@@ -21,7 +21,7 @@ MYSQL_ROOT_PASSWORD=root
 WEB_PORT=5555
 ````
 
-### 3. Lancer le docker compose avec le script ./start.sh (./start.ps1 avec powershell sur windows) avec docker d'allumer ou installer
+### 3. Lancer le docker compose avec le script ./start.sh (".\startPS.ps1" avec PowerShell sur windows) avec docker d'allumer ou installer
 ````
 ./start.sh
 ````
