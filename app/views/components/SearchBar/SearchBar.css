@@ -1,0 +1,59 @@
+.search-bar {
+  color: #333333;
+  width: 830px;
+  height: 55px;
+  background-color: #FFFFFF;
+  border-radius: 200px;
+  box-shadow: 0px 10px 21px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 5px 0px 30px;
+  transition: all 0.1s ease-in-out;
+}
+.search-bar form {
+  display: contents;
+}
+.search-bar__grid-container {
+  flex-basis: 90%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 2.5fr 1.5fr 1.5fr 2.5fr;
+  align-items: center;
+}
+.search-bar__grid-container__search-element {
+  height: 55%;
+  display: flex;
+  flex-direction: column;
+  border-right: 2px solid #E0E0E0;
+  margin-right: 20px;
+  justify-content: center;
+}
+.search-bar__grid-container__search-element input {
+  display: none;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: #FFFFFF;
+  color: #333333;
+  outline: none;
+}
+.search-bar__grid-container__search-element:last-child {
+  border: none;
+}
+.search-bar__search-btn button {
+  width: 43px;
+  height: 43px;
+  border-radius: 50px;
+  background-color: #307B5C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.search-bar__search-btn button i {
+  color: #FFFFFF;
+}/*# sourceMappingURL=SearchBar.css.map */

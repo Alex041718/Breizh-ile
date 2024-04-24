@@ -1,0 +1,44 @@
+version: '3'
+services:
+  web:
+    image: php:8.2-apache-pdo
+    build: ./dockerImage/initPhpApache/
+    container_name: biblio_web
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      - "${WEB_PORT}:80"
+    networks:
+      - rezo_web
+
+  db:
+    image: mariadb:10.5
+    build: ./dockerImage/initBDD/
+    container_name: biblio_mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    volumes:
+      - vol_mysql:/var/lib/mysql
+    networks:
+      - rezo_pma
+      - rezo_web
+  pma:
+    image: phpmyadmin:5.2
+    container_name: biblio_pma
+    environment:
+      - PMA_HOST=db
+    ports:
+      - "8060:80"
+    networks:
+      - rezo_pma
+    
+volumes:
+  vol_web:
+  vol_mysql:
+
+networks:
+  rezo_web:
+  rezo_pma:
