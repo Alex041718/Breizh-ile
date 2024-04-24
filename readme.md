@@ -22,3 +22,8 @@ Le storybook présente les éléements de l'application sous forme de composants
 
 Il montre également la manière dont les composants sont importé dans les vues de l'appli
 Le StoryBook est une vue de l'appli
+
+
+# Extension utile sur vscode 
+- PHP html in string, pour colorer le html dans les fichiers php
+- Live Sass Compiler, pour compiler le scss en css lorsque tu enregistre ton fichier, il le fait tout seul
