@@ -46,7 +46,7 @@ git pull
 Créer une nouvelle branche à partir de develop
 
 ```
-git checkout -b 3.3-Consulter-fiche-logement
+git checkout -b 3.3-Consulter-fiche-logement develop
 ```
 
 
