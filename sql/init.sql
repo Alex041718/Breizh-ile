@@ -28,7 +28,6 @@ CREATE TABLE _Admin (
     password varchar(255)
 );
 
--- TODO add 1 admin (admin, admin)
 -- ajout de l'admin
 INSERT INTO _Admin (mail, firstname, lastname, nickname, password) VALUES ('admin@gmail.com', 'Benoit', 'Tottereau', 'admin', 'admin');
 
