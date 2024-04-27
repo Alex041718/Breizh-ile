@@ -109,7 +109,7 @@
             <p>$infoColor</p>
         </div>
 
-        
+
     </div>
 
     <hr>
@@ -117,7 +117,7 @@
     <br>
     <h3 id="text">SearchBar</h3>
     <br>
-    
+
     <?php
         require_once("../components/SearchBar/SearchBar.php");
         use views\components\SearchBar;
@@ -126,14 +126,36 @@
 
     <br>
     <h4>Comment importer ce composant dans une vue ?</h4>
-    <pre><code class="language-php">
-    <\?php
-        require_once("../components/SearchBar/SearchBar.php");
-        use views\components\SearchBar;
-        SearchBar::render("search-bar--storybook","","./monSuperFormulaireQuiVaEtreTraiter");
-    \?>
-    </code></pre>
+    <pre>
+        <code class="language-php">
+            <\?php
+                require_once("../components/SearchBar/SearchBar.php");
+                use views\components\SearchBar;
+                SearchBar::render("search-bar--storybook","","./monSuperFormulaireQuiVaEtreTraiter");
+            \?>
+        </code>
+    </pre>
     <script>hljs.highlightAll();</script>
+
+    <br>
+    <h3 id="text">HousingCard</h3>
+    <br>
+
+    <?php
+        require_once("../components/HousingCard/HousingCard.php");
+        use views\components\HousingCard;
+        HousingCard::render("housing-card--storybook","");
+    ?>
+
+    <pre>
+        <code class="language-php">
+            <\?php
+                require_once("../components/HousingCard/HousingCard.php");
+                use views\components\HousingCard;
+                HousingCard::render("housing-card--storybook","");
+            \?>
+        </code>
+    </pre>
 
     </body>
 </html>
