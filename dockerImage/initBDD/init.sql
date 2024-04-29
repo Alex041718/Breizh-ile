@@ -8,6 +8,13 @@ CREATE SCHEMA db;
 -- Utilisation du schema
 USE db;
 
+-- Création de la table 'Migration'
+CREATE TABLE _Migration (
+    id serial PRIMARY KEY,
+    scriptName varchar(255),
+    executionDate timestamp DEFAULT CURRENT_TIMESTAMP
+);
+
 
 
 -- Création de la table `Gender`
