@@ -3,7 +3,7 @@ services:
   web:
     image: php:8.2-apache-pdo
     build: ./dockerImage/initPhpApache/
-    container_name: biblio_web
+    container_name: breizh-ile_web
     volumes:
       - ./app:/var/www/html
     ports:
@@ -13,8 +13,9 @@ services:
 
   db:
     image: mariadb:10.5
-    build: ./dockerImage/initBDD/
-    container_name: biblio_mysql
+    build:
+      context: ./dockerImage/initBDD/
+    container_name: breizh-ile_mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_USER=${MYSQL_USER}
@@ -29,14 +30,24 @@ services:
       - rezo_web
   pma:
     image: phpmyadmin:5.2
-    container_name: biblio_pma
+    container_name: breizh-ile_pma
     environment:
       - PMA_HOST=db
     ports:
       - "8060:80"
     networks:
       - rezo_pma
-
+  migration:
+    image: php:8.2-sql-migrations
+    build: ./dockerImage/initSqlMigration/
+    volumes:
+      - ./app/:/var/www/html
+    container_name: breizh-ile_migration-sql
+    entrypoint: ["php", "./migration.php"]
+    depends_on:
+      - db
+    networks:
+      - rezo_web
 volumes:
   vol_web:
   vol_mysql:
