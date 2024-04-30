@@ -12,7 +12,7 @@ services:
       - rezo_web
 
   db:
-    image: mariadb:10.5
+    image: mysql
     build:
       context: ./dockerImage/initBDD/
     container_name: breizh-ile_mysql
