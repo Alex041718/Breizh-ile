@@ -1,0 +1,22 @@
+INSERT INTO `_Lang` (`langID`, `langName`, `langFlag`) VALUES
+    (1, 'Français', 'FR'),
+    (2, 'Anglais', 'EN'),
+    (3, 'Allemand', 'DE'),
+    (4, 'Espagnol', 'ES'),
+    (5, 'Italien', 'IT'),
+    (6, 'Portugais', 'PT'),
+    (7, 'Néerlandais', 'NL'),
+    (8, 'Russe', 'RU'),
+    (9, 'Polonais', 'PL'),
+    (10, 'Suédois', 'SV'),
+    (11, 'Norvégien', 'NO'),
+    (12, 'Danois', 'DA'),
+    (13, 'Finlandais', 'FI'),
+    (14, 'Tchèque', 'CS'),
+    (15, 'Grec', 'EL'),
+    (16, 'Bulgare', 'BG'),
+    (17, 'Hongrois', 'HU'),
+    (18, 'Roumain', 'RO'),
+    (19, 'Slovaque', 'SK'),
+    (20, 'Croate', 'HR');
+

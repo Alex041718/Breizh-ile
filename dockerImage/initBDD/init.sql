@@ -138,6 +138,7 @@ CREATE TABLE _Housing (
     beginDate Date,
     endDate Date,
     creationDate Date,
+    surfaceInM2 Float,
     typeID BIGINT UNSIGNED, -- Correspond au type `serial` dans Type pour mysql
     categoryID BIGINT UNSIGNED, -- Correspond au type `serial` dans Category pour mysql
     addressID BIGINT UNSIGNED, -- Correspond au type `serial` dans Address pour mysql
