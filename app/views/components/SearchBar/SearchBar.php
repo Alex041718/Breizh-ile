@@ -1,10 +1,9 @@
 <?php
-namespace views\components;
 
 class SearchBar {
 
     public static function render($class = "", $id = "", $action = "") {
-        
+
 
         $render =  /*html*/ '
 
