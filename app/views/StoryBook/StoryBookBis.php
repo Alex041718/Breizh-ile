@@ -129,7 +129,6 @@
         <code class="language-php">
             <\?php
                 require_once("../components/SearchBar/SearchBar.php");
-                use views\components\SearchBar;
                 SearchBar::render("search-bar--storybook","","./monSuperFormulaireQuiVaEtreTraiter");
             \?>
         </code>
@@ -149,7 +148,6 @@
         <code class="language-php">
             <\?php
                 require_once("../components/HousingCard/HousingCard.php");
-                use views\components\HousingCard;
                 HousingCard::render("housing-card--storybook","");
             \?>
         </code>
