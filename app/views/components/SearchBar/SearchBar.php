@@ -8,6 +8,10 @@ class SearchBar {
         $render =  /*html*/ '
 
         <link rel="stylesheet" href="/views/components/SearchBar/SearchBar.css">
+        <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+
         <script src="/views/components/Helper/autocompletionHelper.js" defer></script>
         <script src="/views/components/SearchBar/SearchBar.js" defer></script>
         
