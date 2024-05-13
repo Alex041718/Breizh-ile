@@ -45,3 +45,4 @@ Le StoryBook est une vue de l'appli
 - Live Sass Compiler, pour compiler le scss en css lorsque tu enregistre ton fichier, il le fait tout seul
 
 test
+test2
