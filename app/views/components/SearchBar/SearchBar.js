@@ -118,8 +118,7 @@ fetch("https://geo.api.gouv.fr/communes?codeRegion=53", requestOptions)
     let cityNames = [];
 
     data.forEach((city) => {
-        //console.log(city.nom);
-        cityNames.push(city.nom);
+        cityNames.push(`${city.nom} (${city.codesPostaux})`);
     });
     
     
