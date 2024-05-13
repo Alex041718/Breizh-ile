@@ -11,15 +11,15 @@ Si vous utiliser un IDE noublié pas le rebase avant de push votre branche de tr
 # Sommaire
 
 - [La Documentation Git](#la-documentation-git)
-  - [Résumé de la documentation](#résumé-de-la-documentation)
-  - [Explication des branches](#explication-des-branches)
+    - [Résumé de la documentation](#résumé-de-la-documentation)
+    - [Explication des branches](#explication-des-branches)
 - [Comment travailler sur une nouvelle fonctionnalité ?](#comment-travailler-sur-une-nouvelle-fonctionnalité-)
-  - [1. Créer une nouvelle branche à partir de la branche 'develop'](#1-créer-une-nouvelle-branche-à-partir-de-la-branche-develop)
-  - [2. Travailler sur la branche créée](#2-travailler-sur-la-branche-créée-)
-  - [3. Pousser les modifications sur le repository distant](#3-pousser-les-modifications-sur-le-repository-distant-)
-  - [4. Créer une Pull Request](#4-créer-une-pull-request)
-  - [5. Attendre la validation de la PR](#5-attendre-la-validation-de-la-pr)
-  - [6. Merge de la PR](#6-merge-de-la-pr)
+    - [1. Créer une nouvelle branche à partir de la branche 'develop'](#1-créer-une-nouvelle-branche-à-partir-de-la-branche-develop)
+    - [2. Travailler sur la branche créée](#2-travailler-sur-la-branche-créée-)
+    - [3. Pousser les modifications sur le repository distant](#3-pousser-les-modifications-sur-le-repository-distant-)
+    - [4. Créer une Pull Request](#4-créer-une-pull-request)
+    - [5. Attendre la validation de la PR](#5-attendre-la-validation-de-la-pr)
+    - [6. Merge de la PR](#6-merge-de-la-pr)
 - [Comment relire et valider une Pull Request d'un copain ?](#comment-relire-et-valider-une-pull-request-dun-copain-)
 
 ### Résumé de la documentation :
@@ -65,7 +65,7 @@ git checkout -b 3.3-Consulter-fiche-logement develop
 
 
 ### 2. Travailler sur la branche créée :
-- Vous pouvez maintenant travailler sur votre branche. 
+- Vous pouvez maintenant travailler sur votre branche.
 - Vous pouvez faire plusieurs commits pour sauvegarder vos modifications.
 
 ### 3. Pousser les modifications sur le repository distant :
@@ -101,7 +101,7 @@ Pour appliquer ces nouveaux commits, on va rebase votre branche de travail depui
 git rebase develop
 ```
 
-Si vous n'avez aucun conflit réjouissez vous ! 
+Si vous n'avez aucun conflit réjouissez vous !
 
 Voilà votre branche de travail avec votre toute nouvelle fonctionalité est prêt à partir sur le répo distant sur github.com.
 
@@ -121,7 +121,7 @@ git config --global push.default current
 ```
 Cette commande n'est à faire qu'une seule fois.
 
-Maintenant vous pouvez faire un 
+Maintenant vous pouvez faire un
 ```
 git push
 ```
@@ -150,7 +150,7 @@ Dans le titre il faut qu'on ai les même info que la branche de travail, c'est �
 
 C'est ce titre qui apparaîtra dans l'histoirique des commits de develop.
 
-Exemple : 
+Exemple :
 ```
 [3.3] Ajout de la fiche logement
 ```
@@ -211,7 +211,7 @@ Cliquer sur squash and merge.
 
 Cela va créer un commit avec toutes les modifications de la PR.
 Vous devez préciseé un nom pour ce commit, il faut que ce soit un titre qui résume les modifications apportées par la PR.
-Exemple : 
+Exemple :
 ```
 [3.3] - Ajout de la fiche logement
 ```
