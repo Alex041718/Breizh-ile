@@ -1,6 +1,5 @@
 <?php
 
-namespace views\components;
 
 class HousingCard {
 

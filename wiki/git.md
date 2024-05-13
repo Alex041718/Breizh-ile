@@ -8,7 +8,21 @@ J'utilise les lignes de commandes git, mais vous pouvez aussi utiliser un IDE qu
 
 Si vous utiliser un IDE noublié pas le rebase avant de push votre branche de travail.
 
-### Résumé dde la documentation :
+# Sommaire
+
+- [La Documentation Git](#la-documentation-git)
+  - [Résumé de la documentation](#résumé-de-la-documentation)
+  - [Explication des branches](#explication-des-branches)
+- [Comment travailler sur une nouvelle fonctionnalité ?](#comment-travailler-sur-une-nouvelle-fonctionnalité-)
+  - [1. Créer une nouvelle branche à partir de la branche 'develop'](#1-créer-une-nouvelle-branche-à-partir-de-la-branche-develop)
+  - [2. Travailler sur la branche créée](#2-travailler-sur-la-branche-créée-)
+  - [3. Pousser les modifications sur le repository distant](#3-pousser-les-modifications-sur-le-repository-distant-)
+  - [4. Créer une Pull Request](#4-créer-une-pull-request)
+  - [5. Attendre la validation de la PR](#5-attendre-la-validation-de-la-pr)
+  - [6. Merge de la PR](#6-merge-de-la-pr)
+- [Comment relire et valider une Pull Request d'un copain ?](#comment-relire-et-valider-une-pull-request-dun-copain-)
+
+### Résumé de la documentation :
 - Créer une nouvelle branche à partir de develop
 - Travailler sur la branche créée
 - Rebase votre branche de travail depuis develop(à jour)
@@ -158,7 +172,7 @@ Create pull request
 
 ### 5. Attendre la validation de la PR
 
-Maintenant il faut attendre que quelqu'un valide votre PR, je pense qu'on va mettre 2 ou 3 personnes pour valider les PR.
+Maintenant il faut attendre que quelqu'un valide votre PR, pour l'instant il suffit qu'une seule autre personne relise et valide votre PR.
 
 L'objectif d'une validation est de vérifier que le code est propre et qu'il est commenté. C'est surtout ça le plus important.
 
@@ -166,3 +180,43 @@ L'objectif d'une validation est de vérifier que le code est propre et qu'il est
 ### 6. Merge de la PR
 
 Une fois que votre PR est validée, votre branche de travail de votre PR va être mergée dans la branche develop. Et paf votre code est dans le projet.
+
+
+
+
+
+## Comment relire et valider une Pull Request d'un copain ?
+
+Sur github.com vous avez une liste des PR en attente de validation.
+[le lien ici](https://github.com/Alex041718/Breizh-ile/pulls)
+
+Vous cliquez sur la PR que vous voulez relire.
+
+Vous avez une vue de l'ensemble des modifications apportées par la PR.
+
+L'objectif est de vérifier que le code est propre, qu'il est commenté et qu'il est uniforme avec le reste de l'appli.
+
+Vous avez la posibliité de commenter les lignes de code, de demander des modifications. Proposer des améliorations, dire à la personne que ce bout de code n'est pas uniforme avec le reste de l'appli etc.
+
+
+Puis une fois que le dev à reppris ça brancher de travail, il va faire les modifications demandées et repousser sa branche de travail sur le répo distant.
+
+Et vous pourrez à nouveau relire la PR.
+
+Puis valider la PR.
+
+Pour valider la PR il ya un bouton vert avec un menu déroulant qui vous propose de valider la PR.
+
+Cliquer sur squash and merge.
+
+Cela va créer un commit avec toutes les modifications de la PR.
+Vous devez préciseé un nom pour ce commit, il faut que ce soit un titre qui résume les modifications apportées par la PR.
+Exemple : 
+```
+[3.3] - Ajout de la fiche logement
+```
+
+Et voilà la PR est mergée dans la branche develop !
+
+Et le code est dans le projet.
+

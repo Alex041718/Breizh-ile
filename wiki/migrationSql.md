@@ -1,6 +1,14 @@
 # Bienvenue sur cette petite doc pour les migrations SQL de l'appli :
 
-## À quoi ça sert ? 
+# Sommaire
+
+- [À quoi ça sert ?](#à-quoi-ça-sert-)
+- [Comment ça marche ?](#comment-ça-marche-)
+- [Exemple de contenu du fichier](#exemple-de-contenu-du-fichier-)
+- [Comment sont exécuter les scripts ?](#comment-sont-exécuter-les-scripts-)
+- [Comment savoir si un script a été exécuté ?](#comment-savoir-si-un-script-a-été-exécuté-)
+
+## À quoi ça sert ?
 
 Imaginez que tu as besoin de rajouter une colonne dans une table. On ne peut pas toucher au script d'initialisation en le modifiant et le relançant car on perdrait toutes les données déjà présentes dans la base.
 Donc la solution est de créer un script de migration qui va rajouter la colonne à la table.
@@ -20,7 +28,7 @@ La date est écrit dans ce sen sens : Année/Mois/Jour/Heure/Minute (AAAA/MM/JJ/
 Exemple de contenu du fichier :
 
 ```sql
-ALTER TABLE db._User ADD COLUMN animal_fav VARCHAR(255);
+ALTER TABLE db._Client ADD COLUMN animal_fav VARCHAR(255);
 ```
 
 Le ficher doit contenir une seule requête SQL / ligne.

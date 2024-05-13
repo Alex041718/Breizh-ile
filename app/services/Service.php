@@ -1,6 +1,5 @@
 <?php
 
-namespace services;
 
 use PDO;
 
@@ -25,6 +24,6 @@ class Service {
         return new PDO($dsn, $user, $pass, $options);
     }
 
-    
+
 }
 ?>
