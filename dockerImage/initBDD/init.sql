@@ -36,7 +36,7 @@ CREATE TABLE _Admin (
 );
 
 -- ajout de l'admin
-INSERT INTO _Admin (mail, firstname, lastname, nickname, password) VALUES ('admin@gmail.com', 'Benoit', 'Tottereau', 'admin', 'admin');
+INSERT INTO _Admin (mail, firstname, lastname, nickname, password) VALUES ('admin@gmail.com', 'Benoit', 'Tottereau', 'admin', '$2y$10$O.JEDin2vwFgbA3FQnKMheSSJDhaevnV3m5AXetQP6H7TeLrh9HaK');
 
 
 -- Création de la table `Lang`
@@ -134,7 +134,7 @@ CREATE TABLE _Housing (
     longitude Float,
     latitude Float,
     isOnline Boolean,
-    noticeDate Date,
+    noticeCount integer,
     beginDate Date,
     endDate Date,
     creationDate Date,
@@ -176,7 +176,7 @@ CREATE TABLE _Has_for_service (
 -- Création de la table `Arrangement`
 CREATE TABLE _Arrangement (
                              arrangementID serial PRIMARY KEY,
-                             src varchar(255)
+                             label varchar(255)
 );
 
 CREATE TABLE _Has_for_arrangement (

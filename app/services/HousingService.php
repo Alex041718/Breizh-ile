@@ -1,0 +1,106 @@
+<?php
+
+// imports
+require_once 'Service.php';
+require_once __ROOT__.'/models/Address.php';
+
+class HousingService extends Service
+{
+    public static function CreateHousing(Housing $housing)
+    {
+
+        // Étape 1 : Enregistrer en base les images, l'adresse du logement
+        $images = [];
+        foreach ($housing->getImages() as $image) {
+            $image = ImageService::CreateImage($image);
+            // TODO : Enregistrer l'image dans la table de liaison
+            $images[] = $image;
+        }
+        // TODO : Enregistrer l'arrangement dans la table de liaison
+
+        $address = AddressService::CreateAddress($housing->getAddress());
+
+        $housing->setImages($images);
+        $housing->setAddress($address);
+
+
+
+        $pdo = self::getPDO();
+        $stmt = $pdo->prepare('INSERT INTO _Housing (title, shortDesc, longDesc, priceExcl, priceIncl, nbRoom, nbDoubleBed, nbSimpleBed, longitude, latitude, isOnline, noticeCount, beginDate, endDate, creationDate, surfaceInM2, typeID, categoryID, addressID, ownerID) VALUES ( :title, :shortDesc, :longDesc, :priceExcl, :priceIncl, :nbRoom, :nbDoubleBed, :nbSimpleBed, :longitude, :latitude, :isOnline, :noticeCount, :beginDate, :endDate, :creationDate, :surfaceInM2, :typeID, :categoryID, :addressID, :ownerID)');
+        $stmt->execute(array(
+            'title' => $housing->getTitle(),
+            'shortDesc' => $housing->getShortDesc(),
+            'longDesc' => $housing->getLongDesc(),
+            'priceExcl' => $housing->getPriceExcl(),
+            'priceIncl' => $housing->getPriceIncl(),
+            'nbRoom' => $housing->getNbRoom(),
+            'nbDoubleBed' => $housing->getNbDoubleBed(),
+            'nbSimpleBed' => $housing->getNbSimpleBed(),
+            'longitude' => $housing->getLongitude(),
+            'latitude' => $housing->getLatitude(),
+            'isOnline' => $housing->getIsOnline(),
+            'noticeCount' => $housing->getNoticeCount(),
+            'beginDate' => $housing->getBeginDate()->format('Y-m-d H:i:s'),
+            'endDate' => $housing->getEndDate()->format('Y-m-d H:i:s'),
+            'creationDate' => $housing->getCreationDate(),
+            'surfaceInM2' => $housing->getSurfaceInM2(),
+            'typeID' => $housing->getType()->getTypeID(),
+            'categoryID' => $housing->getCategory()->getCategoryID(),
+            'addressID' => $housing->getAddress()->getAddressID(),
+            'ownerID' => $housing->getOwner()->getOwnerID()
+        ));
+        return new Housing($pdo->lastInsertId(), $housing->getTitle(), $housing->getShortDesc(), $housing->getLongDesc(), $housing->getPriceExcl(), $housing->getPriceIncl(), $housing->getNbRoom(), $housing->getNbDoubleBed(), $housing->getNbSimpleBed(), $housing->getLongitude(), $housing->getLatitude(), $housing->getIsOnline(), $housing->getNoticeCount(), $housing->getBeginDate(), $housing->getEndDate(), $housing->getCreationDate(), $housing->getSurfaceInM2(), $housing->getType(), $housing->getCategory(), $housing->getAddress(), $housing->getOwner(), $housing->getImages(), $housing->getArrangement());
+    }
+
+    public static function HousingHandler(array $row): Housing
+    {
+        // Son job est de créer un objet Housing à partir d'un tableau associatif provenant de la bdd. car la table _Housing n'est pas identique à la classe Housing (par exemple, au la bdd possède typeID et la classe Housing, elle gère le type de l'housing avec l'objet Type. Idem avec la catégorie qui est un ID dans la bdd et un objet Category dans la classe Housing)
+
+        // Gestion du type
+        // appel de la méthode GetTypeById de la classe TypeService
+        $type = TypeService::GetTypeById($row['typeID']);
+
+        // Gestion de la catégorie
+        // appel de la méthode GetCategoryById de la classe CategoryService
+        $category = CategoryService::GetCategoryById($row['categoryID']);
+
+        // Gestion de l'adresse
+        // appel de la méthode GetAddressById de la classe AddressService
+        $address = AddressService::GetAddressById($row['addressID']);
+
+        // Gestion du propriétaire
+        // appel de la méthode GetOwnerById de la classe OwnerService
+        $owner = OwnerService::GetOwnerById($row['ownerID']);
+
+        // Gestion des images
+        // appel de la méthode GetHousingImages de la classe ImageService
+        $images = ImageService::GetHousingImages($row['housingID']);
+
+        // Gestion des arrangements
+        // appel de la méthode GetArrangmentByHousingId de la classe ArrangementService
+        $arrangements = ArrangementService::GetArrangmentsByHousingId($row['housingID']);
+
+        return new Housing($row['housingID'], $row['title'], $row['shortDesc'], $row['longDesc'], $row['priceExcl'], $row['priceIncl'], $row['nbRoom'], $row['nbDoubleBed'], $row['nbSimpleBed'], $row['longitude'], $row['latitude'], $row['isOnline'], $row['noticeCount'], $row['beginDate'], $row['endDate'], $row['creationDate'], $row['surfaceInM2'], $type, $category, $address, $owner, $images, $arrangements);
+    }
+    public static function GetAllHousings()
+    {
+        $pdo = self::getPDO();
+        $stmt = $pdo->query('SELECT * FROM _Housing');
+        $housings = [];
+
+        while ($row = $stmt->fetch()) {
+
+            // Get the owner
+            $stmtOwner = $pdo->query('SELECT * FROM _Owner WHERE ownerID = ' . $row['ownerID']);
+            $rowOwner = $stmtOwner->fetch();
+            $owner = new Owner($rowOwner['ownerID'], $rowOwner['identityCard'], $rowOwner['mail'], $rowOwner['firstname'], $rowOwner['lastname'], $rowOwner['nickname'], $rowOwner['password'], $rowOwner['phoneNumber'], $rowOwner['birthDate'], $rowOwner['consent'], $rowOwner['lastConnection'], $rowOwner['creationDate'], $rowOwner['imageSrc'], $rowOwner['genderID'], $rowOwner['addressID']);
+
+            // Get the images
+
+            $housings[] = self::HousingHandler($row);
+        }
+
+        return $housings;
+    }
+
+}

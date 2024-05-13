@@ -1,8 +1,5 @@
 <?php
-
-
-use PDO;
-
+define('__ROOT__', dirname(dirname(__FILE__)));
 
 class Service {
 

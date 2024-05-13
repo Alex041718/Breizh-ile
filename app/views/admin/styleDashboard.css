@@ -1,0 +1,12 @@
+form {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+form input, form select {
+  max-width: 200px;
+}
+
+/*# sourceMappingURL=styleDashboard.css.map */
