@@ -3,3 +3,4 @@
 .idea
 app/FILES/images/*
 !app/FILES/images/.gitkeep
+*.map
