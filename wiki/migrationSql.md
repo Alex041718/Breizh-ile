@@ -8,7 +8,7 @@
 - [Comment sont exécuter les scripts ?](#comment-sont-exécuter-les-scripts-)
 - [Comment savoir si un script a été exécuté ?](#comment-savoir-si-un-script-a-été-exécuté-)
 
-## À quoi ça sert ?
+## À quoi ça sert ? 
 
 Imaginez que tu as besoin de rajouter une colonne dans une table. On ne peut pas toucher au script d'initialisation en le modifiant et le relançant car on perdrait toutes les données déjà présentes dans la base.
 Donc la solution est de créer un script de migration qui va rajouter la colonne à la table.
