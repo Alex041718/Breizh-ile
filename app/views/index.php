@@ -67,6 +67,9 @@
             <a class="btn btn--center">Voir d'avantage</a>
         </section>
     </main>
-
+    <?php 
+        require_once("./components/Footer/footer.php");
+        Footer::render();
+    ?>
 </body>
 </html>
