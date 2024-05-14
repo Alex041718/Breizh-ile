@@ -50,4 +50,10 @@ footer section div h4 {
   footer section div h4 {
     font-size: 10px;
   }
+}
+@media only screen and (max-width: 780px) {
+  footer .informations {
+    flex-direction: column;
+    gap: 50px;
+  }
 }/*# sourceMappingURL=footer.css.map */

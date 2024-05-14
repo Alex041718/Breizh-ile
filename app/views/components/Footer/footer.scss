@@ -1,6 +1,9 @@
+@import '../../style/variables';
+
+
 // Styles pour le format desktop
 footer {
-    background-color: black;
+    background-color: $black2;
     text-align: center;
     padding: 5px;
 
@@ -75,4 +78,12 @@ footer {
         }
     }
 }
-  
+
+@media only screen and (max-width: 780px) {
+    footer {
+        .informations {
+            flex-direction: column;
+            gap: 50px;
+        }
+    }
+}
