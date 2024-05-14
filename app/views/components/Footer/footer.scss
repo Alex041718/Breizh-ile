@@ -1,0 +1,74 @@
+// Styles pour le format desktop
+footer {
+    background-color: black;
+    text-align: center;
+    padding: 5px;
+
+    .informations {
+        display: flex;
+        justify-content: space-evenly;
+        padding: 5px;
+        margin:20px;
+
+        div {
+            div {
+                margin:20px;
+                p{
+                    margin:5px;
+                }
+                a {
+                    text-decoration: none;
+                    color: #FCFCFC;
+                }
+            }
+        }
+    
+        h4 {
+            text-align: center;
+            color: #FCFCFC;
+        }
+    }
+    section {
+        div {
+            h4{
+                color: #FCFCFC;
+                text-align: center;
+            }
+        }
+    }
+}
+  
+// Styles pour le format mobile avec media query
+@media only screen and (max-width: 400px) {
+    footer {
+        .informations {
+            justify-content: space-around;
+            padding-bottom: 1px;
+            margin:8px;
+
+            div {
+                h4 {
+                    font-size: 12px;    
+                }
+        
+                div {
+                    margin:5px;
+                    p{
+                        margin:2px;
+                    }
+                    p, h4 {
+                        font-size: 10px;
+                    }
+                }
+            }
+        }
+        section {
+            div {
+                h4{
+                    font-size: 10px;
+                }
+            }
+        }
+    }
+}
+  
