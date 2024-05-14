@@ -102,6 +102,15 @@ p {
   display: block;
 }
 
+.search-bar--open .search-bar__search-btn button {
+  width: 70px;
+  height: 70px;
+}
+
+.search-bar--open .search-bar__search-btn button i {
+  font-size: 30px;
+}
+
 .search-bar {
   color: #333333;
   width: 830px;
@@ -170,5 +179,6 @@ p {
   transition: all 0.1s ease-in-out;
 }
 .search-bar__search-btn button i {
+  transition: all 0.1s ease-in-out;
   color: #FFFFFF;
 }/*# sourceMappingURL=SearchBar.css.map */

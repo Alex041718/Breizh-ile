@@ -9,6 +9,15 @@
     display: block;
 }
 
+.search-bar--open .search-bar__search-btn button {
+    width: 70px;
+    height: 70px;
+}
+
+.search-bar--open .search-bar__search-btn button i {
+    font-size: 30px;
+}
+
 .search-bar {
     color: variables.$grey1;
     width: 830px;
@@ -92,6 +101,7 @@
     
             transition: all 0.1s ease-in-out;
             i {
+                transition: all 0.1s ease-in-out;
                 color: variables.$whiteColor;
             }
         }
