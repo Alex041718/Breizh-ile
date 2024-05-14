@@ -26,6 +26,7 @@ footer .informations h4 {
 footer section div h4 {
   color: #FCFCFC;
   text-align: center;
+  padding-bottom: 10px;
 }
 
 @media only screen and (max-width: 400px) {
