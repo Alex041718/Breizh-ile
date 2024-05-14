@@ -10,7 +10,7 @@
 <body>
     <?php
         require_once("../components/Footer/Footer.php");
-        Footer::render("footer","","");
+        Footer::render();
 
     ?>
     
