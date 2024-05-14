@@ -187,5 +187,19 @@
         </code>
     </pre>
 
+    <h3 id="text">Input</h3>
+
+    <div class="input-box">
+        <?php
+            $input_list = ['text', 'textarea', 'email', 'password', 'number', 'date', 'time', 'file', 'color', 'range', 'search', 'tel', 'url', 'week', 'month', 'datetime-local', 'submit', 'reset', 'button'];
+            require_once("../components/Input/Input.php");
+            foreach ($input_list as $input): ?>
+
+                <div class="InputContainer">
+                    <?php Input::render("input--storybook","",$input,$input,$input); ?>
+                </div>
+            <?php endforeach; ?>
+
+    </div>
     </body>
 </html>
