@@ -1,0 +1,68 @@
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    justify-content: space-around;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff; 
+    z-index: 1000;
+
+    #oeuil_ouvert {
+        width: 65px;
+        height: auto;
+    }
+
+    #oeuil_ferme {
+        width: 65px;
+        height: auto;
+    }
+    
+    #logo {
+        width: 250px;
+        height: auto;
+    }
+
+    #profil {
+        width: 35px;
+        height: auto; 
+        cursor: pointer;
+    }
+
+    #options  {
+        background-color: #fff; 
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+        border-radius: 4px; 
+        padding: 10px; 
+        display: none; 
+        position: absolute; 
+        top: calc(100%); 
+        right: 75px;
+        z-index: 2; 
+
+        ul {
+            list-style-type: none; 
+            padding: 0;
+            margin: 0;
+            li {
+                color: black; 
+                padding: 5px 0; 
+                cursor: pointer; 
+                
+                a{
+                    text-decoration: none; 
+                    color: inherit; 
+                }
+            }
+            li:hover {
+                background-color: #f0f0f0; 
+            }
+        }
+    }
+}
+
+body {
+    margin-top: 130px;
+}
