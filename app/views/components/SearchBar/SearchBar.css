@@ -4,36 +4,32 @@
 }
 
 h1 {
-  font-size: 75px;
-  font-family: "Outfit", sans-serif;
+  font-size: max(45px, 2.9166666667vw);
   font-weight: bold;
   margin: 0;
 }
 
 h2 {
-  font-size: 48px;
-  font-family: "Outfit", sans-serif;
+  font-size: max(30px, 2.5vw);
   font-weight: bold;
   margin: 0;
 }
 
 h3 {
-  font-size: 30px;
-  font-family: "Outfit", sans-serif;
+  font-size: max(23px, 1.5625vw);
   font-weight: bold;
   margin: 0;
 }
 
 h4 {
-  font-size: 20px;
-  font-family: "Outfit", sans-serif;
+  font-size: max(16px, 1.0416666667vw);
   font-weight: bold;
   margin: 0;
 }
 
 p {
   margin: 0;
-  font-size: 16px;
+  font-size: max(14px, 0.8333333333vw);
 }
 
 .para--bold {
@@ -50,6 +46,19 @@ p {
 }
 .para--20px {
   font-size: 20px;
+}
+
+.btn {
+  padding-block: 15px;
+  padding-inline: 25px;
+  background-color: #1D1D1D;
+  color: white;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 10px;
+}
+.btn--center {
+  margin: auto;
 }
 
 .autocomplete {
@@ -94,23 +103,6 @@ p {
   color: #ffffff;
 }
 
-.search-bar--open .search-bar__grid-container {
-  grid-template-columns: 2.5fr 1.5fr 1.5fr 2.5fr;
-}
-
-.search-bar--open .search-bar__grid-container input {
-  display: block;
-}
-
-.search-bar--open .search-bar__search-btn button {
-  width: 70px;
-  height: 70px;
-}
-
-.search-bar--open .search-bar__search-btn button i {
-  font-size: 30px;
-}
-
 .search-bar {
   color: #333333;
   width: 830px;
@@ -128,16 +120,37 @@ p {
 .search-bar form {
   display: contents;
 }
+.search-bar .fa-sliders {
+  color: black;
+  font-size: 20px;
+  margin-inline: 10px;
+  transition: 0.1s all;
+}
 .search-bar--open {
   height: 85px;
   width: 945px;
   padding: 0 10px 0 40px;
 }
-.search-bar--open__grid-container {
+.search-bar--open .fa-sliders {
+  font-size: 30px;
+}
+.search-bar--open .search-bar__grid-container {
   grid-template-columns: 2.5fr 1.5fr 1.5fr 2.5fr;
 }
-.search-bar--open__grid-container__search-element input {
+.search-bar--open .search-bar__grid-container input {
   display: block;
+}
+.search-bar--open .search-bar__search-btn button {
+  width: 70px;
+  height: 70px;
+}
+.search-bar--open .search-bar__search-btn button i {
+  font-size: 30px;
+}
+.search-bar--header {
+  display: none;
+  box-shadow: none;
+  border: 1px solid black;
 }
 .search-bar__grid-container {
   flex-basis: 90%;

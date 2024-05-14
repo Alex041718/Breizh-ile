@@ -16,22 +16,24 @@
         public static function render() {
             $render = /*html*/ '
                 <script src="/views/components/Header/header.js"></script>
-                <header>
-                    <a href="">
-                        <img src="/views/assets/images/logo_breizh_noir.png" id="logo" alt="logo_breizh">
+                <header class="header">
+                    <a class="logo" href="">
+                        <img class="logo-big" src="/views/assets/images/logo_breizh_noir.png" id="logo" alt="logo_breizh">
+                        <img class="logo-small" src="/views/assets/icons/logo.svg" alt="logo_breizh">
                     </a>
 
             ';
             echo $render;
 
-            require_once("../components/SearchBar/SearchBar.php");
-            SearchBar::render("search-bar--home search-bar--open no-close","","./monSuperFormulaireQuiVaEtreTraiter");
+            require_once("./components/SearchBar/SearchBar.php");
+            SearchBar::render("search-bar search-bar--header","","./monSuperFormulaireQuiVaEtreTraiter", true);
 
             $render =  /*html*/ '
-                    <img src="/views/assets/images/oeuil_ouvert.png" id="oeuil_ouvert" alt="oeuil_ouvert">
-                    <img src="/views/assets/images/oeuil_ferme.png" id="oeuil_ferme" alt="oeuil_ferme" style="display: none;">
-                    
-                    <img src="/views/assets/images/profil.png" id="profil" alt="profil">
+
+                    <div class="header__right">
+                        <i class="fa-sharp fa-regular fa-eye"></i>
+                        <i id="profil" class="fa-solid fa-user"></i>
+                    </div>
                     <div id="options" style="display: none;">
                         <ul>
                             <li><a href="">Compte</a></li>
