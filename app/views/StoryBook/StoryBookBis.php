@@ -189,33 +189,32 @@
 
 
 
-
-
     <h3 id="text">Input</h3>
 
     <div class="input-box">
         <?php
-            $input_list = ['text', 'textarea', 'email', 'password', 'number', 'date', 'time', 'file', 'color', 'range', 'search', 'tel', 'url', 'week', 'month', 'datetime-local', 'submit', 'reset', 'button'];
-            require_once("../components/Input/Input.php");
-            foreach ($input_list as $input): ?>
+        $input_list = ['text', 'textarea', 'email', 'password', 'number', 'date', 'time', 'file', 'color', 'range', 'search', 'tel', 'url', 'week', 'month', 'datetime-local', 'submit', 'reset', 'button'];
+        require_once("../components/Input/Input.php");
+        foreach ($input_list as $input): ?>
 
-                <div class="InputContainer">
-                    <div class="input--storybook">
-                        <?php Input::render("uneCLass","",$input,$input,$input,$input,true); ?>
-                        <pre>
-                    </div>
-
+            <div class="InputContainer">
+                <div class="input--storybook">
+                    <?php Input::render("uneCLass","",$input,$input,$input,$input,true); ?>
                     <pre>
+                </div>
+
+                <pre>
                         <code class="language-php">
     <\?php require_once("../components/Input/Input.php");
     <\?php Input::render("uneClassEnPlus","UnIdEnPlus","<?php echo $input ?>","le label","le name","lePlaceHolder",true); \?>
                         </code>
                     </pre>
-                </div>
+            </div>
 
 
-            <?php endforeach; ?>
+        <?php endforeach; ?>
 
     </div>
+
     </body>
 </html>
