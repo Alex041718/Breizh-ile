@@ -117,6 +117,8 @@
     <br>
     <h3 id="text">SearchBar</h3>
     <br>
+    <p>Si vous souhaiter maintenir la searchBar ouverte, ajoutez les classes "search-bar--open" et "no-close"</p>
+    <br>
 
     <?php
         require_once("../components/SearchBar/SearchBar.php");

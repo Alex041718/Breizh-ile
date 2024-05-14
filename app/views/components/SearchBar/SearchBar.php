@@ -21,7 +21,7 @@ class SearchBar {
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
         
-        <div class="search-bar '. $class . ' " id=" ' . $id . ' ">
+        <div data-depth="0" class="search-bar '. $class . ' " id=" ' . $id . ' ">
             <form action=" '. $action .' " method="get" autocomplete="off">
             <div class="search-bar__grid-container">
                 <div class="search-bar__grid-container__search-element" type="where">

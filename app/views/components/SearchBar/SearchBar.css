@@ -94,6 +94,14 @@ p {
   color: #ffffff;
 }
 
+.search-bar--open .search-bar__grid-container {
+  grid-template-columns: 2.5fr 1.5fr 1.5fr 2.5fr;
+}
+
+.search-bar--open .search-bar__grid-container input {
+  display: block;
+}
+
 .search-bar {
   color: #333333;
   width: 830px;
@@ -110,6 +118,17 @@ p {
 }
 .search-bar form {
   display: contents;
+}
+.search-bar--open {
+  height: 85px;
+  width: 945px;
+  padding: 0 10px 0 40px;
+}
+.search-bar--open__grid-container {
+  grid-template-columns: 2.5fr 1.5fr 1.5fr 2.5fr;
+}
+.search-bar--open__grid-container__search-element input {
+  display: block;
 }
 .search-bar__grid-container {
   flex-basis: 90%;
@@ -152,6 +171,4 @@ p {
 }
 .search-bar__search-btn button i {
   color: #FFFFFF;
-}
-
-/*# sourceMappingURL=SearchBar.css.map */
+}/*# sourceMappingURL=SearchBar.css.map */
