@@ -48,6 +48,19 @@ p {
   font-size: 20px;
 }
 
+.btn {
+  padding-block: 15px;
+  padding-inline: 25px;
+  background-color: #1D1D1D;
+  color: white;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 10px;
+}
+.btn--center {
+  margin: auto;
+}
+
 .autocomplete {
   position: relative;
   display: inline-block;

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./home/home.css">
     <link rel="stylesheet" href="./components/HousingCard/HousingCard.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+    <script src="./home/script.js"></script>
 </head>
 <body>
     <main>
@@ -22,7 +23,7 @@
                 <img data-depth="0.2" class="breizh layer" src="assets/images/Breizh.png" />
             </div>
             <img class="hero-banner__wave" src="assets/images/wave.png">
-            <div class='hero-banner__scrolldown'>
+            <div id="scrolldown" class='hero-banner__scrolldown'>
                 <div class="chevrons">
                     <div class='chevrondown'></div>
                     <div class='chevrondown'></div>
@@ -43,7 +44,7 @@
             </div>
             <div class="logements__container">
                 <?php 
-                for ($i=0; $i < 8; $i++) {
+                for ($i=0; $i < 9; $i++) {
                     require_once("./components/HousingCard/HousingCard.php");
                     HousingCard::render(
                         "Appartement pipou",
@@ -62,13 +63,10 @@
                 ?>
 
             </div>
+            <hr>
+            <a class="btn btn--center">Voir d'avantage</a>
         </section>
     </main>
-    <script>
-        var scene = document.getElementById('scene');
-        var parallaxInstance = new Parallax(scene, {
-            relativeInput: false
-        });
-    </script>
+
 </body>
 </html>

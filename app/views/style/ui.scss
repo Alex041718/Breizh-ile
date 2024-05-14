@@ -63,6 +63,22 @@ p {
     }
 }
 
+// Boutons 
+
+.btn {
+    padding-block: 15px;
+    padding-inline: 25px;
+    background-color: $black2;
+    color: white;
+    width: fit-content;
+    border-radius: 10px;
+
+    &--center {
+        margin: auto;
+    }
+}
+
+
 
 // Auto-Completion styles
 
