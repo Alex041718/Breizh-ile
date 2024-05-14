@@ -42,10 +42,11 @@
                 flex-direction: column;
                 gap: 10px;
                 
-                img {
+                i {
                     height: 20px;
                     width: 20px;
                     object-fit: contain;
+                    color: $black2;
                 }
 
                 &__picto {

@@ -33,11 +33,11 @@ class HousingCard {
                 <div class="housing-card__content__bottom">
                     <div class="housing-card__content__bottom__infos">
                         <div class="housing-card__content__bottom__infos__picto">
-                            <img src="/views/assets/icons/location.svg">
+                            <i class="fa-sharp fa-solid fa-location-dot"></i>
                             <p>' . $housing_postal_code . " - " . $housing_city . '</p>
                         </div>
                         <div class="housing-card__content__bottom__infos__picto">
-                            <img src="/views/assets/icons/account-black.svg" />
+                            <i class="fa-solid fa-user"></i>
                             <p>' . $housing_nb_personn . ' personnes</p>
                         </div>
                     </div>

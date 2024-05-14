@@ -38,11 +38,12 @@
   flex-direction: column;
   gap: 10px;
 }
-.housing-card__content__bottom__infos img {
+.housing-card__content__bottom__infos i {
   height: 20px;
   width: 20px;
   -o-object-fit: contain;
      object-fit: contain;
+  color: #1D1D1D;
 }
 .housing-card__content__bottom__infos__picto {
   display: flex;
