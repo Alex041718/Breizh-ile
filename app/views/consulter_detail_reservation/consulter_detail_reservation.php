@@ -7,20 +7,21 @@
     <title>Document</title>
     <link rel="stylesheet" href="../style/ui.css">
 </head>
+
+<?php
+    require_once("../components/Header/header.php");
+    Header::render();
+?>
+
 <body>
-    <?php
+    
 
-        require_once("../components/Header/header.php");
-        Header::render();
-        
-
-    ?>
-
-
-    <?php
-        require_once("../components/Footer/footer.php");
-        Footer::render();
-    ?>
     
 </body>
+
+<?php
+    require_once("../components/Footer/footer.php");
+    Footer::render();
+?>
+
 </html>
