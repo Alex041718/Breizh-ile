@@ -7,6 +7,14 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
         <link rel="stylesheet" href="/views/components/HousingCard/HousingCard.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <link rel="stylesheet" href="/views/components/SearchBar/SearchBar.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+        <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
+        <script src="/views/components/Helper/autocompletionHelper.js" defer></script>
+        <script src="/views/components/SearchBar/SearchBar.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
         <!-- Import du fichier CSS ui.css, super important pour appliquer le style général de l'appli -->
         <link rel="stylesheet" href="../style/ui.css">
@@ -120,6 +128,7 @@
     <br>
     <p>Si vous souhaiter maintenir la searchBar ouverte, ajoutez les classes "search-bar--open" et "no-close"</p>
     <br>
+    <p>A</p>
 
     <?php
         require_once("../components/SearchBar/SearchBar.php");
@@ -130,6 +139,15 @@
     <h4>Comment importer ce composant dans une vue ?</h4>
     <pre>
         <code class="language-php">
+            <\link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+            <\link rel="stylesheet" href="/views/components/SearchBar/SearchBar.css">
+            <\link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+            <\script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"><\script>
+            <\script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"><\script>
+            <\script src="/views/components/Helper/autocompletionHelper.js" defer><\script>
+            <\script src="/views/components/SearchBar/SearchBar.js" defer><\script>
+            <\script src="https://cdn.jsdelivr.net/npm/flatpickr"><\script>
+
             <\?php
                 require_once("../components/SearchBar/SearchBar.php");
                 SearchBar::render("search-bar--storybook","","./monSuperFormulaireQuiVaEtreTraiter");

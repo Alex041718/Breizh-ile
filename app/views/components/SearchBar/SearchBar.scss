@@ -1,22 +1,6 @@
 @use '../../style/variables';
 @use '../../style/ui';
 
-.search-bar--open .search-bar__grid-container {
-    grid-template-columns: 2.5fr 1.5fr 1.5fr 2.5fr;
-}
-
-.search-bar--open .search-bar__grid-container input {
-    display: block;
-}
-
-.search-bar--open .search-bar__search-btn button {
-    width: 70px;
-    height: 70px;
-}
-
-.search-bar--open .search-bar__search-btn button i {
-    font-size: 30px;
-}
 
 .search-bar {
     color: variables.$grey1;
@@ -39,19 +23,48 @@
         display: contents;
     }
 
+    .fa-sliders {
+        color: black;
+        font-size: 20px;
+        margin-inline: 10px;
+        transition: 0.1s all;
+    } 
+
     &--open {
         height: 85px;
         width: 945px;
         padding: 0 10px 0 40px;
-        
-        &__grid-container {
-            grid-template-columns: 2.5fr 1.5fr 1.5fr 2.5fr;
 
-            &__search-element input {
-                display: block;
-            }
+        .fa-sliders {
+            font-size: 30px;
         }
-    }    
+        
+        .search-bar {
+            &__grid-container {
+                grid-template-columns: 2.5fr 1.5fr 1.5fr 2.5fr;
+    
+                input {
+                    display: block;
+                }
+            }
+
+            &__search-btn button {
+                width: 70px;
+                height: 70px;
+
+                i {
+                    font-size: 30px;
+                }
+            }
+
+        }
+    }
+    
+    &--header {
+        display: none;
+        box-shadow: none;
+        border: 1px solid black;
+    }
 
     &__grid-container {
         flex-basis: 90%;

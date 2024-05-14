@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
+
+    var header = document.querySelector('header');
+
     var profil = document.getElementById('profil');
     var options = document.getElementById('options');
-    var oeuil_ouvert = document.getElementById('oeuil_ouvert');
-    var oeuil_ferme = document.getElementById('oeuil_ferme');
 
     profil.addEventListener('click', function() {
         if (options.style.display === 'none') {
@@ -12,14 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    oeuil_ouvert.addEventListener('click', function() {
-        oeuil_ferme.style.display = 'block';
-        oeuil_ouvert.style.display = 'none';
-    });
+    document.addEventListener("scroll", function() {
+        if(document.documentElement.scrollTop > 85) header.classList.add("scroll");
+        else header.classList.remove("scroll");
+    })
 
-    oeuil_ferme.addEventListener('click', function() {
-        oeuil_ouvert.style.display = 'block';
-        oeuil_ferme.style.display = 'none';
-    });
+
 
 });

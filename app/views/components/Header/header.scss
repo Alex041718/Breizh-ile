@@ -1,23 +1,92 @@
-header {
+
+.header {
     display: flex;
-    flex-direction: row;
-    align-items: center; 
-    justify-content: space-around;
-    padding: 20px;
-    position: fixed;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 20px;
+    position: absolute;
     top: 0;
     width: 100%;
-    background-color: #ffffff; 
+    height: 100px;
+    transition: all 0.3;
+    
     z-index: 1000;
 
-    #oeuil_ouvert {
-        width: 65px;
-        height: auto;
+    .logo {
+        margin-left: 100px;
     }
 
-    #oeuil_ferme {
-        width: 65px;
+    i {
+        color: white;
+    }
+
+    .logo-big {
+        width: 20%;
+        display: none;
+    }
+
+    .logo-small {
+        display: block;
+    }
+
+    &.scroll {
         height: auto;
+        position: fixed;
+        background-color: #ffffff;
+        animation-duration: 0.2s;
+        animation-name: showUp;
+        height: 80px;
+
+        .header__right {
+            margin-right: 50px;
+            
+            i {
+                color: black;
+            }
+        }
+        
+        @keyframes showUp {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .logo-big {
+            display: block;
+        }
+
+        .logo {
+            margin-left: 50px;
+            width: 20%;
+        }
+
+        .logo-small {
+            display: none;
+        }
+        
+        .search-bar {
+            justify-content: space-between;
+            display: flex;
+        }
+    }
+
+    &__right {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        align-items: center;
+        flex: 0 0 20%;
+    }
+
+    .fa-user {
+        font-size: 40px;
+    }
+
+    .fa-eye {
+        font-size: 30px;
     }
     
     #logo {
@@ -61,8 +130,4 @@ header {
             }
         }
     }
-}
-
-body {
-    margin-top: 130px;
 }

@@ -2,24 +2,10 @@
 
 class SearchBar {
 
-    public static function render($class = "", $id = "", $action = "") {
+    public static function render($class = "", $id = "", $action = "", $showSettings = false) {
 
 
         $render =  /*html*/ '
-
-        <link rel="stylesheet" href="/views/components/SearchBar/SearchBar.css">
-        <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
-
-        <script src="/views/components/Helper/autocompletionHelper.js" defer></script>
-        <script src="/views/components/SearchBar/SearchBar.js" defer></script>
-        
-
-        <?php // Date picker ?>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
         
         <div data-depth="0" class="search-bar '. $class . ' " id=" ' . $id . ' ">
             <form action=" '. $action .' " method="get" autocomplete="off">
@@ -43,6 +29,7 @@ class SearchBar {
                     <input class="para--14px" name="peopleNumber" type="number" placeholder="Ajouter un nombre">
                 </div>
             </div>
+            ' . ($showSettings ? '<i class="fa-solid fa-sliders"></i>' : '') . '
             <div class="search-bar__search-btn">
                 <button type="submit" class=""><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>

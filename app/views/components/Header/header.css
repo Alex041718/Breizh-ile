@@ -1,33 +1,87 @@
-header {
+.header {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-around;
-  padding: 20px;
-  position: fixed;
+  justify-content: space-between;
+  padding-block: 20px;
+  position: absolute;
   top: 0;
   width: 100%;
-  background-color: #ffffff;
+  height: 100px;
+  transition: all 0.3;
   z-index: 1000;
 }
-header #oeuil_ouvert {
-  width: 65px;
-  height: auto;
+.header .logo {
+  margin-left: 100px;
 }
-header #oeuil_ferme {
-  width: 65px;
-  height: auto;
+.header i {
+  color: white;
 }
-header #logo {
+.header .logo-big {
+  width: 20%;
+  display: none;
+}
+.header .logo-small {
+  display: block;
+}
+.header.scroll {
+  height: auto;
+  position: fixed;
+  background-color: #ffffff;
+  animation-duration: 0.2s;
+  animation-name: showUp;
+  height: 80px;
+}
+.header.scroll .header__right {
+  margin-right: 50px;
+}
+.header.scroll .header__right i {
+  color: black;
+}
+@keyframes showUp {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.header.scroll .logo-big {
+  display: block;
+}
+.header.scroll .logo {
+  margin-left: 50px;
+  width: 20%;
+}
+.header.scroll .logo-small {
+  display: none;
+}
+.header.scroll .search-bar {
+  justify-content: space-between;
+  display: flex;
+}
+.header__right {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  align-items: center;
+  flex: 0 0 20%;
+}
+.header .fa-user {
+  font-size: 40px;
+}
+.header .fa-eye {
+  font-size: 30px;
+}
+.header #logo {
   width: 250px;
   height: auto;
 }
-header #profil {
+.header #profil {
   width: 35px;
   height: auto;
   cursor: pointer;
 }
-header #options {
+.header #options {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -38,24 +92,20 @@ header #options {
   right: 75px;
   z-index: 2;
 }
-header #options ul {
+.header #options ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-header #options ul li {
+.header #options ul li {
   color: black;
   padding: 5px 0;
   cursor: pointer;
 }
-header #options ul li a {
+.header #options ul li a {
   text-decoration: none;
   color: inherit;
 }
-header #options ul li:hover {
+.header #options ul li:hover {
   background-color: #f0f0f0;
-}
-
-body {
-  margin-top: 130px;
 }/*# sourceMappingURL=header.css.map */
