@@ -22,37 +22,12 @@ inputs.forEach((inp) => {
 
 // transition function
 const openSearchBar = () => {
-    searchBar.style.height = '85px';
-    searchBar.style.width = '945';
-    searchBar.style.padding = "0px 10px 0px 40px"
-
-    grid.style.gridTemplateColumns = "2.5fr 1.5fr 1.5fr 2.5fr";
-
-    inputs.forEach((inp) => {
-        inp.style.display = 'block';
-    });
-
-    btn.style.width = '70px';
-    btn.style.height = '70px';
+    searchBar.classList.add("search-bar--open");
 }
 
 const closeSearchBar = () => {
-    //if there are data in inputs, don't close the search bar
-    if(inputs[0].value || inputs[1].value || inputs[2].value || inputs[3].value){
-        return;
-    }
-    searchBar.style.height = '55px';
-    searchBar.style.width = '830px';
-    searchBar.style.padding = "0px 5px 0px 30px"
+    searchBar.classList.remove("search-bar--open");
 
-    grid.style.gridTemplateColumns = "2.5fr 1.5fr 1.5fr 2.5fr";
-
-    inputs.forEach((inp) => {
-        inp.style.display = 'none';
-    });
-
-    btn.style.width = '43px';
-    btn.style.height = '43px';
 }
 
 
@@ -78,7 +53,7 @@ inputs[2].addEventListener('change', () => {
 
 document.addEventListener('click', function(event) {
     // Vérifier si le clic a été fait à l'extérieur de myDiv
-    if (!searchBar.contains(event.target)) {
+    if (!searchBar.contains(event.target) && !searchBar.classList.contains("no-close")) {
         closeSearchBar();
     }
 });

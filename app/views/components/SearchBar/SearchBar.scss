@@ -1,6 +1,23 @@
 @use '../../style/variables';
 @use '../../style/ui';
 
+.search-bar--open .search-bar__grid-container {
+    grid-template-columns: 2.5fr 1.5fr 1.5fr 2.5fr;
+}
+
+.search-bar--open .search-bar__grid-container input {
+    display: block;
+}
+
+.search-bar--open .search-bar__search-btn button {
+    width: 70px;
+    height: 70px;
+}
+
+.search-bar--open .search-bar__search-btn button i {
+    font-size: 30px;
+}
+
 .search-bar {
     color: variables.$grey1;
     width: 830px;
@@ -21,7 +38,20 @@
     form {
         display: contents;
     }
-    
+
+    &--open {
+        height: 85px;
+        width: 945px;
+        padding: 0 10px 0 40px;
+        
+        &__grid-container {
+            grid-template-columns: 2.5fr 1.5fr 1.5fr 2.5fr;
+
+            &__search-element input {
+                display: block;
+            }
+        }
+    }    
 
     &__grid-container {
         flex-basis: 90%;
@@ -71,6 +101,7 @@
     
             transition: all 0.1s ease-in-out;
             i {
+                transition: all 0.1s ease-in-out;
                 color: variables.$whiteColor;
             }
         }
