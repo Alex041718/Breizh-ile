@@ -1,4 +1,4 @@
-@use 'variables';
+@import 'variables';
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap');
 
 // General Styles
@@ -10,29 +10,25 @@
 // Title
 
 h1 {
-    font-size: 75px;
-    font-family: 'Outfit', sans-serif;
+    font-size: $font-size-3xl;
     font-weight: bold;
     margin: 0;
 }
 
 h2 {
-    font-size: 48px;
-    font-family: 'Outfit', sans-serif;
+    font-size: $font-size-2xl;
     font-weight: bold;
     margin: 0;
 }
 
 h3 {
-    font-size: 30px;
-    font-family: 'Outfit', sans-serif;
+    font-size: $font-size-xl;
     font-weight: bold;
     margin: 0;
 }
 
 h4 {
-    font-size: 20px;
-    font-family: 'Outfit', sans-serif;
+    font-size: $font-size-lg;
     font-weight: bold;
     margin: 0;
 }
@@ -41,7 +37,7 @@ h4 {
 
 p {
     margin: 0;
-    font-size: 16px;
+    font-size: $font-size-base;
 }
 
 .para {

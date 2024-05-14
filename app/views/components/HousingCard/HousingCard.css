@@ -1,1 +1,56 @@
-/*# sourceMappingURL=HousingCard.css.map */
+.housing-card {
+  max-width: 450px;
+  height: 100%;
+  background-color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin: auto;
+}
+.housing-card__thumbnail {
+  border-radius: 10px 10px 0 0;
+  height: 50%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.housing-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+}
+.housing-card__content__owner {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.housing-card__content__owner img {
+  border-radius: 70px;
+  height: 20px;
+}
+.housing-card__content__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+.housing-card__content__bottom__infos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.housing-card__content__bottom__infos img {
+  height: 20px;
+  width: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.housing-card__content__bottom__infos__picto {
+  display: flex;
+}
+.housing-card__content__bottom h3 span {
+  font-size: max(14px, 0.8333333333vw);
+}
+
+.housing-card--storybook {
+  height: 500px;
+}/*# sourceMappingURL=HousingCard.css.map */

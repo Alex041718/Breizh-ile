@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="StoryBook.css">
         <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+        <link rel="stylesheet" href="/views/components/HousingCard/HousingCard.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
 
         <!-- Import du fichier CSS ui.css, super important pour appliquer le style général de l'appli -->
@@ -143,11 +144,24 @@
 
     <?php
         require_once("../components/HousingCard/HousingCard.php");
-        HousingCard::render("housing-card--storybook","");
+        HousingCard::render(
+            "Appartement pipou",
+            60,
+            "../assets/images/test.jpg",
+            "Un superbe appartement avec vue mer, près du centre. Une occasion parfaite pour voyager ! ",
+            "Lannion",
+            "22300",
+            4,
+            "../assets/images/pp-test.jpg",
+            "Benoît Tottereau",
+            "housing-card--storybook",""
+        );
     ?>
 
     <pre>
         <code class="language-php">
+            <\link rel="stylesheet" href="/views/components/HousingCard/HousingCard.css">
+
             <\?php
                 require_once("../components/HousingCard/HousingCard.php");
                 HousingCard::render("housing-card--storybook","");

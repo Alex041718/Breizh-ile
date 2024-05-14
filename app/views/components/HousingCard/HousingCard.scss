@@ -1,0 +1,64 @@
+@import '../../style/variables';
+
+.housing-card {
+    max-width: 450px;
+    height: 100%;
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    border-radius: 10px;
+    margin: auto;
+    &__thumbnail {
+        border-radius: 10px 10px 0 0;
+        height: 50%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+
+        &__owner {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            img {
+                border-radius: 70px;
+                height: 20px;
+            }
+        }
+
+        &__bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+
+            &__infos {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                
+                img {
+                    height: 20px;
+                    width: 20px;
+                    object-fit: contain;
+                }
+
+                &__picto {
+                    display: flex;
+                }
+            }
+
+            h3 span {
+                font-size: $font-size-base;
+            }
+        }
+    }
+}
+
+.housing-card--storybook {
+    height: 500px;
+}
