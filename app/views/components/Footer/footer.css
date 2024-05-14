@@ -1,11 +1,3 @@
-@font-face {
-  font-family: "Outfit-Medium";
-  src: url("polices/outfit/Outfit-Medium.ttf") format("trueType");
-}
-@font-face {
-  font-family: "Outfit-Light";
-  src: url("polices/outfit/Outfit-Light.ttf") format("trueType");
-}
 footer {
   background-color: black;
   text-align: center;
@@ -15,10 +7,13 @@ footer .informations {
   display: flex;
   justify-content: space-evenly;
   padding: 5px;
+  margin: 20px;
+}
+footer .informations div div {
+  margin: 20px;
 }
 footer .informations div div p {
-  font-size: 14px;
-  font-family: "Outfit-Light";
+  margin: 5px;
 }
 footer .informations div div a {
   text-decoration: none;
@@ -26,22 +21,27 @@ footer .informations div div a {
 }
 footer .informations h4 {
   text-align: center;
-  font-family: "Outfit-Medium", sans-serif;
   color: #FCFCFC;
 }
 footer section div h4 {
   color: #FCFCFC;
   text-align: center;
-  font-family: "Outfit-Medium", sans-serif;
 }
 
 @media only screen and (max-width: 400px) {
   footer .informations {
     justify-content: space-around;
     padding-bottom: 1px;
+    margin: 8px;
   }
   footer .informations div h4 {
     font-size: 12px;
+  }
+  footer .informations div div {
+    margin: 5px;
+  }
+  footer .informations div div p {
+    margin: 2px;
   }
   footer .informations div div p, footer .informations div div h4 {
     font-size: 10px;
