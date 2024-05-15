@@ -15,7 +15,6 @@ class Header {
                 <script src="/views/components/SearchBar/SearchBar.js" defer></script>
                 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
                 <script src="/views/components/Header/header.js"></script>
-
                 <link rel="stylesheet" href="/views/components/Header/header.css">
 
                 <header class=" '. ($isScrolling ? 'scroll scrolling' : '' ). ' header">
@@ -27,7 +26,7 @@ class Header {
         ';
         echo $render;
 
-            require_once(__ROOT__."/views/components/SearchBar/SearchBar.php");
+            require_once(__ROOT__."/components/SearchBar/SearchBar.php");
             SearchBar::render("search-bar search-bar--header","","./monSuperFormulaireQuiVaEtreTraiter", true);
 
             $render =  /*html*/ '
