@@ -7,11 +7,20 @@ class SessionService {
      */
 
     public static function system(string $role,string $conectionPage, string $redirectPage = null) {
-        if (!self::isAuthenticated() || self::get('role') !== 'admin' || self::isExpired()) {
+        if (!self::isAuthenticated() || self::get('role') == null || self::isExpired()) {
             // Rediriger vers la page de connexion si l'administrateur n'est pas connecté
-            header('Location: ../../views/admin/adminConnection.php');
+            if ($role == 'admin') {
+                header('Location: ../../views/admin/adminConnection.php');
+            } else if ($role == 'owner') {
+                header('Location: ../../views/owner/ownerConnection.php');
+            } else if ($role == 'client') {
+                header('Location: ../../views/client/clientConnection.php');
+            } else {
+                header('Location: ../../views/client/clientConnection.php');
+            }
             exit();
         }
+
     }
 
 
