@@ -1,3 +1,6 @@
+main {
+  margin-top: 125px;
+}
 main > div {
   display: flex;
   align-items: center;
