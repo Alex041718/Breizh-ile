@@ -120,22 +120,56 @@
     border: 2px solid red;
     width: 50%;
     height: 35em;
-
     
 }
+
+.nbrClients {
+    display: flex;
+    justify-content: center;
+
+    #addTravelersBtn {
+        background-color: transparent;
+        border: 1px solid gray;
+        border-top: none;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        width: 23em;
+        height: 5em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+
 
 .datepicker{
     display: flex;
     justify-content: center;
 
-    .depart, .arrivee{
+    .arrivee {
         display: flex;
         flex-direction: column;
         align-items: center;
+        border: 1px solid gray;
+        border-top-left-radius: 10px;
+    }
+
+    .depart{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid gray;
+        border-left: none;
+        border-top-right-radius: 10px;
     }
 >>>>>>> 7e7be3f (page fonctionnel)
     
+    
 }
+
+
 
 .details {
     width: 50%;
@@ -181,10 +215,6 @@
             right: 1em;
             border: none;
             background-color: transparent;
-<<<<<<< HEAD
-            
-=======
->>>>>>> 7e7be3f (page fonctionnel)
         }
 
         button:hover{
@@ -200,95 +230,11 @@
     display: flex;
     align-items: center;
     gap: 1em;
-<<<<<<< HEAD
-
     
-
-=======
-    
->>>>>>> 7e7be3f (page fonctionnel)
     img{
         width: 70px; // Définissez la largeur de votre image
         height: 70px; // Définissez la hauteur de votre image
         border-radius: 50%; // Rend l'image ronde
         overflow: hidden; // Masque toute partie de l'image en dehors du cadre arrondi
     }
-<<<<<<< HEAD
 }
-
-#start-date, #end-date{
-    border: none;  
-    text-align: center;
-}
-
-
-.popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border: 1px solid gray;
-    border-radius: 20px;
-    padding: 5em;
-    z-index: 9999; // Assurez-vous que la pop-up apparaît au-dessus du fond semi-transparent
-
-    .popup-content {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 2em;
-
-        #closePopupBtn {
-            position: absolute;
-            top: 1em;
-            left: 1em;
-        
-        }
-
-    }
-}
-
-.adulteInfo, .enfantInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-
-
-
-.traveler-type {
-    display: flex;
-    gap: 5em;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    
-    
-}
-
-body.popup-active {
-    overflow: hidden; // Empêche le défilement de la page lorsque la pop-up est ouverte
-    position: relative; // Assure que la position relative est utilisée pour les enfants
-
-    &::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); // Noir avec une opacité de 50%
-        z-index: 9998; // Assurez-vous que le fond semi-transparent est en dessous de la pop-up
-    }
-}
-  
-
-  
-  
-=======
-}
->>>>>>> 7e7be3f (page fonctionnel)
