@@ -1,0 +1,23 @@
+main {
+
+    > div {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        img {
+            width: 50px;
+            height: auto;
+            padding: 15px;
+        }
+        div {
+            text-align: center;
+        }
+        
+    }
+}
+
+#section-2 {
+    border-bottom: 1px solid #ccc; /* Ajoute une bordure en bas */
+    padding-bottom: 10px; /* Ajoute un espace sous la bordure */
+}

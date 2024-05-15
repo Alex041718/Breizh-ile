@@ -7,11 +7,10 @@
     <link rel="stylesheet" href="/views/style/ui.css">
     <link rel="stylesheet" href="/views/components/Header/header.css">
 </head>
-<body>
-    
-    <?php
 
-    class Header {
+<?php
+
+class Header {
 
         public static function render() {
             $render = /*html*/ '
@@ -22,8 +21,8 @@
                         <img class="logo-small" src="/views/assets/icons/logo.svg" alt="logo_breizh">
                     </a>
 
-            ';
-            echo $render;
+        ';
+        echo $render;
 
             require_once("./components/SearchBar/SearchBar.php");
             SearchBar::render("search-bar search-bar--header","","./monSuperFormulaireQuiVaEtreTraiter", true);
@@ -43,14 +42,13 @@
                         </ul>
                     </div>
 
-                </header>
-            ';
+            </header>
+        ';
 
-            echo $render;
-        }
+        echo $render;
     }
+}
 
-    ?>
-    
-</body>
+?>
+
 </html>
