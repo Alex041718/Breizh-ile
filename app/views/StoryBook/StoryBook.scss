@@ -23,64 +23,64 @@ body {
             height: 100px;
             border-radius: 10px;
             margin: 10px;
-    
+
             &--clientPrimaryColor {
                 background-color: variables.$clientPrimaryColor;
             }
-    
+
             &--ownerPrimaryColor {
                 background-color: variables.$ownerPrimaryColor;
             }
-    
+
             &--secondaryColor {
                 background-color: variables.$secondaryColor;
             }
-    
+
             &--blackColor {
                 background-color: variables.$blackColor;
             }
-    
+
             &--whiteColor {
                 background-color: variables.$whiteColor;
             }
-    
+
             &--grey1 {
                 background-color: variables.$grey1;
             }
-    
+
             &--grey2 {
                 background-color: variables.$grey2;
             }
-    
+
             &--grey3 {
                 background-color: variables.$grey3;
             }
-    
+
             &--grey4 {
                 background-color: variables.$grey4;
             }
-    
+
             &--grey5 {
                 background-color: variables.$grey5;
             }
-    
+
             &--successColor {
                 background-color: variables.$successColor;
             }
-    
+
             &--errorColor {
                 background-color: variables.$errorColor;
             }
-    
+
             &--warningColor {
                 background-color: variables.$warningColor;
             }
-    
+
             &--infoColor {
                 background-color: variables.$infoColor;
             }
-    
-    
+
+
         }
     }
 
@@ -96,4 +96,23 @@ body {
 
 .search-bar--storybook {
     margin: auto;
+}
+
+
+.input-box {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    overflow-x: scroll;
+    align-items: center;
+
+    .InputContainer {
+        padding: 20px;
+        background-color: white;
+
+        .input--storybook {
+            border: 3px dashed variables.$grey5;
+            padding: 10px;
+        }
+    }
 }

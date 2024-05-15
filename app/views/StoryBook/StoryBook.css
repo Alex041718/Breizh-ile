@@ -72,4 +72,22 @@ body {
 
 .search-bar--storybook {
   margin: auto;
-}/*# sourceMappingURL=StoryBook.css.map */
+}
+
+.input-box {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  overflow-x: scroll;
+  align-items: center;
+}
+.input-box .InputContainer {
+  padding: 20px;
+  background-color: white;
+}
+.input-box .InputContainer .input--storybook {
+  border: 3px dashed #E0E0E0;
+  padding: 10px;
+}
+
+/*# sourceMappingURL=StoryBook.css.map */
