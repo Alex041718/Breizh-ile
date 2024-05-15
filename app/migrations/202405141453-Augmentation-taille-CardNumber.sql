@@ -1,2 +1,0 @@
-ALTER TABLE db._PayCard
-MODIFY COLUMN cardNumber VARCHAR(300);

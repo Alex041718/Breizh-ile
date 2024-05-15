@@ -49,9 +49,9 @@ CREATE TABLE _Lang (
 -- Création de la table `PayCard`
 CREATE TABLE _PayCard (
     payCardID serial PRIMARY KEY,
-    cardNumber varchar(50),
-    ownerName varchar(50),
-    CVC varchar(4)
+    cardNumber varchar(300),
+    ownerName varchar(300),
+    CVC varchar(300)
 );
 
 -- Création de la table `Service`
