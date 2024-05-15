@@ -25,7 +25,7 @@ class SearchBar {
                     <input class="para--14px" name="endDate" id="end-date" type="date" placeholder="Ajouter une date">
                 </div>
                 <div class="search-bar__grid-container__search-element" type="nbPeople">
-                    <p class="para--bold para--18px">Combien de personnes ?</p>
+                    <p class="para--bold para--18px">Voyageurs</p>
                     <input class="para--14px" name="peopleNumber" type="number" placeholder="Ajouter un nombre">
                 </div>
             </div>

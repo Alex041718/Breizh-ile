@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.addEventListener("scroll", function() {
-        if(document.documentElement.scrollTop > 85) header.classList.add("scroll");
-        else header.classList.remove("scroll");
+        if(document.documentElement.scrollTop > 85 && !header.classList.contains("scrolling")) header.classList.add("scroll");
+        else if(!header.classList.contains("scrolling")) header.classList.remove("scroll");
     })
 
 

@@ -191,4 +191,21 @@ body {
   color: #1D1D1D;
   z-index: 4;
   width: 70%;
+}
+
+@media screen and (max-width: 1300px) {
+  .header__right {
+    width: 10%;
+    flex: auto !important;
+  }
+  .header .logo img {
+    width: 200px !important;
+  }
+  .header .logo {
+    width: 10%;
+    margin-left: 0 !important;
+  }
+  .header .search-bar--header {
+    width: 80%;
+  }
 }/*# sourceMappingURL=home.css.map */
