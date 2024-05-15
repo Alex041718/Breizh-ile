@@ -1,10 +1,17 @@
 main {
-  margin-top: 125px;
+  margin-top: 135px;
 }
 main > div {
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+}
+main .title .title__arrow {
+  display: flex;
+  position: absolute;
+  left: 0;
+  align-items: center;
 }
 main .title .title__arrow img {
   width: 50px;
