@@ -13,6 +13,17 @@ body {
   left: 50%;
   transform: translateX(-50%);
   z-index: 4;
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+@media screen and (max-width: 1024px) {
+  .search-bar--home {
+    display: none !important;
+  }
+}
+.search-bar--home .search-bar__grid-container__search-element input {
+  background-color: transparent;
 }
 
 .hero-banner {
@@ -60,6 +71,11 @@ body {
   bottom: -5px;
   width: 101%;
   height: 300px;
+}
+@media screen and (max-width: 1000px) {
+  .hero-banner__wave {
+    width: 1000px;
+  }
 }
 .hero-banner__scrolldown {
   --color: white;
@@ -181,31 +197,55 @@ body {
   width: 20px;
   height: 16px;
 }
+@media screen and (max-width: 860px) {
+  .logements__filters {
+    flex-direction: column;
+  }
+}
 .logements__container {
   display: grid;
   gap: 50px;
   grid-template-columns: repeat(3, auto);
   justify-content: space-between;
 }
+@media screen and (max-width: 1300px) {
+  .logements__container {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+@media screen and (max-width: 950px) {
+  .logements__container {
+    grid-template-columns: repeat(1, auto);
+  }
+}
 .logements hr {
   color: #1D1D1D;
   z-index: 4;
   width: 70%;
 }
+@media screen and (max-width: 867px) {
+  .logements {
+    padding-inline: 25px;
+  }
+}
 
 @media screen and (max-width: 1300px) {
-  .header__right {
+  .scroll__right,
+  .scrolling__right {
     width: 10%;
     flex: auto !important;
   }
-  .header .logo img {
+  .scroll .logo img,
+  .scrolling .logo img {
     width: 200px !important;
   }
-  .header .logo {
+  .scroll .logo,
+  .scrolling .logo {
     width: 10%;
     margin-left: 0 !important;
   }
-  .header .search-bar--header {
-    width: 80%;
+  .scroll .search-bar--header,
+  .scrolling .search-bar--header {
+    width: 60%;
   }
 }/*# sourceMappingURL=home.css.map */

@@ -15,6 +15,16 @@ body {
     left: 50%;
     transform: translateX(-50%);
     z-index: 4;
+    background-color: rgba(255, 255, 255, 0.70) !important;
+    backdrop-filter: blur(10px);
+
+    @media screen and (max-width: 1024px) {
+        display: none !important;
+    }
+
+    .search-bar__grid-container__search-element input {
+      background-color: transparent;
+    }
 }
 
 .hero-banner {
@@ -56,6 +66,10 @@ body {
             top: 20% !important;
             left: auto !important;
             z-index: 2;
+
+            @media screen and (max-width: 1000px) {
+              width: 1000px;
+            }
         }
     }
 
@@ -64,6 +78,11 @@ body {
         bottom: -5px;
         width: 101%;
         height: 300px;
+
+        @media screen and (max-width: 1000px) {
+          width: 1000px;
+        }
+
     }
 
     &__scrolldown {
@@ -198,6 +217,10 @@ body {
             width: 20px;
             height: 16px;
         }
+
+        @media screen and (max-width: 860px) {
+          flex-direction: column;
+        }
     }
 
     &__container {
@@ -206,6 +229,14 @@ body {
       grid-template-columns: repeat(3, auto);
       justify-content:space-between;
 
+      @media screen and (max-width: 1300px) {
+        grid-template-columns: repeat(2, auto);
+      }
+
+      @media screen and (max-width: 950px) {
+        grid-template-columns: repeat(1, auto);
+      }
+
     }
 
     hr {
@@ -213,11 +244,16 @@ body {
       z-index: 4;
       width: 70%;
     }
+
+    @media screen and (max-width: 867px) {
+      padding-inline: 25px;
+    }
     
 }
 
 @media screen and (max-width: 1300px) {
-  .header {
+  .scroll,
+  .scrolling {
 
     &__right {
       width: 10%;
@@ -232,7 +268,7 @@ body {
       margin-left: 0 !important;
     }
     .search-bar--header {
-      width: 80%;
+      width: 60%;
     }
   }
 }
