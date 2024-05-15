@@ -23,10 +23,9 @@ class OwnerService extends Service
         // Étape 2 : Enregistrer en base l'owner
 
         $pdo = self::getPDO();
-        $stmt = $pdo->prepare('INSERT INTO _Owner (identityCard, mail, firstname, lastname, nickname, password, phoneNumber, birthDate, consent, lastConnection, creationDate, imageID, genderID, addressID) VALUES (:identityCard, :mail, :firstname, :lastname, :nickname, :password, :phoneNumber, :birthDate, :consent, :lastConnection, :creationDate, :imageID, :genderID, :addressID)');
+        $stmt = $pdo->prepare('INSERT INTO _User (mail, firstname, lastname, nickname, password, phoneNumber, birthDate, consent, lastConnection, creationDate, imageID, genderID, addressID) VALUES (:mail, :firstname, :lastname, :nickname, :password, :phoneNumber, :birthDate, :consent, :lastConnection, :creationDate, :imageID, :genderID, :addressID)');
 
         $stmt->execute(array(
-            'identityCard' => $owner->getIdentityCard(),
             'mail' => $owner->getMail(),
             'firstname' => $owner->getFirstname(),
             'lastname' => $owner->getLastname(),
@@ -42,12 +41,21 @@ class OwnerService extends Service
             'addressID' => $owner->getAddress()->getAddressID()
         ));
 
-        return new Owner($pdo->lastInsertId(), $owner->getIdentityCard(), $owner->getMail(), $owner->getFirstname(), $owner->getLastname(), $owner->getNickname(), $owner->getPassword(), $owner->getPhoneNumber(), $owner->getBirthDate(), $owner->getConsent(), $owner->getLastConnection(), $owner->getCreationDate(), $owner->getImage(), $owner->getGender(), $owner->getAddress());
+        $current_id = $pdo->lastInsertId();
+
+        $stmt = $pdo->prepare('INSERT INTO _Owner (ownerID, identityCard) VALUES (:ownerID, :identityCard);');
+
+        $stmt->execute(array(
+            'ownerID' => $current_id,
+            'identityCard' => $owner->getIdentityCard()
+        ));
+
+        return new Owner($current_id, $owner->getIdentityCard(), $owner->getMail(), $owner->getFirstname(), $owner->getLastname(), $owner->getNickname(), $owner->getPassword(), $owner->getPhoneNumber(), $owner->getBirthDate(), $owner->getConsent(), $owner->getLastConnection(), $owner->getCreationDate(), $owner->getImage(), $owner->getGender(), $owner->getAddress());
     }
     public static function GetAllOwners()
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->query('SELECT * FROM _Owner');
+        $stmt = $pdo->query('SELECT * FROM Owner');
         $owners = [];
 
         while ($row = $stmt->fetch()) {
@@ -59,7 +67,7 @@ class OwnerService extends Service
     public static function GetOwnerById(int $ownerID)
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->query('SELECT * FROM _Owner WHERE ownerID = ' . $ownerID);
+        $stmt = $pdo->query('SELECT * FROM Owner WHERE ownerID = ' . $ownerID);
         $row = $stmt->fetch();
         return self::OwnerHandler($row);
     }

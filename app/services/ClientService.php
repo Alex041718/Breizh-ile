@@ -16,10 +16,9 @@ class ClientService extends Service
         $client->setAddress($address);
 
         $pdo = self::getPDO();
-        $stmt = $pdo->prepare('INSERT INTO _Client (isBlocked, mail, firstname, lastname, nickname, password, phoneNumber, birthDate, consent, lastConnection, creationDate, imageID, genderID, addressID) VALUES (:isBlocked, :mail, :firstname, :lastname, :nickname, :password, :phoneNumber, :birthDate, :consent, :lastConnection, :creationDate, :imageID, :genderID, :addressID)');
+        $stmt = $pdo->prepare('INSERT INTO _User (mail, firstname, lastname, nickname, password, phoneNumber, birthDate, consent, lastConnection, creationDate, imageID, genderID, addressID) VALUES (:mail, :firstname, :lastname, :nickname, :password, :phoneNumber, :birthDate, :consent, :lastConnection, :creationDate, :imageID, :genderID, :addressID)');
 
         $stmt->execute(array(
-            'isBlocked' => $client->getIsBlocked(),
             'mail' => $client->getMail(),
             'firstname' => $client->getFirstname(),
             'lastname' => $client->getLastname(),
@@ -35,13 +34,22 @@ class ClientService extends Service
             'addressID' => $client->getAddress()->getAddressID()
         ));
 
-        return new Client($pdo->lastInsertId(), $client->getIsBlocked(), $client->getMail(), $client->getFirstname(), $client->getLastname(), $client->getNickname(), $client->getPassword(), $client->getPhoneNumber(), $client->getBirthDate(), $client->getConsent(), $client->getLastConnection(), $client->getCreationDate(), $client->getImage(), $client->getGender(), $client->getAddress());
+        $current_id = $pdo->lastInsertId();
+
+        $stmt = $pdo->prepare('INSERT INTO _Client (clientID, isBlocked) VALUES (:clientID, :isBlocked);');
+
+        $stmt->execute(array(
+            'clientID' => $current_id,
+            'isBlocked' => $client->getIsBlocked()
+        ));
+
+        return new Client($current_id, $client->getIsBlocked(), $client->getMail(), $client->getFirstname(), $client->getLastname(), $client->getNickname(), $client->getPassword(), $client->getPhoneNumber(), $client->getBirthDate(), $client->getConsent(), $client->getLastConnection(), $client->getCreationDate(), $client->getImage(), $client->getGender(), $client->getAddress());
     }
 
     public static function GetAllClients()
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->query('SELECT * FROM _Client');
+        $stmt = $pdo->query('SELECT * FROM Client');
         $clients = [];
 
         while ($row = $stmt->fetch()) {
@@ -54,7 +62,7 @@ class ClientService extends Service
     public static function GetClientById(int $clientID)
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->query('SELECT * FROM _Client WHERE clientID = ' . $clientID);
+        $stmt = $pdo->query('SELECT * FROM Client WHERE clientID = ' . $clientID);
         $row = $stmt->fetch();
         return self::ClientHandler($row);
     }
