@@ -1,7 +1,7 @@
 main {
   margin-top: 135px;
 }
-main > div {
+main .title {
   display: flex;
   align-items: center;
   flex-direction: row;
