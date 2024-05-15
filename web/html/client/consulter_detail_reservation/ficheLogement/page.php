@@ -100,19 +100,22 @@
     <title>Fiche Logement</title>
     <link rel="stylesheet" href="../style/ui.css">
     <link rel="stylesheet" href="page.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-
-    <?php // Date picker ?>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     
 
 </head>
-<body>
-    <header>
-        <!-- Importer le composant header  -->
-    </header>
+<body>  
+
+<?php
+        
+        define('__ROOT__', dirname(dirname(__FILE__)));
+
+        require_once("../components/Header/header.php");
+        Header::render(true);
+    ?>
+    
     <main>
         <div class="page">
 
@@ -139,8 +142,7 @@
                             <p class="para--18px">
                             Idéalement situé pour découvrir la côte de granit rose : 
                             à 10 min de Perros-Guirrec et de Beg Legue, à 15 min de trégastel, 
-                            mon appartement est à proximité des commerces et des restaurants.
-                            Au premier étage, dans une résidence calme, vous disposerez d'une chambre (lit 2 places) et 
+                            mon appartemnce calme, vous disposerez d'une chambre (lit 2 places) et 
                             d'un canapé lit, d'une cuisine équipée, d'une salle de bain et d'un toilette séparé...
                             </p>
                         </div>
@@ -157,17 +159,17 @@
                     <h4>60 € par nuit</h4>
                     <div class="datepicker">
                         
-                        <div class="search-bar__grid-container__search-element" type="dateStart">
+                        <div class="arrivee" >
                             <p>Arrivée:</p>
                             <input class="para--14px" name="startDate" id="start-date" type="date" placeholder="Ajouter une date">
                         </div>
                         
-                        <div class="search-bar__grid-container__search-element" type="dateBack">
+                        <div class="depart" >
                             <p>Départ:</p>
                             <input class="para--14px" name="endDate" id="end-date" type="date" placeholder="Ajouter une date">
                         </div>
-                        
-                        
+
+                    
                     </div>
  
                 </div>
