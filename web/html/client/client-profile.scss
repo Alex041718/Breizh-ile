@@ -1,0 +1,29 @@
+@use '../style/variables';
+@use '../style/ui';
+
+body {
+    margin: 0;
+}
+
+.content {
+    background: red;
+    height: 38em;
+
+
+    &__selector{
+        width: 15em;
+        height: 60%;
+        position: fixed;
+        width: 15em;
+        background: blue;
+    };
+
+
+}
+
+
+
+.content__personnal-data__image{
+    width: 1em;
+    height: 1em;
+}
