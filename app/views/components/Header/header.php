@@ -17,11 +17,13 @@ class Header {
                 <script src="/views/components/Header/header.js"></script>
                 <link rel="stylesheet" href="/views/components/Header/header.css">
 
-                <header class=" '. ($isScrolling ? 'scroll scrolling' : '' ). ' header">
-                    <a class="logo" href="">
-                        <img class="logo-big" src="/views/assets/images/logo_breizh_noir.png" id="logo" alt="logo_breizh">
-                        <img class="logo-small" src="/views/assets/icons/logo.svg" alt="logo_breizh">
-                    </a>
+                <header class="">
+                    <div class="header '. ($isScrolling ? 'scroll scrolling' : '' ). '">
+                        <a class="logo" href="">
+                            <img class="logo-big" src="/views/assets/images/logo_breizh_noir.png" id="logo" alt="logo_breizh">
+                            <img class="logo-small" src="/views/assets/icons/logo.svg" alt="logo_breizh">
+                        </a>
+
 
         ';
         echo $render;
@@ -31,19 +33,30 @@ class Header {
 
             $render =  /*html*/ '
 
-                    <div class="header__right">
-                        <i class="fa-sharp fa-regular fa-eye"></i>
-                        <i id="profil" class="fa-solid fa-user"></i>
+                        <div class="header__right">
+                            <i class="fa-sharp fa-regular fa-eye"></i>
+                            <i id="profil" class="fa-solid fa-user"></i>
+                        </div>
+                        <div id="options" style="display: none;">
+                            <ul>
+                                <li><a href="">Compte</a></li>
+                                <li><a href="">Mes réservations</a></li>
+                                <li><a href="">Qui sommes nous</a></li>
+                                <li><a href="">Se déconnecter</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div id="options" style="display: none;">
-                        <ul>
-                            <li><a href="">Compte</a></li>
-                            <li><a href="">Mes réservations</a></li>
-                            <li><a href="">Qui sommes nous</a></li>
-                            <li><a href="">Se déconnecter</a></li>
-                        </ul>
+                    <div class="header-mobile">
+                        <div class="header-mobile__icon">
+                            <i class="fa-sharp fa-solid fa-location-dot"></i>
+                            <p>Réservation</p>
+                        </div>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <div class="header-mobile__icon">
+                            <i class="fa-solid fa-user"></i>
+                            <p>Mon profil</p>
+                        </div>
                     </div>
-
             </header>
         ';
 
