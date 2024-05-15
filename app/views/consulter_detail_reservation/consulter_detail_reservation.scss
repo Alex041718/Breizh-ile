@@ -8,6 +8,7 @@ body{
 main {
     margin-top: 135px;
     
+
     .title {
         display: flex;
         align-items: center;
@@ -167,4 +168,9 @@ main {
 
 }
 
+@media screen and (max-width: 1024px) {
 
+    footer {
+        margin-bottom: 135px;
+    }
+}
