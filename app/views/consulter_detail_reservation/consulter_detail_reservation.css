@@ -1,6 +1,3 @@
-main {
-  margin-top: 135px;
-}
 main > div {
   display: flex;
   align-items: center;
