@@ -28,7 +28,7 @@
         define('__ROOT__', dirname(dirname(__FILE__)));
 
         require_once("./components/Header/header.php");
-        Header::render();
+        Header::render(true);
     ?>
     <main>
         <section class="hero-banner">

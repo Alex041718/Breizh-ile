@@ -18,7 +18,7 @@ class Header {
 
                 <link rel="stylesheet" href="/views/components/Header/header.css">
 
-                <header class=" '. ($isScrolling ? 'scrolling' : '' ). ' header">
+                <header class=" '. ($isScrolling ? 'scroll scrolling' : '' ). ' header">
                     <a class="logo" href="">
                         <img class="logo-big" src="/views/assets/images/logo_breizh_noir.png" id="logo" alt="logo_breizh">
                         <img class="logo-small" src="/views/assets/icons/logo.svg" alt="logo_breizh">
