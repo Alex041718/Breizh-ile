@@ -4,38 +4,36 @@
 }
 
 h1 {
-  font-size: max(45px, 2.9166666667vw);
+  font-size: 75px;
+  font-family: "Outfit", sans-serif;
   font-weight: bold;
   margin: 0;
 }
 
 h2 {
-  font-size: max(30px, 2.5vw);
+  font-size: 48px;
+  font-family: "Outfit", sans-serif;
   font-weight: bold;
   margin: 0;
 }
 
 h3 {
-  font-size: max(23px, 1.5625vw);
+  font-size: 30px;
+  font-family: "Outfit", sans-serif;
   font-weight: bold;
   margin: 0;
 }
 
 h4 {
-  font-size: max(16px, 1.0416666667vw);
-  font-weight: bold;
-  margin: 0;
-}
-
-h4 {
-  font-size: max(16px, 1.0416666667vw);
+  font-size: 20px;
+  font-family: "Outfit", sans-serif;
   font-weight: bold;
   margin: 0;
 }
 
 p {
   margin: 0;
-  font-size: max(14px, 0.8333333333vw);
+  font-size: 16px;
 }
 
 .para--bold {
@@ -52,19 +50,6 @@ p {
 }
 .para--20px {
   font-size: 20px;
-}
-
-.btn {
-  padding-block: 15px;
-  padding-inline: 25px;
-  background-color: #1D1D1D;
-  color: white;
-  width: -moz-fit-content;
-  width: fit-content;
-  border-radius: 10px;
-}
-.btn--center {
-  margin: auto;
 }
 
 .autocomplete {
@@ -107,4 +92,36 @@ p {
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important;
   color: #ffffff;
-}/*# sourceMappingURL=ui.css.map */
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+}
+.input input[type=text], .input input[type=password], .input input[type=email], .input input[type=number], .input input[type=tel], .input input[type=url], .input input[type=search], .input input[type=date], .input input[type=time], .input input[type=datetime], .input input[type=datetime-local], .input input[type=month], .input input[type=week] {
+  min-width: 100px;
+  max-width: 800px;
+  padding: 12px 20px;
+  background-color: #FFFFFF;
+  border: 1.5px solid #E0E0E0;
+  border-radius: 4px;
+  font-size: 12px;
+}
+.input__textarea {
+  min-width: 300px;
+  min-height: 60px;
+  width: 100%;
+  padding: 14px 20px;
+  background-color: #FFFFFF;
+  border: 1.5px solid #E0E0E0;
+  border-radius: 4px;
+  font-size: 16px;
+}
+.input label {
+  min-width: 100px;
+  display: block;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+/*# sourceMappingURL=Input.css.map */

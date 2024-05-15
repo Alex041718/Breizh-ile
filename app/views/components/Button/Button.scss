@@ -1,0 +1,35 @@
+@use '../../style/variables';
+@use '../../style/ui';
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  background-color: variables.$ownerPrimaryColor;
+  color: variables.$whiteColor;
+  border: none;
+
+  &:hover {
+    background-color: variables.$grey5;
+  }
+
+  &--secondary {
+    background-color: variables.$secondaryColor;
+    color: variables.$whiteColor;
+
+    &:hover {
+      background-color: variables.$grey5;
+    }
+  }
+
+  &--disabled {
+    background-color: variables.$grey5;
+    color: variables.$grey1;
+    cursor: not-allowed;
+  }
+}

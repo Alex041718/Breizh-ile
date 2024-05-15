@@ -24,6 +24,7 @@ class Header {
                             <img class="logo-small" src="/views/assets/icons/logo.svg" alt="logo_breizh">
                         </a>
 
+
         ';
         echo $render;
 

@@ -1,7 +1,7 @@
 <?php
 require_once 'Image.php';
-require_once 'address.php';
-require_once 'gender.php';
+require_once 'Address.php';
+require_once 'Gender.php';
 class Client
 {
     private ?int $clientID;

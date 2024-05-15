@@ -4,38 +4,36 @@
 }
 
 h1 {
-  font-size: max(45px, 2.9166666667vw);
+  font-size: 75px;
+  font-family: "Outfit", sans-serif;
   font-weight: bold;
   margin: 0;
 }
 
 h2 {
-  font-size: max(30px, 2.5vw);
+  font-size: 48px;
+  font-family: "Outfit", sans-serif;
   font-weight: bold;
   margin: 0;
 }
 
 h3 {
-  font-size: max(23px, 1.5625vw);
+  font-size: 30px;
+  font-family: "Outfit", sans-serif;
   font-weight: bold;
   margin: 0;
 }
 
 h4 {
-  font-size: max(16px, 1.0416666667vw);
-  font-weight: bold;
-  margin: 0;
-}
-
-h4 {
-  font-size: max(16px, 1.0416666667vw);
+  font-size: 20px;
+  font-family: "Outfit", sans-serif;
   font-weight: bold;
   margin: 0;
 }
 
 p {
   margin: 0;
-  font-size: max(14px, 0.8333333333vw);
+  font-size: 16px;
 }
 
 .para--bold {
@@ -52,19 +50,6 @@ p {
 }
 .para--20px {
   font-size: 20px;
-}
-
-.btn {
-  padding-block: 15px;
-  padding-inline: 25px;
-  background-color: #1D1D1D;
-  color: white;
-  width: -moz-fit-content;
-  width: fit-content;
-  border-radius: 10px;
-}
-.btn--center {
-  margin: auto;
 }
 
 .autocomplete {
@@ -107,4 +92,35 @@ p {
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important;
   color: #ffffff;
-}/*# sourceMappingURL=ui.css.map */
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  background-color: #082C4C;
+  color: #FFFFFF;
+  border: none;
+}
+.button:hover {
+  background-color: #E0E0E0;
+}
+.button--secondary {
+  background-color: #A9A9A9;
+  color: #FFFFFF;
+}
+.button--secondary:hover {
+  background-color: #E0E0E0;
+}
+.button--disabled {
+  background-color: #E0E0E0;
+  color: #333333;
+  cursor: not-allowed;
+}
+
+/*# sourceMappingURL=Button.css.map */

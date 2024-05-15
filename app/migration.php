@@ -12,6 +12,8 @@ $retryMax = 10;
 $retryDelay = 5;
 $charset = 'utf8mb4';
 
+
+
 $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -39,6 +41,10 @@ while ($retryMax > 0) {
 // Une date au debut puis une description de la migration
 
 $migrationFiles = array_diff(scandir(__DIR__ . '/migrations'), array('..', '.'));
+echo "<pre>";
+echo "Fichiers de migration trouvés : \n";
+print_r($migrationFiles);
+echo "</pre>";
 
 $migrationsCompleted = $pdo->query('SELECT scriptName FROM db._Migration')->fetchAll(PDO::FETCH_COLUMN);
 print_r($migrationsCompleted);
