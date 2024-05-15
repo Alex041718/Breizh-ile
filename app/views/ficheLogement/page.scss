@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 @import '../style/variables';
 
+=======
+>>>>>>> 7e7be3f (page fonctionnel)
 .photo {
     img {
         width: 100%;
@@ -28,6 +31,7 @@
 }
 
 .reservation{
+<<<<<<< HEAD
     border: 1px solid $secondaryColor;
     border-radius: 20px;
     width: 50%;
@@ -112,14 +116,38 @@
 
     }
     
+=======
+    border: 2px solid red;
+    width: 50%;
+    height: 35em;
+
+    
+}
+
+.datepicker{
+    display: flex;
+    justify-content: center;
+
+    .depart, .arrivee{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+>>>>>>> 7e7be3f (page fonctionnel)
     
 }
 
 .details {
     width: 50%;
+<<<<<<< HEAD
     border: 2px solid red; 
     position: relative;
     
+=======
+    height: 35em;
+    border: 2px solid red; 
+    position: relative;
+>>>>>>> 7e7be3f (page fonctionnel)
 
     .criteres {
         width: 100%;
@@ -153,7 +181,10 @@
             right: 1em;
             border: none;
             background-color: transparent;
+<<<<<<< HEAD
             
+=======
+>>>>>>> 7e7be3f (page fonctionnel)
         }
 
         button:hover{
@@ -169,15 +200,20 @@
     display: flex;
     align-items: center;
     gap: 1em;
+<<<<<<< HEAD
 
     
 
+=======
+    
+>>>>>>> 7e7be3f (page fonctionnel)
     img{
         width: 70px; // Définissez la largeur de votre image
         height: 70px; // Définissez la hauteur de votre image
         border-radius: 50%; // Rend l'image ronde
         overflow: hidden; // Masque toute partie de l'image en dehors du cadre arrondi
     }
+<<<<<<< HEAD
 }
 
 #start-date, #end-date{
@@ -253,3 +289,6 @@ body.popup-active {
 
   
   
+=======
+}
+>>>>>>> 7e7be3f (page fonctionnel)
