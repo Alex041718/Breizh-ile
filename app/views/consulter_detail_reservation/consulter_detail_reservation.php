@@ -28,25 +28,25 @@
 ?>
 
 <main>
-    <div>
-        <img src="/views/assets/images/fleche.png" id="fleche" alt="fleche">
-        <h2>Ma réservation</h2>
-        <div>
+    <div class="title">
+        <div class="title__arrow">
+            <img src="/views/assets/images/fleche.png" id="fleche" alt="fleche">
+            <h2>Ma réservation</h2>
+        </div>
+        <div class="title__date">
             <h5>Voyage  à Lannion du 17/06/24 au 21/06/2024</h5>
         </div>
     </div>
-    <article>
+    <article class="informations">
         <section>
-            <div id="infos-logement">
-                <div class="image-container">
-                    <img src="/views/assets/images/house.png" alt="house">
-                </div>
-                <div class="info">
+            <div id="informations__logement">
+                <img src="/views/assets/images/house.png" alt="house">
+                <div class="informations__logement__info">
                     <h3>Perros-Guirrec - 22700</h3>
                     <p>Appartement T2</p>
                 </div>
             </div>
-            <div id="detail">
+            <div id="informations__detail">
                 <h3>Détails du prix</h3>
                 <div>
                     <p>60€ x 5 nuits x 1 occupant</p>
@@ -66,7 +66,7 @@
                 <p>360€</p>
             </div>
         </section>
-        <section id="section-2">
+        <section id="informations__section-2">
             <div>
                 
             </div>
