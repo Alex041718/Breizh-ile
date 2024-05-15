@@ -15,7 +15,6 @@ class Header {
                 <script src="/views/components/SearchBar/SearchBar.js" defer></script>
                 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
                 <script src="/views/components/Header/header.js"></script>
-
                 <link rel="stylesheet" href="/views/components/Header/header.css">
 
                 <header class=" '. ($isScrolling ? 'scroll' : '' ). ' header">
