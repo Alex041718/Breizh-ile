@@ -1,29 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/views/style/ui.css">
-    <link rel="stylesheet" href="/views/components/Header/header.css">
-</head>
-<body>
-    
-    <?php
 
-    class Header {
+<?php
 
-        public static function render() {
+class Header {
+
+        public static function render($isScrolling = false) {
             $render = /*html*/ '
+
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+                <link rel="stylesheet" href="/views/components/SearchBar/SearchBar.css">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+                <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
+                <script src="/views/components/Helper/autocompletionHelper.js" defer></script>
+                <script src="/views/components/SearchBar/SearchBar.js" defer></script>
+                <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
                 <script src="/views/components/Header/header.js"></script>
-                <header class="header">
+
+                <link rel="stylesheet" href="/views/components/Header/header.css">
+
+                <header class=" '. ($isScrolling ? 'scroll' : '' ). ' header">
                     <a class="logo" href="">
                         <img class="logo-big" src="/views/assets/images/logo_breizh_noir.png" id="logo" alt="logo_breizh">
                         <img class="logo-small" src="/views/assets/icons/logo.svg" alt="logo_breizh">
                     </a>
 
-            ';
-            echo $render;
+        ';
+        echo $render;
 
             require_once(__ROOT__."/views/components/SearchBar/SearchBar.php");
             SearchBar::render("search-bar search-bar--header","","./monSuperFormulaireQuiVaEtreTraiter", true);
@@ -43,14 +45,12 @@
                         </ul>
                     </div>
 
-                </header>
-            ';
+            </header>
+        ';
 
-            echo $render;
-        }
+        echo $render;
     }
+}
 
-    ?>
-    
-</body>
-</html>
+?>
+
