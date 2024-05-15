@@ -29,7 +29,8 @@
         display: block;
     }
 
-    &.scroll {
+    &.scroll,
+    &.scrolling {
         height: auto;
         position: fixed;
         background-color: #ffffff;
