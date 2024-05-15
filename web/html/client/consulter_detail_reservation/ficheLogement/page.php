@@ -64,25 +64,46 @@
                 <div class="reservation">
                     <h4>60 € par nuit</h4>
                     <div class="datepicker">
-                        
                         <div class="arrivee" >
-                            <p>Arrivée:</p>
+                            <p class="para--bold">Arrivée:</p>
                             <input class="para--14px" name="startDate" id="start-date" type="date" placeholder="Ajouter une date">
                         </div>
                         
                         <div class="depart" >
-                            <p>Départ:</p>
+                            <p class="para--bold">Départ:</p>
                             <input class="para--14px" name="endDate" id="end-date" type="date" placeholder="Ajouter une date">
                         </div>
-
-                    
                     </div>
- 
+                    <div class="nbrClients">
+                        <button class="para--bold" id="addTravelersBtn">Ajouter des voyageurs <output id="liveTravelersCount">0</output></button>
+                        <div id="popup" class="popup">
+                <div class="popup-content">
+                    <div class="traveler-type">
+                        <span class="para--bold">Adultes:</span>
+                        <button id="subtractAdultBtn">-</button>
+                        <span id="adultCount">0</span>
+                        <button id="addAdultBtn">+</button>
+                    </div>
+                    <div class="age-info">
+                        <span>13 ans et plus</span>
+                    </div>
+                    <div class="traveler-type">
+                        <span class="para--bold">Enfants:</span>
+                        <button id="subtractChildBtn">-</button>
+                        <span id="childCount">0</span>
+                        <button id="addChildBtn">+</button>
+                    </div>
+                    <div class="age-info">
+                        <span>Moins de 12 ans</span>
+                    </div>
+                    <button id="closePopupBtn">Fermer</button>
                 </div>
-
             </div>
 
-        </div>
+                    </div>
+
+                </div>
+            </div>
         
     </main>
     

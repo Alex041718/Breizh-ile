@@ -62,13 +62,13 @@ searchBars.forEach(searchBar => {
     // Système de recherche, par auto-complétion
 
     // On recupère l'input
-    const searchText = searchBar.querySelector('#search-text');
+    const searchText = document.getElementById('search-text');
 
     // on recupère les villes Bretonnes
 
     const myHeaders = new Headers();
     myHeaders.append("sec-ch-ua", "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\"");
-    myHeaders.append("Referer", "http://localhost:5555/html/StoryBook.php");
+    myHeaders.append("Referer", "http://localhost:5555/views/StoryBook.php");
     myHeaders.append("sec-ch-ua-mobile", "?0");
     myHeaders.append("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36");
     myHeaders.append("sec-ch-ua-platform", "\"macOS\"");
@@ -99,7 +99,6 @@ searchBars.forEach(searchBar => {
         
         // from autompletionHelper.js
         // mise en place de lautompletion sur l'input
-
         autocomplete(searchText, cityNames);
 
     })
