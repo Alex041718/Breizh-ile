@@ -1,10 +1,12 @@
+main {
+  margin-top: 125px;
+}
 main > div {
   display: flex;
   align-items: center;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
 }
-main > div img {
+main .title .title__arrow img {
   width: 50px;
   height: auto;
   padding: 15px;
