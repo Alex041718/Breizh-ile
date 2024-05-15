@@ -187,8 +187,6 @@
         </code>
     </pre>
 
-
-
     <h3 id="text">Input</h3>
 
     <div class="input-box">
@@ -215,6 +213,5 @@
         <?php endforeach; ?>
 
     </div>
-
     </body>
 </html>
