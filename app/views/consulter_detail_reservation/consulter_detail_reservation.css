@@ -1,7 +1,4 @@
-main {
-  margin-top: 135px;
-}
-main .title {
+main > div {
   display: flex;
   align-items: center;
   flex-direction: row;
