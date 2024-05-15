@@ -17,7 +17,11 @@
 }
 
 .twodiv {
+<<<<<<< HEAD
   border: 2px solid red;
+=======
+  /* border: 2px solid red; */
+>>>>>>> bfd68c3 (Premier commit hihihihi)
   width: 100%;
   padding-top: 1em;
   display: flex;
@@ -25,7 +29,11 @@
 }
 
 .reservation {
+<<<<<<< HEAD
   border: 2px solid red;
+=======
+  /* border: 2px solid red; */
+>>>>>>> bfd68c3 (Premier commit hihihihi)
   width: 50%;
   height: 35em;
 }
@@ -43,7 +51,11 @@
 .details {
   width: 50%;
   height: 35em;
+<<<<<<< HEAD
   border: 2px solid red;
+=======
+  /* border: 2px solid red; */
+>>>>>>> bfd68c3 (Premier commit hihihihi)
   position: relative;
 }
 .details .criteres {
