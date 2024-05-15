@@ -23,7 +23,7 @@
 .header .logo-small {
   display: block;
 }
-.header.scroll {
+.header.scroll, .header.scrolling {
   height: auto;
   position: fixed;
   background-color: #ffffff;
@@ -31,10 +31,10 @@
   animation-name: showUp;
   height: 80px;
 }
-.header.scroll .header__right {
+.header.scroll .header__right, .header.scrolling .header__right {
   margin-right: 50px;
 }
-.header.scroll .header__right i {
+.header.scroll .header__right i, .header.scrolling .header__right i {
   color: black;
 }
 @keyframes showUp {
@@ -45,17 +45,17 @@
     transform: translateY(0);
   }
 }
-.header.scroll .logo-big {
+.header.scroll .logo-big, .header.scrolling .logo-big {
   display: block;
 }
-.header.scroll .logo {
+.header.scroll .logo, .header.scrolling .logo {
   margin-left: 50px;
   width: 20%;
 }
-.header.scroll .logo-small {
+.header.scroll .logo-small, .header.scrolling .logo-small {
   display: none;
 }
-.header.scroll .search-bar {
+.header.scroll .search-bar, .header.scrolling .search-bar {
   justify-content: space-between;
   display: flex;
 }

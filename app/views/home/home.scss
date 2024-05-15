@@ -23,6 +23,7 @@ body {
     height: 120vh;
 
     &__parallax {
+        height: 100%;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -213,4 +214,25 @@ body {
       width: 70%;
     }
     
+}
+
+@media screen and (max-width: 1300px) {
+  .header {
+
+    &__right {
+      width: 10%;
+      flex: auto !important;
+    }
+
+    .logo img {
+      width: 200px !important;
+    }
+    .logo {
+      width: 10%;
+      margin-left: 0 !important;
+    }
+    .search-bar--header {
+      width: 80%;
+    }
+  }
 }
