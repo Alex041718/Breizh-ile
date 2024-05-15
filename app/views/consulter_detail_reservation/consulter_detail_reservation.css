@@ -31,6 +31,7 @@ main .informations {
   padding-inline: 50px;
   padding-bottom: 100px;
 }
+
 main .informations .informations__left {
   width: 50%;
   border-right: 1px solid #ccc;
