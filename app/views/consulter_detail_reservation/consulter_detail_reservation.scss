@@ -1,5 +1,5 @@
 main {
-
+    margin-top: 125px;
     > div {
         display: flex;
         align-items: center;
@@ -18,6 +18,6 @@ main {
 }
 
 #section-2 {
-    border-bottom: 1px solid #ccc; /* Ajoute une bordure en bas */
-    padding-bottom: 10px; /* Ajoute un espace sous la bordure */
+    border-bottom: 1px solid #ccc; 
+    padding-bottom: 10px; 
 }

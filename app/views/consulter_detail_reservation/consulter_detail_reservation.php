@@ -7,11 +7,24 @@
     <title>Document</title>
     <link rel="stylesheet" href="../style/ui.css">
     <link rel="stylesheet" href="/views/consulter_detail_reservation/consulter_detail_reservation.css">
+    <link rel="stylesheet" href="/views/components/SearchBar/SearchBar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+    <script src="./home/script.js"></script>
+    <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+    <script src="./components/Helper/autocompletionHelper.js" defer></script>
+    <script src="./components/SearchBar/SearchBar.js" defer></script>
+    <link rel="stylesheet" href="/views/components/Header/header.css">
+
+    <?php // Date picker ?>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 
 <?php
     require_once("../components/Header/header.php");
-    Header::render();
+    Header::render(true);
 ?>
 
 <main>
