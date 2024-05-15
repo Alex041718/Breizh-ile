@@ -37,6 +37,13 @@ main {
         padding-inline: 50px;
         padding-bottom: 100px;
 
+        @media screen and (max-width: 1024px) {
+            flex-direction: column;
+            
+            
+    
+        }
+
         .informations__left {
             width: 50%;
             border-right: 1px solid #ccc; 
@@ -80,6 +87,15 @@ main {
                 }
             }
 
+            .informations__left__total {
+
+                div {
+                    display: flex;
+                    justify-content: space-between;
+
+                }
+            }
+
         }
 
         .informations__right {            
@@ -97,9 +113,42 @@ main {
                     border-bottom-left-radius: 10px;
                 }
                 
-                .informations__right__desc_info {
+                .informations__right__desc__info {
+                    display: flex;
                     padding: 25px;
                     align-items: center;
+                    width: 100%;
+
+                    .informations__right__desc__info__perso {
+                        width: 50%;
+
+                    }
+
+                    .informations__right__desc__info__vide {
+                        width: 30%;
+                    }
+
+                    .informations__right__desc__info__icons {
+                        display: flex;
+                        gap: 25px; 
+                        width: 20%;
+
+
+                        #telephone{
+                            font-size: 30px;
+                            
+                        }
+
+                        #mail{
+                            font-size: 30px;
+                        }
+                    }
+                }
+            }
+
+            .informations__right__localisation {
+                .loca {
+                    margin-top: 25px;
                 }
             }
             
@@ -117,3 +166,5 @@ main {
     }
 
 }
+
+
