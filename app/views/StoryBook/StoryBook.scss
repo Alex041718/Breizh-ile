@@ -107,7 +107,12 @@ body {
     align-items: center;
 
     .InputContainer {
-        padding: 80px;
+        padding: 20px;
         background-color: white;
+
+        .input--storybook {
+            border: 3px dashed variables.$grey5;
+            padding: 10px;
+        }
     }
 }
