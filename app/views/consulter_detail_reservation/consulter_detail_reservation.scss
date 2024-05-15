@@ -1,23 +1,36 @@
 main {
+    margin-top: 135px;
 
-    > div {
+    .title {
         display: flex;
         align-items: center;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: center;
+        margin: 40px;
 
-        img {
-            width: 50px;
-            height: auto;
-            padding: 15px;
+        .title__arrow {
+            display: flex;
+            position: absolute;
+            left: 0;
+            align-items: center;
+            img {
+                width: 50px;
+                height: auto;
+                padding: 15px;
+            }
         }
-        div {
-            text-align: center;
+        .title__date {
+            display: flex;                
         }
         
     }
+    .informations__section-1 {
+        display: flex;
+        position: absolute;
+    }
 }
 
-#section-2 {
-    border-bottom: 1px solid #ccc; /* Ajoute une bordure en bas */
-    padding-bottom: 10px; /* Ajoute un espace sous la bordure */
+#informations__section-2 {
+    border-bottom: 1px solid #ccc; 
+    padding-bottom: 10px; 
 }
