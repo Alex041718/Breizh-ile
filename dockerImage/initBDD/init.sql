@@ -49,22 +49,16 @@ CREATE TABLE _Lang (
 -- Création de la table `PayCard`
 CREATE TABLE _PayCard (
     payCardID serial PRIMARY KEY,
-    cardNumber varchar(50),
-    ownerName varchar(50),
-    CVC varchar(4)
+    cardNumber varchar(300),
+    ownerName varchar(300),
+    CVC varchar(300)
 );
-
-
 
 -- Création de la table `Service`
 CREATE TABLE _Service (
     serviceID serial PRIMARY KEY,
     label varchar(50)
 );
-
-
-
-
 
 -- Création de la table `Config`
 CREATE TABLE _Config (
@@ -83,41 +77,83 @@ CREATE TABLE _Address (
 
 -- Création de la table `Category`
 CREATE TABLE _Category (
-                          categoryID serial PRIMARY KEY,
-                          label varchar(30)
+    categoryID serial PRIMARY KEY,
+    label varchar(30)
 );
 
 -- Création de la table `Type`
 CREATE TABLE _Type (
-                      typeID serial PRIMARY KEY,
-                      label varchar(20)
+    typeID serial PRIMARY KEY,
+    label varchar(20)
 );
 
 -- Création de la table `Image`
 CREATE TABLE _Image (
-                       imageID serial PRIMARY KEY,
-                       src varchar(255)
+    imageID serial PRIMARY KEY,
+    src varchar(255)
 );
+
+-- Création de la table `User`
+CREATE TABLE _User (
+    userID serial PRIMARY KEY,
+    mail varchar(255) UNIQUE,
+    lastname varchar(100),
+    firstname varchar(100),
+    nickname varchar(50),
+    password varchar(255),
+    phoneNumber varchar(50),
+    birthDate Date,
+    consent Boolean,
+    lastConnection Date,
+    creationDate Date,
+    imageID BIGINT UNSIGNED, -- Correspond au type `serial` dans Image pour mysql
+    genderID BIGINT UNSIGNED, -- Correspond au type `serial` dans Gender pour mysal
+    addressID BIGINT UNSIGNED, -- Correspond au type `serial` dans Address pour mysql
+    FOREIGN KEY (genderID) REFERENCES _Gender(genderID),
+    FOREIGN KEY (addressID) REFERENCES _Address(addressID),
+    FOREIGN KEY (imageID) REFERENCES _Image(imageID)
+);
+
 -- Création de la table `Owner`
 CREATE TABLE _Owner (
-                       ownerID serial PRIMARY KEY,
-                       identityCard varchar(100),
-                       mail varchar(255) UNIQUE,
-                       firstname varchar(100),
-                       lastname varchar(100),
-                       nickname varchar(50),
-                       password varchar(255),
-                       phoneNumber varchar(50),
-                       birthDate Date,
-                       consent Boolean,
-                       lastConnection Date,
-                       creationDate Date,
-                       imageID BIGINT UNSIGNED, -- Correspond au type `serial` dans Image pour mysql
-                       genderID BIGINT UNSIGNED, -- Correspond au type `serial` dans Gender pour mysql
-                       addressID BIGINT UNSIGNED, -- Correspond au type `serial` dans Address pour mysql
-                       FOREIGN KEY (genderID) REFERENCES _Gender(genderID),
-                       FOREIGN KEY (addressID) REFERENCES _Address(addressID),
-                       FOREIGN KEY (imageID) REFERENCES _Image(imageID)
+    ownerID BIGINT UNSIGNED PRIMARY KEY,
+    identityCard varchar(100),
+    FOREIGN KEY (ownerID) REFERENCES _User(userID)
+);
+
+-- Création de la table `Client`
+CREATE TABLE _Client (
+    clientID BIGINT UNSIGNED PRIMARY KEY,
+    isBlocked Boolean,
+    FOREIGN KEY (clientID) REFERENCES _User(userID)
+);
+
+-- Création de la view `Owner`
+CREATE VIEW Owner AS (
+    SELECT 
+        ownerID,
+        mail,
+        lastname,
+        firstname,
+        nickname,
+        password,
+        phoneNumber,
+        birthDate,
+        consent,
+        lastConnection,
+        creationDate,
+        imageID,
+        genderID,
+        addressID,
+        identityCard
+    FROM _Owner
+    JOIN _User ON _Owner.ownerID = _User.userID
+);
+
+-- Création de la view `Client`
+CREATE VIEW Client AS (
+    SELECT * FROM _Client
+    JOIN _User ON _Client.clientID = _User.userID
 );
 
 -- Création de la table `Housing`
@@ -128,6 +164,7 @@ CREATE TABLE _Housing (
     longDesc varchar(10000),
     priceExcl Float,
     priceIncl Float,
+    nbPerson integer,
     nbRoom integer,
     nbDoubleBed integer,
     nbSimpleBed integer,
@@ -187,31 +224,6 @@ CREATE TABLE _Has_for_arrangement (
                                      FOREIGN KEY (arrangementID) REFERENCES _Arrangement(arrangementID)
 );
 
-
-
-
--- Création de la table `Client`
-CREATE TABLE _Client (
-    clientID serial PRIMARY KEY,
-    isBlocked Boolean,
-    mail varchar(255) UNIQUE,
-    firstname varchar(100),
-    lastname varchar(100),
-    nickname varchar(50),
-    password varchar(255),
-    phoneNumber varchar(50),
-    birthDate Date,
-    consent Boolean,
-    lastConnection Date,
-    creationDate Date,
-    imageID BIGINT UNSIGNED, -- Correspond au type `serial` dans Image pour mysql
-    genderID BIGINT UNSIGNED, -- Correspond au type `serial` dans Gender pour mysal
-    addressID BIGINT UNSIGNED, -- Correspond au type `serial` dans Address pour mysql
-    FOREIGN KEY (genderID) REFERENCES _Gender(genderID),
-    FOREIGN KEY (addressID) REFERENCES _Address(addressID),
-    FOREIGN KEY (imageID) REFERENCES _Image(imageID)
-);
-
 -- Création de la table `Review`
 CREATE TABLE _Review (
                         reviewID serial PRIMARY KEY,
@@ -239,7 +251,6 @@ CREATE TABLE _PaymentMethod (
     label varchar(50)
 );
 
-
 -- Création de la table `Reservation`
 CREATE TABLE _Reservation (
     reservationID serial PRIMARY KEY,
@@ -248,12 +259,12 @@ CREATE TABLE _Reservation (
     serviceCharge Float,
     touristTax Float,
     status varchar(20),
+    nbPerson integer,
     housingID BIGINT UNSIGNED, -- Correspond au type `serial` dans Housing pour mysql
     payMethodID BIGINT UNSIGNED, -- Correspond au type `serial` dans PaymentMethod pour mysql
     FOREIGN KEY (housingID) REFERENCES _Housing(housingID),
     FOREIGN KEY (payMethodID) REFERENCES _PaymentMethod(payMethodID)
 );
-
 
 -- Associations many-to-many et autres contraintes
 
@@ -266,20 +277,11 @@ CREATE TABLE _Housing_Image (
     FOREIGN KEY (imageID) REFERENCES _Image(imageID)
 );
 
-
 -- Association Lang
-CREATE TABLE _Lang_Client (
+CREATE TABLE _Lang_User (
     langID BIGINT UNSIGNED, -- Correspond au type `serial` dans Lang pour mysql
     userID BIGINT UNSIGNED, -- Correspond au type `serial` dans Client pour mysql
     PRIMARY KEY (langID, userID),
     FOREIGN KEY (langID) REFERENCES _Lang(langID),
-    FOREIGN KEY (userID) REFERENCES _Client(ClientID)
-);
-
-CREATE TABLE _Lang_Owner (
-     langID BIGINT UNSIGNED, -- Correspond au type `serial` dans Lang pour mysql
-     userID BIGINT UNSIGNED, -- Correspond au type `serial` dans Owner pour mysql
-     PRIMARY KEY (langID, userID),
-     FOREIGN KEY (langID) REFERENCES _Lang(langID),
-     FOREIGN KEY (userID) REFERENCES _Owner(OwnerID)
+    FOREIGN KEY (userID) REFERENCES _User(userID)
 );
