@@ -38,6 +38,7 @@ class Header {
 
                         <div class="header__right">
                             <i class="fa-solid fa-eye"></i>
+                            <i class="fa-solid fa-eye"></i>
                             <i id="profil" class="fa-solid fa-user"></i>
                         </div>
                         <div id="options" style="display: none;">
