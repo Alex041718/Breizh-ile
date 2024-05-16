@@ -88,13 +88,10 @@ body {
 .input-box .InputContainer .input--storybook {
   border: 3px dashed #E0E0E0;
   padding: 10px;
-
 }
 
 .button-box {
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
-
-/*# sourceMappingURL=StoryBook.css.map */
+}/*# sourceMappingURL=StoryBook.css.map */

@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../style/ui.css">
-    <link rel="stylesheet" href="/views/consulter_detail_reservation/consulter_detail_reservation.css">
-    <link rel="stylesheet" href="/views/components/SearchBar/SearchBar.css">
+    <link rel="stylesheet" href="/consulter_detail_reservation/consulter_detail_reservation.css">
+    <link rel="stylesheet" href="/components/SearchBar/SearchBar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
-    <link rel="stylesheet" href="/views/components/Header/header.css">
+    <link rel="stylesheet" href="/components/Header/header.css">
 
-    <script src="/views/consulter_detail_reservation/consulter_detail_reservation.js"></script>
+    <script src="/consulter_detail_reservation/consulter_detail_reservation.js"></script>
 
     <?php // Date picker ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -35,7 +35,7 @@
 <main>
     <div class="title">
         <div class="title__arrow">
-            <img src="/views/assets/images/fleche.png" id="fleche" alt="fleche">
+            <img src="/assets/images/fleche.png" id="fleche" alt="fleche">
             <h2>Ma réservation</h2>
         </div>
         <div class="title__date">
@@ -45,7 +45,7 @@
     <article class="informations">
         <section class="informations__left">
             <div class="informations__left__logement">
-                <img src="/../FILES/images/12345.webp" alt="house">
+                <img src="/assets/images//12345.webp" alt="house">
                 <div class="informations__left__logement__info">
                     <h3>Perros-Guirrec - 22700</h3>
                     <p class="para--18px">Appartement T2</p>
@@ -77,7 +77,7 @@
         </section>
         <section class="informations__right">
             <div class="informations__right__desc">
-                <img src="/views/assets/images/jean.png" alt="">
+                <img src="/assets/images/jean.png" alt="">
                 <div class="informations__right__desc__info">
                     <div class="informations__right__desc__info__perso">
                         <h3>+33 6 01 02 03 04</h3>
