@@ -16,5 +16,8 @@
         Header::render(True, True);
         OwnerNavBar::render();
     ?>
+    <main>
+        <h3>Vos réservations</h3>
+    </main>
 </body>
 </html>

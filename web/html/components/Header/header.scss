@@ -150,9 +150,13 @@
         flex: 0 0 20%;
     }
 
-    &.header--xl {
+    &.header--backoffice {
         height: 120px !important;
         padding-bottom: 0;
+
+        &i {
+            color: red;
+        }
     }
 
     .fa-user {

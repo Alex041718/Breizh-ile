@@ -18,7 +18,7 @@ class Header {
                 <link rel="stylesheet" href="/components/Header/header.css">
 
                 <header class="">
-                    <div class="header '. ($isScrolling ? 'scroll scrolling' : '' ). ' '. ($isBackOffice ? 'header--xl' : '' ). '">
+                    <div class="header '. ($isScrolling ? 'scroll scrolling' : '' ). ' '. ($isBackOffice ? 'header--backoffice' : '' ). '">
                         <a class="logo" href="">
                             <img class="logo-big" src="/assets/images/logo_breizh_noir.png" id="logo" alt="logo_breizh">
                             <img class="logo-small" src="/assets/icons/logo.svg" alt="logo_breizh">
