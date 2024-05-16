@@ -5,7 +5,6 @@ body {
 main {
   margin-top: 135px;
 }
-
 @media screen and (max-width: 1024px) {
   main {
     margin-top: 75px;
@@ -32,7 +31,6 @@ main .title .title__arrow img {
 main .title .title__date {
   display: flex;
 }
-
 @media screen and (max-width: 1024px) {
   main .title .title__date {
     padding-top: 100px;
@@ -46,7 +44,6 @@ main .informations {
 @media screen and (max-width: 1024px) {
   main .informations {
     flex-direction: column;
-
     padding-left: 25px;
     padding-right: 25px;
   }
@@ -56,7 +53,6 @@ main .informations .informations__left {
   border-right: 1px solid #ccc;
   padding-right: 50px;
 }
-
 @media screen and (max-width: 1024px) {
   main .informations .informations__left {
     width: 100%;
@@ -77,7 +73,7 @@ main .informations .informations__left .informations__left__logement img {
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 10px;
-
+}
 @media screen and (max-width: 1024px) {
   main .informations .informations__left .informations__left__logement img {
     width: 175px;
@@ -98,7 +94,6 @@ main .informations .informations__left .informations__left__detail div {
 main .informations .informations__left .informations__left__detail div:nth-child(odd) {
   background-color: #E0E0E0;
 }
-
 @media screen and (max-width: 1024px) {
   main .informations .informations__left .informations__left__total {
     padding-bottom: 10px;
@@ -113,7 +108,6 @@ main .informations .informations__right {
   width: 50%;
   padding-left: 50px;
 }
-
 @media screen and (max-width: 1024px) {
   main .informations .informations__right {
     width: 100%;
@@ -130,7 +124,6 @@ main .informations .informations__right .informations__right__desc img {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
-
 @media screen and (max-width: 1024px) {
   main .informations .informations__right .informations__right__desc img {
     width: 75px;
@@ -143,7 +136,6 @@ main .informations .informations__right .informations__right__desc .informations
   align-items: center;
   width: 100%;
 }
-
 @media screen and (max-width: 1024px) {
   main .informations .informations__right .informations__right__desc .informations__right__desc__info {
     padding: 0;
@@ -170,7 +162,6 @@ main .informations .informations__right .informations__right__desc .informations
   gap: 25px;
   width: 20%;
 }
-
 @media screen and (max-width: 1024px) {
   main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__icons {
     display: flex;
