@@ -21,6 +21,16 @@ MYSQL_ROOT_PASSWORD=root
 WEB_PORT=5555
 ````
 
+## 2.1 Pour un serveur, le .env doit-être comme ceci :
+````
+EQUIPE=crepetech
+MYSQL_DATABASE=db
+MYSQL_USER=user
+MYSQL_PASSWORD=pass
+MYSQL_ROOT_PASSWORD=root
+WEB_PORT=80
+````
+
 ### 3. Lancer le docker compose avec le script ./start.sh (".\startPS.ps1" avec PowerShell sur windows) avec docker d'allumer ou installer
 ````
 ./start.sh
