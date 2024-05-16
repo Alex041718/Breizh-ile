@@ -105,10 +105,10 @@ p {
 
 body {
   margin: 0;
+  background-color: #FFFFFF;
 }
 
 .content {
-  background: red;
   height: 38em;
 }
 .content__selector {
@@ -116,7 +116,23 @@ body {
   height: 60%;
   position: fixed;
   width: 15em;
-  background: blue;
+  background: #FFFFFF;
+  color: #307B5C;
+  box-shadow: 9px 0px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.content__selector > div {
+  height: 4em;
+  border-bottom: 1px solid #A9A9A9;
+  display: flex;
+  align-items: center;
+  padding-left: 7%;
+}
+.content__selector > div.content__selector--current {
+  background: #307B5C;
+  color: #FFFFFF;
+}
+.content__personnal-data, .content__security {
+  margin-left: 15em;
 }
 
 .content__personnal-data__image {
