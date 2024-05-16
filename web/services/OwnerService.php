@@ -82,14 +82,33 @@ class OwnerService extends Service
 
         // Gestion de l'adresse
         // appel de la méthode GetAddressById de la classe AddressService
-        $adress = AddressService::GetAddressById($row['addressID']);
+        $address = AddressService::GetAddressById($row['addressID']);
 
         // Gestion de l'image
         // appel de la méthode GetUserImageById de la classe ImageService
         $image = ImageService::GetImageById($row['imageID']);
 
+        $birthDate = isset($row['birthDate']) ? new DateTime($row['birthDate']) : null;
+        $lastConnection = isset($row['lastConnection']) ? new DateTime($row['lastConnection']) : null;
+        $creationDate = isset($row['creationDate']) ? new DateTime($row['creationDate']) : new DateTime("now");
 
-        return new Owner($row['ownerID'], $row['identityCard'], $row['mail'], $row['firstname'], $row['lastname'], $row['nickname'], $row['password'], $row['phoneNumber'], new DateTime($row['birthDate']), $row['consent'], new DateTime($row['lastConnection']), new DateTime($row['creationDate']), $image, $gender, $adress);
+        return new Owner(
+            $row['ownerID'], 
+            $row['identityCard'], 
+            $row['mail'], 
+            $row['firstname'], 
+            $row['lastname'], 
+            $row['nickname'], 
+            $row['password'], 
+            $row['phoneNumber'], 
+            $birthDate, 
+            $row['consent'], 
+            $lastConnection, 
+            $creationDate, 
+            $image, 
+            $gender, 
+            $address
+        );
     }
 
 }

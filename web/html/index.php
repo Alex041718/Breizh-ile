@@ -59,7 +59,17 @@
                 <button>Filtre</button>
             </div>
             <div class="logements__container">
-                <?php 
+                <?php
+                require_once("../services/HousingService.php");
+                require_once("../services/OwnerService.php");
+                require_once("../services/TypeService.php");
+                require_once("../services/CategoryService.php");
+                require_once("../services/ArrangementService.php");
+
+
+                $housings = HousingService::GetAllHousings();
+
+
                 for ($i=0; $i < 9; $i++) {
                     require_once("./components/HousingCard/HousingCard.php");
                     require_once("../models/Housing.php");
@@ -70,31 +80,7 @@
                     require_once("../models/Owner.php");
                     require_once("../models/Gender.php");
 
-                    $card = new Housing(25,
-                                        "Appartement pipou",
-                                        "Un superbe appartement avec vue mer, près du centre. Une occasion parfaite pour voyager ! ",
-                                        "Un superbe appartement avec vue mer, près du centre. Une occasion parfaite pour voyager en famille ahahhahahahah ! ",
-                                        25,
-                                        30,
-                                        4,
-                                        1,
-                                        2,
-                                        2.0212,
-                                        3.20125,
-                                        false,
-                                        4,
-                                        new DateTime("now"),
-                                        new DateTime("now"),
-                                        new DateTime("now"),
-                                        25.20,
-                                        new Type(2, "T2"),
-                                        new Category(3, "Maison"),
-                                        new Address(2, "Perros", "22000", "7 rue des abeilles"),
-                                        new Owner(6, "fkdjgdfg", "caca@caca", "Benoit", "Tottereau", "Bendu22", "dsfgdsfs", "0626857545", new DateTime("now"), true, new DateTime("now"), new DateTime("now"), new Image(78, "./assets/images/pp-test.jpg"), new Gender(9, "Tracteur"), new Address(2, "Perros", "22000", "7 rue des abeilles")),
-                                        new Image(10, "./assets/images/test.jpg"),
-                                        ["dsfsd", "dsfsdf"]);
-
-                    HousingCard::render($card);
+                    HousingCard::render($housings[$i]);
                 }
 
                 ?>
