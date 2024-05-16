@@ -12,7 +12,7 @@ require_once '../../services/GenderService.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['identityCard']) || !isset($_POST['mail']) || !isset($_POST['firstname']) || !isset($_POST['lastname']) || !isset($_POST['nickname']) || !isset($_POST['password']) || !isset($_POST['phoneNumber']) || !isset($_POST['birthDate']) || !isset($_POST['consent']) || !isset($_POST['genderID']) || !isset($_POST['city']) || !isset($_POST['postalCode']) || !isset($_POST['postalAddress'])) {
 
-    header('Location: /views/admin/ownerDashboard.php?error=missingFields');
+    header('Location: /html/admin/ownerDashboard.php?error=missingFields');
     exit();
 }
 
@@ -56,5 +56,5 @@ $owner = new Owner(null, $identityCard, $mail, $firstname, $lastname, $nickname,
 $owner = OwnerService::CreateOwner($owner);
 
 // Redirection vers le dashboard Administrateur
-header('Location: /views/admin/ownerDashboard.php?success=ownerCreated');
+header('Location: /html/admin/ownerDashboard.php?success=ownerCreated');
 exit();

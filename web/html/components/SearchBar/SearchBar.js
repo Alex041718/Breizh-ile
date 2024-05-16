@@ -68,7 +68,7 @@ searchBars.forEach(searchBar => {
 
     const myHeaders = new Headers();
     myHeaders.append("sec-ch-ua", "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\", \"Not-A.Brand\";v=\"99\"");
-    myHeaders.append("Referer", "http://localhost:5555/views/StoryBook.php");
+    myHeaders.append("Referer", "http://localhost:5555/html/StoryBook.php");
     myHeaders.append("sec-ch-ua-mobile", "?0");
     myHeaders.append("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36");
     myHeaders.append("sec-ch-ua-platform", "\"macOS\"");

@@ -17,14 +17,14 @@ function redirect($url)
 
 // Vérifier la méthode de la requête et l'existence des données
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['username']) || !isset($_POST['password'])) {
-    redirect('../../views/admin/adminConnection.php');
+    redirect('../../html/admin/adminConnection.php');
 }
 
 $username = $_POST['username'];
 $password = $_POST['password'];
 
 // Récupération de la page de redirection, avec gestion du fallback, quand l'admin veut accéder à une page protégée mais qu'il n'est plus connecté
-$redirectPage = $_POST['redirect'] ?? '../../views/admin/adminDashboard.php';
+$redirectPage = $_POST['redirect'] ?? '../../html/admin/adminDashboard.php';
 
 // Vérification des informations de connexion de l'administrateur
 if (ConnectionService::checkAdmin($username, $password)) {
@@ -36,7 +36,7 @@ if (ConnectionService::checkAdmin($username, $password)) {
     redirect($redirectPage);
 } else {
     // Connexion échouée, redirection vers la page de connexion
-    redirect('../../views/admin/adminConnection.php?error=loginFailed');
+    redirect('../../html/admin/adminConnection.php?error=loginFailed');
 }
 
 ?>

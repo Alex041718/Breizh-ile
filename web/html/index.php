@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./style/ui.css">
     <link rel="stylesheet" href="./home/home.css">
     <link rel="stylesheet" href="./components/HousingCard/HousingCard.css">
-    <link rel="stylesheet" href="/views/components/SearchBar/SearchBar.css">
+    <link rel="stylesheet" href="/components/SearchBar/SearchBar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
     <script src="./home/script.js"></script>

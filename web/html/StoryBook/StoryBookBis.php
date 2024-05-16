@@ -5,15 +5,15 @@
         <link rel="stylesheet" href="StoryBook.css">
         <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
-        <link rel="stylesheet" href="/views/components/HousingCard/HousingCard.css">
+        <link rel="stylesheet" href="/html/components/HousingCard/HousingCard.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-        <link rel="stylesheet" href="/views/components/SearchBar/SearchBar.css">
+        <link rel="stylesheet" href="/components/SearchBar/SearchBar.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
         <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
-        <script src="/views/components/Helper/autocompletionHelper.js" defer></script>
-        <script src="/views/components/SearchBar/SearchBar.js" defer></script>
+        <script src="/components/Helper/autocompletionHelper.js" defer></script>
+        <script src="/components/SearchBar/SearchBar.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
         <!-- Import du fichier CSS ui.css, super important pour appliquer le style général de l'appli -->
@@ -140,12 +140,12 @@
     <pre>
         <code class="language-php">
             <\link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-            <\link rel="stylesheet" href="/views/components/SearchBar/SearchBar.css">
+            <\link rel="stylesheet" href="/html/components/SearchBar/SearchBar.css">
             <\link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
             <\script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"><\script>
             <\script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"><\script>
-            <\script src="/views/components/Helper/autocompletionHelper.js" defer><\script>
-            <\script src="/views/components/SearchBar/SearchBar.js" defer><\script>
+            <\script src="/html/components/Helper/autocompletionHelper.js" defer><\script>
+            <\script src="/html/components/SearchBar/SearchBar.js" defer><\script>
             <\script src="https://cdn.jsdelivr.net/npm/flatpickr"><\script>
 
             <\?php
@@ -178,7 +178,7 @@
 
     <pre>
         <code class="language-php">
-            <\link rel="stylesheet" href="/views/components/HousingCard/HousingCard.css">
+            <\link rel="stylesheet" href="/html/components/HousingCard/HousingCard.css">
 
             <\?php
                 require_once("../components/HousingCard/HousingCard.php");
