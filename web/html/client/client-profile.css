@@ -142,4 +142,21 @@ body {
   margin: 1em;
   display: flex;
   flex-direction: column;
+  width: 85em;
+  height: 30em;
+}
+.content__personnal-data {
+  display: flex;
+  flex-direction: column;
+}
+.content__personnal-data__elements {
+  background: red;
+  width: 15em;
+}
+.content__personnal-data__image {
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
+  order: 1;
+  margin-left: auto;
 }/*# sourceMappingURL=client-profile.css.map */
