@@ -17,7 +17,7 @@ $address = new Address(
 // Création d'une instance de la classe Image
 $image = new Image(
     null, // imageID
-    "..\..\FILES\images\avatar.svg" // imageSrc
+    "..\assets\images\pp-test.jpg" // imageSrc
 );
 
 // Création d'une instance de la classe Gender
@@ -77,17 +77,38 @@ $client = new Client(
             <p class="content__personnal-data__description">Modifier vos informations Personnels</p>
             <img class="content__personnal-data__image" src="<?php echo $client->getImage()->getImageSrc(); ?>" alt="">
         </div>
-        <div class="content__security" style="display: none">
+        <div class="content__security">
             <h3 class="content__security__title">Sécurité</h3>
             <p class="content__security__description">Modifier vos paramètres de sécurités</p>
         </div>
     </div>
 
     <?php
-    require_once ("../components/Footer/footer.php");
-    Footer::render();
+    //require_once ("../components/Footer/footer.php");
+    //Footer::render();
     ?>
-    <script>
+<script>
+        // Sélectionnez tous les divs enfants de .content__selector
+        const divs = document.querySelectorAll('.content__selector > div');
+
+        // Ajoutez la classe content__selector--current au premier div
+        divs[0].classList.add('content__selector--current');
+
+        // Définissez l'élément actuel comme étant le premier div
+        let currentDiv = divs[0];
+
+        // Ajoutez un écouteur d'événements à chaque div
+        divs.forEach(div => {
+            div.addEventListener('click', function () {
+                if (div !== currentDiv) {
+                    if (currentDiv !== null) {
+                        currentDiv.classList.remove('content__selector--current');
+                    }
+                    div.classList.add('content__selector--current');
+                    currentDiv = div;
+                }
+            });
+        });
     </script>
 
 </body>
