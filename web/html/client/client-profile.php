@@ -75,11 +75,63 @@ $client = new Client(
         <div class="content__personnal-data">
             <h3 class="content__personnal-data__title">Informations Personnelles</h3>
             <p class="content__personnal-data__description">Modifier vos informations Personnels</p>
+
+            <!-- Nom 
+            <?php require_once ("../components/Input/Input.php");
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "le label", "le name", "lePlaceHolder", true); ?>
+            -->
+            <!-- Prenom 
+            <?php require_once ("../components/Input/Input.php");
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "le label", "le name", "lePlaceHolder", true); ?>
+-->
+            <!-- Surnom 
+            <?php require_once ("../components/Input/Input.php");
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "le label", "le name", "lePlaceHolder", true); ?>
+-->
+            <!-- Email 
+            <?php require_once ("../components/Input/Input.php");
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "email", "le label", "le name", "lePlaceHolder", true); ?>
+-->
+            <!-- Genre 
+            <?php require_once ("../components/Input/Input.php");
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "le label", "le name", "lePlaceHolder", true); ?>
+-->
+            <!-- Telephone 
+            <?php require_once ("../components/Input/Input.php");
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "tel", "le label", "le name", "lePlaceHolder", true); ?>
+-->
+            <!-- Date de naissance 
+            <?php require_once ("../components/Input/Input.php");
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "le label", "le name", "lePlaceHolder", true); ?>
+-->
+            <!-- Date de création du compte (READ ONLY) 
+            <?php require_once ("../components/Input/Input.php");
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "le label", "le name", "lePlaceHolder", true); ?>
+-->
+            <!-- Image 
             <img class="content__personnal-data__image" src="<?php echo $client->getImage()->getImageSrc(); ?>" alt="">
+-->
+            <!-- Adresse 
+            <?php require_once ("../components/Input/Input.php");
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "le label", "le name", "lePlaceHolder", true); ?>
+-->
         </div>
         <div class="content__security">
             <h3 class="content__security__title">Sécurité</h3>
             <p class="content__security__description">Modifier vos paramètres de sécurités</p>
+
+            <!-- Mot de passe 
+            <?php require_once ("../components/Input/Input.php");
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "password", "le label", "le name", "lePlaceHolder", true); ?>
+-->
+            <!-- Se Déconnecter 
+            <?php require_once ("../components/Input/Input.php");
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "button", "le label", "le name", "lePlaceHolder", true); ?>
+-->
+            <!-- Supprimer son Compte 
+            <?php require_once ("../components/Input/Input.php");
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "button", "le label", "le name", "lePlaceHolder", true); ?>
+-->
         </div>
     </div>
 
@@ -87,7 +139,7 @@ $client = new Client(
     //require_once ("../components/Footer/footer.php");
     //Footer::render();
     ?>
-<script>
+    <script>
         // Sélectionnez tous les divs enfants de .content__selector
         const divs = document.querySelectorAll('.content__selector > div');
 
