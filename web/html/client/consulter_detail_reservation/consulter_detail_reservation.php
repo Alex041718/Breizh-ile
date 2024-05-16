@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../style/ui.css">
-    <link rel="stylesheet" href="/consulter_detail_reservation/consulter_detail_reservation.css">
+    <link rel="stylesheet" href="../../style/ui.css">
+    <link rel="stylesheet" href="/client/consulter_detail_reservation/consulter_detail_reservation.css">
     <link rel="stylesheet" href="/components/SearchBar/SearchBar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
     <link rel="stylesheet" href="/components/Header/header.css">
 
-    <script src="/consulter_detail_reservation/consulter_detail_reservation.js"></script>
+    <script src="/client/consulter_detail_reservation/consulter_detail_reservation.js"></script>
 
     <?php // Date picker ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -26,7 +26,7 @@
 
 
 <?php
-    require_once("../components/Header/header.php");
+    require_once("../../components/Header/header.php");
     Header::render(true);
 ?>
 
@@ -106,7 +106,7 @@
 </main>
 
 <?php
-    require_once("../components/Footer/footer.php");
+    require_once("../../components/Footer/footer.php");
     Footer::render();
 ?>
 
