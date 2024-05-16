@@ -62,7 +62,7 @@ searchBars.forEach(searchBar => {
     // Système de recherche, par auto-complétion
 
     // On recupère l'input
-    const searchText = document.getElementById('search-text');
+    const searchText = searchBar.querySelector('#search-text');
 
     // on recupère les villes Bretonnes
 
@@ -99,6 +99,7 @@ searchBars.forEach(searchBar => {
         
         // from autompletionHelper.js
         // mise en place de lautompletion sur l'input
+
         autocomplete(searchText, cityNames);
 
     })

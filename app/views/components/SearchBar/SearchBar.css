@@ -27,6 +27,12 @@ h4 {
   margin: 0;
 }
 
+h4 {
+  font-size: max(16px, 1.0416666667vw);
+  font-weight: bold;
+  margin: 0;
+}
+
 p {
   margin: 0;
   font-size: max(14px, 0.8333333333vw);
@@ -193,6 +199,4 @@ p {
 .search-bar__search-btn button i {
   transition: all 0.1s ease-in-out;
   color: #FFFFFF;
-}
-
-/*# sourceMappingURL=SearchBar.css.map */
+}/*# sourceMappingURL=SearchBar.css.map */
