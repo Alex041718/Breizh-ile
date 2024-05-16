@@ -10,8 +10,7 @@
   border-radius: 10px 10px 0 0;
   height: 50%;
   width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .housing-card__content {
   display: flex;
@@ -41,8 +40,7 @@
 .housing-card__content__bottom__infos i {
   height: 20px;
   width: 20px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   color: #1D1D1D;
 }
 .housing-card__content__bottom__infos__picto {
@@ -54,4 +52,6 @@
 
 .housing-card--storybook {
   height: 500px;
-}/*# sourceMappingURL=HousingCard.css.map */
+}
+
+/*# sourceMappingURL=HousingCard.css.map */
