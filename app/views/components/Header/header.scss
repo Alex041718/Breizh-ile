@@ -47,16 +47,19 @@
     align-items: center;
     justify-content: space-between;
     padding-block: 20px;
+    padding-inline: 50px;
+    box-sizing: border-box;
     position: absolute;
     top: 0;
     width: 100%;
     height: 100px;
     transition: all 0.3;
+    background: rgb(115,115,115);
+    background: linear-gradient(rgba(0,45,87,0.55) 0%, rgba(115,115,115,0) 100%);
     
     z-index: 1000;
 
     .logo {
-        margin-left: 100px;
     }
 
     i {
@@ -76,7 +79,7 @@
     &.scrolling {
         height: auto;
         position: fixed;
-        background-color: #ffffff;
+        background: #ffffff;
         animation-duration: 0.2s;
         animation-name: showUp;
         height: 80px;
@@ -106,7 +109,6 @@
         }
 
         .header__right {
-            margin-right: 50px;
             
             i {
                 color: black;
@@ -128,7 +130,6 @@
         }
 
         .logo {
-            margin-left: 50px;
             width: 20%;
         }
 
@@ -147,6 +148,7 @@
         justify-content: center;
         gap: 50px;
         align-items: center;
+        justify-content: end;
         flex: 0 0 20%;
     }
 
@@ -167,7 +169,13 @@
         width: 35px;
         height: auto; 
         cursor: pointer;
+
+        @media screen and (max-width: 1024px) {
+            display: none;
+        }
     }
+
+    
 
     #options  {
         background-color: #fff; 

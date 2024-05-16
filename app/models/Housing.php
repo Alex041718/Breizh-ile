@@ -21,7 +21,7 @@ class Housing {
     private Category $category;
     private Address $address;
     private Owner $owner;
-    private array $images;
+    private Image $image;
     private array $arrangement;
 
     public function __construct(?int $housingID,
@@ -45,7 +45,7 @@ class Housing {
                                 Category $category,
                                 Address $address,
                                 Owner $owner,
-                                array $images,
+                                Image $image,
                                 array $arrangement) {
         $this->housingID = $housingID;
         $this->title = $title;
@@ -68,7 +68,7 @@ class Housing {
         $this->category = $category;
         $this->address = $address;
         $this->owner = $owner;
-        $this->images = $images;
+        $this->image = $image;
         $this->arrangement = $arrangement;
     }
 
@@ -411,17 +411,17 @@ class Housing {
     /**
      * @return array
      */
-    public function getImages(): array
+    public function getImage(): Image
     {
-        return $this->images;
+        return $this->image;
     }
 
     /**
-     * @param array $images
+     * @param array $image
      */
-    public function setImages(array $images): void
+    public function setImages(Image $image): void
     {
-        $this->images = $images;
+        $this->image = $image;
     }
 
     /**

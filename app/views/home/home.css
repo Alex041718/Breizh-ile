@@ -31,6 +31,11 @@ body {
   overflow: hidden;
   height: 120vh;
 }
+@media screen and (max-width: 560px) {
+  .hero-banner {
+    height: 100vh;
+  }
+}
 .hero-banner__parallax {
   height: 100%;
   width: 100%;
@@ -60,9 +65,21 @@ body {
   left: auto !important;
 }
 .hero-banner__parallax .breizh {
+  position: absolute;
   top: 20% !important;
   left: auto !important;
   z-index: 2;
+}
+@media screen and (max-width: 1024px) {
+  .hero-banner__parallax .breizh {
+    width: 500px;
+    z-index: 3;
+  }
+}
+@media screen and (max-width: 560px) {
+  .hero-banner__parallax .breizh {
+    width: 300px;
+  }
 }
 .hero-banner__wave {
   position: absolute;
@@ -73,6 +90,11 @@ body {
 @media screen and (max-width: 1000px) {
   .hero-banner__wave {
     width: 1000px;
+  }
+}
+@media screen and (max-width: 670px) {
+  .hero-banner__wave {
+    left: -150px;
   }
 }
 .hero-banner__scrolldown {
@@ -92,6 +114,16 @@ body {
   box-sizing: border-box;
   margin-bottom: 16px;
   z-index: 5;
+}
+@media screen and (max-width: 676px) {
+  .hero-banner__scrolldown {
+    top: 55%;
+  }
+}
+@media screen and (max-width: 560px) {
+  .hero-banner__scrolldown {
+    display: none;
+  }
 }
 .hero-banner__scrolldown .chevrons {
   padding: 6px 0 0 0;
@@ -175,6 +207,11 @@ body {
   gap: 50px;
   align-items: center;
 }
+@media screen and (max-width: 950px) {
+  .logements__filters {
+    justify-content: center;
+  }
+}
 .logements__filters label {
   font-weight: 600;
 }
@@ -213,7 +250,8 @@ body {
 }
 @media screen and (max-width: 950px) {
   .logements__container {
-    grid-template-columns: repeat(1, auto);
+    display: flex;
+    flex-direction: column;
   }
 }
 .logements hr {
@@ -245,7 +283,6 @@ body {
   .scroll .search-bar--header,
   .scrolling .search-bar--header {
     width: 60%;
-
   }
 }
 

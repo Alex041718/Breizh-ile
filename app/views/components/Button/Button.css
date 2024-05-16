@@ -27,6 +27,13 @@ h4 {
   margin: 0;
 }
 
+h4 {
+  font-size: max(16px, 1.0416666667vw);
+
+  font-weight: bold;
+  margin: 0;
+}
+
 p {
   margin: 0;
   font-size: max(14px, 0.8333333333vw);
@@ -53,6 +60,8 @@ p {
   padding-inline: 25px;
   background-color: #1D1D1D;
   color: white;
+  width: -moz-fit-content;
+
   width: fit-content;
   border-radius: 10px;
 }
@@ -160,8 +169,9 @@ p {
   color: #EB5757 !important;
   border: 2px solid #EB5757;
 }
-.button--delete--secondary:hover {
-  background-color: #f6f6f6 !important;
+.button--disabled {
+  background-color: #E0E0E0;
+  color: #333333;
+  cursor: not-allowed;
 }
 
-/*# sourceMappingURL=Button.css.map */
