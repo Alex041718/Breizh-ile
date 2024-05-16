@@ -150,6 +150,11 @@
         flex: 0 0 20%;
     }
 
+    &.header--xl {
+        height: 120px !important;
+        padding-bottom: 0;
+    }
+
     .fa-user {
         font-size: 40px;
     }

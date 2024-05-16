@@ -1,0 +1,39 @@
+@import '../../style/variables';
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.owner-nav-bar {
+    margin-top: 120px;
+    padding-inline: 4.5rem;
+
+    ul {
+        padding: 0;
+        display: flex;
+        list-style: none;
+
+        li {
+            display: flex;
+            padding-inline: 1rem;
+            width: 170px;
+            height: 70px;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            
+
+            background: linear-gradient(0deg, $ownerPrimaryColor 0%, $ownerPrimaryColor 7%,white 7%);
+
+            a {
+                color: $ownerPrimaryColor;
+                text-decoration: none;
+            }
+
+            :hover {
+                background: linear-gradient(0deg, $ownerPrimaryColor 0%, $ownerPrimaryColor 7%, $grey6 7%);
+            }
+        }
+    }
+}
