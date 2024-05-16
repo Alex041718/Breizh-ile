@@ -7,7 +7,7 @@ services:
       dockerfile: dockerfileiut
     container_name: breizh-ile_web
     volumes:
-      - ./app:/var/www/html
+      - ./web/html:/var/www/html
     ports:
       - "${WEB_PORT}:80"
     networks:
@@ -46,7 +46,7 @@ services:
       context: ./dockerImage/initSqlMigration/
       dockerfile: dockerfileiut
     volumes:
-      - ./app/:/var/www/html
+      - ./web/html/:/var/www/html
     container_name: breizh-ile_migration-sql
     entrypoint: ["php", "./migration.php"]
     depends_on:
