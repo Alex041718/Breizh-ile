@@ -1,0 +1,69 @@
+version: '3'
+services:
+  web:
+    image: php:8.2-apache-pdo
+    build: ./dockerImage/initPhpApache/
+    container_name: breizh-ile_web
+    volumes:
+      - ./web/html:/var/www/html
+    environment:
+         VIRTUAL_HOST: ${EQUIPE}.ventsdouest.dev
+         LETSENCRYPT_HOST: ${EQUIPE}.ventsdouest.dev
+         LETSENCRYPT_EMAIL: gildas@bigpapoo.com
+    networks:
+      - rezo_web
+      - webproxy_back
+
+  db:
+    image: mysql
+    build:
+      context: ./dockerImage/initBDD/
+    container_name: breizh-ile_mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    volumes:
+      - vol_mysql:/var/lib/mysql
+    ports:
+        - "3306:3306"
+    networks:
+      - rezo_pma
+      - rezo_web
+  pma:
+    image: phpmyadmin:5.2
+    container_name: breizh-ile_pma
+    environment:
+      PMA_HOST: db
+      VIRTUAL_HOST: myadmin-${EQUIPE}.ventsdouest.dev
+      LETSENCRYPT_HOST: myadmin-${EQUIPE}.ventsdouest.dev
+      LETSENCRYPT_EMAIL: gildas@bigpapoo.com
+      PMA_PORT: 3306
+    networks:
+      - rezo_pma
+      - webproxy_back
+    depends_on:
+      - db
+
+  migration:
+    image: php:8.2-sql-migrations
+    build: ./dockerImage/initSqlMigration/
+    volumes:
+      - ./web/:/var/www/html
+    container_name: breizh-ile_migration-sql
+    entrypoint: ["php", "./migration.php"]
+    depends_on:
+      - db
+    networks:
+      - rezo_web
+      - webproxy_back
+volumes:
+  vol_web:
+  vol_mysql:
+
+networks:
+  rezo_web:
+  rezo_pma:
+  webproxy_back:
+    external: true
