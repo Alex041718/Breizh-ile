@@ -252,7 +252,10 @@
                     </div>
 
                     <div class="reservationBtn">
-                        <button>Réserver</button>
+                    <?php 
+                        require_once("../components/Input/Input.php");
+                        Input::render("uneClassEnPlus","UnIdEnPlus","button","le label","le name","lePlaceHolder",true); 
+                    ?>
                     </div>
 
                 </div>
