@@ -105,7 +105,7 @@ CREATE TABLE _User (
     birthDate Date,
     consent Boolean,
     lastConnection Date,
-    creationDate Date,
+    creationDate Date DEFAULT (CURRENT_DATE),
     imageID BIGINT UNSIGNED, -- Correspond au type `serial` dans Image pour mysql
     genderID BIGINT UNSIGNED, -- Correspond au type `serial` dans Gender pour mysal
     addressID BIGINT UNSIGNED, -- Correspond au type `serial` dans Address pour mysql
@@ -130,7 +130,7 @@ CREATE TABLE _Client (
 
 -- Création de la view `Owner`
 CREATE VIEW Owner AS (
-    SELECT 
+    SELECT
         ownerID,
         mail,
         lastname,

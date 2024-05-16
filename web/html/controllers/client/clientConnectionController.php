@@ -24,12 +24,12 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 // Récupération de la page de redirection, avec gestion du fallback, quand l'admin veut accéder à une page protégée mais qu'il n'est plus connecté
-$redirectPage = $_POST['redirect'] ?? 'html/client/pageTemporaire.php';
+$redirectPage = $_POST['redirect'] ?? '/client/pageTemporaire.php';
 
 // Vérification des informations de connexion du propriétaire
-if (ConnectionService::checkOwner($username, $password)) {
+if (ConnectionService::checkClient($username, $password)) {
     // Connexion réussie, gestion de la session
-    $id = ConnectionService::getOwnerID($username);
+    $id = ConnectionService::getClientID($username);
     SessionService::authenticate($id, $username, 'owner');
 
 

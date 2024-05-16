@@ -23,7 +23,7 @@ class ImageService extends Service{
         return new Image($row['imageID'], $row['src']);
     }
 
-    public static function GetHousingImages(int $housingID): array
+    public static function GetHousingImages(int $housingID): Image
     {
         // la méthode réccupère toutes les images d'un logement
         // Grace à la table _Housing_Image qui fait le lien entre les images et les logements

@@ -16,8 +16,8 @@ SessionService::system('owner','../../html/owner/ownerConnection/owner_connectio
 // on va afficher des info sur le propriétaire connecté
 
 // on va récupérer les infos du propriétaire connecté
-require_once '../../services/OwnerService.php';
-$owner = OwnerService::getOwnerById($_SESSION['user_id']);
+require_once '../../services/ClientService.php';
+$owner = ClientService::getClientById($_SESSION['user_id']);
 
 
 ?>
