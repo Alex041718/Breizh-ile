@@ -114,14 +114,20 @@
                         </div>
                     </div>
 
-                    
-                    
-
                     <div class="reservationBtn">
                         <?php 
                             require_once("../components/Button/Button.php");
-                            Button::render("button--storybook","unId","Un texte",ButtonType::Client,true); 
+                            Button::render("button--storybook","unId","Réserver",ButtonType::Client,true); 
                         ?>
+                    </div>
+
+                    <div class="prix">
+                        <div class="total">
+                            <p> <u>150 € x 5 nuits</u></p>
+                        </div>
+
+                        <p>750 €</p>
+
                     </div>
 
                 </div>

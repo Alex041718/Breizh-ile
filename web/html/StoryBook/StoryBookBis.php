@@ -271,7 +271,7 @@
         </div>
 
         <div class="button-box__item">
-            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Delete,false); ?>
+            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Delete,"",true,false); ?>
             <pre>
                 <code class="language-php">
                     <\?php require_once("../components/Button/Button.php"); ?>

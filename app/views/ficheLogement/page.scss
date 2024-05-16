@@ -39,11 +39,19 @@
 
     .reservationBtn {
         margin-top: 3em;
-        
+        width: 75%;
 
         button {
-            width: 32.7em
+            width: 100%;
+            padding-top: 1em;
+            padding-bottom: 1em;         
         }
+    }
+
+    .prix {
+        display: flex;
+        gap: 19.5em;
+        margin-top: 2em;
     }
 }
 
