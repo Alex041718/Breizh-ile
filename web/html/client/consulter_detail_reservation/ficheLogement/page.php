@@ -16,7 +16,7 @@
 
 <?php
         
-        define('__ROOT__', dirname(dirname(__FILE__)));
+        define('__HEADER__', dirname(dirname(__FILE__)));
 
         require_once("../components/Header/header.php");
         Header::render(true);

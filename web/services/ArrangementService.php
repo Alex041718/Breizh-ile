@@ -32,7 +32,7 @@ class ArrangementService extends Service {
         // Etape 1 : réccupérer les arrangementsID de la table _Has_for_Arrangement par rapport à l'ID du logement
 
         $pdo = self::getPDO();
-        $stmt = $pdo->query('SELECT * FROM _Has_for_Arrangement WHERE housingID = ' . $housingID);
+        $stmt = $pdo->query('SELECT * FROM _Has_for_arrangement WHERE housingID = ' . $housingID);
         $arrangementsID = [];
 
         while ($row = $stmt->fetch()) {

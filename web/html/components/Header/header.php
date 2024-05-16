@@ -28,13 +28,13 @@ class Header {
         ';
         echo $render;
 
-            define('__ROOT__', dirname(dirname(__FILE__)));
+            define('__HEADER__', dirname(dirname(__FILE__)));
             
-            if (__ROOT__ == 'www/var'){
-                require_once(__ROOT__ . "/html/components/SearchBar/SearchBar.php");
+            if (__HEADER__ == 'www/var'){
+                require_once(__HEADER__ . "/html/components/SearchBar/SearchBar.php");
             }
             else{
-                require_once(__ROOT__ . "/SearchBar/SearchBar.php");
+                require_once(__HEADER__ . "/SearchBar/SearchBar.php");
             }
         
 

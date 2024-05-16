@@ -43,7 +43,7 @@ services:
     image: php:8.2-sql-migrations
     build: ./dockerImage/initSqlMigration/
     volumes:
-      - ./web/html/:/var/www/html
+      - ./web/:/var/www/html
     container_name: breizh-ile_migration-sql
     entrypoint: ["php", "./migration.php"]
     depends_on:

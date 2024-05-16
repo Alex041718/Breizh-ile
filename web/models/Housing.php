@@ -24,7 +24,7 @@ class Housing {
     private Image $image;
     private array $arrangement;
 
-    public function __construct(?int $housingID,
+    public function __construct(int $housingID,
                                 string $title,
                                 string $shortDesc,
                                 string $longDesc,
