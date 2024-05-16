@@ -48,7 +48,7 @@
                 <img src="/../FILES/images/12345.webp" alt="house">
                 <div class="informations__left__logement__info">
                     <h3>Perros-Guirrec - 22700</h3>
-                    <p>Appartement T2</p>
+                    <p class="para--18px">Appartement T2</p>
                 </div>
             </div>
             <hr>
@@ -68,21 +68,32 @@
                 </div>
             </div>
             <hr>
-            <div class="informations__left_detail_total">
-                <h3>Total TTC</h3>
-                <p>360€</p>
+            <div class="informations__left__total">
+                <div>
+                    <h3>Total TTC</h3>
+                    <p class="para--18px">360€</p>
+                </div>
             </div>
         </section>
         <section class="informations__right">
             <div class="informations__right__desc">
                 <img src="/views/assets/images/jean.png" alt="">
-                <div class="informations__right__desc_info">
-                    <h3>+33 6 01 02 03 04</h3>
-                    <p>jean.michel@hotmail.fr</p>
+                <div class="informations__right__desc__info">
+                    <div class="informations__right__desc__info__perso">
+                        <h3>+33 6 01 02 03 04</h3>
+                        <p>jean.michel@hotmail.fr</p>
+                    </div>
+                    <div class="informations__right__desc__info__vide">
+
+                    </div>
+                    <div class="informations__right__desc__info__icons">
+                        <i id="telephone" class="fa-solid fa-phone"></i>                    
+                        <i id="mail" class="fa-solid fa-envelope"></i>
+                    </div>
                 </div>
             </div>
-            <div>
-                <h3>Localisation</h3>
+            <div class="informations__right__localisation">
+                <h3 class="loca">Localisation</h3>
                 <div id="map"></div>
                 <div>
                     <p class="para--18px">29200 Brest,</p>
