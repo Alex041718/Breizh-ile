@@ -18,7 +18,9 @@ $font-size-3xl: max(45px, calc(56vw / 19.2));
 
 // Couleurs
 $clientPrimaryColor: #307B5C;
+$clientPrimaryColorHover: #37906c;
 $ownerPrimaryColor: #082C4C;
+$ownerPrimaryColorHover: #0b3e6b;
 $secondaryColor: #A9A9A9;
 $blackColor: #000000;
 $black2: #1D1D1D;
@@ -28,6 +30,10 @@ $grey2: #4F4F4F;
 $grey3: #828282;
 $grey4: #BDBDBD;
 $grey5: #E0E0E0;
+$grey6: #f6f6f6;
+
+$deleteColor: #EB5757;
+$deleteColorHover: #e43838;
 
 // States
 $successColor: #27AE60;

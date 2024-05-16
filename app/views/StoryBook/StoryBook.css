@@ -90,4 +90,10 @@ body {
   padding: 10px;
 }
 
+.button-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 /*# sourceMappingURL=StoryBook.css.map */
