@@ -1,5 +1,5 @@
 <?php
-namespace views\components;
+namespace html\components;
 
 use model\User;
 

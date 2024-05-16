@@ -37,11 +37,11 @@ WEB_PORT=80
 ````
 ou
 ### 4. Go 
-http://localhost:5555/views/
+http://localhost:5555/html/
 
 ## StoryBook :
 ````
-http://localhost:5555/views/StoryBook/StoryBookBis.php
+http://localhost:5555/html/StoryBook/StoryBookBis.php
 ````
 
 Le storybook présente les éléments de l'application sous forme de composants. Il permet de visualiser les éléments de l'application de manière isolée. ainsi que les couleurs, textes et titres

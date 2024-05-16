@@ -10,7 +10,7 @@
 <body>
 
     <div class="connectionContainer">
-        <img src="http://localhost:5555/views/assets/images/logo_breizh_noir.png">
+        <img src="http://localhost:5555/html/assets/images/logo_breizh_noir.png">
         <div class="connectionContainer__box">
             <h3 class="connectionContainer__box__title">Connecter vous à votre compte propriétaire</h3>
             <form action="/controllers/owner/ownerConnectionController.php" method="post">

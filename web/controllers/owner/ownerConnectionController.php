@@ -17,14 +17,14 @@ function redirect($url)
 
 // Vérifier la méthode de la requête et l'existence des données
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['username']) || !isset($_POST['password']) || !isset($_POST['role']) || $_POST['role'] !== 'owner') {
-    redirect('../../views/owner/ownerConnection/owner_connection.php');
+    redirect('../../html/owner/ownerConnection/owner_connection.php');
 }
 
 $username = $_POST['username'];
 $password = $_POST['password'];
 
 // Récupération de la page de redirection, avec gestion du fallback, quand l'admin veut accéder à une page protégée mais qu'il n'est plus connecté
-$redirectPage = $_POST['redirect'] ?? '../../views/owner/pageTemporaire.php';
+$redirectPage = $_POST['redirect'] ?? '../../html/owner/pageTemporaire.php';
 
 // Vérification des informations de connexion du propriétaire
 if (ConnectionService::checkOwner($username, $password)) {
@@ -36,7 +36,7 @@ if (ConnectionService::checkOwner($username, $password)) {
     redirect($redirectPage);
 } else {
     // Connexion échouée, redirection vers la page de connexion
-    redirect('../../views/owner/ownerConnection/owner_connection.php?error=loginFailed');
+    redirect('../../html/owner/ownerConnection/owner_connection.php?error=loginFailed');
 }
 
 ?>
