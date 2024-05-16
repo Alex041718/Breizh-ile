@@ -66,56 +66,62 @@
 
                 <div class="reservation">
                     <h4>60 € par nuit</h4>
-                    <div class="datepicker">
-                        <div class="arrivee" >
-                            <p class="para--bold">Arrivée:</p>
-                            <input class="para--14px" name="startDate" id="start-date" type="date" placeholder="Ajouter une date">
-                        </div>
 
-                        <span class="vertical-line"></span>
-                        
-                        <div class="depart" >
-                            <p class="para--bold">Départ:</p>
-                            <input class="para--14px" name="endDate" id="end-date" type="date" placeholder="Ajouter une date">
-                        </div>
-                    </div>
-                    <div class="nbrClients">
-                        <button class="para--bold" id="addTravelersBtn">Ajouter des voyageurs <output id="liveTravelersCount">0</output></button>
-                        <div id="popup" class="popup">                   
-                            <div class="popup-content">
-                                <div class="traveler-type">
-                                    <div class="adulteInfo">
-                                        <span class="para--bold">Adultes:</span>
-                                        <span>13 ans et +</span>
-                                    </div>
-                                    <div class="addbtn">
-                                        <button id="subtractAdultBtn">-</button>
-                                        <span id="adultCount">0</span>
-                                        <button id="addAdultBtn">+</button>
-                                    </div>
-                                </div>
+                    <div class="preparation">
+                        <div class="datepicker">
+                            <div class="arrivee" >
+                                <p class="para--bold">Arrivée:</p>
+                                <input class="para--14px" name="startDate" id="start-date" type="date" placeholder="Ajouter une date">
+                            </div>
+
+                            <span class="vertical-line"></span>
                             
-                                <div class="traveler-type">
-                                    <div class="enfantInfo">
-                                        <span class="para--bold">Enfants:</span>
-                                        <span>- de 12 ans</span>
+                            <div class="depart" >
+                                <p class="para--bold">Départ:</p>
+                                <input class="para--14px" name="endDate" id="end-date" type="date" placeholder="Ajouter une date">
+                            </div>
+                        </div>
+                        <div class="nbrClients">
+                            <button class="para--bold" id="addTravelersBtn">Ajouter des voyageurs <output id="liveTravelersCount">0</output></button>
+                            <div id="popup" class="popup">                   
+                                <div class="popup-content">
+                                    <div class="traveler-type">
+                                        <div class="adulteInfo">
+                                            <span class="para--bold">Adultes:</span>
+                                            <span>13 ans et +</span>
+                                        </div>
+                                        <div class="addbtn">
+                                            <button id="subtractAdultBtn">-</button>
+                                            <span id="adultCount">0</span>
+                                            <button id="addAdultBtn">+</button>
+                                        </div>
                                     </div>
-                                    <div class="addbtn">
-                                        <button id="subtractChildBtn">-</button>
-                                        <span id="childCount">0</span>
-                                        <button id="addChildBtn">+</button>
+                                
+                                    <div class="traveler-type">
+                                        <div class="enfantInfo">
+                                            <span class="para--bold">Enfants:</span>
+                                            <span>- de 12 ans</span>
+                                        </div>
+                                        <div class="addbtn">
+                                            <button id="subtractChildBtn">-</button>
+                                            <span id="childCount">0</span>
+                                            <button id="addChildBtn">+</button>
+                                        </div>
                                     </div>
+                                    <i id="closePopupBtn" class="fa-solid fa-xmark"></i>
                                 </div>
-                                <i id="closePopupBtn" class="fa-solid fa-xmark"></i>
                             </div>
                         </div>
                     </div>
 
+                    
+                    
+
                     <div class="reservationBtn">
-                    <?php 
-                        require_once("../components/Input/Input.php");
-                        Input::render("uneClassEnPlus","UnIdEnPlus","button","le label","le name","lePlaceHolder",true); 
-                    ?>
+                        <?php 
+                            require_once("../components/Button/Button.php");
+                            Button::render("button--storybook","unId","Un texte",ButtonType::Client,true); 
+                        ?>
                     </div>
 
                 </div>
