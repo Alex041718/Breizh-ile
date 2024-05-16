@@ -14,8 +14,6 @@
     <script src="./home/script.js"></script>
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
-    <script src="./components/Helper/autocompletionHelper.js" defer></script>
-    <script src="./components/SearchBar/SearchBar.js" defer></script>
 
     <?php // Date picker ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -27,8 +25,8 @@
         
         define('__ROOT__', dirname(dirname(__FILE__)));
 
-        require_once("./components/Header/header.php");
-        Header::render(true);
+        require_once(__ROOT__ . "/views/components/Header/header.php");
+        Header::render(false);
     ?>
     <main>
         <section class="hero-banner">
