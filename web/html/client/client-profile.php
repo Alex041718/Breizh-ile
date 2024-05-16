@@ -63,7 +63,7 @@ $client = new Client(
     ?>
     <div class="content">
         <div class="content__selector">
-            <div class="content__selector__personnal-data">
+            <div class="content__selector__personnal-data content__selector--current">
                 <h4 class="content__selector__personnal-data__title">Informations Personnelles</h4>
             </div>
             <div class="content__selector__security">
@@ -74,52 +74,65 @@ $client = new Client(
             <h3 class="content__personnal-data__title">Informations Personnelles</h3>
             <p class="content__personnal-data__description">Modifier vos informations Personnels</p>
 
-            <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Nom", "le name", "Nom", true); ?>
+            <div class="content__personnal-data__elements">
+
+                <img class="content__personnal-data__image" src="<?php echo $client->getImage()->getImageSrc(); ?>"
+                    alt="photo_de_profile">
 
 
-            <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Prenom", "le name", "Prenom", true); ?>
+                <!-- Nom -->
+                <?php require_once ("../components/Input/Input.php");
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Nom", "le name", "Nom", true); ?>
 
+                <!-- Prenom -->
+                <?php require_once ("../components/Input/Input.php");
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Prenom", "le name", "Prenom", true); ?>
 
-            <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Pseudo", "le name", "Pseudo", true); ?>
+                <!-- Pseudo -->
+                <?php require_once ("../components/Input/Input.php");
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Pseudo", "le name", "Pseudo", true); ?>
 
-            <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "email", "Mail", "le name", "Mail", true); ?>
+                <!-- Mail -->
+                <?php require_once ("../components/Input/Input.php");
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "email", "Mail", "le name", "Mail", true); ?>
 
-            <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Genre", "le name", "Genre", true); ?>
+                <!-- Telephone -->
+                <?php require_once ("../components/Input/Input.php");
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "tel", "Telephone", "le name", "Telephone", true); ?>
 
-            <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "tel", "Telephone", "le name", "Telephone", true); ?>
+                <!-- Adresse -->
+                <?php require_once ("../components/Input/Input.php");
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Adresse", "le name", "Adresse", true); ?>
 
-            <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "Date d'anniversaire", "le name", "Date d'anniversaire", true); ?>
+                <!-- Genre -->
+                <?php require_once ("../components/Input/Input.php");
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Genre", "le name", "Genre", true); ?>
 
-            <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "Date de création du compte", "le name", "Date de création du compte", true); ?>
+                <!-- Date d'anniversaire -->
+                <?php require_once ("../components/Input/Input.php");
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "Date d'anniversaire", "le name", "Date d'anniversaire", true); ?>
 
-            <img class="content__personnal-data__image" src="<?php echo $client->getImage()->getImageSrc(); ?>" alt="">
-
-            <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Adresse", "le name", "Adresse", true); ?>
-
+                <!-- Date de création du compte -->
+                <?php require_once ("../components/Input/Input.php");
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "Date de création du compte", "le name", "Date de création du compte", true); ?>
+            </div>
         </div>
         <div class="content__security" style="display: none">
             <h3 class="content__security__title">Sécurité</h3>
             <p class="content__security__description">Modifier vos paramètres de sécurités</p>
 
+            <div class="content__security__elements">
 
-            <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "password", "Mot de passe", "le name", "Mot de passe", true); ?>
+                <?php require_once ("../components/Input/Input.php");
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "password", "Mot de passe", "le name", "Mot de passe", true); ?>
 
-            <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "button", "Désactiver son compte", "le name", "Désactiver son compte", true); ?>
 
-            <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "button", "Supprimer mon compte", "le name", "Supprimer mon compte", true); ?>
+                <?php require_once ("../components/Button/Button.php");
+                Button::render("button--storybook", "unId", "Désactiver mon compte", ButtonType::Delete, true); ?>
 
+                <?php require_once ("../components/Button/Button.php");
+                Button::render("button--storybook", "unId", "Supprimer mon compte", ButtonType::Delete, true); ?>
+            </div>
         </div>
     </div>
 

@@ -36,5 +36,27 @@ body {
         margin: 1em;
         display: flex;
         flex-direction: column;
+        width: 85em;
+        height: 30em;
+
+
+    }
+    &__personnal-data {
+        display: flex;
+        flex-direction: column;
+
+        &__elements {
+            background: red;
+            width: 15em;
+            
+        }
+
+        &__image {
+            width: 5em;
+            height: 5em;
+            border-radius: 50%;
+            order: 1; // Placer l'image à droite
+            margin-left: auto; // Aligner l'image à droite
+        }
     }
 }
