@@ -28,7 +28,10 @@ class Header {
         ';
         echo $render;
 
-            require_once(__ROOT__."/views/components/SearchBar/SearchBar.php");
+
+          require_once(__ROOT__."/views/components/SearchBar/SearchBar.php");
+
+          
             SearchBar::render("search-bar search-bar--header","","./monSuperFormulaireQuiVaEtreTraiter", true);
 
             $render =  /*html*/ '

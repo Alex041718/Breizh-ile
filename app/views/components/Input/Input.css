@@ -29,6 +29,7 @@ h4 {
 
 h4 {
   font-size: max(16px, 1.0416666667vw);
+
   font-weight: bold;
   margin: 0;
 }
@@ -60,6 +61,7 @@ p {
   background-color: #1D1D1D;
   color: white;
   width: -moz-fit-content;
+
   width: fit-content;
   border-radius: 10px;
 }

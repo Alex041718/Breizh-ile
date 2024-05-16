@@ -187,35 +187,101 @@
         </code>
     </pre>
 
-
-
-
-
     <h3 id="text">Input</h3>
 
     <div class="input-box">
         <?php
-            $input_list = ['text', 'textarea', 'email', 'password', 'number', 'date', 'time', 'file', 'color', 'range', 'search', 'tel', 'url', 'week', 'month', 'datetime-local', 'submit', 'reset', 'button'];
-            require_once("../components/Input/Input.php");
-            foreach ($input_list as $input): ?>
+        $input_list = ['text', 'textarea', 'email', 'password', 'number', 'date', 'time', 'file', 'color', 'range', 'search', 'tel', 'url', 'week', 'month', 'datetime-local', 'submit', 'reset', 'button'];
+        require_once("../components/Input/Input.php");
+        foreach ($input_list as $input): ?>
 
-                <div class="InputContainer">
-                    <div class="input--storybook">
-                        <?php Input::render("uneCLass","",$input,$input,$input,$input,true); ?>
-                        <pre>
-                    </div>
-
+            <div class="InputContainer">
+                <div class="input--storybook">
+                    <?php Input::render("uneCLass","",$input,$input,$input,$input,true); ?>
                     <pre>
+                </div>
+
+                <pre>
                         <code class="language-php">
     <\?php require_once("../components/Input/Input.php");
     <\?php Input::render("uneClassEnPlus","UnIdEnPlus","<?php echo $input ?>","le label","le name","lePlaceHolder",true); \?>
                         </code>
                     </pre>
-                </div>
+            </div>
 
 
-            <?php endforeach; ?>
+        <?php endforeach; ?>
 
     </div>
+
+    <h3 id="text">Buttons</h3>
+
+    <div class="button-box">
+        <?php require_once("../components/Button/Button.php"); ?>
+
+        <div class="button-box__item">
+            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,true); ?>
+            <pre>
+                <code class="language-php">
+                    <\?php require_once("../components/Button/Button.php"); ?>
+                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,true); \?>
+                </code>
+            </pre>
+        </div>
+
+        <div class="button-box__item">
+            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,false); ?>
+            <pre>
+                <code class="language-php">
+                    <\?php require_once("../components/Button/Button.php"); ?>
+                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,true); \?>
+                </code>
+            </pre>
+        </div>
+
+        <div class="button-box__item">
+            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Owner,true); ?>
+            <pre>
+                <code class="language-php">
+                    <\?php require_once("../components/Button/Button.php"); ?>
+                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,true); \?>
+                </code>
+            </pre>
+        </div>
+
+
+        <div class="button-box__item">
+            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Owner,false); ?>
+            <pre>
+                <code class="language-php">
+                    <\?php require_once("../components/Button/Button.php"); ?>
+                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,true); \?>
+                </code>
+            </pre>
+        </div>
+
+        <div class="button-box__item">
+            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Delete,true); ?>
+            <pre>
+                <code class="language-php">
+                    <\?php require_once("../components/Button/Button.php"); ?>
+                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,true); \?>
+                </code>
+            </pre>
+        </div>
+
+        <div class="button-box__item">
+            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Delete,false); ?>
+            <pre>
+                <code class="language-php">
+                    <\?php require_once("../components/Button/Button.php"); ?>
+                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,true); \?>
+                </code>
+            </pre>
+        </div>
+
+
+
+
     </body>
 </html>

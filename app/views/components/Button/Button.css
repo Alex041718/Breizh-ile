@@ -29,6 +29,7 @@ h4 {
 
 h4 {
   font-size: max(16px, 1.0416666667vw);
+
   font-weight: bold;
   margin: 0;
 }
@@ -60,6 +61,7 @@ p {
   background-color: #1D1D1D;
   color: white;
   width: -moz-fit-content;
+
   width: fit-content;
   border-radius: 10px;
 }
@@ -111,29 +113,65 @@ p {
 
 .button {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 8px 20px;
   border-radius: 4px;
   font-size: 16px;
-  font-weight: bold;
   text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  background-color: #082C4C;
-  color: #FFFFFF;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
   border: none;
 }
-.button:hover {
-  background-color: #E0E0E0;
-}
-.button--secondary {
-  background-color: #A9A9A9;
+.button--client {
+  background-color: #307B5C;
   color: #FFFFFF;
+  border: 2px solid #307B5C;
 }
-.button--secondary:hover {
-  background-color: #E0E0E0;
+.button--client:hover {
+  background-color: #37906c;
+  border: 2px solid #37906c;
+}
+.button--client--secondary {
+  background-color: #FFFFFF !important;
+  color: #307B5C !important;
+  border: 2px solid #307B5C;
+}
+.button--client--secondary:hover {
+  background-color: #f6f6f6 !important;
+}
+.button--owner {
+  background-color: #082C4C;
+  color: #FFFFFF;
+  border: 2px solid #082C4C;
+}
+.button--owner:hover {
+  background-color: #0b3e6b;
+  border: 2px solid #0b3e6b;
+}
+.button--owner--secondary {
+  background-color: #FFFFFF !important;
+  color: #082C4C !important;
+  border: 2px solid #082C4C;
+}
+.button--owner--secondary:hover {
+  background-color: #f6f6f6 !important;
+}
+.button--delete {
+  background-color: #EB5757;
+  color: #FFFFFF;
+  border: 2px solid #EB5757;
+}
+.button--delete:hover {
+  background-color: #e43838;
+  border: 2px solid #e43838;
+}
+.button--delete--secondary {
+  background-color: #FFFFFF !important;
+  color: #EB5757 !important;
+  border: 2px solid #EB5757;
 }
 .button--disabled {
   background-color: #E0E0E0;
   color: #333333;
   cursor: not-allowed;
-}/*# sourceMappingURL=Button.css.map */
+}
+
