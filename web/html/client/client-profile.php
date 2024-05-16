@@ -4,8 +4,6 @@ require_once '../../models/Image.php';
 require_once '../../models/Gender.php';
 require_once '../../models/Address.php';
 
-
-
 // Création d'une instance de la classe Address
 $address = new Address(
     null, // addressID
@@ -60,8 +58,8 @@ $client = new Client(
 <body>
 
     <?php
-    //require_once ("../components/Header/header.php");
-    //Header::render();
+    require_once ("../components/Header/header.php");
+    Header::render();
     ?>
     <div class="content">
         <div class="content__selector">
@@ -77,81 +75,59 @@ $client = new Client(
             <p class="content__personnal-data__description">Modifier vos informations Personnels</p>
 
             <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "le label", "le name", "lePlaceHolder", true); ?>
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Nom", "le name", "Nom", true); ?>
 
 
             <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "le label", "le name", "lePlaceHolder", true); ?>
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Prenom", "le name", "Prenom", true); ?>
 
 
             <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "le label", "le name", "lePlaceHolder", true); ?>
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Pseudo", "le name", "Pseudo", true); ?>
 
             <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "email", "le label", "le name", "lePlaceHolder", true); ?>
- 
-            <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "le label", "le name", "lePlaceHolder", true); ?>
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "email", "Mail", "le name", "Mail", true); ?>
 
             <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "tel", "le label", "le name", "lePlaceHolder", true); ?>
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Genre", "le name", "Genre", true); ?>
 
             <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "le label", "le name", "lePlaceHolder", true); ?>
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "tel", "Telephone", "le name", "Telephone", true); ?>
 
             <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "le label", "le name", "lePlaceHolder", true); ?>
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "Date d'anniversaire", "le name", "Date d'anniversaire", true); ?>
+
+            <?php require_once ("../components/Input/Input.php");
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "Date de création du compte", "le name", "Date de création du compte", true); ?>
 
             <img class="content__personnal-data__image" src="<?php echo $client->getImage()->getImageSrc(); ?>" alt="">
 
             <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "le label", "le name", "lePlaceHolder", true); ?>
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Adresse", "le name", "Adresse", true); ?>
 
         </div>
-        <div class="content__security">
+        <div class="content__security" style="display: none">
             <h3 class="content__security__title">Sécurité</h3>
             <p class="content__security__description">Modifier vos paramètres de sécurités</p>
 
 
             <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "password", "le label", "le name", "lePlaceHolder", true); ?>
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "password", "Mot de passe", "le name", "Mot de passe", true); ?>
 
             <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "button", "le label", "le name", "lePlaceHolder", true); ?>
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "button", "Désactiver son compte", "le name", "Désactiver son compte", true); ?>
 
             <?php require_once ("../components/Input/Input.php");
-            Input::render("uneClassEnPlus", "UnIdEnPlus", "button", "le label", "le name", "lePlaceHolder", true); ?>
+            Input::render("uneClassEnPlus", "UnIdEnPlus", "button", "Supprimer mon compte", "le name", "Supprimer mon compte", true); ?>
 
         </div>
     </div>
 
     <?php
-    //require_once ("../components/Footer/footer.php");
-    //Footer::render();
+    require_once ("../components/Footer/footer.php");
+    Footer::render();
     ?>
-    <script>
-        // Sélectionnez tous les divs enfants de .content__selector
-        const divs = document.querySelectorAll('.content__selector > div');
-
-        // Ajoutez la classe content__selector--current au premier div
-        divs[0].classList.add('content__selector--current');
-
-        // Définissez l'élément actuel comme étant le premier div
-        let currentDiv = divs[0];
-
-        // Ajoutez un écouteur d'événements à chaque div
-        divs.forEach(div => {
-            div.addEventListener('click', function () {
-                if (div !== currentDiv) {
-                    if (currentDiv !== null) {
-                        currentDiv.classList.remove('content__selector--current');
-                    }
-                    div.classList.add('content__selector--current');
-                    currentDiv = div;
-                }
-            });
-        });
-    </script>
+    <script src="/client/client-profile.js"></script>
 
 </body>
 
