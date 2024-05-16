@@ -8,8 +8,8 @@ body {
 
 .content {
     height: 38em;
-    
-    
+
+
     &__selector {
         width: 15em;
         height: 60%;
@@ -17,32 +17,29 @@ body {
         width: 15em;
         background: variables.$whiteColor;
         color: variables.$clientPrimaryColor;
-        box-shadow: 9px 0px 15px -3px rgba(0,0,0,0.1);
-        
+        box-shadow: 9px 0px 15px -3px rgba(0, 0, 0, 0.1);
+
         >div {
             height: 4em;
             border-bottom: 1px solid variables.$secondaryColor;
             display: flex;
             align-items: center;
             padding-left: 7%;
-            
+
             &.content__selector--current {
                 background: variables.$clientPrimaryColor;
                 color: variables.$whiteColor;
             }
         }
     }
-    &__personnal-data, &__security{
+
+    &__personnal-data,
+    &__security {
         margin-left: 15em;
     }
 
     ;
-
-
-
 }
-
-
 
 .content__personnal-data__image {
     width: 1em;
