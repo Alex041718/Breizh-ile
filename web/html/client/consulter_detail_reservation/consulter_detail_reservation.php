@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../style/ui.css">
+    <link rel="stylesheet" href="../../style/ui.css">
     <link rel="stylesheet" href="/client/consulter_detail_reservation/consulter_detail_reservation.css">
     <link rel="stylesheet" href="/components/SearchBar/SearchBar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">

@@ -97,6 +97,7 @@ main .informations .informations__left .informations__left__detail div:nth-child
 @media screen and (max-width: 1024px) {
   main .informations .informations__left .informations__left__total {
     padding-bottom: 10px;
+    margin-bottom: 25px;
   }
 }
 main .informations .informations__left .informations__left__total div {
@@ -106,11 +107,11 @@ main .informations .informations__left .informations__left__total div {
 main .informations .informations__right {
   width: 50%;
   padding-left: 50px;
-  padding-left: 0px;
 }
 @media screen and (max-width: 1024px) {
   main .informations .informations__right {
     width: 100%;
+    padding-left: 0px;
   }
 }
 main .informations .informations__right .informations__right__desc {
