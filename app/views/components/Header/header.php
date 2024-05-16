@@ -28,13 +28,13 @@ class Header {
         ';
         echo $render;
 
-            require_once(__ROOT__."/components/SearchBar/SearchBar.php");
+            require_once(__ROOT__."/views/components/SearchBar/SearchBar.php");
             SearchBar::render("search-bar search-bar--header","","./monSuperFormulaireQuiVaEtreTraiter", true);
 
             $render =  /*html*/ '
 
                         <div class="header__right">
-                            <i class="fa-sharp fa-regular fa-eye"></i>
+                            <i class="fa-solid fa-eye"></i>
                             <i id="profil" class="fa-solid fa-user"></i>
                         </div>
                         <div id="options" style="display: none;">

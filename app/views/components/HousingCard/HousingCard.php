@@ -3,20 +3,16 @@
 
 class HousingCard {
 
-    public static function render(
-        $housing_name = "",
-        $housing_price = "",
-        $housing_thumbnail = "",
-        $housing_content = "",
-        $housing_city = "",
-        $housing_postal_code = "",
-        $housing_nb_personn = "",
-        $owner_pp = "",
-        $owner_name = "",
-        $class = "",
-        $id = "",
-        $action = ""
-    ) {
+    public static function render(Housing $housing, $class = "", $id = "", $action = "") {
+        $housing_name = $housing->getTitle();
+        $housing_price = $housing->getPriceExcl();
+        $housing_thumbnail = $housing->getImage()->getImageSrc();
+        $housing_content = $housing->getShortDesc();
+        $housing_city = $housing->getAddress()->getCity();
+        $housing_postal_code = $housing->getAddress()->getPostalCode();
+        $housing_nb_personn = $housing->getNoticeCount();
+        $owner_pp = $housing->getOwner()->getImage()->getImageSrc();
+        $owner_name = $housing->getOwner()->getNickname();
 
 
         $render =  /*html*/ '            

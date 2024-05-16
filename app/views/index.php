@@ -14,8 +14,6 @@
     <script src="./home/script.js"></script>
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
-    <script src="./components/Helper/autocompletionHelper.js" defer></script>
-    <script src="./components/SearchBar/SearchBar.js" defer></script>
 
     <?php // Date picker ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -28,7 +26,7 @@
         define('__ROOT__', dirname(dirname(__FILE__)));
 
         require_once("./components/Header/header.php");
-        Header::render(true);
+        Header::render(false);
     ?>
     <main>
         <section class="hero-banner">
@@ -64,18 +62,39 @@
                 <?php 
                 for ($i=0; $i < 9; $i++) {
                     require_once("./components/HousingCard/HousingCard.php");
-                    HousingCard::render(
-                        "Appartement pipou",
-                        60,
-                        "./assets/images/test.jpg",
-                        "Un superbe appartement avec vue mer, près du centre. Une occasion parfaite pour voyager ! ",
-                        "Lannion",
-                        "22300",
-                        4,
-                        "./assets/images/pp-test.jpg",
-                        "Benoît Tottereau",
-                        "housing-card--home",""
-                    );
+                    require_once("../models/Housing.php");
+                    require_once("../models/Type.php");
+                    require_once("../models/Image.php");
+                    require_once("../models/Address.php");
+                    require_once("../models/Category.php");
+                    require_once("../models/Owner.php");
+                    require_once("../models/Gender.php");
+
+                    $card = new Housing(25,
+                                        "Appartement pipou",
+                                        "Un superbe appartement avec vue mer, près du centre. Une occasion parfaite pour voyager ! ",
+                                        "Un superbe appartement avec vue mer, près du centre. Une occasion parfaite pour voyager en famille ahahhahahahah ! ",
+                                        25,
+                                        30,
+                                        4,
+                                        1,
+                                        2,
+                                        2.0212,
+                                        3.20125,
+                                        false,
+                                        4,
+                                        new DateTime("now"),
+                                        new DateTime("now"),
+                                        new DateTime("now"),
+                                        25.20,
+                                        new Type(2, "T2"),
+                                        new Category(3, "Maison"),
+                                        new Address(2, "Perros", "22000", "7 rue des abeilles"),
+                                        new Owner(6, "fkdjgdfg", "caca@caca", "Benoit", "Tottereau", "Bendu22", "dsfgdsfs", "0626857545", new DateTime("now"), true, new DateTime("now"), new DateTime("now"), new Image(78, "./assets/images/pp-test.jpg"), new Gender(9, "Tracteur"), new Address(2, "Perros", "22000", "7 rue des abeilles")),
+                                        new Image(10, "./assets/images/test.jpg"),
+                                        ["dsfsd", "dsfsdf"]);
+
+                    HousingCard::render($card);
                 }
 
                 ?>
