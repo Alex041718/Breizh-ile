@@ -1,2 +1,0 @@
-INSERT INTO `_Owner` (`identityCard`, `mail`, `firstname`, `lastname`, `nickname`, `password`, `phoneNumber`, `birthDate`, `consent`, `lastConnection`, `creationDate`, `imageID`, `genderID`, `addressID`)
-VALUES ('1234567890', 'owner1@gmail.com', 'owner1', 'owner1', 'owner1', '$2y$10$O.JEDin2vwFgbA3FQnKMheSSJDhaevnV3m5AXetQP6H7TeLrh9HaK', '0123456789', '1980-01-01', true, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 1, 1);
