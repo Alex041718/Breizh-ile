@@ -4,6 +4,7 @@ require_once 'Service.php';
 require_once 'ImageService.php';
 require_once 'AddressService.php';
 require_once 'GenderService.php';
+require_once __ROOT__.'/models/Client.php';
 
 class ClientService extends Service
 {
@@ -59,7 +60,7 @@ class ClientService extends Service
         return $clients;
     }
 
-    public static function GetClientById(int $clientID)
+    public static function GetClientById(int $clientID) : CLient
     {
         $pdo = self::getPDO();
         $stmt = $pdo->query('SELECT * FROM Client WHERE clientID = ' . $clientID);
@@ -73,7 +74,8 @@ class ClientService extends Service
         $address = AddressService::GetAddressById($row['addressID']);
         $image = ImageService::GetImageById($row['imageID']);
 
-        return new Client($row['clientID'], $row['isBlocked'], $row['mail'], $row['firstname'], $row['lastname'], $row['nickname'], $row['password'], $row['phoneNumber'], $row['birthDate'], $row['consent'], $row['lastConnection'], $row['creationDate'], $image, $gender, $address);
+
+        return new Client($row['clientID'], $row['isBlocked'], $row['mail'], $row['firstname'], $row['lastname'], $row['nickname'], $row['password'], $row['phoneNumber'], new DateTime($row['birthDate']), $row['consent'], new DateTime($row['lastConnection']), new DateTime($row['creationDate']), $image, $gender, $address);
     }
 }
 

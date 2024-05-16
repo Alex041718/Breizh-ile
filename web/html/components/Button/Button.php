@@ -33,7 +33,7 @@ class Button {
                 break;
         }
         $render = /*html*/ '
-            <link rel="stylesheet" href="/html/components/Button/Button.css">
+            <link rel="stylesheet" href="/components/Button/Button.css">
             
             <button type="' . $isSubmit . '" class="button '. $class . ' " id=" ' . $id . ' " onclick="' . $onClick . '">
                 ' . $text . '
