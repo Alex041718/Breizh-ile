@@ -6,6 +6,9 @@
     <title>Fiche Logement</title>
     <link rel="stylesheet" href="../style/ui.css">
     <link rel="stylesheet" href="page.css">
+
+    <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
+
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -68,6 +71,8 @@
                             <p class="para--bold">Arrivée:</p>
                             <input class="para--14px" name="startDate" id="start-date" type="date" placeholder="Ajouter une date">
                         </div>
+
+                        <span class="vertical-line"></span>
                         
                         <div class="depart" >
                             <p class="para--bold">Départ:</p>
@@ -76,30 +81,38 @@
                     </div>
                     <div class="nbrClients">
                         <button class="para--bold" id="addTravelersBtn">Ajouter des voyageurs <output id="liveTravelersCount">0</output></button>
-                        <div id="popup" class="popup">
-                <div class="popup-content">
-                    <div class="traveler-type">
-                        <span class="para--bold">Adultes:</span>
-                        <button id="subtractAdultBtn">-</button>
-                        <span id="adultCount">0</span>
-                        <button id="addAdultBtn">+</button>
+                        <div id="popup" class="popup">                   
+                            <div class="popup-content">
+                                <div class="traveler-type">
+                                    <div class="adulteInfo">
+                                        <span class="para--bold">Adultes:</span>
+                                        <span>13 ans et +</span>
+                                    </div>
+                                    <div class="addbtn">
+                                        <button id="subtractAdultBtn">-</button>
+                                        <span id="adultCount">0</span>
+                                        <button id="addAdultBtn">+</button>
+                                    </div>
+                                </div>
+                            
+                                <div class="traveler-type">
+                                    <div class="enfantInfo">
+                                        <span class="para--bold">Enfants:</span>
+                                        <span>- de 12 ans</span>
+                                    </div>
+                                    <div class="addbtn">
+                                        <button id="subtractChildBtn">-</button>
+                                        <span id="childCount">0</span>
+                                        <button id="addChildBtn">+</button>
+                                    </div>
+                                </div>
+                                <i id="closePopupBtn" class="fa-solid fa-xmark"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="age-info">
-                        <span>13 ans et plus</span>
-                    </div>
-                    <div class="traveler-type">
-                        <span class="para--bold">Enfants:</span>
-                        <button id="subtractChildBtn">-</button>
-                        <span id="childCount">0</span>
-                        <button id="addChildBtn">+</button>
-                    </div>
-                    <div class="age-info">
-                        <span>Moins de 12 ans</span>
-                    </div>
-                    <button id="closePopupBtn">Fermer</button>
-                </div>
-            </div>
 
+                    <div class="reservationBtn">
+                        <button>Réserver</button>
                     </div>
 
                 </div>

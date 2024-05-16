@@ -25,9 +25,20 @@
 }
 
 .reservation {
-  /* border: 2px solid red; */
+  border: 1px solid gray;
+  border-radius: 20px;
   width: 50%;
   height: 35em;
+  padding: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.reservation .reservationBtn {
+  margin-top: 3em;
+}
+.reservation .reservationBtn button {
+  width: 32.7em;
 }
 
 .nbrClients {
@@ -40,7 +51,7 @@
   border-top: none;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  width: 23em;
+  width: 32.7em;
   height: 5em;
   display: flex;
   flex-direction: column;
@@ -51,13 +62,23 @@
 .datepicker {
   display: flex;
   justify-content: center;
+  margin-top: 3em;
 }
 .datepicker .arrivee {
   display: flex;
   flex-direction: column;
   align-items: center;
   border: 1px solid gray;
+  border-right: none;
   border-top-left-radius: 10px;
+  padding-left: 2em;
+  padding-right: 2em;
+  justify-content: center;
+}
+.datepicker .vertical-line {
+  border-left: 1px solid gray;
+  display: inline-block;
+  height: 5em;
 }
 .datepicker .depart {
   display: flex;
@@ -66,12 +87,14 @@
   border: 1px solid gray;
   border-left: none;
   border-top-right-radius: 10px;
+  padding-left: 2em;
+  padding-right: 2em;
+  justify-content: center;
 }
 
 .details {
   width: 50%;
-  height: 35em;
-  /* border: 2px solid red; */
+  border: 2px solid red;
   position: relative;
 }
 .details .criteres {
@@ -135,14 +158,34 @@
   transform: translate(-50%, -50%);
   background-color: white;
   border: 1px solid gray;
-  padding: 20px;
+  border-radius: 20px;
+  padding: 5em;
   z-index: 9999;
 }
 .popup .popup-content {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2em;
 }
-.popup .popup-content button {
-  margin: 0 5px;
+.popup .popup-content #closePopupBtn {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+}
+
+.adulteInfo, .enfantInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.traveler-type {
+  display: flex;
+  gap: 5em;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 body.popup-active {
