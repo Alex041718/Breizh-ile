@@ -180,10 +180,12 @@ CREATE TABLE _Housing (
     categoryID BIGINT UNSIGNED, -- Correspond au type `serial` dans Category pour mysql
     addressID BIGINT UNSIGNED, -- Correspond au type `serial` dans Address pour mysql
     ownerID BIGINT UNSIGNED, -- Correspond au type `serial` dans Owner pour mysql
+    imageID BIGINT UNSIGNED, -- Correspond au type `serial` dans Image pour mysql
     FOREIGN KEY (addressID) REFERENCES _Address(addressID),
     FOREIGN KEY (ownerID) REFERENCES _Owner(ownerID),
     FOREIGN Key (typeID) REFERENCES _Type(typeID),
-    FOREIGN Key (categoryID) REFERENCES _Category(categoryID)
+    FOREIGN Key (categoryID) REFERENCES _Category(categoryID),
+    FOREIGN Key (imageID) REFERENCES _Image(imageID)
 );
 
 -- Création de la table `Activity`

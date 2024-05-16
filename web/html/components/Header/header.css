@@ -151,7 +151,7 @@
   display: none;
   position: absolute;
   top: 100%;
-  right: 75px;
+  right: 1em;
   z-index: 2;
 }
 .header #options ul {
