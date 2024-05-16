@@ -1,6 +1,7 @@
 .env
 .DS_Store
 .idea
-app/FILES/images/*
-!app/FILES/images/.gitkeep
+web/FILES/images/*
+!web/FILES/images/.gitkeep
 *.map
+mariadb
