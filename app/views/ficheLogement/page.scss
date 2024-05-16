@@ -1,3 +1,5 @@
+@import '../style/variables';
+
 .photo {
     img {
         width: 100%;
@@ -26,7 +28,7 @@
 }
 
 .reservation{
-    border: 1px solid gray;
+    border: 1px solid $secondaryColor;
     border-radius: 20px;
     width: 50%;
     height: 35em;
