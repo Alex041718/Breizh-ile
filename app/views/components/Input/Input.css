@@ -27,6 +27,13 @@ h4 {
   margin: 0;
 }
 
+h4 {
+  font-size: max(16px, 1.0416666667vw);
+
+  font-weight: bold;
+  margin: 0;
+}
+
 p {
   margin: 0;
   font-size: max(14px, 0.8333333333vw);
@@ -53,6 +60,8 @@ p {
   padding-inline: 25px;
   background-color: #1D1D1D;
   color: white;
+  width: -moz-fit-content;
+
   width: fit-content;
   border-radius: 10px;
 }
@@ -130,6 +139,4 @@ p {
   display: block;
   margin-bottom: 10px;
   margin-top: 10px;
-}
-
-/*# sourceMappingURL=Input.css.map */
+}/*# sourceMappingURL=Input.css.map */

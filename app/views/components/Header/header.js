@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    var header = document.querySelector('header');
+    var header = document.querySelector('.header');
 
     var profil = document.getElementById('profil');
     var options = document.getElementById('options');

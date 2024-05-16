@@ -32,6 +32,10 @@ body {
     overflow: hidden;
     height: 120vh;
 
+    @media screen and (max-width: 560px) {
+      height: 100vh;
+    }
+
     &__parallax {
         height: 100%;
         width: 100%;
@@ -48,6 +52,7 @@ body {
             position: absolute;
             z-index: 1;
             object-fit: cover;
+
         }
         
         .house {
@@ -63,12 +68,18 @@ body {
         }
         
         .breizh {
+          position: absolute;
             top: 20% !important;
             left: auto !important;
             z-index: 2;
 
-            @media screen and (max-width: 1000px) {
-              width: 1000px;
+            @media screen and (max-width: 1024px) {
+              width: 500px;
+              z-index: 3;
+            }
+
+            @media screen and (max-width: 560px) {
+              width: 300px;
             }
         }
     }
@@ -81,6 +92,10 @@ body {
 
         @media screen and (max-width: 1000px) {
           width: 1000px;
+        }
+
+        @media screen and (max-width: 670px) {
+          left: -150px;
         }
 
     }
@@ -103,6 +118,14 @@ body {
         box-sizing: border-box;
         margin-bottom: 16px;
         z-index: 5;
+
+        @media screen and (max-width: 676px) {
+          top: 55%;
+        }
+
+        @media screen and (max-width: 560px) {
+          display: none;
+        }
 
         .chevrons {
             padding: 6px 0 0 0;
@@ -194,6 +217,10 @@ body {
         gap: 50px;
         align-items: center;
 
+        @media screen and (max-width: 950px) {
+          justify-content: center;
+        }
+
         label {
             font-weight: 600;
         }
@@ -234,7 +261,8 @@ body {
       }
 
       @media screen and (max-width: 950px) {
-        grid-template-columns: repeat(1, auto);
+        display: flex;
+        flex-direction: column;
       }
 
     }
