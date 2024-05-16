@@ -77,6 +77,8 @@
         </section>
         <section class="informations__right">
             <div class="informations__right__desc">
+        <section class="informations__right">
+            <div class="informations__right__desc">
                 <img src="/views/assets/images/jean.png" alt="">
                 <div class="informations__right__desc__info">
                     <div class="informations__right__desc__info__perso">
