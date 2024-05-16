@@ -1,7 +1,7 @@
 <?php
 
 class OwnerNavBar {
-    public static function render($navbarIndex = 0) {
+    public static function render() {
         $pages = array(
             array("Page d'accueil", ""),
             array("Logements", ""),
@@ -13,8 +13,8 @@ class OwnerNavBar {
                 <ul>
         ';
 
-        for ($i = 0; $i < count($pages); $i++) {
-            $render .= '<li class="' . ($navbarIndex == $i ? 'active' : '') . '"><a href="' . $pages[$i][1] . '">' . $pages[$i][0] . '</a></li>';
+        foreach ($pages as $page) {
+            $render .= '<li><a href="' . $page[1] . '">' . $page[0] . '</a></li>';
         }
 
         $render .= /*html*/ '
