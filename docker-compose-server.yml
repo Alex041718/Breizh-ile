@@ -6,6 +6,8 @@ services:
     container_name: breizh-ile_web
     volumes:
       - ./web/html:/var/www/html
+      - ./web/services:/var/www/services
+      - ./web/models:/var/www/models
     environment:
          VIRTUAL_HOST: ${EQUIPE}.ventsdouest.dev
          LETSENCRYPT_HOST: ${EQUIPE}.ventsdouest.dev
