@@ -1,4 +1,4 @@
-@use '../../style/variables';
+@import '../../style/variables';
 
 body {
     margin: 0;
@@ -6,5 +6,7 @@ body {
 }
 
 main {
-    padding-inline: 4.5rem;
+    color: $ownerPrimaryColor;
+    padding-top: 2rem;
+    padding-inline: 50px;
 }

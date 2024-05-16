@@ -154,8 +154,8 @@
         height: 120px !important;
         padding-bottom: 0;
 
-        &i {
-            color: red;
+        .header__right {
+            i { color: $ownerPrimaryColor; }
         }
     }
 
