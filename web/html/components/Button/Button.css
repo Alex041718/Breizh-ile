@@ -29,7 +29,6 @@ h4 {
 
 h4 {
   font-size: max(16px, 1.0416666667vw);
-
   font-weight: bold;
   margin: 0;
 }
@@ -61,7 +60,6 @@ p {
   background-color: #1D1D1D;
   color: white;
   width: -moz-fit-content;
-
   width: fit-content;
   border-radius: 10px;
 }
@@ -169,9 +167,6 @@ p {
   color: #EB5757 !important;
   border: 2px solid #EB5757;
 }
-.button--disabled {
-  background-color: #E0E0E0;
-  color: #333333;
-  cursor: not-allowed;
-}
-
+.button--delete--secondary:hover {
+  background-color: #f6f6f6 !important;
+}/*# sourceMappingURL=Button.css.map */

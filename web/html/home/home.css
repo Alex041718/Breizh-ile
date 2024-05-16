@@ -51,11 +51,13 @@ body {
   width: 100%;
   position: absolute;
   z-index: 1;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .hero-banner__parallax .house {
   position: fixed;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   position: absolute;
   bottom: 0;
   width: 106%;
@@ -284,6 +286,4 @@ body {
   .scrolling .search-bar--header {
     width: 60%;
   }
-}
-
-/*# sourceMappingURL=home.css.map */
+}/*# sourceMappingURL=home.css.map */

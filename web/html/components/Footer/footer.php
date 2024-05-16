@@ -15,8 +15,8 @@ class Footer {
 
 
         $render =  /*html*/ '
-            <link rel="stylesheet" href="/views/style/ui.css">
-            <link rel="stylesheet" href="/views/components/Footer/footer.css">
+            <link rel="stylesheet" href="/style/ui.css">
+            <link rel="stylesheet" href="/components/Footer/footer.css">
             
             <footer>
                 <section>
