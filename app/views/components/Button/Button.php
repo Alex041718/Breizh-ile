@@ -12,6 +12,7 @@ class Button {
                                   $id = "",
                                   $text = "",
                                   $type = ButtonType::Client,
+                                  $onClick = "",
                                   $isSecondary = true,
                                   $submit = false) {
 
@@ -34,7 +35,7 @@ class Button {
         $render = /*html*/ '
             <link rel="stylesheet" href="/views/components/Button/Button.css">
             
-            <button type="' . $isSubmit . '" class="button '. $class . ' " id=" ' . $id . ' " >
+            <button type="' . $isSubmit . '" class="button '. $class . ' " id=" ' . $id . ' " onclick="' . $onClick . '">
                 ' . $text . '
             </button>
             
