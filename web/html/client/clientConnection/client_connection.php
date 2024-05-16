@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion Compte Propriétaire</title>
+    <title>Connexion Compte Client</title>
     <link rel="stylesheet" href="../../style/ui.css">
-    <link rel="stylesheet" href="owner_connection.css">
+    <link rel="stylesheet" href="client_connection.css">
 </head>
 <body>
 
     <div class="connectionContainer">
         <img src="http://localhost:5555/html/assets/images/logo_breizh_noir.png">
         <div class="connectionContainer__box">
-            <h3 class="connectionContainer__box__title">Connecter vous à votre compte propriétaire</h3>
-            <form action="/controllers/owner/ownerConnectionController.php" method="post">
+            <h3 class="connectionContainer__box__title">Connecter vous à votre compte client</h3>
+            <form action="/controllers/client/clientConnectionController.php" method="post">
 
                 <?php require_once("../../components/Input/Input.php"); ?>
 
@@ -28,7 +28,7 @@
                 <?php require_once("../../components/Button/Button.php"); ?>
 
 
-                <?php Button::render("connection__button", "connectButton", "Se connecter",ButtonType::Owner,false,false,true); ?>
+                <?php Button::render("connection__button", "connectButton", "Se connecter",ButtonType::Client,false,false,true); ?>
 
             </form>
     </div>
