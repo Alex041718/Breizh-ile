@@ -28,7 +28,7 @@
                 <?php require_once("../../components/Button/Button.php"); ?>
 
 
-                <?php Button::render("connection__button", "connectButton", "Se connecter",true); ?>
+                <?php Button::render("connection__button", "connectButton", "Se connecter",ButtonType::Owner,false,true); ?>
 
             </form>
     </div>
