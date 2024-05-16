@@ -1,0 +1,47 @@
+@import '../../style/variables';
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.owner-nav-bar {
+    margin-top: 120px;
+
+    ul {
+        padding: 0;
+        display: flex;
+        padding-inline: 53px;
+        list-style: none;
+        box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.25);
+
+        li {
+            display: flex;
+            padding-inline: 1rem;
+            width: 170px;
+            height: 70px;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: $font-size-lg;
+            
+            a {
+                color: $ownerPrimaryColor;
+                text-decoration: none;
+            }
+
+            &.active {
+                background: linear-gradient(0deg, $ownerPrimaryColor 0%, $ownerPrimaryColor 7%,white 7%);
+            }
+
+            &:hover {
+                background-color: $grey6;
+                cursor: pointer;
+            }
+
+            &.active:hover {
+                background: linear-gradient(0deg, $ownerPrimaryColor 0%, $ownerPrimaryColor 7%, $grey6 7%);
+            }
+        }
+    }
+}

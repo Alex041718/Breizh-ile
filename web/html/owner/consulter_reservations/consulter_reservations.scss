@@ -1,0 +1,12 @@
+@import '../../style/variables';
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    color: $ownerPrimaryColor;
+    padding-top: 2rem;
+    padding-inline: 50px;
+}

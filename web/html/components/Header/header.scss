@@ -150,6 +150,15 @@
         flex: 0 0 20%;
     }
 
+    &.header--backoffice {
+        height: 120px !important;
+        padding-bottom: 0;
+
+        .header__right {
+            i { color: $ownerPrimaryColor; }
+        }
+    }
+
     .fa-user {
         font-size: 40px;
     }
