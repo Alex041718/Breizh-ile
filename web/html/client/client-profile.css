@@ -27,6 +27,12 @@ h4 {
   margin: 0;
 }
 
+h4 {
+  font-size: max(16px, 1.0416666667vw);
+  font-weight: bold;
+  margin: 0;
+}
+
 p {
   margin: 0;
   font-size: max(14px, 0.8333333333vw);
@@ -110,12 +116,13 @@ body {
 
 .content {
   height: 38em;
+  display: flex;
+  align-items: center;
+  padding-top: 100px;
 }
 .content__selector {
   width: 15em;
-  height: 60%;
-  position: fixed;
-  width: 15em;
+  height: 38em;
   background: #FFFFFF;
   color: #307B5C;
   box-shadow: 9px 0px 15px -3px rgba(0, 0, 0, 0.1);
@@ -131,11 +138,8 @@ body {
   background: #307B5C;
   color: #FFFFFF;
 }
-.content__personnal-data, .content__security {
-  margin-left: 15em;
-}
-
-.content__personnal-data__image {
-  width: 1em;
-  height: 1em;
+.content > div:not(:first-child) {
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
 }/*# sourceMappingURL=client-profile.css.map */
