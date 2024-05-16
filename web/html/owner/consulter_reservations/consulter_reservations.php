@@ -18,6 +18,15 @@
     ?>
     <main>
         <h3>Vos réservations</h3>
+        <section class="title">
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+        </section>
     </main>
 </body>
 </html>
