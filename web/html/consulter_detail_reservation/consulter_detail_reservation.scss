@@ -9,12 +9,17 @@ main {
     margin-top: 135px;
     
 
+    @media screen and (max-width: 1024px) {
+        margin-top: 75px;
+        
+    }
     .title {
         display: flex;
         align-items: center;
         flex-direction: row;
         justify-content: center;
         margin: 40px;
+
 
         .title__arrow {
             display: flex;
@@ -28,7 +33,12 @@ main {
             }
         }
         .title__date {
-            display: flex;                
+            display: flex;  
+            
+            @media screen and (max-width: 1024px) {
+                padding-top: 100px;                
+        
+            }
         }
         
     }
@@ -40,15 +50,21 @@ main {
 
         @media screen and (max-width: 1024px) {
             flex-direction: column;
-            
-            
-    
+            padding-left: 25px;
+            padding-right: 25px;
         }
 
         .informations__left {
             width: 50%;
             border-right: 1px solid #ccc; 
             padding-right: 50px;
+
+
+            @media screen and (max-width: 1024px) {
+                width: 100%;                
+                padding-right: 0;
+                border: none; 
+            }
             
             hr {
                 margin-top: 30px;
@@ -63,6 +79,11 @@ main {
                     height: 150px; 
                     object-fit: cover;
                     border-radius:10px;
+
+                    @media screen and (max-width: 1024px) {
+                        width: 175px;
+                        height: 100px; 
+                    }
                 }
 
                 .informations__left__logement__info {
@@ -90,10 +111,14 @@ main {
 
             .informations__left__total {
 
+                @media screen and (max-width: 1024px) {
+                    padding-bottom: 10px;
+                }
+
                 div {
                     display: flex;
                     justify-content: space-between;
-
+                    
                 }
             }
 
@@ -102,7 +127,12 @@ main {
         .informations__right {            
             width: 50%;
             padding-left: 50px;
+            padding-left: 0px;
 
+            @media screen and (max-width: 1024px) {
+                width: 100%;                
+            }
+            
             .informations__right__desc{
                 display: flex;
                 border: 1px solid $grey4; 
@@ -112,6 +142,11 @@ main {
                 img {
                     border-top-left-radius: 10px;
                     border-bottom-left-radius: 10px;
+
+                    @media screen and (max-width: 1024px) {
+                        width: 75px;
+                        height: auto;                
+                    }
                 }
                 
                 .informations__right__desc__info {
@@ -120,13 +155,26 @@ main {
                     align-items: center;
                     width: 100%;
 
+                    @media screen and (max-width: 1024px) {
+                        padding: 0;               
+                    }
+                    
+
                     .informations__right__desc__info__perso {
                         width: 50%;
 
+                        @media screen and (max-width: 1024px) {
+                            width: 75%;     
+                                
+                        }
                     }
 
                     .informations__right__desc__info__vide {
                         width: 30%;
+
+                        @media screen and (max-width: 1024px) {
+                            width: 10%;     
+                        }
                     }
 
                     .informations__right__desc__info__icons {
@@ -134,14 +182,30 @@ main {
                         gap: 25px; 
                         width: 20%;
 
+                        @media screen and (max-width: 1024px) {
+                            display: flex;
+                            flex-direction: column;           
+                            gap: 12.5px; 
+                            width: 15%;
+
+                        }
 
                         #telephone{
                             font-size: 30px;
-                            
+                            @media screen and (max-width: 1024px) {
+                                font-size: 22px;
+
+    
+                            }
                         }
 
                         #mail{
                             font-size: 30px;
+                            @media screen and (max-width: 1024px) {
+                                font-size: 22px;
+                                ; 
+    
+                            }
                         }
                     }
                 }
@@ -171,6 +235,6 @@ main {
 @media screen and (max-width: 1024px) {
 
     footer {
-        margin-bottom: 135px;
+        margin-bottom: 3em;
     }
 }
