@@ -69,25 +69,30 @@ class HousingService extends Service
 
         // Gestion des images
         // appel de la méthode GetHousingImages de la classe ImageService
-        // $image = ImageService::GetHousingImage($row['housingID']);
+        $image = ImageService::GetImageById($row['profileImageID']);
 
         // Gestion des arrangements
         // appel de la méthode GetArrangmentByHousingId de la classe ArrangementService
         $arrangements = ArrangementService::GetArrangmentsByHousingId($row['housingID']);
 
-        return new Housing($row['housingID'], $row['title'], $row['shortDesc'], $row['longDesc'], $row['priceExcl'], $row['priceIncl'], $row['nbRoom'], $row['nbDoubleBed'], $row['nbSimpleBed'], $row['longitude'], $row['latitude'], $row['isOnline'], $row['noticeCount'], $row['beginDate'], $row['endDate'], $row['creationDate'], $row['surfaceInM2'], $type, $category, $address, $owner, $row['imageID'], $arrangements);
+        if($row['priceIncl'] == null) $row['priceIncl'] = 0;
+        if($row['priceIncl'] == null) $row['beginDate'] = new DateTime("now");
+        if($row['beginDate'] == null) $row['beginDate'] = new DateTime("now");
+        if($row['endDate'] == null) $row['endDate'] = new DateTime("now");
+        if($row['creationDate'] == null) $row['creationDate'] = new DateTime("now");
+
+        return new Housing($row['housingID'], $row['title'], $row['shortDesc'], $row['longDesc'], $row['priceExcl'], $row['priceIncl'], $row['nbRoom'], $row['nbDoubleBed'], $row['nbSimpleBed'], $row['longitude'], $row['latitude'], $row['isOnline'], $row['noticeCount'], $row['beginDate'], $row['endDate'], $row['creationDate'], $row['surfaceInM2'], $type, $category, $address, $owner, $image, $arrangements);
     }
     public static function GetAllHousings()
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->query('SELECT * FROM _Housing');
+        $stmt = $pdo->query('SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID WHERE housingID <= 9;');
         $housings = [];
 
         while ($row = $stmt->fetch()) {
 
             // Get the owner
-            $stmtOwner = $pdo->query('SELECT * FROM Owner WHERE ownerID = ' . $row['ownerID']);
-            $rowOwner = $stmtOwner->fetch();
+
             // $owner = new Owner($rowOwner['ownerID'], $rowOwner['identityCard'], $rowOwner['mail'], $rowOwner['firstname'], $rowOwner['lastname'], $rowOwner['nickname'], $rowOwner['password'], $rowOwner['phoneNumber'], $rowOwner['birthDate'], $rowOwner['consent'], $rowOwner['lastConnection'], $rowOwner['creationDate'], "", $rowOwner['genderID'], $rowOwner['addressID']);
 
             // Get the images

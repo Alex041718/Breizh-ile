@@ -24,7 +24,7 @@ class HousingCard {
                     <img src="' . $owner_pp . '">
                     <p>' . $owner_name . '</p>
                 </div>
-                <h3>' . $housing_name . '</h3>
+                <h4>' . $housing_name . '</h4>
                 <p>' . $housing_content . '</p>
                 <div class="housing-card__content__bottom">
                     <div class="housing-card__content__bottom__infos">
