@@ -17,7 +17,7 @@
 }
 
 .twodiv {
-  /* border: 2px solid red; */
+  border: 2px solid red;
   width: 100%;
   padding-top: 1em;
   display: flex;
@@ -25,7 +25,7 @@
 }
 
 .reservation {
-  border: 1px solid gray;
+  border: 1px solid #A9A9A9;
   border-radius: 20px;
   width: 50%;
   height: 35em;
@@ -36,9 +36,17 @@
 }
 .reservation .reservationBtn {
   margin-top: 3em;
+  width: 75%;
 }
 .reservation .reservationBtn button {
-  width: 32.7em;
+  width: 100%;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.reservation .prix {
+  display: flex;
+  gap: 19.5em;
+  margin-top: 2em;
 }
 
 .nbrClients {
