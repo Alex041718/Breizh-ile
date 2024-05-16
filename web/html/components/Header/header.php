@@ -3,7 +3,7 @@
 
 class Header {
 
-        public static function render($isScrolling = false) {
+        public static function render($isScrolling = false, $isBackOffice = false) {
             $render = /*html*/ '
 
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -18,15 +18,15 @@ class Header {
                 <link rel="stylesheet" href="/components/Header/header.css">
 
                 <header class="">
-                    <div class="header '. ($isScrolling ? 'scroll scrolling' : '' ). '">
+                    <div class="header '. ($isScrolling ? 'scroll scrolling' : '' ). ' '. ($isBackOffice ? 'header--backoffice' : '' ). '">
                         <a class="logo" href="">
                             <img class="logo-big" src="/assets/images/logo_breizh_noir.png" id="logo" alt="logo_breizh">
                             <img class="logo-small" src="/assets/icons/logo.svg" alt="logo_breizh">
                         </a>
 
 
-        ';
-        echo $render;
+            ';
+            echo $render;
 
             define('__HEADER__', dirname(dirname(__FILE__)));
             
@@ -36,11 +36,11 @@ class Header {
             else{
                 require_once(__HEADER__ . "/SearchBar/SearchBar.php");
             }
-        
-
-          
-            SearchBar::render("search-bar search-bar--header","","./monSuperFormulaireQuiVaEtreTraiter", true);
-
+            
+            if (!$isBackOffice) {
+                SearchBar::render("search-bar search-bar--header","","./monSuperFormulaireQuiVaEtreTraiter", true);
+            }
+            
             $render =  /*html*/ '
 
                         <div class="header__right">

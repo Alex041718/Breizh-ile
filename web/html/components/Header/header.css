@@ -123,6 +123,13 @@
   justify-content: end;
   flex: 0 0 20%;
 }
+.header.header--backoffice {
+  height: 120px !important;
+  padding-bottom: 0;
+}
+.header.header--backoffice .header__right i {
+  color: #082C4C;
+}
 .header .fa-user {
   font-size: 40px;
 }
