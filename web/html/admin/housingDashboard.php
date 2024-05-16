@@ -3,7 +3,7 @@
 require_once '../../services/SessionService.php';
 
 // Gestion de la session
-SessionService::system('admin','../../views/admin/adminConnection.php');
+SessionService::system('admin','../../html/admin/adminConnection.php');
 
 // Récupération des logements de la plateforme
 require_once '../../services/HousingService.php';

@@ -16,7 +16,7 @@ require_once '../../models/Housing.php';
 // Vérifier la méthode de la requête et l'existence des données
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['title']) || !isset($_POST['shortDesc']) || !isset($_POST['longDesc']) || !isset($_POST['priceExcl']) || !isset($_POST['priceIncl']) || !isset($_POST['nbRoom']) || !isset($_POST['nbDoubleBed']) || !isset($_POST['nbSimpleBed']) || !isset($_POST['longitude']) || !isset($_POST['latitude']) || !isset($_POST['isOnline']) || !isset($_POST['noticeCount']) || !isset($_POST['beginDate']) || !isset($_POST['endDate']) || !isset($_POST['surfaceInM2']) || !isset($_POST['typeID']) || !isset($_POST['categoryID']) || !isset($_POST['city']) || !isset($_POST['postalCode']) || !isset($_POST['postalAddress']) || !isset($_POST['ownerID'])) {
 
-    header('Location: ../../views/admin/housingDashboard.php?error=missingFields');
+    header('Location: ../../html/admin/housingDashboard.php?error=missingFields');
     exit();
 }
 
@@ -74,5 +74,5 @@ $housing = new Housing(null, $title, $shortDesc, $longDesc, $priceExcl, $priceIn
 $housing = HousingService::CreateHousing($housing);
 
 // Redirection vers la page de gestion des logements
-header('Location: ../../views/admin/housingDashboard.php');
+header('Location: ../../html/admin/housingDashboard.php');
 exit();

@@ -10,13 +10,13 @@ class SessionService {
         if (!self::isAuthenticated() || self::get('role') == null || self::isExpired()) {
             // Rediriger vers la page de connexion si l'administrateur n'est pas connecté
             if ($role == 'admin') {
-                header('Location: ../../views/admin/adminConnection.php');
+                header('Location: ../../html/admin/adminConnection.php');
             } else if ($role == 'owner') {
-                header('Location: ../../views/owner/ownerConnection.php');
+                header('Location: ../../html/owner/ownerConnection.php');
             } else if ($role == 'client') {
-                header('Location: ../../views/client/clientConnection.php');
+                header('Location: ../../html/client/clientConnection.php');
             } else {
-                header('Location: ../../views/client/clientConnection.php');
+                header('Location: ../../html/client/clientConnection.php');
             }
             exit();
         }
