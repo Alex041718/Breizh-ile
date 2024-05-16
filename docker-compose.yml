@@ -6,6 +6,8 @@ services:
     container_name: breizh-ile_web
     volumes:
       - ./web/html:/var/www/html
+      - ./web/services:/var/www/services
+      - ./web/models:/var/www/models
     ports:
       - "${WEB_PORT}:80"
     networks:
