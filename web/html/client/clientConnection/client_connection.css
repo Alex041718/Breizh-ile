@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.connectionContainer {
+  padding-top: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  background-color: #FFFFFF;
+  gap: 1em;
+}
+.connectionContainer img {
+  width: 400px;
+  height: auto;
+}
+.connectionContainer__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 45px 20px;
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  gap: 20px;
+}
+.connectionContainer__box__title {
+  text-align: center;
+  width: 350px;
+}
+.connectionContainer__box form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+.connectionContainer__box form .connection__input, .connectionContainer__box form button {
+  width: 260px;
+}
+
+/*# sourceMappingURL=client_connection.css.map */

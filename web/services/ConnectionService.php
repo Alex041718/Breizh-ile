@@ -33,7 +33,7 @@ class ConnectionService extends Service
     public static function CheckClient(string $nickname, string $password): bool
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->prepare('SELECT * FROM _Client WHERE nickname = :nickname');
+        $stmt = $pdo->prepare('SELECT * FROM Client WHERE nickname = :nickname');
         $stmt->execute([
             'nickname' => $nickname
         ]);
@@ -47,7 +47,7 @@ class ConnectionService extends Service
     public static function GetClientID(string $nickname): int
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->prepare('SELECT clientID FROM _Client WHERE nickname = :nickname');
+        $stmt = $pdo->prepare('SELECT clientID FROM Client WHERE nickname = :nickname');
         $stmt->execute([
             'nickname' => $nickname
         ]);
@@ -58,7 +58,7 @@ class ConnectionService extends Service
     public static function CheckOwner(string $nickname, string $password): bool
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->prepare('SELECT * FROM _Owner WHERE nickname = :nickname');
+        $stmt = $pdo->prepare('SELECT * FROM Owner WHERE nickname = :nickname');
         $stmt->execute([
             'nickname' => $nickname
         ]);
@@ -73,7 +73,7 @@ class ConnectionService extends Service
     public static function GetOwnerID(string $nickname): int
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->prepare('SELECT ownerID FROM _Owner WHERE nickname = :nickname');
+        $stmt = $pdo->prepare('SELECT ownerID FROM Owner WHERE nickname = :nickname');
         $stmt->execute([
             'nickname' => $nickname
         ]);
