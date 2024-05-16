@@ -44,7 +44,7 @@ class Header {
             $render =  /*html*/ '
 
                         <div class="header__right">
-                            <i class="fa-solid fa-eye"></i>
+                            <i id="oeuil" class="fa-solid fa-eye"></i>
                             <i id="profil" class="fa-solid fa-user"></i>
                         </div>
                         <div id="options" style="display: none;">
