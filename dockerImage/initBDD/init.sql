@@ -159,8 +159,8 @@ CREATE VIEW Client AS (
 -- Création de la table `Housing`
 CREATE TABLE _Housing (
     housingID serial PRIMARY KEY,
-    title varchar(100),
-    shortDesc varchar(255),
+    title varchar(255),
+    shortDesc varchar(5000),
     longDesc varchar(10000),
     priceExcl Float,
     priceIncl Float,
@@ -188,59 +188,55 @@ CREATE TABLE _Housing (
 
 -- Création de la table `Activity`
 CREATE TABLE _Activity (
-                          activityID serial PRIMARY KEY,
-                          label varchar(20),
-                          perimeter varchar(20)
+    activityID serial PRIMARY KEY,
+    label varchar(20),
+    perimeter varchar(20)
 );
 
 CREATE TABLE _Has_for_activity (
-                                  housingID BIGINT UNSIGNED, -- Correspond au type `serial` dans Housing pour mysql
-                                  activityID BIGINT UNSIGNED, -- Correspond au type `serial` dans Activity pour mysql
-                                  PRIMARY KEY (housingID, activityID),
-                                  FOREIGN KEY (housingID) REFERENCES _Housing(housingID),
-                                  FOREIGN KEY (activityID) REFERENCES _Activity(activityID)
+    housingID BIGINT UNSIGNED, -- Correspond au type `serial` dans Housing pour mysql
+    activityID BIGINT UNSIGNED, -- Correspond au type `serial` dans Activity pour mysql
+    FOREIGN KEY (housingID) REFERENCES _Housing(housingID),
+    FOREIGN KEY (activityID) REFERENCES _Activity(activityID)
 );
 
 CREATE TABLE _Has_for_service (
-        housingID BIGINT UNSIGNED, -- Correspond au type `serial` dans Housing pour mysql
-        serviceID BIGINT UNSIGNED, -- Correspond au type `serial` dans Service pour mysql
-     PRIMARY KEY (housingID, serviceID),
-     FOREIGN KEY (housingID) REFERENCES _Housing(housingID),
-     FOREIGN KEY (serviceID) REFERENCES _Service(serviceID)
+    housingID BIGINT UNSIGNED, -- Correspond au type `serial` dans Housing pour mysql
+    serviceID BIGINT UNSIGNED, -- Correspond au type `serial` dans Service pour mysql
+    FOREIGN KEY (housingID) REFERENCES _Housing(housingID),
+    FOREIGN KEY (serviceID) REFERENCES _Service(serviceID)
 );
 
 
 -- Création de la table `Arrangement`
 CREATE TABLE _Arrangement (
-                             arrangementID serial PRIMARY KEY,
-                             label varchar(255)
+    arrangementID serial PRIMARY KEY,
+    label varchar(255)
 );
 
 CREATE TABLE _Has_for_arrangement (
-                                     housingID BIGINT UNSIGNED, -- Correspond au type `serial` dans Housing pour mysql
-                                     arrangementID BIGINT UNSIGNED, -- Correspond au type `serial` dans Arrangement pour mysql
-                                     PRIMARY KEY (housingID, arrangementID),
-                                     FOREIGN KEY (housingID) REFERENCES _Housing(housingID),
-                                     FOREIGN KEY (arrangementID) REFERENCES _Arrangement(arrangementID)
+    housingID BIGINT UNSIGNED, -- Correspond au type `serial` dans Housing pour mysql
+    arrangementID BIGINT UNSIGNED, -- Correspond au type `serial` dans Arrangement pour mysql
+    FOREIGN KEY (housingID) REFERENCES _Housing(housingID),
+    FOREIGN KEY (arrangementID) REFERENCES _Arrangement(arrangementID)
 );
 
 -- Création de la table `Review`
 CREATE TABLE _Review (
-                        reviewID serial PRIMARY KEY,
-                        note Float,
-                        comm varchar(3000),
-                        creationDate Date,
-                        isReported Boolean,
-                        clientID BIGINT UNSIGNED, -- Correspond au type `serial` dans Client pour mysql
-                        housingID BIGINT UNSIGNED, -- Correspond au type `serial` dans Housing pour mysql
-                        FOREIGN KEY (clientID) REFERENCES _Client(clientID),
-                        FOREIGN KEY (housingID) REFERENCES _Housing(housingID)
+    reviewID serial PRIMARY KEY,
+    note Float,
+    comm varchar(3000),
+    creationDate Date,
+    isReported Boolean,
+    clientID BIGINT UNSIGNED, -- Correspond au type `serial` dans Client pour mysql
+    housingID BIGINT UNSIGNED, -- Correspond au type `serial` dans Housing pour mysql
+    FOREIGN KEY (clientID) REFERENCES _Client(clientID),
+    FOREIGN KEY (housingID) REFERENCES _Housing(housingID)
 );
 
 CREATE TABLE _Has_for_payCard (
      clientID BIGINT UNSIGNED, -- Correspond au type `serial` dans Client pour mysql
      payCardID BIGINT UNSIGNED, -- Correspond au type `serial` dans PayCard pour mysql
-     PRIMARY KEY (clientID, payCardID),
      FOREIGN KEY (clientID) REFERENCES _Client(clientID),
      FOREIGN KEY (payCardID) REFERENCES _PayCard(payCardID)
 );
