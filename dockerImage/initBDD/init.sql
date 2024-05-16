@@ -189,15 +189,22 @@ CREATE TABLE _Housing (
 -- Création de la table `Activity`
 CREATE TABLE _Activity (
     activityID serial PRIMARY KEY,
-    label varchar(20),
-    perimeter varchar(20)
+    label varchar(20)
+);
+
+-- Création de la table `Perimeter`
+CREATE TABLE _Perimeter (
+    perimeterID serial PRIMARY KEY,
+    label varchar(20)
 );
 
 CREATE TABLE _Has_for_activity (
     housingID BIGINT UNSIGNED, -- Correspond au type `serial` dans Housing pour mysql
     activityID BIGINT UNSIGNED, -- Correspond au type `serial` dans Activity pour mysql
+    perimeterID BIGINT UNSIGNED, -- Correspond au type `serial` dans Perimeter pour mysql
     FOREIGN KEY (housingID) REFERENCES _Housing(housingID),
-    FOREIGN KEY (activityID) REFERENCES _Activity(activityID)
+    FOREIGN KEY (activityID) REFERENCES _Activity(activityID),
+    FOREIGN KEY (perimeterID) REFERENCES _Perimeter(perimeterID)
 );
 
 CREATE TABLE _Has_for_service (
@@ -237,6 +244,7 @@ CREATE TABLE _Review (
 CREATE TABLE _Has_for_payCard (
      clientID BIGINT UNSIGNED, -- Correspond au type `serial` dans Client pour mysql
      payCardID BIGINT UNSIGNED, -- Correspond au type `serial` dans PayCard pour mysql
+     PRIMARY KEY (clientID, payCardID),
      FOREIGN KEY (clientID) REFERENCES _Client(clientID),
      FOREIGN KEY (payCardID) REFERENCES _PayCard(payCardID)
 );
