@@ -11,6 +11,13 @@ footer {
         padding-bottom: 120px;
     }
 
+    &.footer--backoffice {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        background-color: $ownerPrimaryColor;
+    }
+
     .informations {
         display: flex;
         justify-content: space-evenly;
@@ -48,7 +55,8 @@ footer {
         }
     }
 }
-  
+
+
 // Styles pour le format mobile avec media query
 @media only screen and (max-width: 400px) {
     footer {

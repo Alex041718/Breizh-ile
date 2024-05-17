@@ -11,14 +11,14 @@
 
 class Footer {
 
-    public static function render() {
+    public static function render($isBackOffice = false) {
 
 
         $render =  /*html*/ '
             <link rel="stylesheet" href="/style/ui.css">
             <link rel="stylesheet" href="/components/Footer/footer.css">
             
-            <footer>
+            <footer class="' . ($isBackOffice ? 'footer--backoffice' : '') . '">
                 <section>
                     <div class="informations">
                         <div>

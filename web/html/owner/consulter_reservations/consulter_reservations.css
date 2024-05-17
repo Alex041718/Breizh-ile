@@ -7,4 +7,13 @@ main {
   color: #082C4C;
   padding-top: 2rem;
   padding-inline: 50px;
+}
+
+.title {
+  display: flex;
+  width: 100%;
+  padding: 0.4rem 0 0.4rem 0.6rem;
+  align-items: center;
+  margin-top: 1rem;
+  background-color: red;
 }/*# sourceMappingURL=consulter_reservations.css.map */

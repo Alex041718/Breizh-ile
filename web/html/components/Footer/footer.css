@@ -8,6 +8,12 @@ footer {
     padding-bottom: 120px;
   }
 }
+footer.footer--backoffice {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background-color: #082C4C;
+}
 footer .informations {
   display: flex;
   justify-content: space-evenly;
