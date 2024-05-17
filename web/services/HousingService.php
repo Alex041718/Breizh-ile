@@ -14,8 +14,6 @@ class HousingService extends Service
 
         $housing->setAddress($address);
 
-
-
         $pdo = self::getPDO();
         $stmt = $pdo->prepare('INSERT INTO _Housing (title, shortDesc, longDesc, priceExcl, priceIncl, nbRoom, nbDoubleBed, nbSimpleBed, longitude, latitude, isOnline, noticeCount, beginDate, endDate, creationDate, imageSrc, surfaceInM2, typeID, categoryID, addressID, ownerID) VALUES ( :title, :shortDesc, :longDesc, :priceExcl, :priceIncl, :nbRoom, :nbDoubleBed, :nbSimpleBed, :longitude, :latitude, :isOnline, :noticeCount, :beginDate, :endDate, :creationDate, :surfaceInM2, :typeID, :categoryID, :addressID, :ownerID)');
         $stmt->execute(array(
@@ -79,7 +77,7 @@ class HousingService extends Service
         if($row['priceIncl'] == null) $row['beginDate'] = new DateTime("now");
         if($row['beginDate'] == null) $row['beginDate'] = new DateTime("now");
         if($row['endDate'] == null) $row['endDate'] = new DateTime("now");
-        if($row['creationDate'] == null) $row['creationDate'] = new DateTime("now");
+        $row['creationDate'] = new DateTime("now");
 
         return new Housing($row['housingID'], $row['title'], $row['shortDesc'], $row['longDesc'], $row['priceExcl'], $row['priceIncl'], $row['nbRoom'], $row['nbDoubleBed'], $row['nbSimpleBed'], $row['longitude'], $row['latitude'], $row['isOnline'], $row['noticeCount'], $row['beginDate'], $row['endDate'], $row['creationDate'], $row['surfaceInM2'], $type, $category, $address, $owner, $image, $arrangements);
     }
@@ -103,4 +101,16 @@ class HousingService extends Service
         return $housings;
     }
 
+    public static function GetHousingsByOffset($offset) {
+        $pdo = self::getPDO();
+        $stmt = $pdo->query('SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID ORDER BY _Housing.housingID LIMIT 9 OFFSET ' . $offset .';');
+        $housings = [];
+
+        while ($row = $stmt->fetch()) {
+
+            $housings[] = self::HousingHandler($row);
+        }
+
+        return $housings;
+    }
 }

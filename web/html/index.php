@@ -23,7 +23,6 @@
 
     <?php
         
-
         require_once("./components/Header/header.php");
 
         Header::render(false);
@@ -59,6 +58,20 @@
                 <button>Filtre</button>
             </div>
             <div class="logements__container">
+            <script>
+                cpt = 0
+                function showUser() {
+                    cpt++;
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.querySelector(".logements__container").innerHTML += this.responseText;
+                        }
+                    };
+                    xmlhttp.open("GET", "./components/HousingCard/getHousing.php?q=" + cpt, true);
+                    xmlhttp.send();
+                }
+            </script>
                 <?php
                 require_once("../services/HousingService.php");
                 require_once("../services/OwnerService.php");
@@ -66,8 +79,12 @@
                 require_once("../services/CategoryService.php");
                 require_once("../services/ArrangementService.php");
 
+                if(isset($_GET['q']) && $_GET['q'] == "") $q = intval($_GET['q']);
+                else $q = 1;
 
-                $housings = HousingService::GetAllHousings();
+                
+
+                $housings = HousingService::GetHousingsByOffset(0);
 
 
                 for ($i=0; $i < 9; $i++) {
@@ -87,12 +104,15 @@
 
             </div>
             <hr>
-            <a class="btn btn--center">Voir d'avantage</a>
+            <button onclick="showUser()" class="btn btn--center">Voir d'avantage</button>
         </section>
     </main>
     <?php 
         require_once("./components/Footer/footer.php");
         Footer::render();
     ?>
+    
+
+    
 </body>
 </html>
