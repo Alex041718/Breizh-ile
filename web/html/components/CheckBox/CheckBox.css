@@ -1,0 +1,28 @@
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+.checkbox__input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: white;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 3px solid #082C4C;
+  margin-right: 0.4rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+.checkbox__input::before {
+  content: "";
+  display: block;
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 10rem 10rem #082C4C;
+}
+.checkbox__input:checked::before {
+  transform: scale(1);
+}/*# sourceMappingURL=CheckBox.css.map */
