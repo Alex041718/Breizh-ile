@@ -42,6 +42,43 @@
     }
 }
 
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    z-index: 1001;
+    width: 1000px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    h2 {
+        text-align: center;
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        padding: 40px;
+
+        div {
+            display: flex;
+            background-color: white;
+            margin: 20px;
+
+        }
+        
+
+    }
+
+
+}
+
 .header {
     display: flex;
     align-items: center;

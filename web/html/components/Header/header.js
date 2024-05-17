@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var profil = document.getElementById('profil');
     var options = document.getElementById('options');
     var oeuil = document.getElementById('oeuil');
+    var popup = document.getElementById('popup');
 
     profil.addEventListener('click', function() {
         if (options.style.display === 'none') {
@@ -19,11 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 
     oeuil.addEventListener('click', function() {
-        let newWindow = open('../../index.php', 'example', 'width=300,height=300')
-        newWindow.focus();
-
-        newWindow.onload = function() {
-        };
+        popup.style.display = "flex";
     })
 
 

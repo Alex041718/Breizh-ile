@@ -67,6 +67,25 @@ class Header {
                             <p>Mon profil</p>
                         </div>
                     </div>
+                    <div id="popup" class="popup" style="display:none">
+                        <h2>Accessibilité</h2>
+                        <div>
+                            <div>
+                                <p>Couleurs</p>
+                            </div>
+                            <div>
+                                <p>Font police</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div>   
+                                <p>Police taille</p>
+                            </div>
+                            <div>
+                                <p>Option n°4</p>
+                            </div>
+                        </div>
+                    </div>
             </header>
         ';
 
