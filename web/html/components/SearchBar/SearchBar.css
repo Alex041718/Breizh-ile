@@ -55,6 +55,7 @@ p {
 }
 
 .btn {
+  cursor: pointer;
   padding-block: 15px;
   padding-inline: 25px;
   background-color: #1D1D1D;
