@@ -559,3 +559,4 @@ INSERT INTO db._Image (src) VALUES
 ('https://bretagnelocationvacances.fr/assets/images/055634003/57/petit/57a.jpg'),
 ('https://bretagnelocationvacances.fr/assets/images/055641001/692/petit/692a.jpg'),
 ('https://bretagnelocationvacances.fr/assets/images/055617101/781/petit/781a.jpg');
+
