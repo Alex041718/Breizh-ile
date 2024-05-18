@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Client.php';
 /**
  *
  */
@@ -195,8 +195,4 @@ class Reservation
     {
         $this->payMethodId = $payMethodId;
     }
-
-
-
-
 }

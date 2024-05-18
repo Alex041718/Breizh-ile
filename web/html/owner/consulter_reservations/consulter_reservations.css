@@ -12,8 +12,96 @@ main {
 .title {
   display: flex;
   width: 100%;
-  padding: 0.4rem 0 0.4rem 0.6rem;
+  padding: 0.4rem 0.6rem;
+  box-sizing: border-box;
   align-items: center;
+  margin-top: 1.4rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  font-weight: bold;
+  background-color: #E0E0E0;
+}
+.title p {
+  width: max(10rem, 10.4166666667vw);
+  margin-right: 2rem;
+}
+
+.reservations {
+  height: 322.4px;
+  overflow-y: auto;
+  width: 100.2%;
+  padding-right: 0.5rem;
+}
+.reservations::-webkit-scrollbar {
+  width: 0.4rem;
+  background: white;
+}
+.reservations::-webkit-scrollbar-thumb {
+  background-color: #082C4C;
+  border-radius: 100px;
+  background: #082C4C;
+}
+.reservations::-webkit-scrollbar-track {
+  background-color: #E0E0E0;
+  border-radius: 100px;
+  background: #E0E0E0;
+}
+
+.reservation {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.6rem;
+  padding: 0.4rem 0.6rem;
+  border: 2px solid #E0E0E0;
+  border-radius: 10px;
+  height: 2.5rem;
+}
+.reservation .profile-picture {
+  display: flex;
+  align-items: center;
+}
+.reservation p, .reservation a, .reservation .profile-picture {
+  display: flex;
+  width: max(10rem, 10.4166666667vw);
+  margin-right: 2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  font-weight: normal;
+  color: #082C4C;
+}
+.reservation img {
+  margin-right: 0.5rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+.reservation:last-child {
+  margin-bottom: 0;
+}
+
+.exportation__button {
   margin-top: 1rem;
-  background-color: red;
+  margin-bottom: 6rem;
+}
+
+.status {
+  align-self: center;
+  margin-left: 0.3rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.coming {
+  background-color: #2F80ED;
+}
+
+.in-progress {
+  background-color: #FFAF45;
+}
+
+.done {
+  background-color: #27AE60;
 }/*# sourceMappingURL=consulter_reservations.css.map */
