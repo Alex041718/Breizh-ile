@@ -19,6 +19,58 @@
     align-items:start;
 }
 
+// Define the popup styles
+.page .popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 20px;
+    padding: 2em;
+    z-index: 9999;
+
+    &.show {
+        display: block;
+    }
+
+    .popup-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+
+        .traveler-type {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .addbtn {
+                display: flex;
+                gap: 0.5em;
+
+                button {
+                    cursor: pointer;
+                }
+
+                .nbr {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 2em;
+                }
+            }
+        }
+    }
+
+    i.fa-xmark {
+        cursor: pointer;
+        align-self: flex-end;
+    }
+}
+
+
 .twodiv{
     width: 100%;
     padding-top: 1em;
@@ -198,55 +250,12 @@
 }
 
 
-.popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border: 1px solid gray;
-    border-radius: 20px;
-    padding: 2em; // Ajuste le padding selon tes besoins
-    z-index: 9999;
-
-    .popup-content {
-        display: flex;
-        flex-direction: column;
-        gap: 1em;
-
-        h2 {
-            margin-bottom: 1em;
-        }
-
-        p {
-            margin-bottom: 0.5em;
-        }
-
-        button {
-            align-self: flex-end;
-            padding: 0.5em 1em;
-            border: 1px solid gray;
-            border-radius: 5px;
-            background-color: lightgray;
-            cursor: pointer;
-        }
-    }
-}
-
-body.popup-active {
-    overflow: hidden;
-
-    &::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 9998;
-    }
+.traveler-type {
+    display: flex;
+    gap: 5em;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 
@@ -266,21 +275,7 @@ body.popup-active {
        
 }
 
-body.popup-active {
-    overflow: hidden; // Empêche le défilement de la page lorsque la pop-up est ouverte
-    position: relative; // Assure que la position relative est utilisée pour les enfants
 
-    &::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); // Noir avec une opacité de 50%
-        z-index: 9998; // Assurez-vous que le fond semi-transparent est en dessous de la pop-up
-    }
-}
 
 .addbtn {
     display: flex;

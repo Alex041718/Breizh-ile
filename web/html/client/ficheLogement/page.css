@@ -16,6 +16,49 @@
   align-items: start;
 }
 
+.page .popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 20px;
+  padding: 2em;
+  z-index: 9999;
+}
+.page .popup.show {
+  display: block;
+}
+.page .popup .popup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.page .popup .popup-content .traveler-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.page .popup .popup-content .traveler-type .addbtn {
+  display: flex;
+  gap: 0.5em;
+}
+.page .popup .popup-content .traveler-type .addbtn button {
+  cursor: pointer;
+}
+.page .popup .popup-content .traveler-type .addbtn .nbr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2em;
+}
+.page .popup i.fa-xmark {
+  cursor: pointer;
+  align-self: flex-end;
+}
+
 .twodiv {
   width: 100%;
   padding-top: 1em;
@@ -171,50 +214,12 @@
   text-align: center;
 }
 
-.popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border: 1px solid gray;
-  border-radius: 20px;
-  padding: 2em;
-  z-index: 9999;
-}
-.popup .popup-content {
+.traveler-type {
   display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
-.popup .popup-content h2 {
-  margin-bottom: 1em;
-}
-.popup .popup-content p {
-  margin-bottom: 0.5em;
-}
-.popup .popup-content button {
-  align-self: flex-end;
-  padding: 0.5em 1em;
-  border: 1px solid gray;
-  border-radius: 5px;
-  background-color: lightgray;
-  cursor: pointer;
-}
-
-body.popup-active {
-  overflow: hidden;
-}
-body.popup-active::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9998;
+  gap: 5em;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .adulteInfo, .enfantInfo {
@@ -229,21 +234,6 @@ body.popup-active::before {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-}
-
-body.popup-active {
-  overflow: hidden;
-  position: relative;
-}
-body.popup-active::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9998;
 }
 
 .addbtn {

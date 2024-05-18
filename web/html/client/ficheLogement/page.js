@@ -70,21 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Gestionnaire d'événement pour le bouton "Ajouter des voyageurs"
     addTravelersBtn.addEventListener('click', openPopup);
 
-
-    var map = L.map('map').setView([51.505, -0.09], 13);
-
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-
-    var circle = L.circle([51.508, -0.11], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 500
-    }).addTo(map);
-
     const modal = document.getElementById('modal');
     const modalInner = document.getElementById('modalInner');
     const showCriteriaBtn = document.getElementById('showCriteriaBtn');
@@ -137,3 +122,6 @@ inputs.forEach((input) => {
         maxDate: new Date().fp_incr(365)
     });
 });
+
+
+
