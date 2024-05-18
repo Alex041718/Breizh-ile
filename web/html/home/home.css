@@ -7,6 +7,32 @@ body {
   margin: 0;
 }
 
+.show-more {
+  grid-column: span 3/span 3;
+  justify-self: center;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #1D1D1D;
+  grid-column: span 3/span 3;
+  justify-self: center;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .search-bar--home {
   position: absolute;
   top: 50%;
@@ -243,7 +269,6 @@ body {
   display: grid;
   gap: 50px;
   grid-template-columns: repeat(3, auto);
-  justify-content: space-between;
 }
 @media screen and (max-width: 1300px) {
   .logements__container {
