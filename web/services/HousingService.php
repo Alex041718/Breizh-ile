@@ -85,6 +85,7 @@ class HousingService extends Service
         $row['creationDate'] = new DateTime("now");
 
         return new Housing($row['housingID'] , $row['title'], $row['shortDesc'], $row['longDesc'], $row['priceExcl'], $row['priceIncl'], $row['nbPerson'],$row['nbRoom'], $row['nbDoubleBed'], $row['nbSimpleBed'], $row['longitude'], $row['latitude'], $row['isOnline'], $row['noticeCount'], $beginDate, $endDate, $creationDate, $row['surfaceInM2'], $type, $category, $address, $owner, $image, $arrangements);
+
     }
     public static function GetAllHousings()
     {
@@ -165,12 +166,17 @@ class HousingService extends Service
         $pdo = self::getPDO();
         $stmt = $pdo->query($query);
 
+        $stmt = $pdo->query('SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';');
+
         $housings = [];
 
         while ($row = $stmt->fetch()) {
 
             $housings[] = self::HousingHandler($row);
         }
+
+        if(sizeof($housings) == 0) return false;
+
 
         if(sizeof($housings) == 0) return false;
 
