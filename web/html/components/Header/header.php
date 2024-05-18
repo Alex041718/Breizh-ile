@@ -18,13 +18,14 @@ class Header {
                 <link rel="stylesheet" href="/components/Header/header.css">
 
                 <header class="">
+                    <div class="popup__header">
+                        
+                    </div>
                     <div class="header '. ($isScrolling ? 'scroll scrolling' : '' ). ' '. ($isBackOffice ? 'header--backoffice' : '' ). '">
                         <a class="logo" href="">
                             <img class="logo-big" src="/assets/images/logo_breizh_noir.png" id="logo" alt="logo_breizh">
                             <img class="logo-small" src="/assets/icons/logo.svg" alt="logo_breizh">
                         </a>
-
-
             ';
             echo $render;
 
@@ -38,7 +39,7 @@ class Header {
             }
             
             if (!$isBackOffice) {
-                SearchBar::render("search-bar search-bar--header","","./monSuperFormulaireQuiVaEtreTraiter", true);
+                SearchBar::render("search-bar search-bar--header","","/#logements", true);
             }
             
             $render =  /*html*/ '
