@@ -130,6 +130,10 @@
   animation-duration: 0.2s;
   animation-name: showUp;
   height: 80px;
+  transition: all 0.1s;
+}
+.header.scroll:has(.search-bar--open), .header.scrolling:has(.search-bar--open) {
+  height: 120px;
 }
 @media screen and (max-width: 1024px) {
   .header.scroll, .header.scrolling {
