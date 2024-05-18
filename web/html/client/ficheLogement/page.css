@@ -33,11 +33,12 @@ body {
   flex-direction: column;
   height: 100%;
   max-width: 1300px;
-  margin: 5em auto 0 auto;
+  margin: 8em auto 0 auto;
   align-items: start;
 }
 .page #overlay {
   display: none;
+  overflow: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -109,7 +110,7 @@ body {
   gap: 0.5em;
 }
 
-.overflow {
+.popup-active {
   overflow: hidden;
 }
 
@@ -349,8 +350,8 @@ body {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 50em;
-  height: 25em;
+  width: 35em;
+  height: 40em;
   background-color: white;
   padding: 3em;
   border: 2px solid #ccc;
