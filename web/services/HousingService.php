@@ -104,6 +104,7 @@ class HousingService extends Service
     public static function GetHousingsByOffset($offset, $order, $desc = false) {
         $pdo = self::getPDO();
         $stmt = $pdo->query('SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';');
+
         $housings = [];
 
         while ($row = $stmt->fetch()) {
@@ -112,6 +113,7 @@ class HousingService extends Service
         }
 
         if(sizeof($housings) == 0) return false;
+
 
         return $housings;
     }

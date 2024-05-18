@@ -108,6 +108,7 @@
                     xmlhttp.open("GET", "./components/HousingCard/getHousing.php?q=" + cpt + "&sort=" + sort + "&desc=" + desc, true);
                     xmlhttp.send();
 
+
                 }
             </script>
                 <?php
@@ -121,6 +122,7 @@
                 else $q = 1;
 
                 
+
 
                 $housings = HousingService::GetHousingsByOffset(0, "_Housing.priceExcl");
 
@@ -144,6 +146,7 @@
 
             </div>
             
+
         </section>
     </main>
     <?php 
