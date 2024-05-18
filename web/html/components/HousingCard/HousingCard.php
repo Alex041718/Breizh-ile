@@ -10,7 +10,7 @@ class HousingCard {
         $housing_content = $housing->getShortDesc();
         $housing_city = $housing->getAddress()->getCity();
         $housing_postal_code = $housing->getAddress()->getPostalCode();
-        $housing_nb_personn = $housing->getNoticeCount();
+        $housing_nb_personn = $housing->getNbPerson();
         $owner_pp = $housing->getOwner()->getImage()->getImageSrc();
         $owner_name = $housing->getOwner()->getNickname();
 

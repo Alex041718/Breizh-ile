@@ -26,12 +26,13 @@
         require_once("./components/Header/header.php");
 
         Header::render(false);
+
     ?>
     <main>
         <section class="hero-banner">
             <?php
                 require_once("./components/SearchBar/SearchBar.php");
-                SearchBar::render("search-bar--home search-bar--open no-close","","./monSuperFormulaireQuiVaEtreTraiter");
+                SearchBar::render("search-bar--home search-bar--open no-close","",".#logements");
             ?>
             <div class="hero-banner__parallax" id="scene">
                 <img data-depth="0.1" class="house layer" src="assets/images/Houses.png" />
@@ -45,7 +46,7 @@
                 </div>
             </div>
         </section>
-        <section class="logements">
+        <section id="logements" class="logements">
             <h2>Nos logements</h2>
             <div class="logements__filters">
                 <label>Trier par :</label>
@@ -59,12 +60,20 @@
             </div>
             <div class="logements__container">
             <script>
-                cpt = 0
                 const container = document.querySelector(".logements__container")
                 const sorter = document.getElementById("sorter")
+                let nbPerson = <?= json_encode($_POST['peopleNumber'] ?? null) ?>;
+                let beginDate = <?= json_encode($_POST['startDate'] ?? null) ?>;
+                let endDate = <?= json_encode($_POST['endDate'] ?? null) ?>;
+                let city = <?= json_encode($_POST['searchText'] ?? null) ?>;
+
+                if(city) city = city.split(' ')[0];
 
                 let sort;
                 let desc = 0;
+                let cpt = 0
+
+                showUser(0, "_Housing.priceExcl", false);
 
 
                 sorter.addEventListener("change", function() {
@@ -75,22 +84,27 @@
                     else if(sorter.value == 3) { sort = "_Housing.creationDate"; desc = 0; }
                     else if(sorter.value == 4) { sort = "_Housing.creationDate"; desc = 1; }
 
-                    cpt = 1
+                    cpt = 0
                     var xmlhttp = new XMLHttpRequest();
+                    const params = `q=${cpt}&sort=${sort}&desc=${desc}&nbPerson=${nbPerson}&beginDate=${beginDate}&endDate=${endDate}&city=${city}`;
+
+                    xmlhttp.open("POST", "./components/HousingCard/getHousing.php", true);
+
+                    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
                     xmlhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
+                        if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                             container.innerHTML = this.responseText;
                         }
-                    };
+                    }
 
-                    xmlhttp.open("GET", "./components/HousingCard/getHousing.php?sort=" + sort + "&desc=" + desc, true);
-                    xmlhttp.send();
+                    xmlhttp.send(params);
+
                 })
 
-                function showUser() {
+                function showUser(cpt, sort, desc) {
                     const itemsToHide = document.querySelectorAll(".show-more");
 
-                    cpt++;
                     itemsToHide.forEach(itemToHide => {
                         console.log(itemToHide)
                         itemToHide.remove();
@@ -98,55 +112,27 @@
                     const loader = document.createElement("span");
                     loader.classList.add("loader");
                     container.appendChild(loader);
+
                     var xmlhttp = new XMLHttpRequest();
+                    const params = `q=${cpt}&sort=${sort}&desc=${desc}&nbPerson=${nbPerson}&beginDate=${beginDate}&endDate=${endDate}&city=${city}`;
+
+                    xmlhttp.open("POST", "./components/HousingCard/getHousing.php", true);
+
+                    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
                     xmlhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
+                        if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                             container.removeChild(loader)
                             container.innerHTML += this.responseText;
                         }
-                    };
-                    xmlhttp.open("GET", "./components/HousingCard/getHousing.php?q=" + cpt + "&sort=" + sort + "&desc=" + desc, true);
-                    xmlhttp.send();
+                    }
 
+                    xmlhttp.send(params);
+                    cpt++;
 
                 }
             </script>
-                <?php
-                require_once("../services/HousingService.php");
-                require_once("../services/OwnerService.php");
-                require_once("../services/TypeService.php");
-                require_once("../services/CategoryService.php");
-                require_once("../services/ArrangementService.php");
-
-                if(isset($_GET['q']) && $_GET['q'] == "") $q = intval($_GET['q']);
-                else $q = 1;
-
-                
-
-
-                $housings = HousingService::GetHousingsByOffset(0, "_Housing.priceExcl");
-
-
-                if($housings != false) {
-                    for ($i=0; $i < 9; $i++) {
-                        require_once("./components/HousingCard/HousingCard.php");
-                        require_once("../models/Housing.php");
-                        require_once("../models/Type.php");
-                        require_once("../models/Image.php");
-                        require_once("../models/Address.php");
-                        require_once("../models/Category.php");
-                        require_once("../models/Owner.php");
-                        require_once("../models/Gender.php");
-    
-                        HousingCard::render($housings[$i]);
-                    } ?>
-                    <hr class="show-more">
-                    <button onclick="showUser()" class="show-more btn btn--center">Voir d'avantage</button>
-              <?php  } ?>
-
             </div>
-            
-
         </section>
     </main>
     <?php 

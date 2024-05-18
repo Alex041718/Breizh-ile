@@ -8,7 +8,7 @@ class SearchBar {
         $render =  /*html*/ '
         
         <div data-depth="0" class="search-bar '. $class . ' " id=" ' . $id . ' ">
-            <form action=" '. $action .' " method="get" autocomplete="off">
+            <form action=" '. $action .' " method="POST" autocomplete="off">
             <div class="search-bar__grid-container">
                 <div class="search-bar__grid-container__search-element" type="where">
                     <p class="para--bold para--18px">Où ?</p>
