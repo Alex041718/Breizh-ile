@@ -26,6 +26,7 @@
         require_once("./components/Header/header.php");
 
         Header::render(false);
+
     ?>
     <main>
         <section class="hero-banner">
