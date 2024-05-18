@@ -114,12 +114,17 @@ class HousingService extends Service
         $pdo = self::getPDO();
         $stmt = $pdo->query('SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';');
 
+        $stmt = $pdo->query('SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';');
+
         $housings = [];
 
         while ($row = $stmt->fetch()) {
 
             $housings[] = self::HousingHandler($row);
         }
+
+        if(sizeof($housings) == 0) return false;
+
 
         if(sizeof($housings) == 0) return false;
 
