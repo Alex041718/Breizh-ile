@@ -4,7 +4,10 @@
 class Header {
 
         public static function render($isScrolling = false, $isBackOffice = false) {
+<<<<<<< HEAD
         public static function render($isScrolling = false, $isBackOffice = false) {
+=======
+>>>>>>> 391d68267ef87f5c8983e6ae15284a92a5712688
             $render = /*html*/ '
 
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -19,7 +22,11 @@ class Header {
                 <link rel="stylesheet" href="/components/Header/header.css">
 
                 <header class="">
+<<<<<<< HEAD
                     <div class="header '. ($isScrolling ? 'scroll scrolling' : '' ). ' '. ($isBackOffice ? 'header--xl' : '' ). '">
+=======
+                    <div class="header '. ($isScrolling ? 'scroll scrolling' : '' ). ' '. ($isBackOffice ? 'header--backoffice' : '' ). '">
+>>>>>>> 391d68267ef87f5c8983e6ae15284a92a5712688
                         <a class="logo" href="">
                             <img class="logo-big" src="/assets/images/logo_breizh_noir.png" id="logo" alt="logo_breizh">
                             <img class="logo-small" src="/assets/icons/logo.svg" alt="logo_breizh">
@@ -28,8 +35,11 @@ class Header {
 
             ';
             echo $render;
+<<<<<<< HEAD
             ';
             echo $render;
+=======
+>>>>>>> 391d68267ef87f5c8983e6ae15284a92a5712688
 
             define('__HEADER__', dirname(dirname(__FILE__)));
             
@@ -44,11 +54,14 @@ class Header {
                 SearchBar::render("search-bar search-bar--header","","./monSuperFormulaireQuiVaEtreTraiter", true);
             }
             
+<<<<<<< HEAD
             
             if (!$isBackOffice) {
                 SearchBar::render("search-bar search-bar--header","","./monSuperFormulaireQuiVaEtreTraiter", true);
             }
             
+=======
+>>>>>>> 391d68267ef87f5c8983e6ae15284a92a5712688
             $render =  /*html*/ '
 
                         <div class="header__right">
