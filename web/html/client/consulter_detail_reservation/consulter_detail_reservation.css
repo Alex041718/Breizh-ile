@@ -66,6 +66,7 @@ main .informations .informations__left hr {
 }
 main .informations .informations__left .informations__left__logement {
   display: flex;
+  align-items: center;
 }
 main .informations .informations__left .informations__left__logement img {
   width: 250px;
@@ -123,6 +124,8 @@ main .informations .informations__right .informations__right__desc {
 main .informations .informations__right .informations__right__desc img {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  width: 125px;
+  height: auto;
 }
 @media screen and (max-width: 1024px) {
   main .informations .informations__right .informations__right__desc img {
@@ -201,4 +204,7 @@ main .informations .informations__right #map {
   footer {
     margin-bottom: 3em;
   }
+}
+.my-control {
+  background-color: white;
 }/*# sourceMappingURL=consulter_detail_reservation.css.map */

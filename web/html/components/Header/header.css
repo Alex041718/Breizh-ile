@@ -5,7 +5,7 @@
   width: 100%;
   height: 80px;
   background-color: white;
-  z-index: 6;
+  z-index: 60;
   border-radius: 20px 20px 0 0;
   justify-content: space-around;
   align-items: center;
@@ -37,33 +37,64 @@
   }
 }
 
+#oeuil:hover {
+  cursor: pointer;
+}
+
 .popup {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  padding: 50px;
+  border: 1px solid #ddd;
+  z-index: 1001;
+  width: auto;
+  height: auto;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #f9f9f9;
-  padding: 20px;
-  border: 1px solid #ddd;
-  z-index: 1001;
-  width: 1000px;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  border-radius: 10px;
 }
 .popup h2 {
   text-align: center;
 }
-.popup div {
+.popup .popup__options {
   display: flex;
   flex-direction: column;
-  padding: 40px;
+  padding: 20px;
 }
-.popup div div {
+.popup .popup__options div {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+.popup .popup__options div div {
   background-color: white;
   margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2); /* Exemple d'ombre */
+}
+.popup .popup__options div div label {
+  color: #FFF;
+}
+.popup .popup__options div div:hover {
+  background-color: #37906c;
+  cursor: pointer;
+}
+
+.leaflet-pane {
+  position: relative;
+  z-index: 50;
+}
+
+.leaflet-top {
+  position: relative;
+  z-index: 55;
 }
 
 .header {

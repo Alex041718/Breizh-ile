@@ -74,7 +74,7 @@ class HousingService extends Service
         $arrangements = ArrangementService::GetArrangmentsByHousingId($row['housingID']);
 
         if($row['priceIncl'] == null) $row['priceIncl'] = 0;
-        if($row['priceIncl'] == null) $row['beginDate'] = new DateTime("now");
+        if($row['priceExcl'] == null) $row['priceExcl'] = 0;
         if($row['beginDate'] == null) $row['beginDate'] = new DateTime("now");
         if($row['endDate'] == null) $row['endDate'] = new DateTime("now");
         $row['creationDate'] = new DateTime("now");
@@ -101,6 +101,15 @@ class HousingService extends Service
         return $housings;
     }
 
+    public static function GetHousingById(int $housingID)
+    {
+        $pdo = self::getPDO();
+        $stmt = $pdo->query('SELECT *, imageID as profileImageID FROM _Housing WHERE housingID = ' . $housingID);
+        $row = $stmt->fetch();
+        return self::HousingHandler($row);
+    }
+
+  
     public static function GetHousingsByOffset($offset, $order, $desc = false) {
         $pdo = self::getPDO();
         $stmt = $pdo->query('SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';');

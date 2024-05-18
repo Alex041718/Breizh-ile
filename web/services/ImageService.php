@@ -23,27 +23,6 @@ class ImageService extends Service{
         return new Image($row['imageID'], $row['src']);
     }
 
-    public static function GetHousingImages(int $housingID): Image
-    {
-        // la méthode réccupère toutes les images d'un logement
-        // Grace à la table _Housing_Image qui fait le lien entre les images et les logements
-        // Etape 1 : réccupérer les imagesID de la table _Housing_Image par rapport à l'ID du logement
 
-        $pdo = self::getPDO();
-        $stmt = $pdo->query('SELECT * FROM _Housing_Image WHERE housingID = ' . $housingID);
-        $imagesID = [];
-
-        while ($row = $stmt->fetch()) {
-            $imagesID[] = $row['imageID'];
-        }
-
-        // Etape 2 : réccupérer les images par rapport aux imagesID
-        $images = [];
-        foreach ($imagesID as $imageID) {
-            $images[] = self::GetImageById($imageID);
-        }
-
-        return $images;
-    }
 }
 ?>
