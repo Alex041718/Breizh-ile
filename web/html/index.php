@@ -49,27 +49,66 @@
             <h2>Nos logements</h2>
             <div class="logements__filters">
                 <label>Trier par :</label>
-                <select>
-                    <option>Prix (Croissant)</option>
-                    <option>Prix (Croissant)</option>
-                    <option>Prix (Croissant)</option>
-                    <option>Prix (vraiment très croissant)</option>
+                <select id="sorter">
+                    <option value="1">Prix (Croissant)</option>
+                    <option value="2">Prix (Décroissant)</option>
+                    <option value="3">Date de mise en ligne (Croissant)</option>
+                    <option value="4">Date de mise en ligne (Décroissant)</option>
                 </select>
                 <button>Filtre</button>
             </div>
             <div class="logements__container">
             <script>
                 cpt = 0
-                function showUser() {
-                    cpt++;
+                const container = document.querySelector(".logements__container")
+                const sorter = document.getElementById("sorter")
+
+                let sort;
+                let desc = 0;
+
+
+                sorter.addEventListener("change", function() {
+
+                    container.innerHTML = "<span class='loader'></span>";
+                    if(sorter.value == 1) { sort = "_Housing.priceExcl"; desc = 0; }
+                    else if(sorter.value == 2) { sort = "_Housing.priceExcl"; desc = 1; }
+                    else if(sorter.value == 3) { sort = "_Housing.creationDate"; desc = 0; }
+                    else if(sorter.value == 4) { sort = "_Housing.creationDate"; desc = 1; }
+
+                    cpt = 1
                     var xmlhttp = new XMLHttpRequest();
                     xmlhttp.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
-                            document.querySelector(".logements__container").innerHTML += this.responseText;
+                            container.innerHTML = this.responseText;
                         }
                     };
-                    xmlhttp.open("GET", "./components/HousingCard/getHousing.php?q=" + cpt, true);
+
+                    xmlhttp.open("GET", "./components/HousingCard/getHousing.php?sort=" + sort + "&desc=" + desc, true);
                     xmlhttp.send();
+                })
+
+                function showUser() {
+                    const itemsToHide = document.querySelectorAll(".show-more");
+
+                    cpt++;
+                    itemsToHide.forEach(itemToHide => {
+                        console.log(itemToHide)
+                        itemToHide.remove();
+                    });
+                    const loader = document.createElement("span");
+                    loader.classList.add("loader");
+                    container.appendChild(loader);
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            container.removeChild(loader)
+                            container.innerHTML += this.responseText;
+                        }
+                    };
+                    xmlhttp.open("GET", "./components/HousingCard/getHousing.php?q=" + cpt + "&sort=" + sort + "&desc=" + desc, true);
+                    xmlhttp.send();
+
+
                 }
             </script>
                 <?php
@@ -84,27 +123,30 @@
 
                 
 
-                $housings = HousingService::GetHousingsByOffset(0);
+
+                $housings = HousingService::GetHousingsByOffset(0, "_Housing.priceExcl");
 
 
-                for ($i=0; $i < 9; $i++) {
-                    require_once("./components/HousingCard/HousingCard.php");
-                    require_once("../models/Housing.php");
-                    require_once("../models/Type.php");
-                    require_once("../models/Image.php");
-                    require_once("../models/Address.php");
-                    require_once("../models/Category.php");
-                    require_once("../models/Owner.php");
-                    require_once("../models/Gender.php");
-
-                    HousingCard::render($housings[$i]);
-                }
-
-                ?>
+                if($housings != false) {
+                    for ($i=0; $i < 9; $i++) {
+                        require_once("./components/HousingCard/HousingCard.php");
+                        require_once("../models/Housing.php");
+                        require_once("../models/Type.php");
+                        require_once("../models/Image.php");
+                        require_once("../models/Address.php");
+                        require_once("../models/Category.php");
+                        require_once("../models/Owner.php");
+                        require_once("../models/Gender.php");
+    
+                        HousingCard::render($housings[$i]);
+                    } ?>
+                    <hr class="show-more">
+                    <button onclick="showUser()" class="show-more btn btn--center">Voir d'avantage</button>
+              <?php  } ?>
 
             </div>
-            <hr>
-            <button onclick="showUser()" class="btn btn--center">Voir d'avantage</button>
+            
+
         </section>
     </main>
     <?php 
