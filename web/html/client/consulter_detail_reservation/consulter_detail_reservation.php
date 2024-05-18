@@ -28,83 +28,131 @@
 <?php
     require_once("../../components/Header/header.php");
     Header::render(true);
+
+    require_once("../../../services/ReservationService.php");
+    require_once("../../../services/HousingService.php");
+    require_once("../../../services/OwnerService.php");
+    require_once("../../../services/TypeService.php");
+    require_once("../../../services/CategoryService.php");
+    require_once("../../../services/ArrangementService.php");
+    require_once("../../../services/PayementMethodService.php");
+
+    require_once("../../../models/Reservation.php");
+
+    
+
+    $reservation = ReservationService::getReservationByID($_GET['reservationID']);
+    $housing = HousingService::GetHousingById($_GET['reservationID']);
+    
+
+    $reservation_dateDebut = $reservation->getBeginDate()->format('Y-m-d');
+    $reservation_dateFin =  $reservation->getEndDate()->format('Y-m-d');
+    $reservation_image =  $housing->getImage()->getImageSrc();
+    $reservation_titre =  $housing->getTitle();
+    $reservation_type =  $housing->getType()->getlabel();
+    $reservation_prixHT =  $housing->getPriceExcl();
+    $reservation_prixTTC =  $housing->getPriceIncl();
+    $reservation_nbJours =  ReservationService::getNbJoursReservation($reservation_dateDebut, $reservation_dateFin);
+    $reservation_serviceCharge =  $reservation->getServiceCharge();
+    $reservation_touristTax =  $reservation->getTouristTax();
+    $reservation_nbPersonnes =  $housing->getNoticeCount();
+    $reservation_prixCalc = $reservation_prixHT * $reservation_nbJours * $reservation_nbPersonnes;
+    $owner_pp = $housing->getOwner()->getImage()->getImageSrc();
+    $owner_name = $housing->getOwner()->getNickname();
+    $owner_telephone = $housing->getOwner()->getPhoneNumber();
+    $owner_mail = $housing->getOwner()->getMail();
+
+    $reservation_longitude = $housing->getLongitude();
+    $reservation_latitude = $housing->getLatitude();
+    $reservation_postalCode = $housing->getAddress()->getPostalCode();
+    $reservation_city = $housing->getAddress()->getCity();
+    $reservation_postalAdress = $housing->getAddress()->getPostalAddress();
+
 ?>
 
-<main>
-    <div class="title">
-        <div class="title__arrow">
-            <img src="/assets/images/fleche.png" id="fleche" alt="fleche">
-            <h2>Ma réservation</h2>
+<?php
+    $render = /*html*/ ' 
+    <main>
+        <div class="title">
+            <div class="title__arrow">
+                <img src="/assets/images/fleche.png" id="fleche" alt="fleche">
+                <h2>Ma réservation</h2>
+            </div>
+            <div class="title__date">
+                <h5>Voyage  à Lannion du '.$reservation_dateDebut.' au '.$reservation_dateFin.'</h5>
+            </div>
         </div>
-        <div class="title__date">
-            <h5>Voyage  à Lannion du 17/06/24 au 21/06/2024</h5>
-        </div>
-    </div>
-    <article class="informations">
-        <section class="informations__left">
-            <div class="informations__left__logement">
-                <img src="/assets/images//12345.webp" alt="house">
-                <div class="informations__left__logement__info">
-                    <h3>Perros-Guirrec - 22700</h3>
-                    <p class="para--18px">Appartement T2</p>
-                </div>
-            </div>
-            <hr>
-            <div class="informations__left__detail">
-                <h3>Détails du prix</h3>
-                <div>
-                    <p class="para--18px">60€ x 5 nuits x 1 occupant</p>
-                    <p class="para--18px">300€</p>
-                </div>
-                <div>
-                    <p class="para--18px" >Frais de service</p>
-                    <p class="para--18px">40€</p>
-                </div>
-                <div>
-                    <p class="para--18px">Taxee de séjour</p>
-                    <p class="para--18px">20€</p>
-                </div>
-            </div>
-            <hr>
-            <div class="informations__left__total">
-                <div>
-                    <h3>Total TTC</h3>
-                    <p class="para--18px">360€</p>
-                </div>
-            </div>
-        </section>
-        <section class="informations__right">
-            <div class="informations__right__desc">
-                <img src="/assets/images/jean.png" alt="">
-                <div class="informations__right__desc__info">
-                    <div class="informations__right__desc__info__perso">
-                        <h3>+33 6 01 02 03 04</h3>
-                        <p>jean.michel@hotmail.fr</p>
+        <article class="informations">
+            <section class="informations__left">
+                <div class="informations__left__logement">
+                    <img src='.$reservation_image.'>
+                    <div class="informations__left__logement__info">
+                        <h3>'.$reservation_titre.'</h3>
+                        <p class="para--18px">'.$reservation_type.'</p>
                     </div>
-                    <div class="informations__right__desc__info__vide">
+                </div>
+                <hr>
+                <div class="informations__left__detail">
+                    <h3>Détails du prix</h3>
+                    <div>
+                        <p class="para--18px">'.$reservation_prixHT.' € x '.$reservation_nbJours .' nuits x '.$reservation_nbPersonnes .' occupant(s)</p>
+                        <p class="para--18px">'.$reservation_prixCalc.' €</p>
+                    </div>
+                    <div>
+                        <p class="para--18px" >Frais de service</p>
+                        <p class="para--18px">'.$reservation_serviceCharge.' €</p>
+                    </div>
+                    <div>
+                        <p class="para--18px">Taxee de séjour</p>
+                        <p class="para--18px">'.$reservation_touristTax.' €</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="informations__left__total">
+                    <div>
+                        <h3>Total TTC</h3>
+                        <p class="para--18px">'.$reservation_prixTTC.'€</p>
+                    </div>
+                </div>
+            </section>
+            <section class="informations__right">
+                <div class="informations__right__desc">
+                    <img src='.$owner_pp.' alt="">
+                    <div class="informations__right__desc__info">
+                        <div class="informations__right__desc__info__perso">
+                            <h3>'.$owner_telephone.'</h3>
+                            <p>'.$owner_mail.'</p>
+                        </div>
+                        <div class="informations__right__desc__info__vide">
 
-                    </div>
-                    <div class="informations__right__desc__info__icons">
-                        <i id="telephone" class="fa-solid fa-phone"></i>                    
-                        <i id="mail" class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div class="informations__right__desc__info__icons">
+                            <i id="telephone" class="fa-solid fa-phone"></i>                    
+                            <i id="mail" class="fa-solid fa-envelope"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="informations__right__localisation">
-                <h3 class="loca">Localisation</h3>
-                <div id="map"></div>
-                <div>
-                    <p class="para--18px">29200 Brest,</p>
-                    <p class="para--18px">13 rue des jonquilles</p>
-                    <br>
-                    <p class="para--14px">Longitude: 48.066153012488115,  Latitude: -2.9670518765727465</p>
+                <div class="informations__right__localisation">
+                    <h3 class="loca">Localisation</h3>
+                    <div id="map"></div>
+                    <div>
+                        <p class="para--18px">'.$reservation_postalCode.' '.$reservation_city.',</p>
+                        <p id="" class="para--18px">'.$reservation_postalAdress.'</p>
+                        <p id="adresse" class="para--18px">'.$reservation_postalAdress.'</p>
+                        <br>
+                        <p class="para--14px">Longitude: '.$reservation_longitude.',  Latitude: '.$reservation_latitude.'</p>
+                        <p id="longitude" style="display:none">'.$reservation_longitude.'</p>
+                        <p id="latitude" style="display:none">'.$reservation_latitude.'</p>
+                    </div>
                 </div>
-            </div>
-        </section>
-    </article>
-    
-</main>
+            </section>
+        </article>
+        
+    </main>
+    ';
+    echo $render;
 
+?>
 <?php
     require_once("../../components/Footer/footer.php");
     Footer::render();

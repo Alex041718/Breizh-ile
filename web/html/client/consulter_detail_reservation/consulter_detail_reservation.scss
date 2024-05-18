@@ -73,7 +73,8 @@ main {
 
             .informations__left__logement {
                 display: flex;
-
+                align-items: center;
+                
                 img {
                     width: 250px;
                     height: 150px; 
@@ -145,7 +146,8 @@ main {
                 img {
                     border-top-left-radius: 10px;
                     border-bottom-left-radius: 10px;
-
+                    width: 125px;
+                    height: auto;        
 
                     @media screen and (max-width: 1024px) {
                         width: 75px;
@@ -247,4 +249,9 @@ main {
 
         margin-bottom: 3em;
     }
+}
+
+.my-control
+{
+	background-color : white;
 }

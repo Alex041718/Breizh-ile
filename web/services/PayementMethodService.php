@@ -19,10 +19,10 @@ class PayementMethodService extends Service
 
     }
 
-    public static function GetPayementMethodById($payMethodId): PayementMethod
+    public static function GetPayementMethodById($payMethodID): PayementMethod
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->query('SELECT * FROM _PaymentMethod WHERE payMethodId = ' . $payMethodId);
+        $stmt = $pdo->query('SELECT * FROM _PaymentMethod WHERE payMethodID = ' . $payMethodID);
         $row = $stmt->fetch();
         return new PayementMethod($row['payMethodID'], $row['label']);
     }
