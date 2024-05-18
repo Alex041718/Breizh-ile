@@ -73,13 +73,17 @@ class HousingService extends Service
         // appel de la méthode GetArrangmentByHousingId de la classe ArrangementService
         $arrangements = ArrangementService::GetArrangmentsByHousingId($row['housingID']);
 
+        $beginDate = new DateTime($row['beginDate']);
+        $endDate = new DateTime($row['endDate']);
+        $creationDate = new DateTime($row['creationDate']);
+
         if($row['priceIncl'] == null) $row['priceIncl'] = 0;
         if($row['priceExcl'] == null) $row['priceExcl'] = 0;
         if($row['beginDate'] == null) $row['beginDate'] = new DateTime("now");
         if($row['endDate'] == null) $row['endDate'] = new DateTime("now");
         $row['creationDate'] = new DateTime("now");
 
-        return new Housing($row['housingID'], $row['title'], $row['shortDesc'], $row['longDesc'], $row['priceExcl'], $row['priceIncl'], $row['nbRoom'], $row['nbDoubleBed'], $row['nbSimpleBed'], $row['longitude'], $row['latitude'], $row['isOnline'], $row['noticeCount'], $row['beginDate'], $row['endDate'], $row['creationDate'], $row['surfaceInM2'], $type, $category, $address, $owner, $image, $arrangements);
+        return new Housing($row['housingID'] , $row['title'], $row['shortDesc'], $row['longDesc'], $row['priceExcl'], $row['priceIncl'], $row['nbRoom'], $row['nbDoubleBed'], $row['nbSimpleBed'], $row['longitude'], $row['latitude'], $row['isOnline'], $row['noticeCount'], $beginDate, $endDate, $creationDate, $row['surfaceInM2'], $type, $category, $address, $owner, $image, $arrangements);
     }
     public static function GetAllHousings()
     {
