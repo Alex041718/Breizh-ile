@@ -6,6 +6,7 @@ class Housing {
     private string $longDesc;
     private float $priceExcl;
     private float $priceIncl;
+    private int $nbPerson;
     private int $nbRoom;
     private int $nbDoubleBed;
     private int $nbSimpleBed;
@@ -30,6 +31,7 @@ class Housing {
                                 string $longDesc,
                                 float $priceExcl,
                                 float $priceIncl,
+                                int $nbPerson,
                                 int $nbRoom,
                                 int $nbDoubleBed,
                                 int $nbSimpleBed,
@@ -53,6 +55,7 @@ class Housing {
         $this->longDesc = $longDesc;
         $this->priceExcl = $priceExcl;
         $this->priceIncl = $priceIncl;
+        $this->nbPerson = $nbPerson;
         $this->nbRoom = $nbRoom;
         $this->nbDoubleBed = $nbDoubleBed;
         $this->nbSimpleBed = $nbSimpleBed;
@@ -166,6 +169,22 @@ class Housing {
     public function setPriceIncl(float $priceIncl): void
     {
         $this->priceIncl = $priceIncl;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbPerson(): int
+    {
+        return $this->nbPerson;
+    }
+
+    /**
+     * @param int $nbRoom
+     */
+    public function setNbPerson(int $nbPerson): void
+    {
+        $this->nbPerson = $nbPerson;
     }
 
     /**

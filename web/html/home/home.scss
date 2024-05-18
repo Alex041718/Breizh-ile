@@ -12,6 +12,10 @@ body {
 .show-more {
   grid-column: span 3 / span 3;
   justify-self: center;
+
+  @media screen and (max-width: 1300px) {
+    grid-column: span 2 / span 2;
+  }
 }
 
 .loader {
@@ -25,7 +29,12 @@ body {
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+
+  @media screen and (max-width: 1300px) {
+    grid-column: span 2 / span 2;
   }
+}
+  
 
   @keyframes rotation {
   0% {

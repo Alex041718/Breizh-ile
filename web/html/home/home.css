@@ -11,6 +11,11 @@ body {
   grid-column: span 3/span 3;
   justify-self: center;
 }
+@media screen and (max-width: 1300px) {
+  .show-more {
+    grid-column: span 2/span 2;
+  }
+}
 
 .loader {
   width: 48px;
@@ -23,6 +28,11 @@ body {
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+}
+@media screen and (max-width: 1300px) {
+  .loader {
+    grid-column: span 2/span 2;
+  }
 }
 
 @keyframes rotation {
