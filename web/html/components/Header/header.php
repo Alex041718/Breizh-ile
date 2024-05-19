@@ -94,6 +94,7 @@ class Header {
                         </div>
                     </div>
                     <div data-tag="' . $tagToScroll . '" class="header '. ($isScrolling === true ? 'scroll scrolling' : '' ). ' '. ($isBackOffice ? 'header--backoffice' : '' ). '">
+
                         <a class="logo" href="">
                             <img class="logo-big" src="/assets/images/logo_breizh_noir.png" id="logo" alt="logo_breizh">
                             <img class="logo-small" src="/assets/icons/logo.svg" alt="logo_breizh">

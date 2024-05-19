@@ -152,6 +152,7 @@ class HousingService extends Service
             if(isset($dateBegin)) $chaine = $chaine . "_Housing.beginDate < '" . $dateBegin . "'". ((isset($dateEnd) | isset($nbPerson)) ? " AND " : " ");
     
             if(isset($dateEnd)) $chaine = $chaine . "_Housing.endDate > '" . $dateEnd . "'". (isset($nbPerson) ? " AND " : " ");
+
     
             if(isset($nbPerson)) $chaine = $chaine . "_Housing.nbPerson >= " . $nbPerson . " ";
         }
