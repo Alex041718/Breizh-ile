@@ -5,20 +5,37 @@ searchBars.forEach(searchBar => {
     const btn = searchBar.querySelector(".search-bar__search-btn button");
     const grid = searchBar.querySelector(".search-bar__grid-container");
     const inputs = searchBar.querySelectorAll(".search-bar__grid-container__search-element input");
+    const begin = searchBar.querySelector(".beginDate");
+    const end = searchBar.querySelector(".endDate");
 
     const elements = searchBar.querySelectorAll(".search-bar__grid-container__search-element");
 
-    // create inputs with flatpickr for the two dates
-    inputs.forEach((inp) => {
-        if(inp.id === 'start-date' || inp.id === 'end-date'){
-            flatpickr(inp, {
-                dateFormat: "d-m-Y",
-                minDate: "today",
-                maxDate: new Date().fp_incr(365)
-            });
-            return;
-        }
+    const endPickr = flatpickr(end, {
+        dateFormat: "Y-m-d",
+        maxDate: new Date().fp_incr(365),
+        disable: [
+            function(date) {
+                // Désactiver toutes les dates
+                return true;
+            }
+        ]
     });
+
+
+    const beginPickr = flatpickr(begin, {
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        maxDate: new Date().fp_incr(365),
+        onChange: function(selectedDates, dateStr, instance) {
+            endPickr.set('disable', [])
+            endPickr.set('minDate', selectedDates[0]);
+            endPickr.toggle();
+        },
+    });
+    
+    
+    // Initialiser Flatpickr pour l'input de fin 
+
 
     // transition function
     const openSearchBar = () => {
@@ -52,8 +69,8 @@ searchBars.forEach(searchBar => {
 
 
     document.addEventListener('click', function(event) {
-        // Vérifier si le clic a été fait à l'extérieur de myDiv
-        if (!searchBar.contains(event.target) && !searchBar.classList.contains("no-close")) {
+            // Vérifier si le clic a été fait à l'extérieur de myDiv
+        if (!searchBar.contains(event.target) && !event.target.classList.contains("autocomplete--popup") && !searchBar.classList.contains("no-close")) {
             closeSearchBar();
         }
     });

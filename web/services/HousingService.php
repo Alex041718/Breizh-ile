@@ -157,19 +157,16 @@ class HousingService extends Service
     
             if(isset($city)) $chaine = $chaine . '_Address.city = "' . $city . '"' . ((isset($dateBegin) || isset($dateEnd) || isset($nbPerson)) ? " AND " : " ");
             
-            if(isset($dateBegin)) $chaine = $chaine . "_Housing.dateBegin = " . $dateBegin . ((isset($dateEnd) | isset($nbPerson)) ? " AND " : " ");
+            if(isset($dateBegin)) $chaine = $chaine . "_Housing.beginDate < '" . $dateBegin . "'". ((isset($dateEnd) | isset($nbPerson)) ? " AND " : " ");
     
-            if(isset($dateEnd)) $chaine = $chaine . "_Housing.dateBegin = " . $dateEnd . (isset($nbPerson) ? " AND " : " ");
+            if(isset($dateEnd)) $chaine = $chaine . "_Housing.endDate > '" . $dateEnd . "'". (isset($nbPerson) ? " AND " : " ");
+
     
             if(isset($nbPerson)) $chaine = $chaine . "_Housing.nbPerson >= " . $nbPerson . " ";
         }
         else $chaine = "";
 
         $query = 'SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID INNER JOIN _Address ON _Housing.addressID = _Address.addressID ' . $chaine . 'ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';';
-
-        echo $query;
-
-        die;
 
         $pdo = self::getPDO();
         $stmt = $pdo->query($query);
