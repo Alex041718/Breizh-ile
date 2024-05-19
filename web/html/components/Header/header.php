@@ -4,6 +4,9 @@
 class Header {
 
         public static function render($isScrolling = false, $isBackOffice = false) {
+
+            if($isScrolling != false) $tagToScroll = $isScrolling;
+
             $render = /*html*/ '
 
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -19,9 +22,78 @@ class Header {
 
                 <header class="">
                     <div class="popup__header">
-                        
+                        <div class="popup__header__content">
+                            <div class="popup__header__top">
+                                <h2>Filtres</h2>
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                            <div class="popup__header__container">
+                                <div class="popup__header__container__category">
+                                    <h3>Catégorie</h3>
+                                    <div class="popup__header__container__choices">
+                                        <div class="popup__header__box">
+                                            <input type="checkbox" />
+                                            <p>Appartement</p>
+                                        </div>
+                                        <div class="popup__header__box">
+                                            <input type="checkbox" />
+                                            <p>Chalet</p>
+                                        </div>
+                                        <div class="popup__header__box">
+                                            <input type="checkbox" />
+                                            <p>Maison</p>
+                                        </div>
+                                        <div class="popup__header__box">
+                                            <input type="checkbox" />
+                                            <p>Bateau</p>
+                                        </div>
+                                        <div class="popup__header__box">
+                                            <input type="checkbox" />
+                                            <p>Villa d\'exception</p>
+                                        </div>
+                                        <div class="popup__header__box">
+                                            <input type="checkbox" />
+                                            <p>Logement insolite</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="popup__header__container__type">
+                                    <h3>Type</h3>
+                                    <div class="popup__header__container__choices">
+                                    <div class="popup__header__box">
+                                            <input type="checkbox" />
+                                            <p>T1</p>
+                                        </div>
+                                        <div class="popup__header__box">
+                                            <input type="checkbox" />
+                                            <p>T2</p>
+                                        </div>
+                                        <div class="popup__header__box">
+                                            <input type="checkbox" />
+                                            <p>T3</p>
+                                        </div>
+                                        <div class="popup__header__box">
+                                            <input type="checkbox" />
+                                            <p>T4</p>
+                                        </div>
+                                        <div class="popup__header__box">
+                                            <input type="checkbox" />
+                                            <p>T5</p>
+                                        </div>
+                                        <div class="popup__header__box">
+                                            <input type="checkbox" />
+                                            <p>T6</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="popup__header__bottom">
+                                <a class="btn">Valider</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="header '. ($isScrolling ? 'scroll scrolling' : '' ). ' '. ($isBackOffice ? 'header--backoffice' : '' ). '">
+                    <div data-tag="' . $tagToScroll . '" class="header '. ($isScrolling === true ? 'scroll scrolling' : '' ). ' '. ($isBackOffice ? 'header--backoffice' : '' ). '">
                         <a class="logo" href="">
                             <img class="logo-big" src="/assets/images/logo_breizh_noir.png" id="logo" alt="logo_breizh">
                             <img class="logo-small" src="/assets/icons/logo.svg" alt="logo_breizh">

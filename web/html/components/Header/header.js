@@ -1,17 +1,22 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    var header = document.querySelector('.header');
-    var profil = document.getElementById('profil');
-    var options = document.getElementById('options');
-    var oeuil = document.getElementById('oeuil');
-    var popup = document.getElementById('popup');
-    var taille = document.getElementById('taille');
-    var couleurs = document.getElementById('couleurs');
-    var font = document.getElementById('font');
-    var animations = document.getElementById('animations');
-    var parent__taille = document.getElementById('parent__taille');
+    const header = document.querySelector('.header');
+    const profil = document.getElementById('profil');
+    const options = document.getElementById('options');
+    const oeuil = document.getElementById('oeuil');
+    const popup = document.getElementById('popup');
+    const taille = document.getElementById('taille');
+    const couleurs = document.getElementById('couleurs');
+    const font = document.getElementById('font');
+    const animations = document.getElementById('animations');
+    const parent__taille = document.getElementById('parent__taille');
+    const popup_filters = document.querySelector(".popup__header");
+    const popup_filters_close = popup_filters.querySelector("i");
+    const popup_filters_open = document.getElementById("header__settings");
+
     
+    let tagToScroll = document.querySelector("." + header.dataset.tag);
 
     profil.addEventListener('click', function() {
         if (options.style.display === 'none') {
@@ -22,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.addEventListener("scroll", function() {
-        if(document.documentElement.scrollTop > 85 && !header.classList.contains("scrolling")) header.classList.add("scroll");
+        if(document.documentElement.scrollTop > tagToScroll.offsetTop && !header.classList.contains("scrolling")) header.classList.add("scroll");
         else if(!header.classList.contains("scrolling")) header.classList.remove("scroll");
     })
 
@@ -98,7 +103,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Popup Settings
 
+    popup_filters_open.addEventListener("click", function() {
+        popup_filters.classList.add("popup_enable");
+    });
 
+
+    popup_filters_close.addEventListener("click", function() {
+        popup_filters.classList.remove("popup_enable");
+    })
 
 
     
