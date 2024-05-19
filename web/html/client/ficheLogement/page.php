@@ -70,7 +70,61 @@
                         <i id="close-popup" class="fa-solid fa-xmark"></i>
                     </div>
 
-                    <button type="button" class="criteres"><p>Afficher les critères</p></button>
+                    <button type="button" class="criteres"><p class="para--bold">Afficher les critères</p></button>
+
+                    <!-- Overlay and Popup Criteres-->
+                    <div id="overlay-critere" class="overlay-critere"></div>
+                        <div id="popup-critere" class="popup-critere">
+                            <div class="popup-content-critere">
+                                <i id="closePopupCritereBtn" class="fa-solid fa-xmark"></i>
+                                <h3>Critères du Logement</h3>
+                                <div class="section">
+                                    <h4>Aménagements</h4>
+                                    <div class="items">
+                                        <div class="item">
+                                            <i class="fa-solid fa-water-ladder"></i>
+                                            <span>Piscine</span>
+                                        </div>
+                                        <div class="item">
+                                            <i class="fa-solid fa-plant-wilt"></i>
+                                            <span>Jardin</span>
+                                        </div>
+                                        <div class="item">
+                                            <i class="fa-solid fa-plant-wilt"></i>
+                                            <span>Salle de sport</span>
+                                        </div>
+                                        <div class="item">
+                                            <i class="fa-solid fa-square-parking"></i>
+                                            <span>Parking privée</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="horizontal-line"></div>
+
+                                <div class="section">
+                                    <h4>Activités</h4>
+                                    <div class="items">
+                                        <div class="item">
+                                            <i class="fa-solid fa-umbrella-beach"></i>
+                                            <span>Plage</span>
+                                        </div>
+                                        <div class="item">
+                                            <i class="fa-solid fa-paw"></i>
+                                            <span>Zoo</span>
+                                        </div>
+                                        <div class="item">
+                                            <i id="img" class="fa-regular fa-water-ladder"></i>
+                                            <span>Parc d’attraction</span>
+                                        </div>
+                                        <div class="item">
+                                            <i class="fa-solid fa-landmark"></i>
+                                            <span>Musée</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
 
                 <div class="reservation">
@@ -97,7 +151,7 @@
                                     <div class="traveler-type">
                                         <div class="adulteInfo">
                                             <span class="para--bold">Adultes:</span>
-                                            <span>13 ans et +</span>
+                                            <p>13 ans et +</p>
                                         </div>
                                         <div class="addbtn">
                                             <button id="subtractAdultBtn">-</button>
@@ -111,7 +165,7 @@
                                     <div class="traveler-type">
                                         <div class="enfantInfo">
                                             <span class="para--bold">Enfants:</span>
-                                            <span>- de 12 ans</span>
+                                            <p>- de 12 ans</p>
                                         </div>
                                         <div class="addbtn">
                                             <button id="subtractChildBtn">-</button>
@@ -128,10 +182,7 @@
                     </div>
 
                     <div class="reservationBtn">
-                        <?php 
-                            require_once("../../components/Button/Button.php");
-                            Button::render("button--storybook", "unId", "<h4>Réserver</h4>", ButtonType::Client, true); 
-                        ?>
+                        <button class="para--18px para--bold">Réserver</button>
                     </div>
 
                     <div class="prix">

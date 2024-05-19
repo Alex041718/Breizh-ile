@@ -33,11 +33,12 @@ body {
   flex-direction: column;
   height: 100%;
   max-width: 1300px;
-  margin: 5em auto 0 auto;
+  margin: 8em auto 0 auto;
   align-items: start;
 }
 .page #overlay {
   display: none;
+  overflow: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -54,6 +55,7 @@ body {
   transform: translate(-50%, -50%);
   background-color: white;
   border: 1px solid gray;
+  box-shadow: 0 4px 8px rgb(0, 0, 0);
   border-radius: 20px;
   padding: 2em;
   z-index: 9999;
@@ -86,15 +88,22 @@ body {
 .page #popup2 .popup-content .traveler-type .addbtn {
   display: flex;
   gap: 0.5em;
+  border: 1px solid gray;
+  padding: 0.5em;
+  background-color: transparent;
+  border-radius: 20px;
 }
 .page #popup2 .popup-content .traveler-type .addbtn button {
   cursor: pointer;
+  border-radius: 20px;
+  border: 1px solid gray;
 }
 .page #popup2 .popup-content .traveler-type .addbtn .nbr {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 2em;
+  color: black;
 }
 .page .localisation {
   width: 100%;
@@ -109,7 +118,7 @@ body {
   gap: 0.5em;
 }
 
-.overflow {
+.popup-active {
   overflow: hidden;
 }
 
@@ -134,12 +143,13 @@ body {
 }
 .reservation .reservationBtn {
   margin-top: 3em;
+  margin-bottom: 1em;
   width: 75%;
 }
 .reservation .reservationBtn button {
   width: 100%;
-  padding-top: 1.5em;
-  padding-bottom: 1.5em;
+  padding-top: 1em;
+  padding-bottom: 1em;
   border-radius: 20px;
   border: gray;
   background-color: #307B5C;
@@ -156,7 +166,8 @@ body {
   justify-content: space-between;
   width: 100%;
 }
-.reservation .prix .horizontal-line {
+
+.horizontal-line {
   border: none;
   border-top: 1px solid #ccc;
   margin-top: 2em;
@@ -246,10 +257,11 @@ body {
 .details .description .texte #truncate-text {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 10;
+  -webkit-line-clamp: 8;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
+  line-height: 1.6em;
 }
 .details .description button {
   position: absolute;
@@ -321,8 +333,9 @@ body {
   width: -moz-max-content;
   width: max-content;
   border-radius: 10px;
-  background-color: black;
-  color: white;
+  background-color: transparent;
+  color: black;
+  border: 1px solid gray;
   text-align: center;
   padding: 10px;
   position: absolute;
@@ -349,13 +362,14 @@ body {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 50em;
-  height: 25em;
+  width: 35em;
+  height: 40em;
   background-color: white;
   padding: 3em;
   border: 2px solid #ccc;
   border-radius: 20px;
   z-index: 9999;
+  box-shadow: 0 4px 8px rgb(0, 0, 0);
   overflow-y: auto; /* Autoriser le défilement vertical si le contenu dépasse la taille de la fenêtre */
 }
 #popup-savoir #close-popup {
@@ -371,9 +385,8 @@ body {
   animation: circle-animation 1s ease-in-out infinite;
 }
 #popup-savoir h3 {
-  margin-top: 1em;
   margin-bottom: 1.5em;
-  text-align: start;
+  text-align: center;
 }
 #popup-savoir p {
   line-height: 2;
@@ -388,4 +401,73 @@ body {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9998;
+}
+
+.overlay-critere {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+}
+
+.popup-critere {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 20px;
+  padding: 2em;
+  z-index: 9999;
+  overflow-y: auto;
+  box-shadow: 0 4px 8px rgb(0, 0, 0);
+}
+.popup-critere.show {
+  display: block;
+}
+.popup-critere .popup-content-critere {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 3em;
+  width: 35em;
+  height: 35em;
+}
+.popup-critere .popup-content-critere i#closePopupCritereBtn {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  transform-origin: center;
+}
+.popup-critere .popup-content-critere i#closePopupCritereBtn.fa-solid.fa-xmark {
+  transition: transform 0.3s;
+}
+.popup-critere .popup-content-critere i#closePopupCritereBtn.fa-solid.fa-xmark:hover {
+  animation: circle-animation 1s ease-in-out infinite;
+}
+.popup-critere .popup-content-critere h3 {
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+.popup-critere .popup-content-critere .section .items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3em;
+  margin-left: 5em;
+  margin-top: 2em;
+}
+.popup-critere .popup-content-critere .section .items .item {
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+  min-width: 45%;
+}
+.popup-critere .popup-content-critere .section .items .item i {
+  color: #307B5C;
 }/*# sourceMappingURL=page.css.map */
