@@ -153,6 +153,7 @@ body {
   border: gray;
   background-color: #307B5C;
   color: white;
+  cursor: pointer;
 }
 .reservation .prix {
   display: flex;
@@ -189,6 +190,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .datepicker {
@@ -237,6 +239,7 @@ body {
   bottom: 0;
   background-color: black;
   color: white;
+  cursor: pointer;
 }
 .details .description {
   border: 2px solid gray;
@@ -252,6 +255,7 @@ body {
 }
 .details .description .texte p {
   margin-top: 10px;
+  cursor: pointer;
 }
 .details .description .texte #truncate-text {
   display: -webkit-box;
