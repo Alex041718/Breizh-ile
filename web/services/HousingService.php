@@ -116,22 +116,27 @@ class HousingService extends Service
         return self::HousingHandler($row);
     }
   
-    public static function GetHousingsByOffset($city, $dateBegin, $dateEnd, $nbPerson, $offset, $order, $desc = false) {
+    public static function GetHousingsByOffset($city, $dateBegin, $dateEnd, $nbPerson, $minPrice, $maxPrice, $offset, $order, $desc = false) {
 
-        $isAnd = (isset($city) || isset($dateBegin) || isset($dateEnd) || isset($nbPerson));
+        $isAnd = (isset($city) || isset($dateBegin) || isset($dateEnd) || isset($nbPerson) || isset($minPrice) || isset($maxPrice));
 
         if($isAnd) {
             
             $chaine = "WHERE ";
     
-            if(isset($city)) $chaine = $chaine . '_Address.city = "' . $city . '"' . ((isset($dateBegin) || isset($dateEnd) || isset($nbPerson)) ? " AND " : " ");
+            if(isset($city)) $chaine = $chaine . '_Address.city = "' . $city . '"' . ((isset($dateBegin) || isset($dateEnd) || isset($nbPerson) || isset($minPrice) || isset($maxPrice)) ? " AND " : " ");
             
-            if(isset($dateBegin)) $chaine = $chaine . "_Housing.beginDate < '" . $dateBegin . "'". ((isset($dateEnd) | isset($nbPerson)) ? " AND " : " ");
+            if(isset($dateBegin)) $chaine = $chaine . "_Housing.beginDate < '" . $dateBegin . "'". ((isset($dateEnd) | isset($nbPerson) || isset($minPrice) || isset($maxPrice)) ? " AND " : " ");
     
-            if(isset($dateEnd)) $chaine = $chaine . "_Housing.endDate > '" . $dateEnd . "'". (isset($nbPerson) ? " AND " : " ");
+            if(isset($dateEnd)) $chaine = $chaine . "_Housing.endDate > '" . $dateEnd . "'". ((isset($nbPerson) || isset($minPrice) || isset($maxPrice)) ? " AND " : " ");
+
+            if(isset($nbPerson)) $chaine = $chaine . "_Housing.nbPerson >= " . $nbPerson . ((isset($minPrice) || isset($maxPrice)) ? " AND " : " ");
+
+            if(isset($minPrice)) $chaine = $chaine . "_Housing.priceExcl >= " . $minPrice . " ". (isset($maxPrice) ? " AND " : " ");
+
+            if(isset($maxPrice)) $chaine = $chaine . "_Housing.priceExcl <= " . $maxPrice . " ";
 
     
-            if(isset($nbPerson)) $chaine = $chaine . "_Housing.nbPerson >= " . $nbPerson . " ";
         }
         else $chaine = "";
 

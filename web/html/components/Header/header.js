@@ -11,9 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const font = document.getElementById('font');
     const animations = document.getElementById('animations');
     const parent__taille = document.getElementById('parent__taille');
-    const popup_filters = document.querySelector(".popup__header");
-    const popup_filters_close = popup_filters.querySelector("i");
-    const popup_filters_open = document.getElementById("header__settings");
 
     
     let tagToScroll = document.querySelector("." + header.dataset.tag);
@@ -102,15 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Popup Settings
-
-    popup_filters_open.addEventListener("click", function() {
-        popup_filters.classList.add("popup_enable");
-    });
-
-
-    popup_filters_close.addEventListener("click", function() {
-        popup_filters.classList.remove("popup_enable");
-    })
 
 
 
