@@ -88,6 +88,7 @@ class HousingService extends Service
         if($row['priceIncl'] == null) $row['priceIncl'] = 0;
         if($row['priceExcl'] == null) $row['priceExcl'] = 0;
 
+      
         $row['beginDate'] = ($row['beginDate'] == null) ? new DateTime("now") : new DateTime($row['beginDate']);
         $row['endDate'] = ($row['endDate'] == null) ? new DateTime("now") : new DateTime($row['endDate']);
         $row['creationDate'] = new DateTime("now");

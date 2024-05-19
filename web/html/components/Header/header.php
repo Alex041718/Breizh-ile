@@ -69,27 +69,30 @@ class Header {
                             <p>Mon profil</p>
                         </div>
                     </div>
-                    <div id="popup" class="popup" style="display:none">
-                        <h2>Accessibilité</h2>
-                        <div class="popup__options">
-                            <div class="popup__options__couleurfont">
-                                <div id="parent__couleurs">
-                                    <p class="para--18px" id="couleurs">Couleurs</p>
+                    <div id="popup__access" class="popup__access">
+                        <div class="popup__content" >
+                            <h2>Accessibilité</h2>
+                            <div class="popup__options">
+                                <div class="popup__options__couleurfont">
+                                    <div id="parent__couleurs">
+                                        <p class="para--18px" id="couleurs">Couleurs</p>
+                                    </div>
+                                    <div id="parent__font">
+                                        <p class="para--18px" id="font">Font police</p>
+                                    </div>
                                 </div>
-                                <div id="parent__font">
-                                    <p class="para--18px" id="font">Font police</p>
-                                </div>
-                            </div>
-                            <div>
-                                <div id="parent__taille">   
-                                    <p class="para--18px" id="taille">Police taille</p>
-                                </div>
-                                <div id="parent__animations">   
-                                    <p class="para--18px" id="animations">Animations</p>
+                                <div>
+                                    <div id="parent__taille">   
+                                        <p class="para--18px" id="taille">Police taille</p>
+                                    </div>
+                                    <div id="parent__animations">   
+                                        <p class="para--18px" id="animations">Animations</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>                    
+
             </header>
         ';
 

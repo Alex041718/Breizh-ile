@@ -1,3 +1,19 @@
+<?php
+    
+    // Commence le buffering de sortie
+    ob_start();
+
+    echo 'Du contenu qui sera affiché avant la redirection';
+
+    // Nettoie le buffer de sortie et désactive le buffering
+    ob_end_clean();
+
+    if(!isset($_GET['reservationID']) || $_GET['reservationID'] == "") {
+        header('Location: /'); 
+        exit();
+    };
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +42,7 @@
 
 
 <?php
+
     require_once("../../components/Header/header.php");
     Header::render(true);
 
@@ -45,18 +62,18 @@
     $housing = HousingService::GetHousingById($_GET['reservationID']);
     
 
-    $reservation_dateDebut = $reservation->getBeginDate()->format('Y-m-d');
-    $reservation_dateFin =  $reservation->getEndDate()->format('Y-m-d');
+    $reservation_dateDebut = $reservation->getBeginDate();
+    $reservation_dateFin =  $reservation->getEndDate();
     $reservation_image =  $housing->getImage()->getImageSrc();
     $reservation_titre =  $housing->getTitle();
     $reservation_type =  $housing->getType()->getlabel();
-    $reservation_prixHT =  $housing->getPriceExcl();
-    $reservation_prixTTC =  $housing->getPriceIncl();
+    $reservation_prixExcl =  $housing->getPriceExcl();
+    $reservation_prixIncl =  $housing->getPriceIncl();
     $reservation_nbJours =  ReservationService::getNbJoursReservation($reservation_dateDebut, $reservation_dateFin);
     $reservation_serviceCharge =  $reservation->getServiceCharge();
     $reservation_touristTax =  $reservation->getTouristTax();
     $reservation_nbPersonnes =  $housing->getNoticeCount();
-    $reservation_prixCalc = $reservation_prixHT * $reservation_nbJours * $reservation_nbPersonnes;
+    $reservation_prixCalc = $reservation_prixExcl * $reservation_nbJours * $reservation_nbPersonnes;
     $owner_pp = $housing->getOwner()->getImage()->getImageSrc();
     $owner_name = $housing->getOwner()->getNickname();
     $owner_telephone = $housing->getOwner()->getPhoneNumber();
@@ -67,6 +84,9 @@
     $reservation_postalCode = $housing->getAddress()->getPostalCode();
     $reservation_city = $housing->getAddress()->getCity();
     $reservation_postalAdress = $housing->getAddress()->getPostalAddress();
+
+
+    $reservation_prixTTC = $reservation_prixIncl * $reservation_nbJours * $reservation_nbPersonnes + $reservation_serviceCharge + $reservation_touristTax;
 
 ?>
 
@@ -79,7 +99,7 @@
                 <h2>Ma réservation</h2>
             </div>
             <div class="title__date">
-                <h5>Voyage  à Lannion du '.$reservation_dateDebut.' au '.$reservation_dateFin.'</h5>
+                <h5>Voyage  à Lannion du '.$reservation_dateDebut->format('d-m-Y').' au '.$reservation_dateFin->format('d-m-Y').'</h5>
             </div>
         </div>
         <article class="informations">
@@ -95,7 +115,7 @@
                 <div class="informations__left__detail">
                     <h3>Détails du prix</h3>
                     <div>
-                        <p class="para--18px">'.$reservation_prixHT.' € x '.$reservation_nbJours .' nuits x '.$reservation_nbPersonnes .' occupant(s)</p>
+                        <p class="para--18px">'.$reservation_prixExcl.' € x '.$reservation_nbJours .' nuits x '.$reservation_nbPersonnes .' occupant(s)</p>
                         <p class="para--18px">'.$reservation_prixCalc.' €</p>
                     </div>
                     <div>
