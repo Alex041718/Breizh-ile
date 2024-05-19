@@ -32,7 +32,6 @@ if (ConnectionService::checkOwner($username, $password)) {
     $id = ConnectionService::getOwnerID($username);
     SessionService::authenticate($id, $username, 'owner');
 
-
     redirect($redirectPage);
 } else {
     // Connexion échouée, redirection vers la page de connexion

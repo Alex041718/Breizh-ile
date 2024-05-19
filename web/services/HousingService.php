@@ -5,6 +5,13 @@ require_once 'Service.php';
 require_once __ROOT__.'/models/Housing.php';
 require_once __ROOT__.'/models/Address.php';
 
+require_once 'AddressService.php';
+require_once 'TypeService.php';
+require_once 'CategoryService.php';
+require_once 'OwnerService.php';
+require_once 'ImageService.php';
+require_once 'ArrangementService.php';
+
 class HousingService extends Service
 {
     public static function CreateHousing(Housing $housing)
@@ -80,8 +87,9 @@ class HousingService extends Service
 
         if($row['priceIncl'] == null) $row['priceIncl'] = 0;
         if($row['priceExcl'] == null) $row['priceExcl'] = 0;
-        if($row['beginDate'] == null) $row['beginDate'] = new DateTime("now");
-        if($row['endDate'] == null) $row['endDate'] = new DateTime("now");
+
+        $row['beginDate'] = ($row['beginDate'] == null) ? new DateTime("now") : new DateTime($row['beginDate']);
+        $row['endDate'] = ($row['endDate'] == null) ? new DateTime("now") : new DateTime($row['endDate']);
         $row['creationDate'] = new DateTime("now");
 
         return new Housing($row['housingID'] , $row['title'], $row['shortDesc'], $row['longDesc'], $row['priceExcl'], $row['priceIncl'], $row['nbPerson'],$row['nbRoom'], $row['nbDoubleBed'], $row['nbSimpleBed'], $row['longitude'], $row['latitude'], $row['isOnline'], $row['noticeCount'], $beginDate, $endDate, $creationDate, $row['surfaceInM2'], $type, $category, $address, $owner, $image, $arrangements);

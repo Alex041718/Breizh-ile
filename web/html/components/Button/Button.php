@@ -14,7 +14,8 @@ class Button {
                                   $type = ButtonType::Client,
                                   $onClick = "",
                                   $isSecondary = true,
-                                  $submit = false) {
+                                  $submit = false,
+                                  $icon = "") {
 
         $isSubmit = $submit ? 'submit' : 'button';
 
@@ -32,17 +33,19 @@ class Button {
                 $class .= ' button--delete' . $secondaryClass ;
                 break;
         }
+
         $render = /*html*/ '
             <link rel="stylesheet" href="/components/Button/Button.css">
             
             <button type="' . $isSubmit . '" class="button '. $class . ' " id=" ' . $id . ' " onclick="' . $onClick . '">
+                ' . $icon . '
                 ' . $text . '
             </button>
             
         ';
+
         echo $render;
     }
-
 }
 
 ?>

@@ -6,21 +6,20 @@ class SessionService {
      * Système de gestion de la session, cette méthode est à appeler dans chaque view qui nécessite une session.
      */
 
-    public static function system(string $role,string $conectionPage, string $redirectPage = null) {
+    public static function system(string $role, string $redirectPage = null) {
         if (!self::isAuthenticated() || self::get('role') == null || self::isExpired()) {
-            // Rediriger vers la page de connexion si l'administrateur n'est pas connecté
+            $_SESSION['redirect'] = $redirectPage;
             if ($role == 'admin') {
-                header('Location: ../../html/admin/adminConnection.php');
+                header('Location: ../../admin/adminConnection.php');
             } else if ($role == 'owner') {
-                header('Location: ../../html/owner/ownerConnection.php');
+                header('Location: ../../owner/ownerConnection/owner_connection.php');
             } else if ($role == 'client') {
-                header('Location: ../../html/client/clientConnection.php');
+                header('Location: ../../client/clientConnection/client_connection.php');
             } else {
-                header('Location: ../../html/client/clientConnection.php');
+                header('Location: ../../client/clientConnection/client_connection.php');
             }
             exit();
         }
-
     }
 
 
