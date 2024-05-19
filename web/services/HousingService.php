@@ -81,8 +81,8 @@ class HousingService extends Service
         if($row['priceExcl'] == null) $row['priceExcl'] = 0;
         if($row['beginDate'] == null) $row['beginDate'] = new DateTime("now");
         if($row['endDate'] == null) $row['endDate'] = new DateTime("now");
-        $row['creationDate'] = new DateTime("now");
 
+        
         return new Housing($row['housingID'] , $row['title'], $row['shortDesc'], $row['longDesc'], $row['priceExcl'], $row['priceIncl'], $row['nbRoom'], $row['nbDoubleBed'], $row['nbSimpleBed'], $row['longitude'], $row['latitude'], $row['isOnline'], $row['noticeCount'], $beginDate, $endDate, $creationDate, $row['surfaceInM2'], $type, $category, $address, $owner, $image, $arrangements);
     }
     public static function GetAllHousings()
