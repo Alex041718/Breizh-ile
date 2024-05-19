@@ -51,7 +51,8 @@ class ReservationService extends Service
 
         $client = ClientService::getClientById($row[9]);
 
-        $row[1] = ($row[2] == null) ? new DateTime("now") : new DateTime($row[1]);
+
+        $row[1] = ($row[1] == null) ? new DateTime("now") : new DateTime($row[1]);
         $row[2] = ($row[2] == null) ? new DateTime("now") : new DateTime($row[2]);
 
         if($row[3] == null) $row[3] = 0.0;
@@ -68,15 +69,13 @@ class ReservationService extends Service
         return self::ReservationHandler($row);
     }
 
-    public static function getNbJoursReservation(string $beginDate, string $dateFin): int
+    public static function getNbJoursReservation(DateTime $beginDate, DateTime $endDate): int
     {
-        $dateDebut = new DateTime($beginDate);
-        $dateFin = new DateTime($dateFin);
-        if ($dateDebut != $dateFin){
-            return $dateDebut->diff($dateFin)->days;
+        if ($beginDate != $endDate){
+            return $beginDate->diff($endDate)->days;
         }
         else{
-            return 0;
+            return 1;
         }
     }
 }
