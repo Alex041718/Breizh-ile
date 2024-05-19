@@ -213,7 +213,7 @@ body {
         border-top: none;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
-        width: 32.7em;
+        width: 100%;
         height: 5em;
         display: flex;
         flex-direction: column;
@@ -323,10 +323,10 @@ body {
     gap: 1em;
 
     img {
-        width: 70px; // Définissez la largeur de votre image
-        height: 70px; // Définissez la hauteur de votre image
-        border-radius: 50%; // Rend l'image ronde
-        overflow: hidden; // Masque toute partie de l'image en dehors du cadre arrondi
+        width: 70px; 
+        height: 70px; 
+        border-radius: 50%; 
+        overflow: hidden; 
     }
 }
 
@@ -410,6 +410,7 @@ body {
     position: fixed;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
     width: 35em;
     height: 40em;
     background-color: white;
@@ -418,7 +419,7 @@ body {
     border-radius: 20px;
     z-index: 9999;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
-    overflow-y: auto; /* Autoriser le défilement vertical si le contenu dépasse la taille de la fenêtre */
+    overflow-y: auto; 
 
     #close-popup {
         position: absolute;
