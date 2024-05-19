@@ -9,7 +9,6 @@
   width: 1.2rem;
   height: 1.2rem;
   border: 3px solid #082C4C;
-  margin-right: 1.5rem;
   border-radius: 0.3rem;
   cursor: pointer;
   display: grid;
@@ -19,7 +18,7 @@
   content: "";
   display: block;
   width: 0.65em;
-  height: 0.65em;
+  height: 0.66em;
   transform: scale(0);
   transition: 50ms transform ease-in-out;
   box-shadow: inset 10rem 10rem #082C4C;

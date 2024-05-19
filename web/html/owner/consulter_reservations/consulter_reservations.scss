@@ -32,7 +32,7 @@ main {
 .reservations {
     height: 66.4px * 5 - 9.6px;
     overflow-y: auto;
-    width: 100.2%;
+    width: 100.33%;
     padding-right: 0.5rem;
 
     &::-webkit-scrollbar {
@@ -62,13 +62,8 @@ main {
     border-radius: 10px;
     height: 2.5rem;
 
-    .profile-picture {
-        display: flex;
-        align-items: center;
-    }
-
     p, a, .profile-picture {
-        display: flex;
+        display: block;
         width: max(10rem, calc(200vw / 19.2));
         margin-right: 2rem;
         white-space: nowrap;
@@ -77,6 +72,11 @@ main {
         text-overflow: ellipsis;
         font-weight: normal;
         color: $ownerPrimaryColor;
+    }
+
+    .profile-picture, .description-status {
+        display: flex;
+        align-items: center;
     }
 
     img {
@@ -94,6 +94,36 @@ main {
 .exportation__button {
     margin-top: 1rem;
     margin-bottom: 6rem;
+}
+
+.export, .filter {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    margin-left: auto;
+    margin-right: 4px;
+}
+
+.no-reservation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    font-size: $font-size-xl;
+    color: $grey3;
+}
+
+.checkbox {
+    margin-right: 1.2rem;
+}
+
+.filter {
+    margin-right: 9px;
 }
 
 .status {

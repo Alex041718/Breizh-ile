@@ -1,3 +1,11 @@
+<?php
+require_once '../../../services/SessionService.php';
+
+// Gestion de la session
+SessionService::system('owner', '/owner/consulter_reservations/consulter_reservations.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,14 +14,20 @@
     <title>Consultation des réservations</title>
     <link rel="stylesheet" href="../../style/ui.css">
     <link rel="stylesheet" href="consulter_reservations.css">
+    <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <?php
         require_once("../../components/Header/header.php");
         require_once("../../components/OwnerNavBar/ownerNavBar.php");
         require_once("../../../services/ReservationService.php");
+        require_once("../../../services/OwnerService.php");
 
-        $reservations = ReservationService::getAllReservationsByOwnerID(470);
+        $owner = OwnerService::getOwnerById($_SESSION['user_id']);
+
+        $reservations = ReservationService::getAllReservationsByOwnerID($owner->getOwnerID());
+
+        $selected_reservations = array();
 
         Header::render(isScrolling: True, isBackOffice: True);
         OwnerNavBar::render(2);
@@ -23,7 +37,7 @@
         <section class="title">
             <?php
                 require_once("../../components/CheckBox/CheckBox.php");
-                CheckBox::render(name: "checkbox");
+                CheckBox::render(name: "checkboxAll");
             ?>
             <p>Date de réservation</p>
             <p>Client</p>
@@ -32,8 +46,12 @@
             <p>Date de départ</p>
             <p>Méthode de paiement</p>
             <p>Status</p>
+            <button class="filter"><i class="fa-solid fa-filter"></i></button>
         </section>
         <section class="reservations">
+            <?php if (empty($reservations)) { ?>
+                <p class="no-reservation">Vous n'avez aucune réservation.</p>
+            <?php } else { ?>
             <?php foreach ($reservations as $reservation) { ?>
             <div class="reservation">
                 <?php
@@ -41,12 +59,14 @@
                     CheckBox::render(name: "checkbox");
                 ?>
                 <p><?= $reservation->getBeginDate()->format("d / m / Y") ?></p>
-                <a href="#" class="profile-picture"><img src="https://as2.ftcdn.net/v2/jpg/00/64/67/63/1000_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" alt="profile picture"> Paul</a>
+                <a href="#" class="profile-picture"><img src="<?= $reservation->getClientId()->getImage()->getImageSrc() ?>" alt="profile picture">
+                <?= $reservation->getClientId()->getNickname() ?>
+                </a>
                 <a href="#"><?= $reservation->getHousingId()->getTitle() ?></a>
                 <p><?= $reservation->getBeginDate()->format("d / m / Y") ?></p>
                 <p><?= $reservation->getEndDate()->format("d / m / Y") ?></p>
-                <p><?= $reservation->getId() ?></p>
-                <p><?= $reservation->getStatus() ?><span class="status 
+                <p><?= $reservation->getPayMethodId()->getLabel() ?></p>
+                <p class="description-status"><?= $reservation->getStatus() ?><span class="status 
                 <?=
                     match ($reservation->getStatus()) {
                         "En cours" => "in-progress",
@@ -55,13 +75,16 @@
                         default => ""
                     }
                 ?>"></span></p>
+                <button class="export"><i class="fa-solid fa-file-export"></i></button>
             </div>
-            <?php } ?>
+            <?php }} ?>
         </section>
         <?php
             require_once("../../components/Button/Button.php");
-            Button::render("exportation__button", "exportationButton", "Exporter la sélection", ButtonType::Owner, false, false, false); 
+            Button::render("exportation__button", "exportationButton", "Exporter la sélection", ButtonType::Owner, false, false, false, '<i class="fa-solid fa-file-export"></i>'); 
         ?>
+
+        <script src="consulter_reservations.js"></script>
     </main>
 
     <?php

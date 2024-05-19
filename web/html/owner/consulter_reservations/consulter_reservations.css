@@ -29,7 +29,7 @@ main {
 .reservations {
   height: 322.4px;
   overflow-y: auto;
-  width: 100.2%;
+  width: 100.33%;
   padding-right: 0.5rem;
 }
 .reservations::-webkit-scrollbar {
@@ -56,12 +56,8 @@ main {
   border-radius: 10px;
   height: 2.5rem;
 }
-.reservation .profile-picture {
-  display: flex;
-  align-items: center;
-}
 .reservation p, .reservation a, .reservation .profile-picture {
-  display: flex;
+  display: block;
   width: max(10rem, 10.4166666667vw);
   margin-right: 2rem;
   white-space: nowrap;
@@ -70,6 +66,10 @@ main {
   text-overflow: ellipsis;
   font-weight: normal;
   color: #082C4C;
+}
+.reservation .profile-picture, .reservation .description-status {
+  display: flex;
+  align-items: center;
 }
 .reservation img {
   margin-right: 0.5rem;
@@ -84,6 +84,36 @@ main {
 .exportation__button {
   margin-top: 1rem;
   margin-bottom: 6rem;
+}
+
+.export, .filter {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  margin-left: auto;
+  margin-right: 4px;
+}
+
+.no-reservation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-size: max(23px, 1.5625vw);
+  color: #828282;
+}
+
+.checkbox {
+  margin-right: 1.2rem;
+}
+
+.filter {
+  margin-right: 9px;
 }
 
 .status {

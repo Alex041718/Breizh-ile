@@ -4,6 +4,7 @@ require_once 'Service.php';
 require_once __ROOT__.'/models/Reservation.php';
 require_once 'HousingService.php';
 require_once 'PayementMethodService.php';
+require_once 'ClientService.php';
 
 class ReservationService extends Service
 {
@@ -28,7 +29,8 @@ class ReservationService extends Service
             SELECT * FROM _Reservation R 
             JOIN _Housing H ON R.housingID = H.housingID 
             JOIN _Owner O ON H.ownerID = O.ownerID
-            WHERE O.ownerID = ' . $ownerID . ';
+            WHERE O.ownerID = ' . $ownerID . '
+            ORDER BY R.beginDate;
         ');
 
         $reservationList = [];
@@ -43,9 +45,11 @@ class ReservationService extends Service
     public static function ReservationHandler(array $row): Reservation
     {
         //Permet de faire le lien avec le logement de la réservation
-        $housing = HousingService::GetHousingById($row[9]);
+        $housing = HousingService::GetHousingById($row[7]);
 
         $payMethod = PayementMethodService::GetPayementMethodById($row[8]);
+
+        $client = ClientService::getClientById($row[9]);
 
         $row[1] = ($row[2] == null) ? new DateTime("now") : new DateTime($row[1]);
         $row[2] = ($row[2] == null) ? new DateTime("now") : new DateTime($row[2]);
@@ -53,7 +57,7 @@ class ReservationService extends Service
         if($row[3] == null) $row[3] = 0.0;
         if($row[4] == null) $row[4] = 0.0;
 
-        return new Reservation($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $housing, $payMethod);
+        return new Reservation($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $housing, $payMethod, $client);
     }
 
     public static function getReservationByID(int $reservationID): Reservation
