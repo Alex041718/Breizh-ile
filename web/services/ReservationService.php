@@ -35,7 +35,7 @@ class ReservationService extends Service
 
         $reservationList = [];
 
-        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+        while ($row = $stmt->fetch()) {
             $reservationList[] = self::ReservationHandler($row);
         }
 
