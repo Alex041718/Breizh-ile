@@ -25,7 +25,7 @@
         
         require_once("./components/Header/header.php");
 
-        Header::render(false);
+        Header::render("search-bar--home");
 
     ?>
     <main>
@@ -106,7 +106,6 @@
                     const itemsToHide = document.querySelectorAll(".show-more");
 
                     itemsToHide.forEach(itemToHide => {
-                        console.log(itemToHide)
                         itemToHide.remove();
                     });
                     const loader = document.createElement("span");
