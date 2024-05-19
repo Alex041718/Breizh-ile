@@ -137,6 +137,9 @@ body {
   flex-direction: column;
   align-items: center;
 }
+.reservation .preparation {
+  width: 75%;
+}
 .reservation h3 {
   align-self: start;
 }
@@ -201,6 +204,7 @@ body {
 .datepicker .arrivee {
   display: flex;
   flex-direction: column;
+  width: 100%;
   align-items: center;
   border: 1px solid gray;
   border-right: none;
@@ -218,6 +222,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   border: 1px solid gray;
   border-left: none;
   border-top-right-radius: 10px;
@@ -253,7 +258,7 @@ body {
   margin: 20px;
   height: 90%;
 }
-.details .description .texte p {
+.details .description .texte p#button-savoir {
   margin-top: 10px;
   cursor: pointer;
 }

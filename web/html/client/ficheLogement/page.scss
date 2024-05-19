@@ -162,6 +162,10 @@ body {
     flex-direction: column;
     align-items: center;
 
+    .preparation{
+        width: 75%;
+    }
+
     h3{
         align-self: start;
 
@@ -233,6 +237,7 @@ body {
     .arrivee {
         display: flex;
         flex-direction: column;
+        width: 100%;
         align-items: center;
         border: 1px solid gray;
         border-right: none;
@@ -252,6 +257,7 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
         border: 1px solid gray;
         border-left: none;
         border-top-right-radius: 10px;
@@ -289,7 +295,7 @@ body {
             position: relative;
             margin: 20px;
             height: 90%;
-            p {
+            p#button-savoir {
                 margin-top: 10px;
                 cursor: pointer;
 
