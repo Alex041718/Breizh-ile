@@ -179,7 +179,9 @@ body {
             border-radius: 20px;
             border: gray;
             background-color: #307B5C;
-            color: white;           
+            color: white;        
+            cursor: pointer;
+   
         }
     }
 
@@ -219,6 +221,7 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
     }
 }
 
@@ -271,6 +274,8 @@ body {
         bottom: 0;
         background-color: black;
         color: white;
+        cursor: pointer;
+
     }
 
     .description {
@@ -286,6 +291,8 @@ body {
             height: 90%;
             p {
                 margin-top: 10px;
+                cursor: pointer;
+
             }
 
             #truncate-text {
