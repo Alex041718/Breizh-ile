@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Client.php';
 /**
  *
  */
@@ -30,6 +30,10 @@ class Reservation
      */
     private string $status;
     /**
+     * @var int
+     */
+    private int $nbPerson;
+    /**
      * @var Housing
      */
     private Housing $housingId;
@@ -37,6 +41,10 @@ class Reservation
      * @var PayementMethod
      */
     private PayementMethod $payMethodId;
+    /**
+     * @var Client
+     */
+    private Client $clientId;
 
     /**
      * @param int|null $id
@@ -47,8 +55,9 @@ class Reservation
      * @param string $status
      * @param Housing $housingId
      * @param PayementMethod $payMethodId
+     * @param Client $clientId
      */
-    public function __construct(?int $id, DateTime $beginDate, DateTime $endDate, float $serviceCharge, float $touristTax, string $status, Housing $housingId, PayementMethod $payMethodId)
+    public function __construct(?int $id, DateTime $beginDate, DateTime $endDate, float $serviceCharge, float $touristTax, string $status, int $nbPerson, Housing $housingId, PayementMethod $payMethodId, Client $clientId)
     {
         $this->id = $id;
         $this->beginDate = $beginDate;
@@ -56,8 +65,10 @@ class Reservation
         $this->serviceCharge = $serviceCharge;
         $this->touristTax = $touristTax;
         $this->status = $status;
+        $this->nbPerson = $nbPerson;
         $this->housingId = $housingId;
         $this->payMethodId = $payMethodId;
+        $this->clientId = $clientId;
     }
 
     /**
@@ -163,6 +174,14 @@ class Reservation
     }
 
     /**
+     * @return int
+     */
+    public function getNbPerson(): int
+    {
+        return $this->nbPerson;
+    }
+
+    /**
      * @return Housing
      */
     public function getHousingId(): Housing
@@ -196,7 +215,11 @@ class Reservation
         $this->payMethodId = $payMethodId;
     }
 
-
-
-
+    /**
+     * @return Client
+     */
+    public function getClientId(): Client
+    {
+        return $this->clientId;
+    }
 }

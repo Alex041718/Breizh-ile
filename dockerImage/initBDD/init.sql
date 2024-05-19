@@ -268,8 +268,10 @@ CREATE TABLE _Reservation (
     nbPerson integer,
     housingID BIGINT UNSIGNED, -- Correspond au type `serial` dans Housing pour mysql
     payMethodID BIGINT UNSIGNED, -- Correspond au type `serial` dans PaymentMethod pour mysql
+    clientID BIGINT UNSIGNED, -- Correspond au type `serial` dans Client pour mysql
     FOREIGN KEY (housingID) REFERENCES _Housing(housingID),
-    FOREIGN KEY (payMethodID) REFERENCES _PaymentMethod(payMethodID)
+    FOREIGN KEY (payMethodID) REFERENCES _PaymentMethod(payMethodID),
+    FOREIGN KEY (clientID) REFERENCES _Client(clientID)
 );
 
 -- Associations many-to-many et autres contraintes

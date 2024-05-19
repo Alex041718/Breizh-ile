@@ -7,7 +7,7 @@ require_once '../../services/SessionService.php';
 
 
 // Gestion de la session
-SessionService::system('owner','../../html/owner/ownerConnection/owner_connection.php');
+SessionService::system('owner');
 
 
 
