@@ -29,6 +29,7 @@ function autocomplete(inp, arr) {
       /*check if the item starts with the same letters as the text field value:*/
       /*create a DIV element for each matching element:*/
       b = document.createElement("DIV");
+      b.classList.add("autocomplete--popup")
       /*make the matching letters bold:*/
       b.innerHTML = "<strong>" + filteredArray[i].substr(0, val.length) + "</strong>";
       b.innerHTML += filteredArray[i].substr(val.length);

@@ -4,6 +4,9 @@
 class Header {
 
         public static function render($isScrolling = false, $isBackOffice = false) {
+
+            if($isScrolling != false) $tagToScroll = $isScrolling;
+
             $render = /*html*/ '
 
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -18,13 +21,12 @@ class Header {
                 <link rel="stylesheet" href="/components/Header/header.css">
 
                 <header class="">
-                    <div class="header '. ($isScrolling ? 'scroll scrolling' : '' ). ' '. ($isBackOffice ? 'header--backoffice' : '' ). '">
+                    <div data-tag="' . $tagToScroll . '" class="header '. ($isScrolling === true ? 'scroll scrolling' : '' ). ' '. ($isBackOffice ? 'header--backoffice' : '' ). '">
+
                         <a class="logo" href="">
                             <img class="logo-big" src="/assets/images/logo_breizh_noir.png" id="logo" alt="logo_breizh">
                             <img class="logo-small" src="/assets/icons/logo.svg" alt="logo_breizh">
                         </a>
-
-
             ';
             echo $render;
 
@@ -38,7 +40,7 @@ class Header {
             }
             
             if (!$isBackOffice) {
-                SearchBar::render("search-bar search-bar--header","","./monSuperFormulaireQuiVaEtreTraiter", true);
+                SearchBar::render("search-bar search-bar--header","","/#logements", true);
             }
             
             $render =  /*html*/ '

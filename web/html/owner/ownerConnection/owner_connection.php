@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,12 +12,14 @@
 <body>
 
     <div class="connectionContainer">
-        <img src="http://localhost:5555/html/assets/images/logo_breizh_noir.png">
+        <img src="../../assets/images/logo_breizh_noir.png">
         <div class="connectionContainer__box">
             <h3 class="connectionContainer__box__title">Connecter vous à votre compte propriétaire</h3>
             <form action="/controllers/owner/ownerConnectionController.php" method="post">
 
                 <?php require_once("../../components/Input/Input.php"); ?>
+
+                <?= (isset($_SESSION["redirect"]) ? "<input type='hidden' name='redirect' value='" . $_SESSION["redirect"] . "'>" : "") ?>
 
                 <?php Input::render("connection__input", "username", "text", "Identifiant", "username", "Entrez votre identifiant", true); ?>
 

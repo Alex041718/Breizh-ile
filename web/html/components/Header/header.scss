@@ -214,6 +214,17 @@
         animation-duration: 0.2s;
         animation-name: showUp;
         height: 80px;
+        transition: all 0.1s;
+
+        &:has(.search-bar--open) {
+            height: 120px;
+        }
+
+        @media screen and (max-width: 1500px) {
+            .logo-big {
+                width: 150px !important;
+            }
+        }
 
         @media screen and (max-width: 1024px) {
             justify-content: center;
@@ -235,6 +246,8 @@
             .search-bar {
                 display: none !important;
             }
+
+            
     
             
         }

@@ -25,14 +25,14 @@
         
         require_once("./components/Header/header.php");
 
-        Header::render(false);
+        Header::render("search-bar--home");
 
     ?>
     <main>
         <section class="hero-banner">
             <?php
                 require_once("./components/SearchBar/SearchBar.php");
-                SearchBar::render("search-bar--home search-bar--open no-close","","./monSuperFormulaireQuiVaEtreTraiter");
+                SearchBar::render("search-bar--home search-bar--open no-close","",".#logements");
             ?>
             <div class="hero-banner__parallax" id="scene">
                 <img data-depth="0.1" class="house layer" src="assets/images/Houses.png" />
@@ -46,7 +46,123 @@
                 </div>
             </div>
         </section>
-        <section class="logements">
+        <section id="logements" class="logements">
+            <div class="popup__filter">
+                <div method="POST" action="./#logements" class="popup__filter__content">
+                    <?php foreach ($_POST as $key => $value) {
+                        echo '<input type="hidden" name="'. $key . '" value="' . $value . '" />';
+                    }?>
+                    <input type="hidden" />
+                    <div class="popup__filter__top">
+                        <h2>Filtres</h2>
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                    <div class="popup__filter__container">
+                        <h3>Prix</h3>
+                        <div class="popup__filter__container__prices">
+                            <div class="price-input-container">
+                                <div class="price-input"> 
+                                    <div class="price-field"> 
+                                        <span>Prix Minimum</span> 
+                                        <input type="number" 
+                                            class="min-input" 
+                                            value="<?= isset($_POST["maxPrice"]) ? $_POST["minPrice"] : "75" ?>"> 
+                                    </div> 
+                                    <div class="price-field"> 
+                                        <span>Prix Maximum</span> 
+                                        <input type="number" 
+                                            class="max-input" 
+                                            value="<?= isset($_POST["maxPrice"]) ? $_POST["maxPrice"] : "260" ?>"> 
+                                    </div> 
+                                </div> 
+                                <div class="slider-container"> 
+                                    <div class="price-slider"> 
+                                    </div> 
+                                </div> 
+                            </div> 
+                
+                            <!-- Slider -->
+                            <div class="range-input"> 
+                                <input type="range" 
+                                    class="min-range" 
+                                    min="0" 
+                                    max="300" 
+                                    value="75" 
+                                    step="1"> 
+                                <input type="range" 
+                                    class="max-range" 
+                                    min="0" 
+                                    max="300" 
+                                    value="260" 
+                                    step="1"> 
+                            </div> 
+                        </div>
+                        <hr>
+                        <div class="popup__filter__container__category">
+                            <h3>Catégorie</h3>
+                            <div class="popup__filter__container__choices">
+                                <div class="popup__filter__box">
+                                    <input type="checkbox" />
+                                    <p>Appartement</p>
+                                </div>
+                                <div class="popup__filter__box">
+                                    <input type="checkbox" />
+                                    <p>Chalet</p>
+                                </div>
+                                <div class="popup__filter__box">
+                                    <input type="checkbox" />
+                                    <p>Maison</p>
+                                </div>
+                                <div class="popup__filter__box">
+                                    <input type="checkbox" />
+                                    <p>Bateau</p>
+                                </div>
+                                <div class="popup__filter__box">
+                                    <input type="checkbox" />
+                                    <p>Villa d'exception</p>
+                                </div>
+                                <div class="popup__filter__box">
+                                    <input type="checkbox" />
+                                    <p>Logement insolite</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="popup__filter__container__type">
+                            <h3>Type</h3>
+                            <div class="popup__filter__container__choices">
+                            <div class="popup__filter__box">
+                                    <input type="checkbox" />
+                                    <p>T1</p>
+                                </div>
+                                <div class="popup__filter__box">
+                                    <input type="checkbox" />
+                                    <p>T2</p>
+                                </div>
+                                <div class="popup__filter__box">
+                                    <input type="checkbox" />
+                                    <p>T3</p>
+                                </div>
+                                <div class="popup__filter__box">
+                                    <input type="checkbox" />
+                                    <p>T4</p>
+                                </div>
+                                <div class="popup__filter__box">
+                                    <input type="checkbox" />
+                                    <p>T5</p>
+                                </div>
+                                <div class="popup__filter__box">
+                                    <input type="checkbox" />
+                                    <p>T6</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popup__filter__bottom">
+                        <a id="filter_submit" class="btn"a>Valider</a>
+                    </div>
+                </div>
+            </div>
             <h2>Nos logements</h2>
             <div class="logements__filters">
                 <label>Trier par :</label>
@@ -56,98 +172,77 @@
                     <option value="3">Date de mise en ligne (Croissant)</option>
                     <option value="4">Date de mise en ligne (Décroissant)</option>
                 </select>
-                <button>Filtre</button>
+                <button id="filter_button">Filtre</button>
             </div>
             <div class="logements__container">
             <script>
-                cpt = 0
                 const container = document.querySelector(".logements__container")
                 const sorter = document.getElementById("sorter")
+                const filter_submit = document.getElementById("filter_submit")
+
+                let nbPerson = <?= json_encode($_POST['peopleNumber'] ?? null) ?>;
+                let beginDate = <?= json_encode($_POST['startDate'] ?? null) ?>;
+                let endDate = <?= json_encode($_POST['endDate'] ?? null) ?>;
+                let city = <?= json_encode($_POST['searchText'] ?? null) ?>;
+                
+                const minPrice = document.querySelector(".min-input");
+                const maxPrice = document.querySelector(".max-input");
+
+                if(city) city = city.split(' ')[0];
 
                 let sort;
                 let desc = 0;
+                let cpt = 0
+
+                showUser(0, "_Housing.priceExcl", false, false);
 
 
-                sorter.addEventListener("change", function() {
+                filter_submit.addEventListener("click", function() {
+                    showUser(cpt, sort, desc, true);
+                })
 
-                    container.innerHTML = "<span class='loader'></span>";
+                sorter.addEventListener("change", function() {    
                     if(sorter.value == 1) { sort = "_Housing.priceExcl"; desc = 0; }
                     else if(sorter.value == 2) { sort = "_Housing.priceExcl"; desc = 1; }
                     else if(sorter.value == 3) { sort = "_Housing.creationDate"; desc = 0; }
-                    else if(sorter.value == 4) { sort = "_Housing.creationDate"; desc = 1; }
-
-                    cpt = 1
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            container.innerHTML = this.responseText;
-                        }
-                    };
-
-                    xmlhttp.open("GET", "./components/HousingCard/getHousing.php?sort=" + sort + "&desc=" + desc, true);
-                    xmlhttp.send();
+                    else if(sorter.value == 4) { sort = "_Housing.creationDate"; desc = 1; }                
+                    showUser(cpt, sort, desc, true);
                 })
 
-                function showUser() {
+                function showUser(cpt, sort, desc, isFirst) {
+
+                    console.log(desc, sort)
+                    if(isFirst) cpt = 0;
                     const itemsToHide = document.querySelectorAll(".show-more");
 
-                    cpt++;
                     itemsToHide.forEach(itemToHide => {
-                        console.log(itemToHide)
                         itemToHide.remove();
                     });
                     const loader = document.createElement("span");
                     loader.classList.add("loader");
                     container.appendChild(loader);
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            container.removeChild(loader)
-                            container.innerHTML += this.responseText;
-                        }
-                    };
-                    xmlhttp.open("GET", "./components/HousingCard/getHousing.php?q=" + cpt + "&sort=" + sort + "&desc=" + desc, true);
-                    xmlhttp.send();
 
+                    var xmlhttp = new XMLHttpRequest();
+                    const params = `q=${cpt}&sort=${sort}&desc=${desc}&nbPerson=${nbPerson}&beginDate=${beginDate}&endDate=${endDate}&city=${city}&minPrice=${minPrice.value}&maxPrice=${maxPrice.value}`;
+
+                    xmlhttp.open("POST", "./components/HousingCard/getHousing.php", true);
+
+                    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+                    xmlhttp.onreadystatechange = function() {
+                        if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            container.removeChild(loader)
+                            if(isFirst) container.innerHTML = this.responseText;
+                            else container.innerHTML += this.responseText;
+                        }
+                    }
+
+                    xmlhttp.send(params);
+                    cpt++;
 
                 }
             </script>
-                <?php
-                require_once("../services/HousingService.php");
-                require_once("../services/OwnerService.php");
-                require_once("../services/TypeService.php");
-                require_once("../services/CategoryService.php");
-                require_once("../services/ArrangementService.php");
-
-                if(isset($_GET['q']) && $_GET['q'] == "") $q = intval($_GET['q']);
-                else $q = 1;
-
-                
-
-
-                $housings = HousingService::GetHousingsByOffset(0, "_Housing.priceExcl");
-
-
-                if($housings != false) {
-                    for ($i=0; $i < 9; $i++) {
-                        require_once("./components/HousingCard/HousingCard.php");
-                        require_once("../models/Housing.php");
-                        require_once("../models/Type.php");
-                        require_once("../models/Image.php");
-                        require_once("../models/Address.php");
-                        require_once("../models/Category.php");
-                        require_once("../models/Owner.php");
-                        require_once("../models/Gender.php");
-    
-                        HousingCard::render($housings[$i]);
-                    } ?>
-                    <hr class="show-more">
-                    <button onclick="showUser()" class="show-more btn btn--center">Voir d'avantage</button>
-              <?php  } ?>
-
             </div>
-            
-
         </section>
     </main>
     <?php 
