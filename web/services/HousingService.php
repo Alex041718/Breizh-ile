@@ -100,6 +100,7 @@ class HousingService extends Service
         $pdo = self::getPDO();
         $stmt = $pdo->query('SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID WHERE housingID <= 9;');
         $housings = [];
+        
 
         while ($row = $stmt->fetch()) {
 
@@ -122,30 +123,6 @@ class HousingService extends Service
         $row = $stmt->fetch();
         return self::HousingHandler($row);
     }
-
-
-    public static function GetHousingsByFilter($location, $dateBegin, $dateEnd, $nbPersonn) {
-
-        $begin = new DateTime($dateBegin);
-        $end = new DateTime($dateEnd);
-
-
-        $pdo = self::getPDO();
-        $stmt = $pdo->query('SELECT * FROM `_Housing` WHERE noticeCount = '. $nbPersonn .';');
-
-        $housings = [];
-
-        while ($row = $stmt->fetch()) {
-
-            $housings[] = self::HousingHandler($row);
-        }
-
-        if(sizeof($housings) == 0) return false;
-
-
-        return $housings;
-    }
-
   
     public static function GetHousingsByOffset($city, $dateBegin, $dateEnd, $nbPerson, $offset, $order, $desc = false) {
 
@@ -171,8 +148,6 @@ class HousingService extends Service
         $pdo = self::getPDO();
         $stmt = $pdo->query($query);
 
-        $stmt = $pdo->query('SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';');
-
         $housings = [];
 
         while ($row = $stmt->fetch()) {
@@ -181,10 +156,6 @@ class HousingService extends Service
         }
 
         if(sizeof($housings) == 0) return false;
-
-
-        if(sizeof($housings) == 0) return false;
-
 
         return $housings;
     }
