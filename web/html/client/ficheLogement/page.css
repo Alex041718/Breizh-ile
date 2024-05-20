@@ -137,6 +137,9 @@ body {
   flex-direction: column;
   align-items: center;
 }
+.reservation .preparation {
+  width: 75%;
+}
 .reservation h3 {
   align-self: start;
 }
