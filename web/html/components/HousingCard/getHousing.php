@@ -48,6 +48,7 @@
             <hr class="show-more">
             <button onclick="showUser(<?= $q+1 ?>)" class="show-more btn btn--center">Voir d'avantage</button>
         <?php endif; ?>
+
   <?php  }
     else { ?>
         <p class="show-more">Aucun résultat n'a été trouvé...</p>
