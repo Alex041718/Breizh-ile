@@ -78,10 +78,54 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var map = L.map('map').setView([51.505, -0.09], 13);
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/%7Bz%7D/%7By%7D/%7Bx%7D', {
+        attribution: 'ArcGIS'
     }).addTo(map);
+
+
+    let MyControlClass =  L.Control.extend({
+
+        options: {
+            position: 'topleft'
+        },
+
+        onAdd: function(map) {
+            var div = L.DomUtil.create('div', 'leaflet-bar my-control');
+            var myButton = L.DomUtil.create('button', 'my-button-class', div);
+
+
+            let myImage = L.DomUtil.create('img', '', myButton);
+            myImage.src = "https://zestedesavoir.com/media/galleries/16186/1b4da67d-cb8b-4c29-85cb-4633005ea1e9.svg";
+            myImage.style = "margin-left:0px;width:20px;height:20px";
+            L.DomEvent.on(myButton, 'click', function() { changeBackground(); }, this);
+
+            return div;
+        },
+
+        onRemove: function(map) {
+        }
+    });
+
+    let myControl = new MyControlClass().addTo(map);
+
+    function changeBackground(){
+        if(tileType == "OpenStreetMap")
+            {
+                tileType = "ArcGis";
+                L.tileLayer('https://tile.openstreetmap.org/%7Bz%7D/%7Bx%7D/%7By%7D.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+            }
+            else
+            {
+              tileType = "OpenStreetMap";
+
+              selectedTile = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/%7Bz%7D/%7By%7D/%7Bx%7D', {
+                attribution: 'ArcGIS'
+              }).addTo(map);
+        }
+    }
 
     var circle = L.circle([51.508, -0.11], {
         color: 'red',
