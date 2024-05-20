@@ -66,13 +66,13 @@
                                         <span>Prix Minimum</span> 
                                         <input type="number" 
                                             class="min-input" 
-                                            value="<?= isset($_POST["maxPrice"]) ? $_POST["minPrice"] : "75" ?>"> 
+                                            value="<?= isset($_POST["maxPrice"]) ? $_POST["minPrice"] : "0" ?>"> 
                                     </div> 
                                     <div class="price-field"> 
                                         <span>Prix Maximum</span> 
                                         <input type="number" 
                                             class="max-input" 
-                                            value="<?= isset($_POST["maxPrice"]) ? $_POST["maxPrice"] : "260" ?>"> 
+                                            value="<?= isset($_POST["maxPrice"]) ? $_POST["maxPrice"] : "500" ?>"> 
                                     </div> 
                                 </div> 
                                 <div class="slider-container"> 
@@ -86,14 +86,14 @@
                                 <input type="range" 
                                     class="min-range" 
                                     min="0" 
-                                    max="300" 
-                                    value="75" 
+                                    max="500" 
+                                    value="0" 
                                     step="1"> 
                                 <input type="range" 
                                     class="max-range" 
                                     min="0" 
-                                    max="300" 
-                                    value="260" 
+                                    max="500" 
+                                    value="500" 
                                     step="1"> 
                             </div> 
                         </div>

@@ -2,7 +2,7 @@
 require_once '../../../services/SessionService.php';
 
 // Gestion de la session
-SessionService::system('owner', '/owner/consulter_reservations/consulter_reservations.php');
+SessionService::system('owner', '/back/reservations');
 
 ?>
 
@@ -13,7 +13,7 @@ SessionService::system('owner', '/owner/consulter_reservations/consulter_reserva
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultation des réservations</title>
     <link rel="stylesheet" href="../../style/ui.css">
-    <link rel="stylesheet" href="consulter_reservations.css">
+    <link rel="stylesheet" href="/owner/consulter_reservations/consulter_reservations.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
 </head>
 <body>
