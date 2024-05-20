@@ -35,7 +35,7 @@ if (ConnectionService::checkOwner($username, $password)) {
     redirect($redirectPage);
 } else {
     // Connexion échouée, redirection vers la page de connexion
-    redirect('/owner/ownerConnection/owner_connection.php?error=loginFailed');
+    redirect('/back/connection?error=loginFailed');
 }
 
 ?>

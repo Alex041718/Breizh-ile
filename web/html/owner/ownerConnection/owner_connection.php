@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion Compte Propriétaire</title>
     <link rel="stylesheet" href="../../style/ui.css">
-    <link rel="stylesheet" href="owner_connection.css">
+    <link rel="stylesheet" href="/owner/ownerConnection/owner_connection.css">
 </head>
 <body>
 

@@ -1,23 +1,23 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    const header = document.querySelector('.header');
-    const profil = document.getElementById('profil');
-    const options = document.getElementById('options');
-    const oeuil = document.getElementById('oeuil');
-    const popup = document.getElementById('popup');
-    const taille = document.getElementById('taille');
-    const couleurs = document.getElementById('couleurs');
-    const font = document.getElementById('font');
-    const animations = document.getElementById('animations');
-    const parent__taille = document.getElementById('parent__taille');
-    const popup_filters = document.querySelector(".popup__header");
-    const popup_filters_close = popup_filters.querySelector("i");
-    const popup_filters_open = document.getElementById("header__settings");
 
+    var header = document.querySelector('.header');
+    var profil = document.getElementById('profil');
+    var options = document.getElementById('options');
+    var oeuil = document.getElementById('oeuil');
+    var popup = document.getElementById('popup__access');
 
+    var taille = document.getElementById('taille');
+    var couleurs = document.getElementById('couleurs');
+    var font = document.getElementById('font');
+    var animations = document.getElementById('animations');
+
+    var parent__taille = document.getElementById('parent__taille');
+    var parent__couleurs = document.getElementById('parent__couleurs');
+    var parent__animations = document.getElementById('parent__animations');
+    var parent__font = document.getElementById('parent__font');
     
-    let tagToScroll = document.querySelector("." + header.dataset.tag);
 
     if (header.dataset.tag != 1) {
         let tagToScroll = document.querySelector("." + header.dataset.tag);
@@ -36,12 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
             options.style.display = 'none';
         }
     });
-
-    document.addEventListener("scroll", function() {
-        if(document.documentElement.scrollTop > tagToScroll.offsetTop && !header.classList.contains("scrolling")) header.classList.add("scroll");
-        else if(!header.classList.contains("scrolling")) header.classList.remove("scroll");
-    })
-
 
     oeuil.addEventListener('click', function() {
         if (popup.style.display === 'none') {
