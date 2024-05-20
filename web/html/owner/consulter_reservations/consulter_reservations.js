@@ -5,6 +5,9 @@ function main() {
     const checkboxes = document.getElementsByName("checkbox");
     const checkboxAll = document.getElementsByName("checkboxAll");
     const exportationButton = document.getElementById(" exportationButton ");
+    const exportSelectionType = document.querySelectorAll(".export-selection")[0];
+    const closeButton = document.querySelectorAll(".closeExport")[0];
+    const exportCheckboxes = document.querySelectorAll(".checkboxCSV, .checkboxICAL");
 
     let selected_reservations = [];
 
@@ -58,7 +61,7 @@ function main() {
         let xhr = new XMLHttpRequest();
         let params = (sort === "") ? "" : `sort=${sort}&isReverse=${isReverse}`;
 
-        xhr.open("POST", "getReservations.php", true);
+        xhr.open("POST", "/owner/consulter_reservations/getReservations.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         
         xhr.onreadystatechange = function() {
@@ -97,6 +100,26 @@ function main() {
                     showReservations();
                     break;
             }
+        });
+    });
+
+    exportationButton.addEventListener("click", () => {
+        if (!exportSelectionType.classList.contains("export-selection--visible")) {
+            exportSelectionType.classList.toggle("export-selection--visible");
+            exportationButton.innerHTML = '<i class="fa-solid fa-file-export"></i>' + "Valider l'exportation ?";
+        }
+    });
+
+    closeButton.addEventListener("click", () => {
+        exportSelectionType.classList.toggle("export-selection--visible");
+        exportationButton.innerHTML = '<i class="fa-solid fa-file-export"></i>' + "Exporter la sélection";
+    });
+
+    exportCheckboxes.forEach((checkbox) => {
+        checkbox.addEventListener("change", () => {
+            let isAtLeastOneChecked = Array.from(exportCheckboxes).some(checkbox => checkbox.checked);
+            exportationButton.classList.toggle("button--disabled", !isAtLeastOneChecked);
+            exportationButton.disabled = !isAtLeastOneChecked;
         });
     });
 

@@ -1,5 +1,7 @@
 @import '../../style/variables';
 
+$lighterGrey5: #e9e9e9;
+
 body {
     margin: 0;
     padding: 0;
@@ -21,7 +23,7 @@ main {
     margin-bottom: 1rem;
     border-radius: 10px;
     font-weight: bold;
-    background-color: $grey5;
+    background-color: $lighterGrey5;
 
     p {
         width: max(10rem, calc(200vw / 19.2));
@@ -68,9 +70,9 @@ main {
     }
 
     &::-webkit-scrollbar-track {
-        background-color: $grey5;
+        background-color: $lighterGrey5;
         border-radius: 100px;
-        background: $grey5;
+        background: $lighterGrey5;
     }
 }
 
@@ -79,7 +81,7 @@ main {
     align-items: center;
     margin-bottom: 0.6rem;
     padding: 0.4rem 0.6rem;
-    border: 2px solid $grey5;
+    border: 2px solid $lighterGrey5;
     border-radius: 10px;
     height: 2.5rem;
 
@@ -113,11 +115,13 @@ main {
 }
 
 .exportation__button {
+    position: relative;
     margin-top: 1rem;
     margin-bottom: 6rem;
+    z-index: 2;
 }
 
-.export, .filter {
+.export, .filter{
     background: none;
 	color: inherit;
 	border: none;
@@ -131,14 +135,55 @@ main {
 
 .export-selection {
     display: flex;
+    position: absolute;
+    top: 42.8rem;
+    z-index: -1;
     align-items: center;
     margin-bottom: 1rem;
+    background-color: $lighterGrey5;
+    border-radius: 4px;
+    padding: 0.4rem 0.6rem;
+    width: min-content;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+
+    &__CSV, &__ICAL {
+        display: flex;
+        align-items: center;
+        img {
+            margin-right: 6px;
+            margin-left: 10px;
+            height: 24px;
+        }
+    }
 
     &__CSV {
+        margin-right: 0.8rem;
         img {
-            width: 16px;
-            height: 16px;
+            height: 20px;
         }
+    }
+
+    &--visible {
+        transform: translateX(100%);
+        opacity: 1;
+        z-index: 1;
+    }
+
+    .checkboxCSV, .checkboxICAL {
+        margin-right: 0;
+    }
+
+    .closeExport {
+        background: none;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+        margin-left: 0.8rem;
     }
 }
 

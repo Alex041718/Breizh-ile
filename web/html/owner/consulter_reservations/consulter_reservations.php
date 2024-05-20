@@ -50,7 +50,7 @@ SessionService::system('owner', '/back/reservations');
             <button class="filter"><i class="fa-solid fa-filter"></i></button>
         </section>
         <section class="reservations">
-            <script src="consulter_reservations.js"></script>
+            <script src="/owner/consulter_reservations/consulter_reservations.js"></script>
         </section>
         <?php
             require_once("../../components/Button/Button.php");
@@ -60,19 +60,20 @@ SessionService::system('owner', '/back/reservations');
             <section class="export-selection__CSV">
                 <?php
                     require_once("../../components/CheckBox/CheckBox.php");
-                    CheckBox::render(name: "checkboxCSV");
+                    CheckBox::render(name: "checkboxCSV", class: "checkboxCSV", checked: true);
                 ?>
-                <img src="https://cdn-icons-png.flaticon.com/512/9159/9159105.png" alt="icone CSV">
+                <img src="https://static-00.iconduck.com/assets.00/csv-icon-1791x2048-ot22nr8i.png" alt="icone CSV">
                 <p>CSV</p>
             </section>
             <section class="export-selection__ICAL">
                 <?php
                     require_once("../../components/CheckBox/CheckBox.php");
-                    CheckBox::render(name: "checkboxICAL");
+                    CheckBox::render(name: "checkboxICAL", class: "checkboxICAL", checked: true);
                 ?>
                 <img src="https://s3.amazonaws.com/s3.roaringapps.com/assets/icons/1610972759099-Calendar.png" alt="icone iCal">
                 <p>iCal</p>
             </section>
+            <button class="closeExport"><i class="fa-solid fa-xmark"></i></button>
         </section>
     </main>
 

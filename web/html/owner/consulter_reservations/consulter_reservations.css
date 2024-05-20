@@ -19,7 +19,7 @@ main {
   margin-bottom: 1rem;
   border-radius: 10px;
   font-weight: bold;
-  background-color: #E0E0E0;
+  background-color: #e9e9e9;
 }
 .title p {
   width: max(10rem, 10.4166666667vw);
@@ -63,9 +63,9 @@ main {
   background: #082C4C;
 }
 .reservations::-webkit-scrollbar-track {
-  background-color: #E0E0E0;
+  background-color: #e9e9e9;
   border-radius: 100px;
-  background: #E0E0E0;
+  background: #e9e9e9;
 }
 
 .reservation {
@@ -73,7 +73,7 @@ main {
   align-items: center;
   margin-bottom: 0.6rem;
   padding: 0.4rem 0.6rem;
-  border: 2px solid #E0E0E0;
+  border: 2px solid #e9e9e9;
   border-radius: 10px;
   height: 2.5rem;
 }
@@ -103,8 +103,10 @@ main {
 }
 
 .exportation__button {
+  position: relative;
   margin-top: 1rem;
   margin-bottom: 6rem;
+  z-index: 2;
 }
 
 .export, .filter {
@@ -117,6 +119,56 @@ main {
   outline: inherit;
   margin-left: auto;
   margin-right: 4px;
+}
+
+.export-selection {
+  display: flex;
+  position: absolute;
+  top: 42.8rem;
+  z-index: -1;
+  align-items: center;
+  margin-bottom: 1rem;
+  background-color: #e9e9e9;
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  width: -moz-min-content;
+  width: min-content;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+}
+.export-selection__CSV, .export-selection__ICAL {
+  display: flex;
+  align-items: center;
+}
+.export-selection__CSV img, .export-selection__ICAL img {
+  margin-right: 6px;
+  margin-left: 10px;
+  height: 24px;
+}
+.export-selection__CSV {
+  margin-right: 0.8rem;
+}
+.export-selection__CSV img {
+  height: 20px;
+}
+.export-selection--visible {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 1;
+}
+.export-selection .checkboxCSV, .export-selection .checkboxICAL {
+  margin-right: 0;
+}
+.export-selection .closeExport {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  margin-left: 0.8rem;
 }
 
 .no-reservation {

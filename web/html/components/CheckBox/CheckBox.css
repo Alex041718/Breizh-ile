@@ -17,7 +17,7 @@
 .checkbox__input::before {
   content: "";
   display: block;
-  width: 0.65em;
+  width: 0.69em;
   height: 0.66em;
   transform: scale(0);
   transition: 50ms transform ease-in-out;
