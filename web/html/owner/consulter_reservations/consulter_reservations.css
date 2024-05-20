@@ -24,6 +24,27 @@ main {
 .title p {
   width: max(10rem, 10.4166666667vw);
   margin-right: 2rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.title--selected::after {
+  content: "";
+  position: relative;
+  display: inline-block;
+  background-image: url("../../assets/icons/arrow.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 10px;
+  height: 10px;
+  top: 31%;
+  transform: translateY(12%) rotate(180deg);
+  left: 0.3rem;
+  z-index: 999;
+}
+.title--reverse::after {
+  transform: translateY(12%) rotate(0deg);
 }
 
 .reservations {

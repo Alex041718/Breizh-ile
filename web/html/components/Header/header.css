@@ -245,6 +245,12 @@
 .header.header--backoffice .header__right i {
   color: #082C4C;
 }
+.header.header--backoffice .logo-big {
+  filter: brightness(0) saturate(100%) invert(9%) sepia(27%) saturate(6310%) hue-rotate(194deg) brightness(97%) contrast(94%);
+}
+.header.header--backoffice .logo-small {
+  filter: brightness(0) saturate(100%) invert(9%) sepia(27%) saturate(6310%) hue-rotate(194deg) brightness(97%) contrast(94%);
+}
 .header .fa-user {
   font-size: 40px;
 }

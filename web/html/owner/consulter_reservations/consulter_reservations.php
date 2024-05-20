@@ -26,7 +26,8 @@ SessionService::system('owner', '/back/reservations');
         $owner = OwnerService::getOwnerById($_SESSION['user_id']);
 
         $reservations = ReservationService::getAllReservationsByOwnerID($owner->getOwnerID());
-
+        $_SESSION["reservations"] = $reservations;
+        
         $selected_reservations = array();
 
         Header::render(isScrolling: True, isBackOffice: True);
@@ -39,51 +40,22 @@ SessionService::system('owner', '/back/reservations');
                 require_once("../../components/CheckBox/CheckBox.php");
                 CheckBox::render(name: "checkboxAll");
             ?>
-            <p>Date de réservation</p>
-            <p>Client</p>
-            <p>Logement</p>
-            <p>Date d'arrivée</p>
-            <p>Date de départ</p>
-            <p>Méthode de paiement</p>
-            <p>Status</p>
+            <p data-sort="date-resa">Date de réservation</p>
+            <p data-sort="client">Client</p>
+            <p data-sort="logement">Logement</p>
+            <p data-sort="date-arrivee">Date d'arrivée</p>
+            <p data-sort="date-depart">Date de départ</p>
+            <p data-sort="methode-paiement">Méthode de paiement</p>
+            <p data-sort="status">Status</p>
             <button class="filter"><i class="fa-solid fa-filter"></i></button>
         </section>
         <section class="reservations">
-            <?php if (empty($reservations)) { ?>
-                <p class="no-reservation">Vous n'avez aucune réservation.</p>
-            <?php } else { ?>
-            <?php foreach ($reservations as $reservation) { ?>
-            <div class="reservation">
-                <?php
-                    require_once("../../components/CheckBox/CheckBox.php");
-                    CheckBox::render(name: "checkbox");
-                ?>
-                <p><?= $reservation->getBeginDate()->format("d / m / Y") ?></p>
-                <a href="#" class="profile-picture"><img src="<?= $reservation->getClientId()->getImage()->getImageSrc() ?>" alt="profile picture">
-                <?= $reservation->getClientId()->getNickname() ?>
-                </a>
-                <a href="#"><?= $reservation->getHousingId()->getTitle() ?></a>
-                <p><?= $reservation->getBeginDate()->format("d / m / Y") ?></p>
-                <p><?= $reservation->getEndDate()->format("d / m / Y") ?></p>
-                <p><?= $reservation->getPayMethodId()->getLabel() ?></p>
-                <p class="description-status"><?= $reservation->getStatus() ?><span class="status 
-                <?=
-                    match ($reservation->getStatus()) {
-                        "En cours" => "in-progress",
-                        "Terminée" => "done",
-                        "Prochainement" => "coming",
-                        default => ""
-                    }
-                ?>"></span></p>
-                <button class="export"><i class="fa-solid fa-file-export"></i></button>
-            </div>
-            <?php }} ?>
+            <script src="consulter_reservations.js"></script>
         </section>
         <?php
             require_once("../../components/Button/Button.php");
             Button::render("exportation__button", "exportationButton", "Exporter la sélection", ButtonType::Owner, false, false, false, '<i class="fa-solid fa-file-export"></i>'); 
         ?>
-
         <script src="/owner/consulter_reservations/consulter_reservations.js"></script>
     </main>
 
