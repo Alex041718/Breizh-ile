@@ -90,7 +90,7 @@ class HousingService extends Service
     public static function GetAllHousings()
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->query('SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID WHERE housingID <= 9;');
+        $stmt = $pdo->query('SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID;');
         $housings = [];
 
         while ($row = $stmt->fetch()) {
