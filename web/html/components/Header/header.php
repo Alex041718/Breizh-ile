@@ -21,6 +21,7 @@ class Header {
                 <link rel="stylesheet" href="/components/Header/header.css">
 
                 <header class="">
+                
                     <div data-tag="' . $tagToScroll . '" class="header '. ($isScrolling === true ? 'scroll scrolling' : '' ). ' '. ($isBackOffice ? 'header--backoffice' : '' ). '">
 
                         <a class="logo" href="">
