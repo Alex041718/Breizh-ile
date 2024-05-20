@@ -12,7 +12,7 @@ class SessionService {
             if ($role == 'admin') {
                 header('Location: ../../admin/adminConnection.php');
             } else if ($role == 'owner') {
-                header('Location: ../../owner/ownerConnection/owner_connection.php');
+                header('Location: ../../back/connection');
             } else if ($role == 'client') {
                 header('Location: ../../client/clientConnection/client_connection.php');
             } else {

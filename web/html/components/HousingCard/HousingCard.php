@@ -4,6 +4,7 @@
 class HousingCard {
 
     public static function render(Housing $housing, $class = "", $id = "", $action = "") {
+        $housing_id = $housing->getHousingID();
         $housing_name = $housing->getTitle();
         $housing_price = $housing->getPriceExcl();
         $housing_thumbnail = $housing->getImage()->getImageSrc();
@@ -17,7 +18,7 @@ class HousingCard {
 
         $render =  /*html*/ '            
             
-        <a href="client/ficheLogement/page.php" class="housing-card '. $class . ' " id=" ' . $id . ' ">
+        <a href="logement?id='. $housing_id .'" class="housing-card '. $class . ' " id=" ' . $id . ' ">
             <img class="housing-card__thumbnail" src="' . $housing_thumbnail . '">
             <div class="housing-card__content">
                 <div class="housing-card__content__owner">
