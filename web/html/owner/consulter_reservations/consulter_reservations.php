@@ -56,7 +56,24 @@ SessionService::system('owner', '/owner/consulter_reservations/consulter_reserva
             require_once("../../components/Button/Button.php");
             Button::render("exportation__button", "exportationButton", "Exporter la sélection", ButtonType::Owner, false, false, false, '<i class="fa-solid fa-file-export"></i>'); 
         ?>
-        <script src="checkBox.js"></script>
+        <section class="export-selection">
+            <section class="export-selection__CSV">
+                <?php
+                    require_once("../../components/CheckBox/CheckBox.php");
+                    CheckBox::render(name: "checkboxCSV");
+                ?>
+                <img src="https://cdn-icons-png.flaticon.com/512/9159/9159105.png" alt="icone CSV">
+                <p>CSV</p>
+            </section>
+            <section class="export-selection__ICAL">
+                <?php
+                    require_once("../../components/CheckBox/CheckBox.php");
+                    CheckBox::render(name: "checkboxICAL");
+                ?>
+                <img src="https://s3.amazonaws.com/s3.roaringapps.com/assets/icons/1610972759099-Calendar.png" alt="icone iCal">
+                <p>iCal</p>
+            </section>
+        </section>
     </main>
 
     <?php

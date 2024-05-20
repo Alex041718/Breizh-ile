@@ -129,6 +129,19 @@ main {
     margin-right: 4px;
 }
 
+.export-selection {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    &__CSV {
+        img {
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+
 .no-reservation {
     display: flex;
     justify-content: center;
