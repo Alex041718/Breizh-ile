@@ -9,6 +9,7 @@ class OwnerNavBar {
         );
 
         $render = /*html*/ '
+            <link rel="stylesheet" href="../../components/OwnerNavBar/ownerNavBar.css">
             <nav class="owner-nav-bar">
                 <ul>
         ';

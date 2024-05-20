@@ -136,6 +136,30 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('close-popup').addEventListener('click', closePopupSavoir);
 
     popupOverlaSsavoir.addEventListener('click', closePopupSavoir);
+
+    // Fonction pour afficher la pop-up
+    function showPopupCriteres() {
+        document.getElementById('popup-critere').classList.add('show');
+        document.getElementById('overlay-critere').style.display = 'block';
+        body.classList.add('popup-active'); // Empêche le défilement de la page
+    }
+
+    // Fonction pour cacher la pop-up
+    function closePopupCriteres() {
+        document.getElementById('popup-critere').classList.remove('show');
+        document.getElementById('overlay-critere').style.display = 'none';
+        body.classList.remove('popup-active'); // Réactive le défilement de la page
+    }
+
+    // Ajout de l'événement de clic sur le bouton "Afficher les critères"
+    document.querySelector('.criteres').addEventListener('click', showPopupCriteres);
+
+    // Ajout de l'événement de clic sur le bouton "Fermer" de la pop-up
+    document.getElementById('closePopupCritereBtn').addEventListener('click', closePopupCriteres);
+
+    document.getElementById('overlay-critere').addEventListener('click', closePopupCriteres);
+
+  
 });
 
 const inputs = document.querySelectorAll(".datepicker input[type=date]");

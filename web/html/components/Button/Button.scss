@@ -11,7 +11,9 @@
   transition: background-color 0.3s, color 0.3s, border 0.3s;
   border: none;
 
-
+  i {
+    margin-right: 4px !important;
+  }
 
   &--client {
     background-color: variables.$clientPrimaryColor;
@@ -32,7 +34,6 @@
           background-color: variables.$grey6 !important;
         }
     }
-
   }
 
   &--owner {
@@ -78,4 +79,15 @@
     }
   }
 
+  &--disabled {
+    background-color: variables.$grey5;
+    color : variables.$grey3;
+    border: 2px solid variables.$grey5;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: variables.$grey5;
+      border: 2px solid variables.$grey5;
+    }
+  }
 }

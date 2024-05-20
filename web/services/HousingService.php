@@ -5,6 +5,13 @@ require_once 'Service.php';
 require_once __ROOT__.'/models/Housing.php';
 require_once __ROOT__.'/models/Address.php';
 
+require_once 'AddressService.php';
+require_once 'TypeService.php';
+require_once 'CategoryService.php';
+require_once 'OwnerService.php';
+require_once 'ImageService.php';
+require_once 'ArrangementService.php';
+
 class HousingService extends Service
 {
     public static function CreateHousing(Housing $housing)
@@ -80,8 +87,10 @@ class HousingService extends Service
 
         if($row['priceIncl'] == null) $row['priceIncl'] = 0;
         if($row['priceExcl'] == null) $row['priceExcl'] = 0;
-        if($row['beginDate'] == null) $row['beginDate'] = new DateTime("now");
-        if($row['endDate'] == null) $row['endDate'] = new DateTime("now");
+
+      
+        $row['beginDate'] = ($row['beginDate'] == null) ? new DateTime("now") : new DateTime($row['beginDate']);
+        $row['endDate'] = ($row['endDate'] == null) ? new DateTime("now") : new DateTime($row['endDate']);
         $row['creationDate'] = new DateTime("now");
 
         return new Housing($row['housingID'] , $row['title'], $row['shortDesc'], $row['longDesc'], $row['priceExcl'], $row['priceIncl'], $row['nbPerson'],$row['nbRoom'], $row['nbDoubleBed'], $row['nbSimpleBed'], $row['longitude'], $row['latitude'], $row['isOnline'], $row['noticeCount'], $beginDate, $endDate, $creationDate, $row['surfaceInM2'], $type, $category, $address, $owner, $image, $arrangements);
@@ -92,6 +101,7 @@ class HousingService extends Service
         $pdo = self::getPDO();
         $stmt = $pdo->query('SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID;');
         $housings = [];
+        
 
         while ($row = $stmt->fetch()) {
 
@@ -114,47 +124,28 @@ class HousingService extends Service
         $row = $stmt->fetch();
         return self::HousingHandler($row);
     }
-
-
-    public static function GetHousingsByFilter($location, $dateBegin, $dateEnd, $nbPersonn) {
-
-        $begin = new DateTime($dateBegin);
-        $end = new DateTime($dateEnd);
-
-
-        $pdo = self::getPDO();
-        $stmt = $pdo->query('SELECT * FROM `_Housing` WHERE noticeCount = '. $nbPersonn .';');
-
-        $housings = [];
-
-        while ($row = $stmt->fetch()) {
-
-            $housings[] = self::HousingHandler($row);
-        }
-
-        if(sizeof($housings) == 0) return false;
-
-
-        return $housings;
-    }
-
   
-    public static function GetHousingsByOffset($city, $dateBegin, $dateEnd, $nbPerson, $offset, $order, $desc = false) {
+    public static function GetHousingsByOffset($city, $dateBegin, $dateEnd, $nbPerson, $minPrice, $maxPrice, $offset, $order, $desc = false) {
 
-        $isAnd = (isset($city) || isset($dateBegin) || isset($dateEnd) || isset($nbPerson));
+        $isAnd = (isset($city) || isset($dateBegin) || isset($dateEnd) || isset($nbPerson) || isset($minPrice) || isset($maxPrice));
 
         if($isAnd) {
             
             $chaine = "WHERE ";
     
-            if(isset($city)) $chaine = $chaine . '_Address.city = "' . $city . '"' . ((isset($dateBegin) || isset($dateEnd) || isset($nbPerson)) ? " AND " : " ");
+            if(isset($city)) $chaine = $chaine . '_Address.city = "' . $city . '"' . ((isset($dateBegin) || isset($dateEnd) || isset($nbPerson) || isset($minPrice) || isset($maxPrice)) ? " AND " : " ");
             
-            if(isset($dateBegin)) $chaine = $chaine . "_Housing.beginDate < '" . $dateBegin . "'". ((isset($dateEnd) | isset($nbPerson)) ? " AND " : " ");
+            if(isset($dateBegin)) $chaine = $chaine . "_Housing.beginDate < '" . $dateBegin . "'". ((isset($dateEnd) | isset($nbPerson) || isset($minPrice) || isset($maxPrice)) ? " AND " : " ");
     
-            if(isset($dateEnd)) $chaine = $chaine . "_Housing.endDate > '" . $dateEnd . "'". (isset($nbPerson) ? " AND " : " ");
+            if(isset($dateEnd)) $chaine = $chaine . "_Housing.endDate > '" . $dateEnd . "'". ((isset($nbPerson) || isset($minPrice) || isset($maxPrice)) ? " AND " : " ");
+
+            if(isset($nbPerson)) $chaine = $chaine . "_Housing.nbPerson >= " . $nbPerson . ((isset($minPrice) || isset($maxPrice)) ? " AND " : " ");
+
+            if(isset($minPrice)) $chaine = $chaine . "_Housing.priceExcl >= " . $minPrice . " ". (isset($maxPrice) ? " AND " : " ");
+
+            if(isset($maxPrice)) $chaine = $chaine . "_Housing.priceExcl <= " . $maxPrice . " ";
 
     
-            if(isset($nbPerson)) $chaine = $chaine . "_Housing.nbPerson >= " . $nbPerson . " ";
         }
         else $chaine = "";
 
@@ -163,8 +154,6 @@ class HousingService extends Service
         $pdo = self::getPDO();
         $stmt = $pdo->query($query);
 
-        $stmt = $pdo->query('SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';');
-
         $housings = [];
 
         while ($row = $stmt->fetch()) {
@@ -173,10 +162,6 @@ class HousingService extends Service
         }
 
         if(sizeof($housings) == 0) return false;
-
-
-        if(sizeof($housings) == 0) return false;
-
 
         return $housings;
     }

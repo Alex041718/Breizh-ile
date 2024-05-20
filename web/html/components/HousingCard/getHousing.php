@@ -17,8 +17,8 @@
         $sort = "_Housing.priceExcl";
     }
 
-    if(isset($_POST['desc']) && $_POST['desc'] == 1) $desc = true;
-    else $desc = false;
+    if(isset($_POST['desc']) && $_POST['desc'] == 1) $desc = 1;
+    else $desc = 0;
     if(isset($_POST["nbPerson"]) && $_POST["nbPerson"] != "" && $_POST["nbPerson"] != "null") $nbPerson = $_POST["nbPerson"];
     else $nbPerson = null;
     if(isset($_POST["city"]) && $_POST["city"] != "" && $_POST["city"] != "null") $city = $_POST["city"];
@@ -27,9 +27,12 @@
     else $beginDate = null;
     if(isset($_POST["endDate"]) && $_POST["endDate"] != "" && $_POST["endDate"] != "null") $endDate = $_POST["endDate"];
     else $endDate = null;
+    if(isset($_POST["minPrice"]) && $_POST["minPrice"] != "" && $_POST["minPrice"] != "null") $minPrice = $_POST["minPrice"];
+    else $minPrice = null;
+    if(isset($_POST["maxPrice"]) && $_POST["maxPrice"] != "" && $_POST["maxPrice"] != "null") $maxPrice = $_POST["maxPrice"];
+    else $maxPrice = null;
 
-    $housings = HousingService::GetHousingsByOffset($city, $beginDate, $endDate, $nbPerson, $q*9, $sort, $desc);
-
+    $housings = HousingService::GetHousingsByOffset($city, $beginDate, $endDate, $nbPerson, $minPrice, $maxPrice, $q*9, $sort, $desc);
 
     if($housings != false && sizeof($housings) > 0) {
         for ($i=0; $i < count($housings); $i++) {
@@ -46,7 +49,7 @@
         }
         if(sizeof($housings) == 9): ?>
             <hr class="show-more">
-            <button onclick="showUser(<?= $q+1 ?>)" class="show-more btn btn--center">Voir d'avantage</button>
+            <button onclick='showUser(<?= $q+1 ?>,"<?= $sort ?>", <?= $desc ?>, false)' class="show-more btn btn--center">Voir d'avantage</button>
         <?php endif; ?>
 
   <?php  }

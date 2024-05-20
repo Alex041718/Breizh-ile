@@ -21,78 +21,7 @@ class Header {
                 <link rel="stylesheet" href="/components/Header/header.css">
 
                 <header class="">
-                    <div class="popup__header">
-                        <div class="popup__header__content">
-                            <div class="popup__header__top">
-                                <h2>Filtres</h2>
-                                <i class="fa-solid fa-xmark"></i>
-                            </div>
-                            <div class="popup__header__container">
-                                <div class="popup__header__container__category">
-                                    <h3>Catégorie</h3>
-                                    <div class="popup__header__container__choices">
-                                        <div class="popup__header__box">
-                                            <input type="checkbox" />
-                                            <p>Appartement</p>
-                                        </div>
-                                        <div class="popup__header__box">
-                                            <input type="checkbox" />
-                                            <p>Chalet</p>
-                                        </div>
-                                        <div class="popup__header__box">
-                                            <input type="checkbox" />
-                                            <p>Maison</p>
-                                        </div>
-                                        <div class="popup__header__box">
-                                            <input type="checkbox" />
-                                            <p>Bateau</p>
-                                        </div>
-                                        <div class="popup__header__box">
-                                            <input type="checkbox" />
-                                            <p>Villa d\'exception</p>
-                                        </div>
-                                        <div class="popup__header__box">
-                                            <input type="checkbox" />
-                                            <p>Logement insolite</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="popup__header__container__type">
-                                    <h3>Type</h3>
-                                    <div class="popup__header__container__choices">
-                                    <div class="popup__header__box">
-                                            <input type="checkbox" />
-                                            <p>T1</p>
-                                        </div>
-                                        <div class="popup__header__box">
-                                            <input type="checkbox" />
-                                            <p>T2</p>
-                                        </div>
-                                        <div class="popup__header__box">
-                                            <input type="checkbox" />
-                                            <p>T3</p>
-                                        </div>
-                                        <div class="popup__header__box">
-                                            <input type="checkbox" />
-                                            <p>T4</p>
-                                        </div>
-                                        <div class="popup__header__box">
-                                            <input type="checkbox" />
-                                            <p>T5</p>
-                                        </div>
-                                        <div class="popup__header__box">
-                                            <input type="checkbox" />
-                                            <p>T6</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="popup__header__bottom">
-                                <a class="btn">Valider</a>
-                            </div>
-                        </div>
-                    </div>
+                
                     <div data-tag="' . $tagToScroll . '" class="header '. ($isScrolling === true ? 'scroll scrolling' : '' ). ' '. ($isBackOffice ? 'header--backoffice' : '' ). '">
 
                         <a class="logo" href="">
@@ -141,27 +70,30 @@ class Header {
                             <p>Mon profil</p>
                         </div>
                     </div>
-                    <div id="popup" class="popup" style="display:none">
-                        <h2>Accessibilité</h2>
-                        <div class="popup__options">
-                            <div class="popup__options__couleurfont">
-                                <div id="parent__couleurs">
-                                    <p class="para--18px" id="couleurs">Couleurs</p>
+                    <div id="popup__access" class="popup__access">
+                        <div class="popup__content" >
+                            <h2>Accessibilité</h2>
+                            <div class="popup__options">
+                                <div class="popup__options__couleurfont">
+                                    <div id="parent__couleurs">
+                                        <p class="para--18px" id="couleurs">Couleurs</p>
+                                    </div>
+                                    <div id="parent__font">
+                                        <p class="para--18px" id="font">Font police</p>
+                                    </div>
                                 </div>
-                                <div id="parent__font">
-                                    <p class="para--18px" id="font">Font police</p>
-                                </div>
-                            </div>
-                            <div>
-                                <div id="parent__taille">   
-                                    <p class="para--18px" id="taille">Police taille</p>
-                                </div>
-                                <div id="parent__animations">   
-                                    <p class="para--18px" id="animations">Animations</p>
+                                <div>
+                                    <div id="parent__taille">   
+                                        <p class="para--18px" id="taille">Police taille</p>
+                                    </div>
+                                    <div id="parent__animations">   
+                                        <p class="para--18px" id="animations">Animations</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>                    
+
             </header>
         ';
 
