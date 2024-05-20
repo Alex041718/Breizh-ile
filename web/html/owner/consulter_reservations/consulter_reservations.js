@@ -7,7 +7,7 @@ function main() {
     const exportationButton = document.getElementById(" exportationButton ");
     const exportSelectionType = document.querySelectorAll(".export-selection")[0];
     const closeButton = document.querySelectorAll(".closeExport")[0];
-    const exportCheckboxes = document.querySelectorAll(".checkboxCSV, .checkboxICAL");
+    const exportCheckboxes = document.querySelectorAll('[name="checkboxCSV"], [name="checkboxICAL"]');
 
     let selected_reservations = [];
 
@@ -73,6 +73,25 @@ function main() {
         xhr.send(params);
     }
 
+    function exportReservations(type) {
+        fetch("/owner/consulter_reservations/exportReservations.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `type=${type}&reservations=${selected_reservations.join(",")}`
+        })
+        .then(response => response.text())
+        .then(data => {
+            let a = document.createElement("a");
+            let file = new Blob([data], {type: "text/plain"});
+            a.href = URL.createObjectURL(file);
+            a.download = "reserverations_" + Date.now() + "." + (type === 0 ? "csv" : "ical");
+            a.click();
+            a.remove();
+        });
+    }
+
     columns.forEach((column) => {
         column.addEventListener("click", () => {
             let sort = column.dataset.sort;
@@ -107,6 +126,13 @@ function main() {
         if (!exportSelectionType.classList.contains("export-selection--visible")) {
             exportSelectionType.classList.toggle("export-selection--visible");
             exportationButton.innerHTML = '<i class="fa-solid fa-file-export"></i>' + "Valider l'exportation ?";
+        } else {
+            exportCheckboxes.forEach((checkbox, index) => {
+                if (checkbox.checked) {
+                    let type = index;
+                    exportReservations(type);
+                }
+            });
         }
     });
 
@@ -115,7 +141,7 @@ function main() {
         exportationButton.innerHTML = '<i class="fa-solid fa-file-export"></i>' + "Exporter la sélection";
     });
 
-    exportCheckboxes.forEach((checkbox) => {
+    exportCheckboxes.forEach((checkbox, index) => {
         checkbox.addEventListener("change", () => {
             let isAtLeastOneChecked = Array.from(exportCheckboxes).some(checkbox => checkbox.checked);
             exportationButton.classList.toggle("button--disabled", !isAtLeastOneChecked);
