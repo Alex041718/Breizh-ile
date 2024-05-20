@@ -49,13 +49,13 @@ class SessionService {
     /**
      * Authentifie un utilisateur.
      * @param int $userId
-     * @param string $username
+     * @param string $mail
      * @param string $role
      */
-    public static function authenticate($userId, $username, $role) {
+    public static function authenticate($userId, $mail, $role) {
         self::startSession();
         $_SESSION['user_id'] = $userId;
-        $_SESSION['username'] = $username;
+        $_SESSION['mail'] = $mail;
         $_SESSION['role'] = $role;
         $_SESSION['logged_in'] = true;
         $_SESSION['last_activity'] = time();

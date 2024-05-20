@@ -21,7 +21,7 @@
 
                 <?= (isset($_SESSION["redirect"]) ? "<input type='hidden' name='redirect' value='" . $_SESSION["redirect"] . "'>" : "") ?>
 
-                <?php Input::render("connection__input", "username", "text", "Identifiant", "username", "Entrez votre identifiant", true); ?>
+                <?php Input::render("connection__input", "mail", "text", "E-mail", "mail", "Entrez votre e-mail", true); ?>
 
                 <?php Input::render("connection__input", "password", "password", "Mot de Passe", "password", "Entrez votre mot de passe", true); ?>
 

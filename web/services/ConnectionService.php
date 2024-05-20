@@ -30,12 +30,12 @@ class ConnectionService extends Service
         return $admin['adminID'];
     }
 
-    public static function CheckClient(string $nickname, string $password): bool
+    public static function CheckClient(string $mail, string $password): bool
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->prepare('SELECT * FROM Client WHERE nickname = :nickname');
+        $stmt = $pdo->prepare('SELECT * FROM Client WHERE mail = :mail');
         $stmt->execute([
-            'nickname' => $nickname
+            'mail' => $mail
         ]);
         $client = $stmt->fetch();
         if (!$client) {
@@ -44,23 +44,24 @@ class ConnectionService extends Service
         return password_verify($password, $client['password']);
     }
 
-    public static function GetClientID(string $nickname): int
+    public static function GetClientID(string $mail): int
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->prepare('SELECT clientID FROM Client WHERE nickname = :nickname');
+        $stmt = $pdo->prepare('SELECT clientID FROM Client WHERE mail = :mail');
         $stmt->execute([
-            'nickname' => $nickname
+            'mail' => $mail
         ]);
         $client = $stmt->fetch();
+
         return $client['clientID'];
     }
 
-    public static function CheckOwner(string $nickname, string $password): bool
+    public static function CheckOwner(string $mail, string $password): bool
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->prepare('SELECT * FROM Owner WHERE nickname = :nickname');
+        $stmt = $pdo->prepare('SELECT * FROM Owner WHERE mail = :mail');
         $stmt->execute([
-            'nickname' => $nickname
+            'mail' => $mail
         ]);
         $owner = $stmt->fetch();
         // le cas où on a pas trouvé le propriétaire
@@ -70,12 +71,12 @@ class ConnectionService extends Service
         return password_verify($password, $owner['password']);
     }
 
-    public static function GetOwnerID(string $nickname): int
+    public static function GetOwnerID(string $mail): int
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->prepare('SELECT ownerID FROM Owner WHERE nickname = :nickname');
+        $stmt = $pdo->prepare('SELECT ownerID FROM Owner WHERE mail = :mail');
         $stmt->execute([
-            'nickname' => $nickname
+            'mail' => $mail
         ]);
         $owner = $stmt->fetch();
         return $owner['ownerID'];
