@@ -17,7 +17,7 @@ body {
 }
 
 .photo {
-    width: 100%
+    width: 100%;
     img {
         width: 100%;
         max-height: 500px;
@@ -162,6 +162,7 @@ body {
     flex-direction: column;
     align-items: center;
 
+
     h3{
         align-self: start;
 
@@ -179,7 +180,9 @@ body {
             border-radius: 20px;
             border: gray;
             background-color: #307B5C;
-            color: white;           
+            color: white;        
+            cursor: pointer;
+   
         }
     }
 
@@ -213,12 +216,13 @@ body {
         border-top: none;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
-        width: 32.7em;
+        width: 100%;
         height: 5em;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
     }
 }
 
@@ -230,6 +234,7 @@ body {
     .arrivee {
         display: flex;
         flex-direction: column;
+        width: 100%;
         align-items: center;
         border: 1px solid gray;
         border-right: none;
@@ -249,6 +254,7 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
         border: 1px solid gray;
         border-left: none;
         border-top-right-radius: 10px;
@@ -271,6 +277,8 @@ body {
         bottom: 0;
         background-color: black;
         color: white;
+        cursor: pointer;
+
     }
 
     .description {
@@ -284,8 +292,10 @@ body {
             position: relative;
             margin: 20px;
             height: 90%;
-            p {
+            p#button-savoir {
                 margin-top: 10px;
+                cursor: pointer;
+
             }
 
             #truncate-text {
@@ -323,10 +333,10 @@ body {
     gap: 1em;
 
     img {
-        width: 70px; // Définissez la largeur de votre image
-        height: 70px; // Définissez la hauteur de votre image
-        border-radius: 50%; // Rend l'image ronde
-        overflow: hidden; // Masque toute partie de l'image en dehors du cadre arrondi
+        width: 70px; 
+        height: 70px; 
+        border-radius: 50%; 
+        overflow: hidden; 
     }
 }
 
@@ -410,6 +420,7 @@ body {
     position: fixed;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
     width: 35em;
     height: 40em;
     background-color: white;
@@ -418,7 +429,7 @@ body {
     border-radius: 20px;
     z-index: 9999;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
-    overflow-y: auto; /* Autoriser le défilement vertical si le contenu dépasse la taille de la fenêtre */
+    overflow-y: auto; 
 
     #close-popup {
         position: absolute;

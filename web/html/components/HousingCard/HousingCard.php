@@ -17,7 +17,7 @@ class HousingCard {
 
         $render =  /*html*/ '            
             
-        <div class="housing-card '. $class . ' " id=" ' . $id . ' ">
+        <a href="client/ficheLogement/page.php" class="housing-card '. $class . ' " id=" ' . $id . ' ">
             <img class="housing-card__thumbnail" src="' . $housing_thumbnail . '">
             <div class="housing-card__content">
                 <div class="housing-card__content__owner">
@@ -40,7 +40,7 @@ class HousingCard {
                     <h3>' . $housing_price . '€<span>/nuit</span></h3>
                 </div>
             </div>
-        </div>
+        </a>
         ';
 
         echo $render;

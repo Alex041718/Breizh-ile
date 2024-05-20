@@ -26,7 +26,7 @@ class ReservationService extends Service
     {
         $pdo = self::getPDO();
         $stmt = $pdo->query('
-            SELECT * FROM _Reservation R 
+            SELECT *, R.beginDate as r_begin_date, R.endDate as r_end_date FROM _Reservation R 
             JOIN _Housing H ON R.housingID = H.housingID 
             JOIN _Owner O ON H.ownerID = O.ownerID
             WHERE O.ownerID = ' . $ownerID . '
@@ -35,7 +35,7 @@ class ReservationService extends Service
 
         $reservationList = [];
 
-        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+        while ($row = $stmt->fetch()) {
             $reservationList[] = self::ReservationHandler($row);
         }
 
@@ -44,39 +44,39 @@ class ReservationService extends Service
 
     public static function ReservationHandler(array $row): Reservation
     {
+
         //Permet de faire le lien avec le logement de la réservation
-        $housing = HousingService::GetHousingById($row[7]);
+        $housing = HousingService::GetHousingById($row['housingID']);
+        
+        $payMethod = PayementMethodService::GetPayementMethodById($row['payMethodID']);
 
-        $payMethod = PayementMethodService::GetPayementMethodById($row[8]);
+        $client = ClientService::getClientById($row['clientID']);
 
-        $client = ClientService::getClientById($row[9]);
+        if($row['serviceCharge'] == null) $row['serviceCharge'] = 0.0;
+        if($row['touristTax'] == null) $row['touristTax'] = 0.0;
 
-        $row[1] = ($row[2] == null) ? new DateTime("now") : new DateTime($row[1]);
-        $row[2] = ($row[2] == null) ? new DateTime("now") : new DateTime($row[2]);
+        $beginDate = new DateTime($row['r_begin_date']);
+        $endDate = new DateTime($row['r_end_date']);
+        
+        return new Reservation($row['reservationID'], $beginDate, $endDate, $row['serviceCharge'], $row['touristTax'], $row['status'], $row['nbPerson'], $housing, $payMethod, $client);
 
-        if($row[3] == null) $row[3] = 0.0;
-        if($row[4] == null) $row[4] = 0.0;
-
-        return new Reservation($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $housing, $payMethod, $client);
     }
 
     public static function getReservationByID(int $reservationID): Reservation
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->query('SELECT * FROM _Reservation WHERE reservationID = ' . $reservationID);
+        $stmt = $pdo->query('SELECT *, R.beginDate as r_begin_date, R.endDate as r_end_date FROM _Reservation R WHERE reservationID = ' . $reservationID);
         $row = $stmt->fetch();
         return self::ReservationHandler($row);
     }
 
-    public static function getNbJoursReservation(string $beginDate, string $dateFin): int
+    public static function getNbJoursReservation(DateTime $beginDate, DateTime $endDate): int
     {
-        $dateDebut = new DateTime($beginDate);
-        $dateFin = new DateTime($dateFin);
-        if ($dateDebut != $dateFin){
-            return $dateDebut->diff($dateFin)->days;
+        if ($beginDate != $endDate){
+            return $beginDate->diff($endDate)->days;
         }
         else{
-            return 0;
+            return 1;
         }
     }
 }
