@@ -41,6 +41,26 @@ class ReservationService extends Service
 
         return $reservationList;
     }
+    
+    public static function getAllReservationsByClientID(int $clientID)
+    {
+        $pdo = self::getPDO();
+        $stmt = $pdo->query('
+            SELECT *, R.beginDate as r_begin_date, R.endDate as r_end_date FROM _Reservation R 
+            JOIN _Housing H ON R.housingID = H.housingID 
+            JOIN _Client O ON H.clientID = O.clientID
+            WHERE O.clientID = ' . $clientID . '
+            ORDER BY R.beginDate;
+        ');
+
+        $reservationList = [];
+
+        while ($row = $stmt->fetch()) {
+            $reservationList[] = self::ReservationHandler($row);
+        }
+
+        return $reservationList;
+    }
 
     public static function ReservationHandler(array $row): Reservation
     {
