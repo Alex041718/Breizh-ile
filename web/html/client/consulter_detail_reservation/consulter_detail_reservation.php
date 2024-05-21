@@ -1,8 +1,27 @@
 <?php
+
+
+
+
+
     if(!isset($_GET['reservationID']) || $_GET['reservationID'] == "") {
-        header('Location: /client/consulter_reservations/consulter_reservations.php'); 
+        header('Location: /');
         exit();
     };
+
+    // ------------------- Systeme de session -------------------
+    // Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
+    require_once '../../../models/Client.php';
+    require_once '../../../services/ClientService.php';
+    require_once '../../../services/SessionService.php'; // pour le menu du header
+
+    // Vérification de l'authentification de l'utilisateur
+
+    SessionService::system('client', '/detail-reservation?reservationID=' . $_GET['reservationID']);
+    $isAuthenticated = SessionService::isClientAuthenticated();
+    // ----------------------------------------------------------
+
+
 
     /*require_once '../../../services/SessionService.php';
 
@@ -10,7 +29,7 @@
     SessionService::system('client', '/reservations');*/
 
 
-    
+
     require_once("../../../services/ReservationService.php");
     require_once("../../../services/HousingService.php");
     require_once("../../../services/ClientService.php");
@@ -34,7 +53,7 @@
     }
 
     if (!$reservationIsOK){
-        header('Location: /client/consulter_reservations/consulter_reservations.php'); 
+        header('Location: /client/consulter_reservations/consulter_reservations.php');
         exit();
     }*/
 
@@ -69,11 +88,11 @@
 <?php
 
     require_once("../../components/Header/header.php");
-    Header::render(true);
+    Header::render(true,false, $isAuthenticated, '/detail-reservation?reservationID=' . $_GET['reservationID']);
 
     $reservation = ReservationService::getReservationByID($_GET['reservationID']);
     $housing = HousingService::GetHousingById($reservation->getHousingId()->getHousingID());
-    
+
 
     $reservation_dateDebut = $reservation->getBeginDate();
     $reservation_dateFin =  $reservation->getEndDate();
@@ -87,7 +106,7 @@
     $reservation_touristTax =  $reservation->getTouristTax();
     $reservation_nbPersonnes =  $reservation->getNbPerson();
     $reservation_prixCalc = $reservation_prixExcl * $reservation_nbJours * $reservation_nbPersonnes;
-    
+
     $owner_pp = $housing->getOwner()->getImage()->getImageSrc();
     $owner_telephone = $housing->getOwner()->getPhoneNumber();
     $owner_mail = $housing->getOwner()->getMail();
@@ -159,7 +178,7 @@
 
                         </div>
                         <div class="informations__right__desc__info__icons">
-                            <i id="telephone" class="fa-solid fa-phone"></i>                    
+                            <i id="telephone" class="fa-solid fa-phone"></i>
                             <i id="mail" class="fa-solid fa-envelope"></i>
                         </div>
                     </div>
@@ -179,7 +198,7 @@
                 </div>
             </section>
         </article>
-        
+
     </main>
 
 <?php

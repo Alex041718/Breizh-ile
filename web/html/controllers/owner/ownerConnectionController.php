@@ -11,7 +11,7 @@ require_once '../../../services/ConnectionService.php';
 
 
 // Récupération de la page de redirection, avec gestion du fallback, quand l'admin veut accéder à une page protégée mais qu'il n'est plus connecté
-$redirectPage = $_POST['redirect'] ?? '/owner/pageTemporaire.php';
+$redirectPage = $_POST['redirect'] ?? '/back/reservations';
 
 $redirectPage = urldecode($redirectPage);
 function redirect($url)

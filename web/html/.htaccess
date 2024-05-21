@@ -28,6 +28,8 @@ RewriteRule ^detail-reservation$ /client/consulter_detail_reservation/consulter_
 
 # REDIRECTIONS PROPRIETAIRE #
 
+# Rediriger /back vers /back/connection
+RewriteRule ^back$ /back/connection [L]
 
 # Rediriger /back/connection vers /owner/ownerConnection/owner_connection.php
 RewriteRule ^back/connection$ /owner/ownerConnection/owner_connection.php [L]
