@@ -3,7 +3,7 @@ require_once '../../models/Client.php';
 require_once '../../models/Image.php';
 require_once '../../models/Gender.php';
 require_once '../../models/Address.php';
-
+require_once '../../services/ClientService.php';
 // Création d'une instance de la classe Address
 $address = new Address(
     null, // addressID
@@ -25,7 +25,7 @@ $gender = new Gender(
 );
 
 // Création d'une instance de la classe Client avec les données fournies
-$client = new Client(
+/*$client = new Client(
     1, // clientID
     false, // isBlocked
     "martin.albert@gmail.com", // mail
@@ -41,7 +41,10 @@ $client = new Client(
     $image, // image
     $gender, // gender
     $address // address
-);
+);*/
+
+$client_data = ClientService::GetClientById(2);
+var_dump($client_data);
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +52,7 @@ $client = new Client(
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="wclassth=device-wclassth, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire</title>
     <link rel="stylesheet" href="client-profile.css">
 
@@ -63,7 +66,7 @@ $client = new Client(
     ?>
     <div class="content">
         <div class="content__selector">
-            <div class="content__selector__personnal-data content__selector--current">
+            <div class="content__selector__personnal-data">
                 <h4 class="content__selector__personnal-data__title">Informations Personnelles</h4>
             </div>
             <div class="content__selector__security">
@@ -72,49 +75,48 @@ $client = new Client(
         </div>
         <div class="content__personnal-data">
             <h3 class="content__personnal-data__title">Informations Personnelles</h3>
-            <p class="content__personnal-data__description">Modifier vos informations Personnels</p>
+            <p class="content__personnal-data__description">Modifier vos informations Personnelles</p>
+
+            <img class="content__personnal-data__image" src="<?php echo $client->getImage()->getImageSrc(); ?>"
+                    alt="photo_de_profile">
 
             <div class="content__personnal-data__elements">
 
-                <img class="content__personnal-data__image" src="<?php echo $client->getImage()->getImageSrc(); ?>"
-                    alt="photo_de_profile">
-
-
                 <!-- Nom -->
                 <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Nom", "le name", "Nom", true); ?>
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Nom", "le name",  $client->getLastname(), true); ?>
 
                 <!-- Prenom -->
                 <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Prenom", "le name", "Prenom", true); ?>
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Prenom", "le name", $client->getFirstname()); ?>
 
                 <!-- Pseudo -->
                 <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Pseudo", "le name", "Pseudo", true); ?>
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Pseudo", "le name", $client->getNickname()); ?>
 
                 <!-- Mail -->
                 <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "email", "Mail", "le name", "Mail", true); ?>
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "email", "Mail", "le name", $client->getMail()); ?>
 
                 <!-- Telephone -->
                 <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "tel", "Telephone", "le name", "Telephone", true); ?>
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "tel", "Telephone", "le name", $client->getPhoneNumber()); ?>
 
                 <!-- Adresse -->
                 <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Adresse", "le name", "Adresse", true); ?>
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Adresse", "le name", $client->getAddress()->getPostalAddress()); ?>
 
                 <!-- Genre -->
                 <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Genre", "le name", "Genre", true); ?>
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Genre", "le name", $client->getGender()->getLabel()); ?>
 
                 <!-- Date d'anniversaire -->
                 <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "Date d'anniversaire", "le name", "Date d'anniversaire", true); ?>
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "Date d'anniversaire", "le name", $client->getBirthDate()->format('Y-m-d')); ?>
 
                 <!-- Date de création du compte -->
                 <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "Date de création du compte", "le name", "Date de création du compte", true); ?>
+                Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "Date de création du compte", "le name", $client->getCreationDate()->format('Y-m-d')); ?>
             </div>
         </div>
         <div class="content__security" style="display: none">
@@ -124,7 +126,7 @@ $client = new Client(
             <div class="content__security__elements">
 
                 <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "password", "Mot de passe", "le name", "Mot de passe", true); ?>
+                Input::render("content__security__elements__password", "UnIdEnPlus", "password", "Mot de passe", "le name", "Mot de passe", true); ?>
 
 
                 <?php require_once ("../components/Button/Button.php");
@@ -132,6 +134,7 @@ $client = new Client(
 
                 <?php require_once ("../components/Button/Button.php");
                 Button::render("button--storybook", "unId", "Supprimer mon compte", ButtonType::Delete, true); ?>
+
             </div>
         </div>
     </div>

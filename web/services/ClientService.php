@@ -67,7 +67,7 @@ class ClientService extends Service
         $row = $stmt->fetch();
         return self::ClientHandler($row);
     }
-
+    
     public static function ClientHandler(array $row): Client
     {
         $gender = GenderService::GetGenderById($row['genderID']);
