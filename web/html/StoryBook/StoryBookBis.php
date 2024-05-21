@@ -160,21 +160,16 @@
     <h3 id="text">HousingCard</h3>
     <br>
 
+    <div class="housing-box">
     <?php
         require_once("../components/HousingCard/HousingCard.php");
-        HousingCard::render(
-            "Appartement pipou",
-            60,
-            "../assets/images/test.jpg",
-            "Un superbe appartement avec vue mer, près du centre. Une occasion parfaite pour voyager ! ",
-            "Lannion",
-            "22300",
-            4,
-            "../assets/images/pp-test.jpg",
-            "Benoît Tottereau",
-            "housing-card--storybook",""
-        );
+        require_once("../../services/HousingService.php");
+        $housing = HousingService::getHousingById(1);
+
+
+        HousingCard::render($housing,"housing-card--storybook","");
     ?>
+    </div>
 
     <pre>
         <code class="language-php">
@@ -182,7 +177,7 @@
 
             <\?php
                 require_once("../components/HousingCard/HousingCard.php");
-                HousingCard::render("housing-card--storybook","");
+                HousingCard::render($UnObjetHousing,"housing-card--storybook","");
             \?>
         </code>
     </pre>
@@ -220,62 +215,62 @@
         <?php require_once("../components/Button/Button.php"); ?>
 
         <div class="button-box__item">
-            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,true); ?>
+            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,"alert('coucou');", false); ?>
             <pre>
                 <code class="language-php">
                     <\?php require_once("../components/Button/Button.php"); ?>
-                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,true); \?>
+                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,"alert('coucou');", false); \?>
                 </code>
             </pre>
         </div>
 
         <div class="button-box__item">
-            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,false); ?>
+            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,"alert('coucou');", true); ?>
             <pre>
                 <code class="language-php">
                     <\?php require_once("../components/Button/Button.php"); ?>
-                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,true); \?>
+                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,"alert('coucou');", true); \?>
                 </code>
             </pre>
         </div>
 
         <div class="button-box__item">
-            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Owner,true); ?>
+            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Owner,"alert('coucou');", false); ?>
             <pre>
                 <code class="language-php">
                     <\?php require_once("../components/Button/Button.php"); ?>
-                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,true); \?>
+                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Owner,"alert('coucou');", false); \?>
                 </code>
             </pre>
         </div>
 
 
         <div class="button-box__item">
-            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Owner,false); ?>
+            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Owner,"alert('coucou');", true); ?>
             <pre>
                 <code class="language-php">
                     <\?php require_once("../components/Button/Button.php"); ?>
-                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,true); \?>
+                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Owner,"alert('coucou');", true); \?>
                 </code>
             </pre>
         </div>
 
         <div class="button-box__item">
-            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Delete,true); ?>
+            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Delete,"alert('coucou');", true); ?>
             <pre>
                 <code class="language-php">
                     <\?php require_once("../components/Button/Button.php"); ?>
-                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,true); \?>
+                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Delete,"alert('coucou');", true); \?>
                 </code>
             </pre>
         </div>
 
         <div class="button-box__item">
-            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Delete,false); ?>
+            <?php Button::render("button--storybook","unId","Un texte",ButtonType::Delete,"alert('coucou');", false); ?>
             <pre>
                 <code class="language-php">
                     <\?php require_once("../components/Button/Button.php"); ?>
-                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Client,true); \?>
+                    <\?php Button::render("button--storybook","unId","Un texte",ButtonType::Delete,"alert('coucou');", false); \?>
                 </code>
             </pre>
         </div>
