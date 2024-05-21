@@ -30,6 +30,11 @@ body {
     background-color: variables.$whiteColor;
     gap: 20px;
 
+    &__error {
+      color: variables.$errorColor;
+      font-size: 14px;
+    }
+
     &__title {
       text-align: center;
       width: 350px;

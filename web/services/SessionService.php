@@ -14,9 +14,9 @@ class SessionService {
             } else if ($role == 'owner') {
                 header('Location: ../../back/connection');
             } else if ($role == 'client') {
-                header('Location: ../../client/clientConnection/client_connection.php');
+                header('Location: ../../client/connection');
             } else {
-                header('Location: ../../client/clientConnection/client_connection.php');
+                header('Location: ../../client/connection');
             }
             exit();
         }

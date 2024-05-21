@@ -1,4 +1,12 @@
+<?php
 
+// imports
+// Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
+require_once '../models/Client.php';
+require_once '../services/ClientService.php';
+require_once '../services/SessionService.php'; // pour le menu du header
+$isAuthenticated = SessionService::isAuthenticated();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -22,10 +30,12 @@
 <body>
 
     <?php
-        
+
+
+
         require_once("./components/Header/header.php");
 
-        Header::render("search-bar--home");
+        Header::render("search-bar--home", false, $isAuthenticated);
 
         
 
@@ -63,41 +73,41 @@
                         <h3>Prix</h3>
                         <div class="popup__filter__container__prices">
                             <div class="price-input-container">
-                                <div class="price-input"> 
-                                    <div class="price-field"> 
-                                        <span>Prix Minimum</span> 
-                                        <input type="number" 
-                                            class="min-input" 
-                                            value="<?= isset($_POST["maxPrice"]) ? $_POST["minPrice"] : "0" ?>"> 
-                                    </div> 
-                                    <div class="price-field"> 
-                                        <span>Prix Maximum</span> 
-                                        <input type="number" 
-                                            class="max-input" 
-                                            value="<?= isset($_POST["maxPrice"]) ? $_POST["maxPrice"] : "500" ?>"> 
-                                    </div> 
-                                </div> 
-                                <div class="slider-container"> 
-                                    <div class="price-slider"> 
-                                    </div> 
-                                </div> 
-                            </div> 
-                
+                                <div class="price-input">
+                                    <div class="price-field">
+                                        <span>Prix Minimum</span>
+                                        <input type="number"
+                                            class="min-input"
+                                            value="<?= isset($_POST["maxPrice"]) ? $_POST["minPrice"] : "0" ?>">
+                                    </div>
+                                    <div class="price-field">
+                                        <span>Prix Maximum</span>
+                                        <input type="number"
+                                            class="max-input"
+                                            value="<?= isset($_POST["maxPrice"]) ? $_POST["maxPrice"] : "500" ?>">
+                                    </div>
+                                </div>
+                                <div class="slider-container">
+                                    <div class="price-slider">
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Slider -->
-                            <div class="range-input"> 
-                                <input type="range" 
-                                    class="min-range" 
-                                    min="0" 
-                                    max="500" 
-                                    value="0" 
-                                    step="1"> 
-                                <input type="range" 
-                                    class="max-range" 
-                                    min="0" 
-                                    max="500" 
-                                    value="500" 
-                                    step="1"> 
-                            </div> 
+                            <div class="range-input">
+                                <input type="range"
+                                    class="min-range"
+                                    min="0"
+                                    max="500"
+                                    value="0"
+                                    step="1">
+                                <input type="range"
+                                    class="max-range"
+                                    min="0"
+                                    max="500"
+                                    value="500"
+                                    step="1">
+                            </div>
                         </div>
                         <hr>
                         <div class="popup__filter__container__category">
@@ -189,7 +199,7 @@
                 let beginDate = <?= json_encode($_POST['startDate'] ?? null) ?>;
                 let endDate = <?= json_encode($_POST['endDate'] ?? null) ?>;
                 let city = <?= json_encode($_POST['searchText'] ?? null) ?>;
-                
+
                 const minPrice = document.querySelector(".min-input");
                 const maxPrice = document.querySelector(".max-input");
 
@@ -206,11 +216,11 @@
                     showUser(cpt, sort, desc, true);
                 })
 
-                sorter.addEventListener("change", function() {    
+                sorter.addEventListener("change", function() {
                     if(sorter.value == 1) { sort = "_Housing.priceExcl"; desc = 0; }
                     else if(sorter.value == 2) { sort = "_Housing.priceExcl"; desc = 1; }
                     else if(sorter.value == 3) { sort = "_Housing.creationDate"; desc = 0; }
-                    else if(sorter.value == 4) { sort = "_Housing.creationDate"; desc = 1; }                
+                    else if(sorter.value == 4) { sort = "_Housing.creationDate"; desc = 1; }
                     showUser(cpt, sort, desc, true);
                 })
 
@@ -249,12 +259,12 @@
             </div>
         </section>
     </main>
-    <?php 
+    <?php
         require_once("./components/Footer/footer.php");
         Footer::render();
     ?>
-    
 
-    
+
+
 </body>
 </html>
