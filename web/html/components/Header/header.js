@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function closePopup() {
         popup.style.display = 'none';
+        document.body.style.overflow = 'auto';
     }
 
     document.addEventListener('click', function(event){
@@ -60,8 +61,9 @@ document.addEventListener('DOMContentLoaded', function() {
     oeuil.addEventListener('click', function() {
         if (popup.style.display === 'none') {
             popup.style.display = "flex";
+            document.body.style.overflow = 'hidden';
         } else {
-            popup.style.display = 'none';
+            closePopup();
         }
     })
 

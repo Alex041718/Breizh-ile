@@ -77,7 +77,6 @@
   transform: translate(-50%, -50%);
   z-index: 1002;
   background-color: rgba(0, 0, 0, 0.5);
-  pointer-events: all;
 }
 .popup__access .popup__content {
   display: flex;
