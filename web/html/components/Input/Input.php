@@ -2,7 +2,7 @@
 
 class Input {
 
-    public static function render($class = "", $id = "", $type = "text", $label = "",$name = '', $placeholder = "", $required = false) {
+    public static function render($class = "", $id = "", $type = "text", $label = "",$name = '', $placeholder = "", $required = false, $value = "") {
 
         $requiredAttribute = $required ? ' required' : '';
 
@@ -10,13 +10,13 @@ class Input {
         switch ($type) {
 
             case "textarea":
-                $input = '<textarea class="input__textarea" placeholder="' . $placeholder . '"></textarea>';
+                $input = '<textarea class="input__textarea" placeholder="' . $placeholder . '"> ' . $value . '</textarea>';
                 break;
             case "date":
-                $input = '<input name="' . $name . '" type="' . $type . '" class="input__input" placeholder="' . $placeholder . '"' . $requiredAttribute . ' >';
+                $input = '<input name="' . $name . '" type="' . $type . '" class="input__input" placeholder="' . $placeholder . '"' . $requiredAttribute . ' value="' . $value . '"  >';
                 break;
             default:
-                $input = '<input name="' . $name . '" type="' . $type . '" class="input__input" placeholder="' . $placeholder . '"' . $requiredAttribute . ' >';
+                $input = '<input name="' . $name . '" type="' . $type . '" class="input__input" placeholder="' . $placeholder . '"' . $requiredAttribute . ' value="' . $value . '" >';
 
         }
 
