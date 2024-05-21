@@ -27,6 +27,8 @@
 
         Header::render("search-bar--home");
 
+        
+
     ?>
     <main>
         <section class="hero-banner">
@@ -172,7 +174,10 @@
                     <option value="3">Date de mise en ligne (Croissant)</option>
                     <option value="4">Date de mise en ligne (Décroissant)</option>
                 </select>
-                <button id="filter_button">Filtre</button>
+                <div class="filter__button">
+                    <button id="filter_button">Filtres</button>
+                    <?php sizeof($_POST) > 0 ? '<i class="fa-solid fa-xmark"></i>' : "" ?>
+                </div>
             </div>
             <div class="logements__container">
             <script>
@@ -211,7 +216,6 @@
 
                 function showUser(cpt, sort, desc, isFirst) {
 
-                    console.log(desc, sort)
                     if(isFirst) cpt = 0;
                     const itemsToHide = document.querySelectorAll(".show-more");
 

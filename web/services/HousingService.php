@@ -131,7 +131,7 @@ class HousingService extends Service
 
         if($isAnd) {
             
-            $chaine = "WHERE ";
+            $chaine = "AND ";
     
             if(isset($city)) $chaine = $chaine . '_Address.city = "' . $city . '"' . ((isset($dateBegin) || isset($dateEnd) || isset($nbPerson) || isset($minPrice) || isset($maxPrice)) ? " AND " : " ");
             
@@ -149,7 +149,7 @@ class HousingService extends Service
         }
         else $chaine = "";
 
-        $query = 'SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID INNER JOIN _Address ON _Housing.addressID = _Address.addressID ' . $chaine . 'ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';';
+        $query = 'SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID INNER JOIN _Address ON _Housing.addressID = _Address.addressID WHERE _Housing.isOnline = false ' . $chaine . 'ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';';
 
         $pdo = self::getPDO();
         $stmt = $pdo->query($query);

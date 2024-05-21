@@ -1,0 +1,36 @@
+.logement {
+  margin-block: 0 !important;
+  margin-bottom: 150px !important;
+  color: #1D1D1D;
+}
+
+.logement-nav-bar {
+  margin-top: 120px;
+  display: flex;
+  padding-inline: 53px;
+  height: 70px;
+  list-style: none;
+  box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.25);
+  justify-content: center;
+  position: relative;
+  align-items: center;
+}
+.logement-nav-bar i {
+  font-size: 30px;
+}
+.logement-nav-bar a {
+  color: #082C4C;
+  text-decoration: none;
+}
+.logement-nav-bar__back {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: absolute;
+  left: 53px;
+  height: 70px;
+}
+.logement-nav-bar__back > p {
+  font-weight: 600;
+  font-size: max(23px, 1.5625vw);
+}/*# sourceMappingURL=logement.css.map */
