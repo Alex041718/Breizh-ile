@@ -29,6 +29,9 @@ RewriteRule ^back/logements$ /owner/consulter_logements/consulter_logements.php 
 # Rediriger /detail-reservation vers /owner/consulter_detail_reservation/consulter_detail_reservation.php
 RewriteRule ^back/detail-reservation$ /owner/consulter_detail_reservation/consulter_detail_reservation.php [L]
 
+# Rediriger /back/reservations vers /owner/consulter_reservations/consulter_reservations.php
+RewriteRule ^back/logements$ /owner/consulter_logements/consulter_logements.php [L]
+
 
 # REDIRECTIONS ADMINISTRATEUR #
 
