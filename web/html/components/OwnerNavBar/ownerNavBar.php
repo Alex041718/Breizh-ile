@@ -4,8 +4,8 @@ class OwnerNavBar {
     public static function render($navbarIndex = 0) {
         $pages = array(
             array("Page d'accueil", ""),
-            array("Logements", ""),
-            array("Réservations", "")
+            array("Logements", "/back/logements"),
+            array("Réservations", "/back/reservations"),
         );
 
         $render = /*html*/ '
