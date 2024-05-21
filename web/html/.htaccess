@@ -22,6 +22,9 @@ RewriteRule ^client/connection$ /client/clientConnection/client_connection.php [
 # Rediriger /logement vers /client/ficheLogement/page.php
 RewriteRule ^logement$ /client/ficheLogement/logement.php [L]
 
+# Rediriger /logement/devis vers /client/bid/bid.php
+RewriteRule ^logement/devis$ /client/bid/bid.php [L]
+
 # Rediriger /detail-reservation vers /client/consulter_detail_reservation/consulter_detail_reservation.php
 RewriteRule ^detail-reservation$ /client/consulter_detail_reservation/consulter_detail_reservation.php [L]
 
