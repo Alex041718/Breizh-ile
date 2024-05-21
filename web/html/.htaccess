@@ -23,6 +23,9 @@ RewriteRule ^back/connection$ /owner/ownerConnection/owner_connection.php [L]
 # Rediriger /back/reservations vers /owner/consulter_reservations/consulter_reservations.php
 RewriteRule ^back/reservations$ /owner/consulter_reservations/consulter_reservations.php [L]
 
+# Rediriger /detail-reservation vers /owner/consulter_detail_reservation/consulter_detail_reservation.php
+RewriteRule ^back/detail-reservation$ /owner/consulter_detail_reservation/consulter_detail_reservation.php [L]
+
 
 # REDIRECTIONS ADMINISTRATEUR #
 
