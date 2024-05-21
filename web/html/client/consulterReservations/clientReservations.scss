@@ -1,0 +1,35 @@
+@use '../style/variables.css';
+.title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+
+
+}
+
+.fa-greater-than::before{
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.reservation-list{
+    display: flex;
+    flex-direction: row;
+    padding: 2em;
+    justify-content: center;
+    align-items: center;
+
+    &__container{
+        display: flex;
+        flex-direction: column;
+        padding: 2em;
+        scroll-behavior: smooth;
+
+
+        &__card {
+                margin-bottom: 2em;
+        }
+    }
+
+}

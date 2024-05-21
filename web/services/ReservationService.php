@@ -75,8 +75,22 @@ class ReservationService extends Service
         if($row['serviceCharge'] == null) $row['serviceCharge'] = 0.0;
         if($row['touristTax'] == null) $row['touristTax'] = 0.0;
 
-        $beginDate = new DateTime($row['r_begin_date']);
-        $endDate = new DateTime($row['r_end_date']);
+        // Vérifier si 'r_begin_date' est défini et non nul
+        if (isset($row['r_begin_date']) && $row['r_begin_date'] !== null) {
+            $beginDate = new DateTime($row['r_begin_date']);
+        } else {
+            // Gérer le cas où 'r_begin_date' n'est pas défini ou est nul
+            $beginDate = new DateTime(); // ou une valeur par défaut appropriée
+        }
+
+        // Vérifier si 'r_end_date' est défini et non nul
+        if (isset($row['r_end_date']) && $row['r_end_date'] !== null) {
+            $endDate = new DateTime($row['r_end_date']);
+        } else {
+            // Gérer le cas où 'r_end_date' n'est pas défini ou est nul
+            $endDate = new DateTime(); // ou une valeur par défaut appropriée
+        }
+
         
         return new Reservation($row['reservationID'], $beginDate, $endDate, $row['serviceCharge'], $row['touristTax'], $row['status'], $row['nbPerson'], $housing, $payMethod, $client);
 
@@ -88,6 +102,21 @@ class ReservationService extends Service
         $stmt = $pdo->query('SELECT *, R.beginDate as r_begin_date, R.endDate as r_end_date FROM _Reservation R WHERE reservationID = ' . $reservationID);
         $row = $stmt->fetch();
         return self::ReservationHandler($row);
+    }
+
+    public static function getReservationByClientId($clientId): Array
+    {
+        $pdo = self::getPDO();
+        $reservationList = [];
+        $stmt = $pdo->query(
+            '
+                select * from _Reservation 
+                where clientID = '. $clientId
+        );
+        while ($row = $stmt->fetch()) {
+            $reservationList[] = self::ReservationHandler($row);
+        }
+        return $reservationList;
     }
 
     public static function getNbJoursReservation(DateTime $beginDate, DateTime $endDate): int

@@ -1,0 +1,215 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap");
+* {
+  font-family: "Outfit", sans-serif;
+}
+
+h1 {
+  font-size: max(45px, 2.9166666667vw);
+  font-weight: bold;
+  margin: 0;
+}
+
+h2 {
+  font-size: max(30px, 2.5vw);
+  font-weight: bold;
+  margin: 0;
+}
+
+h3 {
+  font-size: max(23px, 1.5625vw);
+  font-weight: bold;
+  margin: 0;
+}
+
+h4 {
+  font-size: max(16px, 1.0416666667vw);
+  font-weight: bold;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  font-size: max(14px, 0.8333333333vw);
+}
+
+.para--bold {
+  font-weight: bold;
+}
+.para--italic {
+  font-style: italic;
+}
+.para--14px {
+  font-size: 14px;
+}
+.para--18px {
+  font-size: 18px;
+}
+.para--20px {
+  font-size: 20px;
+}
+
+.btn {
+  cursor: pointer;
+  padding-block: 15px;
+  padding-inline: 25px;
+  background-color: #1D1D1D;
+  color: white;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 10px;
+}
+.btn--center {
+  margin: auto;
+}
+
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+  border-radius: 10px;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:last-child {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.autocomplete-items div:first-child {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+
+.reservation-card {
+  width: 100%;
+  max-width: 1000px;
+  height: 120px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  background-color: #FFFFFF;
+  box-shadow: 5px 5px 15px -15px #BDBDBD;
+  transition: background-color 0.3s;
+  /*Hover*/
+}
+.reservation-card__img-container img {
+  width: 145px;
+  height: 120px;
+  border-radius: 10px;
+}
+.reservation-card__data-container {
+  width: 65%;
+  padding: 10px;
+  padding-left: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (max-width: 768px) {
+  .reservation-card__data-container {
+    width: 80%;
+  }
+}
+.reservation-card__data-container__title {
+  font-weight: bold;
+  word-wrap: break-word;
+  color: #000000;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+.reservation-card__data-container__description {
+  font-size: 14px;
+  height: 40px;
+  color: #828282;
+  overflow: hidden;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space: normal;
+  transition: color 0.3s;
+}
+.reservation-card__data-container__down {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  font-weight: 500;
+}
+.reservation-card__data-container__down__ville, .reservation-card__data-container__down__personne {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+.reservation-card__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+.reservation-card__right__prix {
+  display: flex;
+  font-size: 20px;
+  justify-content: center;
+  font-weight: bold;
+}
+.reservation-card__right__date {
+  display: flex;
+  font-size: 16px;
+  justify-content: center;
+  color: #828282;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+.reservation-card:hover {
+  background-color: #37906c;
+}
+.reservation-card:hover .reservation-card__data-container__description,
+.reservation-card:hover .reservation-card__right__date {
+  color: #FFFFFF;
+}
+@media (max-width: 768px) {
+  .reservation-card {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    margin: 0 auto;
+    gap: 10%;
+  }
+}
+.reservation-card:hover {
+  background-color: #37906c;
+}
+.reservation-card:hover .reservation-card__data-container__description,
+.reservation-card:hover .reservation-card__right__date {
+  color: #FFFFFF;
+}/*# sourceMappingURL=ReservationCard.css.map */
