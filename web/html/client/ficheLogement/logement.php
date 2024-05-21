@@ -1,5 +1,5 @@
 <?php
-    
+
     if(isset($_GET["housingID"]) && $_GET["housingID"] != null) $housingID = $_GET["housingID"];
     else header("Location: /");
 
@@ -201,7 +201,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>       
+                    </div>
                 </div>
             </div>
             <div class="logement__bottom__right">
