@@ -1,3 +1,12 @@
+<?php
+
+// imports
+// Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
+require_once '../../../models/Client.php';
+require_once '../../../services/ClientService.php';
+require_once '../../../services/SessionService.php'; // pour le menu du header
+$isAuthenticated = SessionService::isClientAuthenticated();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,19 +16,19 @@
     <link rel="stylesheet" href="../../style/ui.css">
     <link rel="stylesheet" href="/client/ficheLogement/page.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    
+
     <script src="/client/ficheLogement/page.js"></script>
 </head>
 <body>
     <?php
         require_once("../../components/Header/header.php");
-        Header::render(true);
+        Header::render(true,false,$isAuthenticated,$_SERVER['REQUEST_URI']);
     ?>
 
     <main>
@@ -36,7 +45,7 @@
                         <p id="nbVoyageurs">5</p>
                         <p>&nbsppersonnes • 4 chambres • 5 lits</p>
                     </div>
-                    
+
 
                     <div class="proprio">
                         <img src="../../assets/images/pp-test.jpg" alt="Proprio Image">
@@ -63,8 +72,8 @@
 
                             Réservez dès maintenant et vivez une expérience mémorable à Perros-Guirec. Vous repartirez avec des souvenirs inoubliables et l'envie de revenir bientôt !
                             </p>
-                            <button type="button"><p class="para--bold" id="button-savoir">En savoir +</p></button> 
-                        </div>                                        
+                            <button type="button"><p class="para--bold" id="button-savoir">En savoir +</p></button>
+                        </div>
                     </div>
 
                     <!-- Pop-up -->
@@ -220,10 +229,10 @@
             </div>
 
             <div id="overlay"></div>
-            
+
         </div>
 
-        
+
     </main>
 
 <?php

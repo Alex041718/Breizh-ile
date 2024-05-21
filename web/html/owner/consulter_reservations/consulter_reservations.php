@@ -2,7 +2,10 @@
 require_once '../../../services/SessionService.php';
 
 // Gestion de la session
+
 SessionService::system('owner', '/back/reservations');
+
+$isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
 
 ?>
 
@@ -28,10 +31,10 @@ SessionService::system('owner', '/back/reservations');
 
         $reservations = ReservationService::getAllReservationsByOwnerID($owner->getOwnerID());
         $_SESSION["reservations"] = $reservations;
-        
+
         $selected_reservations = array();
 
-        Header::render(isScrolling: True, isBackOffice: True);
+        Header::render(True, True, $isOwnerAuthenticated);
         OwnerNavBar::render(2);
     ?>
     <main>
@@ -55,7 +58,7 @@ SessionService::system('owner', '/back/reservations');
         </section>
         <?php
             require_once("../../components/Button/Button.php");
-            Button::render("exportation__button", "exportationButton", "Exporter la sélection", ButtonType::Owner, false, false, false, '<i class="fa-solid fa-file-export"></i>'); 
+            Button::render("exportation__button", "exportationButton", "Exporter la sélection", ButtonType::Owner, false, false, false, '<i class="fa-solid fa-file-export"></i>');
         ?>
         <section class="export-selection">
             <section class="export-selection__CSV">

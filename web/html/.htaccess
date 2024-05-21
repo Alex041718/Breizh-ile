@@ -1,6 +1,11 @@
 Options +FollowSymLinks
 RewriteEngine On
 
+# REDIRECTIONS GLOBALES #
+
+# Rediriger /logout vers /controllers/logoutController.php
+RewriteRule ^logout$ /controllers/logoutController.php [L]
+
 
 # REDIRECTIONS CLIENT #
 

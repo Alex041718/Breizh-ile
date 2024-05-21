@@ -1,9 +1,13 @@
 
 <?php
 
+
+
 class Header {
 
-        public static function render($isScrolling = false, $isBackOffice = false) {
+
+
+        public static function render($isScrolling = false, $isBackOffice = false, $isAuthenticated = false, $redirectAuthPath = "/") {
 
             $tagToScroll = $isScrolling;
 
@@ -32,18 +36,73 @@ class Header {
             echo $render;
 
             define('__HEADER__', dirname(dirname(__FILE__)));
-            
+
             if (__HEADER__ == 'www/var'){
                 require_once(__HEADER__ . "/html/components/SearchBar/SearchBar.php");
             }
             else{
                 require_once(__HEADER__ . "/SearchBar/SearchBar.php");
             }
-            
+
             if (!$isBackOffice) {
                 SearchBar::render("search-bar search-bar--header","","/#logements", true);
             }
-            
+
+            // gestion du menu
+            $menu = '';
+
+            if ($isBackOffice) {
+                $urlLogout = "/logout?redirect=" . urlencode($redirectAuthPath);
+            } else {
+                $urlLogout = "/logout?redirect=" . urlencode($redirectAuthPath);
+            }
+
+            if ($isAuthenticated) {
+
+                // Réccupération des informations du user connecté
+                // ça peut être un client ou un propriétaire
+                if ($isBackOffice) {
+                    $owner = OwnerService::getOwnerById($_SESSION['user_id']);
+
+                    $menu = '
+                        <ul>
+                            <li><a href="">Bienvenue ' . $owner->getFirstname() . '</a></li>
+                            <li><a href="">Mon Compte</a></li>
+                            <li><a href="/back/ownerReservations">Mes réservations</a></li>
+                            <li><a href="">Qui sommes nous</a></li>
+                            <li><a href="' . $urlLogout . '">Se déconnecter</a></li>
+                        </ul>
+                    ';
+                } else {
+                    $client = ClientService::getClientById($_SESSION['user_id']);
+
+                    $menu = '
+                    <ul>
+                        <li><a href="">Bienvenue ' . $client->getFirstname() . '</a></li>
+                        <li><a href="">Mon Compte</a></li>
+                        <li><a href="">Mes réservations</a></li>
+                        <li><a href="">Qui sommes nous</a></li>
+                        <li><a href="' . $urlLogout . '">Se déconnecter</a></li>
+                    </ul>
+                ';
+                }
+            } else {
+
+                if ($isBackOffice) {
+                    $urlConnexion = "/back/connection?redirect=" . urlencode($redirectAuthPath);
+                } else {
+                    $urlConnexion = "/client/connection?redirect=" . urlencode($redirectAuthPath);
+                }
+
+                $menu = '
+                    <ul>
+                        <li><a href="'. $urlConnexion .'">Se connecter</a></li>
+                        <li><a href="">S\'inscrire</a></li>
+                    </ul>
+                ';
+            }
+
+
             $render =  /*html*/ '
 
                         <div class="header__right">
@@ -51,12 +110,9 @@ class Header {
                             <i id="profil" class="fa-solid fa-user"></i>
                         </div>
                         <div id="options" style="display: none;">
-                            <ul>
-                                <li><a href="">Compte</a></li>
-                                <li><a href="">Mes réservations</a></li>
-                                <li><a href="">Qui sommes nous</a></li>
-                                <li><a href="">Se déconnecter</a></li>
-                            </ul>
+                        
+                            '. $menu .'
+                            
                         </div>
                     </div>
                     <div class="header-mobile">
