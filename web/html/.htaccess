@@ -29,9 +29,3 @@ RewriteRule ^back/logements/([0-9]+)$ /owner/consulter_logement/logement.php?hou
 
 # REDIRECTIONS ADMINISTRATEUR #
 
-# Rediriger /admin/connection vers /admin/adminConnection/admin_connection.php
-RewriteRule ^admin/connection$ /admin/adminConnection.php [L]
-
-# Rediriger /admin/dashboard vers /admin/dashboard/dashboard.php
-RewriteRule ^admin/dashboard$ /admin/adminDashboard.php [L]
-

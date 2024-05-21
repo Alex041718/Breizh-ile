@@ -3,7 +3,7 @@
 require_once '../../services/SessionService.php';
 
 // Gestion de la session
-SessionService::system('admin','/admin/dashboard');
+SessionService::system('admin','../../html/admin/adminConnection.php');
 
 // Récupération des propriétaires de la plateforme
 require_once '../../services/OwnerService.php';

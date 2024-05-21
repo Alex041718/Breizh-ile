@@ -20,17 +20,11 @@ body {
   width: 100%;
   max-height: 500px;
   border-radius: 20px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .photo h2 {
   margin-bottom: 10px;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
 }
 
 .page {
@@ -38,7 +32,7 @@ main {
   flex-direction: column;
   height: 100%;
   max-width: 1300px;
-  margin: 8em 5em 0 5em;
+  margin: 8em auto 0 auto;
   align-items: start;
 }
 .page #overlay {
@@ -344,6 +338,7 @@ main {
 }
 .tooltip .tooltip-text {
   visibility: hidden;
+  width: -moz-max-content;
   width: max-content;
   border-radius: 10px;
   background-color: transparent;
@@ -484,6 +479,4 @@ main {
 }
 .popup-critere .popup-content-critere .section .items .item i {
   color: #307B5C;
-}
-
-/*# sourceMappingURL=page.css.map */
+}/*# sourceMappingURL=page.css.map */

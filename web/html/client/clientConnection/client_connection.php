@@ -25,20 +25,6 @@
 
                 <input type="hidden" name="role" value="client">
 
-                <?php if (isset($_GET['error']) && $_GET['error'] === 'loginFailed') {
-                    echo '<p class="connectionContainer__box__error">E-mail ou mot de passe incorrect</p>';
-                } ?>
-
-                <?php
-                    // Gestion de la redirection
-
-                    // Dans l'url on récupère la page de redirection
-
-                    $redirect = $_GET['redirect'] ?? '/';
-                ?>
-
-                <input type="hidden" name="redirect" value="<?php echo $redirect ?>">
-
                 <?php require_once("../../components/Button/Button.php"); ?>
 
 

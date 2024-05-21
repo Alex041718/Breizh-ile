@@ -27,10 +27,6 @@ body {
   background-color: #FFFFFF;
   gap: 20px;
 }
-.connectionContainer__box__error {
-  color: #EB5757;
-  font-size: 14px;
-}
 .connectionContainer__box__title {
   text-align: center;
   width: 350px;
@@ -44,6 +40,4 @@ body {
 }
 .connectionContainer__box form .connection__input, .connectionContainer__box form button {
   width: 260px;
-}
-
-/*# sourceMappingURL=client_connection.css.map */
+}/*# sourceMappingURL=client_connection.css.map */

@@ -1,14 +1,3 @@
-<?php
-// imports
-// Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
-require_once '../../../models/Client.php';
-require_once '../../../services/ClientService.php';
-require_once '../../../services/SessionService.php'; // pour le menu du header
-$isAuthenticated = SessionService::isAuthenticated();
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +19,7 @@ $isAuthenticated = SessionService::isAuthenticated();
 <body>
     <?php
         require_once("../../components/Header/header.php");
-        Header::render(true, false, $isAuthenticated, $_SERVER['REQUEST_URI']);
+        Header::render(true);
     ?>
 
     <main>
@@ -74,8 +63,8 @@ $isAuthenticated = SessionService::isAuthenticated();
 
                             Réservez dès maintenant et vivez une expérience mémorable à Perros-Guirec. Vous repartirez avec des souvenirs inoubliables et l'envie de revenir bientôt !
                             </p>
-                            <button type="button"><p class="para--bold" id="button-savoir">En savoir +</p></button>
-                        </div>
+                            <button type="button"><p class="para--bold" id="button-savoir">En savoir +</p></button> 
+                        </div>                                        
                     </div>
 
                     <!-- Pop-up -->
@@ -231,10 +220,10 @@ $isAuthenticated = SessionService::isAuthenticated();
             </div>
 
             <div id="overlay"></div>
-
+            
         </div>
 
-
+        
     </main>
 
 <?php
