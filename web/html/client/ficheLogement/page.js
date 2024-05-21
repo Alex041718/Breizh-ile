@@ -203,15 +203,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('overlay-critere').addEventListener('click', closePopupCriteres);
 
-  
-});
+    const inputs = document.querySelectorAll(".datepicker input[type=date]");
 
-const inputs = document.querySelectorAll(".datepicker input[type=date]");
-
-inputs.forEach((input) => {
-    flatpickr(input, {
-        dateFormat: "d-m-Y",
-        minDate: "today",
-        maxDate: new Date().fp_incr(365)
+    inputs.forEach((input) => {
+        flatpickr(input, {
+            dateFormat: "d-m-Y",
+            minDate: "today",
+            maxDate: new Date().fp_incr(365)
+        });
     });
+
+
+  
 });
