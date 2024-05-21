@@ -99,6 +99,17 @@ body {
 }
 
 
+
+
+
+.housing-box {
+    width: 800px;
+
+    .housing-card--storybook {
+        height: 500px;
+    }
+}
+
 .input-box {
     display: flex;
     flex-direction: row;
