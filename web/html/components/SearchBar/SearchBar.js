@@ -27,13 +27,29 @@ searchBars.forEach(searchBar => {
         minDate: "today",
         maxDate: new Date().fp_incr(365),
         onChange: function(selectedDates, dateStr, instance) {
-            endPickr.set('disable', [])
-            endPickr.set('minDate', selectedDates[0]);
-            endPickr.toggle();
+            if(selectedDates == "") {
+                endPickr.set('disable', [
+                    function(date) {
+                        // Désactiver toutes les dates
+                        return true;
+                    }
+                ])
+
+                endPickr.clear()
+            }
+            else {
+                endPickr.set('disable', [])
+                endPickr.set('minDate', selectedDates[0]);
+                endPickr.toggle();
+            }
         },
     });
     
-    
+    if(begin.value && !end.value) {
+        endPickr.set('disable', [])
+        endPickr.set('minDate', new Date(begin.value).fp_incr(1));
+    }
+
     // Initialiser Flatpickr pour l'input de fin 
 
 

@@ -271,6 +271,11 @@ body {
   width: 20px;
   height: 16px;
 }
+.logements__filters .filter__button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 @media screen and (max-width: 860px) {
   .logements__filters {
     flex-direction: column;
@@ -392,8 +397,8 @@ body {
 }
 .popup__filter .slider-container .price-slider {
   height: 100%;
-  left: 25%;
-  right: 15%;
+  left: 0%;
+  right: 0%;
   position: absolute;
   border-radius: 5px;
   background: #307B5C;
