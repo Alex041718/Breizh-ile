@@ -72,6 +72,7 @@ class Header {
                     </div>
                     <div id="popup__access" class="popup__access">
                         <div class="popup__content" >
+                            <i id="closeAccess" class="fa-solid fa-xmark"></i>
                             <h2>Accessibilité</h2>
                             <div class="popup__options">
                                 <div class="popup__options__couleurfont">
