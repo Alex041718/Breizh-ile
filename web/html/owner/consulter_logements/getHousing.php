@@ -26,7 +26,7 @@ function showHousings($housings) {
     <?php
     } else {
     foreach ($housings as $housing) { ?>
-        <a href="" class="housing">
+        <a href="/back/logements/<?= $housing->getHousingID() ?>" class="housing">
             <img src="<?= $housing->getImage()->getImageSrc() ?>" alt="Image de logement">
             <p><?= $housing->getTitle() ?></p>
             <p><?= $housing->getAddress()->getPostalAddress() ?></p>
