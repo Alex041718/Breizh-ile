@@ -22,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../style/ui.css">
-    <link rel="stylesheet" href="/client/consulter_detail_reservation/consulter_detail_reservation.css">
+    <link rel="stylesheet" href="/owner/consulter_detail_reservation/consulter_detail_reservation.css">
     <link rel="stylesheet" href="/components/SearchBar/SearchBar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
@@ -30,7 +30,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
     <link rel="stylesheet" href="/components/Header/header.css">
 
-    <script src="/client/consulter_detail_reservation/consulter_detail_reservation.js"></script>
+    <script src="/owner/consulter_detail_reservation/consulter_detail_reservation.js"></script>
 
     <?php // Date picker ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -74,10 +74,12 @@
     $reservation_touristTax =  $reservation->getTouristTax();
     $reservation_nbPersonnes =  $reservation->getNbPerson();
     $reservation_prixCalc = $reservation_prixExcl * $reservation_nbJours * $reservation_nbPersonnes;
-    $owner_pp = $housing->getOwner()->getImage()->getImageSrc();
-    $owner_name = $housing->getOwner()->getNickname();
-    $owner_telephone = $housing->getOwner()->getPhoneNumber();
-    $owner_mail = $housing->getOwner()->getMail();
+    
+
+
+    $client_pp = $reservation->getClientId()->getImage()->getImageSrc();
+    $client_telephone = $reservation->getClientId()->getPhoneNumber();
+    $client_mail = $reservation->getClientID()->getMail();
 
     $reservation_longitude = $housing->getLongitude();
     $reservation_latitude = $housing->getLatitude();
@@ -137,11 +139,11 @@
             </section>
             <section class="informations__right">
                 <div class="informations__right__desc">
-                    <img src='.$owner_pp.' alt="">
+                    <img src='.$client_pp.' alt="">
                     <div class="informations__right__desc__info">
                         <div class="informations__right__desc__info__perso">
-                            <h3>'.$owner_telephone.'</h3>
-                            <p>'.$owner_mail.'</p>
+                            <h3>'.$client_telephone.'</h3>
+                            <p>'.$client_mail.'</p>
                         </div>
                         <div class="informations__right__desc__info__vide">
 

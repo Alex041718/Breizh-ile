@@ -19,7 +19,8 @@
   border-radius: 10px 10px 0 0;
   height: 50%;
   width: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .housing-card__content {
   display: flex;
@@ -49,7 +50,8 @@
 .housing-card__content__bottom__infos i {
   height: 20px;
   width: 20px;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   color: #1D1D1D;
 }
 .housing-card__content__bottom__infos__picto {
@@ -57,6 +59,4 @@
 }
 .housing-card__content__bottom h3 span {
   font-size: max(14px, 0.8333333333vw);
-}
-
-/*# sourceMappingURL=HousingCard.css.map */
+}/*# sourceMappingURL=HousingCard.css.map */
