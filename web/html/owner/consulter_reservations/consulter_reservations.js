@@ -1,3 +1,5 @@
+import { Toast } from "/components/Toast/Toast.js";
+
 function main() {
     const reservations = document.querySelector(".reservations");
     const columns = document.querySelectorAll(".title p");
@@ -130,6 +132,7 @@ function main() {
             exportCheckboxes.forEach((checkbox, index) => {
                 if (checkbox.checked) {
                     let type = index;
+                    Toast("Exportation réussie !", "success");
                     exportReservations(type);
                 }
             });
