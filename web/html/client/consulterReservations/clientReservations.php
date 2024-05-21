@@ -9,7 +9,7 @@ require_once '../../../services/SessionService.php'; // pour le menu du header
 
 // Vérification de l'authentification de l'utilisateur
 
-SessionService::system('client', '/client/client/reservations-liste');
+SessionService::system('client', '/client/reservations-liste');
 $isAuthenticated = SessionService::isClientAuthenticated();
 
 
@@ -42,7 +42,7 @@ usort($clientReservationList, function ($a, $b) {
 </head>
 <?php
 require_once("../../components/Header/header.php");
-Header::render(true,false, $isAuthenticated);
+Header::render(true,false, $isAuthenticated, '/client/reservations-liste');
 ?>
 <body>
 <main>

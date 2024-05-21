@@ -38,7 +38,7 @@ $client = ClientService::GetClientById($_SESSION['user_id']);
 
     <?php
     require_once("../../components/Header/header.php");
-    Header::render(true,false, $isAuthenticated);
+    Header::render(true,false, $isAuthenticated, '/client/profil');
     ?>
     <div class="content">
         <div class="content__selector">

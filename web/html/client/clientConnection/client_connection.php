@@ -10,7 +10,9 @@
 <body>
 
     <div class="connectionContainer">
-        <img src="../../assets/images/logo_breizh_noir.png">
+        <a href="/">
+            <img src="../../assets/images/logo_breizh_noir.png">
+        </a>
         <div class="connectionContainer__box">
             <h3 class="connectionContainer__box__title">Connecter vous à votre compte client</h3>
             <form action="/controllers/client/clientConnectionController.php" method="post">

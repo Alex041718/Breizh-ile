@@ -34,7 +34,7 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
 
         $selected_reservations = array();
 
-        Header::render(True, True, $isOwnerAuthenticated);
+        Header::render(True, True, $isOwnerAuthenticated, '/back/reservations');
         OwnerNavBar::render(2);
     ?>
     <main>
