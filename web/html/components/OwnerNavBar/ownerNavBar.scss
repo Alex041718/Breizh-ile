@@ -26,6 +26,10 @@ body {
             font-size: $font-size-lg;
             
             a {
+                line-height: 70px;
+                width: 100%;
+                height: 100%;
+                text-align: center;
                 color: $ownerPrimaryColor;
                 text-decoration: none;
             }

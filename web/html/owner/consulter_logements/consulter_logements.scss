@@ -14,7 +14,7 @@ main {
 .title {
     display: flex;
     width: 100%;
-    padding: 0.4rem 0.6rem;
+    padding: 0.4rem 0.6rem 0.4rem calc(max(10rem, calc(200vw / 19.2)) + 1.2rem);
     box-sizing: border-box;
     align-items: center;
     margin-top: 1.4rem;
@@ -50,9 +50,9 @@ main {
     }
 }
 
-.reservations {
-    height: 66.4px * 5 - 9.6px;
+.housings {
     overflow-y: auto;
+    height: 133.6px * 3 - 9.6px;
     width: 100.33%;
     padding-right: 0.5rem;
 
@@ -74,37 +74,34 @@ main {
     }
 }
 
-.reservation {
+.housing {
     display: flex;
     align-items: center;
-    margin-bottom: 0.6rem;
-    padding: 0.4rem 0.6rem;
     border: 2px solid $lighterGrey5;
     border-radius: 10px;
-    height: 2.5rem;
-
-    p, a, .profile-picture {
-        display: block;
-        width: max(10rem, calc(200vw / 19.2));
-        margin-right: 2rem;
-        white-space: nowrap;
-        overflow: hidden;
-        word-wrap: break-word;
-        text-overflow: ellipsis;
-        font-weight: normal;
-        color: $ownerPrimaryColor;
-    }
-
-    .profile-picture, .description-status {
-        display: flex;
-        align-items: center;
-    }
+    color: $ownerPrimaryColor;
+    text-decoration: none;
+    margin-bottom: 0.6rem;
+    height: 120px;
+    overflow: hidden;
 
     img {
-        margin-right: 0.5rem;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
+        width: max(10rem, calc(200vw / 19.2));
+        object-fit: cover;
+        border-radius: 10px 0 0 10px;
+        margin-right: 1.2rem;
+    }
+
+    p {
+        display: -webkit-box;
+        width: max(10rem, calc(200vw / 19.2));
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        position:relative;
+        margin-right: 2rem;
+        color: $ownerPrimaryColor;
     }
 
     &:last-child {
@@ -112,88 +109,7 @@ main {
     }
 }
 
-.exportation__button {
-    position: relative;
-    margin-top: 1rem;
-    margin-bottom: 6rem;
-    z-index: 2;
-}
-
-.goTo, .filter{
-    background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-    margin-left: auto;
-    margin-right: 8px !important;
-    i {
-        margin-left: auto;
-    }
-}
-
-.goTo {
-    width: min-content !important;
-    overflow: visible !important;
-}
-
-.export-selection {
-    display: flex;
-    position: absolute;
-    transform: translateY(-355%);
-    z-index: -1;
-    align-items: center;
-    margin-bottom: 1rem;
-    background-color: $lighterGrey5;
-    border-radius: 4px;
-    padding: 0.4rem 0.6rem;
-    width: min-content;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
-    opacity: 0;
-
-    &__CSV, &__ICAL {
-        display: flex;
-        align-items: center;
-        img {
-            margin-right: 6px;
-            margin-left: 10px;
-            height: 24px;
-        }
-    }
-
-    &__CSV {
-        margin-right: 0.8rem;
-        img {
-            height: 20px;
-        }
-    }
-
-    &--visible {
-        transform: translate(100%, -355%);
-        opacity: 1;
-        z-index: 1;
-    }
-
-    .checkboxCSV, .checkboxICAL {
-        margin-right: 0;
-    }
-
-    .closeExport {
-        background: none;
-        color: inherit;
-        border: none;
-        padding: 0;
-        font: inherit;
-        cursor: pointer;
-        outline: inherit;
-        margin-left: 0.8rem;
-    }
-}
-
-.no-reservation {
+.no-housing {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -203,8 +119,30 @@ main {
     color: $grey3;
 }
 
+.add__button {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 6rem;
+    z-index: 2;
+}
+
 .checkbox {
     margin-right: 1.2rem;
+}
+
+.trash, .filter{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    margin-left: auto;
+}
+
+.trash {
+    margin-right: 17px;
 }
 
 .filter {
@@ -212,21 +150,18 @@ main {
 }
 
 .status {
+    display: inline-block;
     align-self: center;
     margin-left: 0.3rem;
     width: 12px;
     height: 12px;
     border-radius: 50%;
 
-    &--coming {
-        background-color: $infoColor;
+    &--offline {
+        background-color: $errorColor;
     }
     
-    &--in-progress {
-        background-color: $inProgressColor;
-    }
-    
-    &--done {
+    &--online {
         background-color: $successColor;
     }
 }

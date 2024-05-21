@@ -111,11 +111,23 @@ function main() {
                 case "date-resa":
                     showReservations("getBeginDate", isReverse);
                     break;
+                case "client":
+                    showReservations("getClientId", isReverse);
+                    break;
+                case "logement":
+                    showReservations("getHousingId", isReverse);
+                    break;
                 case "date-arrivee":
                     showReservations("getBeginDate", isReverse);
                     break;
                 case "date-depart":
                     showReservations("getEndDate", isReverse);
+                    break;
+                case "methode-paiement":
+                    showReservations("getPayMethodId", isReverse);
+                    break;
+                case "status":
+                    showReservations("getStatus", isReverse);
                     break;
                 default:
                     showReservations();

@@ -1,0 +1,157 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  color: #082C4C;
+  padding-top: 2rem;
+  padding-inline: 50px;
+}
+
+.title {
+  display: flex;
+  width: 100%;
+  padding: 0.4rem 0.6rem 0.4rem calc(max(10rem, 10.4166666667vw) + 1.2rem);
+  box-sizing: border-box;
+  align-items: center;
+  margin-top: 1.4rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  font-weight: bold;
+  background-color: #e9e9e9;
+}
+.title p {
+  width: max(10rem, 10.4166666667vw);
+  margin-right: 2rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.title--selected::after {
+  content: "";
+  position: relative;
+  display: inline-block;
+  background-image: url("../../assets/icons/arrow.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 10px;
+  height: 10px;
+  top: 31%;
+  transform: translateY(12%) rotate(180deg);
+  left: 0.3rem;
+  z-index: 999;
+}
+.title--reverse::after {
+  transform: translateY(12%) rotate(0deg);
+}
+
+.housings {
+  overflow-y: auto;
+  height: 391.2px;
+  width: 100.33%;
+  padding-right: 0.5rem;
+}
+.housings::-webkit-scrollbar {
+  width: 0.4rem;
+  background: white;
+}
+.housings::-webkit-scrollbar-thumb {
+  background-color: #082C4C;
+  border-radius: 100px;
+  background: #082C4C;
+}
+.housings::-webkit-scrollbar-track {
+  background-color: #e9e9e9;
+  border-radius: 100px;
+  background: #e9e9e9;
+}
+
+.housing {
+  display: flex;
+  align-items: center;
+  border: 2px solid #e9e9e9;
+  border-radius: 10px;
+  color: #082C4C;
+  text-decoration: none;
+  margin-bottom: 0.6rem;
+  height: 120px;
+  overflow: hidden;
+}
+.housing img {
+  width: max(10rem, 10.4166666667vw);
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10px 0 0 10px;
+  margin-right: 1.2rem;
+}
+.housing p {
+  display: -webkit-box;
+  width: max(10rem, 10.4166666667vw);
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  margin-right: 2rem;
+  color: #082C4C;
+}
+.housing:last-child {
+  margin-bottom: 0;
+}
+
+.no-housing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-size: max(23px, 1.5625vw);
+  color: #828282;
+}
+
+.add__button {
+  position: relative;
+  margin-top: 1rem;
+  margin-bottom: 6rem;
+  z-index: 2;
+}
+
+.checkbox {
+  margin-right: 1.2rem;
+}
+
+.trash, .filter {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  margin-left: auto;
+}
+
+.trash {
+  margin-right: 17px;
+}
+
+.filter {
+  margin-right: 9px;
+}
+
+.status {
+  display: inline-block;
+  align-self: center;
+  margin-left: 0.3rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.status--offline {
+  background-color: #EB5757;
+}
+.status--online {
+  background-color: #27AE60;
+}/*# sourceMappingURL=consulter_logements.css.map */
