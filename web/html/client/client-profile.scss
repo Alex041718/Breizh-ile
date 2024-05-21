@@ -56,7 +56,7 @@ body {
             left: 10%;
             display: grid;
             //grid-template-columns: repeat(4, minmax(0, 1fr));
-            grid-template-columns: repeat(4, minmax( 10em, 1fr));   
+            grid-template-columns: repeat(4, minmax( 13em, 1fr));   
             gap: 1em;
             width: 25em;
         }
@@ -86,13 +86,13 @@ body {
 // VOIR POUR METTRE DES VARIABLES A LA PLACE DES MEDIA QUERIES
 @media (max-width: 950px) {
     .content__personnal-data__elements {
-        grid-template-columns: repeat(3, minmax(10em, 1fr));
+        grid-template-columns: repeat(3, minmax(12em, 1fr));
     }
 }
 
 @media (max-width: 750px) {
     .content__personnal-data__elements {
-        grid-template-columns: repeat(2, minmax(10em, 1fr));
+        grid-template-columns: repeat(2, minmax(11em, 1fr));
     }
 }
 @media (max-width: 650px) {

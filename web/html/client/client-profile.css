@@ -27,12 +27,6 @@ h4 {
   margin: 0;
 }
 
-h4 {
-  font-size: max(16px, 1.0416666667vw);
-  font-weight: bold;
-  margin: 0;
-}
-
 p {
   margin: 0;
   font-size: max(14px, 0.8333333333vw);
@@ -55,6 +49,7 @@ p {
 }
 
 .btn {
+  cursor: pointer;
   padding-block: 15px;
   padding-inline: 25px;
   background-color: #1D1D1D;
@@ -159,7 +154,7 @@ body {
 .content__personnal-data__elements {
   left: 10%;
   display: grid;
-  grid-template-columns: repeat(4, minmax(10em, 1fr));
+  grid-template-columns: repeat(4, minmax(13em, 1fr));
   gap: 1em;
   width: 25em;
 }
@@ -181,12 +176,12 @@ body {
 
 @media (max-width: 950px) {
   .content__personnal-data__elements {
-    grid-template-columns: repeat(3, minmax(10em, 1fr));
+    grid-template-columns: repeat(3, minmax(12em, 1fr));
   }
 }
 @media (max-width: 750px) {
   .content__personnal-data__elements {
-    grid-template-columns: repeat(2, minmax(10em, 1fr));
+    grid-template-columns: repeat(2, minmax(11em, 1fr));
   }
 }
 @media (max-width: 650px) {
