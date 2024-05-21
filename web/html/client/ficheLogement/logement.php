@@ -1,5 +1,11 @@
 <?php
 
+    // Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
+    require_once '../../../models/Client.php';
+    require_once '../../../services/ClientService.php';
+    require_once '../../../services/SessionService.php'; // pour le menu du header
+    $isAuthenticated = SessionService::isClientAuthenticated();
+
     if(isset($_GET["housingID"]) && $_GET["housingID"] != null) $housingID = $_GET["housingID"];
     else header("Location: /");
 
@@ -47,7 +53,7 @@
 <body>
     <?php
         require_once("../../components/Header/header.php");
-        Header::render(true);
+        Header::render(true,false,$isAuthenticated,$_SERVER['REQUEST_URI']);
     ?>
 
     <main class="logement">
