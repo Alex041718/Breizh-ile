@@ -1,12 +1,20 @@
 <?php
+    
+    // Commence le buffering de sortie
+    ob_start();
 
-// imports
-// Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
-require_once '../../../models/Client.php';
-require_once '../../../services/ClientService.php';
-require_once '../../../services/SessionService.php'; // pour le menu du header
-$isAuthenticated = SessionService::isClientAuthenticated();
+    echo 'Du contenu qui sera affiché avant la redirection';
+
+    // Nettoie le buffer de sortie et désactive le buffering
+    ob_end_clean();
+
+    if(!isset($_GET['id']) || $_GET['id'] == "") {
+        header('Location: /'); 
+        exit();
+    };
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,64 +24,79 @@ $isAuthenticated = SessionService::isClientAuthenticated();
     <link rel="stylesheet" href="../../style/ui.css">
     <link rel="stylesheet" href="/client/ficheLogement/page.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
-
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
+    
     <script src="/client/ficheLogement/page.js"></script>
 </head>
+
+<?php
+
+require_once("../../../models/Housing.php");
+
+require_once("../../../services/AddressService.php");
+require_once("../../../services/HousingService.php");
+require_once("../../../services/TypeService.php");
+require_once("../../../services/CategoryService.php");
+require_once("../../../services/OwnerService.php");
+require_once("../../../services/ImageService.php");
+require_once("../../../services/ArrangementService.php");
+
+$housing = HousingService::GetHousingById($_GET['id']);
+
+$housing_title = $housing->getTitle();
+$housing_shortDesc = $housing->getshortDesc();
+$housing_nbPerson = $housing->getNbPerson();
+$housing_nbRoom = $housing->getNbRoom();
+$housing_nbDoubleBed = $housing->getNbDoubleBed();
+$housing_nbSimpleBed = $housing->getNbSimpleBed();
+$housing_nbBed = $housing_nbDoubleBed + $housing_nbSimpleBed;
+$housing_image = $housing->getImage()->getImageSrc();
+$housing_ownerImage = $housing->getOwner()->getImage()->getImageSrc();
+$housing_ownerFirstName = $housing->getOwner()->getFirstname();
+$housing_ownerLastName = $housing->getOwner()->getLastname();
+$housing_longDesc = $housing->getLongDesc();
+$housing_priceHt = $housing->getPriceExcl();
+
+?>
+
 <body>
     <?php
         require_once("../../components/Header/header.php");
-        Header::render(true,false,$isAuthenticated,$_SERVER['REQUEST_URI']);
+        Header::render(true);
     ?>
 
     <main>
         <div class="page">
             <div class="photo">
-                <h2>Perros-Guirrec 22700</h2>
-                <img src="../../assets/images/12345.webp" alt="Image Logement">
+                <h2> <?php echo $housing_title ?> </h2>
+                <img src="<?php echo $housing_image ?>" alt="Image Logement">
             </div>
 
             <div class="twodiv">
                 <div class="details">
-                    <h3>Appartement T2</h3>
+                    <h3> <?php echo $housing_shortDesc ?> </h3>
                     <div class="infoLogement">
-                        <p id="nbVoyageurs">5</p>
-                        <p>&nbsppersonnes • 4 chambres • 5 lits</p>
+                        <p id="nbVoyageurs"> <?php echo $housing_nbPerson ?> </p>
+                        <p>&nbsppersonnes • <?php echo $housing_nbRoom ?> chambres • <?php echo $housing_nbBed ?> lits</p>
                     </div>
-
+                    
 
                     <div class="proprio">
-                        <img src="../../assets/images/pp-test.jpg" alt="Proprio Image">
-                        <p class="para--18px para--bold">Jade Orlabit</p>
+                        <img src=" <?php echo $housing_ownerImage ?>" alt="Proprio Image">
+                        <p class="para--18px para--bold"> <?php echo $housing_ownerFirstName . ' ' . $housing_ownerLastName; ?></p>
                     </div>
 
                     <div class="description">
                         <div class="texte">
                             <h4>Description</h4>
-                            <p class="para--18px" id="truncate-text">
-                            Bienvenue dans notre charmant appartement de deux chambres, situé au cœur de la ville historique de Perros-Guirec, en Bretagne. Cet hébergement spacieux et lumineux offre tout le confort nécessaire pour un séjour inoubliable en famille ou entre amis.
-
-                            L'appartement, récemment rénové, se trouve au deuxième étage d'un immeuble typiquement breton, avec une vue imprenable sur la mer. La décoration moderne et élégante, combinée à des touches traditionnelles, crée une atmosphère chaleureuse et accueillante. Vous apprécierez particulièrement le salon, doté de grandes baies vitrées qui laissent entrer une abondante lumière naturelle. Il est équipé d'un canapé confortable, d'une télévision à écran plat et d'un espace de travail avec une connexion Wi-Fi haut débit.
-
-                            La cuisine entièrement équipée vous permettra de préparer vos repas comme à la maison. Elle comprend un réfrigérateur, un four, un micro-ondes, une cafetière, un lave-vaisselle et une variété d'ustensiles de cuisine. Vous pourrez déguster vos plats dans la salle à manger attenante, qui peut accueillir jusqu'à six personnes.
-
-                            Les deux chambres sont spacieuses et paisibles, offrant chacune un lit double avec des matelas de qualité supérieure pour garantir des nuits reposantes. La chambre principale dispose également d'un dressing et d'un accès direct à une petite terrasse privée, parfaite pour savourer votre café du matin tout en admirant la vue sur l'océan. La deuxième chambre est idéale pour les enfants ou un autre couple, avec suffisamment d'espace pour ranger vos affaires.
-
-                            La salle de bains moderne est équipée d'une douche à l'italienne, d'un lavabo et d'un sèche-serviettes. Pour votre confort, un lave-linge est également à votre disposition dans l'appartement.
-
-                            L'emplacement de l'appartement est l'un de ses principaux atouts. Vous serez à quelques minutes à pied des plages de sable fin, des restaurants locaux, des cafés animés et des boutiques. Perros-Guirec est réputée pour ses paysages côtiers magnifiques et ses sentiers de randonnée, notamment le célèbre sentier des douaniers qui longe la côte de granit rose. Les amateurs de sports nautiques pourront profiter des nombreuses activités disponibles, telles que la voile, le kayak, et la plongée sous-marine.
-
-                            En séjournant chez nous, vous bénéficierez également d'un parking privé gratuit, d'une assistance 24/7 en cas de besoin et de conseils personnalisés pour découvrir les meilleures attractions de la région. Nous mettons tout en œuvre pour que votre séjour soit le plus agréable possible, et nous sommes impatients de vous accueillir dans notre petit coin de paradis breton.
-
-                            Réservez dès maintenant et vivez une expérience mémorable à Perros-Guirec. Vous repartirez avec des souvenirs inoubliables et l'envie de revenir bientôt !
-                            </p>
-                            <button type="button"><p class="para--bold" id="button-savoir">En savoir +</p></button>
-                        </div>
+                            <p class="para--18px" id="truncate-text"> <?php echo $housing_longDesc ?> </p>
+                            <button type="button"><p class="para--bold" id="button-savoir">En savoir +</p></button> 
+                        </div>                                        
                     </div>
 
                     <!-- Pop-up -->
@@ -145,7 +168,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                 </div>
 
                 <div class="reservation">
-                    <h3>60 € par nuit</h3>
+                    <h3> <?php echo $housing_priceHt ?> € par nuit</h3>
 
                     <div class="preparation">
                         <div class="datepicker">
@@ -162,7 +185,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                             </div>
                         </div>
                         <div class="nbrClients">
-                            <button class="para--bold" id="addTravelersBtn">Ajouter des voyageurs<output id="liveTravelersCount">0</output></button>
+                            <button class="para--bold" id="addTravelersBtn">Ajouter des voyageurs<output id="liveTravelersCount">1</output></button>
                             <div id="popup2" class="popup">
                                 <div class="popup-content">
                                     <div class="traveler-type">
@@ -173,7 +196,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                                         <div class="addbtn">
                                             <button id="subtractAdultBtn">-</button>
                                             <div class="nbr">
-                                                <span id="adultCount">0</span>
+                                                <span id="adultCount">1</span>
                                             </div>
                                             <button id="addAdultBtn">+</button>
                                         </div>
@@ -204,15 +227,21 @@ $isAuthenticated = SessionService::isClientAuthenticated();
 
                     <div class="prix">
                         <div class="calcul">
-                            <div><p><u>150 € x 5 nuits</u></p></div>
-                            <div><p>750 €</p></div>
+                            <div>
+                                <p>
+                                    <span id="nightPrice"><?php echo $housing_priceHt ?></span>
+                                    <span>€ x</span>
+                                    <span id="night-count">0</span> nuits
+                                </p>
+                            </div>
+                            <div><p id="total-cost">0 €</p></div>
                         </div>
 
                         <div class="horizontal-line"></div>
 
                         <div class="total">
                             <div><p class="para--bold">Total</p></div>
-                            <div><p class="para--bold">750 €</p></div>
+                            <div><p class="para--bold" id="final-total">0</p></div>
                         </div>
                     </div>
                 </div>
@@ -229,10 +258,10 @@ $isAuthenticated = SessionService::isClientAuthenticated();
             </div>
 
             <div id="overlay"></div>
-
+            
         </div>
 
-
+        
     </main>
 
 <?php
