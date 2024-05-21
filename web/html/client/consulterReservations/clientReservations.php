@@ -9,7 +9,7 @@ require_once '../../../services/SessionService.php'; // pour le menu du header
 
 // Vérification de l'authentification de l'utilisateur
 
-SessionService::system('client', '/client/reservationsListe');
+SessionService::system('client', '/client/client/reservations-liste');
 $isAuthenticated = SessionService::isClientAuthenticated();
 
 
@@ -35,12 +35,11 @@ usort($clientReservationList, function ($a, $b) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../../style/ui.css">
     <link rel="stylesheet" href="/client/consulterReservations/clientReservations.css">
-    <script src="../../components/ReservationCard/ReservationCard.js"></script>
+    <script src="/components/ReservationCard/ReservationCard.js"></script>
 <!--    <script src="clientReservations.js"></script>-->
-    <title>Reservation History</title>
+    <title>Vos réservation</title>
 
 </head>
-header
 <?php
 require_once("../../components/Header/header.php");
 Header::render(true,false, $isAuthenticated);
@@ -49,7 +48,7 @@ Header::render(true,false, $isAuthenticated);
 <main>
     <div class="title">
         <i class="fa-regular fa-less-than"></i>
-        <h2 class="title__text">Historique des réservations</h2>
+        <h2 class="title__text">Vos réservations</h2>
     </div>
     <div class="reservation-list">
         <div class="reservation-list__container">

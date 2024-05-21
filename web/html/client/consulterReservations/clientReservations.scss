@@ -4,6 +4,10 @@ body{
     margin: 0;
 }
 
+main {
+    min-height: 70vh;
+}
+
 .title{
     margin-left: 2em;
     display: flex;
@@ -11,7 +15,6 @@ body{
     align-items: center;
     gap: 1em;
     margin-top: 135px;
-
 }
 
 .fa-less-than::before{
