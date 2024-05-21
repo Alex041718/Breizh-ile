@@ -52,20 +52,40 @@ class Header {
             $menu = '';
             if ($isAuthenticated) {
 
-                // Réccupération des informations du client connecté
-                $client = ClientService::getClientById($_SESSION['user_id']);
+                // Réccupération des informations du user connecté
+                // ça peut être un client ou un propriétaire
+                if ($isBackOffice) {
+                    $owner = OwnerService::getOwnerById($_SESSION['user_id']);
 
-                $menu = '
+                    $menu = '
+                        <ul>
+                            <li><a href="">Bienvenue ' . $owner->getFirstname() . '</a></li>
+                            <li><a href="">Mon Compte</a></li>
+                            <li><a href="/back/ownerReservations">Mes réservations</a></li>
+                            <li><a href="">Qui sommes nous</a></li>
+                            <li><a href="/controllers/logoutController.php">Se déconnecter</a></li>
+                        </ul>
+                    ';
+                } else {
+                    $client = ClientService::getClientById($_SESSION['user_id']);
+
+                    $menu = '
                     <ul>
                         <li><a href="">Bienvenue ' . $client->getFirstname() . '</a></li>
                         <li><a href="">Mon Compte</a></li>
                         <li><a href="">Mes réservations</a></li>
                         <li><a href="">Qui sommes nous</a></li>
-                        <li><a href="/controllers/client/ClientLogoutController.php">Se déconnecter</a></li>
+                        <li><a href="/controllers/logoutController.php">Se déconnecter</a></li>
                     </ul>
                 ';
+                }
             } else {
-                $urlConnexion = "/client/connection?redirect=" . urlencode($redirectAuthPath);
+
+                if ($isBackOffice) {
+                    $urlConnexion = "/back/connection?redirect=" . urlencode($redirectAuthPath);
+                } else {
+                    $urlConnexion = "/client/connection?redirect=" . urlencode($redirectAuthPath);
+                }
 
                 $menu = '
                     <ul>

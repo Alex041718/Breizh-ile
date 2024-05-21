@@ -5,7 +5,8 @@
 require_once '../models/Client.php';
 require_once '../services/ClientService.php';
 require_once '../services/SessionService.php'; // pour le menu du header
-$isAuthenticated = SessionService::isAuthenticated();
+$isAuthenticated = SessionService::isClientAuthenticated();
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -35,7 +36,7 @@ $isAuthenticated = SessionService::isAuthenticated();
 
         require_once("./components/Header/header.php");
 
-        Header::render("search-bar--home", false, $isAuthenticated);
+        Header::render("search-bar--home", false, $isAuthenticated, $_SERVER['REQUEST_URI']);
 
         
 

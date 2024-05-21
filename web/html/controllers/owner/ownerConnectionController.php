@@ -17,7 +17,7 @@ function redirect($url)
 
 // Vérifier la méthode de la requête et l'existence des données
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['mail']) || !isset($_POST['password']) || !isset($_POST['role']) || $_POST['role'] !== 'owner') {
-    redirect('/owner/ownerConnection/owner_connection.php');
+    redirect('/back/connection');
 }
 
 $mail = $_POST['mail'];

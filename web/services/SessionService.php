@@ -46,6 +46,18 @@ class SessionService {
         return isset($_SESSION['logged_in']) && $_SESSION['logged_in'];
     }
 
+    public static function isOwnerAuthenticated() {
+        self::startSession();  // Assurez-vous que la session est démarrée
+        return isset($_SESSION['logged_in']) && $_SESSION['logged_in'] && $_SESSION['role'] == "owner";
+    }
+
+    public static function isClientAuthenticated() {
+        self::startSession();  // Assurez-vous que la session est démarrée
+        return isset($_SESSION['logged_in']) && $_SESSION['logged_in'] && $_SESSION['role'] == "client";
+    }
+
+
+
     /**
      * Authentifie un utilisateur.
      * @param int $userId
