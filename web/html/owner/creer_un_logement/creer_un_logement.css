@@ -3,13 +3,18 @@ body {
   padding: 0;
 }
 
-nav {
+main {
   margin-top: 120px;
+  display: flex;
+}
+
+nav {
   width: -moz-min-content;
   width: min-content;
 }
 nav ul {
   padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -23,7 +28,10 @@ nav ul li {
   font-weight: bold;
   font-size: max(16px, 1.0416666667vw);
 }
-nav ul li a {
+nav ul li span {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   line-height: 70px;
   width: 100%;
   padding-inline: 3.2rem;
@@ -35,7 +43,7 @@ nav ul li a {
 nav ul li.active {
   background-color: #082C4C;
 }
-nav ul li.active a {
+nav ul li.active span {
   color: #FFFFFF;
 }
 nav ul li:hover {
@@ -44,4 +52,40 @@ nav ul li:hover {
 }
 nav ul li.active:hover {
   background-color: #0b3e6b;
+}
+
+.content {
+  display: flex;
+  padding-inline: 4rem;
+}
+.content__input--large input, .content__input--large textarea {
+  width: max(15rem, 36.4583333333vw) !important;
+  min-width: 0;
+  font-size: 16px !important;
+}
+.content__input--long textarea {
+  height: 5rem !important;
+}
+.content__input--very-long textarea {
+  height: 22rem !important;
+}
+.content__button {
+  margin-top: 1rem;
+  padding-block: 0.87rem !important;
+  width: 100%;
+}
+.content__imagePicker {
+  margin-top: 32px;
+  margin-left: 3rem;
+  width: max(15rem, 26.0416666667vw) !important;
+}
+.content__right {
+  width: 100%;
+}
+
+.input {
+  margin-bottom: 1.5rem !important;
+}
+.input label {
+  margin-top: 0 !important;
 }/*# sourceMappingURL=creer_un_logement.css.map */

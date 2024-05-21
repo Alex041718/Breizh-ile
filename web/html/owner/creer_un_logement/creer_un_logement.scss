@@ -5,12 +5,17 @@ body {
     padding: 0;
 }
 
-nav {
+main {
     margin-top: 120px;
+    display: flex;
+}
+
+nav {
     width: min-content;
 
     ul {
         padding: 0;
+        margin: 0;
         display: flex;
         flex-direction: column;
         height: 100vh;
@@ -24,7 +29,8 @@ nav {
             font-weight: bold;
             font-size: $font-size-lg;
             
-            a {
+            span {
+                user-select: none;
                 line-height: 70px;
                 width: 100%;
                 padding-inline: 3.2rem;
@@ -36,7 +42,7 @@ nav {
 
             &.active {
                 background-color: $ownerPrimaryColor;
-                a { color: $whiteColor; }
+                span { color: $whiteColor; }
             }
 
             &:hover {
@@ -48,5 +54,56 @@ nav {
                 background-color: $ownerPrimaryColorHover;
             }
         }
+    }
+}
+
+.content {
+    display: flex;
+    padding-inline: 4rem;
+
+    &__input {
+        &--large {
+            input, textarea {
+                width: max(15rem, calc(700vw / 19.2)) !important;
+                min-width: 0;
+                font-size: 16px !important;
+            }
+        }
+
+        &--long {
+            textarea {
+                height: 5rem !important;
+            }
+        }
+
+        &--very-long {
+            textarea {
+                height: 22rem !important;
+            }
+        }
+    }
+
+    &__button {
+        margin-top: 1rem;
+        padding-block: 0.87rem !important;
+        width: 100%;
+    }
+
+    &__imagePicker {
+        margin-top: 32px;
+        margin-left: 3rem;
+        width: max(15rem, calc(500vw / 19.2)) !important;
+    }
+
+    &__right {
+        width: 100%;
+    }
+}
+
+.input {
+    margin-bottom: 1.5rem !important;
+
+    label {
+        margin-top: 0 !important;
     }
 }

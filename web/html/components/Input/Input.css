@@ -132,4 +132,9 @@ p {
   display: block;
   margin-bottom: 10px;
   margin-top: 10px;
+}
+
+.require {
+  color: #EB5757;
+  margin-left: 5px;
 }/*# sourceMappingURL=Input.css.map */
