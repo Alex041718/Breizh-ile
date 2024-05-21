@@ -12,6 +12,9 @@ RewriteRule ^logout$ /controllers/logoutController.php [L]
 # Rediriger /client/profil vers /client/clientProfil/client-profil.php
 RewriteRule ^client/profil$ /client/clientProfile/client-profile.php [L]
 
+# Rediriger /client/reservationsListe /client/consulterReservations/clientReservations.php
+RewriteRule ^client/reservationsListe$ /client/consulterReservations/clientReservations.php [L]
+
 
 # Rediriger /client/connection vers /client/clientConnection/client_connection.php
 RewriteRule ^client/connection$ /client/clientConnection/client_connection.php [L]
