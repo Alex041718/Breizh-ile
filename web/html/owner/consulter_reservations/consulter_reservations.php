@@ -4,7 +4,7 @@ require_once '../../../services/SessionService.php';
 // Gestion de la session
 
 SessionService::system('owner', '/back/reservations');
-var_dump($_SESSION);
+
 $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
 
 ?>

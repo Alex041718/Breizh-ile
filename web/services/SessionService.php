@@ -7,16 +7,21 @@ class SessionService {
      */
 
     public static function system(string $role, string $redirectPage = null) {
-        if (!self::isAuthenticated() || self::get('role') == null || self::isExpired()) {
-            $_SESSION['redirect'] = $redirectPage;
+        if (!self::isAuthenticated()
+            || self::get('role') == null
+            || self::isExpired() || self::get('role') != $role
+        ) {
+            // encodage de la page de redirection
+            $redirectPage = urlencode($redirectPage);
+
             if ($role == 'admin') {
-                header('Location: ../../admin/adminConnection.php');
+                header('Location: ../../admin/adminConnection.php'.($redirectPage ? '?redirect='.$redirectPage : ''));
             } else if ($role == 'owner') {
-                header('Location: ../../back/connection');
+                header('Location: /back/connection'.($redirectPage ? '?redirect='.$redirectPage : ''));
             } else if ($role == 'client') {
-                header('Location: ../../client/connection');
+                header('Location: /client/connection'.($redirectPage ? '?redirect='.$redirectPage : ''));
             } else {
-                header('Location: ../../client/connection');
+                header('Location: /client/connection'.($redirectPage ? '?redirect='.$redirectPage : ''));
             }
             exit();
         }

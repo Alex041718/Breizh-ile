@@ -9,6 +9,11 @@
 require_once '../../../services/SessionService.php';
 require_once '../../../services/ConnectionService.php';
 
+
+// Récupération de la page de redirection, avec gestion du fallback, quand l'admin veut accéder à une page protégée mais qu'il n'est plus connecté
+$redirectPage = $_POST['redirect'] ?? '/owner/pageTemporaire.php';
+
+$redirectPage = urldecode($redirectPage);
 function redirect($url)
 {
     header('Location: ' . $url);
@@ -17,14 +22,13 @@ function redirect($url)
 
 // Vérifier la méthode de la requête et l'existence des données
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['mail']) || !isset($_POST['password']) || !isset($_POST['role']) || $_POST['role'] !== 'owner') {
-    redirect('/back/connection');
+    redirect('/back/connection' . ($redirectPage ? '?redirect=' . $redirectPage : ''));
 }
 
 $mail = $_POST['mail'];
 $password = $_POST['password'];
 
-// Récupération de la page de redirection, avec gestion du fallback, quand l'admin veut accéder à une page protégée mais qu'il n'est plus connecté
-$redirectPage = $_POST['redirect'] ?? '/owner/pageTemporaire.php';
+
 
 // Vérification des informations de connexion du propriétaire
 if (ConnectionService::checkOwner($mail, $password)) {
@@ -35,7 +39,7 @@ if (ConnectionService::checkOwner($mail, $password)) {
     redirect($redirectPage);
 } else {
     // Connexion échouée, redirection vers la page de connexion
-    redirect('/back/connection?error=loginFailed');
+    redirect('/back/connection?error=loginFailed' . ($redirectPage ? '&redirect=' . $redirectPage : ''));
 }
 
 ?>

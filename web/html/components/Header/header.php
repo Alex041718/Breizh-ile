@@ -50,6 +50,13 @@ class Header {
 
             // gestion du menu
             $menu = '';
+
+            if ($isBackOffice) {
+                $urlLogout = "/logout?redirect=" . urlencode($redirectAuthPath);
+            } else {
+                $urlLogout = "/logout?redirect=" . urlencode($redirectAuthPath);
+            }
+
             if ($isAuthenticated) {
 
                 // Réccupération des informations du user connecté
@@ -63,7 +70,7 @@ class Header {
                             <li><a href="">Mon Compte</a></li>
                             <li><a href="/back/ownerReservations">Mes réservations</a></li>
                             <li><a href="">Qui sommes nous</a></li>
-                            <li><a href="/controllers/logoutController.php">Se déconnecter</a></li>
+                            <li><a href="' . $urlLogout . '">Se déconnecter</a></li>
                         </ul>
                     ';
                 } else {
@@ -75,7 +82,7 @@ class Header {
                         <li><a href="">Mon Compte</a></li>
                         <li><a href="">Mes réservations</a></li>
                         <li><a href="">Qui sommes nous</a></li>
-                        <li><a href="/controllers/logoutController.php">Se déconnecter</a></li>
+                        <li><a href="' . $urlLogout . '">Se déconnecter</a></li>
                     </ul>
                 ';
                 }

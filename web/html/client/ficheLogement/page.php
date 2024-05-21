@@ -6,8 +6,6 @@ require_once '../../../models/Client.php';
 require_once '../../../services/ClientService.php';
 require_once '../../../services/SessionService.php'; // pour le menu du header
 $isAuthenticated = SessionService::isClientAuthenticated();
-var_dump($_SESSION);
-var_dump($isAuthenticated);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +45,7 @@ var_dump($isAuthenticated);
                         <p id="nbVoyageurs">5</p>
                         <p>&nbsppersonnes • 4 chambres • 5 lits</p>
                     </div>
-                    
+
 
                     <div class="proprio">
                         <img src="../../assets/images/pp-test.jpg" alt="Proprio Image">
