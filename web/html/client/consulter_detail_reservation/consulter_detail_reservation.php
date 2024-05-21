@@ -1,8 +1,42 @@
 <?php
     if(!isset($_GET['reservationID']) || $_GET['reservationID'] == "") {
-        header('Location: /'); 
+        header('Location: /client/consulter_reservations/consulter_reservations.php'); 
         exit();
     };
+
+    /*require_once '../../../services/SessionService.php';
+
+    // Gestion de la session
+    SessionService::system('client', '/reservations');*/
+
+
+    
+    require_once("../../../services/ReservationService.php");
+    require_once("../../../services/HousingService.php");
+    require_once("../../../services/ClientService.php");
+    require_once("../../../services/TypeService.php");
+    require_once("../../../services/CategoryService.php");
+    require_once("../../../services/ArrangementService.php");
+    require_once("../../../services/PayementMethodService.php");
+
+    require_once("../../../models/Reservation.php");
+    /*
+    $reservationIsOK = false;
+
+    $client = ClientService::GetClientById($_SESSION['user_id']);
+
+    $allReservations = ReservationService::getAllReservationsByClientID($client->getClientID());
+
+    foreach ($allReservations as $key => $reservationTmp) {
+        if ($_GET['reservationID'] == $reservationTmp->getId()){
+            $reservationIsOK = true;
+        }
+    }
+
+    if (!$reservationIsOK){
+        header('Location: /client/consulter_reservations/consulter_reservations.php'); 
+        exit();
+    }*/
 
 ?>
 
@@ -37,20 +71,8 @@
     require_once("../../components/Header/header.php");
     Header::render(true);
 
-    require_once("../../../services/ReservationService.php");
-    require_once("../../../services/HousingService.php");
-    require_once("../../../services/OwnerService.php");
-    require_once("../../../services/TypeService.php");
-    require_once("../../../services/CategoryService.php");
-    require_once("../../../services/ArrangementService.php");
-    require_once("../../../services/PayementMethodService.php");
-
-    require_once("../../../models/Reservation.php");
-
-    
-
     $reservation = ReservationService::getReservationByID($_GET['reservationID']);
-    $housing = HousingService::GetHousingById($_GET['reservationID']);
+    $housing = HousingService::GetHousingById($reservation->getHousingId()->getHousingID());
     
 
     $reservation_dateDebut = $reservation->getBeginDate();
