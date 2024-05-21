@@ -10,7 +10,7 @@ require_once '../../../services/SessionService.php'; // pour le menu du header
 
 // Vérification de l'authentification de l'utilisateur
 
-SessionService::system('client', '/back/reservations');
+SessionService::system('client', '/client/profil');
 $isAuthenticated = SessionService::isClientAuthenticated();
 
 
