@@ -1,10 +1,26 @@
 <?php
-require_once '../../models/Client.php';
-require_once '../../models/Image.php';
-require_once '../../models/Gender.php';
-require_once '../../models/Address.php';
-require_once '../../services/ClientService.php';
-$client = ClientService::GetClientById(1);
+
+
+// Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
+require_once '../../../models/Client.php';
+require_once '../../../services/ClientService.php';
+require_once '../../../services/SessionService.php'; // pour le menu du header
+
+
+
+// Vérification de l'authentification de l'utilisateur
+
+SessionService::system('client', '/back/reservations');
+$isAuthenticated = SessionService::isClientAuthenticated();
+
+
+
+require_once '../../../models/Client.php';
+require_once '../../../models/Image.php';
+require_once '../../../models/Gender.php';
+require_once '../../../models/Address.php';
+require_once '../../../services/ClientService.php';
+$client = ClientService::GetClientById($_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
@@ -14,15 +30,15 @@ $client = ClientService::GetClientById(1);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire</title>
-    <link rel="stylesheet" href="client-profile.css">
+    <link rel="stylesheet" href="/client/clientProfile/client-profile.css">
 
 </head>
 
 <body>
 
     <?php
-    require_once ("../components/Header/header.php");
-    Header::render(false,true);
+    require_once("../../components/Header/header.php");
+    Header::render(true,false, $isAuthenticated);
     ?>
     <div class="content">
         <div class="content__selector">
@@ -44,39 +60,39 @@ $client = ClientService::GetClientById(1);
                 <div class="content__personnal-data__elements">
 
                     <!-- Nom -->
-                    <?php require_once ("../components/Input/Input.php");
+                    <?php require_once("../../components/Input/Input.php");
                     Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Nom", "le name", "Nom", true, $client->getLastname()); ?>
 
                     <!-- Prenom -->
-                    <?php require_once ("../components/Input/Input.php");
+                    <?php
                     Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Prenom", "le name", "Prenom", true, $client->getFirstname()); ?>
 
                     <!-- Pseudo -->
-                    <?php require_once ("../components/Input/Input.php");
+                    <?php
                     Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Pseudo", "le name", "Pseudo", true, $client->getNickname()); ?>
 
                     <!-- Mail -->
-                    <?php require_once ("../components/Input/Input.php");
+                    <?php
                     Input::render("uneClassEnPlus", "UnIdEnPlus", "email", "Mail", "le name", "Mail", true, $client->getMail()); ?>
 
                     <!-- Telephone -->
-                    <?php require_once ("../components/Input/Input.php");
+                    <?php
                     Input::render("uneClassEnPlus", "UnIdEnPlus", "tel", "Telephone", "le name", "Telephone", true, $client->getPhoneNumber()); ?>
 
                     <!-- Adresse -->
-                    <?php require_once ("../components/Input/Input.php");
+                    <?php
                     Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Adresse", "le name", "Adresse", true, $client->getAddress()->getPostalAddress()); ?>
 
                     <!-- Genre -->
-                    <?php require_once ("../components/Input/Input.php");
+                    <?php
                     Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Genre", "le name", "Genre", true, $client->getGender()->getLabel()); ?>
 
                     <!-- Date d'anniversaire -->
-                    <?php require_once ("../components/Input/Input.php");
+                    <?php
                     Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "Date d'anniversaire", "le name", "Date D'anniversaire", false, $client->getBirthDate()->format('Y-m-d')); ?>
 
                     <!-- Date de création du compte -->
-                    <?php require_once ("../components/Input/Input.php");
+                    <?php
                     Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "Date de création du compte", "le name", "Date de création du compte", true, $client->getCreationDate()->format('Y-m-d')); ?>
                 </div>
             </form>
@@ -87,14 +103,14 @@ $client = ClientService::GetClientById(1);
 
             <div class="content__security__elements">
 
-                <?php require_once ("../components/Input/Input.php");
+                <?php
                 Input::render("content__security__elements__password", "UnIdEnPlus", "password", "Mot de passe", "le name", "Mot de passe", true); ?>
 
 
-                <?php require_once ("../components/Button/Button.php");
+                <?php require_once("../components/Button/Button.php");
                 Button::render("button--storybook", "unId", "Désactiver mon compte", ButtonType::Delete, true); ?>
 
-                <?php require_once ("../components/Button/Button.php");
+                <?php
                 Button::render("button--storybook", "unId", "Supprimer mon compte", ButtonType::Delete, true); ?>
 
             </div>
@@ -102,7 +118,7 @@ $client = ClientService::GetClientById(1);
     </div>
 
     <?php
-    require_once ("../components/Footer/footer.php");
+    require_once("../components/Footer/footer.php");
     Footer::render();
     ?>
     <script src="/client/client-profile.js"></script>
