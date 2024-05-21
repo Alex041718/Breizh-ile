@@ -37,6 +37,9 @@ RewriteRule ^back/connection$ /owner/ownerConnection/owner_connection.php [L]
 # Rediriger /back/reservations vers /owner/consulter_reservations/consulter_reservations.php
 RewriteRule ^back/reservations$ /owner/consulter_reservations/consulter_reservations.php [L]
 
+# Rediriger /back/detail-reservation vers /owner/consulter_detail_reservation/consulter_detail_reservation.php
+RewriteRule ^back/detail-reservation$ /owner/consulter_detail_reservation/consulter_detail_reservation.php [L]
+
 # Rediriger /back/logements/id vers /owner/consulter_logement/logement.php
 RewriteRule ^back/logements/([0-9]+)$ /owner/consulter_logement/logement.php?housingID=$1 [L]
 

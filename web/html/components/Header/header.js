@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var parent__font = document.getElementById('parent__font');
     var closeAccess = document.getElementById("closeAccess");
 
+    var closeAccess = document.getElementById("closeAccess");
+
 
     if (header.dataset.tag != 1) {
         let tagToScroll = document.querySelector("." + header.dataset.tag);
@@ -39,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function closePopup() {
         popup.style.display = 'none';
+        document.body.style.overflow = 'auto';
     }
 
     document.addEventListener('click', function(event){
@@ -57,11 +60,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
+
     oeuil.addEventListener('click', function() {
         if (popup.style.display === 'none') {
             popup.style.display = "flex";
         } else {
-            popup.style.display = 'none';
+            closePopup();
         }
     })
 
