@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const childCount = document.getElementById('childCount');
     const body = document.querySelector('body'); // Sélectionnez le corps du document
     const overlay = document.getElementById('overlay'); // Sélectionnez l'élément overlay
+    const nbVoyageurs = document.getElementById('nbVoyageurs');
 
     let adultCountValue = parseInt(adultCount.textContent); // Nombre initial d'adultes
     let childCountValue = parseInt(childCount.textContent); // Nombre initial d'enfants
@@ -58,14 +59,30 @@ document.addEventListener('DOMContentLoaded', function () {
         updateChildCount();
     });
 
-    // Fonction pour mettre à jour le nombre d'adultes affiché
     function updateAdultCount() {
+        const maxVoyageurs = parseInt(nbVoyageurs.textContent, 10);
+        const totalTravelers = adultCountValue + childCountValue;
+
+        if (totalTravelers > maxVoyageurs) {
+            // Ajuster adultCountValue pour ne pas dépasser nbVoyageurs
+            adultCountValue = maxVoyageurs - childCountValue;
+        }
+
+        // Mettre à jour les éléments HTML avec les nouvelles valeurs
         adultCount.textContent = adultCountValue;
         liveTravelersCount.textContent = adultCountValue + childCountValue;
     }
 
-    // Fonction pour mettre à jour le nombre d'enfants affiché
     function updateChildCount() {
+        const maxVoyageurs = parseInt(nbVoyageurs.textContent, 10);
+        const totalTravelers = adultCountValue + childCountValue;
+
+        if (totalTravelers > maxVoyageurs) {
+            // Ajuster childCountValue pour ne pas dépasser nbVoyageurs
+            childCountValue = maxVoyageurs - adultCountValue;
+        }
+
+        // Mettre à jour les éléments HTML avec les nouvelles valeurs
         childCount.textContent = childCountValue;
         liveTravelersCount.textContent = adultCountValue + childCountValue;
     }
@@ -203,15 +220,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('overlay-critere').addEventListener('click', closePopupCriteres);
 
-  
-});
+    const inputs = document.querySelectorAll(".datepicker input[type=date]");
 
-const inputs = document.querySelectorAll(".datepicker input[type=date]");
+    let arriveePicker, departPicker;
 
-inputs.forEach((input) => {
-    flatpickr(input, {
-        dateFormat: "d-m-Y",
-        minDate: "today",
-        maxDate: new Date().fp_incr(365)
+    inputs.forEach((input) => {
+        const options = {
+            dateFormat: "d-m-Y",
+            minDate: "today",
+            maxDate: new Date().fp_incr(365)
+        };
+
+        if (input.id === 'start-date') {
+            options.onChange = function(selectedDates) {
+                // Mettre à jour la date minimale pour la date de départ
+                const minDepartDate = selectedDates[0];
+                departPicker.set('minDate', minDepartDate);
+            };
+            arriveePicker = flatpickr(input, options);
+        } else if (input.id === 'end-date') {
+            departPicker = flatpickr(input, options);
+        } else {
+            flatpickr(input, options);
+        }
     });
+
+
+  
 });

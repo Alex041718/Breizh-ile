@@ -117,6 +117,19 @@ class HousingService extends Service
         return $housings;
     }
 
+    public static function getAllHousingsByOwnerID(int $ownerID)
+    {
+        $pdo = self::getPDO();
+        $stmt = $pdo->query('SELECT *, _Housing.imageID AS profileImageID FROM _Housing WHERE ownerID = ' . $ownerID);
+        $housings = [];
+
+        while ($row = $stmt->fetch()) {
+            $housings[] = self::HousingHandler($row);
+        }
+
+        return $housings;
+    }
+
     public static function GetHousingById(int $housingID)
     {
         $pdo = self::getPDO();

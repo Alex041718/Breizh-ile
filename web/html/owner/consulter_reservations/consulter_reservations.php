@@ -15,6 +15,7 @@ SessionService::system('owner', '/back/reservations');
     <link rel="stylesheet" href="../../style/ui.css">
     <link rel="stylesheet" href="/owner/consulter_reservations/consulter_reservations.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/components/Toast/Toast.css">
 </head>
 <body>
     <?php
@@ -50,7 +51,7 @@ SessionService::system('owner', '/back/reservations');
             <button class="filter"><i class="fa-solid fa-filter"></i></button>
         </section>
         <section class="reservations">
-            <script src="/owner/consulter_reservations/consulter_reservations.js"></script>
+            <script type="module" src="/owner/consulter_reservations/consulter_reservations.js"></script>
         </section>
         <?php
             require_once("../../components/Button/Button.php");

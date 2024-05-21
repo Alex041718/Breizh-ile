@@ -232,6 +232,9 @@ body {
   width: 50%;
   position: relative;
 }
+.details .infoLogement {
+  display: flex;
+}
 .details .criteres {
   width: 100%;
   height: 10%;
