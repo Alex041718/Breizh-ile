@@ -1,0 +1,370 @@
+body {
+  margin: 0;
+}
+
+.logement {
+  margin-block: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding-inline: 150px;
+}
+@media screen and (max-width: 1500px) {
+  .logement {
+    padding-inline: 50px;
+  }
+}
+.logement__top {
+  display: flex;
+  gap: 100px;
+}
+.logement__top__image {
+  width: 50%;
+}
+.logement__top__image img {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.logement__top__reservation {
+  width: 50%;
+  padding: 30px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  border: 2px solid #828282;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+.logement__top__reservation h3 {
+  align-self: baseline;
+}
+.logement__top__reservation__options {
+  width: 80%;
+  border-radius: 20px;
+  border: 2px solid #828282;
+}
+.logement__top__reservation__options__dates {
+  display: flex;
+  border-bottom: 2px solid #828282;
+}
+.logement__top__reservation__options__dates .options__arrivee {
+  border-right: 2px solid #828282;
+  width: 50%;
+  text-align: center;
+  padding-block: 10px;
+}
+.logement__top__reservation__options__dates .options__depart {
+  width: 50%;
+  text-align: center;
+  padding-block: 10px;
+}
+.logement__top__reservation__options__voyageurs {
+  padding-block: 20px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.logement__top__reservation__options__voyageurs button {
+  background-color: transparent;
+  border: none;
+  font-size: max(16px, 1.0416666667vw);
+}
+.logement__top__reservation .order-btn {
+  background-color: #307B5C;
+  border: none;
+  color: white;
+  width: 80%;
+  padding-block: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.logement__top__reservation__nuits {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+.logement__top__reservation__nuits * {
+  font-size: max(16px, 1.0416666667vw);
+}
+.logement__top__reservation__nuits .nuits__calculs {
+  text-decoration: underline;
+}
+.logement__top__reservation hr {
+  width: 80%;
+}
+.logement__top__reservation__total {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  font-weight: 600;
+}
+.logement__top__reservation__total * {
+  font-size: max(16px, 1.0416666667vw);
+}
+@media screen and (max-width: 1500px) {
+  .logement__top {
+    gap: 50px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .logement__top {
+    flex-direction: column;
+  }
+  .logement__top > * {
+    width: 100%;
+  }
+}
+.logement__mid {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
+.logement__mid__left {
+  width: 50%;
+  display: flex;
+  gap: 100px;
+}
+.logement__mid__left__description {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+.logement__mid__left__host {
+  display: flex;
+  align-self: center;
+  gap: 10px;
+}
+.logement__mid__left__host img {
+  height: 60px;
+  border-radius: 70px;
+}
+.logement__mid__left__host h4 {
+  margin: auto;
+}
+.logement__mid__right {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  gap: 10px;
+}
+.logement__mid__right i span {
+  display: none;
+}
+.logement__bottom {
+  display: flex;
+  gap: 100px;
+}
+.logement__bottom__left {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  width: 50%;
+}
+.logement__bottom__left__info {
+  display: flex;
+  gap: 100px;
+  height: 10%;
+}
+@media screen and (max-width: 1024px) {
+  .logement__bottom__left__info {
+    justify-content: center;
+  }
+}
+.logement__bottom__left__description {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid gray;
+  box-sizing: border-box;
+  border-radius: 20px;
+  padding: 20px;
+  gap: 10px;
+}
+.logement__bottom__left__description .button-savoir {
+  font-weight: 600;
+  transition: all 0.3s;
+  align-self: flex-end;
+  cursor: pointer;
+}
+.logement__bottom__left__description .button-savoir:hover {
+  text-decoration: underline;
+}
+.logement__bottom__right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  gap: 20px;
+  box-sizing: border-box;
+}
+.logement__bottom__right__title {
+  display: flex;
+  gap: 20px;
+  position: relative;
+  height: 10%;
+}
+.logement__bottom__right__title span {
+  position: absolute;
+  top: 0;
+}
+.logement__bottom #map {
+  width: 100%;
+  height: 100%;
+}
+.logement__bottom .city {
+  align-self: baseline;
+}
+@media screen and (max-width: 1500px) {
+  .logement__bottom {
+    gap: 50px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .logement__bottom {
+    flex-direction: column;
+  }
+  .logement__bottom > * {
+    width: 100%;
+  }
+  .logement__bottom #map {
+    height: 300px;
+  }
+}
+
+#popup2 {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid gray;
+  box-shadow: 0 4px 8px rgb(0, 0, 0);
+  border-radius: 20px;
+  padding: 2em;
+  z-index: 9999;
+}
+#popup2.show {
+  display: block;
+}
+#popup2 .popup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+#popup2 .popup-content #closePopupBtn {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  transform-origin: center;
+}
+#popup2 .popup-content #closePopupBtn.fa-solid.fa-xmark {
+  transition: transform 0.3s;
+}
+#popup2 .popup-content #closePopupBtn.fa-solid.fa-xmark:hover {
+  animation: circle-animation 1s ease-in-out infinite;
+}
+#popup2 .popup-content .traveler-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#popup2 .popup-content .traveler-type .addbtn {
+  display: flex;
+  gap: 0.5em;
+  border: 1px solid gray;
+  padding: 0.5em;
+  background-color: transparent;
+  border-radius: 20px;
+}
+#popup2 .popup-content .traveler-type .addbtn button {
+  cursor: pointer;
+  border-radius: 20px;
+  border: 1px solid gray;
+}
+#popup2 .popup-content .traveler-type .addbtn .nbr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2em;
+  color: black;
+}
+
+#popup-overlay-savoir {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+}
+
+#popup-savoir {
+  flex-direction: column;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 35em;
+  height: 40em;
+  background-color: white;
+  padding: 3em;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  z-index: 9999;
+  box-shadow: 0 4px 8px rgb(0, 0, 0);
+  overflow-y: auto;
+}
+#popup-savoir #close-popup {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  transform-origin: center;
+}
+#popup-savoir #close-popup.fa-solid.fa-xmark {
+  transition: transform 0.3s;
+}
+#popup-savoir #close-popup.fa-solid.fa-xmark:hover {
+  animation: circle-animation 1s ease-in-out infinite;
+}
+#popup-savoir h3 {
+  margin-bottom: 1.5em;
+  text-align: center;
+}
+#popup-savoir p {
+  line-height: 2;
+}
+
+.caca {
+  display: flex;
+  height: 100%;
+  gap: 100px;
+}
+
+.bob {
+  background-color: red;
+  width: 50%;
+}
+.bob img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.baba {
+  background-color: green;
+  width: 50%;
+  height: 700px;
+}/*# sourceMappingURL=logement.css.map */

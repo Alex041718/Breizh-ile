@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
     addTravelersBtn.addEventListener('click', openPopup);
 
     // Fermer la pop-up en cliquant sur l'overlay
-    overlay.addEventListener('click', closePopup);
+    if(overlay) overlay.addEventListener('click', closePopup);
 
     var map = L.map('map').setView([51.505, -0.09], 13);
 

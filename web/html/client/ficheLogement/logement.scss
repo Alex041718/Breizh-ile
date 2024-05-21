@@ -1,0 +1,444 @@
+@import '../../style/variables';
+
+body {
+    margin: 0;
+}
+
+.logement {
+    margin-block: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding-inline: 150px;
+
+    @media screen and (max-width: 1500px) {
+        padding-inline: 50px;
+    }
+
+    &__top {
+        display: flex;
+        gap: 100px;
+
+        &__image {
+            width: 50%;
+            
+
+            img {
+                height: 100%;
+                width: 100%;
+                border-radius: 20px;
+                object-fit: cover;
+            }
+        }
+
+        &__reservation {
+            width: 50%;
+            padding: 30px;
+            border-radius: 20px;
+            box-sizing: border-box;
+            border: 2px solid $grey3;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+
+            h3 {
+                align-self: baseline;
+            }
+
+            &__options {
+                width: 80%;
+                border-radius: 20px;
+                border: 2px solid $grey3;
+
+                &__dates {
+                    display: flex;
+                    border-bottom: 2px solid $grey3;
+
+                    .options__arrivee {
+                        border-right: 2px solid $grey3;
+                        width: 50%;
+                        text-align: center;
+                        padding-block: 10px;
+                    }
+
+                    .options__depart {
+                        width: 50%;
+                        text-align: center;
+                        padding-block: 10px;
+                    }
+                }
+
+                &__voyageurs {
+                    padding-block: 20px;
+                    gap: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+
+                    button {
+                        background-color: transparent;
+                        border: none;
+                        font-size: $font-size-lg;
+                    }
+                }
+            }
+
+            .order-btn {
+                background-color: $clientPrimaryColor;
+                border: none;
+                color: white;
+                width: 80%;
+                padding-block: 20px;
+                border-radius: 20px;
+                cursor: pointer;
+            }
+
+            &__nuits {
+                display: flex;
+                justify-content: space-between;
+                width: 80%;
+
+                * {
+                    font-size: $font-size-lg;
+                }
+
+                .nuits__calculs {
+                    text-decoration: underline;
+                }
+            }
+
+            hr {
+                width: 80%;
+            }
+
+            &__total {
+                display: flex;
+                justify-content: space-between;
+                width: 80%;
+                font-weight: 600;
+
+                * {
+                    font-size: $font-size-lg;
+                }
+            }
+        }
+
+        @media screen and (max-width: 1500px) {
+            gap: 50px;
+        }
+
+        @media screen and (max-width: 1200px) {
+            flex-direction: column;
+
+            & > * {
+                width: 100%;
+            }
+        }
+
+    }
+
+    &__mid {
+        display: flex;
+        align-items: center;
+        gap: 100px;
+
+        &__left {
+            width: 50%;
+            display: flex;
+            gap: 100px;
+            &__description {
+                justify-content: center;
+                display: flex;
+                flex-direction: column;
+            }
+
+            &__host {
+                display: flex;
+                align-self: center;
+                gap: 10px;
+                img {
+                    height: 60px;
+                    border-radius: 70px;
+                }
+
+                h4 {
+                    margin: auto;
+                }
+            }
+        }
+
+        &__right {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            gap: 10px;
+
+            i {
+                span {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    &__bottom {
+        display: flex;
+        gap: 100px;
+
+        &__left {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            width: 50%;
+
+            &__info {
+                display: flex;
+                gap: 100px;
+                height: 10%;
+
+                @media screen and (max-width: 1024px) {
+                    justify-content: center;
+                }
+            }
+
+            &__description {
+                display: flex;
+                flex-direction: column;
+                border: 1px solid gray;
+                box-sizing: border-box;
+                border-radius: 20px;
+                padding: 20px;
+                gap: 10px;
+    
+                .button-savoir {
+                    font-weight: 600;
+                    transition: all 0.3s;
+                    align-self: flex-end;
+                    cursor: pointer;
+    
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+        &__right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%;
+            gap: 20px;
+            box-sizing: border-box;
+
+            &__title {
+                display: flex;
+                gap: 20px;
+                position: relative;
+                height: 10%;
+
+                span {
+                    position: absolute;
+                    top: 0;
+                }
+            }
+        }
+
+        
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .city {
+            align-self: baseline;
+        }
+
+        @media screen and (max-width: 1500px) {
+            gap: 50px;
+        }
+
+        @media screen and (max-width: 1024px) {
+            flex-direction: column;
+
+            & > * {
+                width: 100%;
+            }
+
+            #map {
+                height: 300px;
+            }
+        }
+    }
+    
+}
+
+#popup2 {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid gray;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+    border-radius: 20px;
+    padding: 2em;
+    z-index: 9999;
+
+    &.show {
+        display: block;
+    }
+
+    .popup-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+
+        #closePopupBtn {
+            position: absolute;
+            top: 1em;
+            left: 1em;
+
+            // Définir le centre de rotation au milieu de l'icône
+            transform-origin: center;
+                
+            // Appliquer les styles de l'icône
+            &.fa-solid {
+                // Définir les propriétés pour l'icône spécifique
+                &.fa-xmark {
+                    // Ajouter une transition pour une animation fluide
+                    transition: transform 0.3s;
+
+                    // Définir les styles pour le survol de l'icône
+                    &:hover {
+                        // Appliquer l'animation de cercle définie
+                        animation: circle-animation 1s ease-in-out infinite;
+                    }
+                }
+            }                
+        }
+
+        .traveler-type {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .addbtn {
+                display: flex;
+                gap: 0.5em;
+                border: 1px solid gray;
+                padding: 0.5em;
+                background-color: transparent;
+                border-radius: 20px;
+
+                button {
+                    cursor: pointer;
+                    border-radius: 20px;
+                    border: 1px solid gray;
+                }
+
+                .nbr {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 2em;
+                    color: black;
+                }
+            }
+        }
+    }
+}
+
+#popup-overlay-savoir {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+}
+
+#popup-savoir {
+    flex-direction: column;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 35em;
+    height: 40em;
+    background-color: white;
+    padding: 3em;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    z-index: 9999;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+    overflow-y: auto; 
+
+    #close-popup {
+        position: absolute;
+        top: 1em;
+        left: 1em;
+    
+        // Définir le centre de rotation au milieu de l'icône
+        transform-origin: center;
+    
+        // Appliquer les styles de l'icône
+        &.fa-solid {
+            // Définir les propriétés pour l'icône spécifique
+            &.fa-xmark {
+                // Ajouter une transition pour une animation fluide
+                transition: transform 0.3s;
+    
+                // Définir les styles pour le survol de l'icône
+                &:hover {
+                    // Appliquer l'animation de cercle définie
+                    animation: circle-animation 1s ease-in-out infinite;
+                }
+            }
+        }
+    }
+
+    h3{
+        margin-bottom: 1.5em;
+        text-align: center;
+    }
+
+    p {
+        line-height: 2;
+    }
+
+}
+
+.caca {
+    display: flex;
+    height: 100%;
+    gap: 100px;
+}
+
+.bob {
+    background-color: red;
+    width: 50%;
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.baba {
+    background-color: green;
+    width: 50%;
+    height: 700px;
+
+}
