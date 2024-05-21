@@ -7,14 +7,13 @@ class ReservationCard
     public static function render($class = "", $id = "", $data = "")
     {
         $housing = $data->getHousingId();
-        $defaultImage = "/FILES/images/default-house-image.png";
-        //$imageSrc = isset($housing->getImages()[0]) ? $housing->getImages()[0] : $defaultImage;
-        $imageSrc = $defaultImage;
+        $defaultImage = "../../assets/images/default-house-image.png";
+        $imageSrc = $housing->getImage()->getImageSrc();
         $render =  /*html*/
             '
             <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
-            <link rel="stylesheet" href="/views/components/ReservationCard/ReservationCard.css">
-            <div class="reservation-card' . ' " id=" ' . $id . ' ">
+            <link rel="stylesheet" href="/components/ReservationCard/ReservationCard.css">
+            <div class="reservation-card' . ' " id=" ' . $id . '" onclick="redirectToReservationDetails(' . $data->getId() . ')">
                 <div class="reservation-card__img-container">
                     <img src=" ' . $imageSrc . '" alt="" onerror=this.src="/FILES/images/default-house-image.png">
                 </div>

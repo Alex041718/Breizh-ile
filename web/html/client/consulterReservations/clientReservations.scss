@@ -1,14 +1,20 @@
-@use '../style/variables.css';
+@use '../../style/variables.css';
+
+body{
+    margin: 0;
+}
+
 .title{
+    margin-left: 2em;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0.5em;
-
+    gap: 1em;
+    margin-top: 135px;
 
 }
 
-.fa-greater-than::before{
+.fa-less-than::before{
     font-size: 3em;
     font-weight: bold;
 }

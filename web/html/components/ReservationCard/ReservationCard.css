@@ -114,6 +114,7 @@ p {
   background-color: #FFFFFF;
   box-shadow: 5px 5px 15px -15px #BDBDBD;
   transition: background-color 0.3s;
+  cursor: pointer;
   /*Hover*/
 }
 .reservation-card__img-container img {
@@ -189,13 +190,6 @@ p {
   font-weight: bold;
   transition: color 0.3s;
 }
-.reservation-card:hover {
-  background-color: #37906c;
-}
-.reservation-card:hover .reservation-card__data-container__description,
-.reservation-card:hover .reservation-card__right__date {
-  color: #FFFFFF;
-}
 @media (max-width: 768px) {
   .reservation-card {
     flex-direction: column;
@@ -207,9 +201,5 @@ p {
   }
 }
 .reservation-card:hover {
-  background-color: #37906c;
-}
-.reservation-card:hover .reservation-card__data-container__description,
-.reservation-card:hover .reservation-card__right__date {
-  color: #FFFFFF;
+  background-color: #f6f6f6;
 }/*# sourceMappingURL=ReservationCard.css.map */

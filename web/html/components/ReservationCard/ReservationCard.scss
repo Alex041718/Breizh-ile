@@ -12,6 +12,7 @@
   background-color: variables.$whiteColor;
   box-shadow: 5px 5px 15px -15px variables.$grey4;
   transition: background-color 0.3s;
+  cursor: pointer;
 
   &__img-container img {
     width: 145px;
@@ -98,15 +99,6 @@
   }
 
   /*Hover*/
-  &:hover {
-    background-color: variables.$clientPrimaryColorHover;
-
-    .reservation-card__data-container__description,
-    .reservation-card__right__date {
-      color: variables.$whiteColor;
-    }
-  }
-
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
@@ -117,11 +109,11 @@
   }
 
   &:hover {
-    background-color: variables.$clientPrimaryColorHover;
+    background-color: variables.$grey6;
 
     .reservation-card__data-container__description,
     .reservation-card__right__date {
-      color: variables.$whiteColor;
+      //color: variables.$whiteColor;
     }
   }
 }
