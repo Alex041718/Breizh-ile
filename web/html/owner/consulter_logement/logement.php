@@ -2,6 +2,7 @@
     
     if(isset($_GET["housingID"]) && $_GET["housingID"] != null) $housingID = $_GET["housingID"];
     else header("Location: /");
+    
 
     require_once("../../../services/ReservationService.php");
     require_once("../../../services/HousingService.php");
@@ -27,6 +28,17 @@
     $housingNbRoom = $housing->getNbRoom();
     $ownerPicture = $housing->getOwner()->getImage()->getImageSrc();
     $ownerNickname = $housing->getOwner()->getNickname();
+
+    require_once '../../../services/SessionService.php';
+    require_once '../../../services/OwnerService.php';
+
+    // Gestion de la session
+    SessionService::system('owner', '/back/reservations');
+
+    if($housing->getOwner()->getOwnerID() != $_SESSION["user_id"]) {
+        header("Location: /back/logement");
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +46,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiche Logement</title>
+    <title>Consultation des réservations</title>
+    <link rel="stylesheet" href="../../style/ui.css">
+    <link rel="stylesheet" href="/owner/consulter_reservations/consulter_reservations.css">
+    <link rel="stylesheet" href="/owner/consulter_logement/logement.css">
+    <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../style/ui.css">
     <script src="/client/ficheLogement/logement.js"></script>
     <link rel="stylesheet" href="/client/ficheLogement/logement.css">
@@ -47,10 +63,27 @@
 <body>
     <?php
         require_once("../../components/Header/header.php");
-        Header::render(true);
-    ?>
+        require_once("../../components/OwnerNavBar/ownerNavBar.php");
+        require_once("../../../services/ReservationService.php");
+        require_once("../../../services/OwnerService.php");
 
-    <main class="logement">
+        $owner = OwnerService::getOwnerById($_SESSION['user_id']);
+
+        $reservations = ReservationService::getAllReservationsByOwnerID($owner->getOwnerID());
+        $_SESSION["reservations"] = $reservations;
+        
+        $selected_reservations = array();
+
+        Header::render(isScrolling: True, isBackOffice: True);
+    ?>
+    <nav class="logement-nav-bar">
+        <a href="/back/logements" class="logement-nav-bar__back">
+            <i class="fa-solid fa-chevron-left"></i>
+            <p>Logements</p>
+        </a>
+        <a>Prévisualisation de "<?= $housingTitle ?>"</a>
+    </nav>
+    <main class="logement logement--fiche">
         <h2><?= $housingCity . " - " . $housingPostalCode ?></h2>
         <section class="logement__top">
             <div class="logement__top__image">
@@ -106,7 +139,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="order-btn para--18px para--bold">Réserver</button>
+                <button class="order-btn para--18px para--bold" disabled>Réserver</button>
                 <div class="logement__top__reservation__nuits">
                     <p class="nuits__calculs">150 € x 5 nuits</p>
                     <p class="nuits__total">750 €</p>
@@ -219,9 +252,9 @@
         </section>
     </main>
 
-<?php
-    require_once("../../components/Footer/footer.php");
-    Footer::render();
-?>
+    <?php
+        require_once("../../components/Footer/footer.php");
+        Footer::render(True);
+    ?>
 </body>
 </html>
