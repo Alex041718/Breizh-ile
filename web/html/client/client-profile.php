@@ -4,47 +4,7 @@ require_once '../../models/Image.php';
 require_once '../../models/Gender.php';
 require_once '../../models/Address.php';
 require_once '../../services/ClientService.php';
-// Création d'une instance de la classe Address
-$address = new Address(
-    null, // addressID
-    "Paris", // city
-    "75000", // postalCode
-    "3 rue des bouleaux" // postalAddress
-);
-
-// Création d'une instance de la classe Image
-$image = new Image(
-    null, // imageID
-    "..\assets\images\pp-test.jpg" // imageSrc
-);
-
-// Création d'une instance de la classe Gender
-$gender = new Gender(
-    null, // genderID
-    "Féminin" // label
-);
-
-// Création d'une instance de la classe Client avec les données fournies
-/*$client = new Client(
-    1, // clientID
-    false, // isBlocked
-    "martin.albert@gmail.com", // mail
-    "Martine", // firstname
-    "Albert", // lastname
-    "LaCarry78", // nickname
-    "MotDePasse", // password
-    "06 70 42 56 37", // phoneNumber
-    new DateTime("1990-01-01"), // birthDate
-    true, // consent
-    new DateTime(), // lastConnection
-    new DateTime(), // creationDate
-    $image, // image
-    $gender, // gender
-    $address // address
-);*/
-
-$client_data = ClientService::GetClientById(2);
-var_dump($client_data);
+$client = ClientService::GetClientById(1);
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +22,7 @@ var_dump($client_data);
 
     <?php
     require_once ("../components/Header/header.php");
-    Header::render();
+    Header::render(false,true);
     ?>
     <div class="content">
         <div class="content__selector">
@@ -77,47 +37,49 @@ var_dump($client_data);
             <h3 class="content__personnal-data__title">Informations Personnelles</h3>
             <p class="content__personnal-data__description">Modifier vos informations Personnelles</p>
 
-            <img class="content__personnal-data__image" src="<?php echo $client->getImage()->getImageSrc(); ?>"
-                    alt="photo_de_profile">
+            <img class="content__personnal-data__image" src="<?= $client->getImage()->getImageSrc() ?>"
+                alt="photo_de_profile">
 
-            <div class="content__personnal-data__elements">
+            <form>
+                <div class="content__personnal-data__elements">
 
-                <!-- Nom -->
-                <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Nom", "le name",  $client->getLastname(), true); ?>
+                    <!-- Nom -->
+                    <?php require_once ("../components/Input/Input.php");
+                    Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Nom", "le name", "Nom", true, $client->getLastname()); ?>
 
-                <!-- Prenom -->
-                <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Prenom", "le name", $client->getFirstname()); ?>
+                    <!-- Prenom -->
+                    <?php require_once ("../components/Input/Input.php");
+                    Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Prenom", "le name", "Prenom", true, $client->getFirstname()); ?>
 
-                <!-- Pseudo -->
-                <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Pseudo", "le name", $client->getNickname()); ?>
+                    <!-- Pseudo -->
+                    <?php require_once ("../components/Input/Input.php");
+                    Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Pseudo", "le name", "Pseudo", true, $client->getNickname()); ?>
 
-                <!-- Mail -->
-                <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "email", "Mail", "le name", $client->getMail()); ?>
+                    <!-- Mail -->
+                    <?php require_once ("../components/Input/Input.php");
+                    Input::render("uneClassEnPlus", "UnIdEnPlus", "email", "Mail", "le name", "Mail", true, $client->getMail()); ?>
 
-                <!-- Telephone -->
-                <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "tel", "Telephone", "le name", $client->getPhoneNumber()); ?>
+                    <!-- Telephone -->
+                    <?php require_once ("../components/Input/Input.php");
+                    Input::render("uneClassEnPlus", "UnIdEnPlus", "tel", "Telephone", "le name", "Telephone", true, $client->getPhoneNumber()); ?>
 
-                <!-- Adresse -->
-                <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Adresse", "le name", $client->getAddress()->getPostalAddress()); ?>
+                    <!-- Adresse -->
+                    <?php require_once ("../components/Input/Input.php");
+                    Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Adresse", "le name", "Adresse", true, $client->getAddress()->getPostalAddress()); ?>
 
-                <!-- Genre -->
-                <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Genre", "le name", $client->getGender()->getLabel()); ?>
+                    <!-- Genre -->
+                    <?php require_once ("../components/Input/Input.php");
+                    Input::render("uneClassEnPlus", "UnIdEnPlus", "text", "Genre", "le name", "Genre", true, $client->getGender()->getLabel()); ?>
 
-                <!-- Date d'anniversaire -->
-                <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "Date d'anniversaire", "le name", $client->getBirthDate()->format('Y-m-d')); ?>
+                    <!-- Date d'anniversaire -->
+                    <?php require_once ("../components/Input/Input.php");
+                    Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "Date d'anniversaire", "le name", "Date D'anniversaire", false, $client->getBirthDate()->format('Y-m-d')); ?>
 
-                <!-- Date de création du compte -->
-                <?php require_once ("../components/Input/Input.php");
-                Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "Date de création du compte", "le name", $client->getCreationDate()->format('Y-m-d')); ?>
-            </div>
+                    <!-- Date de création du compte -->
+                    <?php require_once ("../components/Input/Input.php");
+                    Input::render("uneClassEnPlus", "UnIdEnPlus", "date", "Date de création du compte", "le name", "Date de création du compte", true, $client->getCreationDate()->format('Y-m-d')); ?>
+                </div>
+            </form>
         </div>
         <div class="content__security" style="display: none">
             <h3 class="content__security__title">Sécurité</h3>

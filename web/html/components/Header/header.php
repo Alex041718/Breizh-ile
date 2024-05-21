@@ -5,7 +5,7 @@ class Header {
 
         public static function render($isScrolling = false, $isBackOffice = false) {
 
-            if($isScrolling != false) $tagToScroll = $isScrolling;
+            $tagToScroll = $isScrolling;
 
             $render = /*html*/ '
 
