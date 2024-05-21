@@ -92,8 +92,6 @@
 
 ?>
 
-<?php
-    $render = /*html*/ ' 
     <main>
         <div class="title">
             <div class="title__arrow">
@@ -101,49 +99,49 @@
                 <h2>Ma réservation</h2>
             </div>
             <div class="title__date">
-                <h5>Voyage  à Lannion du '.$reservation_dateDebut->format('d-m-Y').' au '.$reservation_dateFin->format('d-m-Y').'</h5>
+                <h5>Voyage  à Lannion du <?= $reservation_dateDebut->format('d-m-Y').' au '.$reservation_dateFin->format('d-m-Y') ?></h5>
             </div>
         </div>
         <article class="informations">
             <section class="informations__left">
                 <div class="informations__left__logement">
-                    <img src='.$reservation_image.'>
+                    <img src=<?= $reservation_image ?>>
                     <div class="informations__left__logement__info">
-                        <h3>'.$reservation_titre.'</h3>
-                        <p class="para--18px">'.$reservation_type.'</p>
+                        <h3><?= $reservation_titre ?></h3>
+                        <p class="para--18px"><?= $reservation_type ?></p>
                     </div>
                 </div>
                 <hr>
                 <div class="informations__left__detail">
                     <h3>Détails du prix</h3>
                     <div>
-                        <p class="para--18px">'.$reservation_prixExcl.' € x '.$reservation_nbJours .' nuits x '.$reservation_nbPersonnes .' occupant(s)</p>
-                        <p class="para--18px">'.$reservation_prixCalc.' €</p>
+                        <p class="para--18px"><?= $reservation_prixExcl ?> € x <?= $reservation_nbJours ?> nuits x <?= $reservation_nbPersonnes  ?> occupant(s)</p>
+                        <p class="para--18px"><?= $reservation_prixCalc ?> €</p>
                     </div>
                     <div>
                         <p class="para--18px" >Frais de service</p>
-                        <p class="para--18px">'.$reservation_serviceCharge.' €</p>
+                        <p class="para--18px"><?= $reservation_serviceCharge ?> €</p>
                     </div>
                     <div>
                         <p class="para--18px">Taxee de séjour</p>
-                        <p class="para--18px">'.$reservation_touristTax.' €</p>
+                        <p class="para--18px"><?= $reservation_touristTax ?> €</p>
                     </div>
                 </div>
                 <hr>
                 <div class="informations__left__total">
                     <div>
                         <h3>Total TTC</h3>
-                        <p class="para--18px">'.$reservation_prixTTC.'€</p>
+                        <p class="para--18px"><?= $reservation_prixTTC ?> €</p>
                     </div>
                 </div>
             </section>
             <section class="informations__right">
                 <div class="informations__right__desc">
-                    <img src='.$client_pp.' alt="">
+                    <img src=<?=$client_pp?> alt="">
                     <div class="informations__right__desc__info">
                         <div class="informations__right__desc__info__perso">
-                            <h3>'.$client_telephone.'</h3>
-                            <p>'.$client_mail.'</p>
+                            <h3><?= $client_telephone ?></h3>
+                            <p><?= $client_mail ?></p>
                         </div>
                         <div class="informations__right__desc__info__vide">
 
@@ -158,23 +156,20 @@
                     <h3 class="loca">Localisation</h3>
                     <div id="map"></div>
                     <div>
-                        <p class="para--18px">'.$reservation_postalCode.' '.$reservation_city.',</p>
-                        <p id="" class="para--18px">'.$reservation_postalAdress.'</p>
-                        <p id="adresse" class="para--18px">'.$reservation_postalAdress.'</p>
+                        <p class="para--18px"><?= $reservation_postalCode.' '.$reservation_city?>,</p>
+                        <p id="" class="para--18px"><?= $reservation_postalAdress ?></p>
+                        <p id="adresse" class="para--18px"><?= $reservation_postalAdress ?></p>
                         <br>
-                        <p class="para--14px">Longitude: '.$reservation_longitude.',  Latitude: '.$reservation_latitude.'</p>
-                        <p id="longitude" style="display:none">'.$reservation_longitude.'</p>
-                        <p id="latitude" style="display:none">'.$reservation_latitude.'</p>
+                        <p class="para--14px">Longitude: <?=$reservation_longitude?>,  Latitude: <?=$reservation_latitude?></p>
+                        <p id="longitude" style="display:none"><?= $reservation_longitude?></p>
+                        <p id="latitude" style="display:none"><?= $reservation_latitude?></p>
                     </div>
                 </div>
             </section>
         </article>
         
     </main>
-    ';
-    echo $render;
 
-?>
 <?php
     require_once("../../components/Footer/footer.php");
     Footer::render();
