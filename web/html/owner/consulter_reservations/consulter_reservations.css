@@ -109,7 +109,7 @@ main {
   z-index: 2;
 }
 
-.export, .filter {
+.goTo, .filter {
   background: none;
   color: inherit;
   border: none;
@@ -118,7 +118,16 @@ main {
   cursor: pointer;
   outline: inherit;
   margin-left: auto;
-  margin-right: 4px;
+  margin-right: 8px !important;
+}
+.goTo i, .filter i {
+  margin-left: auto;
+}
+
+.goTo {
+  width: -moz-min-content !important;
+  width: min-content !important;
+  overflow: visible !important;
 }
 
 .export-selection {
@@ -196,15 +205,12 @@ main {
   height: 12px;
   border-radius: 50%;
 }
-
-.coming {
+.status--coming {
   background-color: #2F80ED;
 }
-
-.in-progress {
+.status--in-progress {
   background-color: #FFAF45;
 }
-
-.done {
+.status--done {
   background-color: #27AE60;
 }/*# sourceMappingURL=consulter_reservations.css.map */

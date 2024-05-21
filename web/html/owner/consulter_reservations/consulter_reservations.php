@@ -2,7 +2,10 @@
 require_once '../../../services/SessionService.php';
 
 // Gestion de la session
+
 SessionService::system('owner', '/back/reservations');
+
+$isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
 
 ?>
 
@@ -15,6 +18,7 @@ SessionService::system('owner', '/back/reservations');
     <link rel="stylesheet" href="../../style/ui.css">
     <link rel="stylesheet" href="/owner/consulter_reservations/consulter_reservations.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/components/Toast/Toast.css">
 </head>
 <body>
     <?php
@@ -27,10 +31,10 @@ SessionService::system('owner', '/back/reservations');
 
         $reservations = ReservationService::getAllReservationsByOwnerID($owner->getOwnerID());
         $_SESSION["reservations"] = $reservations;
-        
+
         $selected_reservations = array();
 
-        Header::render(isScrolling: True, isBackOffice: True);
+        Header::render(True, True, $isOwnerAuthenticated);
         OwnerNavBar::render(2);
     ?>
     <main>
@@ -50,11 +54,11 @@ SessionService::system('owner', '/back/reservations');
             <button class="filter"><i class="fa-solid fa-filter"></i></button>
         </section>
         <section class="reservations">
-            <script src="/owner/consulter_reservations/consulter_reservations.js"></script>
+            <script type="module" src="/owner/consulter_reservations/consulter_reservations.js"></script>
         </section>
         <?php
             require_once("../../components/Button/Button.php");
-            Button::render("exportation__button", "exportationButton", "Exporter la sélection", ButtonType::Owner, false, false, false, '<i class="fa-solid fa-file-export"></i>'); 
+            Button::render("exportation__button", "exportationButton", "Exporter la sélection", ButtonType::Owner, false, false, false, '<i class="fa-solid fa-file-export"></i>');
         ?>
         <section class="export-selection">
             <section class="export-selection__CSV">

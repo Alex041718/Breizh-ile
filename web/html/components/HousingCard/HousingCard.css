@@ -1,4 +1,5 @@
 .housing-card {
+  display: block;
   max-width: 450px;
   height: 100%;
   background-color: white;
@@ -58,8 +59,4 @@
 }
 .housing-card__content__bottom h3 span {
   font-size: max(14px, 0.8333333333vw);
-}
-
-.housing-card--storybook {
-  height: 500px;
 }/*# sourceMappingURL=HousingCard.css.map */

@@ -74,6 +74,13 @@ body {
   margin: auto;
 }
 
+.housing-box {
+  width: 800px;
+}
+.housing-box .housing-card--storybook {
+  height: 500px;
+}
+
 .input-box {
   display: flex;
   flex-direction: row;

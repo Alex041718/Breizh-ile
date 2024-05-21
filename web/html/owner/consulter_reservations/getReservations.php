@@ -34,15 +34,15 @@ function showReservations($reservations) {
             <p><?= $reservation->getBeginDate()->format("d / m / Y") ?></p>
             <p><?= $reservation->getEndDate()->format("d / m / Y") ?></p>
             <p><?= $reservation->getPayMethodId()->getLabel() ?></p>
-            <p class="description-status"><?= $reservation->getStatus() ?><span class="status <?= match ($reservation->getStatus()) {
+            <p class="description-status"><?= $reservation->getStatus() ?><span class="status status--<?= match ($reservation->getStatus()) {
                 "En cours" => "in-progress",
                 "Terminée" => "done",
                 "Prochainement" => "coming",
                 default => ""
             } ?>"></span></p>
-            <button class="export"><i class="fa-solid fa-file-export"></i></button>
+            <a href="/back/detail-reservation?reservationID=<?= $reservation->getId() ?>" class="goTo"><i class="fa-solid fa-arrow-right"></i></a>
         </div>
-<?php 
+    <?php 
     }}
 }
 

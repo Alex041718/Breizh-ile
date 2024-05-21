@@ -65,9 +65,13 @@ class ClientService extends Service
         $pdo = self::getPDO();
         $stmt = $pdo->query('SELECT * FROM Client WHERE clientID = ' . $clientID);
         $row = $stmt->fetch();
+        // retourne une erreur si le client n'existe pas
+        if (!$row) {
+            throw new Exception('Client not found');
+        }
         return self::ClientHandler($row);
     }
-
+    
     public static function ClientHandler(array $row): Client
     {
         $gender = GenderService::GetGenderById($row['genderID']);

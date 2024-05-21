@@ -105,7 +105,7 @@ CREATE TABLE _User (
     birthDate Date,
     consent Boolean,
     lastConnection Date,
-    creationDate Date DEFAULT (CURRENT_DATE),
+    creationDate timestamp DEFAULT CURRENT_TIMESTAMP,
     imageID BIGINT UNSIGNED, -- Correspond au type `serial` dans Image pour mysql
     genderID BIGINT UNSIGNED, -- Correspond au type `serial` dans Gender pour mysal
     addressID BIGINT UNSIGNED, -- Correspond au type `serial` dans Address pour mysql

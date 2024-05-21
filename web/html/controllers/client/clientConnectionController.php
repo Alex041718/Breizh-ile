@@ -17,7 +17,7 @@ function redirect($url)
 
 // Vérifier la méthode de la requête et l'existence des données
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['mail']) || !isset($_POST['password']) || !isset($_POST['role']) || $_POST['role'] !== 'client') {
-    redirect('/client/clientConnection/client_connection.php');
+    redirect('/client/connection');
 }
 
 $mail = $_POST['mail'];
@@ -28,12 +28,15 @@ $redirectPage = $_POST['redirect'] ?? '/client/pageTemporaire.php';
 
 // Vérification des informations de connexion du propriétaire
 if (ConnectionService::checkClient($mail, $password)) {
+
+    // Deconnexion de l'utilisateur au cas où il était connecté en tant que propriétaire
+    //SessionService::logout();
     // Connexion réussie, gestion de la session
     $id = ConnectionService::getClientID($mail);
-    SessionService::authenticate($id, $mail, 'owner');
-
+    SessionService::authenticate($id, $mail, 'client');
 
     redirect($redirectPage);
+
 } else {
     // Connexion échouée, redirection vers la page de connexion
     redirect('/client/clientConnection/client_connection.php?error=loginFailed');

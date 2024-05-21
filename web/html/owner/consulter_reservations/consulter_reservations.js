@@ -1,3 +1,5 @@
+import { Toast } from "/components/Toast/Toast.js";
+
 function main() {
     const reservations = document.querySelector(".reservations");
     const columns = document.querySelectorAll(".title p");
@@ -109,11 +111,23 @@ function main() {
                 case "date-resa":
                     showReservations("getBeginDate", isReverse);
                     break;
+                case "client":
+                    showReservations("getClientId", isReverse);
+                    break;
+                case "logement":
+                    showReservations("getHousingId", isReverse);
+                    break;
                 case "date-arrivee":
                     showReservations("getBeginDate", isReverse);
                     break;
                 case "date-depart":
                     showReservations("getEndDate", isReverse);
+                    break;
+                case "methode-paiement":
+                    showReservations("getPayMethodId", isReverse);
+                    break;
+                case "status":
+                    showReservations("getStatus", isReverse);
                     break;
                 default:
                     showReservations();
@@ -130,6 +144,7 @@ function main() {
             exportCheckboxes.forEach((checkbox, index) => {
                 if (checkbox.checked) {
                     let type = index;
+                    Toast("Exportation réussie !", "success");
                     exportReservations(type);
                 }
             });
