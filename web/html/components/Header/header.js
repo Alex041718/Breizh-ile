@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var parent__font = document.getElementById('parent__font');
     var closeAccess = document.getElementById("closeAccess");
 
+    var closeAccess = document.getElementById("closeAccess");
+
 
     if (header.dataset.tag != 1) {
         let tagToScroll = document.querySelector("." + header.dataset.tag);
@@ -58,10 +60,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
+
     oeuil.addEventListener('click', function() {
         if (popup.style.display === 'none') {
             popup.style.display = "flex";
-            document.body.style.overflow = 'hidden';
         } else {
             closePopup();
         }
