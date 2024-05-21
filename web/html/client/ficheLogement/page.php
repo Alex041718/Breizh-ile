@@ -32,7 +32,11 @@
             <div class="twodiv">
                 <div class="details">
                     <h3>Appartement T2</h3>
-                    <p>5 personnes • 4 chambres • 5 lits</p>
+                    <div class="infoLogement">
+                        <p id="nbVoyageurs">5</p>
+                        <p>&nbsppersonnes • 4 chambres • 5 lits</p>
+                    </div>
+                    
 
                     <div class="proprio">
                         <img src="../../assets/images/pp-test.jpg" alt="Proprio Image">
