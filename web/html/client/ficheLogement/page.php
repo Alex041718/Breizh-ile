@@ -62,6 +62,8 @@ $housing_ownerFirstName = $housing->getOwner()->getFirstname();
 $housing_ownerLastName = $housing->getOwner()->getLastname();
 $housing_longDesc = $housing->getLongDesc();
 $housing_priceHt = $housing->getPriceExcl();
+$housingLongitude = $housing->getLongitude();
+$housingLatitude = $housing->getLatitude();
 
 $housing_arrangements = $housing->getArrangement();
 
@@ -86,7 +88,7 @@ $iconMapping = [
 
     <main>
         <div class="page">
-            <h3> <?php echo $housing_title ?> </h3>
+            <h3 id="title"> <?php echo $housing_title ?> </h3>
             <div class="photoAndReservation">
                 <div class="photo">
                     <img src="<?php echo $housing_image ?>" alt="Image Logement">
@@ -167,7 +169,7 @@ $iconMapping = [
                         <div class="horizontal-line"></div>
 
                         <div class="total">
-                            <div><p class="para--bold">Total</p></div>
+                            <div><p class="para--bold">Total HT</p></div>
                             <div><p class="para--bold" id="final-total">0</p></div>
                         </div>
                     </div>
@@ -199,7 +201,7 @@ $iconMapping = [
                     <div class="popup-overlay" id="popup-overlay-savoir"></div>
                     <div class="popup" id="popup-savoir">
                         <!-- Contenu de la pop-up (description complète) -->
-                        <h3>Description du logement</h3>
+                        <h3 id="titleDescription">Description du logement</h3>
                         <p class="para--18px" id="full-description">
                             <!-- Le texte de la description complète sera injecté ici par JavaScript -->
                         </p>
@@ -271,7 +273,7 @@ $iconMapping = [
                             <span class="tooltip-text"> <p>La localisation exacte sera communiquée une fois la réservation terminée </p></span>
                         </i>
                     </div>
-                    <div id="map"></div>
+                    <div data-lat="<?= $housingLatitude ?>" data-long="<?= $housingLongitude ?>" id="map"></div>
                 </div>    
             </div>
             

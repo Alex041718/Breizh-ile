@@ -27,20 +27,33 @@ body {
     width: 100%;
     height: 100%;
     gap: 3em;
-    align-items: flex-start;
+
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column; // Change flex direction to column for mobile devices
+        align-items: center; // Align items to the center horizontally
+    }
 
     .photo {
         height: 100%;
-        width: 100%;
+        width: 50%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
 
+        @media screen and (max-width:768px) {
+            width: 100%;;
+        }
+
         img {
             width: 100%;
             min-height: 43em;
             border-radius: 20px;
+
+            @media screen and (max-width:768px) {
+                min-height: 0;
+            }
         }
         
     }
@@ -48,13 +61,15 @@ body {
     .reservation {
         border: 1px solid #A9A9A9;
         border-radius: 20px;
-        width: 85%;
-        height: 37em;
-        padding: 2.6em;
+        width: 50%;
+        height: 43em;
         display: flex;
         flex-direction: column;
         align-items: center;
-        align-self: end;
+        @media screen and (max-width:768px) {
+            height: 30em;
+            width: 100%;
+        }
 
         .preparation {
             width: 75%;
@@ -62,6 +77,8 @@ body {
 
         h3{
             align-self: start;
+            margin-left: 0.5em;
+            margin-top: 0.5em;
     
         }
     
@@ -89,11 +106,19 @@ body {
             width: 75%;
             margin-top: 2em;
 
+            @media screen and (max-width:768px) {
+                margin-top: 0;
+            }
+
             .calcul, .total {
                 display: flex;
                 margin-top: 2em;
                 justify-content: space-between;
                 width: 100%;
+
+                @media screen and (max-width: 768px) {
+                    margin-top: 0em;
+                }
             }
         }
     }
@@ -106,8 +131,16 @@ body {
     max-width: 1920px;
     margin: 8em;
 
-    h3{
-        margin-bottom:0.5em
+    @media screen and (max-width: 768px) {
+        margin: 3em;;
+    }
+
+    #title{
+        margin-bottom:0.5em;
+        @media screen and (max-width:768px) {
+            margin-top: 3em;
+        }
+        
     }
 
     #overlay {
@@ -177,7 +210,7 @@ body {
                     display: flex;
                     gap: 0.5em;
                     border: 1px solid gray;
-                    padding: 0.5em;
+
                     background-color: transparent;
                     border-radius: 20px;
 
@@ -209,29 +242,54 @@ body {
 .twodiv {
     width: 100%;
     height: 40em;
-    padding-top: 2em;
     display: flex;
     gap: 3em;
+    flex-direction: row;
+
+    @media screen and (max-width:768px) {
+        flex-direction: column;
+        height: auto;
+    }
 
     .localisation {
         width: 50%;
         display: flex;
         flex-direction: column;
         height: 100%;
-        align-self: flex-end;
+
+        @media screen and (max-width: 768px) {
+            width: 100%;
+            height: 20em;
+        }
+
 
         .local-texte {
             display: flex;
             gap: 0.5em;
             margin-bottom: 0.5em;
             justify-content: center;
+            margin-top: 3em;
+
+            @media screen and (max-width: 728px) {
+                margin-top: 0;
+            }
         }
 
     }
 
     .details {
         width: 50%;
-        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        @media screen and (max-width: 768px) {
+            width: 100%;
+            margin-top: 1em;
+        }
+
+        h4
+
     
         .infoLogement{
             display: flex;
@@ -242,11 +300,16 @@ body {
             height: 10%;
             margin-top: 3em;
             border-radius: 20px;
-            position: absolute;
-            bottom: 0;
+            align-self: flex-end;
             background-color: black;
             color: white;
             cursor: pointer;
+
+            p {
+                @media screen and (max-width:768px) {
+                    padding: 1em;
+                }
+            }
     
         }
     
@@ -261,6 +324,8 @@ body {
                 position: relative;
                 margin: 20px;
                 height: 90%;
+                display: flex;
+                flex-direction: column;
                 p#button-savoir {
                     margin-top: 10px;
                     cursor: pointer;
@@ -275,14 +340,16 @@ body {
                     text-overflow: ellipsis;
                     white-space: normal;
                     line-height: 1.6em;
+
+    
+
+                    
                 }
             }
     
         
             button {
-                position: absolute;
-                bottom: 0;
-                right: 0;
+                align-self: flex-end;
                 border: none;
                 background-color: transparent;
             }
@@ -308,7 +375,12 @@ body {
     border: none;
     border-top: 1px solid #ccc; 
     margin-top: 2em;
-    height: 0;       
+    height: 0; 
+    
+    @media screen and (max-width: 768px) {
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
 }
 
 .nbrClients {
@@ -349,6 +421,16 @@ body {
             border-right: none;
             border-top-left-radius: 10px;
             justify-content: center;
+
+            @media screen and (max-width: 768px) {
+                width: 50%;
+            }
+
+            input{
+                @media screen and (max-width: 768px) {
+                    width: 5em;
+                }
+            }
         }
     
         .vertical-line {
@@ -366,6 +448,16 @@ body {
             border-left: none;
             border-top-right-radius: 10px;
             justify-content: center;
+
+            @media screen and (max-width: 768px) {
+                width: 50%;
+            }
+
+            input{
+                @media screen and (max-width: 768px) {
+                    width: 5em;
+                }
+            }
         }
 
     }
@@ -402,13 +494,26 @@ body {
     align-items: center;
     margin-left: 3em;
     margin-right: 3em;
+
+    @media screen and (max-width:768px) {
+        margin-left: 2em;
+        margin-right: 2em; 
+    }
 }
 
 .adulteInfo, .enfantInfo {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    p{
+        @media screen and (max-width:768px) {
+            width: 5em;
+        }
+    }
+    
 }
+
 
 .addbtn {
     display: flex;
@@ -427,7 +532,6 @@ body {
 
     .tooltip-text {
         visibility: hidden;
-        width: max-content;
         border-radius: 10px;
         background-color: black;
         color: white;
@@ -440,6 +544,14 @@ body {
         transform: translateX(-50%);
         opacity: 0;
         transition: opacity 0.3s;
+
+        p{
+            white-space: nowrap;
+
+            @media screen and (max-width:768px) {
+                white-space: normal;
+            }
+        }
     }
 
     &:hover .tooltip-text {
@@ -473,6 +585,11 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
     overflow-y: auto; 
 
+    @media screen and (max-width: 768px) {
+        width: 15em;
+        height: 20em;
+    }
+
     #close-popup {
         position: absolute;
         top: 1em;
@@ -497,7 +614,7 @@ body {
         }
     }
 
-    h3{
+    #titleDescription{
         margin-bottom: 1.5em;
         text-align: center;
     }
@@ -558,6 +675,10 @@ body {
         width: 35em;
         height: 35em;
 
+        @media screen and (max-width:768px) {
+            width: 15em;
+        }
+
         i#closePopupCritereBtn {
             position: absolute;
             top: 1em;
@@ -595,6 +716,11 @@ body {
                 gap: 3em;
                 margin-left: 5em;
                 margin-top: 2em;
+
+                @media screen and (max-width:768px) {
+                    flex-direction: column;
+                    margin-left: 3em;
+                }
                 .item {
                     display: flex;
                     align-items: center;
@@ -610,3 +736,5 @@ body {
         }
     }
 }
+
+
