@@ -21,9 +21,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Afficher le contenu correspondant à l'élément cliqué
             if (index === 0) {
-                personalData.style.display = "block";
+                personalData.style.display = "flex";
             } else {
-                security.style.display = "block";
+                security.style.display = "flex";
             }
 
             // Ajouter la classe active à l'élément cliqué
