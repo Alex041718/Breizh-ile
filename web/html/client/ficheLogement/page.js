@@ -104,9 +104,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'ArcGIS'
-    }).addTo(map);
+                L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                    attribution: 'ArcGIS'
+                }).addTo(map);
 
     var circle = L.circle([latitude, longitude], {
         color: 'red',
@@ -127,19 +127,17 @@ document.addEventListener('DOMContentLoaded', function () {
             var myButton = L.DomUtil.create('button', 'my-button-class', div);
 
 
-            let myImage = L.DomUtil.create('img', '', myButton);
-            myImage.src = "https://zestedesavoir.com/media/galleries/16186/1b4da67d-cb8b-4c29-85cb-4633005ea1e9.svg";
-            myImage.style = "margin-left:0px;width:20px;height:20px";
-            L.DomEvent.on(myButton, 'click', function() { changeBackground(); }, this);
+                        let myImage = L.DomUtil.create('img', '', myButton);
+                        myImage.src = "https://zestedesavoir.com/media/galleries/16186/1b4da67d-cb8b-4c29-85cb-4633005ea1e9.svg";
+                        myImage.style = "margin-left:0px;width:20px;height:20px";
+                        L.DomEvent.on(myButton, 'click', function() { changeBackground(); }, this);
 
-            return div;
-        },
-      
-        onRemove: function(map) {
-        }
-    });
+                        return div;
+                    },
+                    onRemove: function(map) {}
+                });
 
-    let myControl = new MyControlClass().addTo(map);
+                let myControl = new MyControlClass().addTo(map);
 
     function changeBackground(){
         if(tileType == "OpenStreetMap")
