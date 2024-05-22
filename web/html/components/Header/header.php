@@ -133,18 +133,18 @@ class Header {
                             <div class="popup__options">
                                 <div class="popup__options__couleurfont">
                                     <div id="parent__couleurs">
-                                        <p class="para--18px" id="couleurs">Couleurs</p>
+                                        <p class="para--18px" id="couleurs">Couleurs daltonisme</p>
                                     </div>
-                                    <div id="parent__font">
-                                        <p class="para--18px" id="font">Font police</p>
+                                    <div id="parent__animations">   
+                                        <p class="para--18px" id="animations">Animations</p>
                                     </div>
                                 </div>
                                 <div>
                                     <div id="parent__taille">   
                                         <p class="para--18px" id="taille">Police taille</p>
                                     </div>
-                                    <div id="parent__animations">   
-                                        <p class="para--18px" id="animations">Animations</p>
+                                    <div id="parent__font">
+                                        <p class="para--18px" id="font">Font police</p>
                                     </div>
                                 </div>
                             </div>

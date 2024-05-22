@@ -30,7 +30,7 @@ class SearchBar {
                 </div>
             </div>
             ' . ($showSettings ? '<i id="header__settings" class="fa-solid fa-sliders"></i>' : '') . '
-            <div class="search-bar__search-btn">
+            <div class="search-bar__search-btn button--vert">
                 <button type="submit" class=""><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
             </form>      

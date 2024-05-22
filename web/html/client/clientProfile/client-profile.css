@@ -54,6 +54,7 @@ p {
   padding-inline: 25px;
   background-color: #1D1D1D;
   color: white;
+  width: -moz-fit-content;
   width: fit-content;
   border-radius: 10px;
 }
@@ -187,6 +188,4 @@ body {
   .content__personnal-data__elements {
     grid-template-columns: repeat(1, minmax(10em, 1em));
   }
-}
-
-/*# sourceMappingURL=client-profile.css.map */
+}/*# sourceMappingURL=client-profile.css.map */
