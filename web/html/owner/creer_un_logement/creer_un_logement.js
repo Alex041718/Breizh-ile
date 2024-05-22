@@ -7,11 +7,11 @@ pages.forEach(page => {
     page.addEventListener("click", () => {
         pages.forEach(p => {
             const content = document.querySelector(`.${p.id}`);
-            if (content) { content.style.visibility = "hidden"; }
+            if (content) { content.style.display = "none"; }
             p.classList.remove("active");
         });
         page.classList.add("active");
         const content = document.querySelector(`.${page.id}`);
-        if (content) { content.style.visibility = "visible"; }
+        if (content) { content.style.display = "flex"; }
     });
 });

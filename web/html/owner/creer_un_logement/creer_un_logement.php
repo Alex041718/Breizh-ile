@@ -66,7 +66,6 @@ SessionService::system('owner', '/back/creer-logement');
                 </section>
             </section>
         </section>
-        <img src="<?= Image::getSrc("664d0b76a07559.36385554.png") ?>" alt="Image">
         <script type="module" src="/owner/creer_un_logement/creer_un_logement.js"></script>
     </main>
 

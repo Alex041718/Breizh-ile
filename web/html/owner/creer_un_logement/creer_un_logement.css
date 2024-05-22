@@ -88,4 +88,8 @@ nav ul li.active:hover {
 }
 .input label {
   margin-top: 0 !important;
+}
+
+.localisation {
+  display: none;
 }/*# sourceMappingURL=creer_un_logement.css.map */
