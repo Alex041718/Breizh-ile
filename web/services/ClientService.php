@@ -155,7 +155,6 @@ class ClientService extends Service
             'clientID' => $client->getClientID()
         ));
     }
-
     return true;
 }
 

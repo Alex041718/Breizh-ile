@@ -55,14 +55,13 @@ $client = ClientService::GetClientById($clientID);
         </div>
         <div class="content__personnal-data">
             <h3 class="content__personnal-data__title">Informations Personnelles</h3>
-            <p class="content__personnal-data__description">Modifier vos informations Personnelles</p>
 
-            <?php if (isset($error)): ?>
-                <p class="error-message"><?= htmlspecialchars($error) ?></p>
-            <?php endif; ?>
+            <div class="content__personnal-data__top">
+                <p class="content__personnal-data__top__description">Modifier vos informations Personnelles</p>
 
-            <img class="content__personnal-data__image" src="<?= $client->getImage()->getImageSrc() ?>"
-                alt="photo_de_profile">
+                <img class="content__personnal-data__image" src="<?= $client->getImage()->getImageSrc() ?>"
+                    alt="photo_de_profile">
+            </div>
 
             <form method="POST" action="/controllers/client/clientUpdateController.php">
                 <div class="content__personnal-data__elements">
@@ -95,29 +94,30 @@ $client = ClientService::GetClientById($clientID);
                         <label for="genderID">Genre</label>
                         <select name="genderID" id="genderID" class="content__personnal-data__elements__select">
                             <?php foreach ($genders as $gender): ?>
-                                <option value="<?= $gender->getGenderID() ?>"><?= $gender->getLabel() ?></option>
+                                <option <?= $client->getGender()->getGenderID() == $gender->getGenderID() ? "selected" : "" ?>
+                                    value="<?= $gender->getGenderID() ?>"><?= $gender->getLabel() ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
 
 
-                    <!-- Date d'anniversaire -->
+                    <!-- Date de naissance -->
                     <?php
-                    Input::render("uneClassEnPlus", "birthDate", "date", "Date d'anniversaire", "birthDate", "Date D'anniversaire", false, $client->getBirthDate()->format('Y-m-d')); ?>
+                    Input::render("uneClassEnPlus", "birthDate", "date", "Date de naissance", "birthDate", "Date de naissance", false, $client->getBirthDate()->format('Y-m-d')); ?>
 
                     <!-- Date de création du compte -->
                     <?php
                     Input::render("uneClassEnPlus", "creationDate", "date", "Date de création du compte", "creationDate", "Date de création du compte", true, $client->getCreationDate()->format('Y-m-d')); ?>
 
-                    <!-- Confirmer modifications button -->
-
                     <input type="hidden" name="clientID" value="<?php echo ($client->getClientID()) ?>">
 
                 </div>
-
-                <?php
-                require_once ("../../components/Button/Button.php");
-                Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Client, "", true, true); ?>
+                <!-- Confirmer modifications button -->
+                <div class="content__personnal-data__elements__modify_button">
+                    <?php
+                    require_once ("../../components/Button/Button.php");
+                    Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Client, "", true, true); ?>
+                </div>
             </form>
         </div>
         <div class="content__security" style="display: none">
@@ -126,8 +126,9 @@ $client = ClientService::GetClientById($clientID);
 
             <div class="content__security__elements">
                 <?php
-                Input::render("content__security__elements__password", "password", "password", "Mot de passe", "password", "Mot de passe", true); ?>
-
+                Input::render("content__security__elements__password", "password", "password", "Modifier Mot de passe", "password", "Mot de passe", true); ?>
+            </div>
+            <div class="content__security__moderator">
                 <?php
                 Button::render("button--storybook", "deactivate-account", "Désactiver mon compte", ButtonType::Delete, true); ?>
 

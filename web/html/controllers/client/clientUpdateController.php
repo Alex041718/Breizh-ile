@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $birthDate = $_POST['birthDate'];
     $creationDate = $_POST['creationDate'];
     $clientID = $_POST['clientID'];
+    $password = $_POST['password'];
 
     $client = ClientService::GetClientById($clientID);
 
@@ -26,15 +27,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $client->setMail($mail);
         $client->setPhoneNumber($phoneNumber);
         $client->getAddress()->setPostalAddress($address);
-        $client->getGender()->setLabel($gender);
+        $client->getGender()->setGenderID($gender);
         $client->setBirthDate(new DateTime($birthDate));
         $client->setCreationDate(new DateTime($creationDate));
+        $client->setPassword($password);
 
         // Modifier le client dans la base de données
         ClientService::ModifyClient($client);
 
         // Rediriger ou afficher un message de succès
-        redirect('/client/profil?success=1');
+        header('Location: /client/profil?success=1');
     } catch (Exception $e) {
         // Gérer les erreurs (par exemple, afficher un message d'erreur à l'utilisateur)
         $error = $e->getMessage();
