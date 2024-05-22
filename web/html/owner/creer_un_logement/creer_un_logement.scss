@@ -18,7 +18,7 @@ nav {
         margin: 0;
         display: flex;
         flex-direction: column;
-        height: 100vh;
+        height: 95vh;
         list-style: none;
         box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.25);
 
@@ -59,7 +59,8 @@ nav {
 
 .content {
     display: flex;
-    padding-inline: 4rem;
+    padding-left: 4rem;
+    height: 100%;
 
     &__input {
         &--large {
@@ -87,6 +88,11 @@ nav {
         margin-top: 1rem;
         padding-block: 0.87rem !important;
         width: 100%;
+
+        &--next {
+            margin-top: auto;
+            margin-bottom: 8.5rem;
+        }
     }
 
     &__imagePicker {
@@ -95,8 +101,43 @@ nav {
         width: max(15rem, calc(500vw / 19.2)) !important;
     }
 
+    #map {
+        width: max(15rem, calc(600vw / 19.2)); 
+        height: 50.8rem; 
+        border-radius:10px;
+        margin-left: 3rem;
+    }
+
+    &__left {
+        section {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+    }
+
     &__right {
         width: 100%;
+
+        section {
+            height: 100%;
+        }
+    }
+
+    &__up, &__bottom {
+        display: flex;
+    }
+
+    p {
+        font-size: 20px;
+    }
+
+    .separator {
+        display: block;
+        width: max(15rem, calc(700vw / 19.2));
+        height: 2px;
+        margin-top: 4px;
+        background-color: $lighterGrey5;
     }
 }
 
@@ -109,5 +150,45 @@ nav {
 }
 
 .localisation {
-    display: none;
+    position: fixed;
+    visibility: hidden;
+}
+
+.specifications {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.inline {
+    display: flex;
+    flex-direction: row !important;
+    height: max-content !important;
+    width: max(15rem, calc(700vw / 19.2)) !important;
+
+    .input {
+        width: max(5rem, calc(300vw / 19.2));
+        min-width: 0;
+        font-size: 16px !important;
+
+        &__input, &__label {
+            width: 100% !important;
+        }
+    }
+
+    .input:last-child {
+        margin-left: auto;
+    }
+
+    input:first-child, textarea:first-child {
+        margin-right: 1rem;
+    }
+}
+
+.half {
+    width: max(5rem, calc(180vw / 19.2)) !important;
+}
+
+.wide {
+    width: max(5rem, calc(420vw / 19.2)) !important;
 }

@@ -106,7 +106,7 @@ class ReservationService extends Service
     public static function getReservationByID(int $reservationID): Reservation
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->query('SELECT *, R.beginDate as r_begin_date, R.endDate as r_end_date FROM _Reservation R WHERE reservationID = ' . $reservationID);
+        $stmt = $pdo->query('SELECT *, creationDate as r_creation_date, beginDate as r_begin_date, endDate as r_end_date, priceIncl as r_price_incl  FROM _Reservation R WHERE reservationID = ' . $reservationID);
         $row = $stmt->fetch();
         return self::ReservationHandler($row);
     }
@@ -117,7 +117,7 @@ class ReservationService extends Service
         $reservationList = [];
         $stmt = $pdo->query(
             '
-                select * from _Reservation 
+                select *, creationDate as r_creation_date, beginDate as r_begin_date, endDate as r_end_date, priceIncl as r_price_incl  from _Reservation 
                 where clientID = '. $clientId
         );
         while ($row = $stmt->fetch()) {
