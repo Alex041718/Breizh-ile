@@ -11,6 +11,7 @@ class Owner {
     private string $phoneNumber;
     private DateTime $birthDate;
     private bool $consent;
+    private bool $isValidated;
     private DateTime $lastConnection;
     private DateTime $creationDate;
     private Image $image;
@@ -29,6 +30,7 @@ class Owner {
                                 bool $consent,
                                 DateTime $lastConnection,
                                 DateTime $creationDate,
+                                bool $isValidated,
                                 Image $image,
                                 Gender $gender,
                                 Address $address) {
@@ -44,9 +46,21 @@ class Owner {
         $this->consent = $consent;
         $this->lastConnection = $lastConnection;
         $this->creationDate = $creationDate;
+        $this->isValidated = $isValidated;
         $this->image = $image;
         $this->gender = $gender;
         $this->address = $address;
+    }
+
+
+    public function getIsValidated(): bool
+    {
+        return $this->isValidated;
+    }
+
+    public function setIsValidated(bool $isValidated): void
+    {
+        $this->isValidated = $isValidated;
     }
 
     /**

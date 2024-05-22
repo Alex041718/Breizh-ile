@@ -71,8 +71,7 @@ main .informations .informations__left .informations__left__logement {
 main .informations .informations__left .informations__left__logement img {
   width: 250px;
   height: 150px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 10px;
 }
 @media screen and (max-width: 1024px) {
@@ -206,5 +205,7 @@ main .informations .informations__right #map {
   }
 }
 .my-control {
-  background-color: white;
-}/*# sourceMappingURL=consulter_detail_reservation.css.map */
+  background-color: #FFFFFF;
+}
+
+/*# sourceMappingURL=consulter_detail_reservation.css.map */
