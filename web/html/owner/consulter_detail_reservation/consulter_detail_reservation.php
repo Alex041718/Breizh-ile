@@ -196,7 +196,7 @@
 
 <?php
     require_once("../../components/Footer/footer.php");
-    Footer::render();
+    Footer::render(true);
 ?>
 
 </html>

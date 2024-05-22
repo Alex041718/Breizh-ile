@@ -76,6 +76,15 @@
 
 }
 
+
+.accessibilite__animations {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+    
+}
+
 .accessibilite__couleurs {
     .button--vert, .button--bleu, .button--rouge {
         button {
@@ -87,14 +96,14 @@
     }
 
     .content__selector__personnal-data__title, .content__selector__security__title {
-        color: red;
+        color: violet;
     }
 
     .order-btn {
         background-color: orange;
     }
     * {
-        color: red;
+        color: violet;
     }
     
 }

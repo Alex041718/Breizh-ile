@@ -65,6 +65,11 @@
   cursor: pointer;
 }
 
+.accessibilite__animations * {
+  animation: none !important;
+  transition: none !important;
+}
+
 .accessibilite__couleurs .button--vert button, .accessibilite__couleurs .button--bleu button, .accessibilite__couleurs .button--rouge button {
   background-color: orange;
 }
@@ -72,13 +77,13 @@
   background-color: orange;
 }
 .accessibilite__couleurs .content__selector__personnal-data__title, .accessibilite__couleurs .content__selector__security__title {
-  color: red;
+  color: violet;
 }
 .accessibilite__couleurs .order-btn {
   background-color: orange;
 }
 .accessibilite__couleurs * {
-  color: red;
+  color: violet;
 }
 
 .accessibilite__font * :not(i) {

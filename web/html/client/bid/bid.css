@@ -1,0 +1,108 @@
+body {
+  margin: 0;
+}
+
+main {
+  background-color: #f6f6f6;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #E0E0E0;
+  width: 100%;
+}
+
+.bid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.bid__container {
+  margin-top: 6em;
+  margin-bottom: 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+}
+.bid__container__title-page {
+  align-self: flex-start;
+}
+.bid__container__info {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  gap: 2em;
+}
+.bid__container__info__info-detail {
+  width: 700px;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.bid__container__info__info-detail__description {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+}
+.bid__container__info__info-detail__description__image > img {
+  width: 220px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.bid__container__info__info-detail__description__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.bid__container__info__info-detail__kpi {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  margin-block: 1em;
+}
+.bid__container__info__info-detail__kpi__item {
+  padding: 10px 20px;
+  border: 1px solid #828282;
+  border-radius: 10px;
+}
+.bid__container__info__pay-recap {
+  width: 300px;
+  height: 400px;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.bid__container__info__pay-recap__price-detail h3 {
+  padding-block: 10px;
+}
+.bid__container__info__pay-recap__price-detail div {
+  display: flex;
+  justify-content: space-between;
+  margin-block: 8px;
+}
+.bid__container__info__pay-recap__price-detail div:nth-child(odd) {
+  background-color: #E0E0E0;
+}
+.bid__container__info__pay-recap__price-total div {
+  display: flex;
+  justify-content: space-between;
+}
+
+/*# sourceMappingURL=bid.css.map */

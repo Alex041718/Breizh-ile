@@ -33,6 +33,7 @@
     $housingNbRoom = $housing->getNbRoom();
     $ownerPicture = $housing->getOwner()->getImage()->getImageSrc();
     $ownerNickname = $housing->getOwner()->getNickname();
+    $housingNightPrice = $housing->getPriceExcl();
 ?>
 
 <!DOCTYPE html>
@@ -45,8 +46,10 @@
     <script src="/client/ficheLogement/logement.js"></script>
     <link rel="stylesheet" href="/client/ficheLogement/logement.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
@@ -62,22 +65,47 @@
             <div class="logement__top__image">
                 <img src="<?= $housingImage ?>" alt="Image Logement" />
             </div>
-            <div class="logement__top__reservation">
-                <h3>60€ la nuit</h3>
+
+
+
+            <form class="logement__top__reservation" method="post" action="/controllers/client/clientBidCreation.php">
+
+
+                <h3><?php echo $housingNightPrice ?>€ la nuit</h3>
+
                 <div class="logement__top__reservation__options">
                     <div class="datepicker logement__top__reservation__options__dates">
+
+                        <?php
+                        // établir des dates de début et de fin pour la réservation
+                        $dateStart = new DateTime();
+                        $dateEnd = new DateTime();
+                        $dateEnd->add(new DateInterval('P5D'));
+
+
+
+                        ?>
+
                         <div class="options__arrivee" type="dateStart">
                             <h4>Arrivée<h4>
-                            <input class="para--14px" name="startDate" id="start-date" type="date" placeholder="Ajouter une date">
+
+                            <input value="<?php echo $dateStart->format('Y-m-d') ?>" class="para--14px" name="startDate" id="start-date" type="date" placeholder="Ajouter une date">
+
                         </div>
                         <div class="options__depart">
                             <h4>Départ<h4>
-                            <input class="para--14px" name="endDate" id="end-date" type="date" placeholder="Ajouter une date">
+
+                            <input value="<?php echo $dateEnd->format('Y-m-d') ?>" class="para--14px" name="endDate" id="end-date" type="date" placeholder="Ajouter une date">
+
                         </div>
+
+
                     </div>
                     <div class="logement__top__reservation__options__voyageurs">
-                        <button class="para--bold" id="addTravelersBtn">Ajouter des voyageurs</button>
-                        <output id="liveTravelersCount">0</output>
+                        <button type="button" class="para--bold" id="addTravelersBtn">Ajouter des voyageurs</button>
+
+                        <input name="numberPerson" id="liveTravelersCount" value="0">
+
                         <div id="popup2" class="popup">
                             <div class="popup-content">
                                 <div class="traveler-type">
@@ -86,11 +114,11 @@
                                         <p>13 ans et +</p>
                                     </div>
                                     <div class="addbtn">
-                                        <button id="subtractAdultBtn">-</button>
+                                        <button type="button" id="subtractAdultBtn">-</button>
                                         <div class="nbr">
                                             <span id="adultCount">0</span>
                                         </div>
-                                        <button id="addAdultBtn">+</button>
+                                        <button type="button" id="addAdultBtn">+</button>
                                     </div>
                                 </div>
 
@@ -100,11 +128,11 @@
                                         <p>- de 12 ans</p>
                                     </div>
                                     <div class="addbtn">
-                                        <button id="subtractChildBtn">-</button>
+                                        <button type="button" id="subtractChildBtn">-</button>
                                         <div class="nbr">
                                             <span id="childCount">0</span>
                                         </div>
-                                        <button id="addChildBtn">+</button>
+                                        <button type="button" id="addChildBtn">+</button>
                                     </div>
                                 </div>
                                 <i id="closePopupBtn" class="fa-solid fa-xmark"></i>
@@ -112,7 +140,20 @@
                         </div>
                     </div>
                 </div>
-                <button class="order-btn para--18px para--bold">Réserver</button>
+
+                <input type="hidden" name="clientID" value="<?php echo $isAuthenticated?>">
+
+                <?php if($isAuthenticated): ?>
+
+                    <input type="hidden" name="clientID" value="<?php echo $_SESSION['user_id'] ?>">
+
+                <?php endif; ?>
+
+                <?php require_once("../../components/Button/Button.php");
+                Button::render("order-btn para--18px para--bold", "","Réserver",ButtonType::Client,"",false,true);
+                ?>
+
+
                 <div class="logement__top__reservation__nuits">
                     <p class="nuits__calculs">150 € x 5 nuits</p>
                     <p class="nuits__total">750 €</p>
@@ -122,7 +163,10 @@
                     <p>Total</p>
                     <p class="total__total">750 €</p>
                 </div>
-            </div>
+
+            </form>
+
+
         </section>
 
         <section  class="logement__bottom">

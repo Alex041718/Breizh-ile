@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var font = document.getElementById('font');
     var animations = document.getElementById('animations');
 
+
     var parent__taille = document.getElementById('parent__taille');
     var parent__couleurs = document.getElementById('parent__couleurs');
     var parent__animations = document.getElementById('parent__animations');
@@ -374,12 +375,16 @@ document.addEventListener('DOMContentLoaded', function() {
         if (document.body.classList.contains('accessibilite__animations')){
             parent__animations.style.backgroundColor = "#FFF";
             document.body.classList.remove('accessibilite__animations');
-
+            if (typeof checkParallaxAccessibilite === 'function') {
+                checkParallaxAccessibilite();
+            }        
         }
         else{
             parent__animations.style.backgroundColor = "#37906c";
             document.body.classList.add('accessibilite__animations');
-
+            if (typeof checkParallaxAccessibilite === 'function') {
+                checkParallaxAccessibilite();
+            }
         }
         
     });

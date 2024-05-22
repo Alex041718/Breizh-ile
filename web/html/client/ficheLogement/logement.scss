@@ -21,7 +21,7 @@ body {
 
         &__image {
             width: 50%;
-            
+
 
             img {
                 height: 100%;
@@ -41,7 +41,7 @@ body {
             justify-content: center;
             flex-direction: column;
             align-items: center;
-            gap: 50px;
+            gap: 30px;
 
             h3 {
                 align-self: baseline;
@@ -66,7 +66,7 @@ body {
                         width: 50%;
                         text-align: center;
                         padding-block: 10px;
-                        
+
                     }
 
                     .options__depart {
@@ -89,6 +89,11 @@ body {
                         border: none;
                         font-size: $font-size-lg;
                         cursor: pointer;
+                    }
+
+                    #liveTravelersCount {
+                        border: none;
+                        text-align: center;
                     }
                 }
             }
@@ -205,13 +210,13 @@ body {
                     white-space: normal;
                     line-height: 1.6em;
                 }
-    
+
                 .button-savoir {
                     font-weight: 600;
                     transition: all 0.3s;
                     align-self: flex-end;
                     cursor: pointer;
-    
+
                     &:hover {
                         text-decoration: underline;
                     }
@@ -230,7 +235,7 @@ body {
             &__title {
                 display: flex;
                 gap: 20px;
-                position: relative;                
+                position: relative;
 
                 h3 {
                     margin-top: auto;
@@ -255,7 +260,7 @@ body {
             .tooltip {
                 position: relative;
                 cursor: pointer;
-            
+
                 .tooltip-text {
                     visibility: hidden;
                     width: max-content;
@@ -276,8 +281,8 @@ body {
                         width: 300px;
                         transform: translateX(-95%);
                     }
-                }                
-            
+                }
+
                 &:hover .tooltip-text {
                     visibility: visible;
                     opacity: 1;
@@ -299,9 +304,9 @@ body {
             }
         }
 
-        
-        
-        
+
+
+
         .city {
             align-self: baseline;
         }
@@ -334,7 +339,7 @@ body {
         border: none;
         cursor: pointer;
     }
-    
+
 }
 
 #popup2 {
@@ -365,7 +370,6 @@ body {
         box-sizing: border-box;
         justify-content: center;
         width: 50%;
-        height: 30%;
         flex-direction: column;
         gap: 1em;
 
@@ -376,7 +380,7 @@ body {
 
             // Définir le centre de rotation au milieu de l'icône
             transform-origin: center;
-                
+
             // Appliquer les styles de l'icône
             &.fa-solid {
                 // Définir les propriétés pour l'icône spécifique
@@ -390,7 +394,7 @@ body {
                         animation: circle-animation 1s ease-in-out infinite;
                     }
                 }
-            }                
+            }
         }
 
         .traveler-type {
@@ -447,30 +451,30 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 35em;
-    height: 40em;
+    height: 35em;
     background-color: white;
     padding: 3em;
     border: 2px solid #ccc;
     border-radius: 20px;
     z-index: 9999;
-    overflow-y: auto; 
+    overflow-y: auto;
 
     #close-popup {
         cursor: pointer;
         position: absolute;
         top: 1em;
         left: 1em;
-    
+
         // Définir le centre de rotation au milieu de l'icône
         transform-origin: center;
-    
+
         // Appliquer les styles de l'icône
         &.fa-solid {
             // Définir les propriétés pour l'icône spécifique
             &.fa-xmark {
                 // Ajouter une transition pour une animation fluide
                 transition: transform 0.3s;
-    
+
                 // Définir les styles pour le survol de l'icône
                 &:hover {
                     // Appliquer l'animation de cercle définie
@@ -536,14 +540,14 @@ body {
             cursor: pointer;
 
             transform-origin: center;
-    
+
             // Appliquer les styles de l'icône
             &.fa-solid {
                 // Définir les propriétés pour l'icône spécifique
                 &.fa-xmark {
                     // Ajouter une transition pour une animation fluide
                     transition: transform 0.3s;
-        
+
                     // Définir les styles pour le survol de l'icône
                     &:hover {
                         // Appliquer l'animation de cercle définie

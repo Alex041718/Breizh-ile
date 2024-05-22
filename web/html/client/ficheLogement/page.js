@@ -93,19 +93,35 @@ document.addEventListener('DOMContentLoaded', function () {
     // Fermer la pop-up en cliquant sur l'overlay
     if(overlay) overlay.addEventListener('click', closePopup);
 
-    var map = L.map('map').setView([51.505, -0.09], 13);
+    // MAP GESTION
 
-    L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/%7Bz%7D/%7By%7D/%7Bx%7D', {
+    let mapObj = document.getElementById('map');
+    var longitude = mapObj.dataset.long;
+    var latitude = mapObj.dataset.lat;
+    var tileType = "OpenStreetMap";
+
+    var map = L.map('map').setView([latitude, longitude], 13);
+
+    
+
+    L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'ArcGIS'
     }).addTo(map);
 
+    var circle = L.circle([latitude, longitude], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 1500
+    }).addTo(map);
+        
 
-    let MyControlClass =  L.Control.extend({
-
+    let MyControlClass =  L.Control.extend({  
+  
         options: {
             position: 'topleft'
         },
-
+        
         onAdd: function(map) {
             var div = L.DomUtil.create('div', 'leaflet-bar my-control');
             var myButton = L.DomUtil.create('button', 'my-button-class', div);
@@ -118,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             return div;
         },
-
+      
         onRemove: function(map) {
         }
     });
@@ -129,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if(tileType == "OpenStreetMap")
             {
                 tileType = "ArcGis";
-                L.tileLayer('https://tile.openstreetmap.org/%7Bz%7D/%7Bx%7D/%7By%7D.png', {
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 19,
                     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 }).addTo(map);
@@ -137,19 +153,13 @@ document.addEventListener('DOMContentLoaded', function () {
             else
             {
               tileType = "OpenStreetMap";
-
-              selectedTile = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/%7Bz%7D/%7By%7D/%7Bx%7D', {
+                            
+              selectedTile = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'ArcGIS'
               }).addTo(map);
         }
     }
 
-    var circle = L.circle([51.508, -0.11], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 500
-    }).addTo(map);
 
     // Récupération des éléments avec infobulle
     const tooltips = document.querySelectorAll('.tooltip');
@@ -255,16 +265,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const priceDisplay = document.querySelector('.prix');
-    
-    function displayPriceDetails() {
-        const nightCount = parseInt(nightCountElement.textContent, 10);
+    const buttonDisplay = document.querySelector("#reserverBtn");
 
-        if(nightCount > 0 ){
-            priceDisplay.style.display = 'flex';
-        }else{
-            priceDisplay.style.display = 'none';
-        }
-    }
 
     function calculateAndDisplayNights() {
         const startDate = arriveePicker.selectedDates[0];
@@ -277,7 +279,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (nightCount == 0) {
                 nightCount = 1;
             }
-
 
             nightCountElement.textContent = nightCount;
             const totalCost = nightCount * costPerNight;
@@ -297,8 +298,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (nightCount > 0) {
             priceDisplay.style.display = 'flex';
+            buttonDisplay.disabled = false;
         } else {
             priceDisplay.style.display = 'none';
+            buttonDisplay.disabled = true;
         }
     }
 

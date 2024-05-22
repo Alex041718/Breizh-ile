@@ -7,8 +7,11 @@ class ReservationCard
     public static function render($class = "", $id = "", $data = "")
     {
         $housing = $data->getHousingId();
+        $reservation = ReservationService::getReservationByID($data->getId());
         $defaultImage = "../../assets/images/default-house-image.png";
         $imageSrc = $housing->getImage()->getImageSrc();
+        $reservation_nbJours =  ReservationService::getNbJoursReservation($reservation->getBeginDate(), $reservation->getEndDate());
+        $prixTTC = $housing->getPriceIncl() * $reservation_nbJours * $data->getNbPerson() + $reservation->getServiceCharge() + $reservation->getTouristTax();
         $render =  /*html*/
             '
             <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
@@ -35,8 +38,8 @@ class ReservationCard
                     
                 </div>
                 <div class="reservation-card__right">
-                    <div class="reservation-card__right__prix"> ' . $housing->getPriceIncl()  . '€ TTC</div>
-                    <div class="reservation-card__right__date">' . $data->getBeginDate()->format('d/m/Y') . '</div>
+                    <div class="reservation-card__right__prix"> ' . $prixTTC  . '€ TTC</div>
+                    <div class="reservation-card__right__date">' . $reservation->getBeginDate()->format('d/m/Y') . '</div>
                 </div>
                 
             </div>

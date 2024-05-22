@@ -27,6 +27,11 @@ document.addEventListener("DOMContentLoaded", function() {
         
     }
 
+    window.checkParallaxAccessibilite = function() {
+        if(document.body.classList.contains('accessibilite__animations')) parallaxInstance.disable();
+        else parallaxInstance.enable();
+    }
+
     // popup
 
     popup_filters_open.addEventListener("click", function() {
