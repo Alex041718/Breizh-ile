@@ -8,7 +8,7 @@
     // Nettoie le buffer de sortie et désactive le buffering
     ob_end_clean();
 
-    if(!isset($_GET['id']) || $_GET['id'] == "") {
+    if(!isset($_GET['housingID']) || $_GET['housingID'] == "") {
         header('Location: /');
         exit();
     };
@@ -52,7 +52,7 @@ require_once("../../../services/ImageService.php");
 require_once("../../../services/ArrangementService.php");
 // require_once("../../../services/ActivityService.php");
 
-$housing = HousingService::GetHousingById($_GET['id']);
+$housing = HousingService::GetHousingById($_GET['housingID']);
 
 $housing_title = $housing->getTitle();
 $housing_shortDesc = $housing->getshortDesc();
@@ -99,7 +99,7 @@ $iconMapping = [
                     <h3> <?php echo $housing_title ?> </h3>
                     <img src="<?php echo $housing_image ?>" alt="Image Logement">
                 </div>
-                <div class="reservation">
+                <form class="reservation" method="post" action="/controllers/client/clientCreateDevis.php">
                     <h3> <?php echo $housing_priceHt ?> € par nuit</h3>
 
                     <?php
@@ -128,7 +128,7 @@ $iconMapping = [
 
                         </div>
                         <div class="nbrClients">
-                            <button class="para--bold" id="addTravelersBtn">Ajouter des voyageurs<output id="liveTravelersCount">1</output></button>
+                            <button type="button" class="para--bold" id="addTravelersBtn">Ajouter des voyageurs<input name="numberPerson" id="liveTravelersCount" value="1"></button>
                             <div id="popup2" class="popup">
                                 <div class="popup-content">
                                     <div class="traveler-type">
@@ -137,11 +137,11 @@ $iconMapping = [
                                             <p>18 ans et +</p>
                                         </div>
                                         <div class="addbtn">
-                                            <button id="subtractAdultBtn">-</button>
+                                            <button type="button" id="subtractAdultBtn">-</button>
                                             <div class="nbr">
                                                 <span id="adultCount">1</span>
                                             </div>
-                                            <button id="addAdultBtn">+</button>
+                                            <button type="button" id="addAdultBtn">+</button>
                                         </div>
                                     </div>
 
@@ -151,11 +151,11 @@ $iconMapping = [
                                             <p>- de 18 ans</p>
                                         </div>
                                         <div class="addbtn">
-                                            <button id="subtractChildBtn">-</button>
+                                            <button type="button" id="subtractChildBtn">-</button>
                                             <div class="nbr">
                                                 <span id="childCount">0</span>
                                             </div>
-                                            <button id="addChildBtn">+</button>
+                                            <button  type="button" id="addChildBtn">+</button>
                                         </div>
                                     </div>
                                     <i id="closePopupBtn" class="fa-solid fa-xmark"></i>
@@ -165,7 +165,7 @@ $iconMapping = [
                     </div>
 
                     <div class="reservationBtn">
-                        <button class="para--18px para--bold">Réserver</button>
+                        <button type="submit" class="para--18px para--bold">Réserver</button>
                     </div>
 
                     <div class="prix">
@@ -206,7 +206,7 @@ $iconMapping = [
 
                 </form>
 
-            </div>
+
 
             <div class="twodiv">
                 <div class="details">
