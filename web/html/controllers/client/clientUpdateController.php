@@ -15,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $birthDate = $_POST['birthDate'];
     $creationDate = $_POST['creationDate'];
     $clientID = $_POST['clientID'];
-    $password = $_POST['password'];
 
     $client = ClientService::GetClientById($clientID);
 
@@ -30,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $client->getGender()->setGenderID($gender);
         $client->setBirthDate(new DateTime($birthDate));
         $client->setCreationDate(new DateTime($creationDate));
-        $client->setPassword($password);
 
         // Modifier le client dans la base de données
         ClientService::ModifyClient($client);
@@ -42,5 +40,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = $e->getMessage();
     }
 }
-
-?>

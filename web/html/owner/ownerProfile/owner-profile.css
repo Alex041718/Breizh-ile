@@ -120,7 +120,7 @@ body {
   width: 15em;
   height: 38em;
   background: #FFFFFF;
-  color: #307B5C;
+  color: #082C4C;
   box-shadow: 9px 0px 15px -3px rgba(0, 0, 0, 0.1);
 }
 .content__selector > div {
@@ -131,7 +131,7 @@ body {
   padding-left: 7%;
 }
 .content__selector > div.content__selector--current {
-  background: #307B5C;
+  background: #082C4C;
   color: #FFFFFF;
 }
 .content__personnal-data {
@@ -142,10 +142,17 @@ body {
   height: 30em;
   position: relative;
 }
+.content__personnal-data__top {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .content__personnal-data__image {
   width: 5em;
   height: 5em;
   border-radius: 50%;
+  justify-self: end;
 }
 .content__personnal-data__title {
   margin-bottom: 1em;
@@ -156,7 +163,28 @@ body {
   display: grid;
   grid-template-columns: repeat(4, minmax(13em, 1fr));
   gap: 1em;
-  width: 25em;
+  width: 20%;
+}
+.content__personnal-data__elements__modify_button {
+  margin: 10px 0;
+}
+.content__personnal-data__elements__genre {
+  grid-column: span 1;
+  display: flex;
+  flex-direction: column;
+}
+.content__personnal-data__elements__genre label {
+  margin-bottom: 13px;
+  margin-top: 10px;
+}
+.content__personnal-data__elements__genre select {
+  min-width: 100px;
+  max-width: 800px;
+  padding: 12px 20px;
+  background-color: #FFFFFF;
+  border: 1.5px solid #E0E0E0;
+  border-radius: 4px;
+  font-size: 12px;
 }
 .content__security {
   margin-left: 5em;
@@ -168,24 +196,28 @@ body {
 }
 .content__security__title {
   margin-bottom: 1em;
+  width: 10%;
+}
+.content__security__elements {
+  left: 10%;
 }
 .content__security__elements__password {
   width: 20%;
   margin-bottom: 1em;
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1200px) {
   .content__personnal-data__elements {
     grid-template-columns: repeat(3, minmax(12em, 1fr));
   }
 }
-@media (max-width: 750px) {
+@media (max-width: 850px) {
   .content__personnal-data__elements {
     grid-template-columns: repeat(2, minmax(11em, 1fr));
   }
 }
-@media (max-width: 650px) {
+@media (max-width: 610px) {
   .content__personnal-data__elements {
     grid-template-columns: repeat(1, minmax(10em, 1em));
   }
-}/*# sourceMappingURL=client-profile.css.map */
+}/*# sourceMappingURL=owner-profile.css.map */
