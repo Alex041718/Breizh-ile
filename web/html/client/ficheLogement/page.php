@@ -1,5 +1,5 @@
 <?php
-    
+
     // Commence le buffering de sortie
     ob_start();
 
@@ -9,7 +9,7 @@
     ob_end_clean();
 
     if(!isset($_GET['id']) || $_GET['id'] == "") {
-        header('Location: /'); 
+        header('Location: /');
         exit();
     };
 
@@ -24,13 +24,13 @@
     <link rel="stylesheet" href="../../style/ui.css">
     <link rel="stylesheet" href="/client/ficheLogement/page.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    
+
     <script src="/client/ficheLogement/page.js"></script>
 </head>
 
@@ -94,8 +94,10 @@ $iconMapping = [
                 <div class="photo">
                     <img src="<?php echo $housing_image ?>" alt="Image Logement">
                 </div>
-                <div class="reservation">
+                <form class="reservation" action="/controllers/client/clientCreateDevis.php" method="post">
                     <h3> <?php echo $housing_priceHt ?> € par nuit</h3>
+
+
 
                     <div class="preparation">
                         <div class="datepicker">
@@ -112,10 +114,10 @@ $iconMapping = [
                                     <input class="para--14px" name="endDate" id="end-date" type="date" placeholder="Ajouter une date">
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="nbrClients">
-                            <button class="para--bold" id="addTravelersBtn">Ajouter des voyageurs<output id="liveTravelersCount">1</output></button>
+                            <button type="button" class="para--bold" id="addTravelersBtn">Ajouter des voyageurs<input name="numberPerson" id="liveTravelersCount" value="1"></button>
                             <div id="popup2" class="popup">
                                 <div class="popup-content">
                                     <div class="traveler-type">
@@ -124,11 +126,11 @@ $iconMapping = [
                                             <p>18 ans et +</p>
                                         </div>
                                         <div class="addbtn">
-                                            <button id="subtractAdultBtn">-</button>
+                                            <button type="button" id="subtractAdultBtn">-</button>
                                             <div class="nbr">
                                                 <span id="adultCount">1</span>
                                             </div>
-                                            <button id="addAdultBtn">+</button>
+                                            <button type="button" id="addAdultBtn">+</button>
                                         </div>
                                     </div>
 
@@ -151,8 +153,10 @@ $iconMapping = [
                         </div>
                     </div>
 
+
+
                     <div class="reservationBtn">
-                        <button class="para--18px para--bold" id="reserverBtn">Réserver</button>
+                        <button type="submit" class="para--18px para--bold" id="reserverBtn">Réserver</button>
                     </div>
 
                     <div class="prix">
@@ -174,8 +178,22 @@ $iconMapping = [
                             <div><p class="para--bold" id="final-total">0</p></div>
                         </div>
                     </div>
-                </div>
- 
+
+                    <input type="hidden" name="isAuthenticated" value="<?php echo $isAuthenticated?>">
+
+                    <?php if($isAuthenticated): ?>
+
+                        <input type="hidden" name="clientID" value="<?php echo $_SESSION['user_id'] ?>">
+
+                    <?php endif; ?>
+
+                    <input type="hidden" name="housingID" value="<?php echo $housing->getHousingID() ?>">
+
+                    <input type="hidden" name="ownerID" value="<?php echo $housing->getOwner()->getOwnerID() ?>">
+
+                    <input type="hidden" name="oldPage" value="<?php echo $_SERVER['REQUEST_URI'] ?>">
+                </form>
+
             </div>
 
             <div class="twodiv">
@@ -275,11 +293,11 @@ $iconMapping = [
                         </i>
                     </div>
                     <div data-lat="<?= $housingLatitude ?>" data-long="<?= $housingLongitude ?>" id="map"></div>
-                </div>    
+                </div>
             </div>
-            
+
             <div id="overlay"></div>
-            
+
         </div>
 
     </main>
