@@ -117,6 +117,7 @@ CREATE TABLE _User (
 -- Création de la table `Owner`
 CREATE TABLE _Owner (
     ownerID BIGINT UNSIGNED PRIMARY KEY,
+    isValidated Boolean,
     identityCard varchar(100),
     FOREIGN KEY (ownerID) REFERENCES _User(userID)
 );

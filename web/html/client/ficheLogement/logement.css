@@ -25,8 +25,7 @@ body {
   height: 100%;
   width: 100%;
   border-radius: 20px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .logement__top__reservation {
   width: 50%;
@@ -38,7 +37,7 @@ body {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  gap: 50px;
+  gap: 30px;
 }
 .logement__top__reservation h3 {
   align-self: baseline;
@@ -80,6 +79,10 @@ body {
   border: none;
   font-size: max(16px, 1.0416666667vw);
   cursor: pointer;
+}
+.logement__top__reservation__options__voyageurs #liveTravelersCount {
+  border: none;
+  text-align: center;
 }
 .logement__top__reservation .order-btn {
   background-color: #307B5C;
@@ -228,7 +231,6 @@ body {
 }
 .logement__bottom__right .tooltip .tooltip-text {
   visibility: hidden;
-  width: -moz-max-content;
   width: max-content;
   border-radius: 10px;
   background-color: transparent;
@@ -325,7 +327,6 @@ body {
   box-sizing: border-box;
   justify-content: center;
   width: 50%;
-  height: 30%;
   flex-direction: column;
   gap: 1em;
 }
@@ -389,7 +390,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 35em;
-  height: 40em;
+  height: 35em;
   background-color: white;
   padding: 3em;
   border: 2px solid #ccc;
@@ -485,4 +486,6 @@ body {
 }
 .popup-critere .popup-content-critere .section .items .item i {
   color: #307B5C;
-}/*# sourceMappingURL=logement.css.map */
+}
+
+/*# sourceMappingURL=logement.css.map */

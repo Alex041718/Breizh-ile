@@ -1,0 +1,145 @@
+@import '../../style/variables';
+
+body {
+    margin: 0;
+
+}
+
+
+main {
+    background-color: $grey6;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: $grey5;
+    width: 100%;
+}
+
+.bid {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    &__container {
+
+        margin-top: 6em;
+        margin-bottom: 5em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2em;
+
+        &__title-page {
+            align-self: flex-start;
+        }
+
+        &__info {
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            justify-content: center;
+            width: 100%;
+            gap: 2em;
+
+            // Gauche
+            &__info-detail {
+                width: 700px;
+                border: 1px solid $grey5;
+                border-radius: 5px;
+                background-color: $whiteColor;
+                padding: 2em;
+
+                display: flex;
+                flex-direction: column;
+                gap: 1em;
+
+                &__description {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 2em;
+
+                    &__image > img {
+                        width: 220px;
+                        height: 170px;
+                        object-fit: cover;
+                        border-radius: 5px;
+                    }
+
+                    &__content {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1em;
+
+
+                    }
+                }
+
+                &__kpi {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 1em;
+                    margin-block: 1em;
+
+
+                    &__item {
+                        padding: 10px 20px;
+                        border: 1px solid $grey3;
+                        border-radius: 10px;
+                    }
+
+                }
+            }
+
+            // Droite
+            &__pay-recap {
+                width: 300px;
+                height: 400px;
+                border: 1px solid $grey5;
+                border-radius: 5px;
+                background-color: $whiteColor;
+                padding: 1em;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                &__price-detail {
+                    h3 {
+                        padding-block: 10px;
+
+                    }
+
+                    div {
+                        display: flex;
+                        justify-content: space-between;
+                        margin-block: 8px;
+                    }
+
+                    div:nth-child(odd) {
+                        background-color: $grey5;
+                    }
+                }
+
+
+                &__price-total {
+                    div {
+                        display: flex;
+                        justify-content: space-between;
+
+                    }
+                }
+
+                &__button {
+                    ;
+                }
+
+            }
+        }
+    }
+}

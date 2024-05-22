@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Mettre à jour les éléments HTML avec les nouvelles valeurs
         adultCount.textContent = adultCountValue;
-        liveTravelersCount.textContent = adultCountValue + childCountValue;
+        liveTravelersCount.value = adultCountValue + childCountValue;
     }
 
     function updateChildCount() {
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Mettre à jour les éléments HTML avec les nouvelles valeurs
         childCount.textContent = childCountValue;
-        liveTravelersCount.textContent = adultCountValue + childCountValue;
+        liveTravelersCount.value = adultCountValue + childCountValue;
     }
 
     // Gestionnaire d'événement pour le bouton "Ajouter des voyageurs"
@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function closePopupSavoir() {
         document.getElementById('popup-overlay-savoir').style.display = 'none';
         document.getElementById('popup-savoir').style.display = 'none';
-        
+
         // Retirer la classe pour rétablir le défilement du corps
         body.classList.remove('popup-savoir-open');
     }
@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const priceDisplay = document.querySelector('.prix');
-    
+
     function displayPriceDetails() {
         const nightCount = parseInt(nightCountElement.textContent, 10);
 

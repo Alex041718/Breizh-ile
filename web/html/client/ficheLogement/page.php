@@ -1,5 +1,5 @@
 <?php
-    
+
     // Commence le buffering de sortie
     ob_start();
 
@@ -8,11 +8,16 @@
     // Nettoie le buffer de sortie et désactive le buffering
     ob_end_clean();
 
-    if(!isset($_GET['id']) || $_GET['id'] == "") {
-        header('Location: /'); 
+    if(!isset($_GET['housingID']) || $_GET['housingID'] == "") {
+        header('Location: /');
         exit();
     };
 
+    // Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
+    require_once '../../../models/Client.php';
+    require_once '../../../services/ClientService.php';
+    require_once '../../../services/SessionService.php'; // pour le menu du header
+    $isAuthenticated = SessionService::isClientAuthenticated();
 ?>
 
 <!DOCTYPE html>
@@ -24,13 +29,13 @@
     <link rel="stylesheet" href="../../style/ui.css">
     <link rel="stylesheet" href="/client/ficheLogement/page.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    
+
     <script src="/client/ficheLogement/page.js"></script>
 </head>
 
@@ -47,7 +52,7 @@ require_once("../../../services/ImageService.php");
 require_once("../../../services/ArrangementService.php");
 // require_once("../../../services/ActivityService.php");
 
-$housing = HousingService::GetHousingById($_GET['id']);
+$housing = HousingService::GetHousingById($_GET['housingID']);
 
 $housing_title = $housing->getTitle();
 $housing_shortDesc = $housing->getshortDesc();
@@ -91,10 +96,19 @@ $iconMapping = [
             <h3 id="title"> <?php echo $housing_title ?> </h3>
             <div class="photoAndReservation">
                 <div class="photo">
+                    <h3> <?php echo $housing_title ?> </h3>
                     <img src="<?php echo $housing_image ?>" alt="Image Logement">
                 </div>
-                <div class="reservation">
+                <form class="reservation" method="post" action="/controllers/client/clientCreateDevis.php">
                     <h3> <?php echo $housing_priceHt ?> € par nuit</h3>
+
+                    <?php
+                    // établir des dates de début et de fin pour la réservation
+                    $dateStart = new DateTime();
+                    $dateEnd = new DateTime();
+                    $dateEnd->add(new DateInterval('P5D'));
+
+                    ?>
 
                     <div class="preparation">
                         <div class="datepicker">
@@ -111,10 +125,10 @@ $iconMapping = [
                                     <input class="para--14px" name="endDate" id="end-date" type="date" placeholder="Ajouter une date">
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="nbrClients">
-                            <button class="para--bold" id="addTravelersBtn">Ajouter des voyageurs<output id="liveTravelersCount">1</output></button>
+                            <button type="button" class="para--bold" id="addTravelersBtn">Ajouter des voyageurs<input name="numberPerson" id="liveTravelersCount" value="1"></button>
                             <div id="popup2" class="popup">
                                 <div class="popup-content">
                                     <div class="traveler-type">
@@ -123,11 +137,11 @@ $iconMapping = [
                                             <p>18 ans et +</p>
                                         </div>
                                         <div class="addbtn">
-                                            <button id="subtractAdultBtn">-</button>
+                                            <button type="button" id="subtractAdultBtn">-</button>
                                             <div class="nbr">
                                                 <span id="adultCount">1</span>
                                             </div>
-                                            <button id="addAdultBtn">+</button>
+                                            <button type="button" id="addAdultBtn">+</button>
                                         </div>
                                     </div>
 
@@ -137,11 +151,11 @@ $iconMapping = [
                                             <p>- de 18 ans</p>
                                         </div>
                                         <div class="addbtn">
-                                            <button id="subtractChildBtn">-</button>
+                                            <button type="button" id="subtractChildBtn">-</button>
                                             <div class="nbr">
                                                 <span id="childCount">0</span>
                                             </div>
-                                            <button id="addChildBtn">+</button>
+                                            <button  type="button" id="addChildBtn">+</button>
                                         </div>
                                     </div>
                                     <i id="closePopupBtn" class="fa-solid fa-xmark"></i>
@@ -151,7 +165,7 @@ $iconMapping = [
                     </div>
 
                     <div class="reservationBtn">
-                        <button class="para--18px para--bold">Réserver</button>
+                        <button type="submit" class="para--18px para--bold">Réserver</button>
                     </div>
 
                     <div class="prix">
@@ -169,13 +183,30 @@ $iconMapping = [
                         <div class="horizontal-line"></div>
 
                         <div class="total">
-                            <div><p class="para--bold">Total HT</p></div>
+                            <div><p class="para--bold">Total</p></div>
                             <div><p class="para--bold" id="final-total">0</p></div>
                         </div>
                     </div>
-                </div>
- 
-            </div>
+
+                    <input type="hidden" name="isAuthenticated" value="<?php echo $isAuthenticated?>">
+
+                    <?php if($isAuthenticated): ?>
+
+                        <input type="hidden" name="clientID" value="<?php echo $_SESSION['user_id'] ?>">
+
+                    <?php endif; ?>
+
+                    <input type="hidden" name="housingID" value="<?php echo $housing->getHousingID() ?>">
+
+                    <input type="hidden" name="ownerID" value="<?php echo $housing->getOwner()->getOwnerID() ?>">
+
+                    <input type="hidden" name="oldPage" value="<?php echo $_SERVER['REQUEST_URI'] ?>">
+
+
+
+                </form>
+
+
 
             <div class="twodiv">
                 <div class="details">
@@ -201,7 +232,7 @@ $iconMapping = [
                     <div class="popup-overlay" id="popup-overlay-savoir"></div>
                     <div class="popup" id="popup-savoir">
                         <!-- Contenu de la pop-up (description complète) -->
-                        <h3 id="titleDescription">Description du logement</h3>
+                        <h3>Description du logement</h3>
                         <p class="para--18px" id="full-description">
                             <!-- Le texte de la description complète sera injecté ici par JavaScript -->
                         </p>
@@ -274,11 +305,11 @@ $iconMapping = [
                         </i>
                     </div>
                     <div data-lat="<?= $housingLatitude ?>" data-long="<?= $housingLongitude ?>" id="map"></div>
-                </div>    
+                </div>
             </div>
-            
+
             <div id="overlay"></div>
-            
+
         </div>
 
     </main>
