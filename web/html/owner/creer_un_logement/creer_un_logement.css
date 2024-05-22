@@ -17,7 +17,11 @@ nav ul {
   margin: 0;
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
   height: 95vh;
+=======
+  height: 100vh;
+>>>>>>> b1cd61f4b3849d0c228fdd99b58707f02e8dde29
   list-style: none;
   box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.25);
 }
@@ -57,7 +61,10 @@ nav ul li.active:hover {
 .content {
   display: flex;
   padding-inline: 4rem;
+<<<<<<< HEAD
   height: 100%;
+=======
+>>>>>>> b1cd61f4b3849d0c228fdd99b58707f02e8dde29
 }
 .content__input--large input, .content__input--large textarea {
   width: max(15rem, 36.4583333333vw) !important;
@@ -75,15 +82,19 @@ nav ul li.active:hover {
   padding-block: 0.87rem !important;
   width: 100%;
 }
+<<<<<<< HEAD
 .content__button--next {
   margin-top: auto;
   margin-bottom: 8.5rem;
 }
+=======
+>>>>>>> b1cd61f4b3849d0c228fdd99b58707f02e8dde29
 .content__imagePicker {
   margin-top: 32px;
   margin-left: 3rem;
   width: max(15rem, 26.0416666667vw) !important;
 }
+<<<<<<< HEAD
 .content__left section {
   display: flex;
   flex-direction: column;
@@ -95,6 +106,11 @@ nav ul li.active:hover {
 .content__right section {
   height: 100%;
 }
+=======
+.content__right {
+  width: 100%;
+}
+>>>>>>> b1cd61f4b3849d0c228fdd99b58707f02e8dde29
 
 .input {
   margin-bottom: 1.5rem !important;
@@ -105,6 +121,7 @@ nav ul li.active:hover {
 
 .localisation {
   display: none;
+<<<<<<< HEAD
 }
 
 .inline {
@@ -135,4 +152,6 @@ nav ul li.active:hover {
 
 .wide {
   width: max(5rem, 21.875vw) !important;
+=======
+>>>>>>> b1cd61f4b3849d0c228fdd99b58707f02e8dde29
 }/*# sourceMappingURL=creer_un_logement.css.map */

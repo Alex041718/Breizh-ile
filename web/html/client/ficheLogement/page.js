@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function displayPriceDetails() {
         const nightCount = parseInt(nightCountElement.textContent, 10);
 
-        if(nightCount > 0){
+        if(nightCount > 0 ){
             priceDisplay.style.display = 'flex';
         }else{
             priceDisplay.style.display = 'none';
@@ -272,7 +272,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (startDate && endDate) {
             const timeDifference = endDate - startDate;
-            const nightCount = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+            let nightCount = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+            if (nightCount == 0) {
+                nightCount = 1;
+            }
+
 
             nightCountElement.textContent = nightCount;
             const totalCost = nightCount * costPerNight;

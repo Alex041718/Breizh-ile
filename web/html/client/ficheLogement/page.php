@@ -45,6 +45,7 @@ require_once("../../../services/CategoryService.php");
 require_once("../../../services/OwnerService.php");
 require_once("../../../services/ImageService.php");
 require_once("../../../services/ArrangementService.php");
+// require_once("../../../services/ActivityService.php");
 
 $housing = HousingService::GetHousingById($_GET['id']);
 
@@ -62,6 +63,19 @@ $housing_ownerLastName = $housing->getOwner()->getLastname();
 $housing_longDesc = $housing->getLongDesc();
 $housing_priceHt = $housing->getPriceExcl();
 
+$housing_arrangements = $housing->getArrangement();
+
+
+
+$iconMapping = [
+    'Jardin' => 'fa-solid fa-plant-wilt',
+    'Balcon' => 'fa-solid fa-door-open',
+    'Terrasse' => 'fa-solid fa-chair',
+    'Piscine' => 'fa-solid fa-swimmer',
+    'Jacuzzi' => 'fa-solid fa-hot-tub'
+    // Ajouter d'autres correspondances ici
+];
+
 ?>
 
 <body>
@@ -72,117 +86,30 @@ $housing_priceHt = $housing->getPriceExcl();
 
     <main>
         <div class="page">
-            <div class="photo">
-                <h2> <?php echo $housing_title ?> </h2>
-                <img src="<?php echo $housing_image ?>" alt="Image Logement">
-            </div>
-
-            <div class="twodiv">
-                <div class="details">
-                    <h3> <?php echo $housing_shortDesc ?> </h3>
-                    <div class="infoLogement">
-                        <p id="nbVoyageurs"> <?php echo $housing_nbPerson ?> </p>
-                        <p>&nbsppersonnes • <?php echo $housing_nbRoom ?> chambres • <?php echo $housing_nbBed ?> lits</p>
-                    </div>
-                    
-
-                    <div class="proprio">
-                        <img src=" <?php echo $housing_ownerImage ?>" alt="Proprio Image">
-                        <p class="para--18px para--bold"> <?php echo $housing_ownerFirstName . ' ' . $housing_ownerLastName; ?></p>
-                    </div>
-
-                    <div class="description">
-                        <div class="texte">
-                            <h4>Description</h4>
-                            <p class="para--18px" id="truncate-text"> <?php echo $housing_longDesc ?> </p>
-                            <button type="button"><p class="para--bold" id="button-savoir">En savoir +</p></button> 
-                        </div>                                        
-                    </div>
-
-                    <!-- Pop-up -->
-                    <div class="popup-overlay" id="popup-overlay-savoir"></div>
-                    <div class="popup" id="popup-savoir">
-                        <!-- Contenu de la pop-up (description complète) -->
-                        <h3>Description du logement</h3>
-                        <p class="para--18px" id="full-description">
-                            <!-- Le texte de la description complète sera injecté ici par JavaScript -->
-                        </p>
-                        <i id="close-popup" class="fa-solid fa-xmark"></i>
-                    </div>
-
-                    <button type="button" class="criteres"><p class="para--bold">Afficher les critères</p></button>
-
-                    <!-- Overlay and Popup Criteres-->
-                    <div id="overlay-critere" class="overlay-critere"></div>
-                        <div id="popup-critere" class="popup-critere">
-                            <div class="popup-content-critere">
-                                <i id="closePopupCritereBtn" class="fa-solid fa-xmark"></i>
-                                <h3>Critères du Logement</h3>
-                                <div class="section">
-                                    <h4>Aménagements</h4>
-                                    <div class="items">
-                                        <div class="item">
-                                            <i class="fa-solid fa-water-ladder"></i>
-                                            <span>Piscine</span>
-                                        </div>
-                                        <div class="item">
-                                            <i class="fa-solid fa-plant-wilt"></i>
-                                            <span>Jardin</span>
-                                        </div>
-                                        <div class="item">
-                                            <i class="fa-solid fa-plant-wilt"></i>
-                                            <span>Salle de sport</span>
-                                        </div>
-                                        <div class="item">
-                                            <i class="fa-solid fa-square-parking"></i>
-                                            <span>Parking privée</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="horizontal-line"></div>
-
-                                <div class="section">
-                                    <h4>Activités</h4>
-                                    <div class="items">
-                                        <div class="item">
-                                            <i class="fa-solid fa-umbrella-beach"></i>
-                                            <span>Plage</span>
-                                        </div>
-                                        <div class="item">
-                                            <i class="fa-solid fa-paw"></i>
-                                            <span>Zoo</span>
-                                        </div>
-                                        <div class="item">
-                                            <i id="img" class="fa-regular fa-water-ladder"></i>
-                                            <span>Parc d’attraction</span>
-                                        </div>
-                                        <div class="item">
-                                            <i class="fa-solid fa-landmark"></i>
-                                            <span>Musée</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="photoAndReservation">
+                <div class="photo">
+                    <h3> <?php echo $housing_title ?> </h3>
+                    <img src="<?php echo $housing_image ?>" alt="Image Logement">
                 </div>
-
                 <div class="reservation">
                     <h3> <?php echo $housing_priceHt ?> € par nuit</h3>
 
                     <div class="preparation">
                         <div class="datepicker">
-                            <div class="arrivee">
-                                <p class="para--bold">Arrivée:</p>
-                                <input class="para--14px" name="startDate" id="start-date" type="date" placeholder="Ajouter une date">
-                            </div>
+                            <div class="arriveeAndDepart">
+                                <div class="arrivee">
+                                    <p class="para--bold">Arrivée:</p>
+                                    <input class="para--14px" name="startDate" id="start-date" type="date" placeholder="Ajouter une date">
+                                </div>
 
-                            <span class="vertical-line"></span>
+                                <span class="vertical-line"></span>
 
-                            <div class="depart">
-                                <p class="para--bold">Départ:</p>
-                                <input class="para--14px" name="endDate" id="end-date" type="date" placeholder="Ajouter une date">
+                                <div class="depart">
+                                    <p class="para--bold">Départ:</p>
+                                    <input class="para--14px" name="endDate" id="end-date" type="date" placeholder="Ajouter une date">
+                                </div>
                             </div>
+                            
                         </div>
                         <div class="nbrClients">
                             <button class="para--bold" id="addTravelersBtn">Ajouter des voyageurs<output id="liveTravelersCount">1</output></button>
@@ -191,7 +118,7 @@ $housing_priceHt = $housing->getPriceExcl();
                                     <div class="traveler-type">
                                         <div class="adulteInfo">
                                             <span class="para--bold">Adultes:</span>
-                                            <p>13 ans et +</p>
+                                            <p>18 ans et +</p>
                                         </div>
                                         <div class="addbtn">
                                             <button id="subtractAdultBtn">-</button>
@@ -205,7 +132,7 @@ $housing_priceHt = $housing->getPriceExcl();
                                     <div class="traveler-type">
                                         <div class="enfantInfo">
                                             <span class="para--bold">Enfants:</span>
-                                            <p>- de 12 ans</p>
+                                            <p>- de 18 ans</p>
                                         </div>
                                         <div class="addbtn">
                                             <button id="subtractChildBtn">-</button>
@@ -245,24 +172,115 @@ $housing_priceHt = $housing->getPriceExcl();
                         </div>
                     </div>
                 </div>
+ 
             </div>
 
-            <div class="localisation">
-                <div class="local-texte">
-                    <h4>Localisation du logement</h4>
-                    <i class="fa-solid fa-circle-exclamation tooltip">
-                        <span class="tooltip-text"> <p>La localisation exacte sera communiquée une fois la réservation terminée </p></span>
-                    </i>
+            <div class="twodiv">
+                <div class="details">
+                    <h4> <?php echo $housing_shortDesc ?> </h4>
+                    <div class="infoLogement">
+                        <p id="nbVoyageurs"> <?php echo $housing_nbPerson ?> personnes • <?php echo $housing_nbRoom ?> chambres • <?php echo $housing_nbBed ?> lits</p>
+                    </div>
+
+                    <div class="proprio">
+                        <img src=" <?php echo $housing_ownerImage ?>" alt="Proprio Image">
+                        <p class="para--18px para--bold"> <?php echo $housing_ownerFirstName . ' ' . $housing_ownerLastName; ?></p>
+                    </div>
+
+                    <div class="description">
+                        <div class="texte">
+                            <h4>Description</h4>
+                            <p class="para--18px" id="truncate-text"> <?php echo $housing_longDesc ?> </p>
+                            <button type="button"><p class="para--bold" id="button-savoir">En savoir +</p></button>
+                        </div>
+                    </div>
+
+                    <!-- Pop-up -->
+                    <div class="popup-overlay" id="popup-overlay-savoir"></div>
+                    <div class="popup" id="popup-savoir">
+                        <!-- Contenu de la pop-up (description complète) -->
+                        <h3>Description du logement</h3>
+                        <p class="para--18px" id="full-description">
+                            <!-- Le texte de la description complète sera injecté ici par JavaScript -->
+                        </p>
+                        <i id="close-popup" class="fa-solid fa-xmark"></i>
+                    </div>
+
+                    <button type="button" class="criteres"><p class="para--bold">Afficher les critères</p></button>
+
+                    <!-- Overlay and Popup Criteres-->
+                    <div id="overlay-critere" class="overlay-critere"></div>
+                    <div id="popup-critere" class="popup-critere">
+                        <div class="popup-content-critere">
+                            <i id="closePopupCritereBtn" class="fa-solid fa-xmark"></i>
+                            <h3>Critères du Logement</h3>
+                            <div class="section">
+                                <h4>Activités</h4>
+                                <div class="items">
+                                    <div class="item">
+                                        <i class="fa-solid fa-umbrella-beach"></i>
+                                        <span>Plage</span>
+                                    </div>
+                                    <div class="item">
+                                        <i class="fa-solid fa-paw"></i>
+                                        <span>Zoo</span>
+                                    </div>
+                                    <div class="item">
+                                        <i class="fa-solid fa-candy-cane"></i>
+                                        <span>Parc d'attraction</span>
+                                    </div>
+                                    <div class="item">
+                                        <i class="fa-solid fa-landmark"></i>
+                                        <span>Musée</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="horizontal-line"></div>
+
+                            <div class="section">
+                                <h4>Aménagements</h4>
+                                <div class="items">
+                                    <?php if (!empty($housing_arrangements)): ?>
+                                        <?php foreach ($housing_arrangements as $arrangement): ?>
+                                            <div class="item">
+                                                <?php
+                                                $label = $arrangement->getLabel();
+                                                if (isset($iconMapping[$label])) {
+                                                    $iconClass = $iconMapping[$label];
+                                                    echo '<i class="' . $iconClass . '"></i>';
+                                                }
+                                                ?>
+                                                <span><?php echo $label ?></span>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <p>Aucun aménagement disponible.</p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <div id="map"></div>
-            </div>
 
+                <div class="localisation">
+                    <div class="local-texte">
+                        <p class="para--18px">Localisation du logement</p>
+                        <i class="fa-solid fa-circle-exclamation tooltip">
+                            <span class="tooltip-text"> <p>La localisation exacte sera communiquée une fois la réservation terminée </p></span>
+                        </i>
+                    </div>
+                    <div id="map"></div>
+                </div>    
+            </div>
+            
             <div id="overlay"></div>
             
         </div>
 
-        
     </main>
+
 
 <?php
     require_once("../../components/Footer/footer.php");

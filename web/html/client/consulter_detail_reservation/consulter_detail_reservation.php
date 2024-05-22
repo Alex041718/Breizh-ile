@@ -1,11 +1,11 @@
 <?php
 
-
-
-
-
     if(!isset($_GET['reservationID']) || $_GET['reservationID'] == "") {
+<<<<<<< HEAD
         header('Location: /client/consulter_reservations/consulter_reservations.php'); 
+=======
+        header('Location: /client/consulterReservations/clientReservations.php');
+>>>>>>> b1cd61f4b3849d0c228fdd99b58707f02e8dde29
         exit();
     };
 
@@ -17,17 +17,20 @@
 
     // Vérification de l'authentification de l'utilisateur
 
-    SessionService::system('client', '/detail-reservation?reservationID=' . $_GET['reservationID']);
+    SessionService::system('client', '/client/consulter_detail_reservation/consulter_detail_reservation.php?reservationID=' . $_GET['reservationID']);
     $isAuthenticated = SessionService::isClientAuthenticated();
     // ----------------------------------------------------------
 
 
 
+<<<<<<< HEAD
     /*require_once '../../../services/SessionService.php';
 
     // Gestion de la session
     SessionService::system('client', '/reservations');*/
 
+=======
+>>>>>>> b1cd61f4b3849d0c228fdd99b58707f02e8dde29
 
     require_once("../../../services/ReservationService.php");
     require_once("../../../services/HousingService.php");
@@ -38,7 +41,7 @@
     require_once("../../../services/PayementMethodService.php");
 
     require_once("../../../models/Reservation.php");
-    /*
+    
     $reservationIsOK = false;
 
     $client = ClientService::GetClientById($_SESSION['user_id']);
@@ -52,10 +55,14 @@
     }
 
     if (!$reservationIsOK){
+<<<<<<< HEAD
         header('Location: /client/consulter_reservations/consulter_reservations.php'); 
 
+=======
+        header('Location: /client/consulterReservations/clientReservations.php');
+>>>>>>> b1cd61f4b3849d0c228fdd99b58707f02e8dde29
         exit();
-    }*/
+    }
 
 ?>
 
@@ -126,7 +133,7 @@
     <main>
         <div class="title">
             <div class="title__arrow">
-                <img src="/assets/images/fleche.png" id="fleche" alt="fleche">
+                <a href="/client/consulterReservations/clientReservations.php"><img src="/assets/images/fleche.png" id="fleche" alt="fleche"></a>
                 <h2>Ma réservation</h2>
             </div>
             <div class="title__date">

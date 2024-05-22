@@ -5,11 +5,23 @@
         exit();
     }
 
-    require_once '../../../services/SessionService.php';
+    /*require_once '../../../services/SessionService.php';
 
     // Gestion de la session
-    SessionService::system('owner', '/back/reservations');
+    SessionService::system('owner', '/back/reservations');*/
 
+
+    // ------------------- Systeme de session -------------------
+    // Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
+    require_once '../../../models/Owner.php';
+    require_once '../../../services/OwnerService.php';
+    require_once '../../../services/SessionService.php'; // pour le menu du header
+
+    // Vérification de l'authentification de l'utilisateur
+
+    SessionService::system('owner', '/owner/consulter_detail_reservation/consulter_detail_reservation.php?reservationID=' . $_GET['reservationID']);
+    $isAuthenticated = SessionService::isOwnerAuthenticated();
+    // ----------------------------------------------------------
 
     require_once("../../../services/ReservationService.php");
     require_once("../../../services/HousingService.php");
@@ -69,7 +81,11 @@
 <?php
 
     require_once("../../components/Header/header.php");
+<<<<<<< HEAD
     Header::render(true);
+=======
+    Header::render(true,true, $isAuthenticated, '/back/detail-reservation?reservationID=' . $_GET['reservationID']);
+>>>>>>> b1cd61f4b3849d0c228fdd99b58707f02e8dde29
 
     $reservation = ReservationService::getReservationByID($_GET['reservationID']);
     $housing = HousingService::GetHousingById($reservation->getHousingId()->getHousingID());
@@ -107,7 +123,7 @@
     <main>
         <div class="title">
             <div class="title__arrow">
-                <img src="/assets/images/fleche.png" id="fleche" alt="fleche">
+                <a href="/owner/consulter_reservations/consulter_reservations.php"><img src="/assets/images/fleche.png" id="fleche" alt="fleche"></a>
                 <h2>Ma réservation</h2>
             </div>
             <div class="title__date">

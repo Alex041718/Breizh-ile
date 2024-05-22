@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+// select in array the element with id "description", "localisation", "specifications", "arrangements", "activities"
+
+>>>>>>> b1cd61f4b3849d0c228fdd99b58707f02e8dde29
 const pages_title = ["description", "localisation", "specifications", "arrangements", "activities"];
 const pages = pages_title.map(page => document.getElementById(page));
 
@@ -12,6 +17,7 @@ pages.forEach(page => {
         const content = document.querySelector(`.${page.id}`);
         if (content) { content.style.display = "flex"; }
     });
+<<<<<<< HEAD
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -76,3 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 });
+=======
+});
+>>>>>>> b1cd61f4b3849d0c228fdd99b58707f02e8dde29
