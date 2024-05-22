@@ -1,9 +1,9 @@
 <?php
-    
+
     if(!isset($_GET['reservationID']) || $_GET['reservationID'] == "") {
-        header('Location: /owner/consulter_reservations/consulter_reservations.php'); 
+        header('Location: /owner/consulter_reservations/consulter_reservations.php');
         exit();
-    };
+    }
 
     require_once '../../../services/SessionService.php';
 
@@ -34,7 +34,7 @@
     }
 
     if (!$reservationIsOK){
-        header('Location: /owner/consulter_reservations/consulter_reservations.php'); 
+        header('Location: /owner/consulter_reservations/consulter_reservations.php');
         exit();
     }
 
@@ -73,7 +73,6 @@
 
     $reservation = ReservationService::getReservationByID($_GET['reservationID']);
     $housing = HousingService::GetHousingById($reservation->getHousingId()->getHousingID());
-    
 
     $reservation_dateDebut = $reservation->getBeginDate();
     $reservation_dateFin =  $reservation->getEndDate();
@@ -87,7 +86,7 @@
     $reservation_touristTax =  $reservation->getTouristTax();
     $reservation_nbPersonnes =  $reservation->getNbPerson();
     $reservation_prixCalc = $reservation_prixExcl * $reservation_nbJours * $reservation_nbPersonnes;
-    
+
 
 
     $client_pp = $reservation->getClientId()->getImage()->getImageSrc();
@@ -160,7 +159,7 @@
 
                         </div>
                         <div class="informations__right__desc__info__icons">
-                            <i id="telephone" class="fa-solid fa-phone"></i>                    
+                            <i id="telephone" class="fa-solid fa-phone"></i>
                             <i id="mail" class="fa-solid fa-envelope"></i>
                         </div>
                     </div>
@@ -180,7 +179,7 @@
                 </div>
             </section>
         </article>
-        
+
     </main>
 
 <?php

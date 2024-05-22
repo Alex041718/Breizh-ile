@@ -17,9 +17,8 @@ class HousingCard {
 
 
         $render =  /*html*/ '            
-            
-        <a href="logement?housingID='. $housing_id .'" class="housing-card '. $class . ' " id=" ' . $id . ' ">
 
+        <a href="/logement?housingID='. $housing_id .'" class="housing-card '. $class . ' " id=" ' . $id . ' ">
             <img class="housing-card__thumbnail" src="' . $housing_thumbnail . '">
             <div class="housing-card__content">
                 <div class="housing-card__content__owner">

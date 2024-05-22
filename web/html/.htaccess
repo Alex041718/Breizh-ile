@@ -1,8 +1,19 @@
 Options +FollowSymLinks
 RewriteEngine On
 
+# REDIRECTIONS GLOBALES #
+
+# Rediriger /logout vers /controllers/logoutController.php
+RewriteRule ^logout$ /controllers/logoutController.php [L]
+
 
 # REDIRECTIONS CLIENT #
+
+# Rediriger /client/profil vers /client/clientProfil/client-profil.php
+RewriteRule ^client/profil$ /client/clientProfile/client-profile.php [L]
+
+# Rediriger /client/reservationsListe /client/consulterReservations/clientReservations.php
+RewriteRule ^client/reservations-liste$ /client/consulterReservations/clientReservations.php [L]
 
 
 # Rediriger /client/connection vers /client/clientConnection/client_connection.php
@@ -17,6 +28,8 @@ RewriteRule ^detail-reservation$ /client/consulter_detail_reservation/consulter_
 
 # REDIRECTIONS PROPRIETAIRE #
 
+# Rediriger /back vers /back/connection
+RewriteRule ^back$ /back/connection [L]
 
 # Rediriger /back/connection vers /owner/ownerConnection/owner_connection.php
 RewriteRule ^back/connection$ /owner/ownerConnection/owner_connection.php [L]
@@ -24,10 +37,7 @@ RewriteRule ^back/connection$ /owner/ownerConnection/owner_connection.php [L]
 # Rediriger /back/reservations vers /owner/consulter_reservations/consulter_reservations.php
 RewriteRule ^back/reservations$ /owner/consulter_reservations/consulter_reservations.php [L]
 
-# Rediriger /back/reservations vers /owner/consulter_reservations/consulter_reservations.php
-RewriteRule ^back/logements$ /owner/consulter_logements/consulter_logements.php [L]
-
-# Rediriger /detail-reservation vers /owner/consulter_detail_reservation/consulter_detail_reservation.php
+# Rediriger /back/detail-reservation vers /owner/consulter_detail_reservation/consulter_detail_reservation.php
 RewriteRule ^back/detail-reservation$ /owner/consulter_detail_reservation/consulter_detail_reservation.php [L]
 
 # Rediriger /back/creer-logement vers /owner/creer_logement/creer_logement.php
@@ -44,4 +54,3 @@ RewriteRule ^back/detail-reservation$ /owner/consulter_detail_reservation/consul
 RewriteRule ^back/creer-logement$ /owner/creer_un_logement/creer_un_logement.php [L]
 
 # REDIRECTIONS ADMINISTRATEUR #
-

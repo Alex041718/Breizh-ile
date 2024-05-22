@@ -10,12 +10,17 @@
 <body>
 
     <div class="connectionContainer">
-        <img src="../../assets/images/logo_breizh_noir.png">
+        <a href="/">
+            <img src="../../assets/images/logo_breizh_noir.png">
+        </a>
         <div class="connectionContainer__box">
             <h3 class="connectionContainer__box__title">Connecter vous à votre compte client</h3>
             <form action="/controllers/client/clientConnectionController.php" method="post">
 
                 <?php require_once("../../components/Input/Input.php"); ?>
+
+
+                <?= (isset($_GET["redirect"]) ? "<input type='hidden' name='redirect' value='" . $_GET["redirect"] . "'>" : "") ?>
 
                 <?php Input::render("connection__input", "mail", "text", "E-mail", "mail", "Entrez votre e-mail", true); ?>
 

@@ -1,0 +1,44 @@
+@use '../../style/variables.css';
+
+body{
+    margin: 0;
+}
+
+main {
+    min-height: 70vh;
+}
+
+.title{
+    margin-left: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+    margin-top: 135px;
+}
+
+.fa-less-than::before{
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.reservation-list{
+    display: flex;
+    flex-direction: row;
+    padding: 2em;
+    justify-content: center;
+    align-items: center;
+
+    &__container{
+        display: flex;
+        flex-direction: column;
+        padding: 2em;
+        scroll-behavior: smooth;
+
+
+        &__card {
+                margin-bottom: 2em;
+        }
+    }
+
+}

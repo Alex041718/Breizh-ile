@@ -17,7 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var parent__couleurs = document.getElementById('parent__couleurs');
     var parent__animations = document.getElementById('parent__animations');
     var parent__font = document.getElementById('parent__font');
-    
+    var closeAccess = document.getElementById("closeAccess");
+
+    var closeAccess = document.getElementById("closeAccess");
+
 
     if (header.dataset.tag != 1) {
         let tagToScroll = document.querySelector("." + header.dataset.tag);
@@ -28,6 +31,25 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     }
 
+    popup.addEventListener("click", function(event) {
+        if(event.target === popup) closePopup();
+    })
+
+    closeAccess.onclick = function() {
+        closePopup();
+    }
+    
+    function closePopup() {
+        popup.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    document.addEventListener('click', function(event){
+        if (event.target != profil){
+            options.style.display = 'none';
+        }
+    })
+
   
     profil.addEventListener('click', function() {
         if (options.style.display === 'none') {
@@ -37,13 +59,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+
+
     oeuil.addEventListener('click', function() {
         if (popup.style.display === 'none') {
             popup.style.display = "flex";
-            document.body.style.overflow = 'hidden';
         } else {
-            popup.style.display = 'none';
-            document.body.style.overflow = 'auto';
+            closePopup();
         }
     })
 

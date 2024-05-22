@@ -19,7 +19,7 @@
 
                 <?php require_once("../../components/Input/Input.php"); ?>
 
-                <?= (isset($_SESSION["redirect"]) ? "<input type='hidden' name='redirect' value='" . $_SESSION["redirect"] . "'>" : "") ?>
+                <?= (isset($_GET["redirect"]) ? "<input type='hidden' name='redirect' value='" . urlencode($_GET["redirect"]) . "'>" : "") ?>
 
                 <?php Input::render("connection__input", "mail", "text", "E-mail", "mail", "Entrez votre e-mail", true); ?>
 
