@@ -7,7 +7,7 @@ SessionService::system('owner', '/back/logements');
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,7 +49,7 @@ SessionService::system('owner', '/back/logements');
         </section>
         <?php
             require_once("../../components/Button/Button.php");
-            Button::render("add__button", "addButton", "Ajouter un logement", ButtonType::Owner, false, false, false, '<i class="fa-solid fa-plus"></i>'); 
+            Button::render("add__button", "addButton", "Ajouter un logement", ButtonType::Owner, "window.location.href = '/back/creer-logement';", false, false, '<i class="fa-solid fa-plus"></i>'); 
         ?>
     </main>
 

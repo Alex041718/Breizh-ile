@@ -40,6 +40,8 @@ $isAuthenticated = SessionService::isClientAuthenticated();
 
         
 
+        
+
     ?>
     <main>
         <section class="hero-banner">

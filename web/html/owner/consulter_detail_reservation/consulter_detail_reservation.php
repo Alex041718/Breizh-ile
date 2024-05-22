@@ -3,7 +3,7 @@
     if(!isset($_GET['reservationID']) || $_GET['reservationID'] == "") {
         header('Location: /owner/consulter_reservations/consulter_reservations.php');
         exit();
-    };
+    }
 
     require_once '../../../services/SessionService.php';
 
@@ -73,7 +73,6 @@
 
     $reservation = ReservationService::getReservationByID($_GET['reservationID']);
     $housing = HousingService::GetHousingById($reservation->getHousingId()->getHousingID());
-
 
     $reservation_dateDebut = $reservation->getBeginDate();
     $reservation_dateFin =  $reservation->getEndDate();

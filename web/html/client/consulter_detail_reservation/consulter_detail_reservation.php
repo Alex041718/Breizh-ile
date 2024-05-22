@@ -20,7 +20,6 @@
 
 
 
-
     require_once("../../../services/ReservationService.php");
     require_once("../../../services/HousingService.php");
     require_once("../../../services/ClientService.php");
@@ -79,11 +78,11 @@
 <?php
 
     require_once("../../components/Header/header.php");
+  
     Header::render(true,false, $isAuthenticated, '/detail-reservation?reservationID=' . $_GET['reservationID']);
 
     $reservation = ReservationService::getReservationByID($_GET['reservationID']);
     $housing = HousingService::GetHousingById($reservation->getHousingId()->getHousingID());
-
 
     $reservation_dateDebut = $reservation->getBeginDate();
     $reservation_dateFin =  $reservation->getEndDate();

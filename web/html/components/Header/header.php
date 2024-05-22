@@ -5,8 +5,6 @@
 
 class Header {
 
-
-
         public static function render($isScrolling = false, $isBackOffice = false, $isAuthenticated = false, $redirectAuthPath = "/") {
 
             $tagToScroll = $isScrolling;
