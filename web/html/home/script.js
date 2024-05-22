@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     checkParallax();
-
+    
     var scrollBtn = document.getElementById("scrolldown");
     var logements = document.querySelector(".logements");
 
@@ -25,6 +25,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function checkParallax() {
         if(window.innerWidth <= 1024) parallaxInstance.disable();
+        else parallaxInstance.enable();
+    }
+
+    window.checkParallaxAccessibilite = function() {
+        if(document.body.classList.contains('accessibilite__animations')) parallaxInstance.disable();
         else parallaxInstance.enable();
     }
 
