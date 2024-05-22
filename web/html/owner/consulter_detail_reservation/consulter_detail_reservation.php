@@ -69,7 +69,7 @@
 <?php
 
     require_once("../../components/Header/header.php");
-    Header::render(true,);
+    Header::render(true);
 
     $reservation = ReservationService::getReservationByID($_GET['reservationID']);
     $housing = HousingService::GetHousingById($reservation->getHousingId()->getHousingID());
@@ -108,7 +108,7 @@
     <main>
         <div class="title">
             <div class="title__arrow">
-                <img src="/assets/images/fleche.png" id="fleche" alt="fleche">
+                <a href="/owner/consulter_reservations/consulter_reservations.php"><img src="/assets/images/fleche.png" id="fleche" alt="fleche"></a>
                 <h2>Ma réservation</h2>
             </div>
             <div class="title__date">
