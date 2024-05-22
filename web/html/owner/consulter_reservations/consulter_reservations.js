@@ -109,7 +109,7 @@ function main() {
 
             switch (sort) {
                 case "date-resa":
-                    showReservations("getBeginDate", isReverse);
+                    showReservations("getCreationDate", isReverse);
                     break;
                 case "client":
                     showReservations("getClientId", isReverse);

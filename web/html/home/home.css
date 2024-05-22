@@ -366,7 +366,7 @@ body {
 .popup__filter .price-input .price-field span {
   width: 50%;
 }
-.popup__filter .price-field input {
+.popup__filter .price-input .price-field input {
   flex: 1;
   height: 35px;
   font-size: 15px;
@@ -375,6 +375,21 @@ body {
   text-align: center;
   border: 0px;
   background: #e4e4e4;
+}
+@media screen and (max-width: 1300px) {
+  .popup__filter .price-input .price-field {
+    grid-column: span 2/span 2;
+  }
+}
+@media screen and (max-width: 568px) {
+  .popup__filter .price-input .price-field {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .popup__filter .price-input .price-field span {
+    width: 100%;
+    text-align: center;
+  }
 }
 .popup__filter .price-input {
   width: 100%;
@@ -388,6 +403,11 @@ body {
 }
 .popup__filter .slider-container {
   width: 100%;
+}
+@media screen and (max-width: 568px) {
+  .popup__filter .slider-container {
+    display: none;
+  }
 }
 .popup__filter .slider-container {
   height: 6px;
@@ -405,6 +425,11 @@ body {
 }
 .popup__filter .range-input {
   position: relative;
+}
+@media screen and (max-width: 568px) {
+  .popup__filter .range-input {
+    display: none;
+  }
 }
 .popup__filter .range-input input {
   position: absolute;
@@ -433,6 +458,11 @@ body {
   border-radius: 10px;
   pointer-events: all;
   width: 60%;
+}
+@media screen and (max-width: 568px) {
+  .popup__filter__content {
+    width: 80%;
+  }
 }
 .popup__filter__content .popup__filter__container {
   padding: 20px;

@@ -41,6 +41,12 @@
         p {
             font-weight: bold;
         }
+
+        .profilImg {
+            height: 40px;
+            border-radius: 70px;
+            border: $clientPrimaryColor 3px solid;
+        }
       }
 
     @media screen and (max-width: 1024px) {
@@ -52,6 +58,30 @@
     cursor: pointer;
 
 }
+
+.accessibilite__couleurs {
+    .button--vert, .button--bleu, .button--rouge {
+        button {
+            background-color: orange;
+        }
+    }
+    .button--bleu {
+        background-color: orange;
+    }
+
+    .content__selector__personnal-data__title, .content__selector__security__title {
+        color: red;
+    }
+
+    .order-btn {
+        background-color: orange;
+    }
+    * {
+        color: red;
+    }
+    
+}
+
 
 .accessibilite__font {
     * :not(i) {
@@ -149,7 +179,7 @@
             display: flex;
             flex-direction: column;
             padding: 50px;
-            white-space: nowrap;
+            white-space: wrap;
             
             @media screen and (max-width: 1024px) {
                 padding: 25px;
@@ -235,6 +265,16 @@
         display: block;
     }
 
+    &.rm-anim {
+        animation-name: none !important;
+    }
+
+    .profilImg {
+        width: 50px !important;
+        border-radius: 70px;
+        border: 3px solid white;
+    }
+
     &.scroll,
     &.scrolling {
         height: auto;
@@ -244,6 +284,10 @@
         animation-name: showUp;
         height: 80px;
         transition: all 0.1s;
+
+        .profilImg {
+            border: 3px solid $black2;
+        }
 
         &:has(.search-bar--open) {
             height: 120px;

@@ -174,7 +174,7 @@ CREATE TABLE _Housing (
     noticeCount integer,
     beginDate Date,
     endDate Date,
-    creationDate Date,
+    creationDate timestamp DEFAULT CURRENT_TIMESTAMP,
     surfaceInM2 Float,
     typeID BIGINT UNSIGNED, -- Correspond au type `serial` dans Type pour mysql
     categoryID BIGINT UNSIGNED, -- Correspond au type `serial` dans Category pour mysql
@@ -266,6 +266,8 @@ CREATE TABLE _Reservation (
     touristTax Float,
     status varchar(20),
     nbPerson integer,
+    priceIncl Float,
+    creationDate timestamp DEFAULT CURRENT_TIMESTAMP,
     housingID BIGINT UNSIGNED, -- Correspond au type `serial` dans Housing pour mysql
     payMethodID BIGINT UNSIGNED, -- Correspond au type `serial` dans PaymentMethod pour mysql
     clientID BIGINT UNSIGNED, -- Correspond au type `serial` dans Client pour mysql

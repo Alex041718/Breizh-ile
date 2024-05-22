@@ -35,6 +35,11 @@
 .header-mobile .header-mobile__icon p {
   font-weight: bold;
 }
+.header-mobile .header-mobile__icon .profilImg {
+  height: 40px;
+  border-radius: 70px;
+  border: #307B5C 3px solid;
+}
 @media screen and (max-width: 1024px) {
   .header-mobile {
     display: flex;
@@ -43,6 +48,22 @@
 
 #oeuil:hover {
   cursor: pointer;
+}
+
+.accessibilite__couleurs .button--vert button, .accessibilite__couleurs .button--bleu button, .accessibilite__couleurs .button--rouge button {
+  background-color: orange;
+}
+.accessibilite__couleurs .button--bleu {
+  background-color: orange;
+}
+.accessibilite__couleurs .content__selector__personnal-data__title, .accessibilite__couleurs .content__selector__security__title {
+  color: red;
+}
+.accessibilite__couleurs .order-btn {
+  background-color: orange;
+}
+.accessibilite__couleurs * {
+  color: red;
 }
 
 .accessibilite__font * :not(i) {
@@ -118,7 +139,7 @@
   display: flex;
   flex-direction: column;
   padding: 50px;
-  white-space: nowrap;
+  white-space: wrap;
 }
 @media screen and (max-width: 1024px) {
   .popup__access .popup__content .popup__options {
@@ -191,6 +212,14 @@
 .header .logo-small {
   display: block;
 }
+.header.rm-anim {
+  animation-name: none !important;
+}
+.header .profilImg {
+  width: 50px !important;
+  border-radius: 70px;
+  border: 3px solid white;
+}
 .header.scroll, .header.scrolling {
   height: auto;
   position: fixed;
@@ -199,6 +228,9 @@
   animation-name: showUp;
   height: 80px;
   transition: all 0.1s;
+}
+.header.scroll .profilImg, .header.scrolling .profilImg {
+  border: 3px solid #1D1D1D;
 }
 .header.scroll:has(.search-bar--open), .header.scrolling:has(.search-bar--open) {
   height: 120px;

@@ -12,6 +12,10 @@ class Reservation
     /**
      * @var DateTime
      */
+    private DateTime $creationDate;
+    /**
+     * @var DateTime
+     */
     private DateTime $beginDate;
     /**
      * @var DateTime
@@ -33,6 +37,10 @@ class Reservation
      * @var int
      */
     private int $nbPerson;
+    /**
+     * @float
+     */
+    private float $priceIncl;
     /**
      * @var Housing
      */
@@ -57,15 +65,17 @@ class Reservation
      * @param PayementMethod $payMethodId
      * @param Client $clientId
      */
-    public function __construct(?int $id, DateTime $beginDate, DateTime $endDate, float $serviceCharge, float $touristTax, string $status, int $nbPerson, Housing $housingId, PayementMethod $payMethodId, Client $clientId)
+    public function __construct(?int $id, DateTime $creationDate, DateTime $beginDate, DateTime $endDate, float $serviceCharge, float $touristTax, string $status, int $nbPerson, float $priceIncl, Housing $housingId, PayementMethod $payMethodId, Client $clientId)
     {
         $this->id = $id;
+        $this->creationDate = $creationDate;
         $this->beginDate = $beginDate;
         $this->endDate = $endDate;
         $this->serviceCharge = $serviceCharge;
         $this->touristTax = $touristTax;
         $this->status = $status;
         $this->nbPerson = $nbPerson;
+        $this->priceIncl = $priceIncl;
         $this->housingId = $housingId;
         $this->payMethodId = $payMethodId;
         $this->clientId = $clientId;
@@ -86,6 +96,14 @@ class Reservation
     public function setId(?int $id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getCreationDate(): DateTime
+    {
+        return $this->creationDate;
     }
 
     /**
@@ -179,6 +197,14 @@ class Reservation
     public function getNbPerson(): int
     {
         return $this->nbPerson;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPriceIncl(): float
+    {
+        return $this->priceIncl;
     }
 
     /**
