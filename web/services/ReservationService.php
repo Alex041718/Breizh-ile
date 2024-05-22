@@ -12,7 +12,7 @@ class ReservationService extends Service
     public static function getAllReservations()
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->query('SELECT * FROM _Reservation');
+        $stmt = $pdo->query('SELECT *, creationDate as r_creation_date, beginDate as r_begin_date, endDate as r_end_date, priceIncl as r_price_incl FROM _Reservation');
         $reservationList = [];
 
         while ($row = $stmt->fetch()) {
@@ -26,7 +26,7 @@ class ReservationService extends Service
     {
         $pdo = self::getPDO();
         $stmt = $pdo->query('
-            SELECT *, R.beginDate as r_begin_date, R.endDate as r_end_date FROM _Reservation R 
+            SELECT *, R.creationDate as r_creation_date, R.beginDate as r_begin_date, R.endDate as r_end_date, R.priceIncl as r_price_incl FROM _Reservation R 
             JOIN _Housing H ON R.housingID = H.housingID 
             JOIN _Owner O ON H.ownerID = O.ownerID
             WHERE O.ownerID = ' . $ownerID . '
@@ -46,7 +46,7 @@ class ReservationService extends Service
     {
         $pdo = self::getPDO();
         $stmt = $pdo->query('
-            SELECT *, R.beginDate as r_begin_date, R.endDate as r_end_date FROM _Reservation R 
+            SELECT *, R.creationDate as r_creation_date, R.beginDate as r_begin_date, R.endDate as r_end_date, R.priceIncl as r_price_incl FROM _Reservation R 
             JOIN _Housing H ON R.housingID = H.housingID 
             JOIN _Client O ON R.clientID = O.clientID
             WHERE O.clientID = ' . $clientID . '
@@ -74,6 +74,13 @@ class ReservationService extends Service
 
         if($row['serviceCharge'] == null) $row['serviceCharge'] = 0.0;
         if($row['touristTax'] == null) $row['touristTax'] = 0.0;
+        if($row['r_price_incl'] == null) $row['r_price_incl'] = 0.0;
+
+        if (isset($row['r_creation_date']) && $row['r_creation_date'] == null) {
+            $creationDate = new DateTime($row['r_creation_date']);
+        } else {
+            $creationDate = new DateTime($row['r_creation_date']);
+        }
 
         // Vérifier si 'r_begin_date' est défini et non nul
         if (isset($row['r_begin_date']) && $row['r_begin_date'] !== null) {
@@ -92,7 +99,7 @@ class ReservationService extends Service
         }
 
         
-        return new Reservation($row['reservationID'], $beginDate, $endDate, $row['serviceCharge'], $row['touristTax'], $row['status'], $row['nbPerson'], $housing, $payMethod, $client);
+        return new Reservation($row['reservationID'], $creationDate, $beginDate, $endDate, $row['serviceCharge'], $row['touristTax'], $row['status'], $row['nbPerson'], $row['r_price_incl'], $housing, $payMethod, $client);
 
     }
 

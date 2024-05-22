@@ -28,7 +28,7 @@ function showReservations($reservations) {
     foreach ($reservations as $reservation) { ?>
         <div class="reservation">
             <?php require_once("../../components/CheckBox/CheckBox.php"); CheckBox::render(name: "checkbox"); ?>
-            <p><?= $reservation->getBeginDate()->format("d / m / Y") ?></p>
+            <p><?= $reservation->getCreationDate()->format("d / m / Y") ?></p>
             <a href="#" class="profile-picture"><img src="<?= $reservation->getClientId()->getImage()->getImageSrc() ?>" alt="profile picture"><?= $reservation->getClientId()->getNickname() ?></a>
             <a href="#"><?= $reservation->getHousingId()->getTitle() ?></a>
             <p><?= $reservation->getBeginDate()->format("d / m / Y") ?></p>
