@@ -298,6 +298,8 @@ body {
       gap: 50px;
       grid-template-columns: repeat(3, auto);
 
+      
+
       @media screen and (max-width: 1300px) {
         grid-template-columns: repeat(2, auto);
       }
@@ -382,19 +384,32 @@ body {
 
     span {
       width: 50%;
+    }
+
+    input { 
+      flex: 1; 
+      height: 35px; 
+      font-size: 15px; 
+      font-family: "DM Sans", sans-serif; 
+      border-radius: 9px; 
+      text-align: center; 
+      border: 0px; 
+      background: #e4e4e4; 
+  } 
+
+    @media screen and (max-width: 1300px) {
+      grid-column: span 2 / span 2;
+    }
+
+    @media screen and (max-width: 568px) {
+      flex-direction: column;
+      gap: 20px;
+      span {
+        width: 100%;
+        text-align: center;
+      }
 
     }
-} 
-  
-.price-field input { 
-    flex: 1; 
-    height: 35px; 
-    font-size: 15px; 
-    font-family: "DM Sans", sans-serif; 
-    border-radius: 9px; 
-    text-align: center; 
-    border: 0px; 
-    background: #e4e4e4; 
 } 
   
 .price-input { 
@@ -411,7 +426,12 @@ input::-webkit-inner-spin-button {
 } 
   
 .slider-container { 
-    width: 100%; 
+    width: 100%;
+
+
+    @media screen and (max-width: 568px) {
+      display: none;
+    }
 } 
   
 .slider-container { 
@@ -432,6 +452,10 @@ input::-webkit-inner-spin-button {
   
 .range-input { 
     position: relative; 
+
+    @media screen and (max-width: 568px) {
+      display: none;
+    }
 } 
   
 .range-input input { 
@@ -465,6 +489,10 @@ input[type="range"]::-webkit-slider-thumb {
       pointer-events: all;
       width: 60%;
 
+      @media screen and (max-width: 568px) {
+        width: 80%;      
+      }
+
       .popup__filter__container {
           padding: 20px;
           display: flex;
@@ -473,8 +501,7 @@ input[type="range"]::-webkit-slider-thumb {
           width: 90%;
           max-height: 300px;
           overflow-y: scroll;
-          overflow-x: hidden;
-          
+          overflow-x: hidden;       
 
           hr {
               width: 100%;

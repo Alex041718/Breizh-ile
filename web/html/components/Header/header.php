@@ -12,7 +12,9 @@ class Header {
             $render = /*html*/ '
 
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+                <title>Breizh\'Ile</title>
                 <link rel="stylesheet" href="/components/SearchBar/SearchBar.css">
+                <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.png">
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
                 <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
@@ -23,8 +25,8 @@ class Header {
                 <link rel="stylesheet" href="/components/Header/header.css">
 
                 <header class="">
-                
-                    <div data-tag="' . $tagToScroll . '" class="header '. ($isScrolling === true ? 'scroll scrolling' : '' ). ' '. ($isBackOffice ? 'header--backoffice' : '' ). '">
+                    <div class="popup__">
+                    <div data-tag="' . $tagToScroll . '" class="header '. ($isScrolling === true ? 'scroll scrolling rm-anim' : '' ). ' '. ($isBackOffice ? 'header--backoffice' : '' ). '">
 
                         <a class="logo" href="/">
                             <img class="logo-big" src="/assets/images/logo_breizh_noir.png" id="logo" alt="logo_breizh">
@@ -102,13 +104,18 @@ class Header {
                 ';
             }
 
+            if($isBackOffice && $isAuthenticated) {
+                $user = $owner;
+            }
+            else if($isAuthenticated) $user = $client;
+
 
             $render =  /*html*/ '
 
                         <div class="header__right">
                             <i id="oeuil" class="fa-solid fa-eye"></i>
-                            <i id="profil" class="fa-solid fa-user"></i>
-                        </div>
+                            ' . ($isAuthenticated ? '<img id="profil" class="profilImg" src="' . $user->getImage()->getImageSrc() . '" />' : '<i id="profil" class="fa-solid fa-user"></i>') .
+                        '</div>
                         <div id="options" style="display: none;">
                         
                             '. $menu .'
@@ -122,8 +129,8 @@ class Header {
                         </div>
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <div class="header-mobile__icon">
-                            <i class="fa-solid fa-user"></i>
-                            <p>Mon profil</p>
+                        ' . ($isAuthenticated ? '<img id="profil" class="profilImg" src="' . $user->getImage()->getImageSrc() . '" />' : '<i id="profil" class="fa-solid fa-user"></i>') .
+                            '<p>Mon profil</p>
                         </div>
                     </div>
                     <div id="popup__access" class="popup__access">
