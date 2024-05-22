@@ -1,0 +1,102 @@
+@use '../../style/variables.scss';
+@use '../../style/ui.scss';
+
+body {
+    margin: 0;
+    background-color: variables.$whiteColor;
+}
+
+.content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+
+    &__selector {
+        min-width: 8em;
+        width: 15em;
+        height: 38em;
+        background: variables.$whiteColor;
+        color: variables.$clientPrimaryColor;
+        box-shadow: 9px 0px 15px -3px rgba(0, 0, 0, 0.1);
+
+        > div {
+            height: 4em;
+            border-bottom: 1px solid variables.$secondaryColor;
+            display: flex;
+            align-items: center;
+            padding-left: 7%;
+
+            &.content__selector--current {
+                background: variables.$clientPrimaryColor;
+                color: variables.$whiteColor;
+            }
+        }
+    }
+
+    &__personnal-data {
+        margin-left: 5em;
+        display: flex;
+        flex-direction: column;
+                width: 85em;
+        height: 30em;
+        position: relative;
+
+        &__image {
+            width: 5em;
+            height: 5em;
+            border-radius: 50%;
+        }
+        &__title {
+            margin-bottom: 1em;
+            width: 10%;
+        }
+
+        &__elements {
+            left: 10%;
+            display: grid;
+            //grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-template-columns: repeat(4, minmax( 13em, 1fr));
+            gap: 1em;
+            width: 25em;
+        }
+    }
+
+    &__security {
+        margin-left: 5em;
+        display: flex;
+        flex-direction: column;
+        width: 85em;
+        height: 30em;
+        position: relative;
+
+        &__title {
+            margin-bottom: 1em;
+        }
+        &__elements{
+            &__password{
+                width: 20%;
+                margin-bottom: 1em;
+            }
+        }
+    }
+}
+
+
+// VOIR POUR METTRE DES VARIABLES A LA PLACE DES MEDIA QUERIES
+@media (max-width: 950px) {
+    .content__personnal-data__elements {
+        grid-template-columns: repeat(3, minmax(12em, 1fr));
+    }
+}
+
+@media (max-width: 750px) {
+    .content__personnal-data__elements {
+        grid-template-columns: repeat(2, minmax(11em, 1fr));
+    }
+}
+@media (max-width: 650px) {
+    .content__personnal-data__elements {
+        grid-template-columns: repeat(1, minmax(10em, 1em));
+    }
+}

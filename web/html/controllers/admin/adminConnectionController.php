@@ -6,8 +6,8 @@
  * Il récupère les données du formulaire de connexion et les utilise pour vérifier les informations de connexion de l'administrateur.
  */
 // Import de la classe SessionService
-require_once '../../services/SessionService.php';
-require_once '../../services/ConnectionService.php';
+require_once '../../../services/SessionService.php';
+require_once '../../../services/ConnectionService.php';
 
 function redirect($url)
 {
@@ -17,14 +17,14 @@ function redirect($url)
 
 // Vérifier la méthode de la requête et l'existence des données
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['username']) || !isset($_POST['password'])) {
-    redirect('../../html/admin/adminConnection.php');
+    redirect('/admin/connection');
 }
 
 $username = $_POST['username'];
 $password = $_POST['password'];
 
 // Récupération de la page de redirection, avec gestion du fallback, quand l'admin veut accéder à une page protégée mais qu'il n'est plus connecté
-$redirectPage = $_POST['redirect'] ?? '../../html/admin/adminDashboard.php';
+$redirectPage = $_POST['redirect'] ?? '/admin/dashboard';
 
 // Vérification des informations de connexion de l'administrateur
 if (ConnectionService::checkAdmin($username, $password)) {
@@ -36,7 +36,7 @@ if (ConnectionService::checkAdmin($username, $password)) {
     redirect($redirectPage);
 } else {
     // Connexion échouée, redirection vers la page de connexion
-    redirect('../../html/admin/adminConnection.php?error=loginFailed');
+    redirect('/admin/connection?error=loginFailed');
 }
 
 ?>

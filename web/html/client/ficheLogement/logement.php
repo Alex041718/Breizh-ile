@@ -1,5 +1,11 @@
 <?php
-    
+
+    // Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
+    require_once '../../../models/Client.php';
+    require_once '../../../services/ClientService.php';
+    require_once '../../../services/SessionService.php'; // pour le menu du header
+    $isAuthenticated = SessionService::isClientAuthenticated();
+
     if(isset($_GET["housingID"]) && $_GET["housingID"] != null) $housingID = $_GET["housingID"];
     else header("Location: /");
 
@@ -47,7 +53,7 @@
 <body>
     <?php
         require_once("../../components/Header/header.php");
-        Header::render(true);
+        Header::render(true,false,$isAuthenticated,$_SERVER['REQUEST_URI']);
     ?>
 
     <main class="logement">
@@ -145,6 +151,62 @@
                                 <!-- Le texte de la description complète sera injecté ici par JavaScript -->
                             </p>
                             <i id="close-popup" class="fa-solid fa-xmark"></i>
+                        </div>
+
+                    </div>
+                    <button type="button" class="logement__criteria">Afficher les critères</button>
+                    <!-- Overlay and Popup Criteres-->
+                    <div id="overlay-critere" class="overlay-critere"></div>
+                        <div id="popup-critere" class="popup-critere">
+                            <div class="popup-content-critere">
+                                <i id="closePopupCritereBtn" class="fa-solid fa-xmark"></i>
+                                <h3>Critères du Logement</h3>
+                                <div class="section">
+                                    <h4>Aménagements</h4>
+                                    <div class="items">
+                                        <div class="item">
+                                            <i class="fa-solid fa-water-ladder"></i>
+                                            <span>Piscine</span>
+                                        </div>
+                                        <div class="item">
+                                            <i class="fa-solid fa-plant-wilt"></i>
+                                            <span>Jardin</span>
+                                        </div>
+                                        <div class="item">
+                                            <i class="fa-solid fa-plant-wilt"></i>
+                                            <span>Salle de sport</span>
+                                        </div>
+                                        <div class="item">
+                                            <i class="fa-solid fa-square-parking"></i>
+                                            <span>Parking privée</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="horizontal-line"></div>
+
+                                <div class="section">
+                                    <h4>Activités</h4>
+                                    <div class="items">
+                                        <div class="item">
+                                            <i class="fa-solid fa-umbrella-beach"></i>
+                                            <span>Plage</span>
+                                        </div>
+                                        <div class="item">
+                                            <i class="fa-solid fa-paw"></i>
+                                            <span>Zoo</span>
+                                        </div>
+                                        <div class="item">
+                                            <i id="img" class="fa-regular fa-water-ladder"></i>
+                                            <span>Parc d’attraction</span>
+                                        </div>
+                                        <div class="item">
+                                            <i class="fa-solid fa-landmark"></i>
+                                            <span>Musée</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <button type="button" class="logement__criteria">Afficher les critères</button>

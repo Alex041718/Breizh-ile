@@ -1,5 +1,11 @@
 @import '../../style/variables';
 
+@font-face {
+	font-family: Luciole-Reguglar;
+	src:
+		url(/assets/luciole/Luciole-Reguglar.ttf) format(ttf);
+}
+
 .header-mobile {
     display: none;
     position: fixed;
@@ -47,6 +53,12 @@
 
 }
 
+.accessibilite__font {
+    * :not(i) {
+        font-family: 'Luciole-Reguglar', sans-serif;
+    }
+}
+
 .accessibilite__taille {
     $font-size-xs: max(14px, calc(16vw / 19.2));
     $font-size-base: max(16px, calc(20vw / 19.2));
@@ -77,6 +89,7 @@
 
 }
 
+
 .popup__access {
     justify-content: center;
     align-items: center;
@@ -90,7 +103,6 @@
     transform: translate(-50%, -50%);
     z-index: 1002;
     background-color: rgba(0, 0, 0, 0.5);
-    pointer-events: none;
 
     .popup__content {
         
@@ -104,13 +116,30 @@
         border: 1px solid #ddd;
         width: 40%;
         justify-content: center;
-        pointer-events: all;
+        position: relative;
 
         @media screen and (max-width: 1024px) {
             padding: 25px;
             width: 70%;
         }
-        
+
+        #closeAccess {
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #closeAccess:hover,
+        #closeAccess:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
         h2 {
             text-align: center;
         }

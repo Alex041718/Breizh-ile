@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Gestionnaire d'événement pour le bouton de soustraction d'adulte
     subtractAdultBtn.addEventListener('click', function () {
-        if (adultCountValue > 0) {
+        if (adultCountValue > 1) {
             adultCountValue--;
             updateAdultCount();
         }
@@ -223,6 +223,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const inputs = document.querySelectorAll(".datepicker input[type=date]");
 
     let arriveePicker, departPicker;
+    const nightCountElement = document.getElementById('night-count');
+    const finalTotalElement = document.getElementById('final-total');
+    const totalCostElement = document.getElementById('total-cost');
+    const nightPriceElement = document.getElementById('nightPrice');
+    const costPerNight = parseFloat(nightPriceElement.textContent);
 
     inputs.forEach((input) => {
         const options = {
@@ -233,18 +238,66 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (input.id === 'start-date') {
             options.onChange = function(selectedDates) {
-                // Mettre à jour la date minimale pour la date de départ
+                // Update the minimum date for the departure date
                 const minDepartDate = selectedDates[0];
                 departPicker.set('minDate', minDepartDate);
+                calculateAndDisplayNights();
             };
             arriveePicker = flatpickr(input, options);
         } else if (input.id === 'end-date') {
+            options.onChange = function() {
+                calculateAndDisplayNights();
+            };
             departPicker = flatpickr(input, options);
         } else {
             flatpickr(input, options);
         }
     });
 
+    const priceDisplay = document.querySelector('.prix');
+    
+    function displayPriceDetails() {
+        const nightCount = parseInt(nightCountElement.textContent, 10);
 
-  
+        if(nightCount > 0){
+            priceDisplay.style.display = 'flex';
+        }else{
+            priceDisplay.style.display = 'none';
+        }
+    }
+
+    function calculateAndDisplayNights() {
+        const startDate = arriveePicker.selectedDates[0];
+        const endDate = departPicker.selectedDates[0];
+
+        if (startDate && endDate) {
+            const timeDifference = endDate - startDate;
+            const nightCount = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+            nightCountElement.textContent = nightCount;
+            const totalCost = nightCount * costPerNight;
+            totalCostElement.textContent = totalCost + " €";
+            finalTotalElement.textContent = totalCost + " €";
+        } else {
+            nightCountElement.textContent = 0;
+            totalCostElement.textContent = "0 €";
+            finalTotalElement.textContent = "0 €";
+        }
+
+        displayPriceDetails();
+    }
+
+    function displayPriceDetails() {
+        const nightCount = parseInt(nightCountElement.textContent, 10);
+
+        if (nightCount > 0) {
+            priceDisplay.style.display = 'flex';
+        } else {
+            priceDisplay.style.display = 'none';
+        }
+    }
+
+    // Initial call to set the correct values on page load
+    calculateAndDisplayNights();
+
 });
