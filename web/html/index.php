@@ -61,7 +61,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
             </div>
         </section>
         <section id="logements" class="logements">
-            <div class="popup__filter">
+            <div id="popup__filter" class="popup__filter">
                 <div method="POST" action="./#logements" class="popup__filter__content">
                     <?php foreach ($_POST as $key => $value) {
                         echo '<input type="hidden" name="'. $key . '" value="' . $value . '" />';
@@ -79,12 +79,14 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                                     <div class="price-field">
                                         <span>Prix Minimum</span>
                                         <input type="number"
+                                            id="minInput"
                                             class="min-input"
-                                            value="<?= isset($_POST["maxPrice"]) ? $_POST["minPrice"] : "0" ?>">
+                                            value="<?= isset($_POST["minPrice"]) ? $_POST["minPrice"] : "0" ?>">
                                     </div>
                                     <div class="price-field">
                                         <span>Prix Maximum</span>
                                         <input type="number"
+                                            id="maxInput"
                                             class="max-input"
                                             value="<?= isset($_POST["maxPrice"]) ? $_POST["maxPrice"] : "500" ?>">
                                     </div>
@@ -101,13 +103,13 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                                     class="min-range"
                                     min="0"
                                     max="500"
-                                    value="0"
+                                    value="<?= isset($_POST["minPrice"]) ? $_POST["minPrice"] : "0" ?>"
                                     step="1">
                                 <input type="range"
                                     class="max-range"
                                     min="0"
                                     max="500"
-                                    value="500"
+                                    value="<?= isset($_POST["maxPrice"]) ? $_POST["maxPrice"] : "500" ?>"
                                     step="1">
                             </div>
                         </div>
@@ -188,7 +190,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                 </select>
                 <div class="filter__button">
                     <button id="filter_button">Filtres</button>
-                    <?php sizeof($_POST) > 0 ? '<i class="fa-solid fa-xmark"></i>' : "" ?>
+                    <?= sizeof($_POST) > 0 ? '<a href="/"><i class="fa-solid fa-xmark"></i></a>' : "" ?>
                 </div>
             </div>
             <div class="logements__container">
@@ -202,8 +204,11 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                 let endDate = <?= json_encode($_POST['endDate'] ?? null) ?>;
                 let city = <?= json_encode($_POST['searchText'] ?? null) ?>;
 
-                const minPrice = document.querySelector(".min-input");
-                const maxPrice = document.querySelector(".max-input");
+                let rawMinPrice = <?= json_encode($_POST['minPrice'] ?? null) ?>;
+                let rawMaxPrice = <?= json_encode($_POST['maxPrice'] ?? null) ?>;
+
+                
+
 
                 if(city) city = city.split(' ')[0];
 
@@ -211,7 +216,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                 let desc = 0;
                 let cpt = 0
 
-                showUser(0, "_Housing.priceExcl", false, false);
+                showUser(0, "_Housing.priceExcl", false, false, true);
 
 
                 filter_submit.addEventListener("click", function() {
@@ -226,7 +231,10 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                     showUser(cpt, sort, desc, true);
                 })
 
-                function showUser(cpt, sort, desc, isFirst) {
+                function showUser(cpt, sort, desc, isFirst, isVeryFirst = false) {
+
+                    const minPrice = rawMinPrice && isVeryFirst ? rawMinPrice : document.getElementById("minInput").value;
+                    const maxPrice = rawMaxPrice && isVeryFirst ? rawMaxPrice : document.getElementById("maxInput").value;
 
                     if(isFirst) cpt = 0;
                     const itemsToHide = document.querySelectorAll(".show-more");
@@ -239,7 +247,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                     container.appendChild(loader);
 
                     var xmlhttp = new XMLHttpRequest();
-                    const params = `q=${cpt}&sort=${sort}&desc=${desc}&nbPerson=${nbPerson}&beginDate=${beginDate}&endDate=${endDate}&city=${city}&minPrice=${minPrice.value}&maxPrice=${maxPrice.value}`;
+                    const params = `q=${cpt}&sort=${sort}&desc=${desc}&nbPerson=${nbPerson}&beginDate=${beginDate}&endDate=${endDate}&city=${city}&minPrice=${minPrice}&maxPrice=${maxPrice}`;
 
                     xmlhttp.open("POST", "./components/HousingCard/getHousing.php", true);
 
