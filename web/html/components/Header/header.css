@@ -50,6 +50,22 @@
   cursor: pointer;
 }
 
+.accessibilite__couleurs .button--vert button, .accessibilite__couleurs .button--bleu button, .accessibilite__couleurs .button--rouge button {
+  background-color: orange;
+}
+.accessibilite__couleurs .button--bleu {
+  background-color: orange;
+}
+.accessibilite__couleurs .content__selector__personnal-data__title, .accessibilite__couleurs .content__selector__security__title {
+  color: red;
+}
+.accessibilite__couleurs .order-btn {
+  background-color: orange;
+}
+.accessibilite__couleurs * {
+  color: red;
+}
+
 .accessibilite__font * :not(i) {
   font-family: "Luciole-Reguglar", sans-serif;
 }
@@ -123,7 +139,7 @@
   display: flex;
   flex-direction: column;
   padding: 50px;
-  white-space: nowrap;
+  white-space: wrap;
 }
 @media screen and (max-width: 1024px) {
   .popup__access .popup__content .popup__options {

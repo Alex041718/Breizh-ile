@@ -24,13 +24,13 @@ class Button {
 
         switch ($type) {
             case ButtonType::Client:
-                $class .= ' button--client' . $secondaryClass ;
+                $class .= ' button--client' . $secondaryClass . ' button--vert' ;
                 break;
             case ButtonType::Owner:
-                $class .= ' button--owner' . $secondaryClass ;
+                $class .= ' button--owner' . $secondaryClass  . ' button--bleu' ;
                 break;
             case ButtonType::Delete:
-                $class .= ' button--delete' . $secondaryClass ;
+                $class .= ' button--delete' . $secondaryClass . ' button--rouge' ;
                 break;
         }
 
