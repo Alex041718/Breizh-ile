@@ -87,10 +87,15 @@ body {
   padding-top: 1em;
   padding-bottom: 1em;
   border-radius: 10px;
-  border: gray;
+  border: 1px solid gray;
   background-color: #307B5C;
   color: white;
   cursor: pointer;
+}
+.photoAndReservation .reservation .reservationBtn button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
 }
 .photoAndReservation .reservation .prix {
   display: none;

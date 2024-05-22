@@ -64,6 +64,7 @@ $housing_longDesc = $housing->getLongDesc();
 $housing_priceHt = $housing->getPriceExcl();
 $housingLongitude = $housing->getLongitude();
 $housingLatitude = $housing->getLatitude();
+$housingCity = $housing->getAddress()->getCity();
 
 $housing_arrangements = $housing->getArrangement();
 
@@ -151,7 +152,7 @@ $iconMapping = [
                     </div>
 
                     <div class="reservationBtn">
-                        <button class="para--18px para--bold">Réserver</button>
+                        <button class="para--18px para--bold" id="reserverBtn">Réserver</button>
                     </div>
 
                     <div class="prix">
@@ -273,7 +274,7 @@ $iconMapping = [
                             <span class="tooltip-text"> <p>La localisation exacte sera communiquée une fois la réservation terminée </p></span>
                         </i>
                     </div>
-                    <div data-lat="<?= $housingLatitude ?>" data-long="<?= $housingLongitude ?>" id="map"></div>
+                    <div data-city="<?= $housingCity ?>" id="map"></div>
                 </div>    
             </div>
             

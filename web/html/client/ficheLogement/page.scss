@@ -86,19 +86,24 @@ body {
             margin-top: 3em;
             margin-bottom: 1em;
             width: 75%;
-    
+          
             button {
-                width: 100%;
-                padding-top: 1em;
-                padding-bottom: 1em;
-                border-radius: 10px;
-                border: gray;
-                background-color: #307B5C;
-                color: white;        
-                cursor: pointer;
-       
+              width: 100%;
+              padding-top: 1em;
+              padding-bottom: 1em;
+              border-radius: 10px;
+              border: 1px solid gray;
+              background-color: #307B5C;
+              color: white;        
+              cursor: pointer;
+          
+              &:disabled {
+                background-color: #cccccc;
+                color: #666666;
+                cursor: not-allowed;
+              }
             }
-        }
+          }
     
         .prix {
             display: none;
