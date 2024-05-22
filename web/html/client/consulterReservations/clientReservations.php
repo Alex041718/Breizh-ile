@@ -47,16 +47,16 @@ Header::render(true,false, $isAuthenticated, '/client/reservations-liste');
 <body>
 <main>
     <div class="title">
-        <i class="fa-regular fa-less-than"></i>
+        <a href="/">
+            <i class="fa-regular fa-less-than"></i>
+        </a>
         <h2 class="title__text">Vos réservations</h2>
     </div>
     <div class="reservation-list">
         <div class="reservation-list__container">
             <?php foreach ($clientReservationList as $index => $reservationItem) : ?>
                 <div class="reservation-list__container__card" data-index="<?php echo $index; ?>">
-<!--                    -->
                     <?php ReservationCard::render("reservation-list__container__card__render", "", $reservationItem); ?>
-<!--                    </a>-->
                 </div>
             <?php endforeach; ?>
         </div>
