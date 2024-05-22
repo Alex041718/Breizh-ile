@@ -19,6 +19,10 @@ main {
   all: unset;
 }
 
+a {
+  all: unset;
+}
+
 .fa-less-than::before {
   font-size: 3em;
   font-weight: bold;
