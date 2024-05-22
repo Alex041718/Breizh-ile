@@ -56,8 +56,8 @@ SessionService::system('owner', '/back/creer-logement');
                 <section class="content__left">
                     <section>
                         <section>
-                        <?php Input::render("content__input--large", "title", "text", "Title", "title", "Entrez un titre pour votre logement", true, '', 0, 100); ?>
-                        <?php Input::render("content__input--large content__input--long", "shortdesc", "textarea", "Accroche", "shortdesc", "Détaillez votre logement en 3 lignes", true, '', 0, 255); ?>
+                            <?php Input::render("content__input--large", "title", "text", "Title", "title", "Entrez un titre pour votre logement", true, '', 0, 100); ?>
+                            <?php Input::render("content__input--large content__input--long", "shortdesc", "textarea", "Accroche", "shortdesc", "Détaillez votre logement en 3 lignes", true, '', 0, 255); ?>
                         </section>
                         <?php Input::render("content__input--large content__input--very-long", "longdesc", "textarea", "Description détaillée", "longdesc", "Détaillez précisement votre logement", false, '', 0, 8000); ?>
                         <?php Button::render("content__button", "nextButton", "Suivant", ButtonType::Owner, "", false, false); ?>
