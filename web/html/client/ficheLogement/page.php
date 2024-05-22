@@ -86,9 +86,9 @@ $iconMapping = [
 
     <main>
         <div class="page">
+            <h3> <?php echo $housing_title ?> </h3>
             <div class="photoAndReservation">
                 <div class="photo">
-                    <h3> <?php echo $housing_title ?> </h3>
                     <img src="<?php echo $housing_image ?>" alt="Image Logement">
                 </div>
                 <div class="reservation">
