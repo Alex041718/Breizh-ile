@@ -48,7 +48,7 @@ class ReservationService extends Service
         $stmt = $pdo->query('
             SELECT *, R.beginDate as r_begin_date, R.endDate as r_end_date FROM _Reservation R 
             JOIN _Housing H ON R.housingID = H.housingID 
-            JOIN _Client O ON H.clientID = O.clientID
+            JOIN _Client O ON R.clientID = O.clientID
             WHERE O.clientID = ' . $clientID . '
             ORDER BY R.beginDate;
         ');
