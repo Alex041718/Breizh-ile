@@ -116,12 +116,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }).addTo(map);
 
 
-    let MyControlClass =  L.Control.extend({
-
+    let MyControlClass =  L.Control.extend({  
+  
         options: {
             position: 'topleft'
         },
-
+        
         onAdd: function(map) {
             var div = L.DomUtil.create('div', 'leaflet-bar my-control');
             var myButton = L.DomUtil.create('button', 'my-button-class', div);
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             return div;
         },
-
+      
         onRemove: function(map) {
         }
     });
