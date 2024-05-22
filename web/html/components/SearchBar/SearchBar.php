@@ -26,7 +26,7 @@ class SearchBar {
                 </div>
                 <div class="search-bar__grid-container__search-element" type="nbPeople">
                     <p class="para--bold para--18px">Voyageurs</p>
-                    <input class="para--14px" name="peopleNumber" type="number" value="' . (isset($_POST["peopleNumber"]) ? $_POST["peopleNumber"] : "") .'" placeholder="Ajouter un nombre">
+                    <input class="para--14px" name="peopleNumber" min="0" type="number" value="' . (isset($_POST["peopleNumber"]) ? $_POST["peopleNumber"] : "") .'" placeholder="Ajouter un nombre">
                 </div>
             </div>
             ' . ($showSettings ? '<i id="header__settings" class="fa-solid fa-sliders"></i>' : '') . '

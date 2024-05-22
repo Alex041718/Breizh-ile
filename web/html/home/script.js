@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-    const popup_filters = document.querySelector(".popup__filter");
+    const popup_filters = document.getElementById("popup__filter");
     const popup_filters_close = popup_filters.querySelector("i");
     const popup_filters_submit = popup_filters.querySelector("a");
     const popup_filters_open = document.getElementById("filter_button");
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
         relativeInput: false
     });
 
-    checkParallax();
+    if(window.innerWidth <= 1024) parallaxInstance.destroy();
 
     var scrollBtn = document.getElementById("scrolldown");
     var logements = document.querySelector(".logements");
@@ -24,8 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 
     function checkParallax() {
-        if(window.innerWidth <= 1024) parallaxInstance.disable();
-        else parallaxInstance.enable();
+        
     }
 
     // popup
@@ -46,17 +45,14 @@ document.addEventListener("DOMContentLoaded", function() {
     // Price filter
 
     //  Script.js 
-    const rangevalue =  
-    document.querySelector(".slider-container .price-slider"); 
-    const rangeInputvalue =  
-    document.querySelectorAll(".range-input input"); 
+    const rangevalue = popup_filters.querySelector(".slider-container .price-slider"); 
+    const rangeInputvalue = popup_filters.querySelectorAll(".range-input input"); 
 
     // Set the price gap 
     let priceGap = 10; 
 
     // Adding event listners to price input elements 
-    const priceInputvalue =  
-    document.querySelectorAll(".price-input input"); 
+    const priceInputvalue = popup_filters.querySelectorAll(".price-input input"); 
     for (let i = 0; i < priceInputvalue.length; i++) { 
     priceInputvalue[i].addEventListener("input", e => { 
 

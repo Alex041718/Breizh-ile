@@ -107,9 +107,9 @@ searchBars.forEach(searchBar => {
     myHeaders.append("sec-ch-ua-platform", "\"macOS\"");
 
     const requestOptions = {
-    method: "GET",
-    headers: myHeaders,
-    redirect: "follow"
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow"
     };
 
     let data;
