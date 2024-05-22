@@ -1,5 +1,5 @@
 <?php
-    
+
     // Commence le buffering de sortie
     ob_start();
 
@@ -9,10 +9,15 @@
     ob_end_clean();
 
     if(!isset($_GET['id']) || $_GET['id'] == "") {
-        header('Location: /'); 
+        header('Location: /');
         exit();
     };
 
+    // Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
+    require_once '../../../models/Client.php';
+    require_once '../../../services/ClientService.php';
+    require_once '../../../services/SessionService.php'; // pour le menu du header
+    $isAuthenticated = SessionService::isClientAuthenticated();
 ?>
 
 <!DOCTYPE html>
@@ -24,13 +29,13 @@
     <link rel="stylesheet" href="../../style/ui.css">
     <link rel="stylesheet" href="/client/ficheLogement/page.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    
+
     <script src="/client/ficheLogement/page.js"></script>
 </head>
 
@@ -91,10 +96,19 @@ $iconMapping = [
             <h3 id="title"> <?php echo $housing_title ?> </h3>
             <div class="photoAndReservation">
                 <div class="photo">
+                    <h3> <?php echo $housing_title ?> </h3>
                     <img src="<?php echo $housing_image ?>" alt="Image Logement">
                 </div>
                 <div class="reservation">
                     <h3> <?php echo $housing_priceHt ?> € par nuit</h3>
+
+                    <?php
+                    // établir des dates de début et de fin pour la réservation
+                    $dateStart = new DateTime();
+                    $dateEnd = new DateTime();
+                    $dateEnd->add(new DateInterval('P5D'));
+
+                    ?>
 
                     <div class="preparation">
                         <div class="datepicker">
@@ -111,7 +125,7 @@ $iconMapping = [
                                     <input class="para--14px" name="endDate" id="end-date" type="date" placeholder="Ajouter une date">
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="nbrClients">
                             <button class="para--bold" id="addTravelersBtn">Ajouter des voyageurs<output id="liveTravelersCount">1</output></button>
@@ -169,12 +183,29 @@ $iconMapping = [
                         <div class="horizontal-line"></div>
 
                         <div class="total">
-                            <div><p class="para--bold">Total HT</p></div>
+                            <div><p class="para--bold">Total</p></div>
                             <div><p class="para--bold" id="final-total">0</p></div>
                         </div>
                     </div>
-                </div>
- 
+
+                    <input type="hidden" name="isAuthenticated" value="<?php echo $isAuthenticated?>">
+
+                    <?php if($isAuthenticated): ?>
+
+                        <input type="hidden" name="clientID" value="<?php echo $_SESSION['user_id'] ?>">
+
+                    <?php endif; ?>
+
+                    <input type="hidden" name="housingID" value="<?php echo $housing->getHousingID() ?>">
+
+                    <input type="hidden" name="ownerID" value="<?php echo $housing->getOwner()->getOwnerID() ?>">
+
+                    <input type="hidden" name="oldPage" value="<?php echo $_SERVER['REQUEST_URI'] ?>">
+
+
+
+                </form>
+
             </div>
 
             <div class="twodiv">
@@ -201,7 +232,7 @@ $iconMapping = [
                     <div class="popup-overlay" id="popup-overlay-savoir"></div>
                     <div class="popup" id="popup-savoir">
                         <!-- Contenu de la pop-up (description complète) -->
-                        <h3 id="titleDescription">Description du logement</h3>
+                        <h3>Description du logement</h3>
                         <p class="para--18px" id="full-description">
                             <!-- Le texte de la description complète sera injecté ici par JavaScript -->
                         </p>
@@ -274,11 +305,11 @@ $iconMapping = [
                         </i>
                     </div>
                     <div data-lat="<?= $housingLatitude ?>" data-long="<?= $housingLongitude ?>" id="map"></div>
-                </div>    
+                </div>
             </div>
-            
+
             <div id="overlay"></div>
-            
+
         </div>
 
     </main>

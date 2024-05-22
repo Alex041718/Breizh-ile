@@ -8,6 +8,36 @@
     require_once '../../../services/SessionService.php'; // pour le menu du header
     $isAuthenticated = SessionService::isClientAuthenticated();
 
+    // imports
+    require_once('../../../models/Bid.php');
+    require_once('../../../services/HousingService.php');
+    require_once('../../../services/ClientService.php');
+    require_once('../../../services/OwnerService.php');
+
+    // Récupération du devis
+    /** @var Bid $bid */
+
+    if (!isset($_SESSION['currentBid'])) {
+        header('Location: '. SessionService::get('oldPage') ?? '/');
+        exit();
+    }
+
+    // on récupère le devis
+    $bid = SessionService::get('currentBid');
+
+
+    // Création du devis avec la deserialization des classes
+    /** @var Housing $housing */
+    $housing = HousingService::getHousingByID($bid['housing']);
+    /** @var Owner $owner */
+    $owner = OwnerService::getOwnerByID($bid['owner']);
+
+    // Découpe des variables
+    $intervalDay = $bid['interval'];
+    $numberPerson = $bid['numberPerson'];
+    $beginDate = $bid['beginDate'];
+    $endDate = $bid['endDate'];
+
 
 ?>
 
@@ -32,46 +62,56 @@ Header::render(true,false,$isAuthenticated,$_SERVER['REQUEST_URI']);
     <span>la barre de progression</span>
     <div class="bid__container">
 
-        <h2 class="bid__container__title-page">Votre devis pour séjourné à Lannion :</h2>
+        <h2 class="bid__container__title-page">Votre devis pour séjourné à <?= $housing->getAddress()->getCity() ?> :</h2>
 
         <div class="bid__container__info">
             <div class="bid__container__info__info-detail">
                 <div class="bid__container__info__info-detail__description">
                     <div class="bid__container__info__info-detail__description__image">
-                        <img src="https://bretagnelocationvacances.fr/assets/images/055634003/54/petit/54a.jpg" alt="Image de l'appartement">
+                        <img src="<?= $housing->getImage()->getImageSrc() ?>" alt="Image du logement">
                     </div>
                     <div class="bid__container__info__info-detail__description__content">
-                        <h3>Appartement 2 pièces</h3>
-                        <p class="para--18px>">pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+                        <h3><?= $housing->getTitle() ?></h3>
+                        <p class="para--18px>"><?= $housing->getLongDesc() ?></p>
                     </div>
                 </div>
 
                 <div class="bid__container__info__info-detail__kpi">
-                    <div class="bid__container__info__info-detail__kpi__item">3 nuits</div>
-                    <div class="bid__container__info__info-detail__kpi__item">3 personnes</div>
-                    <div class="bid__container__info__info-detail__kpi__item">3 lits</div>
+                    <div class="bid__container__info__info-detail__kpi__item"><?= $intervalDay ?> nuits</div>
+                    <div class="bid__container__info__info-detail__kpi__item"><?= $numberPerson ?> personnes</div>
+                    <!--<div class="bid__container__info__info-detail__kpi__item"><?= $housing->getNbSimpleBed() ?> lit(s) simple(s)</div>
+                    <div class="bid__container__info__info-detail__kpi__item"><?= $housing->getNbDoubleBed() ?> lit(s) double(s)</div> -->
 
                 </div>
 
                 <div class="bid__container__info__info-detail__dates">
-                    <h3>Du 25/12/2021 au 28/12/2021</h3>
+                    <h3>Du <?= $beginDate->format('d/m/Y') ?> au <?= $endDate->format('d/m/Y') ?></h3>
                 </div>
             </div>
             <div class="bid__container__info__pay-recap">
 
                 <div class="bid__container__info__pay-recap__price-detail">
                     <h3>Détails du prix</h3>
+                    <?php
+                    // CALCUL !
+
+                    $nights = $housing->getPriceIncl()*$intervalDay;
+                    $serviceFee = $nights*0.01;
+                    $sejourTax = 1*$intervalDay*$numberPerson;
+                    $total = $nights + $serviceFee + $sejourTax;
+                    ?>
+
                     <div>
-                        <p class="para--18px"><?= "100" ?> € x <?= "3" ?> nuits x <?= "8"  ?> occupant(s)</p>
-                        <p class="para--18px"><?= "500" ?> €</p>
+                        <p class="para--18px"><?= $housing->getPriceIncl() ?> € x <?= $intervalDay ?> nuits</p>
+                        <p class="para--18px"><?= $nights ?> €</p>
                     </div>
                     <div>
                         <p class="para--18px" >Frais de service</p>
-                        <p class="para--18px"><?= "20" ?> €</p>
+                        <p class="para--18px"><?= $serviceFee  ?> €</p>
                     </div>
                     <div>
                         <p class="para--18px">Taxee de séjour</p>
-                        <p class="para--18px"><?= "32" ?> €</p>
+                        <p class="para--18px"><?= $sejourTax ?> €</p>
                     </div>
                     <hr>
                 </div>
@@ -79,7 +119,7 @@ Header::render(true,false,$isAuthenticated,$_SERVER['REQUEST_URI']);
                 <div class="bid__container__info__pay-recap__price-total">
                     <div>
                         <h3>Total TTC</h3>
-                        <p class="para--18px"><?= "800"?> €</p>
+                        <p class="para--18px"><?= $total ?> €</p>
                     </div>
                 </div>
 

@@ -106,7 +106,7 @@ class OwnerService extends Service
             $row['consent'],
             $lastConnection,
             $creationDate,
-            $row['isValidated'],
+            "true",
             $image,
             $gender,
             $address
