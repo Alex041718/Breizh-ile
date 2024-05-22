@@ -35,6 +35,11 @@
 .header-mobile .header-mobile__icon p {
   font-weight: bold;
 }
+.header-mobile .header-mobile__icon .profilImg {
+  height: 40px;
+  border-radius: 70px;
+  border: #307B5C 3px solid;
+}
 @media screen and (max-width: 1024px) {
   .header-mobile {
     display: flex;
@@ -191,6 +196,14 @@
 .header .logo-small {
   display: block;
 }
+.header.rm-anim {
+  animation-name: none !important;
+}
+.header .profilImg {
+  width: 50px !important;
+  border-radius: 70px;
+  border: 3px solid white;
+}
 .header.scroll, .header.scrolling {
   height: auto;
   position: fixed;
@@ -199,6 +212,9 @@
   animation-name: showUp;
   height: 80px;
   transition: all 0.1s;
+}
+.header.scroll .profilImg, .header.scrolling .profilImg {
+  border: 3px solid #1D1D1D;
 }
 .header.scroll:has(.search-bar--open), .header.scrolling:has(.search-bar--open) {
   height: 120px;

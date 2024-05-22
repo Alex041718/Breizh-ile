@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             else {
                 endPickr.set('disable', [])
-                endPickr.set('minDate', selectedDates[0]);
+                endPickr.set('minDate', selectedDates[0].fp_incr(1));
                 endPickr.toggle();
             }
         },
