@@ -12,30 +12,104 @@
     }
 }
 
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 body {
     margin: 0;
 }
 
-.photo {
+.photoAndReservation{
+    display: flex;
     width: 100%;
-    img {
+    height: 100%;
+    gap: 3em;
+    align-items: flex-start;
+
+    .photo {
+        height: 100%;
         width: 100%;
-        max-height: 500px;
-        border-radius: 20px;
-        object-fit: cover;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        h3{
+            align-self: start;
+            margin-bottom:0.5em
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+        }
+        
     }
-    h2 {
-        margin-bottom: 10px;
+
+    .reservation {
+        border: 1px solid #A9A9A9;
+        border-radius: 20px;
+        width: 85%;
+        height: 37em;
+        padding: 2.6em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-self: end;
+
+        .preparation {
+            width: 75%;
+        }
+
+        h3{
+            align-self: start;
+    
+        }
+    
+        .reservationBtn {
+            margin-top: 3em;
+            margin-bottom: 1em;
+            width: 75%;
+    
+            button {
+                width: 100%;
+                padding-top: 1em;
+                padding-bottom: 1em;
+                border-radius: 10px;
+                border: gray;
+                background-color: #307B5C;
+                color: white;        
+                cursor: pointer;
+       
+            }
+        }
+    
+        .prix {
+            display: none;
+            flex-direction: column;
+            width: 75%;
+            margin-top: 2em;
+
+            .calcul, .total {
+                display: flex;
+                margin-top: 2em;
+                justify-content: space-between;
+                width: 100%;
+            }
+        }
     }
 }
 
+
+
 .page {
-    display: flex;
-    flex-direction: column;
     height: 100%;
-    max-width: 1300px;
-    margin: 8em auto 0 auto;
-    align-items: start;
+    max-width: 1920px;
+    margin: 8em;
 
     #overlay {
         display: none;
@@ -126,19 +200,6 @@ body {
         }
     }
 
-    .localisation {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 3em;
-        margin-bottom: 3em;
-
-        .local-texte {
-            display: flex;
-            gap: 0.5em;
-        }
-    }
 }
 
 .popup-active {
@@ -149,56 +210,100 @@ body {
 .twodiv {
     width: 100%;
     height: 40em;
-    padding-top: 1em;
+    padding-top: 2em;
     display: flex;
-    gap: 2em;
-}
+    gap: 3em;
 
-.reservation {
-    border: 1px solid $secondaryColor;
-    border-radius: 20px;
-    width: 50%;
-    padding: 3em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-
-    h3{
-        align-self: start;
-
-    }
-
-    .reservationBtn {
-        margin-top: 3em;
-        margin-bottom: 1em;
-        width: 75%;
-
-        button {
-            width: 100%;
-            padding-top: 1em;
-            padding-bottom: 1em;
-            border-radius: 20px;
-            border: gray;
-            background-color: #307B5C;
-            color: white;        
-            cursor: pointer;
-   
-        }
-    }
-
-    .prix {
-        display: none;
+    .localisation {
+        width: 50%;
+        display: flex;
         flex-direction: column;
-        width: 75%;
-        .calcul, .total {
+        height: 100%;
+        align-self: flex-end;
+
+        .local-texte {
             display: flex;
-            margin-top: 2em;
-            justify-content: space-between;
-            width: 100%;
+            gap: 0.5em;
+            margin-bottom: 0.5em;
+            justify-content: center;
         }
+
+    }
+
+    .details {
+        width: 50%;
+        position: relative;
+    
+        .infoLogement{
+            display: flex;
+        }
+    
+        .criteres {
+            width: 100%;
+            height: 10%;
+            margin-top: 3em;
+            border-radius: 20px;
+            position: absolute;
+            bottom: 0;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+    
+        }
+    
+        .description {
+            border: 2px solid gray; 
+            margin-top: 2em;
+            height: 50%;
+            border-radius: 20px;
+            position: relative;
+    
+            .texte {
+                position: relative;
+                margin: 20px;
+                height: 90%;
+                p#button-savoir {
+                    margin-top: 10px;
+                    cursor: pointer;
+    
+                }
+    
+                #truncate-text {
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 8; // Nombre de lignes avant la troncature
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: normal;
+                    line-height: 1.6em;
+                }
+            }
+    
+        
+            button {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                border: none;
+                background-color: transparent;
+            }
+    
+            button:hover {
+                text-decoration: underline;
+            }
+        }
+    
+        
     }
 }
+
+#map{
+    position: relative;
+    height: 100%;
+    outline-style: none;
+    border-radius: 20px;
+}
+
 
 .horizontal-line {
     border: none;
@@ -232,104 +337,44 @@ body {
     justify-content: center;
     margin-top: 3em;
 
-    .arrivee {
-        display: flex;
-        flex-direction: column;
+    .arriveeAndDepart {
         width: 100%;
-        align-items: center;
-        border: 1px solid gray;
-        border-right: none;
-        border-top-left-radius: 10px;
-        padding-left: 2em;
-        padding-right: 2em;
-        justify-content: center;
-    }
-
-    .vertical-line {
-        border-left: 1px solid gray;
-        display: inline-block;
-        height: 5em;
-    }
-
-    .depart {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        border: 1px solid gray;
-        border-left: none;
-        border-top-right-radius: 10px;
-        padding-left: 2em;
-        padding-right: 2em;
-        justify-content: center;
-    }
-}
 
-.details {
-    width: 50%;
-    position: relative;
-
-    .infoLogement{
-        display: flex;
-    }
-
-    .criteres {
-        width: 100%;
-        height: 10%;
-        margin-top: 3em;
-        border-radius: 20px;
-        position: absolute;
-        bottom: 0;
-        background-color: black;
-        color: white;
-        cursor: pointer;
-
-    }
-
-    .description {
-        border: 2px solid gray; 
-        margin-top: 2em;
-        height: 50%;
-        border-radius: 20px;
-        position: relative;
-
-        .texte {
-            position: relative;
-            margin: 20px;
-            height: 90%;
-            p#button-savoir {
-                margin-top: 10px;
-                cursor: pointer;
-
-            }
-
-            #truncate-text {
-                display: -webkit-box;
-                -webkit-box-orient: vertical;
-                -webkit-line-clamp: 8; // Nombre de lignes avant la troncature
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: normal;
-                line-height: 1.6em;
-            }
+        .arrivee {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+            border: 1px solid gray;
+            border-right: none;
+            border-top-left-radius: 10px;
+            justify-content: center;
         }
-
     
-        button {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            border: none;
-            background-color: transparent;
+        .vertical-line {
+            border-left: 1px solid gray;
+            display: inline-block;
+            height: 5em;
+        }
+    
+        .depart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            border: 1px solid gray;
+            border-left: none;
+            border-top-right-radius: 10px;
+            justify-content: center;
         }
 
-        button:hover {
-            text-decoration: underline;
-        }
     }
 
     
 }
+
+
 
 .proprio {
     margin-top: 1em;
@@ -375,13 +420,7 @@ body {
     }
 }
 
-#map {
-    width: 100%; 
-    height: 200px; 
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-}
+
 
 .tooltip {
     position: relative;
@@ -391,15 +430,14 @@ body {
         visibility: hidden;
         width: max-content;
         border-radius: 10px;
-        background-color: transparent;
-        color: black;
+        background-color: black;
+        color: white;
         border: 1px solid gray;
         text-align: center;
         padding: 10px;
         position: absolute;
         z-index: 1;
         bottom: 115%;
-        left: 10em;
         transform: translateX(-50%);
         opacity: 0;
         transition: opacity 0.3s;
@@ -572,4 +610,8 @@ body {
             }
         }
     }
+}
+
+footer {
+    margin-top: 4em;
 }
