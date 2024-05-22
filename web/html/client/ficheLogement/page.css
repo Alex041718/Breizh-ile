@@ -19,51 +19,63 @@ body {
   margin: 0;
 }
 
-#liveTravelersCount {
-  border: none;
-  text-align: center;
-}
-
 .photoAndReservation {
   display: flex;
   width: 100%;
   height: 100%;
   gap: 3em;
-  align-items: flex-start;
+}
+@media screen and (max-width: 768px) {
+  .photoAndReservation {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 .photoAndReservation .photo {
   height: 100%;
-  width: 100%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
-.photoAndReservation .photo h3 {
-  align-self: start;
-  margin-bottom: 0.5em;
+@media screen and (max-width: 768px) {
+  .photoAndReservation .photo {
+    width: 100%;
+  }
 }
 .photoAndReservation .photo img {
   width: 100%;
-  height: 100%;
+  min-height: 43em;
   border-radius: 20px;
+}
+@media screen and (max-width: 768px) {
+  .photoAndReservation .photo img {
+    min-height: 0;
+  }
 }
 .photoAndReservation .reservation {
   border: 1px solid #A9A9A9;
   border-radius: 20px;
-  width: 85%;
-  height: 37em;
-  padding: 2.6em;
+  width: 50%;
+  height: 43em;
   display: flex;
   flex-direction: column;
   align-items: center;
-  align-self: end;
+}
+@media screen and (max-width: 768px) {
+  .photoAndReservation .reservation {
+    height: 30em;
+    width: 100%;
+  }
 }
 .photoAndReservation .reservation .preparation {
   width: 75%;
 }
 .photoAndReservation .reservation h3 {
   align-self: start;
+  margin-left: 0.5em;
+  margin-top: 0.5em;
 }
 .photoAndReservation .reservation .reservationBtn {
   margin-top: 3em;
@@ -75,10 +87,15 @@ body {
   padding-top: 1em;
   padding-bottom: 1em;
   border-radius: 10px;
-  border: gray;
+  border: 1px solid gray;
   background-color: #307B5C;
   color: white;
   cursor: pointer;
+}
+.photoAndReservation .reservation .reservationBtn button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
 }
 .photoAndReservation .reservation .prix {
   display: none;
@@ -86,17 +103,40 @@ body {
   width: 75%;
   margin-top: 2em;
 }
+@media screen and (max-width: 768px) {
+  .photoAndReservation .reservation .prix {
+    margin-top: 0;
+  }
+}
 .photoAndReservation .reservation .prix .calcul, .photoAndReservation .reservation .prix .total {
   display: flex;
   margin-top: 2em;
   justify-content: space-between;
   width: 100%;
 }
+@media screen and (max-width: 768px) {
+  .photoAndReservation .reservation .prix .calcul, .photoAndReservation .reservation .prix .total {
+    margin-top: 0em;
+  }
+}
 
 .page {
   height: 100%;
   max-width: 1920px;
   margin: 8em;
+}
+@media screen and (max-width: 768px) {
+  .page {
+    margin: 3em;
+  }
+}
+.page #title {
+  margin-bottom: 0.5em;
+}
+@media screen and (max-width: 768px) {
+  .page #title {
+    margin-top: 3em;
+  }
 }
 .page #overlay {
   display: none;
@@ -151,7 +191,6 @@ body {
   display: flex;
   gap: 0.5em;
   border: 1px solid gray;
-  padding: 0.5em;
   background-color: transparent;
   border-radius: 20px;
 }
@@ -175,28 +214,53 @@ body {
 .twodiv {
   width: 100%;
   height: 40em;
-  padding-top: 2em;
   display: flex;
   gap: 3em;
+  flex-direction: row;
+}
+@media screen and (max-width: 768px) {
+  .twodiv {
+    flex-direction: column;
+    height: auto;
+  }
 }
 .twodiv .localisation {
   width: 50%;
   display: flex;
   flex-direction: column;
   height: 100%;
-  align-self: flex-end;
+}
+@media screen and (max-width: 768px) {
+  .twodiv .localisation {
+    width: 100%;
+    height: 20em;
+  }
 }
 .twodiv .localisation .local-texte {
   display: flex;
   gap: 0.5em;
   margin-bottom: 0.5em;
   justify-content: center;
+  margin-top: 3em;
+}
+@media screen and (max-width: 728px) {
+  .twodiv .localisation .local-texte {
+    margin-top: 0;
+  }
 }
 .twodiv .details {
   width: 50%;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
-.twodiv .details .infoLogement {
+@media screen and (max-width: 768px) {
+  .twodiv .details {
+    width: 100%;
+    margin-top: 1em;
+  }
+}
+.twodiv .details h4 .infoLogement {
   display: flex;
 }
 .twodiv .details .criteres {
@@ -204,11 +268,15 @@ body {
   height: 10%;
   margin-top: 3em;
   border-radius: 20px;
-  position: absolute;
-  bottom: 0;
+  align-self: flex-end;
   background-color: black;
   color: white;
   cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+  .twodiv .details .criteres p {
+    padding: 1em;
+  }
 }
 .twodiv .details .description {
   border: 2px solid gray;
@@ -221,6 +289,8 @@ body {
   position: relative;
   margin: 20px;
   height: 90%;
+  display: flex;
+  flex-direction: column;
 }
 .twodiv .details .description .texte p#button-savoir {
   margin-top: 10px;
@@ -236,9 +306,7 @@ body {
   line-height: 1.6em;
 }
 .twodiv .details .description button {
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  align-self: flex-end;
   border: none;
   background-color: transparent;
 }
@@ -258,6 +326,12 @@ body {
   border-top: 1px solid #ccc;
   margin-top: 2em;
   height: 0;
+}
+@media screen and (max-width: 768px) {
+  .horizontal-line {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
 }
 
 .nbrClients {
@@ -298,6 +372,16 @@ body {
   border-top-left-radius: 10px;
   justify-content: center;
 }
+@media screen and (max-width: 768px) {
+  .datepicker .arriveeAndDepart .arrivee {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .datepicker .arriveeAndDepart .arrivee input {
+    width: 5em;
+  }
+}
 .datepicker .arriveeAndDepart .vertical-line {
   border-left: 1px solid gray;
   display: inline-block;
@@ -312,6 +396,16 @@ body {
   border-left: none;
   border-top-right-radius: 10px;
   justify-content: center;
+}
+@media screen and (max-width: 768px) {
+  .datepicker .arriveeAndDepart .depart {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .datepicker .arriveeAndDepart .depart input {
+    width: 5em;
+  }
 }
 
 .proprio {
@@ -341,11 +435,22 @@ body {
   margin-left: 3em;
   margin-right: 3em;
 }
+@media screen and (max-width: 768px) {
+  .traveler-type {
+    margin-left: 2em;
+    margin-right: 2em;
+  }
+}
 
 .adulteInfo, .enfantInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+@media screen and (max-width: 768px) {
+  .adulteInfo p, .enfantInfo p {
+    width: 5em;
+  }
 }
 
 .addbtn {
@@ -362,7 +467,6 @@ body {
 }
 .tooltip .tooltip-text {
   visibility: hidden;
-  width: max-content;
   border-radius: 10px;
   background-color: black;
   color: white;
@@ -375,6 +479,14 @@ body {
   transform: translateX(-50%);
   opacity: 0;
   transition: opacity 0.3s;
+}
+.tooltip .tooltip-text p {
+  white-space: nowrap;
+}
+@media screen and (max-width: 768px) {
+  .tooltip .tooltip-text p {
+    white-space: normal;
+  }
 }
 .tooltip:hover .tooltip-text {
   visibility: visible;
@@ -403,6 +515,12 @@ body {
   box-shadow: 0 4px 8px rgb(0, 0, 0);
   overflow-y: auto;
 }
+@media screen and (max-width: 768px) {
+  #popup-savoir {
+    width: 15em;
+    height: 20em;
+  }
+}
 #popup-savoir #close-popup {
   position: absolute;
   top: 1em;
@@ -415,7 +533,7 @@ body {
 #popup-savoir #close-popup.fa-solid.fa-xmark:hover {
   animation: circle-animation 1s ease-in-out infinite;
 }
-#popup-savoir h3 {
+#popup-savoir #titleDescription {
   margin-bottom: 1.5em;
   text-align: center;
 }
@@ -470,6 +588,11 @@ body {
   width: 35em;
   height: 35em;
 }
+@media screen and (max-width: 768px) {
+  .popup-critere .popup-content-critere {
+    width: 15em;
+  }
+}
 .popup-critere .popup-content-critere i#closePopupCritereBtn {
   position: absolute;
   top: 1em;
@@ -493,6 +616,12 @@ body {
   margin-left: 5em;
   margin-top: 2em;
 }
+@media screen and (max-width: 768px) {
+  .popup-critere .popup-content-critere .section .items {
+    flex-direction: column;
+    margin-left: 3em;
+  }
+}
 .popup-critere .popup-content-critere .section .items .item {
   display: flex;
   align-items: center;
@@ -501,10 +630,4 @@ body {
 }
 .popup-critere .popup-content-critere .section .items .item i {
   color: #307B5C;
-}
-
-footer {
-  margin-top: 4em;
-}
-
-/*# sourceMappingURL=page.css.map */
+}/*# sourceMappingURL=page.css.map */

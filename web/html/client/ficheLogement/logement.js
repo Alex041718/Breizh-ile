@@ -60,13 +60,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // Fonction pour mettre à jour le nombre d'adultes affiché
     function updateAdultCount() {
         adultCount.textContent = adultCountValue;
-        liveTravelersCount.value = adultCountValue + childCountValue;
+        liveTravelersCount.textContent = adultCountValue + childCountValue;
     }
 
     // Fonction pour mettre à jour le nombre d'enfants affiché
     function updateChildCount() {
         childCount.textContent = childCountValue;
-        liveTravelersCount.value = adultCountValue + childCountValue;
+        liveTravelersCount.textContent = adultCountValue + childCountValue;
     }
 
     // Gestionnaire d'événement pour le bouton "Ajouter des voyageurs"
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var map = L.map('map').setView([latitude, longitude], 13);
 
-
+    
 
     L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'ArcGIS'
@@ -97,14 +97,14 @@ document.addEventListener('DOMContentLoaded', function () {
         fillOpacity: 0.5,
         radius: 500
     }).addTo(map);
+        
 
-
-    let MyControlClass =  L.Control.extend({
-
+    let MyControlClass =  L.Control.extend({  
+  
         options: {
             position: 'topleft'
         },
-
+        
         onAdd: function(map) {
             var div = L.DomUtil.create('div', 'leaflet-bar my-control');
             var myButton = L.DomUtil.create('button', 'my-button-class', div);
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             return div;
         },
-
+      
         onRemove: function(map) {
         }
     });
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
             else
             {
               tileType = "OpenStreetMap";
-
+                            
               selectedTile = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'ArcGIS'
               }).addTo(map);
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.style.overflow = "auto";
         document.getElementById('popup-overlay-savoir').style.display = 'none';
         document.getElementById('popup-savoir').style.display = 'none';
-
+        
         // Retirer la classe pour rétablir le défilement du corps
         body.classList.remove('popup-savoir-open');
     }
@@ -260,11 +260,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         },
     });
-
+    
     if(begin.value && !end.value) {
         endPickr.set('disable', [])
         endPickr.set('minDate', new Date(begin.value).fp_incr(1));
     }
-
+  
 });
 

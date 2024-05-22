@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Mettre à jour les éléments HTML avec les nouvelles valeurs
         adultCount.textContent = adultCountValue;
-        liveTravelersCount.value = adultCountValue + childCountValue;
+        liveTravelersCount.textContent = adultCountValue + childCountValue;
     }
 
     function updateChildCount() {
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Mettre à jour les éléments HTML avec les nouvelles valeurs
         childCount.textContent = childCountValue;
-        liveTravelersCount.value = adultCountValue + childCountValue;
+        liveTravelersCount.textContent = adultCountValue + childCountValue;
     }
 
     // Gestionnaire d'événement pour le bouton "Ajouter des voyageurs"
@@ -160,13 +160,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    var circle = L.circle([51.508, -0.11], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 500
-    }).addTo(map);
-
 
     // Récupération des éléments avec infobulle
     const tooltips = document.querySelectorAll('.tooltip');
@@ -202,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function closePopupSavoir() {
         document.getElementById('popup-overlay-savoir').style.display = 'none';
         document.getElementById('popup-savoir').style.display = 'none';
-
+        
         // Retirer la classe pour rétablir le défilement du corps
         body.classList.remove('popup-savoir-open');
     }
@@ -272,16 +265,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const priceDisplay = document.querySelector('.prix');
+    const buttonDisplay = document.querySelector("#reserverBtn");
 
-    function displayPriceDetails() {
-        const nightCount = parseInt(nightCountElement.textContent, 10);
-
-        if(nightCount > 0 ){
-            priceDisplay.style.display = 'flex';
-        }else{
-            priceDisplay.style.display = 'none';
-        }
-    }
 
     function calculateAndDisplayNights() {
         const startDate = arriveePicker.selectedDates[0];
@@ -294,7 +279,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (nightCount == 0) {
                 nightCount = 1;
             }
-
 
             nightCountElement.textContent = nightCount;
             const totalCost = nightCount * costPerNight;
@@ -314,8 +298,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (nightCount > 0) {
             priceDisplay.style.display = 'flex';
+            buttonDisplay.disabled = false;
         } else {
             priceDisplay.style.display = 'none';
+            buttonDisplay.disabled = true;
         }
     }
 
