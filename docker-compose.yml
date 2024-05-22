@@ -8,6 +8,7 @@ services:
       - ./web/html:/var/www/html
       - ./web/services:/var/www/services
       - ./web/models:/var/www/models
+      - ./web/uploads:/var/www/uploads
     ports:
       - "${WEB_PORT}:80"
     networks:
