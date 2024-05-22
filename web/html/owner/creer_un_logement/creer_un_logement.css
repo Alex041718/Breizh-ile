@@ -17,7 +17,7 @@ nav ul {
   margin: 0;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 95vh;
   list-style: none;
   box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.25);
 }
@@ -57,6 +57,7 @@ nav ul li.active:hover {
 .content {
   display: flex;
   padding-inline: 4rem;
+  height: 100%;
 }
 .content__input--large input, .content__input--large textarea {
   width: max(15rem, 36.4583333333vw) !important;
@@ -74,13 +75,25 @@ nav ul li.active:hover {
   padding-block: 0.87rem !important;
   width: 100%;
 }
+.content__button--next {
+  margin-top: auto;
+  margin-bottom: 8.5rem;
+}
 .content__imagePicker {
   margin-top: 32px;
   margin-left: 3rem;
   width: max(15rem, 26.0416666667vw) !important;
 }
+.content__left section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 .content__right {
   width: 100%;
+}
+.content__right section {
+  height: 100%;
 }
 
 .input {
@@ -92,4 +105,34 @@ nav ul li.active:hover {
 
 .localisation {
   display: none;
+}
+
+.inline {
+  display: flex;
+  flex-direction: row !important;
+  height: -moz-max-content !important;
+  height: max-content !important;
+  width: max(15rem, 36.4583333333vw) !important;
+}
+.inline .input {
+  width: max(5rem, 15.625vw);
+  min-width: 0;
+  font-size: 16px !important;
+}
+.inline .input__input, .inline .input__label {
+  width: 100% !important;
+}
+.inline .input:last-child {
+  margin-left: auto;
+}
+.inline input:first-child, .inline textarea:first-child {
+  margin-right: 1rem;
+}
+
+.half {
+  width: max(5rem, 9.375vw) !important;
+}
+
+.wide {
+  width: max(5rem, 21.875vw) !important;
 }/*# sourceMappingURL=creer_un_logement.css.map */
