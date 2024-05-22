@@ -18,6 +18,11 @@ main{
     align-items: center;
 }
 
+#liveTravelersCount {
+    border: none;
+    text-align: center;
+}
+
 body {
     margin: 0;
 }
@@ -55,7 +60,7 @@ body {
                 min-height: 0;
             }
         }
-        
+
     }
 
     .reservation {
@@ -79,14 +84,14 @@ body {
             align-self: start;
             margin-left: 0.5em;
             margin-top: 0.5em;
-    
+
         }
-    
+
         .reservationBtn {
             margin-top: 3em;
             margin-bottom: 1em;
             width: 75%;
-          
+
             button {
               width: 100%;
               padding-top: 1em;
@@ -94,9 +99,9 @@ body {
               border-radius: 10px;
               border: 1px solid gray;
               background-color: #307B5C;
-              color: white;        
+              color: white;
               cursor: pointer;
-          
+
               &:disabled {
                 background-color: #cccccc;
                 color: #666666;
@@ -104,7 +109,7 @@ body {
               }
             }
           }
-    
+
         .prix {
             display: none;
             flex-direction: column;
@@ -145,7 +150,7 @@ body {
         @media screen and (max-width:768px) {
             margin-top: 3em;
         }
-        
+
     }
 
     #overlay {
@@ -189,7 +194,7 @@ body {
 
                 // Définir le centre de rotation au milieu de l'icône
                 transform-origin: center;
-                    
+
                 // Appliquer les styles de l'icône
                 &.fa-solid {
                     // Définir les propriétés pour l'icône spécifique
@@ -203,7 +208,7 @@ body {
                             animation: circle-animation 1s ease-in-out infinite;
                         }
                     }
-                }                
+                }
             }
 
             .traveler-type {
@@ -295,11 +300,11 @@ body {
 
         h4
 
-    
+
         .infoLogement{
             display: flex;
         }
-    
+
         .criteres {
             width: 100%;
             height: 10%;
@@ -315,16 +320,16 @@ body {
                     padding: 1em;
                 }
             }
-    
+
         }
-    
+
         .description {
-            border: 2px solid gray; 
+            border: 2px solid gray;
             margin-top: 2em;
             height: 50%;
             border-radius: 20px;
             position: relative;
-    
+
             .texte {
                 position: relative;
                 margin: 20px;
@@ -334,9 +339,9 @@ body {
                 p#button-savoir {
                     margin-top: 10px;
                     cursor: pointer;
-    
+
                 }
-    
+
                 #truncate-text {
                     display: -webkit-box;
                     -webkit-box-orient: vertical;
@@ -346,25 +351,25 @@ body {
                     white-space: normal;
                     line-height: 1.6em;
 
-    
 
-                    
+
+
                 }
             }
-    
-        
+
+
             button {
                 align-self: flex-end;
                 border: none;
                 background-color: transparent;
             }
-    
+
             button:hover {
                 text-decoration: underline;
             }
         }
-    
-        
+
+
     }
 }
 
@@ -378,10 +383,10 @@ body {
 
 .horizontal-line {
     border: none;
-    border-top: 1px solid #ccc; 
+    border-top: 1px solid #ccc;
     margin-top: 2em;
-    height: 0; 
-    
+    height: 0;
+
     @media screen and (max-width: 768px) {
         margin-top: 1em;
         margin-bottom: 1em;
@@ -437,13 +442,13 @@ body {
                 }
             }
         }
-    
+
         .vertical-line {
             border-left: 1px solid gray;
             display: inline-block;
             height: 5em;
         }
-    
+
         .depart {
             display: flex;
             flex-direction: column;
@@ -467,7 +472,7 @@ body {
 
     }
 
-    
+
 }
 
 
@@ -479,15 +484,15 @@ body {
     gap: 1em;
 
     img {
-        width: 70px; 
-        height: 70px; 
-        border-radius: 50%; 
-        overflow: hidden; 
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        overflow: hidden;
     }
 }
 
 #start-date, #end-date {
-    border: none;  
+    border: none;
     text-align: center;
 }
 
@@ -502,7 +507,7 @@ body {
 
     @media screen and (max-width:768px) {
         margin-left: 2em;
-        margin-right: 2em; 
+        margin-right: 2em;
     }
 }
 
@@ -516,7 +521,7 @@ body {
             width: 5em;
         }
     }
-    
+
 }
 
 
@@ -569,7 +574,7 @@ body {
 
 .popup-savoir-open {
     overflow: hidden; // Empêche le défilement du corps lorsque la pop-up est ouverte
-    
+
 }
 
 /* Styles pour la pop-up */
@@ -588,7 +593,7 @@ body {
     border-radius: 20px;
     z-index: 9999;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
-    overflow-y: auto; 
+    overflow-y: auto;
 
     @media screen and (max-width: 768px) {
         width: 15em;
@@ -599,17 +604,17 @@ body {
         position: absolute;
         top: 1em;
         left: 1em;
-    
+
         // Définir le centre de rotation au milieu de l'icône
         transform-origin: center;
-    
+
         // Appliquer les styles de l'icône
         &.fa-solid {
             // Définir les propriétés pour l'icône spécifique
             &.fa-xmark {
                 // Ajouter une transition pour une animation fluide
                 transition: transform 0.3s;
-    
+
                 // Définir les styles pour le survol de l'icône
                 &:hover {
                     // Appliquer l'animation de cercle définie
@@ -690,14 +695,14 @@ body {
             left: 1em;
 
             transform-origin: center;
-    
+
             // Appliquer les styles de l'icône
             &.fa-solid {
                 // Définir les propriétés pour l'icône spécifique
                 &.fa-xmark {
                     // Ajouter une transition pour une animation fluide
                     transition: transform 0.3s;
-        
+
                     // Définir les styles pour le survol de l'icône
                     &:hover {
                         // Appliquer l'animation de cercle définie
