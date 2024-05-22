@@ -7,7 +7,8 @@ body{
 
 main {
     margin-top: 135px;
-    
+    color: $ownerPrimaryColor;
+
 
     @media screen and (max-width: 1024px) {
         margin-top: 75px;
@@ -56,7 +57,7 @@ main {
 
         .informations__left {
             width: 50%;
-            border-right: 1px solid #ccc; 
+            border-right: 1px solid $lighterGrey5; 
             padding-right: 50px;
 
 
@@ -106,7 +107,7 @@ main {
                 }
 
                 div:nth-child(odd) {
-                    background-color: $grey5;
+                    background-color: $lighterGrey5;
                 }
             }
 
@@ -139,7 +140,7 @@ main {
             
             .informations__right__desc{
                 display: flex;
-                border: 1px solid $grey4; 
+                border: 1px solid $lighterGrey5; 
                 border-radius: 10px;
                 gap: 10px;
 

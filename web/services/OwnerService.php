@@ -23,7 +23,7 @@ class OwnerService extends Service
         // Étape 2 : Enregistrer en base l'owner
 
         $pdo = self::getPDO();
-        $stmt = $pdo->prepare('INSERT INTO _User (mail, firstname, lastname, nickname, password, phoneNumber, birthDate, consent, lastConnection, creationDate, imageID, genderID, addressID) VALUES (:mail, :firstname, :lastname, :nickname, :password, :phoneNumber, :birthDate, :consent, :lastConnection, :creationDate, :imageID, :genderID, :addressID)');
+        $stmt = $pdo->prepare('INSERT INTO _User (mail, firstname, lastname, nickname, password, phoneNumber, birthDate, consent, lastConnection, creationDate, imageID, genderID, addressID, isValidated) VALUES (:mail, :firstname, :lastname, :nickname, :password, :phoneNumber, :birthDate, :consent, :lastConnection, :creationDate, :imageID, :genderID, :addressID, :isValidated)');
 
         $stmt->execute(array(
             'mail' => $owner->getMail(),
@@ -38,7 +38,8 @@ class OwnerService extends Service
             'creationDate' => $owner->getCreationDate()->format('Y-m-d H:i:s'),
             'imageID' => $owner->getImage()->getImageID(),
             'genderID' => $owner->getGender()->getGenderID(),
-            'addressID' => $owner->getAddress()->getAddressID()
+            'addressID' => $owner->getAddress()->getAddressID(),
+            'isValidated' => $owner->getIsValidated()*1
         ));
 
         $current_id = $pdo->lastInsertId();
@@ -50,7 +51,7 @@ class OwnerService extends Service
             'identityCard' => $owner->getIdentityCard()
         ));
 
-        return new Owner($current_id, $owner->getIdentityCard(), $owner->getMail(), $owner->getFirstname(), $owner->getLastname(), $owner->getNickname(), $owner->getPassword(), $owner->getPhoneNumber(), $owner->getBirthDate(), $owner->getConsent(), $owner->getLastConnection(), $owner->getCreationDate(), $owner->getImage(), $owner->getGender(), $owner->getAddress());
+        return new Owner($current_id, $owner->getIdentityCard(), $owner->getMail(), $owner->getFirstname(), $owner->getLastname(), $owner->getNickname(), $owner->getPassword(), $owner->getPhoneNumber(), $owner->getBirthDate(), $owner->getConsent(), $owner->getLastConnection(), $owner->getCreationDate(),$owner->getIsValidated(), $owner->getImage(), $owner->getGender(), $owner->getAddress());
     }
     public static function GetAllOwners()
     {
@@ -93,20 +94,21 @@ class OwnerService extends Service
         $creationDate = isset($row['creationDate']) ? new DateTime($row['creationDate']) : new DateTime("now");
 
         return new Owner(
-            $row['ownerID'], 
-            $row['identityCard'], 
-            $row['mail'], 
-            $row['firstname'], 
-            $row['lastname'], 
-            $row['nickname'], 
-            $row['password'], 
-            $row['phoneNumber'], 
-            $birthDate, 
-            $row['consent'], 
-            $lastConnection, 
-            $creationDate, 
-            $image, 
-            $gender, 
+            $row['ownerID'],
+            $row['identityCard'],
+            $row['mail'],
+            $row['firstname'],
+            $row['lastname'],
+            $row['nickname'],
+            $row['password'],
+            $row['phoneNumber'],
+            $birthDate,
+            $row['consent'],
+            $lastConnection,
+            $creationDate,
+            "true",
+            $image,
+            $gender,
             $address
         );
     }
