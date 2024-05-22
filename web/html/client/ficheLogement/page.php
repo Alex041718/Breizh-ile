@@ -274,7 +274,7 @@ $iconMapping = [
                             <span class="tooltip-text"> <p>La localisation exacte sera communiquée une fois la réservation terminée </p></span>
                         </i>
                     </div>
-                    <div data-city="<?= $housingCity ?>" id="map"></div>
+                    <div data-lat="<?= $housingLatitude ?>" data-long="<?= $housingLongitude ?>" id="map"></div>
                 </div>    
             </div>
             
