@@ -5,7 +5,7 @@
 
 
     if(!isset($_GET['reservationID']) || $_GET['reservationID'] == "") {
-        header('Location: /');
+        header('Location: /client/consulter_reservations/consulter_reservations.php'); 
         exit();
     };
 
@@ -27,7 +27,6 @@
 
     // Gestion de la session
     SessionService::system('client', '/reservations');*/
-
 
 
     require_once("../../../services/ReservationService.php");
@@ -53,7 +52,8 @@
     }
 
     if (!$reservationIsOK){
-        header('Location: /client/consulter_reservations/consulter_reservations.php');
+        header('Location: /client/consulter_reservations/consulter_reservations.php'); 
+
         exit();
     }*/
 
@@ -88,11 +88,11 @@
 <?php
 
     require_once("../../components/Header/header.php");
+  
     Header::render(true,false, $isAuthenticated, '/detail-reservation?reservationID=' . $_GET['reservationID']);
 
     $reservation = ReservationService::getReservationByID($_GET['reservationID']);
     $housing = HousingService::GetHousingById($reservation->getHousingId()->getHousingID());
-
 
     $reservation_dateDebut = $reservation->getBeginDate();
     $reservation_dateFin =  $reservation->getEndDate();

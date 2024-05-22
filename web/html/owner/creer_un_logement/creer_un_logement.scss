@@ -1,0 +1,113 @@
+@import '../../style/variables';
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    margin-top: 120px;
+    display: flex;
+}
+
+nav {
+    width: min-content;
+
+    ul {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        list-style: none;
+        box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.25);
+
+        li {
+            display: flex;
+            width: 20rem;
+            height: 70px;
+            font-weight: bold;
+            font-size: $font-size-lg;
+            
+            span {
+                user-select: none;
+                line-height: 70px;
+                width: 100%;
+                padding-inline: 3.2rem;
+                height: 100%;
+                color: $ownerPrimaryColor;
+                text-decoration: none;
+                border-bottom: 1px solid $lighterGrey5;
+            }
+
+            &.active {
+                background-color: $ownerPrimaryColor;
+                span { color: $whiteColor; }
+            }
+
+            &:hover {
+                background-color: $grey6;
+                cursor: pointer;
+            }
+
+            &.active:hover {
+                background-color: $ownerPrimaryColorHover;
+            }
+        }
+    }
+}
+
+.content {
+    display: flex;
+    padding-inline: 4rem;
+
+    &__input {
+        &--large {
+            input, textarea {
+                width: max(15rem, calc(700vw / 19.2)) !important;
+                min-width: 0;
+                font-size: 16px !important;
+            }
+        }
+
+        &--long {
+            textarea {
+                height: 5rem !important;
+            }
+        }
+
+        &--very-long {
+            textarea {
+                height: 22rem !important;
+            }
+        }
+    }
+
+    &__button {
+        margin-top: 1rem;
+        padding-block: 0.87rem !important;
+        width: 100%;
+    }
+
+    &__imagePicker {
+        margin-top: 32px;
+        margin-left: 3rem;
+        width: max(15rem, calc(500vw / 19.2)) !important;
+    }
+
+    &__right {
+        width: 100%;
+    }
+}
+
+.input {
+    margin-bottom: 1.5rem !important;
+
+    label {
+        margin-top: 0 !important;
+    }
+}
+
+.localisation {
+    display: none;
+}
