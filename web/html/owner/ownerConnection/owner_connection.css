@@ -27,6 +27,12 @@ body {
   background-color: #FFFFFF;
   gap: 20px;
 }
+.connectionContainer__box .error {
+  color: red;
+}
+.connectionContainer__box__forgot {
+  color: #1D1D1D;
+}
 .connectionContainer__box__title {
   text-align: center;
   width: 350px;

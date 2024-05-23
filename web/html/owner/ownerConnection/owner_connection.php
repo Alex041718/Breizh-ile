@@ -19,13 +19,15 @@
 
                 <?php require_once("../../components/Input/Input.php"); ?>
 
+                <?= isset($_GET["error"]) && $_GET["error"] == "loginFailed" ? '<p class="error">Identifiants incorrects</p>' : "" ?>
+
                 <?= (isset($_GET["redirect"]) ? "<input type='hidden' name='redirect' value='" . urlencode($_GET["redirect"]) . "'>" : "") ?>
 
                 <?php Input::render("connection__input", "mail", "text", "E-mail", "mail", "Entrez votre e-mail", true); ?>
 
                 <?php Input::render("connection__input", "password", "password", "Mot de Passe", "password", "Entrez votre mot de passe", true); ?>
 
-                <a href="">J'ai oublié mon mot de passe</a>
+                <a href="" class="connectionContainer__box__forgot">J'ai oublié mon mot de passe</a>
 
                 <input type="hidden" name="role" value="owner">
 
