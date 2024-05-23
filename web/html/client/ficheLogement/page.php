@@ -69,6 +69,7 @@ $housingLongitude = $housing->getLongitude();
 $housingLatitude = $housing->getLatitude();
 $housingCity = $housing->getAddress()->getCity();
 
+
 // $housing_arrangements = $housing->getArrangement(); a modifier du aux changements de la bdd
 
 
@@ -144,11 +145,11 @@ $iconMapping = [
                                             <p>- de 18 ans</p>
                                         </div>
                                         <div class="addbtn">
-                                            <button id="subtractChildBtn">-</button>
+                                            <button type="button" id="subtractChildBtn">-</button>
                                             <div class="nbr">
                                                 <span id="childCount">0</span>
                                             </div>
-                                            <button id="addChildBtn">+</button>
+                                            <button type="button" id="addChildBtn">+</button>
                                         </div>
                                     </div>
                                     <i id="closePopupBtn" class="fa-solid fa-xmark"></i>
@@ -204,7 +205,7 @@ $iconMapping = [
                 <div class="details">
                     <h4> <?php echo $housing_shortDesc ?> </h4>
                     <div class="infoLogement">
-                        <p id="nbVoyageurs"> <?php echo $housing_nbPerson ?> personnes • <?php echo $housing_nbRoom ?> chambres • <?php echo $housing_nbBed ?> lits</p>
+                        <p id="nbVoyageurs"> <?php echo $housing_nbPerson ?> personnes • <?=$housing_nbRoom!=0? $housing_nbRoom :"1"?> chambres • <?=$housing_nbBed?> lits</p>
                     </div>
 
                     <div class="proprio">
@@ -297,6 +298,7 @@ $iconMapping = [
                         </i>
                     </div>
                     <div data-lat="<?= $housingLatitude ?>" data-long="<?= $housingLongitude ?>" id="map"></div>
+
                 </div>
             </div>
             
