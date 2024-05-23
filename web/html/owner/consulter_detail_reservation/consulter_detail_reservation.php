@@ -84,7 +84,7 @@
     Header::render(true,true, $isAuthenticated, '/back/detail-reservation?reservationID=' . $_GET['reservationID']);
 
     $reservation = ReservationService::getReservationByID($_GET['reservationID']);
-    $housing = HousingService::GetHousingById($reservation->getHousingId()->getHousingID());
+    $housing = HousingService::GetHousingById($reservation->getHousing()->getHousingID());
 
     $reservation_dateDebut = $reservation->getBeginDate();
     $reservation_dateFin =  $reservation->getEndDate();
@@ -101,9 +101,9 @@
 
 
 
-    $client_pp = $reservation->getClientId()->getImage()->getImageSrc();
-    $client_telephone = $reservation->getClientId()->getPhoneNumber();
-    $client_mail = $reservation->getClientID()->getMail();
+    $client_pp = $reservation->getClient()->getImage()->getImageSrc();
+    $client_telephone = $reservation->getClient()->getPhoneNumber();
+    $client_mail = $reservation->getClient()->getMail();
 
     $reservation_longitude = $housing->getLongitude();
     $reservation_latitude = $housing->getLatitude();
