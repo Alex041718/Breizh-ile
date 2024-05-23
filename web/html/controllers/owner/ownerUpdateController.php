@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         OwnerService::ModifyOwner($owner);
 
         // Rediriger ou afficher un message de succès
-        header('Location: /owner/profil?success=1');
+        header('Location: /back/profile?success=1');
     } catch (Exception $e) {
         // Gérer les erreurs (par exemple, afficher un message d'erreur à l'utilisateur)
         $error = $e->getMessage();

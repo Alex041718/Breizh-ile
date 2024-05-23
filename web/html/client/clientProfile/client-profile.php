@@ -67,27 +67,27 @@ $client = ClientService::GetClientById($clientID);
                 <div class="content__personnal-data__elements">
                     <!-- Nom -->
                     <?php require_once ("../../components/Input/Input.php");
-                    Input::render("uneClassEnPlus", "lastname", "text", "Nom", "lastname", "Nom", true, $client->getLastname()); ?>
+                    Input::render("uneClassEnPlus", "lastname", "text", "Nom", "lastname", "Nom", true, $client->getLastname(),'1','100', '[a-zA-Z]*$'); ?>
 
                     <!-- Prenom -->
                     <?php
-                    Input::render("uneClassEnPlus", "firstname", "text", "Prenom", "firstname", "Prenom", true, $client->getFirstname()); ?>
+                    Input::render("uneClassEnPlus", "firstname", "text", "Prenom", "firstname", "Prenom", true, $client->getFirstname(),'1','100', '[a-zA-Z]*$'); ?>
 
                     <!-- Pseudo -->
                     <?php
-                    Input::render("uneClassEnPlus", "nickname", "text", "Pseudo", "nickname", "Pseudo", true, $client->getNickname()); ?>
+                    Input::render("uneClassEnPlus", "nickname", "text", "Pseudo", "nickname", "Pseudo", true, $client->getNickname(),'1','100','[A-Za-z0-9 -]+'); ?>
 
                     <!-- Mail -->
                     <?php
-                    Input::render("uneClassEnPlus", "mail", "email", "Mail", "mail", "Mail", true, $client->getMail()); ?>
+                    Input::render("uneClassEnPlus", "mail", "email", "Mail", "mail", "Mail", true, $client->getMail(),'1','100','[A-Za-z0-9\._%+\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,}'); ?>
 
                     <!-- Telephone -->
                     <?php
-                    Input::render("uneClassEnPlus", "phoneNumber", "tel", "Telephone", "phoneNumber", "Telephone", true, $client->getPhoneNumber()); ?>
+                    Input::render("uneClassEnPlus", "phoneNumber", "tel", "Telephone", "phoneNumber", "Telephone", true, $client->getPhoneNumber(),'10','12','^((\+)33|0)[1-9](\d{2}){4}$'); ?>
 
                     <!-- Adresse -->
                     <?php
-                    Input::render("uneClassEnPlus", "address", "text", "Adresse", "address", "Adresse", true, $client->getAddress()->getPostalAddress()); ?>
+                    Input::render("uneClassEnPlus", "address", "text", "Adresse", "address", "Adresse", true, $client->getAddress()->getPostalAddress(),"1","200","[a-zA-Z -]"); ?>
 
                     <!-- Genre -->
                     <div class="content__personnal-data__elements__genre">
@@ -116,7 +116,7 @@ $client = ClientService::GetClientById($clientID);
                 <div class="content__personnal-data__elements__modify_button">
                     <?php
                     require_once ("../../components/Button/Button.php");
-                    Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Client, "", true, true); ?>
+                    Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Client, "", false, true); ?>
                 </div>
             </form>
         </div>

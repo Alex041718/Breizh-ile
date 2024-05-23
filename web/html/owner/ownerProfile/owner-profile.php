@@ -14,7 +14,7 @@ function redirect($url)
 }
 
 // Vérifier l'authentification du owner
-SessionService::system('owner', '/back/profil');
+SessionService::system('owner', '/back/profile');
 $isAuthenticated = SessionService::isOwnerAuthenticated();
 
 if (!$isAuthenticated) {
@@ -40,7 +40,7 @@ $owner = OwnerService::GetOwnerById($ownerID);
 <body>
     <?php
     require_once("../../components/Header/header.php");
-    Header::render(false,true, $isAuthenticated, '/owner/profil');
+    Header::render(false,true, $isAuthenticated, '/back/profile');
     ?>
     <div class="content">
         <div class="content__selector">
@@ -65,27 +65,27 @@ $owner = OwnerService::GetOwnerById($ownerID);
                 <div class="content__personnal-data__elements">
                     <!-- Nom -->
                     <?php require_once ("../../components/Input/Input.php");
-                    Input::render("uneClassEnPlus", "lastname", "text", "Nom", "lastname", "Nom", true, $owner->getLastname()); ?>
+                    Input::render("uneClassEnPlus", "lastname", "text", "Nom", "lastname", "Nom", true, $owner->getLastname(),'1','100', '[a-zA-Z]*$'); ?>
 
                     <!-- Prenom -->
                     <?php
-                    Input::render("uneClassEnPlus", "firstname", "text", "Prenom", "firstname", "Prenom", true, $owner->getFirstname()); ?>
+                    Input::render("uneClassEnPlus", "firstname", "text", "Prenom", "firstname", "Prenom", true, $owner->getFirstname(),'1','100', '[a-zA-Z]*$'); ?>
 
                     <!-- Pseudo -->
                     <?php
-                    Input::render("uneClassEnPlus", "nickname", "text", "Pseudo", "nickname", "Pseudo", true, $owner->getNickname()); ?>
+                    Input::render("uneClassEnPlus", "nickname", "text", "Pseudo", "nickname", "Pseudo", true, $owner->getNickname(),'1','100','[A-Za-z0-9 -]+'); ?>
 
                     <!-- Mail -->
                     <?php
-                    Input::render("uneClassEnPlus", "mail", "email", "Mail", "mail", "Mail", true, $owner->getMail()); ?>
+                    Input::render("uneClassEnPlus", "mail", "email", "Mail", "mail", "Mail", true, $owner->getMail(),'1','100','[A-Za-z0-9\._%+\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,}'); ?>
 
                     <!-- Telephone -->
                     <?php
-                    Input::render("uneClassEnPlus", "phoneNumber", "tel", "Telephone", "phoneNumber", "Telephone", true, $owner->getPhoneNumber()); ?>
+                    Input::render("uneClassEnPlus", "phoneNumber", "tel", "Telephone", "phoneNumber", "Telephone", true, $owner->getPhoneNumber(),'10','12','^((\+)33|0)[1-9](\d{2}){4}$'); ?>
 
                     <!-- Adresse -->
                     <?php
-                    Input::render("uneClassEnPlus", "address", "text", "Adresse", "address", "Adresse", true, $owner->getAddress()->getPostalAddress()); ?>
+                    Input::render("uneClassEnPlus", "address", "text", "Adresse", "address", "Adresse", true, $owner->getAddress()->getPostalAddress(),"1","200","[a-zA-Z -]"); ?>
 
                     <!-- Genre -->
                     <div class="content__personnal-data__elements__genre">
@@ -114,7 +114,7 @@ $owner = OwnerService::GetOwnerById($ownerID);
                 <div class="content__personnal-data__elements__modify_button">
                     <?php
                     require_once ("../../components/Button/Button.php");
-                    Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Owner, "", true, true); ?>
+                    Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Owner, "", false, true); ?>
                 </div>
             </form>
         </div>
