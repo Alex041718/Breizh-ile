@@ -65,26 +65,26 @@ class Header {
                     // OWNER !!!!!!!!!!!!!!!!
                     // OWNER !!!!!!!!!!!!!!!!
                     $menu = '
-                        <ul>
-                            <li><a href="">Bienvenue ' . $owner->getFirstname() . '</a></li>
-                            <li><a href="/back/profile">Mon Compte</a></li>
-                            <li><a href="/back/ownerReservations">Mes réservations</a></li>
-                            <li><a href="">Qui sommes nous</a></li>
-                            <li><a href="' . $urlLogout . '">Se déconnecter</a></li>
-                        </ul>
+                        <div class="option__container">
+                            <p>Bienvenue ' . $owner->getFirstname() . '</p>
+                            <a href="/back/profile">Mon Compte</a>
+                            <a href="/back/ownerReservations">Mes réservations</a>
+                            <a href="">Qui sommes nous</a>
+                            <a href="' . $urlLogout . '">Se déconnecter</a>
+                        </div>
                     ';
                 } else {
                     $client = ClientService::getClientById($_SESSION['user_id']);
                     // CLIENT !!!!!!!!!!!!!!!!
                     // CLIENT !!!!!!!!!!!!!!!!
                     $menu = '
-                    <ul>
-                        <li><a href="">Bienvenue ' . $client->getFirstname() . '</a></li>
-                        <li><a href="/client/profile">Mon Compte</a></li>
-                        <li><a href="/client/reservations-liste">Mes réservations</a></li>
-                        <li><a href="">Qui sommes nous</a></li>
-                        <li><a href="' . $urlLogout . '">Se déconnecter</a></li>
-                    </ul>
+                    <div class="option__container">
+                        <p href="">Bienvenue ' . $client->getFirstname() . '</p>
+                        <a href="/client/profile">Mon Compte</a>
+                        <a href="/client/reservations-liste">Mes réservations</a>
+                        <a href="">Qui sommes nous</a>
+                        <a href="' . $urlLogout . '">Se déconnecter</a>
+                    </div>
                 ';
                 }
             } else {
@@ -96,10 +96,10 @@ class Header {
                 }
 
                 $menu = '
-                    <ul>
-                        <li><a href="'. $urlConnexion .'">Se connecter</a></li>
-                        <li><a href="">S\'inscrire</a></li>
-                    </ul>
+                    <div class="option__container">
+                        <a href="'. $urlConnexion .'">Se connecter</a>
+                        <a href="">S\'inscrire</a>
+                    </div>
                 ';
             }
 

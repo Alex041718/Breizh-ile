@@ -555,24 +555,28 @@ input::-webkit-outer-spin-button,
     right: 1em;
     z-index: 2; 
 
-    ul {
+    .option__container {
+        display: flex;
+        flex-direction: column;
         list-style-type: none; 
         padding: 0;
         margin: 0;
-        li {
+        a {
             transition: all 0.1s;
             color: black; 
+            cursor: pointer;
             padding: 10px;
-            cursor: pointer; 
-            
-            a{
-                text-decoration: none; 
-                color: inherit; 
-            }
+            text-decoration: none; 
         }
-        li:hover {
+        a:hover {
             color: white;
             background-color: $clientPrimaryColor; 
+        }
+
+        p {
+            border-bottom: 1px solid $black2;
+            padding-block: 5px;
+            text-align: center;
         }
     }
 }

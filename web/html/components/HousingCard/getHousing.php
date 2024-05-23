@@ -14,7 +14,7 @@
     if(isset($_POST['sort']) && $_POST['sort'] != "undefined" && !empty($_POST['sort'])) {
         $sort = $_POST['sort'];
     } else {
-        $sort = "_Housing.priceExcl";
+        $sort = "_Housing.priceIncl";
     }
 
     if(isset($_POST['desc']) && $_POST['desc'] == 1) $desc = 1;

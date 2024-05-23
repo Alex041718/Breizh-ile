@@ -216,7 +216,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                 let desc = 0;
                 let cpt = 0
 
-                showUser(0, "_Housing.priceExcl", false, false, true);
+                showUser(0, "_Housing.priceIncl", false, false, true);
 
 
                 filter_submit.addEventListener("click", function() {
@@ -224,8 +224,8 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                 })
 
                 sorter.addEventListener("change", function() {
-                    if(sorter.value == 1) { sort = "_Housing.priceExcl"; desc = 0; }
-                    else if(sorter.value == 2) { sort = "_Housing.priceExcl"; desc = 1; }
+                    if(sorter.value == 1) { sort = "_Housing.priceIncl"; desc = 0; }
+                    else if(sorter.value == 2) { sort = "_Housing.priceIncl"; desc = 1; }
                     else if(sorter.value == 3) { sort = "_Housing.creationDate"; desc = 0; }
                     else if(sorter.value == 4) { sort = "_Housing.creationDate"; desc = 1; }
                     showUser(cpt, sort, desc, true);
