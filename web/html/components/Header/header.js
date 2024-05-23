@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const popup_filters_open = document.getElementById("header__settings");
     const popup_filters_open_mobile = document.getElementById("open-mobile-settings");
 
-    popup_filters_open.addEventListener("click", openSettings);
+    if(popup_filters_open) popup_filters_open.addEventListener("click", openSettings);
     popup_filters_open_mobile.addEventListener("click", openSettings);
 
     function openSettings() {

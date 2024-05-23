@@ -30,6 +30,14 @@ body {
     background-color: variables.$whiteColor;
     gap: 20px;
 
+    .error {
+      color: red;
+    }
+
+    &__forgot {
+      color: variables.$black2;
+    }
+
     &__title {
       text-align: center;
       width: 350px;
