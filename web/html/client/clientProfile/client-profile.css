@@ -174,7 +174,7 @@ body {
   flex-direction: column;
 }
 .content__personnal-data__elements__genre label {
-  margin-bottom: 10px;
+  margin-bottom: 13px;
   margin-top: 10px;
 }
 .content__personnal-data__elements__genre select {

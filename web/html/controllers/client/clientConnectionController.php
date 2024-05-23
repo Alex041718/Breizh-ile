@@ -41,5 +41,3 @@ if (ConnectionService::checkClient($mail, $password)) {
     // Connexion échouée, redirection vers la page de connexion
     redirect('/client/clientConnection/client_connection.php?error=loginFailed');
 }
-
-?>
