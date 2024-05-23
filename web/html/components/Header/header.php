@@ -85,6 +85,7 @@ class Header {
                         <a href="">Qui sommes nous</a>
                         <a href="' . $urlLogout . '">Se déconnecter</a>
                     </div>
+
                 ';
                 }
             } else {

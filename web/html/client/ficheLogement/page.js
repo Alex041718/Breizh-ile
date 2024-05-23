@@ -297,13 +297,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function displayPriceDetails() {
         const nightCount = parseInt(nightCountElement.textContent, 10);
+        let auth = document.getElementById('auth');
 
-        if (nightCount > 0) {
+        if (nightCount > 0 ) {
             priceDisplay.style.display = 'flex';
-            buttonDisplay.disabled = false;
+            if (auth.innerHTML){
+                buttonDisplay.disabled = false;
+            }
         } else {
             priceDisplay.style.display = 'none';
-            buttonDisplay.disabled = true;
+
+            if (auth.innerHTML){
+                buttonDisplay.disabled = true;
+            }
         }
     }
 

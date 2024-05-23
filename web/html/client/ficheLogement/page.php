@@ -1,23 +1,20 @@
 <?php
 
-    // Commence le buffering de sortie
-    ob_start();
+    
+    // ------------------- Systeme de session -------------------
+    // Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
+    require_once '../../../models/Client.php';
+    require_once '../../../services/ClientService.php';
+    require_once '../../../services/SessionService.php'; // pour le menu du header
 
-    echo 'Du contenu qui sera affiché avant la redirection';
+    // Vérification de l'authentification de l'utilisateur
 
-    // Nettoie le buffer de sortie et désactive le buffering
-    ob_end_clean();
-
-    if(!isset($_GET['id']) || $_GET['id'] == "") {
+    $isAuthenticated = SessionService::isClientAuthenticated();
+    
+    if((!isset($_GET['id']) || $_GET['id'] == "")) {
         header('Location: /');
         exit();
     };
-// Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
-require_once '../../../models/Client.php';
-require_once '../../../services/ClientService.php';
-require_once '../../../services/SessionService.php'; // pour le menu du header
-$isAuthenticated = SessionService::isClientAuthenticated();
-
 
 ?>
 
@@ -72,7 +69,7 @@ $housingLongitude = $housing->getLongitude();
 $housingLatitude = $housing->getLatitude();
 $housingCity = $housing->getAddress()->getCity();
 
-$housing_arrangements = $housing->getArrangement();
+// $housing_arrangements = $housing->getArrangement(); a modifier du aux changements de la bdd
 
 
 
@@ -88,10 +85,11 @@ $iconMapping = [
 ?>
 
 <body>
+    <p id="auth" style="display:none"><?=$isAuthenticated?></p>
     <?php
         require_once("../../components/Header/header.php");
-        Header::render(true);
-    ?>
+        Header::render(true,false, $isAuthenticated, '/logement?id=' . $_GET['id']);
+        ?>
 
     <main>
         <div class="page">
@@ -162,7 +160,7 @@ $iconMapping = [
 
 
                     <div class="reservationBtn">
-                        <button type="submit" class="para--18px para--bold" id="reserverBtn">Réserver</button>
+                        <button type="submit" class="para--18px para--bold" id="reserverBtn" disabled="<?=$isAuthenticated ?>">Réserver</button>
                     </div>
 
                     <div class="prix">
