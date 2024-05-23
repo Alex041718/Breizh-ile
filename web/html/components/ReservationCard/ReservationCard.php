@@ -11,7 +11,7 @@ class ReservationCard
         $defaultImage = "../../assets/images/default-house-image.png";
         $imageSrc = $housing->getImage()->getImageSrc();
         $reservation_nbJours =  ReservationService::getNbJoursReservation($reservation->getBeginDate(), $reservation->getEndDate());
-        $prixTTC = $housing->getPriceIncl() * $reservation_nbJours * $data->getNbPerson() + $reservation->getServiceCharge() + $reservation->getTouristTax();
+        $prixTTC = $housing->getPriceIncl() * $reservation_nbJours + $reservation->getServiceCharge() + $reservation->getTouristTax();
         $render =  /*html*/
             '
             <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>

@@ -95,7 +95,7 @@
     $reservation_serviceCharge =  $reservation->getServiceCharge();
     $reservation_touristTax =  $reservation->getTouristTax();
     $reservation_nbPersonnes =  $reservation->getNbPerson();
-    $reservation_prixCalc = $reservation_prixExcl * $reservation_nbJours * $reservation_nbPersonnes;
+    $reservation_prixCalc = $reservation_prixIncl * $reservation_nbJours ;
 
     $owner_pp = $housing->getOwner()->getImage()->getImageSrc();
     $owner_telephone = $housing->getOwner()->getPhoneNumber();
@@ -108,7 +108,7 @@
     $reservation_postalAdress = $housing->getAddress()->getPostalAddress();
 
 
-    $reservation_prixTTC = $reservation_prixIncl * $reservation_nbJours * $reservation_nbPersonnes + $reservation_serviceCharge + $reservation_touristTax;
+    $reservation_prixTTC = $reservation_prixIncl * $reservation_nbJours + $reservation_serviceCharge + $reservation_touristTax;
 
 ?>
 
@@ -136,7 +136,7 @@
                 <div class="informations__left__detail">
                     <h3>Détails du prix</h3>
                     <div>
-                        <p class="para--18px"><?= $reservation_prixExcl ?> € x <?= $reservation_nbJours ?> nuits x <?= $reservation_nbPersonnes  ?> occupant(s)</p>
+                        <p class="para--18px"><?= $reservation_prixIncl ?> € x <?= $reservation_nbJours ?> nuits</p>
                         <p class="para--18px"><?= $reservation_prixCalc ?> €</p>
                     </div>
                     <div>
