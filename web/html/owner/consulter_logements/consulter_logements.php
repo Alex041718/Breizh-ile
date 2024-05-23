@@ -4,6 +4,8 @@ require_once '../../../services/SessionService.php';
 // Gestion de la session
 SessionService::system('owner', '/back/logements');
 
+$isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
+
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +31,7 @@ SessionService::system('owner', '/back/logements');
         $housings = HousingService::getAllHousingsByOwnerID($owner->getOwnerID());
         $_SESSION["housings"] = $housings;
         
-        Header::render(isScrolling: True, isBackOffice: True);
+        Header::render(True, True, $isOwnerAuthenticated, '/back/logements');
         OwnerNavBar::render(1);
     ?>
     <main>
