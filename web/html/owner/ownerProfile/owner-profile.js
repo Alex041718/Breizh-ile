@@ -1,33 +1,27 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const divs = document.querySelectorAll('.content__selector > div');
+    const infos = document.getElementById('infos');
     const security = document.querySelector('.content__security');
+
+    const infosBtn = document.getElementById('infos__btn');
+    const securityBtn = document.getElementById('security__btn');
+
     const personalData = document.querySelector('.content__personnal-data');
 
     // Activer par défaut le contenu "Informations Personnelles"
-    personalData.style.display = "block";
-    divs[0].classList.add('content__selector--current');
 
-    // Ajouter un écouteur d'événement à chaque élément du sélecteur
-    divs.forEach((div, index) => {
-        div.addEventListener('click', () => {
-            // Masquer tous les contenus
-            security.style.display = "none";
-            personalData.style.display = "none";
 
-            // Retirer la classe active de tous les éléments du sélecteur
-            divs.forEach((item) => {
-                item.classList.remove('content__selector--current');
-            });
+    securityBtn.addEventListener("click", function() {
+        toggle();
+    })
 
-            // Afficher le contenu correspondant à l'élément cliqué
-            if (index === 0) {
-                personalData.style.display = "flex";
-            } else {
-                security.style.display = "flex";
-            }
+    infosBtn.addEventListener("click", function() {
+        toggle();
+    })
 
-            // Ajouter la classe active à l'élément cliqué
-            div.classList.add('content__selector--current');
-        });
-    });
+    function toggle() {
+        securityBtn.classList.toggle("active");
+        infosBtn.classList.toggle("active");
+        infos.classList.toggle('content__display');
+        security.classList.toggle('content__display');
+    } 
 });

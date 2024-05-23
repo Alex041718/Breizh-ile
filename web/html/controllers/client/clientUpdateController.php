@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ClientService::ModifyClient($client);
 
         // Rediriger ou afficher un message de succès
-        header('Location: /client/profil?success=1');
+        header('Location: /client/profile?success=1');
     } catch (Exception $e) {
         // Gérer les erreurs (par exemple, afficher un message d'erreur à l'utilisateur)
         $error = $e->getMessage();

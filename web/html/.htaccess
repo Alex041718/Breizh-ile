@@ -12,8 +12,8 @@ RewriteRule ^logout$ /controllers/logoutController.php [L]
 # Rediriger /logement/payment vers /client/reservationPayment/reservation-payment.php
 RewriteRule ^logement/payment$ /client/reservationPayment/reservation-payment.php [L]
 
-# Rediriger /client/profil vers /client/clientProfil/client-profil.php
-RewriteRule ^client/profil$ /client/clientProfile/client-profile.php [L]
+# Rediriger /client/profile vers /client/clientProfil/client-profil.php
+RewriteRule ^client/profile$ /client/clientProfile/client-profile.php [L]
 
 # Rediriger /client/reservationsListe /client/consulterReservations/clientReservations.php
 RewriteRule ^client/reservations-liste$ /client/consulterReservations/clientReservations.php [L]
@@ -56,8 +56,8 @@ RewriteRule ^back/logements$ /owner/consulter_logements/consulter_logements.php 
 # Rediriger /detail-reservation vers /owner/consulter_detail_reservation/consulter_detail_reservation.php
 RewriteRule ^back/detail-reservation$ /owner/consulter_detail_reservation/consulter_detail_reservation.php [L]
 
-# Rediriger /back/profil vers /owner/ownerProfile/owner-profile.php
-RewriteRule ^back/profil$ /owner/ownerProfile/owner-profile.php [L]
+# Rediriger /back/profile vers /owner/ownerProfile/owner-profile.php
+RewriteRule ^back/profile$ /owner/ownerProfile/owner-profile.php [L]
 
 # Rediriger /back/creer-logement vers /owner/creer_logement/creer_logement.php
 RewriteRule ^back/creer-logement$ /owner/creer_un_logement/creer_un_logement.php [L]

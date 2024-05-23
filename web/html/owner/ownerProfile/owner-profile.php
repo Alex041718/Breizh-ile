@@ -26,7 +26,6 @@ $ownerID = $_SESSION['user_id'];
 $owner = OwnerService::GetOwnerById($ownerID);
 
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -40,18 +39,17 @@ $owner = OwnerService::GetOwnerById($ownerID);
 <body>
     <?php
     require_once("../../components/Header/header.php");
-    Header::render(false,true, $isAuthenticated, '/back/profile');
+    Header::render(isScrolling: True, isBackOffice: True, isAuthenticated: $isAuthenticated, redirectAuthPath: '/back/profile');
     ?>
-    <div class="content">
-        <div class="content__selector">
-            <div class="content__selector__personnal-data">
-                <h4 class="content__selector__personnal-data__title">Informations Personnelles</h4>
-            </div>
-            <div class="content__selector__security">
-                <h4 class="content__selector__security__title">Sécurité</h4>
-            </div>
-        </div>
-        <div class="content__personnal-data">
+    <main class="content">
+        <nav>
+            <ul>
+                <li id="infos__btn" class="active"><span>Informations Personnelles</span></li>
+                <li id="security__btn"><span>Sécurité</span></li>
+
+            </ul>
+        </nav>
+        <div id="infos" class="content__personnal-data content__display">
             <h3 class="content__personnal-data__title">Informations Personnelles</h3>
 
             <div class="content__personnal-data__top">
@@ -65,27 +63,27 @@ $owner = OwnerService::GetOwnerById($ownerID);
                 <div class="content__personnal-data__elements">
                     <!-- Nom -->
                     <?php require_once ("../../components/Input/Input.php");
-                    Input::render("uneClassEnPlus", "lastname", "text", "Nom", "lastname", "Nom", true, $owner->getLastname(),'1','100', '[a-zA-Z]*$'); ?>
+                    Input::render("uneClassEnPlus", "lastname", "text", "Nom", "lastname", "Nom", true, $owner->getLastname(),'1','100'); ?>
 
                     <!-- Prenom -->
                     <?php
-                    Input::render("uneClassEnPlus", "firstname", "text", "Prenom", "firstname", "Prenom", true, $owner->getFirstname(),'1','100', '[a-zA-Z]*$'); ?>
+                    Input::render("uneClassEnPlus", "firstname", "text", "Prenom", "firstname", "Prenom", true, $owner->getFirstname(),'1','100'); ?>
 
                     <!-- Pseudo -->
                     <?php
-                    Input::render("uneClassEnPlus", "nickname", "text", "Pseudo", "nickname", "Pseudo", true, $owner->getNickname(),'1','100','[A-Za-z0-9 -]+'); ?>
+                    Input::render("uneClassEnPlus", "nickname", "text", "Pseudo", "nickname", "Pseudo", true, $owner->getNickname(),'1','100'); ?>
 
                     <!-- Mail -->
                     <?php
-                    Input::render("uneClassEnPlus", "mail", "email", "Mail", "mail", "Mail", true, $owner->getMail(),'1','100','[A-Za-z0-9\._%+\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,}'); ?>
+                    Input::render("uneClassEnPlus", "mail", "email", "Mail", "mail", "Mail", true, $owner->getMail(),'1','100'); ?>
 
                     <!-- Telephone -->
                     <?php
-                    Input::render("uneClassEnPlus", "phoneNumber", "tel", "Telephone", "phoneNumber", "Telephone", true, $owner->getPhoneNumber(),'10','12','^((\+)33|0)[1-9](\d{2}){4}$'); ?>
+                    Input::render("uneClassEnPlus", "phoneNumber", "tel", "Telephone", "phoneNumber", "Telephone", true, $owner->getPhoneNumber(),'10','12'); ?>
 
                     <!-- Adresse -->
                     <?php
-                    Input::render("uneClassEnPlus", "address", "text", "Adresse", "address", "Adresse", true, $owner->getAddress()->getPostalAddress(),"1","200","[a-zA-Z -]"); ?>
+                    Input::render("uneClassEnPlus", "address", "text", "Adresse", "address", "Adresse", true, $owner->getAddress()->getPostalAddress(),"1","200"); ?>
 
                     <!-- Genre -->
                     <div class="content__personnal-data__elements__genre">
@@ -104,8 +102,8 @@ $owner = OwnerService::GetOwnerById($ownerID);
                     Input::render("uneClassEnPlus", "birthDate", "date", "Date de naissance", "birthDate", "Date de naissance", false, $owner->getBirthDate()->format('Y-m-d')); ?>
 
                     <!-- Date de création du compte -->
-                    <?php
-                    Input::render("uneClassEnPlus", "creationDate", "date", "Date de création du compte", "creationDate", "Date de création du compte", true, $owner->getCreationDate()->format('Y-m-d')); ?>
+
+                    <input type="hidden" name="creationDate" value="<?php echo ($owner->getCreationDate()->format('Y-m-d')) ?>">
 
                     <input type="hidden" name="ownerID" value="<?php echo ($owner->getOwnerID()) ?>">
 
@@ -118,7 +116,7 @@ $owner = OwnerService::GetOwnerById($ownerID);
                 </div>
             </form>
         </div>
-        <div class="content__security" style="display: none">
+        <div class="content__security">
             <h3 class="content__security__title">Sécurité</h3>
             <p class="content__security__description">Modifier vos paramètres de sécurités</p>
 
@@ -134,7 +132,7 @@ $owner = OwnerService::GetOwnerById($ownerID);
                 Button::render("button--storybook", "delete-account", "Supprimer mon compte", ButtonType::Delete, true); ?>
             </div>
         </div>
-    </div>
+    </main>
 
     <?php
     require_once ("../../components/Footer/footer.php");

@@ -48,7 +48,6 @@ function validateFormOfPage() {
                 return;
             }
 
-            console.log()
         }
     });
 }
@@ -173,12 +172,6 @@ buttonValidate.addEventListener("click", () => {
 
     xhr.open("POST", "/owner/creer_un_logement/createHousing.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log(this.responseText);
-        }
-    }
 
     xhr.send(params);
 });
