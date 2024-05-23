@@ -22,7 +22,7 @@ class HousingService extends Service
         $housing->setAddress($address);
 
         $pdo = self::getPDO();
-        $stmt = $pdo->prepare('INSERT INTO _Housing (title, shortDesc, longDesc, priceExcl, priceIncl, nbPerson, nbRoom, nbDoubleBed, nbSimpleBed, longitude, latitude, isOnline, noticeCount, beginDate, endDate, creationDate, imageSrc, surfaceInM2, typeID, categoryID, addressID, ownerID) VALUES ( :title, :shortDesc, :longDesc, :priceExcl, :priceIncl, :nbRoom, :nbDoubleBed, :nbSimpleBed, :longitude, :latitude, :isOnline, :noticeCount, :beginDate, :endDate, :creationDate, :surfaceInM2, :typeID, :categoryID, :addressID, :ownerID)');
+        $stmt = $pdo->prepare('INSERT INTO _Housing (title, shortDesc, longDesc, priceExcl, priceIncl, nbPerson, nbRoom, nbDoubleBed, nbSimpleBed, longitude, latitude, isOnline, noticeCount, beginDate, endDate, creationDate, imageID, surfaceInM2, typeID, categoryID, addressID, ownerID) VALUES ( :title, :shortDesc, :longDesc, :priceExcl, :priceIncl, :nbPerson, :nbRoom, :nbDoubleBed, :nbSimpleBed, :longitude, :latitude, :isOnline, :noticeCount, :beginDate, :endDate, :creationDate, :imageID, :surfaceInM2, :typeID, :categoryID, :addressID, :ownerID)');
         $stmt->execute(array(
             'title' => $housing->getTitle(),
             'shortDesc' => $housing->getShortDesc(),
@@ -39,15 +39,15 @@ class HousingService extends Service
             'noticeCount' => $housing->getNoticeCount(),
             'beginDate' => $housing->getBeginDate()->format('Y-m-d H:i:s'),
             'endDate' => $housing->getEndDate()->format('Y-m-d H:i:s'),
-            'creationDate' => $housing->getCreationDate(),
-            'imageID' => $housing->getImage()->getImageSrc(),
+            'creationDate' => $housing->getCreationDate()->format('Y-m-d H:i:s'),
+            'imageID' => $housing->getImage()->getImageID(),
             'surfaceInM2' => $housing->getSurfaceInM2(),
             'typeID' => $housing->getType()->getTypeID(),
             'categoryID' => $housing->getCategory()->getCategoryID(),
             'addressID' => $housing->getAddress()->getAddressID(),
             'ownerID' => $housing->getOwner()->getOwnerID()
         ));
-        return new Housing($pdo->lastInsertId(), $housing->getTitle(), $housing->getShortDesc(), $housing->getLongDesc(), $housing->getPriceExcl(), $housing->getPriceIncl(), $housing->getNbPerson(), $housing->getNbRoom(), $housing->getNbDoubleBed(), $housing->getNbSimpleBed(), $housing->getLongitude(), $housing->getLatitude(), $housing->getIsOnline(), $housing->getNoticeCount(), $housing->getBeginDate(), $housing->getEndDate(), $housing->getCreationDate(), $housing->getSurfaceInM2(), $housing->getType(), $housing->getCategory(), $housing->getAddress(), $housing->getOwner(), $housing->getImage(), $housing->getArrangement());
+        return new Housing($pdo->lastInsertId(), $housing->getTitle(), $housing->getShortDesc(), $housing->getLongDesc(), $housing->getPriceExcl(), $housing->getPriceIncl(), $housing->getNbPerson(), $housing->getNbRoom(), $housing->getNbDoubleBed(), $housing->getNbSimpleBed(), $housing->getLongitude(), $housing->getLatitude(), $housing->getIsOnline(), $housing->getNoticeCount(), $housing->getBeginDate(), $housing->getEndDate(), $housing->getCreationDate(), $housing->getSurfaceInM2(), $housing->getType(), $housing->getCategory(), $housing->getAddress(), $housing->getOwner(), $housing->getImage());
     }
 
     public static function HousingHandler(array $row): Housing

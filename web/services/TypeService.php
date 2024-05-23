@@ -24,4 +24,16 @@ class TypeService extends Service
         $row = $stmt->fetch();
         return new Type($row['typeID'], $row['label']);
     }
+
+    public static function getAllTypesAsArrayOfString()
+    {
+        $types = self::GetAllTypes();
+        $typesStrings = [];
+
+        foreach ($types as $type) {
+            $typesStrings[] = $type->getLabel();
+        }
+
+        return $typesStrings;
+    }
 }

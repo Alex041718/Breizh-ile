@@ -16,12 +16,16 @@ if (isset($_FILES['image'])) {
                     $new_name = uniqid('', true) . '.' . $ext;
                     $destination = '/var/www/uploads/' . $new_name;
                     move_uploaded_file($tmp_name, $destination);
-                    echo $destination;
+                    $response = array(
+                        'status' => 'success',
+                        'file_name' => $new_name
+                    );
 
                     $uploadDir = '/uploads/'; // Chemin relatif vers le répertoire /uploads
 
                     $imageUrl = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $uploadDir . $new_name;
-                    echo '<img src="' . $imageUrl . '" alt="Image">';
+
+                    echo json_encode($response);
                 } else {
                     echo 'File is too big';
                 }

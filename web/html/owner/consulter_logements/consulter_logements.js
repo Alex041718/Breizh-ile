@@ -2,7 +2,7 @@ function main() {
     const housings = document.querySelector(".housings");
     const columns = document.querySelectorAll(".title p");
 
-    const addButton = document.getElementById(" addButton ");
+    const addButton = document.getElementById("addButton");
 
     housings.innerHTML = "Chargement...";
     
