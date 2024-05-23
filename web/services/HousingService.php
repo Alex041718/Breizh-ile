@@ -154,9 +154,9 @@ class HousingService extends Service
 
             if(isset($nbPerson)) $chaine = $chaine . "_Housing.nbPerson >= " . $nbPerson . ((isset($minPrice) || isset($maxPrice)) ? " AND " : " ");
 
-            if(isset($minPrice)) $chaine = $chaine . "_Housing.priceExcl >= " . $minPrice . " ". (isset($maxPrice) ? " AND " : " ");
+            if(isset($minPrice)) $chaine = $chaine . "_Housing.priceIncl >= " . $minPrice . " ". (isset($maxPrice) ? " AND " : " ");
 
-            if(isset($maxPrice)) $chaine = $chaine . "_Housing.priceExcl <= " . $maxPrice . " ";
+            if(isset($maxPrice)) $chaine = $chaine . "_Housing.priceIncl <= " . $maxPrice . " ";
 
     
         }
