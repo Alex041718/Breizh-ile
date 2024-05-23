@@ -21,7 +21,9 @@
 
                 <?= isset($_GET["error"]) && $_GET["error"] == "loginFailed" ? '<p class="error">Identifiants incorrects</p>' : "" ?>
 
+
                 <?= (isset($_GET["redirect"]) ? "<input type='hidden' name='redirect' value='" . $_GET["redirect"] . "'>" : "<input type='hidden' name='redirect' value='" . "/back/reservations" . "'>") ?>
+
 
                 <?php Input::render("connection__input", "mail", "text", "E-mail", "mail", "Entrez votre e-mail", true); ?>
 
