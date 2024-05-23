@@ -146,11 +146,11 @@ $iconMapping = [
                                             <p>- de 18 ans</p>
                                         </div>
                                         <div class="addbtn">
-                                            <button id="subtractChildBtn">-</button>
+                                            <button type="button" id="subtractChildBtn">-</button>
                                             <div class="nbr">
                                                 <span id="childCount">0</span>
                                             </div>
-                                            <button id="addChildBtn">+</button>
+                                            <button type="button" id="addChildBtn">+</button>
                                         </div>
                                     </div>
                                     <i id="closePopupBtn" class="fa-solid fa-xmark"></i>
