@@ -37,7 +37,6 @@ body {
   }
 }
 .photoAndReservation .photo {
-  height: 100%;
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -51,8 +50,10 @@ body {
 }
 .photoAndReservation .photo img {
   width: 100%;
-  height: auto;
+  height: 100%;
   border-radius: 20px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 @media screen and (max-width: 768px) {
   .photoAndReservation .photo img {
@@ -77,8 +78,7 @@ body {
   width: 75%;
 }
 .photoAndReservation .reservation h3 {
-  align-self: start;
-  margin-left: 0.5em;
+  align-self: center;
   margin-top: 0.5em;
 }
 .photoAndReservation .reservation .reservationBtn {
