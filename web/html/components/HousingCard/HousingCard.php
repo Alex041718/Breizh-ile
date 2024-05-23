@@ -6,7 +6,7 @@ class HousingCard {
     public static function render(Housing $housing, $class = "", $id = "", $action = "") {
         $housing_id = $housing->getHousingID();
         $housing_name = $housing->getTitle();
-        $housing_price = $housing->getPriceExcl();
+        $housing_price = $housing->getPriceIncl();
         $housing_thumbnail = $housing->getImage()->getImageSrc();
         $housing_content = $housing->getShortDesc();
         $housing_city = $housing->getAddress()->getCity();

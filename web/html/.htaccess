@@ -9,8 +9,11 @@ RewriteRule ^logout$ /controllers/logoutController.php [L]
 
 # REDIRECTIONS CLIENT #
 
-# Rediriger /client/profil vers /client/clientProfil/client-profil.php
-RewriteRule ^client/profil$ /client/clientProfile/client-profile.php [L]
+# Rediriger /logement/payment vers /client/reservationPayment/reservation-payment.php
+RewriteRule ^logement/payment$ /client/reservationPayment/reservation-payment.php [L]
+
+# Rediriger /client/profile vers /client/clientProfil/client-profil.php
+RewriteRule ^client/profile$ /client/clientProfile/client-profile.php [L]
 
 # Rediriger /client/reservationsListe /client/consulterReservations/clientReservations.php
 RewriteRule ^client/reservations-liste$ /client/consulterReservations/clientReservations.php [L]
@@ -28,6 +31,8 @@ RewriteRule ^logement/devis$ /client/bid/bid.php [L]
 # Rediriger /detail-reservation vers /client/consulter_detail_reservation/consulter_detail_reservation.php
 RewriteRule ^detail-reservation$ /client/consulter_detail_reservation/consulter_detail_reservation.php [L]
 
+# Rediriger /client-forgot-password /client/clientForgotPassword/clientForgotPassword.php
+RewriteRule ^client/forgot-password$ /client/clientForgotPassword/clientForgotPassword.php [L]
 
 # REDIRECTIONS PROPRIETAIRE #
 
@@ -52,6 +57,9 @@ RewriteRule ^back/logements$ /owner/consulter_logements/consulter_logements.php 
 
 # Rediriger /detail-reservation vers /owner/consulter_detail_reservation/consulter_detail_reservation.php
 RewriteRule ^back/detail-reservation$ /owner/consulter_detail_reservation/consulter_detail_reservation.php [L]
+
+# Rediriger /back/profile vers /owner/ownerProfile/owner-profile.php
+RewriteRule ^back/profile$ /owner/ownerProfile/owner-profile.php [L]
 
 # Rediriger /back/creer-logement vers /owner/creer_logement/creer_logement.php
 RewriteRule ^back/creer-logement$ /owner/creer_un_logement/creer_un_logement.php [L]

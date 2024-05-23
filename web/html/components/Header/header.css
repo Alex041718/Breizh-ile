@@ -446,28 +446,32 @@ input[type=number] {
   right: 1em;
   z-index: 2;
 }
-#mobile-options ul,
-#options ul {
+#mobile-options .option__container,
+#options .option__container {
+  display: flex;
+  flex-direction: column;
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-#mobile-options ul li,
-#options ul li {
+#mobile-options .option__container a,
+#options .option__container a {
   transition: all 0.1s;
   color: black;
-  padding: 10px;
   cursor: pointer;
-}
-#mobile-options ul li a,
-#options ul li a {
+  padding: 10px;
   text-decoration: none;
-  color: inherit;
 }
-#mobile-options ul li:hover,
-#options ul li:hover {
+#mobile-options .option__container a:hover,
+#options .option__container a:hover {
   color: white;
   background-color: #307B5C;
+}
+#mobile-options .option__container p,
+#options .option__container p {
+  border-bottom: 1px solid #1D1D1D;
+  padding-block: 5px;
+  text-align: center;
 }
 
 #mobile-options {

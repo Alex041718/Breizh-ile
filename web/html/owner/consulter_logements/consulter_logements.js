@@ -2,7 +2,7 @@ function main() {
     const housings = document.querySelector(".housings");
     const columns = document.querySelectorAll(".title p");
 
-    const addButton = document.getElementById(" addButton ");
+    const addButton = document.getElementById("addButton");
 
     housings.innerHTML = "Chargement...";
     
@@ -67,10 +67,6 @@ function main() {
                     break;
             }
         });
-    });
-
-    addButton.addEventListener("click", () => {
-        console.log("click");
     });
 
     showReservations();

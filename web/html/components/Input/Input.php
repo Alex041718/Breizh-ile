@@ -10,10 +10,10 @@ class Input {
         switch ($type) {
 
             case "textarea":
-                $input = '<textarea class="input__textarea" placeholder="' . $placeholder . '" minlenght="' . $minLength . '" maxlength="' . $maxLength . '"' . ($pattern == "" ? "" : ' pattern="' . $pattern . '"') . '>' . $value . '</textarea>';
+                $input = '<textarea class="input__textarea" placeholder="' . $placeholder . '"' . $requiredAttribute . ' value="' . $value . '" minlenght="' . $minLength . '" maxlength="' . $maxLength . '"' . ($pattern == "" ? "" : ' pattern="' . $pattern . '"') . '>' . $value . '</textarea>';
                 break;
             case "date":
-                $input = '<input name="' . $name . '" type="' . $type . '" class="input__input" placeholder="' . $placeholder . '"' . $requiredAttribute . '" value="' . $value . ' minlenght="' . $minLength . '" maxlength="' . $maxLength . '"' . ($pattern == "" ? "" : ' pattern="' . $pattern . '"') . '>';
+                $input = '<input name="' . $name . '" type="' . $type . '" class="input__input" placeholder="' . $placeholder . '"' . $requiredAttribute . ' value="' . $value . '" minlenght="' . $minLength . '" maxlength="' . $maxLength . '"' . ($pattern == "" ? "" : ' pattern="' . $pattern . '"') . '>';
                 break;
             default:
                 $input = '<input name="' . $name . '" type="' . $type . '" class="input__input" placeholder="' . $placeholder . '"' . $requiredAttribute . ' value="' . $value . '" minlenght="' . $minLength . '" maxlength="' . $maxLength . '"' . ($pattern == "" ? "" : ' pattern="' . $pattern . '"') . '>';
@@ -26,7 +26,7 @@ class Input {
 
                 <link rel="stylesheet" href="/components/Input/Input.css">
             
-                <div class="input '. $class . ' " id=" ' . $id . ' ">
+                <div class="input '. $class . ' " id="' . $id . '">
                     <label class="input__label para--18px" for="' . $name . '">' . $label . ($requiredAttribute ? '<span class="require">*</span>' :''). '</label>
                     
                     '. $input .'
@@ -38,4 +38,3 @@ class Input {
 
     }
 }
-?>

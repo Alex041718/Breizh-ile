@@ -24,5 +24,17 @@ class CategoryService extends Service
         $row = $stmt->fetch();
         return new Category($row['categoryID'], $row['label']);
     }
+
+    public static function getAllCategoriesAsArrayOfString()
+    {
+        $categories = self::GetAllCategories();
+        $categoriesStrings = [];
+
+        foreach ($categories as $category) {
+            $categoriesStrings[] = $category->getLabel();
+        }
+
+        return $categoriesStrings;
+    }
 }
 ?>

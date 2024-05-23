@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var closeAccess = document.getElementById("closeAccess");
 
 
-    if (header.dataset.tag != 1) {
+    if (header.dataset.tag != "" && header.dataset.tag != 1 && header) {
         let tagToScroll = document.querySelector("." + header.dataset.tag);
 
         document.addEventListener("scroll", function() {
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const popup_filters_open = document.getElementById("header__settings");
     const popup_filters_open_mobile = document.getElementById("open-mobile-settings");
 
-    popup_filters_open.addEventListener("click", openSettings);
+    if(popup_filters_open) popup_filters_open.addEventListener("click", openSettings);
     popup_filters_open_mobile.addEventListener("click", openSettings);
 
     function openSettings() {
@@ -314,10 +314,13 @@ document.addEventListener('DOMContentLoaded', function() {
             optionsMobile.style.display = 'none';
         }
     });
+    
+    popup.style.display = 'none';
 
     oeuil.addEventListener('click', function() {
         if (popup.style.display === 'none') {
             popup.style.display = "flex";
+            document.body.style.overflow = 'hidden';
         } else {
             closePopup();
         }
@@ -345,16 +348,17 @@ document.addEventListener('DOMContentLoaded', function() {
         if (document.body.classList.contains('accessibilite__couleurs')){
             parent__couleurs.style.backgroundColor = "#FFF";
             document.body.classList.remove('accessibilite__couleurs');
-
+            document.querySelector('header').classList.remove('accessibilite__couleurs');
+            document.querySelector('footer').classList.remove('accessibilite__couleurs');            
         }
         else{
             parent__couleurs.style.backgroundColor = "#37906c";
             document.body.classList.add('accessibilite__couleurs');
-
+            document.querySelector('header').classList.add('accessibilite__couleurs');
+            document.querySelector('footer').classList.add('accessibilite__couleurs');
         }
-        
     });
-
+    
     parent__font.addEventListener('click', function() {
  
         if (document.body.classList.contains('accessibilite__font')){

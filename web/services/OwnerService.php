@@ -112,5 +112,71 @@ class OwnerService extends Service
             $address
         );
     }
+    public static function ModifyOwner(Owner $owner): bool
+    {
+        $existingOwner = self::GetOwnerById($owner->getOwnerID());
+        
+        if (!$existingOwner) {
+            throw new Exception('Owner not found');
+        }
+        
+        // Modifie l'image si elle a été modifiée
+        if ($owner->getImage() !== $existingOwner->getImage()) {
+            $image = ImageService::CreateImage($owner->getImage());
+            $owner->setImage($image);
+        }
+        
+        // Modifie l'adresse si elle a été modifiée
+        if ($owner->getAddress() !== $existingOwner->getAddress()) {
+            $address = AddressService::CreateAddress($owner->getAddress());
+            $owner->setAddress($address);
+        }
+    
+        // Modifie le genre si il a été modifié
+        if ($owner->getGender() !== $existingOwner->getGender()) {
+            $gender = GenderService::GetGenderById($owner->getGender()->getGenderID());
+            $owner->setGender($gender);
+        }
+    
+        // Modifier la table
+        $pdo = self::getPDO();
+        $stmt = $pdo->prepare('UPDATE _User SET 
+            mail = :mail, 
+            firstname = :firstname, 
+            lastname = :lastname, 
+            nickname = :nickname, 
+            password = :password, 
+            phoneNumber = :phoneNumber, 
+            birthDate = :birthDate, 
+            consent = :consent, 
+            lastConnection = :lastConnection, 
+            creationDate = :creationDate, 
+            imageID = :imageID, 
+            genderID = :genderID, 
+            addressID = :addressID 
+            WHERE userID = :userID');
+    
+        $success = $stmt->execute(array(
+            'mail' => $owner->getMail(),
+            'firstname' => $owner->getFirstname(),
+            'lastname' => $owner->getLastname(),
+            'nickname' => $owner->getNickname(),
+            'password' => $owner->getPassword(),
+            'phoneNumber' => $owner->getPhoneNumber(),
+            'birthDate' => $owner->getBirthDate()->format('Y-m-d H:i:s'),
+            'consent' => $owner->getConsent(),
+            'lastConnection' => $owner->getLastConnection()->format('Y-m-d H:i:s'),
+            'creationDate' => $owner->getCreationDate()->format('Y-m-d H:i:s'),
+            'imageID' => $owner->getImage()->getImageID(),
+            'genderID' => $owner->getGender()->getGenderID(),
+            'addressID' => $owner->getAddress()->getAddressID(),
+            'userID' => $owner->getOwnerID()
+        ));
+    
+        if (!$success) {
+            throw new Exception('Failed to modify owner');
+        }
+        return true;
+    }
 
 }

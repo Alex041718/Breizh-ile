@@ -4,6 +4,7 @@ class ButtonType {
     const Client = 'Client';
     const Owner = 'Owner';
     const Delete = 'Delete';
+    const Basic = 'Basic';
 }
 
 class Button {
@@ -32,12 +33,15 @@ class Button {
             case ButtonType::Delete:
                 $class .= ' button--delete' . $secondaryClass . ' button--rouge' ;
                 break;
+            case ButtonType::Basic:
+                $class .= ' button--basic' . $secondaryClass . ' button--gris' ;
+                break;
         }
 
         $render = /*html*/ '
             <link rel="stylesheet" href="/components/Button/Button.css">
             
-            <button type="' . $isSubmit . '" class="button '. $class . ' " id=" ' . $id . ' " onclick="' . $onClick . '">
+            <button type="' . $isSubmit . '" class="button '. $class . ' " id="' . $id . '" onclick="' . $onClick . '">
                 ' . $icon . '
                 ' . $text . '
             </button>

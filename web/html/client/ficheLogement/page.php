@@ -69,7 +69,6 @@ $housingLongitude = $housing->getLongitude();
 $housingLatitude = $housing->getLatitude();
 $housingCity = $housing->getAddress()->getCity();
 
-
 // $housing_arrangements = $housing->getArrangement(); a modifier du aux changements de la bdd
 
 
