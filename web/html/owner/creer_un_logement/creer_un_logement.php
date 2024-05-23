@@ -6,6 +6,8 @@ require_once("../../../services/OwnerService.php");
 SessionService::system('owner', '/back/creer-logement');
 
 $owner = OwnerService::getOwnerById($_SESSION['user_id']);
+$_SESSION["owner"] = $owner;
+
 ?>
 
 <!DOCTYPE html>
