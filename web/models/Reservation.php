@@ -68,6 +68,7 @@ class Reservation
     public function __construct(?int $id, DateTime $beginDate, DateTime $endDate, float $serviceCharge, float $touristTax, string $status, int $nbPerson, float $priceIncl, Housing $housing, PayementMethod $payMethod, Client $client)
     {
         $this->id = $id;
+        $this->creationDate = new DateTime();
         $this->beginDate = $beginDate;
         $this->endDate = $endDate;
         $this->serviceCharge = $serviceCharge;
