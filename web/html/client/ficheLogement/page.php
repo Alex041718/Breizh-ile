@@ -204,7 +204,7 @@ $iconMapping = [
                 <div class="details">
                     <h4> <?php echo $housing_shortDesc ?> </h4>
                     <div class="infoLogement">
-                        <p id="nbVoyageurs"> <?php echo $housing_nbPerson ?> personnes • <?php echo $housing_nbRoom ?> chambres • <?php echo $housing_nbBed ?> lits</p>
+                        <p id="nbVoyageurs"> <?php echo $housing_nbPerson ?> personnes • <?=$housing_nbRoom!=0? $housing_nbRoom :"1"?> chambres • <?=$housing_nbBed?> lits</p>
                     </div>
 
                     <div class="proprio">
