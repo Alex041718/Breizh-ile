@@ -19,7 +19,6 @@
 
                 <?php require_once("../../components/Input/Input.php"); ?>
 
-                <?= isset($_GET["error"]) && $_GET["error"] == "loginFailed" ? '<p class="error">Identifiants incorrects</p>' : "" ?>
 
                 <?= (isset($_GET["redirect"]) ? "<input type='hidden' name='redirect' value='" . $_GET["redirect"] . "'>" : "") ?>
 

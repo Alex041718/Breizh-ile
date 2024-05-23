@@ -31,6 +31,8 @@ RewriteRule ^logement/devis$ /client/bid/bid.php [L]
 # Rediriger /detail-reservation vers /client/consulter_detail_reservation/consulter_detail_reservation.php
 RewriteRule ^detail-reservation$ /client/consulter_detail_reservation/consulter_detail_reservation.php [L]
 
+# Rediriger /client-forgot-password /client/clientForgotPassword/clientForgotPassword.php
+RewriteRule ^client/forgot-password$ /client/clientForgotPassword/clientForgotPassword.php [L]
 
 # REDIRECTIONS PROPRIETAIRE #
 

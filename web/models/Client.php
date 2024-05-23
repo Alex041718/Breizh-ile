@@ -19,8 +19,10 @@ class Client
     private Image $image;
     private Gender $gender;
     private Address $address;
+    private ?string $resetTokenHash;
+    private ?DateTime $resetTokenExpiration;
 
-    public function __construct(?int $clientID, bool $isBlocked, string $mail, string $firstname, string $lastname, string $nickname, string $password, string $phoneNumber, DateTime $birthDate, bool $consent, DateTime $lastConnection, DateTime $creationDate, Image $image, Gender $gender, Address $address)
+    public function __construct(?int $clientID, bool $isBlocked, string $mail, string $firstname, string $lastname, string $nickname, string $password, string $phoneNumber, DateTime $birthDate, bool $consent, DateTime $lastConnection, DateTime $creationDate, Image $image, Gender $gender, Address $address, ?string $resetTokenHash, ?DateTime $resetTokenExpiration)
     {
         $this->clientID = $clientID;
         $this->isBlocked = $isBlocked;
@@ -37,6 +39,8 @@ class Client
         $this->image = $image;
         $this->gender = $gender;
         $this->address = $address;
+        $this->resetTokenHash = $resetTokenHash;
+        $this->resetTokenExpiration = $resetTokenExpiration;
     }
 
 
@@ -189,6 +193,28 @@ class Client
     {
         $this->address = $address;
     }
+
+    public function getResetTokenHash(): ?string
+    {
+        return $this->resetTokenHash;
+    }
+
+    public function setResetTokenHash(?string $resetTokenHash): void
+    {
+        $this->resetTokenHash = $resetTokenHash;
+    }
+
+    public function getResetTokenExpiration(): ?DateTime
+    {
+        return $this->resetTokenExpiration;
+    }
+
+    public function setResetTokenExpiration(?DateTime $resetTokenExpiration): void
+    {
+        $this->resetTokenExpiration = $resetTokenExpiration;
+    }
+
+
 }
 
 ?>
