@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var closeAccess = document.getElementById("closeAccess");
 
 
-    if (header.dataset.tag != 1) {
+    if (header.dataset.tag != "" && header.dataset.tag != 1 && header) {
         let tagToScroll = document.querySelector("." + header.dataset.tag);
 
         document.addEventListener("scroll", function() {

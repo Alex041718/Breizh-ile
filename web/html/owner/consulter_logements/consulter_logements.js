@@ -69,10 +69,6 @@ function main() {
         });
     });
 
-    addButton.addEventListener("click", () => {
-        console.log("click");
-    });
-
     showReservations();
 }
 

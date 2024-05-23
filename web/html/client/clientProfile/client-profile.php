@@ -16,7 +16,7 @@ function redirect($url)
 }
 
 // Vérifier l'authentification du client
-SessionService::system('client', '/client/profil');
+SessionService::system('client', '/client/profile');
 $isAuthenticated = SessionService::isClientAuthenticated();
 
 if (!$isAuthenticated) {
@@ -47,16 +47,14 @@ $client = ClientService::GetClientById($clientID);
     require_once("../../components/Header/header.php");
     Header::render(true,false, $isAuthenticated, '/client/profile');
     ?>
-    <div class="content">
-        <div class="content__selector">
-            <div class="content__selector__personnal-data">
-                <h4 class="content__selector__personnal-data__title">Informations Personnelles</h4>
-            </div>
-            <div class="content__selector__security">
-                <h4 class="content__selector__security__title">Sécurité</h4>
-            </div>
-        </div>
-        <div class="content__personnal-data">
+    <main class="content">
+        <nav>
+            <ul>
+                <li id="infos__btn" class="active"><span>Informations Personnelles</span></li>
+                <li id="security__btn"><span>Sécurité</span></li>
+            </ul>
+        </nav>
+        <div id="infos" class="content__personnal-data content__display">
             <h3 class="content__personnal-data__title">Informations Personnelles</h3>
 
             <div class="content__personnal-data__top">
@@ -71,27 +69,27 @@ $client = ClientService::GetClientById($clientID);
                     <!-- Nom -->
                     <?php require_once ("../../components/Input/Input.php");
 
-                    Input::render("uneClassEnPlus", "lastname", "text", "Nom", "lastname", "Nom", true, $client->getLastname(),'1','100', '[a-zA-Z]*$'); ?>
+                    Input::render("uneClassEnPlus", "lastname", "text", "Nom", "lastname", "Nom", true, $client->getLastname(),'1','100'); ?>
 
                     <!-- Prenom -->
                     <?php
-                    Input::render("uneClassEnPlus", "firstname", "text", "Prenom", "firstname", "Prenom", true, $client->getFirstname(),'1','100', '[a-zA-Z]*$'); ?>
+                    Input::render("uneClassEnPlus", "firstname", "text", "Prenom", "firstname", "Prenom", true, $client->getFirstname(),'1','100'); ?>
 
                     <!-- Pseudo -->
                     <?php
-                    Input::render("uneClassEnPlus", "nickname", "text", "Pseudo", "nickname", "Pseudo", true, $client->getNickname(),'1','100','[A-Za-z0-9 -]+'); ?>
+                    Input::render("uneClassEnPlus", "nickname", "text", "Pseudo", "nickname", "Pseudo", true, $client->getNickname(),'1','100'); ?>
 
                     <!-- Mail -->
                     <?php
-                    Input::render("uneClassEnPlus", "mail", "email", "Mail", "mail", "Mail", true, $client->getMail(),'1','100','[A-Za-z0-9\._%+\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,}'); ?>
+                    Input::render("uneClassEnPlus", "mail", "email", "Mail", "mail", "Mail", true, $client->getMail(),'1','100'); ?>
 
                     <!-- Telephone -->
                     <?php
-                    Input::render("uneClassEnPlus", "phoneNumber", "tel", "Telephone", "phoneNumber", "Telephone", true, $client->getPhoneNumber(),'10','12','^((\+)33|0)[1-9](\d{2}){4}$'); ?>
+                    Input::render("uneClassEnPlus", "phoneNumber", "tel", "Telephone", "phoneNumber", "Telephone", true, $client->getPhoneNumber(),'10','12'); ?>
 
                     <!-- Adresse -->
                     <?php
-                    Input::render("uneClassEnPlus", "address", "text", "Adresse", "address", "Adresse", true, $client->getAddress()->getPostalAddress(),"1","200","[a-zA-Z -]"); ?>
+                    Input::render("uneClassEnPlus", "address", "text", "Adresse", "address", "Adresse", true, $client->getAddress()->getPostalAddress(),"1","200"); ?>
 
                     <!-- Genre -->
                     <div class="content__personnal-data__elements__genre">
@@ -110,9 +108,8 @@ $client = ClientService::GetClientById($clientID);
                     Input::render("uneClassEnPlus", "birthDate", "date", "Date de naissance", "birthDate", "Date de naissance", false, $client->getBirthDate()->format('Y-m-d')); ?>
 
                     <!-- Date de création du compte -->
-                    <?php
-                    Input::render("uneClassEnPlus", "creationDate", "date", "Date de création du compte", "creationDate", "Date de création du compte", true, $client->getCreationDate()->format('Y-m-d')); ?>
 
+                    <input type="hidden" name="creationDate" value="<?php echo ($client->getCreationDate()->format('Y-m-d')) ?>">
                     <input type="hidden" name="clientID" value="<?php echo ($client->getClientID()) ?>">
 
                 </div>
@@ -125,7 +122,7 @@ $client = ClientService::GetClientById($clientID);
                 </div>
             </form>
         </div>
-        <div class="content__security" style="display: none">
+        <div class="content__security">
             <h3 class="content__security__title">Sécurité</h3>
             <p class="content__security__description">Modifier vos paramètres de sécurités</p>
 
@@ -141,7 +138,7 @@ $client = ClientService::GetClientById($clientID);
                 Button::render("button--storybook", "delete-account", "Supprimer mon compte", ButtonType::Delete, true); ?>
             </div>
         </div>
-    </div>
+    </main>
 
     <?php
     require_once ("../../components/Footer/footer.php");

@@ -6,11 +6,71 @@ body {
     background-color: variables.$whiteColor;
 }
 
+.content__display {
+    display: flex !important;
+}
+
+nav {
+    width: min-content;
+
+    ul {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        height: 95vh;
+        list-style: none;
+        box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.25);
+
+        li {
+            display: flex;
+            width: 20rem;
+            height: 70px;
+            font-weight: bold;
+            font-size: variables.$font-size-lg;
+            
+            span {
+                user-select: none;
+                line-height: 70px;
+                width: 100%;
+                padding-inline: 3.2rem;
+                height: 100%;
+                color: variables.$clientPrimaryColor;
+                text-decoration: none;
+                border-bottom: 1px solid variables.$lighterGrey5;
+            }
+
+            &.active {
+                background-color: variables.$clientPrimaryColor;
+                span { color: variables.$whiteColor; }
+            }
+
+            &.locked {
+                background-color: variables.$whiteColor;
+                span { color: variables.$grey5; }
+            }
+
+            &:hover {
+                background-color: variables.$grey6;
+                cursor: pointer;
+            }
+
+            &.active:hover {
+                background-color: variables.$clientPrimaryColor;
+            }
+        }
+    }
+}
+
 .content {
     height: 100%;
     display: flex;
     align-items: center;
-    padding-top: 100px;
+    margin-top: 80px;
+
+    @media (max-width: 1024px) {
+        margin-top: 100px;
+    }
 
     &__selector {
         min-width: 8em;
@@ -36,7 +96,7 @@ body {
 
     &__personnal-data {
         margin-left: 5em;
-        display: flex;
+        display: none;
         flex-direction: column;
         width: 85em;
         height: 30em;
@@ -101,7 +161,7 @@ body {
 
     &__security {
         margin-left: 5em;
-        display: flex;
+        display: none;
         flex-direction: column;
         width: 85em;
         height: 30em;
