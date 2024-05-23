@@ -4,6 +4,7 @@ class ButtonType {
     const Client = 'Client';
     const Owner = 'Owner';
     const Delete = 'Delete';
+    const Basic = 'Basic';
 }
 
 class Button {
@@ -31,6 +32,9 @@ class Button {
                 break;
             case ButtonType::Delete:
                 $class .= ' button--delete' . $secondaryClass . ' button--rouge' ;
+                break;
+            case ButtonType::Basic:
+                $class .= ' button--basic' . $secondaryClass . ' button--gris' ;
                 break;
         }
 

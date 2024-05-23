@@ -41,7 +41,32 @@ class ReservationService extends Service
 
         return $reservationList;
     }
-    
+
+    public static function createReservation(Reservation $reservation): bool
+{
+    $pdo = self::getPDO();
+    $stmt = $pdo->prepare('INSERT INTO _Reservation (`reservationID`,beginDate, endDate, serviceCharge, touristTax, status, nbPerson, priceIncl,`creationDate`, housingID, payMethodID, clientID) VALUES (NULL, :beginDate, :endDate, :serviceCharge, :touristTax, :status, :nbPerson, :priceIncl,CURRENT_TIMESTAMP, :housingID, :payMethodID, :clientID)');
+
+    $success = $stmt->execute(array(
+        'beginDate' => $reservation->getBeginDate()->format('Y-m-d H:i:s'),
+        'endDate' => $reservation->getEndDate()->format('Y-m-d H:i:s'),
+        'serviceCharge' => $reservation->getServiceCharge(),
+        'touristTax' => $reservation->getTouristTax(),
+        'status' => $reservation->getStatus(),
+        'nbPerson' => $reservation->getNbPerson(),
+        'priceIncl' => $reservation->getPriceIncl(),
+        'housingID' => $reservation->getHousingID()->getHousingID(),
+        'payMethodID' => $reservation->getPayMethodID()->getPayMethodID(),
+        'clientID' => $reservation->getClientID()->getClientID()
+    ));
+
+    if (!$success) {
+        throw new Exception('Failed to create reservation');
+    }
+
+    return true;
+}
+
     public static function getAllReservationsByClientID(int $clientID)
     {
         $pdo = self::getPDO();
@@ -67,7 +92,7 @@ class ReservationService extends Service
 
         //Permet de faire le lien avec le logement de la réservation
         $housing = HousingService::GetHousingById($row['housingID']);
-        
+
         $payMethod = PayementMethodService::GetPayementMethodById($row['payMethodID']);
 
         $client = ClientService::getClientById($row['clientID']);
@@ -98,8 +123,8 @@ class ReservationService extends Service
             $endDate = new DateTime(); // ou une valeur par défaut appropriée
         }
 
-        
-        return new Reservation($row['reservationID'], $creationDate, $beginDate, $endDate, $row['serviceCharge'], $row['touristTax'], $row['status'], $row['nbPerson'], $row['r_price_incl'], $housing, $payMethod, $client);
+
+        return new Reservation($row['reservationID'], $beginDate, $endDate, $row['serviceCharge'], $row['touristTax'], $row['status'], $row['nbPerson'], $row['r_price_incl'], $housing, $payMethod, $client);
 
     }
 

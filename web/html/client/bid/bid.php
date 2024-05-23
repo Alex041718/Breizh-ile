@@ -14,8 +14,7 @@
     require_once('../../../services/ClientService.php');
     require_once('../../../services/OwnerService.php');
 
-    // Récupération du devis
-    /** @var Bid $bid */
+
 
     if (!isset($_SESSION['currentBid'])) {
         header('Location: '. SessionService::get('oldPage') ?? '/');
@@ -124,9 +123,13 @@ Header::render(true,false,$isAuthenticated,$_SERVER['REQUEST_URI']);
                 </div>
 
 
-                <?php require_once('../../components/Button/Button.php');
-                Button::render("bid__container__info__pay-recap__button","id","Procéder au paiement",ButtonType::Client,"alert('Payer')",false);
-                ?>
+
+
+
+
+                    <?php require_once('../../components/Button/Button.php');
+                    Button::render("bid__container__info__pay-recap__button","id","Procéder au paiement",ButtonType::Client,"window.location.href = '/logement/payment'",false);
+                    ?>
 
 
             </div>

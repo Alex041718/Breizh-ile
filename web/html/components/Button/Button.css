@@ -54,7 +54,6 @@ p {
   padding-inline: 25px;
   background-color: #1D1D1D;
   color: white;
-  width: -moz-fit-content;
   width: fit-content;
   border-radius: 10px;
 }
@@ -134,6 +133,23 @@ p {
 .button--client--secondary:hover {
   background-color: #f6f6f6 !important;
 }
+.button--basic {
+  background-color: #E0E0E0;
+  color: #828282;
+  border: 2px solid #E0E0E0;
+}
+.button--basic:hover {
+  background-color: #BDBDBD;
+  border: 2px solid #BDBDBD;
+}
+.button--basic--secondary {
+  background-color: #FFFFFF !important;
+  color: #E0E0E0 !important;
+  border: 2px solid #E0E0E0;
+}
+.button--basic--secondary:hover {
+  background-color: #f6f6f6 !important;
+}
 .button--owner {
   background-color: #082C4C;
   color: #FFFFFF;
@@ -177,4 +193,6 @@ p {
 .button--disabled:hover {
   background-color: #E0E0E0;
   border: 2px solid #E0E0E0;
-}/*# sourceMappingURL=Button.css.map */
+}
+
+/*# sourceMappingURL=Button.css.map */
