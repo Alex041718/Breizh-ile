@@ -6,7 +6,7 @@ function main() {
 
     const checkboxes = document.getElementsByName("checkbox");
     const checkboxAll = document.getElementsByName("checkboxAll");
-    const exportationButton = document.getElementById(" exportationButton ");
+    const exportationButton = document.getElementById("exportationButton");
     const exportSelectionType = document.querySelectorAll(".export-selection")[0];
     const closeButton = document.querySelectorAll(".closeExport")[0];
     const exportCheckboxes = document.querySelectorAll('[name="checkboxCSV"], [name="checkboxICAL"]');
