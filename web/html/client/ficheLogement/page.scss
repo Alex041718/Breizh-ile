@@ -370,6 +370,7 @@ body {
     height: 100%;
     outline-style: none;
     border-radius: 20px;
+    z-index: 20;
 }
 
 
@@ -416,12 +417,13 @@ body {
         .arrivee {
             display: flex;
             flex-direction: column;
-            width: 100%;
+            width: 50%;
             align-items: center;
             border: 1px solid gray;
             border-right: none;
             border-top-left-radius: 10px;
             justify-content: center;
+            overflow: hidden;
 
             @media screen and (max-width: 768px) {
                 width: 50%;
@@ -444,11 +446,12 @@ body {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
+            width: 50%;
             border: 1px solid gray;
             border-left: none;
             border-top-right-radius: 10px;
             justify-content: center;
+            overflow: hidden;
 
             @media screen and (max-width: 768px) {
                 width: 50%;
@@ -576,7 +579,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 35em;
-    height: 40em;
+    height: 50vh;
     background-color: white;
     padding: 3em;
     border: 2px solid #ccc;
@@ -599,6 +602,7 @@ body {
         position: absolute;
         top: 1em;
         left: 1em;
+        cursor: pointer;
 
         // Définir le centre de rotation au milieu de l'icône
         transform-origin: center;

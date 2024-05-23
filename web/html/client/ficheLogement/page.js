@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function () {
             options.onChange = function(selectedDates) {
                 // Update the minimum date for the departure date
                 const minDepartDate = selectedDates[0];
-                departPicker.set('minDate', minDepartDate);
+                departPicker.set('minDate', minDepartDate.fp_incr(1));
                 calculateAndDisplayNights();
             };
             arriveePicker = flatpickr(input, options);
@@ -280,8 +280,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (nightCount == 0) {
                 nightCount = 1;
             }
-            const totalTravelers = adultCountValue + childCountValue;
-            const totalCost = nightCount * costPerNight * totalTravelers;
+            const totalCost = nightCount * costPerNight ;
 
             nightCountElement.textContent = nightCount;
             totalCostElement.textContent = totalCost + " €";
