@@ -41,7 +41,7 @@ class Button {
         $render = /*html*/ '
             <link rel="stylesheet" href="/components/Button/Button.css">
             
-            <button type="' . $isSubmit . '" class="button '. $class . ' " id=" ' . $id . ' " onclick="' . $onClick . '">
+            <button type="' . $isSubmit . '" class="button '. $class . ' " id="' . $id . '" onclick="' . $onClick . '">
                 ' . $icon . '
                 ' . $text . '
             </button>

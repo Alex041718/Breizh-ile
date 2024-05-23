@@ -65,9 +65,10 @@ class Reservation
      * @param PayementMethod $payMethodId
      * @param Client $clientId
      */
-    public function __construct(?int $id, DateTime $beginDate, DateTime $endDate, float $serviceCharge, float $touristTax, string $status, int $nbPerson, float $priceIncl, Housing $housing, PayementMethod $payMethod, Client $client)
+    public function __construct(?int $id, DateTime $creationDate, DateTime $beginDate, DateTime $endDate, float $serviceCharge, float $touristTax, string $status, int $nbPerson, float $priceIncl, Housing $housingId, PayementMethod $payMethodId, Client $clientId)
     {
         $this->id = $id;
+        $this->creationDate = $creationDate;
         $this->beginDate = $beginDate;
         $this->endDate = $endDate;
         $this->serviceCharge = $serviceCharge;
@@ -75,9 +76,9 @@ class Reservation
         $this->status = $status;
         $this->nbPerson = $nbPerson;
         $this->priceIncl = $priceIncl;
-        $this->housingId = $housing;
-        $this->payMethodId = $payMethod;
-        $this->clientId = $client;
+        $this->housingId = $housingId;
+        $this->payMethodId = $payMethodId;
+        $this->clientId = $clientId;
     }
 
     /**

@@ -46,10 +46,12 @@
 .header-mobile .header-mobile__icon p {
   font-weight: bold;
 }
+
 .header-mobile .header-mobile__icon #profil,
 .header-mobile .header-mobile__icon #mobile-profil {
   cursor: pointer;
 }
+
 .header-mobile .header-mobile__icon .profilImg {
   height: 40px;
   border-radius: 70px;

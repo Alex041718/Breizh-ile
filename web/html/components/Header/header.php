@@ -156,6 +156,7 @@ class Header {
                         </div>
                         <i id="open-search" class="fa-solid fa-magnifying-glass"></i>
                         <div class="header-mobile__icon">
+
                         ' . ($isAuthenticated ? '<img id="mobile-profil" class="profilImg" src="' . $user->getImage()->getImageSrc() . '" />' : '<i id="mobile-profil" class="fa-solid fa-user"></i>') .
                             '<p>Mon profil</p>
                             <div id="mobile-options" style="display: none;">

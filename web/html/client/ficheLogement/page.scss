@@ -83,7 +83,6 @@ body {
             align-self: start;
             margin-left: 0.5em;
             margin-top: 0.5em;
-
         }
 
         .reservationBtn {
@@ -149,7 +148,6 @@ body {
         @media screen and (max-width:768px) {
             margin-top: 3em;
         }
-
     }
 
     #overlay {
@@ -299,7 +297,6 @@ body {
 
         h4
 
-
         .infoLogement{
             display: flex;
         }
@@ -319,7 +316,6 @@ body {
                     padding: 1em;
                 }
             }
-
         }
 
         .description {
@@ -349,9 +345,6 @@ body {
                     text-overflow: ellipsis;
                     white-space: normal;
                     line-height: 1.6em;
-
-
-
 
                 }
             }
@@ -385,7 +378,6 @@ body {
     border-top: 1px solid #ccc;
     margin-top: 2em;
     height: 0;
-
     @media screen and (max-width: 768px) {
         margin-top: 1em;
         margin-bottom: 1em;
@@ -506,7 +498,7 @@ body {
 
     @media screen and (max-width:768px) {
         margin-left: 2em;
-        margin-right: 2em;
+        margin-right: 2em; 
     }
 }
 
@@ -520,7 +512,6 @@ body {
             width: 5em;
         }
     }
-
 }
 
 
@@ -593,6 +584,11 @@ body {
     z-index: 9999;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
     overflow-y: auto;
+
+    @media screen and (max-width: 768px) {
+        width: 15em;
+        height: 20em;
+    }
 
     @media screen and (max-width: 768px) {
         width: 15em;

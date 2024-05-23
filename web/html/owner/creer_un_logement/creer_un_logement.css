@@ -46,6 +46,12 @@ nav ul li.active {
 nav ul li.active span {
   color: #FFFFFF;
 }
+nav ul li.locked {
+  background-color: #FFFFFF;
+}
+nav ul li.locked span {
+  color: #E0E0E0;
+}
 nav ul li:hover {
   background-color: #f6f6f6;
   cursor: pointer;
@@ -104,32 +110,90 @@ nav ul li.active:hover {
 .content__up, .content__bottom {
   display: flex;
 }
+.content__bottom {
+  flex-wrap: wrap;
+  height: -moz-max-content;
+  height: max-content;
+}
 .content p {
-  font-size: 20px;
+  font-size: 22px;
 }
 .content .separator {
   display: block;
   width: max(15rem, 36.4583333333vw);
   height: 2px;
-  margin-top: 4px;
+  margin-top: 8px;
+  margin-bottom: 20px;
   background-color: #e9e9e9;
 }
+.content .separator--large {
+  width: 100%;
+}
+.content #priceHT input {
+  width: 6rem !important;
+}
+.content #beginDate input, .content #endDate input, .content #nbPerson input, .content #nbRooms input, .content #nbSimpleBed input, .content #nbDoubleBed input, .content #surface input {
+  width: 15rem !important;
+}
+.content #category select, .content #type select, .content #activity select, .content #arrangement select, .content #perimeter select {
+  width: 17.7rem !important;
+}
 
-.input {
+.input, .comboList {
   margin-bottom: 1.5rem !important;
 }
-.input label {
+.input label, .comboList label {
   margin-top: 0 !important;
 }
 
-.localisation {
+.localisation, .specifications, .arrangements, .activities {
   position: fixed;
   visibility: hidden;
 }
 
-.specifications {
+.activity-text {
+  display: flex;
+  font-weight: normal !important;
+}
+.activity-text p {
+  width: 20rem;
+}
+.activity-text :first-child {
+  font-weight: bold;
+}
+
+.specifications, .arrangements, .activities {
   display: flex;
   flex-direction: column;
+}
+.specifications .content__button, .arrangements .content__button, .activities .content__button {
+  margin-top: 1.8rem;
+  width: -moz-min-content;
+  width: min-content;
+}
+.specifications .content__button--next, .arrangements .content__button--next, .activities .content__button--next {
+  margin-top: auto;
+  margin-bottom: 8.5rem;
+  width: max(15rem, 41.6666666667vw) !important;
+}
+.specifications input, .specifications select, .arrangements input, .arrangements select, .activities input, .activities select {
+  margin-right: 2rem;
+}
+
+.arrangements .content__up, .activities .content__up {
+  width: max(15rem, 52.0833333333vw) !important;
+}
+.arrangements .content__button, .activities .content__button {
+  margin-top: 1.8rem;
+  width: -moz-min-content;
+  width: min-content;
+  margin-left: auto;
+  height: 3.2rem;
+}
+.arrangements .content__button--next, .activities .content__button--next {
+  margin-top: auto;
+  margin-bottom: 8.5rem;
+  margin-left: 0;
 }
 
 .inline {
@@ -160,4 +224,49 @@ nav ul li.active:hover {
 
 .wide {
   width: max(5rem, 21.875vw) !important;
+}
+
+.items {
+  height: 412px;
+  overflow-y: auto;
+  width: 100.33%;
+  padding-right: 0.5rem;
+}
+.items::-webkit-scrollbar {
+  width: 0.4rem;
+  background: white;
+}
+.items::-webkit-scrollbar-thumb {
+  background-color: #082C4C;
+  border-radius: 100px;
+  background: #082C4C;
+}
+.items::-webkit-scrollbar-track {
+  background-color: #e9e9e9;
+  border-radius: 100px;
+  background: #e9e9e9;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  background-color: #e9e9e9;
+  padding: 1.5rem 1rem;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #082C4C;
+  box-sizing: border-box;
+}
+.item i {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.item:last-child {
+  margin-bottom: 0;
 }/*# sourceMappingURL=creer_un_logement.css.map */

@@ -45,6 +45,11 @@ nav {
                 span { color: $whiteColor; }
             }
 
+            &.locked {
+                background-color: $whiteColor;
+                span { color: $grey5; }
+            }
+
             &:hover {
                 background-color: $grey6;
                 cursor: pointer;
@@ -128,20 +133,49 @@ nav {
         display: flex;
     }
 
+    &__bottom {
+        flex-wrap: wrap;
+        height: max-content;
+    }
+
     p {
-        font-size: 20px;
+        font-size: 22px;
     }
 
     .separator {
         display: block;
         width: max(15rem, calc(700vw / 19.2));
         height: 2px;
-        margin-top: 4px;
+        margin-top: 8px;
+        margin-bottom: 20px;
         background-color: $lighterGrey5;
+
+        &--large {
+            width: 100%;
+        }
     }
+
+    #priceHT {
+        input {
+            width: 6rem !important;
+        }
+    }
+    
+    #beginDate, #endDate, #nbPerson, #nbRooms, #nbSimpleBed, #nbDoubleBed, #surface {
+        input {
+            width: 15rem !important;
+        }
+    }
+
+    #category, #type, #activity, #arrangement, #perimeter {
+        select {
+            width: 17.7rem !important;
+        }
+    }
+
 }
 
-.input {
+.input, .comboList {
     margin-bottom: 1.5rem !important;
 
     label {
@@ -149,15 +183,61 @@ nav {
     }
 }
 
-.localisation {
+.localisation, .specifications, .arrangements, .activities {
     position: fixed;
     visibility: hidden;
 }
 
-.specifications {
+.activity-text {
+    display: flex;
+    font-weight: normal !important;
+
+    p {
+        width: 20rem;
+    }
+
+    :first-child {
+        font-weight: bold;
+    }
+}
+
+.specifications, .arrangements, .activities {
     display: flex;
     flex-direction: column;
 
+    .content__button {
+        margin-top: 1.8rem;
+        width: min-content;
+
+        &--next {
+            margin-top: auto;
+            margin-bottom: 8.5rem;
+            width: max(15rem, calc(800vw / 19.2)) !important;
+        }
+    }
+
+    input, select {
+        margin-right: 2rem;
+    }
+}
+
+.arrangements, .activities {
+    .content__up {
+        width: max(15rem, calc(1000vw / 19.2)) !important;
+    }
+
+    .content__button {
+        margin-top: 1.8rem;
+        width: min-content;
+        margin-left: auto;
+        height: 3.2rem;
+        
+        &--next {
+            margin-top: auto;
+            margin-bottom: 8.5rem;
+            margin-left: 0;
+        }
+    }
 }
 
 .inline {
@@ -191,4 +271,53 @@ nav {
 
 .wide {
     width: max(5rem, calc(420vw / 19.2)) !important;
+}
+
+.items {
+    height: 412px;
+    overflow-y: auto;
+    width: 100.33%;
+    padding-right: 0.5rem;
+
+    &::-webkit-scrollbar {
+        width: 0.4rem;
+        background: white;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $ownerPrimaryColor;
+        border-radius: 100px;
+        background: $ownerPrimaryColor;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: $lighterGrey5;
+        border-radius: 100px;
+        background: $lighterGrey5;
+    }
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    background-color: $lighterGrey5;
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: $ownerPrimaryColor;
+    box-sizing: border-box;
+
+    i {
+        font-size: 20px;
+        cursor: pointer;
+    }
+}
+
+.item:last-child {
+    margin-bottom: 0;
 }

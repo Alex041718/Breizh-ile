@@ -23,7 +23,6 @@ class Housing {
     private Address $address;
     private Owner $owner;
     private Image $image;
-    private array $arrangement;
 
     public function __construct(int $housingID,
                                 string $title,
@@ -47,8 +46,7 @@ class Housing {
                                 Category $category,
                                 Address $address,
                                 Owner $owner,
-                                Image $image,
-                                array $arrangement) {
+                                Image $image) {
         $this->housingID = $housingID;
         $this->title = $title;
         $this->shortDesc = $shortDesc;
@@ -72,7 +70,6 @@ class Housing {
         $this->address = $address;
         $this->owner = $owner;
         $this->image = $image;
-        $this->arrangement = $arrangement;
     }
 
     /**
@@ -442,25 +439,5 @@ class Housing {
     {
         $this->image = $image;
     }
-
-    /**
-     * @return array
-     */
-    public function getArrangement(): array
-    {
-        return $this->arrangement;
-    }
-
-    /**
-     * @param array $arrangement
-     */
-    public function setArrangement(array $arrangement): void
-    {
-        $this->arrangement = $arrangement;
-    }
-
-
-
 }
-
 ?>

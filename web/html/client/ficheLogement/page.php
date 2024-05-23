@@ -299,6 +299,7 @@ $iconMapping = [
                         </i>
                     </div>
                     <div data-lat="<?= $housingLatitude ?>" data-long="<?= $housingLongitude ?>" id="map"></div>
+
                 </div>
             </div>
             

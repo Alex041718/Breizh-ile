@@ -122,9 +122,8 @@ class ReservationService extends Service
             // Gérer le cas où 'r_end_date' n'est pas défini ou est nul
             $endDate = new DateTime(); // ou une valeur par défaut appropriée
         }
-
-
-        return new Reservation($row['reservationID'], $beginDate, $endDate, $row['serviceCharge'], $row['touristTax'], $row['status'], $row['nbPerson'], $row['r_price_incl'], $housing, $payMethod, $client);
+        
+        return new Reservation($row['reservationID'], $creationDate, $beginDate, $endDate, $row['serviceCharge'], $row['touristTax'], $row['status'], $row['nbPerson'], $row['r_price_incl'], $housing, $payMethod, $client);
 
     }
 

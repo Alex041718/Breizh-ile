@@ -38,8 +38,8 @@ $client = ClientService::GetClientById($clientID);
     <title>Formulaire</title>
     <link rel="stylesheet" href="/client/clientProfile/client-profile.css">
 
-    <link rel="stylesheet" href="../../style/ui.css">
 
+    <link rel="stylesheet" href="../../style/ui.css">
 </head>
 
 <body>
@@ -70,6 +70,7 @@ $client = ClientService::GetClientById($clientID);
                 <div class="content__personnal-data__elements">
                     <!-- Nom -->
                     <?php require_once ("../../components/Input/Input.php");
+
                     Input::render("uneClassEnPlus", "lastname", "text", "Nom", "lastname", "Nom", true, $client->getLastname(),'1','100', '[a-zA-Z]*$'); ?>
 
                     <!-- Prenom -->
@@ -119,6 +120,7 @@ $client = ClientService::GetClientById($clientID);
                 <div class="content__personnal-data__elements__modify_button">
                     <?php
                     require_once ("../../components/Button/Button.php");
+
                     Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Client, "", false, true); ?>
                 </div>
             </form>

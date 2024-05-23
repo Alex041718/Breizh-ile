@@ -105,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var map = L.map('map').setView([latitude, longitude], 13);
 
 
-
     L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'ArcGIS'
     }).addTo(map);
@@ -116,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function () {
         fillOpacity: 0.5,
         radius: 1500
     }).addTo(map);
-
 
     let MyControlClass =  L.Control.extend({  
   
@@ -161,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
               }).addTo(map);
         }
     }
+
 
 
     // Récupération des éléments avec infobulle

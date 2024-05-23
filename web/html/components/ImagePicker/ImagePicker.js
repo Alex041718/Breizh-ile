@@ -1,6 +1,7 @@
 const dropArea = document.getElementById("drop-area");
 const inputFile = document.getElementById("input-file");
 const imageView = document.getElementById("img-view");
+const imageName = document.getElementsByName("file-name")[0];
 
 function uploadImage() {
     const file = URL.createObjectURL(inputFile.files[0]);
@@ -14,7 +15,10 @@ function uploadImage() {
         method: "POST",
         body: formData
     })
-    .then(response => console.log(response))
+    .then(response => response.json())
+    .then(data => {
+        imageName.textContent = data.file_name;
+    })
 }
 
 inputFile.addEventListener("change", uploadImage);
@@ -31,6 +35,10 @@ dropArea.addEventListener("dragleave", event => {
 
 dropArea.addEventListener("drop", event => {
     event.preventDefault();
+    // check if the file is an image
+    if (event.dataTransfer.files[0].type.indexOf("image") === -1) {
+        return;
+    }
     inputFile.files = event.dataTransfer.files;
     uploadImage();
 });

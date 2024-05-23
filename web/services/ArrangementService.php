@@ -47,5 +47,17 @@ class ArrangementService extends Service {
 
         return $arrangements;
     }
+
+    public static function getAllArrangementsAsArrayOfString()
+    {
+        $arrangements = self::GetArrangements();
+        $arrangementsStrings = [];
+
+        foreach ($arrangements as $arrangement) {
+            $arrangementsStrings[] = $arrangement->getLabel();
+        }
+
+        return $arrangementsStrings;
+    }
 }
 ?>
