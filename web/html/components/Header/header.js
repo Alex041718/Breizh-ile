@@ -320,6 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
     oeuil.addEventListener('click', function() {
         if (popup.style.display === 'none') {
             popup.style.display = "flex";
+            document.body.style.overflow = 'hidden';
         } else {
             closePopup();
         }
