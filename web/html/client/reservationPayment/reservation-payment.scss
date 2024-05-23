@@ -1,0 +1,45 @@
+@import '../../style/variables';
+
+body {
+    margin: 0;
+}
+
+.reservation-payment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: $grey6;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 500px;
+        padding: 20px;
+        background-color: $whiteColor;
+        border-radius: 5px;
+        border: 1px solid $grey5;
+        gap: 2em;
+
+        &__title {
+        }
+
+        p {
+
+        }
+
+        &__price-to-pay {
+            color: $clientPrimaryColor;
+            font-weight: bold;
+        }
+
+        &__button-box {
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+        }
+    }
+}

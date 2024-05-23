@@ -36,6 +36,27 @@
     }
   }
 
+  &--basic {
+    background-color: variables.$grey5;
+    color : variables.$grey3;
+    border: 2px solid variables.$grey5;
+
+    &:hover {
+      background-color: variables.$grey4;
+      border: 2px solid variables.$grey4;
+    }
+
+    &--secondary {
+      background-color: variables.$whiteColor !important;
+      color: variables.$grey5 !important;
+      border: 2px solid variables.$grey5;
+
+      &:hover {
+        background-color: variables.$grey6 !important;
+      }
+    }
+  }
+
   &--owner {
     background-color: variables.$ownerPrimaryColor;
     color : variables.$whiteColor;

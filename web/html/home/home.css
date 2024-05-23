@@ -124,6 +124,7 @@ body {
   bottom: -5px;
   width: 101%;
   height: 300px;
+  z-index: 10;
 }
 @media screen and (max-width: 1000px) {
   .hero-banner__wave {
@@ -275,6 +276,9 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+.logements__filters .filter__button a {
+  color: #1D1D1D;
 }
 @media screen and (max-width: 860px) {
   .logements__filters {

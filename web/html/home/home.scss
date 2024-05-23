@@ -125,6 +125,7 @@ body {
         bottom: -5px;
         width: 101%;
         height: 300px;
+        z-index: 10;
 
         @media screen and (max-width: 1000px) {
           width: 1000px;
@@ -286,6 +287,10 @@ body {
           display: flex;
           align-items: center;
           gap: 10px;
+
+          a {
+            color: $black2;
+          }
         }
 
         @media screen and (max-width: 860px) {

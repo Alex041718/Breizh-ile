@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+}
+
+.reservation-payment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f6f6f6;
+}
+.reservation-payment__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 500px;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  border: 1px solid #E0E0E0;
+  gap: 2em;
+}
+.reservation-payment__container__price-to-pay {
+  color: #307B5C;
+  font-weight: bold;
+}
+.reservation-payment__container__button-box {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+/*# sourceMappingURL=reservation-payment.css.map */

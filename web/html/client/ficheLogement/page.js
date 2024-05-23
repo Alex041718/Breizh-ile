@@ -70,7 +70,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Mettre à jour les éléments HTML avec les nouvelles valeurs
         adultCount.textContent = adultCountValue;
-        liveTravelersCount.textContent = adultCountValue + childCountValue;
+        liveTravelersCount.value = adultCountValue + childCountValue;
+        calculateAndDisplayNights();
     }
 
     function updateChildCount() {
@@ -84,7 +85,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Mettre à jour les éléments HTML avec les nouvelles valeurs
         childCount.textContent = childCountValue;
-        liveTravelersCount.textContent = adultCountValue + childCountValue;
+        liveTravelersCount.value = adultCountValue + childCountValue;
+        calculateAndDisplayNights();
     }
 
     // Gestionnaire d'événement pour le bouton "Ajouter des voyageurs"
@@ -102,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var map = L.map('map').setView([latitude, longitude], 13);
 
-    
 
     L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'ArcGIS'
@@ -114,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function () {
         fillOpacity: 0.5,
         radius: 1500
     }).addTo(map);
-        
 
     let MyControlClass =  L.Control.extend({  
   
@@ -153,19 +153,13 @@ document.addEventListener('DOMContentLoaded', function () {
             else
             {
               tileType = "OpenStreetMap";
-                            
+
               selectedTile = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'ArcGIS'
               }).addTo(map);
         }
     }
 
-    var circle = L.circle([51.508, -0.11], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 500
-    }).addTo(map);
 
 
     // Récupération des éléments avec infobulle
@@ -202,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function closePopupSavoir() {
         document.getElementById('popup-overlay-savoir').style.display = 'none';
         document.getElementById('popup-savoir').style.display = 'none';
-        
+
         // Retirer la classe pour rétablir le défilement du corps
         body.classList.remove('popup-savoir-open');
     }
@@ -272,16 +266,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const priceDisplay = document.querySelector('.prix');
-    
-    function displayPriceDetails() {
-        const nightCount = parseInt(nightCountElement.textContent, 10);
+    const buttonDisplay = document.querySelector("#reserverBtn");
 
-        if(nightCount > 0 ){
-            priceDisplay.style.display = 'flex';
-        }else{
-            priceDisplay.style.display = 'none';
-        }
-    }
 
     function calculateAndDisplayNights() {
         const startDate = arriveePicker.selectedDates[0];
@@ -294,10 +280,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (nightCount == 0) {
                 nightCount = 1;
             }
-
+            const totalTravelers = adultCountValue + childCountValue;
+            const totalCost = nightCount * costPerNight * totalTravelers;
 
             nightCountElement.textContent = nightCount;
-            const totalCost = nightCount * costPerNight;
             totalCostElement.textContent = totalCost + " €";
             finalTotalElement.textContent = totalCost + " €";
         } else {
@@ -314,8 +300,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (nightCount > 0) {
             priceDisplay.style.display = 'flex';
+            buttonDisplay.disabled = false;
         } else {
             priceDisplay.style.display = 'none';
+            buttonDisplay.disabled = true;
         }
     }
 

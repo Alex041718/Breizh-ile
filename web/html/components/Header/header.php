@@ -25,7 +25,6 @@ class Header {
                 <link rel="stylesheet" href="/components/Header/header.css">
 
                 <header class="">
-                    <div class="popup__">
                     <div data-tag="' . $tagToScroll . '" class="header '. ($isScrolling === true ? 'scroll scrolling rm-anim' : '' ). ' '. ($isBackOffice ? 'header--backoffice' : '' ). '">
 
                         <a class="logo" href="/">
@@ -68,7 +67,7 @@ class Header {
                     $menu = '
                         <ul>
                             <li><a href="">Bienvenue ' . $owner->getFirstname() . '</a></li>
-                            <li><a href="">Mon Compte</a></li>
+                            <li><a href="/back/profil">Mon Compte</a></li>
                             <li><a href="/back/ownerReservations">Mes réservations</a></li>
                             <li><a href="">Qui sommes nous</a></li>
                             <li><a href="' . $urlLogout . '">Se déconnecter</a></li>
@@ -109,6 +108,11 @@ class Header {
             }
             else if($isAuthenticated) $user = $client;
 
+            $hiddenInputs = "";
+
+            foreach ($_POST as $key => $value) {
+                $hiddenInputs = $hiddenInputs . '<input type="hidden" name="'. $key . '" value="' . $value . '" />';
+            }
 
             $render =  /*html*/ '
 
@@ -122,16 +126,159 @@ class Header {
                             
                         </div>
                     </div>
+                    <div class="popup__search">
+                        <form method="POST" class="popup__search__content" action="/#logements">
+                            <div class="popup__search__content__filter" type="where">
+                                <p>Où ?</p>
+                                <span class="autocomplete">
+                                    <input id="text-input" name="searchText" type="text" value="' . (isset($_POST["searchText"]) ? $_POST["searchText"] : "") . '" placeholder="Rechercher une destination">
+                                </span>
+                            </div>
+                            <div class="popup__search__content__filter">
+                                <p>Arrivée ?</p>
+                                <input class="beginDate para--14px" name="startDate" id="start-date" type="date" value="' . (isset($_POST["startDate"]) ? $_POST["startDate"] : "") .'" placeholder="Ajouter une date">
+                            </div>
+                            <div class="popup__search__content__filter">
+                                <p>Départ ?</p>
+                                <input class="endDate para--14px" name="endDate" id="end-date" type="date" value="' . (isset($_POST["endDate"]) ? $_POST["endDate"] : "") .'" placeholder="Ajouter une date">
+                            </div>
+                            <div class="popup__search__content__filter">
+                                <p>Combien de personnes ?</p>
+                                <input min="0" type="number" name="peopleNumber" value="' . (isset($_POST["peopleNumber"]) ? $_POST["peopleNumber"] : "") .'" placeholder="Ajouter un nombre" />
+                            </div>
+                            <button type="submit">Rechercher</button>
+                        </form>
+                    </div>
                     <div class="header-mobile">
-                        <div class="header-mobile__icon">
-                            <i class="fa-sharp fa-solid fa-location-dot"></i>
-                            <p>Réservation</p>
+                        <div id="open-mobile-settings" class="header-mobile__icon">
+                            <i class="fa-solid fa-sliders"></i>
+                            <p>Filtres</p>
                         </div>
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i id="open-search" class="fa-solid fa-magnifying-glass"></i>
                         <div class="header-mobile__icon">
-                        ' . ($isAuthenticated ? '<img id="profil" class="profilImg" src="' . $user->getImage()->getImageSrc() . '" />' : '<i id="profil" class="fa-solid fa-user"></i>') .
+
+                        ' . ($isAuthenticated ? '<img id="mobile-profil" class="profilImg" src="' . $user->getImage()->getImageSrc() . '" />' : '<i id="mobile-profil" class="fa-solid fa-user"></i>') .
                             '<p>Mon profil</p>
+                            <div id="mobile-options" style="display: none;">
+                                '. $menu .'
+                            </div>
                         </div>
+                    </div>
+                    <div id="popup__filter__header" class="popup__filter">
+                        <form method="POST" action="./#logements" class="popup__filter__content">' .
+                            $hiddenInputs .
+                            '<input type="hidden" />
+                            <div class="popup__filter__top">
+                                <h2>Filtres</h2>
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                            <div class="popup__filter__container">
+                                <h3>Prix</h3>
+                                <div class="popup__filter__container__prices">
+                                    <div class="price-input-container">
+                                        <div class="price-input">
+                                            <div class="price-field">
+                                                <span>Prix Minimum</span>
+                                                <input type="number"
+                                                    name="minPrice"
+                                                    class="min-input"
+                                                    value="' . (isset($_POST["minPrice"]) ? $_POST["minPrice"] : "0") .'">
+                                            </div>
+                                            <div class="price-field">
+                                                <span>Prix Maximum</span>
+                                                <input type="number"
+                                                    name="maxPrice"
+                                                    class="max-input"
+                                                    value="' . (isset($_POST["minPrice"]) ? $_POST["minPrice"] : "500").'">
+                                            </div>
+                                        </div>
+                                        <div class="slider-container">
+                                            <div class="price-slider">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Slider -->
+                                    <div class="range-input">
+                                        <input type="range"
+                                            class="min-range"
+                                            min="0"
+                                            max="500"
+                                            value="0"
+                                            step="1">
+                                        <input type="range"
+                                            class="max-range"
+                                            min="0"
+                                            max="500"
+                                            value="500"
+                                            step="1">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="popup__filter__container__category">
+                                    <h3>Catégorie</h3>
+                                    <div class="popup__filter__container__choices">
+                                        <div class="popup__filter__box">
+                                            <input type="checkbox" />
+                                            <p>Appartement</p>
+                                        </div>
+                                        <div class="popup__filter__box">
+                                            <input type="checkbox" />
+                                            <p>Chalet</p>
+                                        </div>
+                                        <div class="popup__filter__box">
+                                            <input type="checkbox" />
+                                            <p>Maison</p>
+                                        </div>
+                                        <div class="popup__filter__box">
+                                            <input type="checkbox" />
+                                            <p>Bateau</p>
+                                        </div>
+                                        <div class="popup__filter__box">
+                                            <input type="checkbox" />
+                                            <p>Villa d\'exception</p>
+                                        </div>
+                                        <div class="popup__filter__box">
+                                            <input type="checkbox" />
+                                            <p>Logement insolite</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="popup__filter__container__type">
+                                    <h3>Type</h3>
+                                    <div class="popup__filter__container__choices">
+                                    <div class="popup__filter__box">
+                                            <input type="checkbox" />
+                                            <p>T1</p>
+                                        </div>
+                                        <div class="popup__filter__box">
+                                            <input type="checkbox" />
+                                            <p>T2</p>
+                                        </div>
+                                        <div class="popup__filter__box">
+                                            <input type="checkbox" />
+                                            <p>T3</p>
+                                        </div>
+                                        <div class="popup__filter__box">
+                                            <input type="checkbox" />
+                                            <p>T4</p>
+                                        </div>
+                                        <div class="popup__filter__box">
+                                            <input type="checkbox" />
+                                            <p>T5</p>
+                                        </div>
+                                        <div class="popup__filter__box">
+                                            <input type="checkbox" />
+                                            <p>T6</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="popup__filter__bottom">
+                                <button type="submit" id="filter_submit__header" class="btn"a>Valider</a>
+                            </div>
+                        </form>
                     </div>
                     <div id="popup__access" class="popup__access">
                         <div class="popup__content" >

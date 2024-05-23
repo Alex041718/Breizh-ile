@@ -15,6 +15,11 @@ main {
   align-items: center;
 }
 
+#liveTravelersCount {
+  border: none;
+  text-align: center;
+}
+
 body {
   margin: 0;
 }
@@ -46,7 +51,7 @@ body {
 }
 .photoAndReservation .photo img {
   width: 100%;
-  min-height: 43em;
+  height: auto;
   border-radius: 20px;
 }
 @media screen and (max-width: 768px) {
@@ -58,7 +63,6 @@ body {
   border: 1px solid #A9A9A9;
   border-radius: 20px;
   width: 50%;
-  height: 43em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,10 +91,15 @@ body {
   padding-top: 1em;
   padding-bottom: 1em;
   border-radius: 10px;
-  border: gray;
+  border: 1px solid gray;
   background-color: #307B5C;
   color: white;
   cursor: pointer;
+}
+.photoAndReservation .reservation .reservationBtn button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
 }
 .photoAndReservation .reservation .prix {
   display: none;

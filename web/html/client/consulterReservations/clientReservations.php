@@ -47,18 +47,26 @@ Header::render(true,false, $isAuthenticated, '/client/reservations-liste');
 <body>
 <main>
     <div class="title">
-        <i class="fa-regular fa-less-than"></i>
+        <a href="/" class="title__arrow">
+            <i class="fa-regular fa-less-than"></i>
+        </a>
         <h2 class="title__text">Vos réservations</h2>
     </div>
     <div class="reservation-list">
         <div class="reservation-list__container">
-            <?php foreach ($clientReservationList as $index => $reservationItem) : ?>
-                <div class="reservation-list__container__card" data-index="<?php echo $index; ?>">
-<!--                    -->
-                    <?php ReservationCard::render("reservation-list__container__card__render", "", $reservationItem); ?>
-<!--                    </a>-->
-                </div>
-            <?php endforeach; ?>
+            <?php if (empty($clientReservationList)) : ?>
+            <div class="reservation-list__container__empty">
+                <h4>Aucune réservation trouvée.</h4>
+                <h4>Louez un logement dès maintenant <a href="/">ici</a></h4>
+            </div>
+
+            <?php else : ?>
+                <?php foreach ($clientReservationList as $index => $reservationItem) : ?>
+                    <div class="reservation-list__container__card" data-index="<?php echo $index; ?>">
+                        <?php ReservationCard::render("reservation-list__container__card__render", "", $reservationItem); ?>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
 </main>
