@@ -82,7 +82,7 @@
     Header::render(true,false, $isAuthenticated, '/detail-reservation?reservationID=' . $_GET['reservationID']);
 
     $reservation = ReservationService::getReservationByID($_GET['reservationID']);
-    $housing = HousingService::GetHousingById($reservation->getHousing()->getHousingID());
+    $housing = HousingService::GetHousingById($reservation->getHousingId()->getHousingID());
 
     $reservation_dateDebut = $reservation->getBeginDate();
     $reservation_dateFin =  $reservation->getEndDate();
