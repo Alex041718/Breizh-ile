@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Mettre à jour les éléments HTML avec les nouvelles valeurs
         adultCount.textContent = adultCountValue;
         liveTravelersCount.value = adultCountValue + childCountValue;
+        calculateAndDisplayNights();
     }
 
     function updateChildCount() {
@@ -85,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Mettre à jour les éléments HTML avec les nouvelles valeurs
         childCount.textContent = childCountValue;
         liveTravelersCount.value = adultCountValue + childCountValue;
+        calculateAndDisplayNights();
     }
 
     // Gestionnaire d'événement pour le bouton "Ajouter des voyageurs"
@@ -116,12 +118,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }).addTo(map);
 
 
-    let MyControlClass =  L.Control.extend({
-
+    let MyControlClass =  L.Control.extend({  
+  
         options: {
             position: 'topleft'
         },
-
+        
         onAdd: function(map) {
             var div = L.DomUtil.create('div', 'leaflet-bar my-control');
             var myButton = L.DomUtil.create('button', 'my-button-class', div);
@@ -134,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             return div;
         },
-
+      
         onRemove: function(map) {
         }
     });
@@ -279,9 +281,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (nightCount == 0) {
                 nightCount = 1;
             }
+            const totalTravelers = adultCountValue + childCountValue;
+            const totalCost = nightCount * costPerNight * totalTravelers;
 
             nightCountElement.textContent = nightCount;
-            const totalCost = nightCount * costPerNight;
             totalCostElement.textContent = totalCost + " €";
             finalTotalElement.textContent = totalCost + " €";
         } else {

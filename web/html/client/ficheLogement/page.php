@@ -301,7 +301,7 @@ $iconMapping = [
                     <div data-lat="<?= $housingLatitude ?>" data-long="<?= $housingLongitude ?>" id="map"></div>
                 </div>
             </div>
-
+            
             <div id="overlay"></div>
 
         </div>

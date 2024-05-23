@@ -79,76 +79,73 @@ document.addEventListener('DOMContentLoaded', function () {
     // MAP GESTION
 
     let mapObj = document.getElementById('map');
-    var longitude = mapObj.dataset.long;
-    var latitude = mapObj.dataset.lat;
-    var tileType = "OpenStreetMap";
+var longitude = mapObj.dataset.long;
+var latitude = mapObj.dataset.lat;
+var tileType = "OpenStreetMap";
 
-    var map = L.map('map').setView([latitude, longitude], 13);
+var map = L.map('map').setView([latitude, longitude], 13);
 
-    
+L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'ArcGIS'
+}).addTo(map);
 
-    L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'ArcGIS'
-    }).addTo(map);
-
-    var circle = L.circle([latitude, longitude], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 500
-    }).addTo(map);
-        
-
-    let MyControlClass =  L.Control.extend({  
-  
-        options: {
-            position: 'topleft'
-        },
-        
-        onAdd: function(map) {
-            var div = L.DomUtil.create('div', 'leaflet-bar my-control');
-            var myButton = L.DomUtil.create('button', 'my-button-class', div);
+var circle = L.circle([latitude, longitude], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 500
+}).addTo(map);
 
 
-            let myImage = L.DomUtil.create('img', '', myButton);
-            myImage.src = "https://zestedesavoir.com/media/galleries/16186/1b4da67d-cb8b-4c29-85cb-4633005ea1e9.svg";
-            myImage.style = "margin-left:0px;width:20px;height:20px";
-            L.DomEvent.on(myButton, 'click', function() { changeBackground(); }, this);
+let MyControlClass = L.Control.extend({
 
-            return div;
-        },
-      
-        onRemove: function(map) {
-        }
-    });
+    options: {
+        position: 'topleft'
+    },
 
-    let myControl = new MyControlClass().addTo(map);
+    onAdd: function(map) {
+        var div = L.DomUtil.create('div', 'leaflet-bar my-control');
+        var myButton = L.DomUtil.create('button', 'my-button-class', div);
 
-    function changeBackground(){
-        if(tileType == "OpenStreetMap")
-            {
-                tileType = "ArcGis";
-                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                }).addTo(map);
+        let myImage = L.DomUtil.create('img', '', myButton);
+        myImage.src = "https://zestedesavoir.com/media/galleries/16186/1b4da67d-cb8b-4c29-85cb-4633005ea1e9.svg";
+        myImage.style = "margin-left:0px;width:20px;height:20px";
+        L.DomEvent.on(myButton, 'click', function() {
+            changeBackground();
+        }, this);
+
+        return div;
+    },
+
+    onRemove: function(map) {}
+});
+
+let myControl = new MyControlClass().addTo(map);
+
+function changeBackground() {
+    if (tileType == "OpenStreetMap") {
+        tileType = "ArcGis";
+        map.eachLayer(function (layer) {
+            if (layer instanceof L.TileLayer) {
+                map.removeLayer(layer);
             }
-            else
-            {
-              tileType = "OpenStreetMap";
-                            
-              selectedTile = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'ArcGIS'
-              }).addTo(map);
-        }
+        });
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+    } else {
+        tileType = "OpenStreetMap";
+        map.eachLayer(function (layer) {
+            if (layer instanceof L.TileLayer) {
+                map.removeLayer(layer);
+            }
+        });
+        L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'ArcGIS'
+        }).addTo(map);
     }
-
-    var circle = L.circle([51.508, -0.11], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 500
-    }).addTo(map);
+}
 
     // Récupération des éléments avec infobulle
     const tooltips = document.querySelectorAll('.tooltip');
