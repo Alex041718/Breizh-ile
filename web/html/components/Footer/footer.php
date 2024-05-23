@@ -38,7 +38,7 @@ class Footer {
                         <div>
                             <h4>Votre compte</h4>
                             <div>
-                                <a href=""><p>Devenir propriétaire</p></a>
+                                <a href="/back"><p>Devenir propriétaire</p></a>
                             </div>
                         </div>
                     </div>
