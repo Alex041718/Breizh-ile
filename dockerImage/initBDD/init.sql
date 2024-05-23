@@ -109,6 +109,8 @@ CREATE TABLE _User (
     imageID BIGINT UNSIGNED, -- Correspond au type `serial` dans Image pour mysql
     genderID BIGINT UNSIGNED, -- Correspond au type `serial` dans Gender pour mysal
     addressID BIGINT UNSIGNED, -- Correspond au type `serial` dans Address pour mysql
+    reset_token_hash varchar(64) default null,
+    reset_token_expires_at DATETIME default null,
     FOREIGN KEY (genderID) REFERENCES _Gender(genderID),
     FOREIGN KEY (addressID) REFERENCES _Address(addressID),
     FOREIGN KEY (imageID) REFERENCES _Image(imageID)

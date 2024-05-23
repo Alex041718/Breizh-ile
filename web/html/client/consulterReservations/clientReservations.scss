@@ -15,13 +15,12 @@ main {
     align-items: center;
     gap: 1em;
     margin-top: 135px;
+}
 
     &__arrow{
         all: unset;
     }
 }
-
-
 
 .fa-less-than::before{
     font-size: 3em;
@@ -41,12 +40,12 @@ main {
         flex-direction: column;
         padding: 2em;
         scroll-behavior: smooth;
-        
+
         &__empty{
             display: flex;
             flex-direction: column;
             align-items: center;
-            
+
         }
 
         &__card {
