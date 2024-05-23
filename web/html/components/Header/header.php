@@ -67,7 +67,7 @@ class Header {
                     $menu = '
                         <ul>
                             <li><a href="">Bienvenue ' . $owner->getFirstname() . '</a></li>
-                            <li><a href="/back/profile">Mon Compte</a></li>
+                            <li><a href="/back/profil">Mon Compte</a></li>
                             <li><a href="/back/ownerReservations">Mes réservations</a></li>
                             <li><a href="">Qui sommes nous</a></li>
                             <li><a href="' . $urlLogout . '">Se déconnecter</a></li>
@@ -80,7 +80,7 @@ class Header {
                     $menu = '
                     <ul>
                         <li><a href="">Bienvenue ' . $client->getFirstname() . '</a></li>
-                        <li><a href="/client/profile">Mon Compte</a></li>
+                        <li><a href="/client/profil">Mon Compte</a></li>
                         <li><a href="/client/reservations-liste">Mes réservations</a></li>
                         <li><a href="">Qui sommes nous</a></li>
                         <li><a href="' . $urlLogout . '">Se déconnecter</a></li>
