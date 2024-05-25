@@ -65,11 +65,14 @@ $housing_ownerFirstName = $housing->getOwner()->getFirstname();
 $housing_ownerLastName = $housing->getOwner()->getLastname();
 $housing_longDesc = $housing->getLongDesc();
 $housing_priceHt = $housing->getPriceIncl();
+$housing_priceHt_format = number_format($housing_priceHt, 2, '.', '');
 $housingLongitude = $housing->getLongitude();
 $housingLatitude = $housing->getLatitude();
 $housingCity = $housing->getAddress()->getCity();
+$housingPostalCode = $housing->getAddress()->getPostalCode();
 
-// $housing_arrangements = $housing->getArrangement(); a modifier du aux changements de la bdd
+
+// $housing_arrangements = $housing->getArrangement(); à modifier du aux changements de la bdd
 
 
 
@@ -93,16 +96,17 @@ $iconMapping = [
 
     <main>
         <div class="page">
-            <h3 id="title"> <?php echo $housing_title ?> </h3>
+        <h2 id="title"><?= $housingCity . " - " . $housingPostalCode ?></h2>
             <div class="photoAndReservation">
                 <div class="photo">
                     <img src="<?php echo $housing_image ?>" alt="Image Logement">
                 </div>
                 <form class="reservation" action="/controllers/client/clientCreateDevis.php" method="post">
-                    <h3> <?php echo $housing_priceHt ?> € par nuit</h3>
-
-
-
+                    <div class="price">
+                        <h2> <?php echo $housing_priceHt_format . ' €' ?></h2>
+                        <p class="para--18px para--bold">/ nuit</p>
+                    </div>
+                    
                     <div class="preparation">
                         <div class="datepicker">
                             <div class="arriveeAndDepart">
@@ -157,29 +161,28 @@ $iconMapping = [
                         </div>
                     </div>
 
-
-
                     <div class="reservationBtn">
-                        <button type="submit" class="para--18px para--bold" id="reserverBtn" disabled="<?=$isAuthenticated ?>">Réserver</button>
+                        <button type="submit" class="para--18px para--bold" id="reserverBtn">Réserver</button>
+                        <div id="message" style="display: none;">Veuillez sélectionner vos dates d'arrivée et de départ !</div>
                     </div>
 
                     <div class="prix">
                         <div class="calcul">
                             <div>
                                 <p>
-                                    <span id="nightPrice"><?php echo $housing_priceHt ?></span>
-                                    <span>€ x</span>
-                                    <span id="night-count">0</span> nuits
+                                    <span id="nightPrice" class="para--18px"><?php echo $housing_priceHt_format ?></span>
+                                    <span class="para--18px">€ x</span>
+                                    <span id="night-count" class="para--18px">0</span> nuits
                                 </p>
                             </div>
-                            <div><p id="total-cost">0 €</p></div>
+                            <div><p id="total-cost" class="para--18px">0 €</p></div>
                         </div>
 
                         <div class="horizontal-line"></div>
 
                         <div class="total">
-                            <div><p class="para--bold">Total HT</p></div>
-                            <div><p class="para--bold" id="final-total">0</p></div>
+                            <div><p class="para--18px para--bold">Total HT</p></div>
+                            <div><p class="para--18px para--bold" id="final-total">0</p></div>
                         </div>
                     </div>
 
@@ -202,14 +205,14 @@ $iconMapping = [
 
             <div class="twodiv">
                 <div class="details">
-                    <h4> <?php echo $housing_shortDesc ?> </h4>
+                    <h3> <?php echo $housing_shortDesc ?> </h3>
                     <div class="infoLogement">
-                        <p id="nbVoyageurs"> <?php echo $housing_nbPerson ?> personnes • <?=$housing_nbRoom!=0? $housing_nbRoom :"1"?> chambres • <?=$housing_nbBed?> lits</p>
+                        <p id="nbVoyageurs" class="para--18px"> <?php echo $housing_nbPerson ?> personnes • <?=$housing_nbRoom!=0? $housing_nbRoom :"1"?> chambres • <?=$housing_nbBed?> lits</p>
                     </div>
 
                     <div class="proprio">
                         <img src=" <?php echo $housing_ownerImage ?>" alt="Proprio Image">
-                        <p class="para--18px para--bold"> <?php echo $housing_ownerFirstName . ' ' . $housing_ownerLastName; ?></p>
+                        <p class="para--18px"> <?php echo $housing_ownerFirstName . ' ' . $housing_ownerLastName; ?></p>
                     </div>
 
                     <div class="description">
