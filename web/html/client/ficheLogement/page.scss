@@ -79,15 +79,30 @@ body {
             width: 75%;
         }
 
-        h3{
-            align-self: center;
+        .price {  
+            display: flex;
+            align-items: center;
             margin-top: 0.5em;
+            gap: 0.5em;
+
+            h2{
+                color: $clientPrimaryColor;
+            }
         }
+        
 
         .reservationBtn {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+            align-items: center;
             margin-top: 3em;
             margin-bottom: 1em;
             width: 75%;
+
+            #message{
+                color: red;
+            }
 
             button {
               width: 100%;
@@ -293,8 +308,6 @@ body {
             width: 100%;
             margin-top: 1em;
         }
-
-        h4
 
         .infoLogement{
             display: flex;

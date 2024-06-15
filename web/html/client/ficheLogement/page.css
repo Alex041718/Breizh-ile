@@ -77,14 +77,26 @@ body {
 .photoAndReservation .reservation .preparation {
   width: 75%;
 }
-.photoAndReservation .reservation h3 {
-  align-self: center;
+.photoAndReservation .reservation .price {
+  display: flex;
+  align-items: center;
   margin-top: 0.5em;
+  gap: 0.5em;
+}
+.photoAndReservation .reservation .price h2 {
+  color: #307B5C;
 }
 .photoAndReservation .reservation .reservationBtn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  align-items: center;
   margin-top: 3em;
   margin-bottom: 1em;
   width: 75%;
+}
+.photoAndReservation .reservation .reservationBtn #message {
+  color: red;
 }
 .photoAndReservation .reservation .reservationBtn button {
   width: 100%;
@@ -264,7 +276,7 @@ body {
     margin-top: 1em;
   }
 }
-.twodiv .details h4 .infoLogement {
+.twodiv .details .infoLogement {
   display: flex;
 }
 .twodiv .details .criteres {
@@ -521,6 +533,12 @@ body {
   z-index: 9999;
   box-shadow: 0 4px 8px rgb(0, 0, 0);
   overflow-y: auto;
+}
+@media screen and (max-width: 768px) {
+  #popup-savoir {
+    width: 15em;
+    height: 20em;
+  }
 }
 @media screen and (max-width: 768px) {
   #popup-savoir {
