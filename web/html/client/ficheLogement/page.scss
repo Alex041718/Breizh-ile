@@ -1,0 +1,761 @@
+@import '../../style/variables';
+
+@keyframes circle-animation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#liveTravelersCount {
+    border: none;
+    text-align: center;
+}
+
+body {
+    margin: 0;
+}
+
+.photoAndReservation{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 3em;
+
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column; // Change flex direction to column for mobile devices
+        align-items: center; // Align items to the center horizontally
+    }
+
+    .photo {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        @media screen and (max-width:768px) {
+            width: 100%;;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            object-fit: cover;
+
+            @media screen and (max-width:768px) {
+                min-height: 0;
+            }
+        }
+
+    }
+
+    .reservation {
+        border: 1px solid #A9A9A9;
+        border-radius: 20px;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @media screen and (max-width:768px) {
+            height: 30em;
+            width: 100%;
+        }
+
+        .preparation {
+            width: 75%;
+        }
+
+        .price {  
+            display: flex;
+            align-items: center;
+            margin-top: 0.5em;
+            gap: 0.5em;
+
+            h2{
+                color: $clientPrimaryColor;
+            }
+        }
+        
+
+        .reservationBtn {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+            align-items: center;
+            margin-top: 3em;
+            margin-bottom: 1em;
+            width: 75%;
+
+            #message{
+                color: red;
+            }
+
+            button {
+              width: 100%;
+              padding-top: 1em;
+              padding-bottom: 1em;
+              border-radius: 10px;
+              border: 1px solid gray;
+              background-color: #307B5C;
+              color: white;
+              cursor: pointer;
+
+              &:disabled {
+                background-color: #cccccc;
+                color: #666666;
+                cursor: not-allowed;
+              }
+            }
+          }
+
+        .prix {
+            display: none;
+            flex-direction: column;
+            width: 75%;
+            margin-bottom: 2em;
+
+            @media screen and (max-width:768px) {
+                margin-top: 0;
+            }
+
+            .calcul, .total {
+                display: flex;
+                margin-top: 2em;
+                justify-content: space-between;
+                width: 100%;
+
+                @media screen and (max-width: 768px) {
+                    margin-top: 0em;
+                }
+            }
+        }
+    }
+}
+
+
+
+.page {
+    height: 100%;
+    max-width: 1920px;
+    margin: 8em;
+
+    @media screen and (max-width: 768px) {
+        margin: 3em;;
+    }
+
+    #title{
+        margin-bottom:0.5em;
+        @media screen and (max-width:768px) {
+            margin-top: 3em;
+        }
+    }
+
+    #overlay {
+        display: none;
+        overflow: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9998;
+    }
+
+    #popup2 {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border: 1px solid gray;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+        border-radius: 20px;
+        padding: 2em;
+        z-index: 9999;
+
+        &.show {
+            display: block;
+        }
+
+        .popup-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+
+            #closePopupBtn {
+                position: absolute;
+                top: 1em;
+                left: 1em;
+
+                // Définir le centre de rotation au milieu de l'icône
+                transform-origin: center;
+
+                // Appliquer les styles de l'icône
+                &.fa-solid {
+                    // Définir les propriétés pour l'icône spécifique
+                    &.fa-xmark {
+                        // Ajouter une transition pour une animation fluide
+                        transition: transform 0.3s;
+
+                        // Définir les styles pour le survol de l'icône
+                        &:hover {
+                            // Appliquer l'animation de cercle définie
+                            animation: circle-animation 1s ease-in-out infinite;
+                        }
+                    }
+                }
+            }
+
+            .traveler-type {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .addbtn {
+                    display: flex;
+                    gap: 0.5em;
+                    border: 1px solid gray;
+
+                    background-color: transparent;
+                    border-radius: 20px;
+
+                    button {
+                        cursor: pointer;
+                        border-radius: 20px;
+                        border: 1px solid gray;
+                    }
+
+                    .nbr {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 2em;
+                        color: black;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+.popup-active {
+    overflow: hidden;
+}
+
+
+.twodiv {
+    width: 100%;
+    height: 40em;
+    display: flex;
+    gap: 3em;
+    flex-direction: row;
+
+    @media screen and (max-width:768px) {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .localisation {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        @media screen and (max-width: 768px) {
+            width: 100%;
+            height: 20em;
+        }
+
+
+        .local-texte {
+            display: flex;
+            gap: 0.5em;
+            margin-bottom: 0.5em;
+            justify-content: center;
+            margin-top: 3em;
+
+            @media screen and (max-width: 728px) {
+                margin-top: 0;
+            }
+        }
+
+    }
+
+    .details {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        @media screen and (max-width: 768px) {
+            width: 100%;
+            margin-top: 1em;
+        }
+
+        .infoLogement{
+            display: flex;
+        }
+
+        .criteres {
+            width: 100%;
+            height: 10%;
+            margin-top: 3em;
+            border-radius: 20px;
+            align-self: flex-end;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+
+            p {
+                @media screen and (max-width:768px) {
+                    padding: 1em;
+                }
+            }
+        }
+
+        .description {
+            border: 2px solid gray;
+            margin-top: 2em;
+            height: 50%;
+            border-radius: 20px;
+            position: relative;
+
+            .texte {
+                position: relative;
+                margin: 20px;
+                height: 90%;
+                display: flex;
+                flex-direction: column;
+                p#button-savoir {
+                    margin-top: 10px;
+                    cursor: pointer;
+
+                }
+
+                #truncate-text {
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 8; // Nombre de lignes avant la troncature
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: normal;
+                    line-height: 1.6em;
+
+                }
+            }
+
+
+            button {
+                align-self: flex-end;
+                border: none;
+                background-color: transparent;
+            }
+
+            button:hover {
+                text-decoration: underline;
+            }
+        }
+
+
+    }
+}
+
+#map{
+    position: relative;
+    height: 100%;
+    outline-style: none;
+    border-radius: 20px;
+    z-index: 20;
+}
+
+
+.horizontal-line {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin-top: 2em;
+    height: 0;
+    @media screen and (max-width: 768px) {
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+}
+
+.nbrClients {
+    display: flex;
+    justify-content: center;
+
+    #addTravelersBtn {
+        background-color: transparent;
+        border: 1px solid gray;
+        border-top: none;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        width: 100%;
+        height: 5em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+}
+
+.datepicker {
+    display: flex;
+    justify-content: center;
+    margin-top: 3em;
+
+    .arriveeAndDepart {
+        width: 100%;
+        display: flex;
+
+        .arrivee {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            align-items: center;
+            border: 1px solid gray;
+            border-right: none;
+            border-top-left-radius: 10px;
+            justify-content: center;
+            overflow: hidden;
+
+            @media screen and (max-width: 768px) {
+                width: 50%;
+            }
+
+            input{
+                @media screen and (max-width: 768px) {
+                    width: 5em;
+                }
+            }
+        }
+
+        .vertical-line {
+            border-left: 1px solid gray;
+            display: inline-block;
+            height: 5em;
+        }
+
+        .depart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%;
+            border: 1px solid gray;
+            border-left: none;
+            border-top-right-radius: 10px;
+            justify-content: center;
+            overflow: hidden;
+
+            @media screen and (max-width: 768px) {
+                width: 50%;
+            }
+
+            input{
+                @media screen and (max-width: 768px) {
+                    width: 5em;
+                }
+            }
+        }
+
+    }
+
+
+}
+
+
+
+.proprio {
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+
+    img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+}
+
+#start-date, #end-date {
+    border: none;
+    text-align: center;
+}
+
+.traveler-type {
+    display: flex;
+    gap: 3em;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 3em;
+    margin-right: 3em;
+
+    @media screen and (max-width:768px) {
+        margin-left: 2em;
+        margin-right: 2em; 
+    }
+}
+
+.adulteInfo, .enfantInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    p{
+        @media screen and (max-width:768px) {
+            width: 5em;
+        }
+    }
+}
+
+
+.addbtn {
+    display: flex;
+
+    .nbr {
+        text-align: center;
+        width: 2em;
+    }
+}
+
+
+
+.tooltip {
+    position: relative;
+    cursor: pointer;
+
+    .tooltip-text {
+        visibility: hidden;
+        border-radius: 10px;
+        background-color: black;
+        color: white;
+        border: 1px solid gray;
+        text-align: center;
+        padding: 10px;
+        position: absolute;
+        z-index: 1;
+        bottom: 115%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: opacity 0.3s;
+
+        p{
+            white-space: nowrap;
+
+            @media screen and (max-width:768px) {
+                white-space: normal;
+            }
+        }
+    }
+
+    &:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+
+
+.popup-savoir-open {
+    overflow: hidden; // Empêche le défilement du corps lorsque la pop-up est ouverte
+
+}
+
+/* Styles pour la pop-up */
+#popup-savoir {
+    flex-direction: column;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 35em;
+    height: 50vh;
+    background-color: white;
+    padding: 3em;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    z-index: 9999;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+    overflow-y: auto;
+
+    @media screen and (max-width: 768px) {
+        width: 15em;
+        height: 20em;
+    }
+
+    @media screen and (max-width: 768px) {
+        width: 15em;
+        height: 20em;
+    }
+
+    #close-popup {
+        position: absolute;
+        top: 1em;
+        left: 1em;
+        cursor: pointer;
+
+        // Définir le centre de rotation au milieu de l'icône
+        transform-origin: center;
+
+        // Appliquer les styles de l'icône
+        &.fa-solid {
+            // Définir les propriétés pour l'icône spécifique
+            &.fa-xmark {
+                // Ajouter une transition pour une animation fluide
+                transition: transform 0.3s;
+
+                // Définir les styles pour le survol de l'icône
+                &:hover {
+                    // Appliquer l'animation de cercle définie
+                    animation: circle-animation 1s ease-in-out infinite;
+                }
+            }
+        }
+    }
+
+    #titleDescription{
+        margin-bottom: 1.5em;
+        text-align: center;
+    }
+
+    p {
+        line-height: 2;
+    }
+
+}
+
+#popup-overlay-savoir {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+}
+
+
+.overlay-critere {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+
+}
+
+.popup-critere {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 20px;
+    padding: 2em;
+    z-index: 9999;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+
+    &.show {
+        display: block;
+    }
+
+    .popup-content-critere {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        gap: 3em;
+        width: 35em;
+        height: 35em;
+
+        @media screen and (max-width:768px) {
+            width: 15em;
+        }
+
+        i#closePopupCritereBtn {
+            position: absolute;
+            top: 1em;
+            left: 1em;
+
+            transform-origin: center;
+
+            // Appliquer les styles de l'icône
+            &.fa-solid {
+                // Définir les propriétés pour l'icône spécifique
+                &.fa-xmark {
+                    // Ajouter une transition pour une animation fluide
+                    transition: transform 0.3s;
+
+                    // Définir les styles pour le survol de l'icône
+                    &:hover {
+                        // Appliquer l'animation de cercle définie
+                        animation: circle-animation 1s ease-in-out infinite;
+                    }
+                }
+            }
+        }
+
+        h3 {
+            text-align: center;
+            margin-bottom: 0.5em;
+        }
+
+        .section {
+
+
+            .items {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 3em;
+                margin-left: 5em;
+                margin-top: 2em;
+
+                @media screen and (max-width:768px) {
+                    flex-direction: column;
+                    margin-left: 3em;
+                }
+                .item {
+                    display: flex;
+                    align-items: center;
+                    gap: 1.5em;
+                    min-width: 45%;
+
+                    i{
+                        color: $clientPrimaryColor;
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+

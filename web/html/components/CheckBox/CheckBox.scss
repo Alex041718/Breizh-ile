@@ -1,0 +1,31 @@
+@import '../../style/variables';
+
+.checkbox {
+    display: flex;
+    align-items: center;
+
+    &__input {
+        appearance: none;
+        width: 1.2rem;
+        height: 1.2rem;
+        border: 3px solid $ownerPrimaryColor;
+        border-radius: 0.3rem;
+        cursor: pointer;
+        display: grid;
+        place-content: center;
+
+        &::before {
+            content: '';
+            display: block;
+            width: 0.69em;
+            height: 0.66em;
+            transform: scale(0);
+            transition: 50ms transform ease-in-out;
+            box-shadow: inset 10rem 10rem $ownerPrimaryColor;
+        }
+
+        &:checked::before {
+            transform: scale(1);
+        }
+    }
+}

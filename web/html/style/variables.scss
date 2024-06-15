@@ -1,0 +1,45 @@
+// Définition des variables du site
+
+// Tailles de police
+
+$font-size-xs: max(10px, calc(14vw / 19.2));
+
+$font-size-base: max(14px, calc(16vw / 19.2));
+
+$font-size-lg: max(16px, calc(20vw / 19.2));
+
+$font-size-xl: max(23px, calc(30vw / 19.2));
+
+$font-size-2xl: max(30px, calc(48vw / 19.2));
+
+$font-size-3xl: max(45px, calc(56vw / 19.2));
+
+
+
+// Couleurs
+$clientPrimaryColor: #307B5C;
+$clientPrimaryColorHover: #37906c;
+$ownerPrimaryColor: #082C4C;
+$ownerPrimaryColorHover: #0b3e6b;
+$secondaryColor: #A9A9A9;
+$blackColor: #000000;
+$black2: #1D1D1D;
+$whiteColor: #FFFFFF;
+$grey1: #333333;
+$grey2: #4F4F4F;
+$grey3: #828282;
+$grey4: #BDBDBD;
+$grey5: #E0E0E0;
+$lighterGrey5: #e9e9e9;
+$grey6: #f6f6f6;
+
+$deleteColor: #EB5757;
+$deleteColorHover: #e43838;
+
+// States
+$successColor: #27AE60;
+$errorColor: #EB5757;
+$warningColor: #E2B93B;
+$inProgressColor: #FFAF45;
+$infoColor: #2F80ED;
+

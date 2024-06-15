@@ -1,0 +1,203 @@
+@use '../../style/variables.scss';
+@use '../../style/ui.scss';
+
+body {
+    margin: 0;
+    background-color: variables.$whiteColor;
+}
+
+.content__display {
+    display: flex !important;
+}
+
+nav {
+    width: min-content;
+
+    ul {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        height: 95vh;
+        list-style: none;
+        box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.25);
+
+        li {
+            display: flex;
+            width: 20rem;
+            height: 70px;
+            font-weight: bold;
+            font-size: variables.$font-size-lg;
+            
+            span {
+                user-select: none;
+                line-height: 70px;
+                width: 100%;
+                padding-inline: 3.2rem;
+                height: 100%;
+                color: variables.$clientPrimaryColor;
+                text-decoration: none;
+                border-bottom: 1px solid variables.$lighterGrey5;
+            }
+
+            &.active {
+                background-color: variables.$clientPrimaryColor;
+                span { color: variables.$whiteColor; }
+            }
+
+            &.locked {
+                background-color: variables.$whiteColor;
+                span { color: variables.$grey5; }
+            }
+
+            &:hover {
+                background-color: variables.$grey6;
+                cursor: pointer;
+            }
+
+            &.active:hover {
+                background-color: variables.$clientPrimaryColor;
+            }
+        }
+    }
+}
+
+.content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 80px;
+
+    @media (max-width: 1024px) {
+        margin-top: 100px;
+    }
+
+    &__selector {
+        min-width: 8em;
+        width: 15em;
+        height: 38em;
+        background: variables.$whiteColor;
+        color: variables.$clientPrimaryColor;
+        box-shadow: 9px 0px 15px -3px rgba(0, 0, 0, 0.1);
+
+        >div {
+            height: 4em;
+            border-bottom: 1px solid variables.$secondaryColor;
+            display: flex;
+            align-items: center;
+            padding-left: 7%;
+
+            &.content__selector--current {
+                background: variables.$clientPrimaryColor;
+                color: variables.$whiteColor;
+            }
+        }
+    }
+
+    &__personnal-data {
+        margin-left: 5em;
+        display: none;
+        flex-direction: column;
+        width: 85em;
+        height: 30em;
+        position: relative;
+
+
+        &__top {
+            width: 70%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &__image {
+            width: 5em;
+            height: 5em;
+            border-radius: 50%;
+            justify-self: end;
+        }
+
+        &__title {
+            margin-bottom: 1em;
+            width: 10%;
+        }
+
+        &__elements {
+            left: 10%;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(13em, 1fr));
+            gap: 1em;
+            width: 20%;
+
+            &__modify_button{
+                margin: 10px 0;
+            }
+
+            &__genre {
+                grid-column: span 1;
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    margin-bottom: 13px;
+                    margin-top: 10px;
+                }
+
+                select {
+                    min-width: 100px;
+                    max-width: 800px;
+                    padding: 12px 20px;
+                    background-color: variables.$whiteColor;
+                    border: 1.5px solid variables.$grey5;
+                    border-radius: 4px;
+                    font-size: 12px;
+                }
+            }
+        }
+
+
+
+    }
+
+    &__security {
+        margin-left: 5em;
+        display: none;
+        flex-direction: column;
+        width: 85em;
+        height: 30em;
+        position: relative;
+
+        &__title {
+            margin-bottom: 1em;
+            width: 10%;
+        }
+
+        &__elements {
+            left: 10%;
+            &__password {
+                width: 20%;
+                margin-bottom: 1em;
+            }
+        }
+    }
+}
+
+
+// VOIR POUR METTRE DES VARIABLES A LA PLACE DES MEDIA QUERIES
+@media (max-width: 1200px) {
+    .content__personnal-data__elements {
+        grid-template-columns: repeat(3, minmax(12em, 1fr));
+    }
+}
+
+@media (max-width: 850px) {
+    .content__personnal-data__elements {
+        grid-template-columns: repeat(2, minmax(11em, 1fr));
+    }
+}
+
+@media (max-width: 610px) {
+    .content__personnal-data__elements {
+        grid-template-columns: repeat(1, minmax(10em, 1em));
+    }
+}

@@ -21,17 +21,27 @@ MYSQL_ROOT_PASSWORD=root
 WEB_PORT=5555
 ````
 
-### 3. Lancer le docker compose avec le script ./start.sh (./start.ps1 avec powershell sur windows) avec docker d'allumer ou installer
+## 2.1 Pour un serveur, le .env doit-être comme ceci :
+````
+EQUIPE=crepetech
+MYSQL_DATABASE=db
+MYSQL_USER=user
+MYSQL_PASSWORD=pass
+MYSQL_ROOT_PASSWORD=root
+WEB_PORT=80
+````
+
+### 3. Lancer le docker compose avec le script ./start.sh (".\startPS.ps1" avec PowerShell sur windows) avec docker d'allumer ou installer
 ````
 ./start.sh
 ````
 ou
 ### 4. Go 
-http://localhost:5555/views/
+http://localhost:5555/html/
 
 ## StoryBook :
 ````
-http://localhost:5555/views/StoryBook/StoryBookBis.php
+http://localhost:5555/html/StoryBook/StoryBookBis.php
 ````
 
 Le storybook présente les éléments de l'application sous forme de composants. Il permet de visualiser les éléments de l'application de manière isolée. ainsi que les couleurs, textes et titres
@@ -44,3 +54,5 @@ Le StoryBook est une vue de l'appli
 - PHP html in string, pour colorer le html dans les fichiers php
 - Live Sass Compiler, pour compiler le scss en css lorsque tu enregistre ton fichier, il le fait tout seul
 
+test
+test2

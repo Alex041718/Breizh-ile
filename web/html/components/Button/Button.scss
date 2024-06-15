@@ -1,0 +1,114 @@
+@use '../../style/variables';
+@use '../../style/ui';
+
+.button {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
+  border: none;
+
+  i {
+    margin-right: 4px !important;
+  }
+
+  &--client {
+    background-color: variables.$clientPrimaryColor;
+    color : variables.$whiteColor;
+    border: 2px solid variables.$clientPrimaryColor;
+
+    &:hover {
+      background-color: variables.$clientPrimaryColorHover;
+        border: 2px solid variables.$clientPrimaryColorHover;
+    }
+
+    &--secondary {
+      background-color: variables.$whiteColor !important;
+      color: variables.$clientPrimaryColor !important;
+      border: 2px solid variables.$clientPrimaryColor;
+
+        &:hover {
+          background-color: variables.$grey6 !important;
+        }
+    }
+  }
+
+  &--basic {
+    background-color: variables.$grey5;
+    color : variables.$grey3;
+    border: 2px solid variables.$grey5;
+
+    &:hover {
+      background-color: variables.$grey4;
+      border: 2px solid variables.$grey4;
+    }
+
+    &--secondary {
+      background-color: variables.$whiteColor !important;
+      color: variables.$grey5 !important;
+      border: 2px solid variables.$grey5;
+
+      &:hover {
+        background-color: variables.$grey6 !important;
+      }
+    }
+  }
+
+  &--owner {
+    background-color: variables.$ownerPrimaryColor;
+    color : variables.$whiteColor;
+    border: 2px solid variables.$ownerPrimaryColor;
+
+    &:hover {
+      background-color: variables.$ownerPrimaryColorHover;
+      border: 2px solid variables.$ownerPrimaryColorHover;
+    }
+
+    &--secondary {
+      background-color: variables.$whiteColor !important;
+      color: variables.$ownerPrimaryColor !important;
+      border: 2px solid variables.$ownerPrimaryColor;
+
+      &:hover {
+        background-color: variables.$grey6 !important;
+      }
+    }
+  }
+
+  &--delete {
+    background-color: variables.$deleteColor;
+    color : variables.$whiteColor;
+    border: 2px solid variables.$deleteColor;
+
+    &:hover {
+      background-color: variables.$deleteColorHover;
+      border: 2px solid variables.$deleteColorHover;
+    }
+
+
+    &--secondary {
+      background-color: variables.$whiteColor !important;
+      color: variables.$deleteColor !important;
+      border: 2px solid variables.$deleteColor;
+
+      &:hover {
+        background-color: variables.$grey6 !important;
+      }
+    }
+  }
+
+  &--disabled {
+    background-color: variables.$grey5;
+    color : variables.$grey3;
+    border: 2px solid variables.$grey5;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: variables.$grey5;
+      border: 2px solid variables.$grey5;
+    }
+  }
+}

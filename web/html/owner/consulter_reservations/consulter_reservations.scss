@@ -1,0 +1,232 @@
+@import '../../style/variables';
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    color: $ownerPrimaryColor;
+    padding-top: 2rem;
+    padding-inline: 50px;
+}
+
+.title {
+    display: flex;
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    box-sizing: border-box;
+    align-items: center;
+    margin-top: 1.4rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    font-weight: bold;
+    background-color: $lighterGrey5;
+
+    p {
+        width: max(10rem, calc(200vw / 19.2));
+        margin-right: 2rem;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    &--selected::after {
+        content: "";
+        position: relative;
+        display: inline-block;
+        background-image: url("../../assets/icons/arrow.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 10px;
+        height: 10px;
+        top: 31%;
+        transform: translateY(12%) rotate(180deg);
+        left: 0.3rem;
+        z-index: 999;
+    }
+
+    &--reverse::after {
+        transform: translateY(12%) rotate(0deg);
+    }
+}
+
+.reservations {
+    height: 66.4px * 5 - 9.6px;
+    overflow-y: auto;
+    width: 100.33%;
+    padding-right: 0.5rem;
+
+    &::-webkit-scrollbar {
+        width: 0.4rem;
+        background: white;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $ownerPrimaryColor;
+        border-radius: 100px;
+        background: $ownerPrimaryColor;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: $lighterGrey5;
+        border-radius: 100px;
+        background: $lighterGrey5;
+    }
+}
+
+.reservation {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    padding: 0.4rem 0.6rem;
+    border: 2px solid $lighterGrey5;
+    border-radius: 10px;
+    height: 2.5rem;
+
+    p, a, .profile-picture {
+        display: block;
+        width: max(10rem, calc(200vw / 19.2));
+        margin-right: 2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        word-wrap: break-word;
+        text-overflow: ellipsis;
+        font-weight: normal;
+        color: $ownerPrimaryColor;
+    }
+
+    .profile-picture, .description-status {
+        display: flex;
+        align-items: center;
+    }
+
+    img {
+        margin-right: 0.5rem;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.exportation__button {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 6rem;
+    z-index: 2;
+}
+
+.goTo, .filter{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    margin-left: auto;
+    margin-right: 8px !important;
+    i {
+        margin-left: auto;
+    }
+}
+
+.goTo {
+    width: min-content !important;
+    overflow: visible !important;
+}
+
+.export-selection {
+    display: flex;
+    position: absolute;
+    transform: translateY(-355%);
+    z-index: -1;
+    align-items: center;
+    margin-bottom: 1rem;
+    background-color: $lighterGrey5;
+    border-radius: 4px;
+    padding: 0.4rem 0.6rem;
+    width: min-content;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+
+    &__CSV, &__ICAL {
+        display: flex;
+        align-items: center;
+        img {
+            margin-right: 6px;
+            margin-left: 10px;
+            height: 24px;
+        }
+    }
+
+    &__CSV {
+        margin-right: 0.8rem;
+        img {
+            height: 20px;
+        }
+    }
+
+    &--visible {
+        transform: translate(100%, -355%);
+        opacity: 1;
+        z-index: 1;
+    }
+
+    .checkboxCSV, .checkboxICAL {
+        margin-right: 0;
+    }
+
+    .closeExport {
+        background: none;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+        margin-left: 0.8rem;
+    }
+}
+
+.no-reservation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    font-size: $font-size-xl;
+    color: $grey3;
+}
+
+.checkbox {
+    margin-right: 1.2rem;
+}
+
+.filter {
+    margin-right: 9px;
+}
+
+.status {
+    align-self: center;
+    margin-left: 0.3rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+
+    &--coming {
+        background-color: $infoColor;
+    }
+    
+    &--in-progress {
+        background-color: $inProgressColor;
+    }
+    
+    &--done {
+        background-color: $successColor;
+    }
+}

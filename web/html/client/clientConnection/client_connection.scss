@@ -1,0 +1,60 @@
+@use '../../style/variables';
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.connectionContainer {
+  padding-top: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  background-color: variables.$whiteColor;
+  gap: 1em;
+
+  img {
+    width: 400px;
+    height: auto;
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 45px 20px;
+    border: 1px solid variables.$grey5;
+    border-radius: 4px;
+    background-color: variables.$whiteColor;
+    gap: 20px;
+
+    .error {
+      color: red;
+    }
+    
+    &__forgot {
+      color: variables.$black2;
+    }
+
+    &__title {
+      text-align: center;
+      width: 350px;
+    }
+
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+
+      .connection__input, button {
+        width: 260px;
+      }
+    }
+
+
+  }
+}

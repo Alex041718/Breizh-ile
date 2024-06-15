@@ -1,0 +1,323 @@
+@import '../../style/variables';
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    margin-top: 120px;
+    display: flex;
+}
+
+nav {
+    width: min-content;
+
+    ul {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        height: 95vh;
+        list-style: none;
+        box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.25);
+
+        li {
+            display: flex;
+            width: 20rem;
+            height: 70px;
+            font-weight: bold;
+            font-size: $font-size-lg;
+            
+            span {
+                user-select: none;
+                line-height: 70px;
+                width: 100%;
+                padding-inline: 3.2rem;
+                height: 100%;
+                color: $ownerPrimaryColor;
+                text-decoration: none;
+                border-bottom: 1px solid $lighterGrey5;
+            }
+
+            &.active {
+                background-color: $ownerPrimaryColor;
+                span { color: $whiteColor; }
+            }
+
+            &.locked {
+                background-color: $whiteColor;
+                span { color: $grey5; }
+            }
+
+            &:hover {
+                background-color: $grey6;
+                cursor: pointer;
+            }
+
+            &.active:hover {
+                background-color: $ownerPrimaryColorHover;
+            }
+        }
+    }
+}
+
+.content {
+    display: flex;
+    padding-left: 4rem;
+    height: 100%;
+
+    &__input {
+        &--large {
+            input, textarea {
+                width: max(15rem, calc(700vw / 19.2)) !important;
+                min-width: 0;
+                font-size: 16px !important;
+            }
+        }
+
+        &--long {
+            textarea {
+                height: 5rem !important;
+            }
+        }
+
+        &--very-long {
+            textarea {
+                height: 22rem !important;
+            }
+        }
+    }
+
+    &__button {
+        margin-top: 1rem;
+        padding-block: 0.87rem !important;
+        width: 100%;
+
+        &--next {
+            margin-top: auto;
+            margin-bottom: 8.5rem;
+        }
+    }
+
+    &__imagePicker {
+        margin-top: 32px;
+        margin-left: 3rem;
+        width: max(15rem, calc(500vw / 19.2)) !important;
+    }
+
+    #map {
+        width: max(15rem, calc(600vw / 19.2)); 
+        height: 50.8rem; 
+        border-radius:10px;
+        margin-left: 3rem;
+    }
+
+    &__left {
+        section {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+    }
+
+    &__right {
+        width: 100%;
+
+        section {
+            height: 100%;
+        }
+    }
+
+    &__up, &__bottom {
+        display: flex;
+    }
+
+    &__bottom {
+        flex-wrap: wrap;
+        height: max-content;
+    }
+
+    p {
+        font-size: 22px;
+    }
+
+    .separator {
+        display: block;
+        width: max(15rem, calc(700vw / 19.2));
+        height: 2px;
+        margin-top: 8px;
+        margin-bottom: 20px;
+        background-color: $lighterGrey5;
+
+        &--large {
+            width: 100%;
+        }
+    }
+
+    #priceHT {
+        input {
+            width: 6rem !important;
+        }
+    }
+    
+    #beginDate, #endDate, #nbPerson, #nbRooms, #nbSimpleBed, #nbDoubleBed, #surface {
+        input {
+            width: 15rem !important;
+        }
+    }
+
+    #category, #type, #activity, #arrangement, #perimeter {
+        select {
+            width: 17.7rem !important;
+        }
+    }
+
+}
+
+.input, .comboList {
+    margin-bottom: 1.5rem !important;
+
+    label {
+        margin-top: 0 !important;
+    }
+}
+
+.localisation, .specifications, .arrangements, .activities {
+    position: fixed;
+    visibility: hidden;
+}
+
+.activity-text {
+    display: flex;
+    font-weight: normal !important;
+
+    p {
+        width: 20rem;
+    }
+
+    :first-child {
+        font-weight: bold;
+    }
+}
+
+.specifications, .arrangements, .activities {
+    display: flex;
+    flex-direction: column;
+
+    .content__button {
+        margin-top: 1.8rem;
+        width: min-content;
+
+        &--next {
+            margin-top: auto;
+            margin-bottom: 8.5rem;
+            width: max(15rem, calc(800vw / 19.2)) !important;
+        }
+    }
+
+    input, select {
+        margin-right: 2rem;
+    }
+}
+
+.arrangements, .activities {
+    .content__up {
+        width: max(15rem, calc(1000vw / 19.2)) !important;
+    }
+
+    .content__button {
+        margin-top: 1.8rem;
+        width: min-content;
+        margin-left: auto;
+        height: 3.2rem;
+        
+        &--next {
+            margin-top: auto;
+            margin-bottom: 8.5rem;
+            margin-left: 0;
+        }
+    }
+}
+
+.inline {
+    display: flex;
+    flex-direction: row !important;
+    height: max-content !important;
+    width: max(15rem, calc(700vw / 19.2)) !important;
+
+    .input {
+        width: max(5rem, calc(300vw / 19.2));
+        min-width: 0;
+        font-size: 16px !important;
+
+        &__input, &__label {
+            width: 100% !important;
+        }
+    }
+
+    .input:last-child {
+        margin-left: auto;
+    }
+
+    input:first-child, textarea:first-child {
+        margin-right: 1rem;
+    }
+}
+
+.half {
+    width: max(5rem, calc(180vw / 19.2)) !important;
+}
+
+.wide {
+    width: max(5rem, calc(420vw / 19.2)) !important;
+}
+
+.items {
+    height: 412px;
+    overflow-y: auto;
+    width: 100.33%;
+    padding-right: 0.5rem;
+
+    &::-webkit-scrollbar {
+        width: 0.4rem;
+        background: white;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $ownerPrimaryColor;
+        border-radius: 100px;
+        background: $ownerPrimaryColor;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: $lighterGrey5;
+        border-radius: 100px;
+        background: $lighterGrey5;
+    }
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    background-color: $lighterGrey5;
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: $ownerPrimaryColor;
+    box-sizing: border-box;
+
+    i {
+        font-size: 20px;
+        cursor: pointer;
+    }
+}
+
+.item:last-child {
+    margin-bottom: 0;
+}

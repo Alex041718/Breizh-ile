@@ -1,0 +1,119 @@
+@use '../../style/variables';
+@use '../../style/ui';
+
+
+.reservation-card {
+  width: 100%;
+  max-width: 1000px; // Limite la largeur maximale à 1000px pour les grands écrans
+  height: 120px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  background-color: variables.$whiteColor;
+  box-shadow: 5px 5px 15px -15px variables.$grey4;
+  transition: background-color 0.3s;
+  cursor: pointer;
+
+  &__img-container img {
+    width: 145px;
+    height: 120px;
+    border-radius: 10px;
+  }
+
+  &__data-container {
+    width: 65%;
+    padding: 10px;
+    padding-left: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @media (max-width: 768px) {
+      width: 80%;
+    }
+
+
+    &__title {
+      font-weight: bold;
+      word-wrap: break-word;
+      color: variables.$blackColor;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+    }
+
+    &__description {
+      font-size: 14px;
+      height: 40px;
+      color: variables.$grey3;
+      overflow: hidden;
+      word-wrap: break-word;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      white-space: normal;
+      transition: color 0.3s;
+    }
+
+    &__down {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      font-weight: 500;
+
+      &__ville,
+      &__personne {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+      }
+    }
+
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+
+    &__prix {
+      display: flex;
+      font-size: 20px;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    &__date {
+      display: flex;
+      font-size: 16px;
+      justify-content: center;
+      color: variables.$grey3;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+  }
+
+  /*Hover*/
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    margin: 0 auto; // Centre la carte horizontalement
+    gap: 10%;
+  }
+
+  &:hover {
+    background-color: variables.$grey6;
+
+    .reservation-card__data-container__description,
+    .reservation-card__right__date {
+      //color: variables.$whiteColor;
+    }
+  }
+}

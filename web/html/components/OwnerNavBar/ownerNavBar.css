@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.owner-nav-bar {
+  margin-top: 120px;
+}
+.owner-nav-bar ul {
+  padding: 0;
+  display: flex;
+  padding-inline: 53px;
+  list-style: none;
+  box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.25);
+}
+.owner-nav-bar ul li {
+  display: flex;
+  padding-inline: 1rem;
+  width: 170px;
+  height: 70px;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: max(16px, 1.0416666667vw);
+}
+.owner-nav-bar ul li a {
+  line-height: 70px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: #082C4C;
+  text-decoration: none;
+}
+.owner-nav-bar ul li.active {
+  background: linear-gradient(0deg, #082C4C 0%, #082C4C 7%, white 7%);
+}
+.owner-nav-bar ul li:hover {
+  background-color: #f6f6f6;
+  cursor: pointer;
+}
+.owner-nav-bar ul li.active:hover {
+  background: linear-gradient(0deg, #082C4C 0%, #082C4C 7%, #f6f6f6 7%);
+}/*# sourceMappingURL=ownerNavBar.css.map */

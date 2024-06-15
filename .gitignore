@@ -1,0 +1,7 @@
+.env
+.DS_Store
+.idea
+web/FILES/images/*
+!web/FILES/images/.gitkeep
+*.map
+mariadb

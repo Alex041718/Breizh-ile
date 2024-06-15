@@ -1,0 +1,272 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  margin-top: 120px;
+  display: flex;
+}
+
+nav {
+  width: -moz-min-content;
+  width: min-content;
+}
+nav ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 95vh;
+  list-style: none;
+  box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.25);
+}
+nav ul li {
+  display: flex;
+  width: 20rem;
+  height: 70px;
+  font-weight: bold;
+  font-size: max(16px, 1.0416666667vw);
+}
+nav ul li span {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  line-height: 70px;
+  width: 100%;
+  padding-inline: 3.2rem;
+  height: 100%;
+  color: #082C4C;
+  text-decoration: none;
+  border-bottom: 1px solid #e9e9e9;
+}
+nav ul li.active {
+  background-color: #082C4C;
+}
+nav ul li.active span {
+  color: #FFFFFF;
+}
+nav ul li.locked {
+  background-color: #FFFFFF;
+}
+nav ul li.locked span {
+  color: #E0E0E0;
+}
+nav ul li:hover {
+  background-color: #f6f6f6;
+  cursor: pointer;
+}
+nav ul li.active:hover {
+  background-color: #0b3e6b;
+}
+
+.content {
+  display: flex;
+  padding-left: 4rem;
+  height: 100%;
+}
+.content__input--large input, .content__input--large textarea {
+  width: max(15rem, 36.4583333333vw) !important;
+  min-width: 0;
+  font-size: 16px !important;
+}
+.content__input--long textarea {
+  height: 5rem !important;
+}
+.content__input--very-long textarea {
+  height: 22rem !important;
+}
+.content__button {
+  margin-top: 1rem;
+  padding-block: 0.87rem !important;
+  width: 100%;
+}
+.content__button--next {
+  margin-top: auto;
+  margin-bottom: 8.5rem;
+}
+.content__imagePicker {
+  margin-top: 32px;
+  margin-left: 3rem;
+  width: max(15rem, 26.0416666667vw) !important;
+}
+.content #map {
+  width: max(15rem, 31.25vw);
+  height: 50.8rem;
+  border-radius: 10px;
+  margin-left: 3rem;
+}
+.content__left section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.content__right {
+  width: 100%;
+}
+.content__right section {
+  height: 100%;
+}
+.content__up, .content__bottom {
+  display: flex;
+}
+.content__bottom {
+  flex-wrap: wrap;
+  height: -moz-max-content;
+  height: max-content;
+}
+.content p {
+  font-size: 22px;
+}
+.content .separator {
+  display: block;
+  width: max(15rem, 36.4583333333vw);
+  height: 2px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  background-color: #e9e9e9;
+}
+.content .separator--large {
+  width: 100%;
+}
+.content #priceHT input {
+  width: 6rem !important;
+}
+.content #beginDate input, .content #endDate input, .content #nbPerson input, .content #nbRooms input, .content #nbSimpleBed input, .content #nbDoubleBed input, .content #surface input {
+  width: 15rem !important;
+}
+.content #category select, .content #type select, .content #activity select, .content #arrangement select, .content #perimeter select {
+  width: 17.7rem !important;
+}
+
+.input, .comboList {
+  margin-bottom: 1.5rem !important;
+}
+.input label, .comboList label {
+  margin-top: 0 !important;
+}
+
+.localisation, .specifications, .arrangements, .activities {
+  position: fixed;
+  visibility: hidden;
+}
+
+.activity-text {
+  display: flex;
+  font-weight: normal !important;
+}
+.activity-text p {
+  width: 20rem;
+}
+.activity-text :first-child {
+  font-weight: bold;
+}
+
+.specifications, .arrangements, .activities {
+  display: flex;
+  flex-direction: column;
+}
+.specifications .content__button, .arrangements .content__button, .activities .content__button {
+  margin-top: 1.8rem;
+  width: -moz-min-content;
+  width: min-content;
+}
+.specifications .content__button--next, .arrangements .content__button--next, .activities .content__button--next {
+  margin-top: auto;
+  margin-bottom: 8.5rem;
+  width: max(15rem, 41.6666666667vw) !important;
+}
+.specifications input, .specifications select, .arrangements input, .arrangements select, .activities input, .activities select {
+  margin-right: 2rem;
+}
+
+.arrangements .content__up, .activities .content__up {
+  width: max(15rem, 52.0833333333vw) !important;
+}
+.arrangements .content__button, .activities .content__button {
+  margin-top: 1.8rem;
+  width: -moz-min-content;
+  width: min-content;
+  margin-left: auto;
+  height: 3.2rem;
+}
+.arrangements .content__button--next, .activities .content__button--next {
+  margin-top: auto;
+  margin-bottom: 8.5rem;
+  margin-left: 0;
+}
+
+.inline {
+  display: flex;
+  flex-direction: row !important;
+  height: -moz-max-content !important;
+  height: max-content !important;
+  width: max(15rem, 36.4583333333vw) !important;
+}
+.inline .input {
+  width: max(5rem, 15.625vw);
+  min-width: 0;
+  font-size: 16px !important;
+}
+.inline .input__input, .inline .input__label {
+  width: 100% !important;
+}
+.inline .input:last-child {
+  margin-left: auto;
+}
+.inline input:first-child, .inline textarea:first-child {
+  margin-right: 1rem;
+}
+
+.half {
+  width: max(5rem, 9.375vw) !important;
+}
+
+.wide {
+  width: max(5rem, 21.875vw) !important;
+}
+
+.items {
+  height: 412px;
+  overflow-y: auto;
+  width: 100.33%;
+  padding-right: 0.5rem;
+}
+.items::-webkit-scrollbar {
+  width: 0.4rem;
+  background: white;
+}
+.items::-webkit-scrollbar-thumb {
+  background-color: #082C4C;
+  border-radius: 100px;
+  background: #082C4C;
+}
+.items::-webkit-scrollbar-track {
+  background-color: #e9e9e9;
+  border-radius: 100px;
+  background: #e9e9e9;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  background-color: #e9e9e9;
+  padding: 1.5rem 1rem;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #082C4C;
+  box-sizing: border-box;
+}
+.item i {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.item:last-child {
+  margin-bottom: 0;
+}/*# sourceMappingURL=creer_un_logement.css.map */

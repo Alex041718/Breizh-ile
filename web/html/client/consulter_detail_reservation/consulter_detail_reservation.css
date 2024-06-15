@@ -1,0 +1,211 @@
+body {
+  margin: 0;
+}
+
+main {
+  margin-top: 135px;
+}
+@media screen and (max-width: 1024px) {
+  main {
+    margin-top: 75px;
+  }
+}
+main .title {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  margin: 40px;
+}
+main .title .title__arrow {
+  display: flex;
+  position: absolute;
+  left: 0;
+  align-items: center;
+}
+main .title .title__arrow img {
+  width: 50px;
+  height: auto;
+  padding: 15px;
+}
+main .title .title__date {
+  display: flex;
+}
+@media screen and (max-width: 1024px) {
+  main .title .title__date {
+    padding-top: 100px;
+  }
+}
+main .informations {
+  display: flex;
+  padding-inline: 50px;
+  padding-bottom: 100px;
+}
+@media screen and (max-width: 1024px) {
+  main .informations {
+    flex-direction: column;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}
+main .informations .informations__left {
+  width: 50%;
+  border-right: 1px solid #ccc;
+  padding-right: 50px;
+}
+@media screen and (max-width: 1024px) {
+  main .informations .informations__left {
+    width: 100%;
+    padding-right: 0;
+    border: none;
+  }
+}
+main .informations .informations__left hr {
+  margin-top: 30px;
+  margin-bottom: 25px;
+}
+main .informations .informations__left .informations__left__logement {
+  display: flex;
+  align-items: center;
+}
+main .informations .informations__left .informations__left__logement img {
+  width: 250px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+@media screen and (max-width: 1024px) {
+  main .informations .informations__left .informations__left__logement img {
+    width: 175px;
+    height: 100px;
+  }
+}
+main .informations .informations__left .informations__left__logement .informations__left__logement__info {
+  margin: 10px;
+}
+main .informations .informations__left .informations__left__detail h3 {
+  padding-block: 10px;
+}
+main .informations .informations__left .informations__left__detail div {
+  display: flex;
+  justify-content: space-between;
+  margin-block: 8px;
+}
+main .informations .informations__left .informations__left__detail div:nth-child(odd) {
+  background-color: #E0E0E0;
+}
+@media screen and (max-width: 1024px) {
+  main .informations .informations__left .informations__left__total {
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+  }
+}
+main .informations .informations__left .informations__left__total div {
+  display: flex;
+  justify-content: space-between;
+}
+main .informations .informations__right {
+  width: 50%;
+  padding-left: 50px;
+}
+@media screen and (max-width: 1024px) {
+  main .informations .informations__right {
+    width: 100%;
+    padding-left: 0px;
+  }
+}
+main .informations .informations__right .informations__right__desc {
+  display: flex;
+  border: 1px solid #BDBDBD;
+  border-radius: 10px;
+  gap: 10px;
+}
+main .informations .informations__right .informations__right__desc img {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  width: 125px;
+  height: auto;
+}
+@media screen and (max-width: 1024px) {
+  main .informations .informations__right .informations__right__desc img {
+    width: 75px;
+    height: auto;
+  }
+}
+main .informations .informations__right .informations__right__desc .informations__right__desc__info {
+  display: flex;
+  padding: 25px;
+  align-items: center;
+  width: 100%;
+}
+@media screen and (max-width: 1024px) {
+  main .informations .informations__right .informations__right__desc .informations__right__desc__info {
+    padding: 0;
+  }
+}
+main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__perso {
+  width: 50%;
+}
+@media screen and (max-width: 1024px) {
+  main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__perso {
+    width: 75%;
+  }
+}
+main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__vide {
+  width: 30%;
+}
+@media screen and (max-width: 1024px) {
+  main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__vide {
+    width: 10%;
+  }
+}
+main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__icons {
+  display: flex;
+  gap: 25px;
+  width: 20%;
+}
+@media screen and (max-width: 1024px) {
+  main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__icons {
+    display: flex;
+    flex-direction: column;
+    gap: 12.5px;
+    width: 15%;
+  }
+}
+main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__icons #telephone {
+  font-size: 30px;
+}
+@media screen and (max-width: 1024px) {
+  main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__icons #telephone {
+    font-size: 22px;
+  }
+}
+main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__icons #mail {
+  font-size: 30px;
+}
+@media screen and (max-width: 1024px) {
+  main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__icons #mail {
+    font-size: 22px;
+  }
+}
+main .informations .informations__right .informations__right__localisation .loca {
+  margin-top: 25px;
+}
+main .informations .informations__right #map {
+  width: 100%;
+  height: 200px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+  footer {
+    margin-bottom: 3em;
+  }
+}
+.my-control {
+  background-color: #FFFFFF;
+}
+
+/*# sourceMappingURL=consulter_detail_reservation.css.map */
