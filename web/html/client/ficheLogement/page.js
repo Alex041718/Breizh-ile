@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (nightCount == 0) {
                 nightCount = 1;
             }
-            const totalCost = nightCount * costPerNight ;
+            const totalCost = (nightCount * costPerNight).toFixed(2) ;
 
             nightCountElement.textContent = nightCount;
             totalCostElement.textContent = totalCost + " €";
@@ -293,22 +293,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
         displayPriceDetails();
     }
+    const messageErreurDates = document.getElementById("message");
+        // Ajouter un gestionnaire d'événement pour le survol du bouton
+    buttonDisplay.addEventListener("mouseover", function() {
+        // Vérifier si le bouton est désactivé
+        if (buttonDisplay.disabled) {
+            // Afficher le message
+            messageErreurDates.style.display = "block";
+        }
+    });
+    
+    // Ajouter un gestionnaire d'événement pour la sortie du survol du bouton
+    buttonDisplay.addEventListener("mouseout", function() {
+        // Cacher le message lorsque le curseur quitte le bouton
+        messageErreurDates.style.display = "none";
+    });
 
     function displayPriceDetails() {
         const nightCount = parseInt(nightCountElement.textContent, 10);
-        let auth = document.getElementById('auth');
-
         if (nightCount > 0 ) {
             priceDisplay.style.display = 'flex';
-            if (auth.innerHTML){
-                buttonDisplay.disabled = false;
-            }
+            buttonDisplay.disabled = false;
         } else {
             priceDisplay.style.display = 'none';
-
-            if (auth.innerHTML){
-                buttonDisplay.disabled = true;
-            }
+            buttonDisplay.disabled = true;
         }
     }
 
