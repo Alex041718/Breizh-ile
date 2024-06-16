@@ -1,4 +1,6 @@
 <?php
+require_once dirname(dirname(__FILE__)) . '/html/components/Image/Image.php';
+
 class Image {
     private ?int $imageID;
     private string $imageSrc;
@@ -29,7 +31,11 @@ class Image {
      */
     public function getImageSrc(): string
     {
-        return $this->imageSrc;
+        if (filter_var($this->imageSrc, FILTER_VALIDATE_URL)) {
+            return $this->imageSrc;
+        } else {
+            return ImageGetter::getSrc($this->imageSrc);
+        }
     }
 
     /**

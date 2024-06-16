@@ -1,6 +1,5 @@
 <?php
 
-
 class HousingCard {
 
     public static function render(Housing $housing, $class = "", $id = "", $action = "") {
