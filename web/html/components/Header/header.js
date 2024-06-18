@@ -15,17 +15,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     var taille = document.getElementById('taille');
-    var couleurs = document.getElementById('couleurs');
+    var deute = document.getElementById('deute');
     var font = document.getElementById('font');
     var animations = document.getElementById('animations');
 
 
     var parent__taille = document.getElementById('parent__taille');
-    var parent__couleurs = document.getElementById('parent__couleurs');
+    var parent__deute = document.getElementById('parent__deute');
     var parent__animations = document.getElementById('parent__animations');
     var parent__font = document.getElementById('parent__font');
-    var closeAccess = document.getElementById("closeAccess");
-
     var closeAccess = document.getElementById("closeAccess");
 
 
@@ -343,21 +341,22 @@ document.addEventListener('DOMContentLoaded', function() {
         
     });
 
-    parent__couleurs.addEventListener('click', function() {
+    parent__deute.addEventListener('click', function() {
  
-        if (document.body.classList.contains('accessibilite__couleurs')){
-            parent__couleurs.style.backgroundColor = "#FFF";
-            document.body.classList.remove('accessibilite__couleurs');
-            document.querySelector('header').classList.remove('accessibilite__couleurs');
-            document.querySelector('footer').classList.remove('accessibilite__couleurs');            
+        if (document.body.classList.contains('accessibilite__deute')){
+            parent__deute.style.backgroundColor = "#FFF";
+            document.body.classList.remove('accessibilite__deute');
+            document.querySelector('header').classList.remove('accessibilite__deute');
+            document.querySelector('footer').classList.remove('accessibilite__deute');            
         }
         else{
-            parent__couleurs.style.backgroundColor = "#37906c";
-            document.body.classList.add('accessibilite__couleurs');
-            document.querySelector('header').classList.add('accessibilite__couleurs');
-            document.querySelector('footer').classList.add('accessibilite__couleurs');
+            parent__deute.style.backgroundColor = "#37906c";
+            document.body.classList.add('accessibilite__deute');
+            document.querySelector('header').classList.add('accessibilite__deute');
+            document.querySelector('footer').classList.add('accessibilite__deute');
         }
     });
+
     
     parent__font.addEventListener('click', function() {
  

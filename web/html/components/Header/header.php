@@ -287,8 +287,8 @@ class Header {
                             <h2>Accessibilité</h2>
                             <div class="popup__options">
                                 <div class="popup__options__couleurfont">
-                                    <div id="parent__couleurs">
-                                        <p class="para--18px" id="couleurs">Couleurs daltonisme</p>
+                                    <div id="parent__deute">
+                                        <p class="para--18px" id="deute">Mode deutéranope</p>
                                     </div>
                                     <div id="parent__animations">   
                                         <p class="para--18px" id="animations">Animations</p>
