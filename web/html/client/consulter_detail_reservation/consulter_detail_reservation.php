@@ -89,13 +89,13 @@
     $reservation_image =  $housing->getImage()->getImageSrc();
     $reservation_titre =  $housing->getTitle();
     $reservation_type =  $housing->getType()->getlabel();
-    $reservation_prixExcl =  $housing->getPriceExcl();
-    $reservation_prixIncl =  $housing->getPriceIncl();
+    $reservation_prixExcl =  number_format($housing->getPriceExcl(), 2);
+    $reservation_prixIncl =  number_format($housing->getPriceIncl(), 2);
     $reservation_nbJours =  ReservationService::getNbJoursReservation($reservation_dateDebut, $reservation_dateFin);
-    $reservation_serviceCharge =  $reservation->getServiceCharge();
-    $reservation_touristTax =  $reservation->getTouristTax();
+    $reservation_serviceCharge =  number_format($reservation->getServiceCharge(), 2);
+    $reservation_touristTax =  number_format($reservation->getTouristTax(), 2);
     $reservation_nbPersonnes =  $reservation->getNbPerson();
-    $reservation_prixCalc = $reservation_prixIncl * $reservation_nbJours ;
+    $reservation_prixCalc = number_format($reservation_prixIncl * $reservation_nbJours, 2) ;
 
     $owner_pp = $housing->getOwner()->getImage()->getImageSrc();
     $owner_telephone = $housing->getOwner()->getPhoneNumber();
@@ -108,7 +108,7 @@
     $reservation_postalAdress = $housing->getAddress()->getPostalAddress();
 
 
-    $reservation_prixTTC = $reservation_prixIncl * $reservation_nbJours + $reservation_serviceCharge + $reservation_touristTax;
+    $reservation_prixTTC = number_format($reservation_prixIncl * $reservation_nbJours + $reservation_serviceCharge + $reservation_touristTax, 2);
 
 ?>
 
@@ -116,11 +116,11 @@
     <main>
         <div class="title">
             <div class="title__arrow">
-                <a href="/client/consulterReservations/clientReservations.php"><img src="/assets/images/fleche.png" id="fleche" alt="fleche"></a>
+                <a href="/client/consulterReservations/clientReservations.php"><i class="fa-solid fa-arrow-left"></i></a>
                 <h2>Ma réservation</h2>
             </div>
             <div class="title__date">
-                <h5>Voyage  à Lannion du <?= $reservation_dateDebut->format('d-m-Y').' au '.$reservation_dateFin->format('d-m-Y') ?></h5>
+                <h4>Voyage  à Lannion du <?= $reservation_dateDebut->format('d-m-Y').' au '.$reservation_dateFin->format('d-m-Y') ?></h4>
             </div>
         </div>
         <article class="informations">
@@ -168,8 +168,8 @@
 
                         </div>
                         <div class="informations__right__desc__info__icons">
-                            <i id="telephone" class="fa-solid fa-phone"></i>
-                            <i id="mail" class="fa-solid fa-envelope"></i>
+                            <a href="tel:<?= $owner_telephone ?>"><i id="telephone" class="fa-solid fa-phone"></i></a>
+                            <a href="//<?= $owner_mail ?>"><i id="mail" class="fa-solid fa-envelope"></i></a>
                         </div>
                     </div>
                 </div>

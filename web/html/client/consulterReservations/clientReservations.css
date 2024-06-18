@@ -18,9 +18,10 @@ main {
 .title__arrow {
   all: unset;
 }
-
-a {
-  all: unset;
+.title__arrow i {
+  font-size: 30px;
+  padding: 15px;
+  color: black;
 }
 
 .fa-less-than::before {

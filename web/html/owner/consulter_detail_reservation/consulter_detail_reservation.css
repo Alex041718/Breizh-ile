@@ -24,10 +24,10 @@ main .title .title__arrow {
   left: 0;
   align-items: center;
 }
-main .title .title__arrow img {
-  width: 50px;
-  height: auto;
+main .title .title__arrow i {
+  font-size: 30px;
   padding: 15px;
+  color: #082C4C;
 }
 main .title .title__date {
   display: flex;
@@ -165,6 +165,10 @@ main .informations .informations__right .informations__right__desc .informations
   display: flex;
   gap: 25px;
   width: 20%;
+}
+main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__icons i {
+  text-decoration: none;
+  color: black;
 }
 @media screen and (max-width: 1024px) {
   main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__icons {
