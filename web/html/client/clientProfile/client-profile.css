@@ -118,11 +118,12 @@ nav {
   width: min-content;
 }
 nav ul {
-  padding: 0;
+  padding-left: 0;
+  padding-top: 80px;
   margin: 0;
   display: flex;
   flex-direction: column;
-  height: 95vh;
+  height: 80vh;
   list-style: none;
   box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.25);
 }
@@ -166,15 +167,8 @@ nav ul li.active:hover {
 }
 
 .content {
-  height: 100%;
+  height: 80vh;
   display: flex;
-  align-items: center;
-  margin-top: 80px;
-}
-@media (max-width: 1024px) {
-  .content {
-    margin-top: 100px;
-  }
 }
 .content__selector {
   min-width: 8em;
@@ -196,35 +190,32 @@ nav ul li.active:hover {
   color: #FFFFFF;
 }
 .content__personnal-data {
-  margin-left: 5em;
+  padding-top: 200px;
+  padding-inline: 50px;
+  width: 80%;
+  height: 100%;
   display: none;
   flex-direction: column;
-  width: 85em;
-  height: 30em;
-  position: relative;
 }
 .content__personnal-data__top {
-  width: 70%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .content__personnal-data__image {
-  width: 5em;
-  height: 5em;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   justify-self: end;
 }
 .content__personnal-data__title {
-  margin-bottom: 1em;
   width: 10%;
 }
 .content__personnal-data__elements {
-  left: 10%;
   display: grid;
   grid-template-columns: repeat(4, minmax(13em, 1fr));
   gap: 1em;
-  width: 20%;
+  width: 100%;
 }
 .content__personnal-data__elements__modify_button {
   margin: 10px 0;
@@ -267,18 +258,29 @@ nav ul li.active:hover {
   margin-bottom: 1em;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1280px) {
   .content__personnal-data__elements {
     grid-template-columns: repeat(3, minmax(12em, 1fr));
   }
 }
-@media (max-width: 850px) {
+@media (max-width: 1024px) {
   .content__personnal-data__elements {
     grid-template-columns: repeat(2, minmax(11em, 1fr));
   }
+  nav > ul {
+    padding-top: 100px;
+  }
 }
-@media (max-width: 610px) {
+@media (max-width: 640px) {
   .content__personnal-data__elements {
     grid-template-columns: repeat(1, minmax(10em, 1em));
+    display: flex;
+    flex-direction: column;
+  }
+  nav > ul {
+    height: 90vh;
+  }
+  .content {
+    height: 90vh;
   }
 }/*# sourceMappingURL=client-profile.css.map */
