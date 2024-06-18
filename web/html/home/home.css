@@ -120,6 +120,7 @@ body {
   }
 }
 .hero-banner__wave {
+  pointer-events: none;
   position: absolute;
   bottom: -5px;
   width: 101%;

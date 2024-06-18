@@ -25,7 +25,8 @@ body {
   height: 100%;
   width: 100%;
   border-radius: 20px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .logement__top__reservation {
   width: 50%;
@@ -231,6 +232,7 @@ body {
 }
 .logement__bottom__right .tooltip .tooltip-text {
   visibility: hidden;
+  width: -moz-max-content;
   width: max-content;
   border-radius: 10px;
   background-color: transparent;
@@ -486,6 +488,4 @@ body {
 }
 .popup-critere .popup-content-critere .section .items .item i {
   color: #307B5C;
-}
-
-/*# sourceMappingURL=logement.css.map */
+}/*# sourceMappingURL=logement.css.map */
