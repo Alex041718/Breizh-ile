@@ -70,20 +70,14 @@
   transition: none !important;
 }
 
-.accessibilite__couleurs .button--vert button, .accessibilite__couleurs .button--bleu button, .accessibilite__couleurs .button--rouge button {
-  background-color: orange;
+.accessibilite__deute .button--vert button, .accessibilite__deute .button--bleu button, .accessibilite__deute .button--rouge button {
+  background-color: pink;
 }
-.accessibilite__couleurs .button--bleu {
-  background-color: orange;
+.accessibilite__deute .button--bleu {
+  background-color: pink;
 }
-.accessibilite__couleurs .content__selector__personnal-data__title, .accessibilite__couleurs .content__selector__security__title {
-  color: violet;
-}
-.accessibilite__couleurs .order-btn {
-  background-color: orange;
-}
-.accessibilite__couleurs * {
-  color: violet;
+.accessibilite__deute .order-btn {
+  background-color: pink;
 }
 
 .accessibilite__font * :not(i) {
@@ -669,6 +663,4 @@ input[type=number] {
   justify-content: end;
   box-sizing: border-box;
   border-top: solid 1px #1D1D1D;
-}
-
-/*# sourceMappingURL=header.css.map */
+}/*# sourceMappingURL=header.css.map */
