@@ -48,7 +48,7 @@ Header::render(true,false, $isAuthenticated, '/client/reservations-liste');
 <main>
     <div class="title">
         <a href="/" class="title__arrow">
-            <i class="fa-regular fa-less-than"></i>
+            <i class="fa-solid fa-arrow-left"></i>
         </a>
         <h2 class="title__text">Vos réservations</h2>
     </div>

@@ -21,16 +21,16 @@ main {
         justify-content: center;
         margin: 40px;
 
-
         .title__arrow {
             display: flex;
             position: absolute;
             left: 0;
             align-items: center;
-            img {
-                width: 50px;
-                height: auto;
+
+            i {
+                font-size: 30px;
                 padding: 15px;
+                color : $ownerPrimaryColor;
             }
         }
         .title__date {
@@ -192,6 +192,11 @@ main {
                         gap: 25px; 
                         width: 20%;
 
+
+                        i {
+                            text-decoration: none;
+                            color: black;
+                        }
 
                         @media screen and (max-width: 1024px) {
                             display: flex;

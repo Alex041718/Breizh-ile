@@ -78,7 +78,7 @@
     ?>
     <nav class="logement-nav-bar">
         <a href="/back/logements" class="logement-nav-bar__back">
-            <i class="fa-solid fa-chevron-left"></i>
+            <i class="fa-solid fa-arrow-left"></i>
             <p>Logements</p>
         </a>
         <a>Prévisualisation de "<?= $housingTitle ?>"</a>

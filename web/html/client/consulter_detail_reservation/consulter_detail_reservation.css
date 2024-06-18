@@ -23,10 +23,10 @@ main .title .title__arrow {
   left: 0;
   align-items: center;
 }
-main .title .title__arrow img {
-  width: 50px;
-  height: auto;
-  padding: 15px;
+main .title .title__arrow i {
+  font-size: 30px;
+  padding: 30px;
+  color: black;
 }
 main .title .title__date {
   display: flex;
@@ -71,7 +71,8 @@ main .informations .informations__left .informations__left__logement {
 main .informations .informations__left .informations__left__logement img {
   width: 250px;
   height: 150px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 10px;
 }
 @media screen and (max-width: 1024px) {
@@ -164,6 +165,10 @@ main .informations .informations__right .informations__right__desc .informations
   gap: 25px;
   width: 20%;
 }
+main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__icons i {
+  text-decoration: none;
+  color: black;
+}
 @media screen and (max-width: 1024px) {
   main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__icons {
     display: flex;
@@ -206,6 +211,4 @@ main .informations .informations__right #map {
 }
 .my-control {
   background-color: #FFFFFF;
-}
-
-/*# sourceMappingURL=consulter_detail_reservation.css.map */
+}/*# sourceMappingURL=consulter_detail_reservation.css.map */
