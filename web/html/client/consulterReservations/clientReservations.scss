@@ -15,12 +15,19 @@ main {
     align-items: center;
     gap: 1em;
     margin-top: 135px;
-}
+
 
     &__arrow{
         all: unset;
+
+        i {
+            font-size: 30px;
+            padding: 15px;
+            color : black;
+        }
     }
 }
+
 
 .fa-less-than::before{
     font-size: 3em;
