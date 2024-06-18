@@ -86,26 +86,18 @@
 
 }
 
-.accessibilite__couleurs {
+.accessibilite__deute {
     .button--vert, .button--bleu, .button--rouge {
         button {
-            background-color: orange;
+            background-color: pink;
         }
     }
     .button--bleu {
-        background-color: orange;
-    }
-
-    .content__selector__personnal-data__title, .content__selector__security__title {
-        color: violet;
+        background-color: pink;
     }
 
     .order-btn {
-        background-color: orange;
-    }
-    * {
-
-        color: violet;
+        background-color: pink;
     }
 
 }
