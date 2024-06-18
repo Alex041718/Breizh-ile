@@ -261,24 +261,24 @@ document.addEventListener('DOMContentLoaded', function() {
     } 
     }
 
-    closeAccess.onclick = function() {
-        closePopup();
-    }
+    // closeAccess.onclick = function() {
+    //     closePopup();
+    // }
 
     // Popup compte
 
-    popup.addEventListener("click", function(event) {
-        if(event.target === popup) closePopup();
-    })
+    // popup.addEventListener("click", function(event) {
+    //     if(event.target === popup) closePopup();
+    // })
 
-    closeAccess.onclick = function() {
-        closePopup();
-    }
+    // closeAccess.onclick = function() {
+    //     closePopup();
+    // }
     
-    function closePopup() {
-        popup.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
+    // function closePopup() {
+    //     popup.style.display = 'none';
+    //     document.body.style.overflow = 'auto';
+    // }
 
     window.addEventListener('resize', function(){
         closeSearch();
@@ -315,14 +315,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     popup.style.display = 'none';
 
-    oeuil.addEventListener('click', function() {
-        if (popup.style.display === 'none') {
-            popup.style.display = "flex";
-            document.body.style.overflow = 'hidden';
-        } else {
-            closePopup();
-        }
-    })
+    // oeuil.addEventListener('click', function() {
+    //     if (popup.style.display === 'none') {
+    //         popup.style.display = "flex";
+    //         document.body.style.overflow = 'hidden';
+    //     } else {
+    //         closePopup();
+    //     }
+    // })
 
     parent__taille.addEventListener('click', function() {
             //mettre en plus grand

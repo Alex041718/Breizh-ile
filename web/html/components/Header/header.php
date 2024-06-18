@@ -114,7 +114,16 @@ class Header {
             foreach ($_POST as $key => $value) {
                 $hiddenInputs = $hiddenInputs . '<input type="hidden" name="'. $key . '" value="' . $value . '" />';
             }
+            
+            if (__HEADER__ == 'www/var'){
+                require_once(__HEADER__ . "/html/components/Popup/popup.php");
+            }
+            else{
+                require_once(__HEADER__ . "/Popup/popup.php");
+            }
 
+            
+            
             $render =  /*html*/ '
 
                         <div class="header__right">
@@ -280,10 +289,10 @@ class Header {
                                 <button type="submit" id="filter_submit__header" class="btn"a>Valider</a>
                             </div>
                         </form>
-                    </div>
-                    <div id="popup__access" class="popup__access">
-                        <div class="popup__content" >
-                            <i id="closeAccess" class="fa-solid fa-xmark"></i>
+                    </div>'
+                    . Popup::render("popup__access","oeuil",                    
+                        
+                        '
                             <h2>Accessibilité</h2>
                             <div class="popup__options">
                                 <div class="popup__options__couleurfont">
@@ -303,8 +312,9 @@ class Header {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>                    
+                        '
+
+                    ) . '                
 
             </header>
         ';

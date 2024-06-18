@@ -275,6 +275,22 @@
             </pre>
         </div>
 
+        <?php require_once("../components/Popup/popup.php"); ?>
+        <div class="button-box__item">
+            <?php Button::render("button--storybook","storybook-btn","Popup"); ?>
+            <?php Popup::render("storybook","storybook-btn",
+                '<p>TEST POPUP</p>'
+            ); ?>
+            <pre>
+                <code class="language-php">
+                    <\?php Button::render("button--storybook","storybook-btn","Popup"); ?>
+                    <\?php Popup::render("storybook","storybook-btn",
+                        '<\p>TEST POPUP<\/p>'
+                    ); ?>
+                </code>
+            </pre>
+        </div>
+
 
 
 
