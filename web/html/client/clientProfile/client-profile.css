@@ -252,6 +252,7 @@ nav ul li.active:hover {
   height: 100%;
   display: none;
   flex-direction: column;
+  gap: 20px;
 }
 .content__security__top {
   display: flex;
