@@ -15,7 +15,11 @@
                 <img src="../../assets/images/logo_breizh_noir.png">
             </a>
             <h3 class="connectionContainer__box__title">Création de votre compte client</h3>
+<<<<<<< HEAD
             <form action="/client/clientRegister/sendAccountCreation.php" method="post">
+=======
+            <form action="/controllers/client/clientConnectionController.php" method="post">
+>>>>>>> 31009769d706f19055078f865f8bb69384ec7c7c
 
                 <?php require_once("../../components/Input/Input.php"); ?>
 

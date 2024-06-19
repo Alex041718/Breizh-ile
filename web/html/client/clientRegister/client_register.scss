@@ -5,10 +5,17 @@ body {
   padding: 0;
 }
 
+<<<<<<< HEAD
 $background-image-url: "../../assets/images/ClientBg.jpg";
 
 .connectionContainer {
   background-image: url(#{$background-image-url});
+=======
+$background-image-url: "../../assets/images/ClientBg.png";
+
+.connectionContainer {
+  // background-image: url(#{$background-image-url});
+>>>>>>> 31009769d706f19055078f865f8bb69384ec7c7c
   background-size: cover; // Pour que l'image couvre toute la zone
   background-position: center ; // Pour centrer l'image
   background-repeat: repeat; // Pour éviter que l'image se répète

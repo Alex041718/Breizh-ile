@@ -4,7 +4,10 @@ body {
 }
 
 .connectionContainer {
+<<<<<<< HEAD
   background-image: url(../../assets/images/ClientBg.jpg);
+=======
+>>>>>>> 31009769d706f19055078f865f8bb69384ec7c7c
   background-size: cover;
   background-position: center;
   background-repeat: repeat;
