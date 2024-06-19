@@ -12,6 +12,7 @@ class ReservationCard
         $imageSrc = $housing->getImage()->getImageSrc();
         $reservation_nbJours =  ReservationService::getNbJoursReservation($reservation->getBeginDate(), $reservation->getEndDate());
         $prixTTC = $housing->getPriceIncl() * $reservation_nbJours + $reservation->getServiceCharge() + $reservation->getTouristTax();
+
         $prixTTC = number_format($prixTTC, 2, ',', ' ');
         $render =  /*html*/
             '

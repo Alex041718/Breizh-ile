@@ -40,8 +40,7 @@
                 <p>OU</p>
                 <div class="horizontal-line"></div>
             </div>
-            <p class="para--18px">Pas encore de compte ? <a href="">S'inscrire</a> </p>
-            
+          <p class="para--18px">Pas encore de compte ? <a href="">S'inscrire</a> </p>       
     </div>
 </body>
 </html>
