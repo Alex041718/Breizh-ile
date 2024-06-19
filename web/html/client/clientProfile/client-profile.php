@@ -26,7 +26,7 @@ if (!$isAuthenticated) {
 // Récupérer le client authentifié
 $clientID = $_SESSION['user_id'];
 $client = ClientService::GetClientById($clientID);
-
+$res = "bite"
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +37,7 @@ $client = ClientService::GetClientById($clientID);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire</title>
     <link rel="stylesheet" href="/client/clientProfile/client-profile.css">
+    <link rel="stylesheet" href="/components/Toast/Toast.css">
 
 
     <link rel="stylesheet" href="../../style/ui.css">
@@ -44,22 +45,22 @@ $client = ClientService::GetClientById($clientID);
 
 <body>
     <?php
-    require_once("../../components/Header/header.php");
-    Header::render(true,false, $isAuthenticated, '/client/profile');
+    require_once ("../../components/Header/header.php");
+    Header::render(true, false, $isAuthenticated, '/client/profile');
     ?>
     <main class="content">
-    <nav>
-    <ul>
-        <li id="infos__btn" class="active">
-            <span>Informations Personnelles</span>
-            <img src="./../../../assets/icons/personal.svg" alt="Personal Info Icon" class="nav-icon">
-        </li>
-        <li id="security__btn">
-            <span>Sécurité</span>
-            <img src="./../../../assets/icons/settings.svg" alt="Security Icon" class="nav-icon">
-        </li>
-    </ul>
-</nav>
+        <nav>
+            <ul>
+                <li id="infos__btn" class="active">
+                    <span>Informations Personnelles</span>
+                    <img src="./../../../assets/icons/personal.svg" alt="Personal Info Icon" class="nav-icon">
+                </li>
+                <li id="security__btn">
+                    <span>Sécurité</span>
+                    <img src="./../../../assets/icons/settings.svg" alt="Security Icon" class="nav-icon">
+                </li>
+            </ul>
+        </nav>
 
         <div id="infos" class="content__personnal-data content__display">
             <h3 class="content__personnal-data__title">Informations Personnelles</h3>
@@ -76,27 +77,27 @@ $client = ClientService::GetClientById($clientID);
                     <!-- Nom -->
                     <?php require_once ("../../components/Input/Input.php");
 
-                    Input::render("uneClassEnPlus", "lastname", "text", "Nom", "lastname", "Nom", true, $client->getLastname(),'1','100'); ?>
+                    Input::render("uneClassEnPlus", "lastname", "text", "Nom", "lastname", "Nom", true, $client->getLastname(), '1', '100'); ?>
 
                     <!-- Prenom -->
                     <?php
-                    Input::render("uneClassEnPlus", "firstname", "text", "Prenom", "firstname", "Prenom", true, $client->getFirstname(),'1','100'); ?>
+                    Input::render("uneClassEnPlus", "firstname", "text", "Prenom", "firstname", "Prenom", true, $client->getFirstname(), '1', '100'); ?>
 
                     <!-- Pseudo -->
                     <?php
-                    Input::render("uneClassEnPlus", "nickname", "text", "Pseudo", "nickname", "Pseudo", true, $client->getNickname(),'1','100'); ?>
+                    Input::render("uneClassEnPlus", "nickname", "text", "Pseudo", "nickname", "Pseudo", true, $client->getNickname(), '1', '100'); ?>
 
                     <!-- Mail -->
                     <?php
-                    Input::render("uneClassEnPlus", "mail", "email", "Mail", "mail", "Mail", true, $client->getMail(),'1','100'); ?>
+                    Input::render("uneClassEnPlus", "mail", "email", "Mail", "mail", "Mail", true, $client->getMail(), '1', '100'); ?>
 
                     <!-- Telephone -->
                     <?php
-                    Input::render("uneClassEnPlus", "phoneNumber", "tel", "Telephone", "phoneNumber", "Telephone", true, $client->getPhoneNumber(),'10','12'); ?>
+                    Input::render("uneClassEnPlus", "phoneNumber", "tel", "Telephone", "phoneNumber", "Telephone", true, $client->getPhoneNumber(), '10', '12'); ?>
 
                     <!-- Adresse -->
                     <?php
-                    Input::render("uneClassEnPlus", "address", "text", "Adresse", "address", "Adresse", true, $client->getAddress()->getPostalAddress(),"1","200"); ?>
+                    Input::render("uneClassEnPlus", "address", "text", "Adresse", "address", "Adresse", true, $client->getAddress()->getPostalAddress(), "1", "200"); ?>
 
                     <!-- Genre -->
                     <div class="content__personnal-data__elements__genre">
@@ -116,7 +117,8 @@ $client = ClientService::GetClientById($clientID);
 
                     <!-- Date de création du compte -->
 
-                    <input type="hidden" name="creationDate" value="<?php echo ($client->getCreationDate()->format('Y-m-d')) ?>">
+                    <input type="hidden" name="creationDate"
+                        value="<?php echo ($client->getCreationDate()->format('Y-m-d')) ?>">
                     <input type="hidden" name="clientID" value="<?php echo ($client->getClientID()) ?>">
 
                 </div>
@@ -130,49 +132,57 @@ $client = ClientService::GetClientById($clientID);
             </form>
         </div>
         <div id="security" class="content__security">
-            <h3 class="content__security__title">Sécurité</h3>
-            <p class="content__security__description">Modifier vos paramètres de sécurités</p>
+    <h3 class="content__security__title">Sécurité</h3>
+    <p class="content__security__description">Modifier vos paramètres de sécurités</p>
+    <form method="POST" action= "/client/clientForgotPassword/reset-password-action.php">
+        <div class="content__security__elements">
+            <?php
+            Input::render(
+                "content__security__elements__password",
+                "firstPasswordEntry",
+                "password",
+                "Modifier Mot de passe",
+                "firstPasswordEntry",
+                "Mot de passe",
+                true,
+                "",//"10",
+                ""//,"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?]).{10,}"
+            );
+            ?>
+            <?php
+            Input::render(
+                "content__security__elements__password--confirmation",
+                "secondPasswordEntry",
+                "password",
+                "Confirmer Mot de passe",
+                "secondPasswordEntry",
+                "Confirmer Mot de passe",
+                true,
+                "",//"10",
+                ""//,"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?]).{10,}"
+            );
+            ?>
+            <input type="hidden" name="clientId" value="<?php echo ($client->getClientID()) ?>">
+            <div class="content__security__elements__modify_button">
+                <?php
+                require_once ("../../components/Button/Button.php");
 
-            <div class="content__security__elements">
-                <?php
-                Input::render(
-                    "content__security__elements__password", 
-                    "password", 
-                    "password", 
-                    "Modifier Mot de passe", 
-                    "password", 
-                    "Mot de passe", 
-                    true, 
-                    "", 
-                    "10", 
-                    "", 
-                    "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{10,}"
-                );
-                ?>
-                <?php
-                Input::render(
-                    "content__security__elements__password--confirmation", 
-                    "password_confirm", 
-                    "password", 
-                    "Confirmer Mot de passe", 
-                    "password_confirm", 
-                    "Confirmer Mot de passe", 
-                    true, 
-                    "", 
-                    "10", 
-                    "", 
-                    "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{10,}"
-                );
-                ?>
+                Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Client, "", false, true); ?>
             </div>
         </div>
+    </form>
+</div>
+
     </main>
 
     <?php
     require_once ("../../components/Footer/footer.php");
     Footer::render();
     ?>
-    <script src="/client/clientProfile/client-profile.js"></script>
+    <script type="module" src="/client/clientProfile/client-profile.js"></script>
+    <script>
+        console.log("test :  + <?= $res ?>")
+    </script>
 </body>
 
 </html>
