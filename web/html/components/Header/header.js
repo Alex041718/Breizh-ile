@@ -330,15 +330,24 @@ document.addEventListener('DOMContentLoaded', function() {
             if (document.body.classList.contains('accessibilite__taille')){
                 parent__taille.style.backgroundColor = "#FFF";
                 document.body.classList.remove('accessibilite__taille');
+                parent__taille.style.color = "#000000";
+
+                if (document.body.classList.contains('accessibilite__deute')) {
+                    parent__taille.style.backgroundColor = "FFF";
+                    parent__taille.style.color = "#000000";
+                }
 
             }
             else{
                 parent__taille.style.backgroundColor = "#37906c";
+                parent__taille.style.color = "#ffffff";
                 document.body.classList.add('accessibilite__taille');
 
+                if (document.body.classList.contains('accessibilite__deute')) {
+                    parent__taille.style.backgroundColor = "brown";
+                    parent__taille.style.color = "#ffffff";
+                }
             }
-            
-        
     });
 
     parent__deute.addEventListener('click', function() {
@@ -347,13 +356,48 @@ document.addEventListener('DOMContentLoaded', function() {
             parent__deute.style.backgroundColor = "#FFF";
             document.body.classList.remove('accessibilite__deute');
             document.querySelector('header').classList.remove('accessibilite__deute');
-            document.querySelector('footer').classList.remove('accessibilite__deute');            
+            document.querySelector('footer').classList.remove('accessibilite__deute');        
+            parent__deute.style.color = "#000000";
+            
+            if (document.body.classList.contains('accessibilite__font')) {
+                parent__font.style.backgroundColor = "#37906c";
+                parent__font.style.color = "#ffffff";
+            }else{
+                parent__font.style.backgroundColor = "#brown";
+            }
+            if (document.body.classList.contains('accessibilite__animations')) {
+                parent__animations.style.backgroundColor = "#37906c";
+                parent__animations.style.color = "#ffffff";
+            }else{
+                parent__animations.style.backgroundColor = "#brown";
+            }
+            if (document.body.classList.contains('accessibilite__taille')) {
+                parent__taille.style.backgroundColor = "#37906c";
+                parent__animations.style.color = "#ffffff";
+            }else{
+                parent__taille.style.backgroundColor = "#ffffff";
+            }
+    
         }
         else{
-            parent__deute.style.backgroundColor = "#37906c";
+            parent__deute.style.backgroundColor = "brown";
             document.body.classList.add('accessibilite__deute');
             document.querySelector('header').classList.add('accessibilite__deute');
             document.querySelector('footer').classList.add('accessibilite__deute');
+            parent__deute.style.color = "#ffffff";
+
+            if (document.body.classList.contains('accessibilite__font')) {
+                parent__font.style.backgroundColor = "brown";
+                parent__font.style.color = "#ffffff";
+            }
+            if (document.body.classList.contains('accessibilite__animations')) {
+                parent__animations.style.backgroundColor = "brown";
+                parent__animations.style.color = "#ffffff";
+            }
+            if (document.body.classList.contains('accessibilite__taille')) {
+                parent__taille.style.backgroundColor = "brown";
+                parent__taille.style.color = "#ffffff";
+            }
         }
     });
 
@@ -363,14 +407,24 @@ document.addEventListener('DOMContentLoaded', function() {
         if (document.body.classList.contains('accessibilite__font')){
             parent__font.style.backgroundColor = "#FFF";
             document.body.classList.remove('accessibilite__font');
+            parent__font.style.color = "#000000";
 
+            if (document.body.classList.contains('accessibilite__deute')) {
+                parent__font.style.backgroundColor = "FFF";
+                parent__font.style.color = "#000000";
+            }
         }
         else{
             parent__font.style.backgroundColor = "#37906c";
             document.body.classList.add('accessibilite__font');
+            parent__font.style.color = "#ffffff";
+
+            if (document.body.classList.contains('accessibilite__deute')) {
+                parent__font.style.backgroundColor = "brown";
+                parent__font.style.color = "#ffffff";
+            }
 
         }
-        
     });
 
     parent__animations.addEventListener('click', function() {
@@ -381,12 +435,25 @@ document.addEventListener('DOMContentLoaded', function() {
             if (typeof checkParallaxAccessibilite === 'function') {
                 checkParallaxAccessibilite();
             }        
+            parent__animations.style.color = "#000000";
+
+            if (document.body.classList.contains('accessibilite__deute')) {
+                parent__animations.style.backgroundColor = "FFF";
+                parent__animations.style.color = "#000000";
+            }
+
         }
         else{
             parent__animations.style.backgroundColor = "#37906c";
             document.body.classList.add('accessibilite__animations');
             if (typeof checkParallaxAccessibilite === 'function') {
                 checkParallaxAccessibilite();
+            }
+            parent__animations.style.color = "#ffffff";
+
+            if (document.body.classList.contains('accessibilite__deute')) {
+                parent__animations.style.backgroundColor = "brown";
+                parent__animations.style.color = "#ffffff";
             }
         }
         
