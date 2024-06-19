@@ -1,7 +1,18 @@
 <?php
 require_once("../../../services/HousingService.php");
+require_once("../../components/Popup/popup.php");
+require_once("../../components/Button/Button.php");
 
 session_start();
+
+$codePopUp = /*html*/ '
+    <section class="actions">
+        <?php
+        Button::render("add__button", "addButton", "Ajouter un logement", ButtonType::Owner, "", false, false, "");
+        Button::render("add__button", "addButton", "Ajouter un logement", ButtonType::Owner, "", false, false, "");
+        ?>    
+    </section>
+';
 
 function getSort($methodName, $isReverse = false)
 {
@@ -35,7 +46,7 @@ function showHousings($housings) {
             <p><?= $housing->getBeginDate()->format("d / m / Y") ?></p>
             <p><?= $housing->getEndDate()->format("d / m / Y") ?></p>
             <p class="description-status"><?= $housing->getIsOnline() ? "En ligne" : "Hors ligne" ?><span class="status status--<?= $housing->getIsOnline() ? "online" : "offline" ?>"></span></p>
-            <button class="eye visibilityButtons" onclick="
+            <button id="popUpVisibility-btn" class="eye visibilityButtons" onclick="
             event.preventDefault();
 
             let formData = new FormData();
@@ -57,11 +68,12 @@ function showHousings($housings) {
                 currentHousings.querySelector('.status').classList.add('status--online');
                 currentHousings.querySelector('.description-status').innerHTML = currentHousings.querySelector('.description-status').innerHTML.replace('Hors ligne', 'En ligne');
             }
-
             "><i class="fa-solid fa-eye"></i></button>
         </a>
     <?php 
     }}
+
+    PopUp::render("popUpVisibility", "popUpVisibility-btn", "<p>test</p>");
 }
 
 $housings = $_SESSION["housings"];

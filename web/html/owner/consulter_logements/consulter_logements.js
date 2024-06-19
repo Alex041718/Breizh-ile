@@ -1,3 +1,5 @@
+import { loadPopUp } from "/components/Popup/popup.js";
+
 function main() {
     const housings = document.querySelector(".housings");
     const columns = document.querySelectorAll(".title p");
@@ -20,6 +22,8 @@ function main() {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 housings.innerHTML = this.responseText;
+
+                loadPopUp();
             }
         };
         xhr.send(params);
