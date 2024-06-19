@@ -48,7 +48,6 @@ body {
   background-color: gray;
 }
 .connectionContainer__box a {
-  text-decoration: none;
   color: #307B5C;
 }
 .connectionContainer__box .error {
