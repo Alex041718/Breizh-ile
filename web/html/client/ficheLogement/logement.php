@@ -57,6 +57,9 @@
     <?php
         require_once("../../components/Header/header.php");
         Header::render(true,false,$isAuthenticated,$_SERVER['REQUEST_URI']);
+
+        require_once(__HEADER__ . "/html/components/Popup/popup.php");
+        
     ?>
 
     <main class="logement">
