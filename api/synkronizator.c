@@ -11,7 +11,7 @@
 #include "cJSON.h" // https://github.com/DaveGamble/cJSON
 
 #define MAX_CLIENTS 1
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 2048
 
 static struct option long_options[] = {
     {"help", no_argument, NULL, 'h'},
@@ -36,20 +36,27 @@ void print_log(const char *message) {
     printf("[%s] %s\n", timestamp, message);
 }
 
-cJSON* parse_request(char* request) {
-    cJSON* json = NULL;
-    char* body = NULL;
-
+void parse_request(char* request, char* method, char* path, char* headers, char* body) {
     char* pos = strstr(request, "\r\n\r\n");
     if (pos != NULL) {
-        body = pos + 4;
+        *pos = '\0'; // Terminer la chaîne de l'en-tête
+        strcpy(headers, request); // Copier l'en-tête
+        pos += 4; // Sauter les deux sauts de ligne après l'en-tête
+        strcpy(body, pos); // Copier le corps
     }
 
-    if (body != NULL) {
-        json = cJSON_Parse(body);
+    // Extraire la méthode et le chemin de la première ligne de l'en-tête
+    char* first_line = strtok(headers, "\r\n");
+    if (first_line != NULL) {
+        char* method_token = strtok(first_line, " ");
+        if (method_token != NULL) {
+            strcpy(method, method_token);
+        }
+        char* path_token = strtok(NULL, " ");
+        if (path_token != NULL) {
+            strcpy(path, path_token);
+        }
     }
-
-    return json;
 }
 
 void handle_request(int client_fd) {
@@ -63,13 +70,19 @@ void handle_request(int client_fd) {
         buffer[read_bytes] = '\0';
         printf("Reçu : %s\n", buffer);
 
-        cJSON* json = parse_request(buffer);
+        char method[10], path[50], headers[BUFFER_SIZE], body[BUFFER_SIZE];
+        parse_request(buffer, method, path, headers, body);
+        printf("Méthode : %s\n", method);
+        printf("Chemin : %s\n", path);
+        printf("Corps : %s\n", body);
+
+        cJSON* json = cJSON_Parse(body);
         if (json != NULL) {
             char* response_body = cJSON_Print(json);
             cJSON_Delete(json);
 
             char response[BUFFER_SIZE];
-            sprintf(response, "HTTP/1.1 200 OK\nContent-Type: application/json\nContent-Length: %ld\r\n\r\n%s", strlen(response_body), response_body);
+            snprintf(response, BUFFER_SIZE, "HTTP/1.1 200 OK\nContent-Type: application/json\nContent-Length: %ld\r\n\r\n%s", strlen(response_body), response_body);
             printf("Réponse envoyée : %s\n", response);
             send(client_fd, response, strlen(response), 0);
 
