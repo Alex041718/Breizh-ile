@@ -58,7 +58,6 @@ Header::render(true,false,$isAuthenticated,$_SERVER['REQUEST_URI']);
 ?>
 
 <main class="bid">
-    <span>la barre de progression</span>
     <div class="bid__container">
 
         <h2 class="bid__container__title-page">Votre devis pour séjourné à <?= $housing->getAddress()->getCity() ?> :</h2>
@@ -71,17 +70,18 @@ Header::render(true,false,$isAuthenticated,$_SERVER['REQUEST_URI']);
                     </div>
                     <div class="bid__container__info__info-detail__description__content">
                         <h3><?= $housing->getTitle() ?></h3>
-                        <p class="para--18px>"><?= $housing->getLongDesc() ?></p>
+                        <p class="para--18px bid__container__info__info-detail__description__content__desc"><?= $housing->getShortDesc() ?></p>
+                        <div class="bid__container__info__info-detail__kpi">
+                            <div class="bid__container__info__info-detail__kpi__item"><?= $intervalDay ?> nuits</div>
+                            <div class="bid__container__info__info-detail__kpi__item"><?= $numberPerson ?> personnes</div>
+                            <!--<div class="bid__container__info__info-detail__kpi__item"><?= $housing->getNbSimpleBed() ?> lit(s) simple(s)</div>
+                    <div class="bid__container__info__info-detail__kpi__item"><?= $housing->getNbDoubleBed() ?> lit(s) double(s)</div> -->
+
+                        </div>
                     </div>
                 </div>
 
-                <div class="bid__container__info__info-detail__kpi">
-                    <div class="bid__container__info__info-detail__kpi__item"><?= $intervalDay ?> nuits</div>
-                    <div class="bid__container__info__info-detail__kpi__item"><?= $numberPerson ?> personnes</div>
-                    <!--<div class="bid__container__info__info-detail__kpi__item"><?= $housing->getNbSimpleBed() ?> lit(s) simple(s)</div>
-                    <div class="bid__container__info__info-detail__kpi__item"><?= $housing->getNbDoubleBed() ?> lit(s) double(s)</div> -->
 
-                </div>
 
                 <div class="bid__container__info__info-detail__dates">
                     <h3>Du <?= $beginDate->format('d/m/Y') ?> au <?= $endDate->format('d/m/Y') ?></h3>
