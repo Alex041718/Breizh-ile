@@ -1,18 +1,26 @@
-@use '../../style/variables';
+@import '../../style/variables';
 
 body {
   margin: 0;
   padding: 0;
 }
 
+$background-image-url: "../../assets/images/OwnerBg.png";
+
 .connectionContainer {
+  background-image: url(#{$background-image-url});
+  background-size: cover; // Pour que l'image couvre toute la zone
+  background-position: center ; // Pour centrer l'image
+  background-repeat: repeat; // Pour éviter que l'image se répète
+  height: 100vh; // Pour que l'image couvre toute la hauteur de la fenêtres
+  width: 100%; // Pour que l'image couvre toute la largeur de la fenêtre
+  justify-content: center;
   padding-top: 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
-  background-color: variables.$whiteColor;
   gap: 1em;
+  box-sizing: border-box;
 
   img {
     width: 400px;
@@ -24,23 +32,43 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 45px 20px;
-    border: 1px solid variables.$grey5;
-    border-radius: 4px;
-    background-color: variables.$whiteColor;
+    padding: 45px 40px;
+    border: 1px solid #E0E0E0;
+    border-radius: 20px;
+    background-color: white;
     gap: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
 
+    .inscription {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1em;
+      width: 100%;
+      justify-content: center;
+
+      .horizontal-line {
+        border: none;
+        height: 1px;
+        width: 100%;
+        background-color: gray;
+      }
+    }
+
+    a{
+      color: $ownerPrimaryColor;
+    }
+    
     .error {
       color: red;
     }
-
+    
     &__forgot {
-      color: variables.$black2;
+      color: $black2;
     }
 
     &__title {
       text-align: center;
-      width: 350px;
     }
 
     form {
@@ -51,10 +79,9 @@ body {
       align-items: center;
 
       .connection__input, button {
-        width: 260px;
+        width: 100%;
       }
     }
-
 
   }
 }
