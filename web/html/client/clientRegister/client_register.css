@@ -4,7 +4,6 @@ body {
 }
 
 .connectionContainer {
-  background-image: url(../../assets/images/ClientBg.png);
   background-size: cover;
   background-position: center;
   background-repeat: repeat;
@@ -70,4 +69,4 @@ body {
 }
 .connectionContainer__box form .connection__input, .connectionContainer__box form button {
   width: 100%;
-}/*# sourceMappingURL=client_connection.css.map */
+}/*# sourceMappingURL=client_register.css.map */

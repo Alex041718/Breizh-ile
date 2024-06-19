@@ -8,7 +8,7 @@ body {
 $background-image-url: "../../assets/images/ClientBg.png";
 
 .connectionContainer {
-  background-image: url(#{$background-image-url});
+  // background-image: url(#{$background-image-url});
   background-size: cover; // Pour que l'image couvre toute la zone
   background-position: center ; // Pour centrer l'image
   background-repeat: repeat; // Pour éviter que l'image se répète
