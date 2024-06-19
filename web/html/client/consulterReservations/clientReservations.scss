@@ -12,7 +12,7 @@ main {
 }
 
 .title {
-    margin-left: 2em;
+    margin-left: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -20,7 +20,7 @@ main {
     margin-top: 135px;
 
     @media (max-width: 1024px) {
-        padding-left: 15px;
+        //margin: 40px;
     }
 
     &__arrow{
