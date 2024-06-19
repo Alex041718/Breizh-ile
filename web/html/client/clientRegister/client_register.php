@@ -24,14 +24,13 @@
                 <?php Input::render("connection__input", "mail", "text", "E-mail", "mail", "Entrez votre e-mail", true); ?>
 
 
-                <a href="/client/clientForgotPassword/clientForgotPassword.php" class="connectionContainer__box__forgot">J'ai oublié mon mot de passe</a>
 
                 <input type="hidden" name="role" value="client">
 
                 <?php require_once("../../components/Button/Button.php"); ?>
 
 
-                <?php Button::render("connection__button", "connectButton", "Se connecter",ButtonType::Client,false,false,true); ?>
+                <?php Button::render("connection__button", "connectButton", "S'inscrire",ButtonType::Client,false,false,true); ?>
 
             </form>
             <div class="inscription">
@@ -39,8 +38,8 @@
                 <p>OU</p>
                 <div class="horizontal-line"></div>
             </div>
+            <p class="para--18px">Déjà client ? <a href="/client/connection">Se connecter</a> </p>
 
-            <a href="" class="para--20px">S'inscrire</a>
             
     </div>
 </body>
