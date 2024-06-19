@@ -178,4 +178,18 @@ class HousingService extends Service
 
         return $housings;
     }
+
+    public static function changeVisibility(Housing $housing): Housing
+    {
+        $housingID = $housing->getHousingID();
+
+        $newVisibility = (int) !$housing->getIsOnline();
+        $housing->setIsOnline($newVisibility);
+
+        $pdo = self::getPDO();
+        $stmt = $pdo->prepare('UPDATE _Housing SET isOnline = ? WHERE housingID = ?');
+        $stmt->execute([$newVisibility, $housingID]);
+
+        return $housing;
+    }
 }
