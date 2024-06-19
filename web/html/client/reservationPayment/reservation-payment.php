@@ -80,6 +80,7 @@ $paymentMethods = PayementMethodService::GetPayementMethodById(1);
     <title>Validation du paiement</title>
     <link rel="stylesheet" type="text/css" href="/client/reservationPayment/reservation-payment.css">
     <link rel="stylesheet" href="../../style/ui.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
