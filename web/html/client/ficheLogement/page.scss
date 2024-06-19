@@ -176,82 +176,82 @@ body {
         z-index: 9998;
     }
 
-    #popup2 {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: white;
-        border: 1px solid gray;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
-        border-radius: 20px;
-        padding: 2em;
-        z-index: 9999;
+    // #popupVoyageurs {
+    //     display: none;
+    //     position: fixed;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     background-color: white;
+    //     border: 1px solid gray;
+    //     box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+    //     border-radius: 20px;
+    //     padding: 2em;
+    //     z-index: 9999;
 
-        &.show {
-            display: block;
-        }
+    //     &.show {
+    //         display: block;
+    //     }
 
-        .popup-content {
-            display: flex;
-            flex-direction: column;
-            gap: 1em;
+    //     .popup-content {
+    //         display: flex;
+    //         flex-direction: column;
+    //         gap: 1em;
 
-            #closePopupBtn {
-                position: absolute;
-                top: 1em;
-                left: 1em;
+    //         #closePopupBtn {
+    //             position: absolute;
+    //             top: 1em;
+    //             left: 1em;
 
-                // Définir le centre de rotation au milieu de l'icône
-                transform-origin: center;
+    //             // Définir le centre de rotation au milieu de l'icône
+    //             transform-origin: center;
 
-                // Appliquer les styles de l'icône
-                &.fa-solid {
-                    // Définir les propriétés pour l'icône spécifique
-                    &.fa-xmark {
-                        // Ajouter une transition pour une animation fluide
-                        transition: transform 0.3s;
+    //             // Appliquer les styles de l'icône
+    //             &.fa-solid {
+    //                 // Définir les propriétés pour l'icône spécifique
+    //                 &.fa-xmark {
+    //                     // Ajouter une transition pour une animation fluide
+    //                     transition: transform 0.3s;
 
-                        // Définir les styles pour le survol de l'icône
-                        &:hover {
-                            // Appliquer l'animation de cercle définie
-                            animation: circle-animation 1s ease-in-out infinite;
-                        }
-                    }
-                }
-            }
+    //                     // Définir les styles pour le survol de l'icône
+    //                     &:hover {
+    //                         // Appliquer l'animation de cercle définie
+    //                         animation: circle-animation 1s ease-in-out infinite;
+    //                     }
+    //                 }
+    //             }
+    //         }
 
-            .traveler-type {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+    //         .traveler-type {
+    //             display: flex;
+    //             justify-content: space-between;
+    //             align-items: center;
 
-                .addbtn {
-                    display: flex;
-                    gap: 0.5em;
-                    border: 1px solid gray;
+    //             .addbtn {
+    //                 display: flex;
+    //                 gap: 0.5em;
+    //                 border: 1px solid gray;
 
-                    background-color: transparent;
-                    border-radius: 20px;
+    //                 background-color: transparent;
+    //                 border-radius: 20px;
 
-                    button {
-                        cursor: pointer;
-                        border-radius: 20px;
-                        border: 1px solid gray;
-                    }
+    //                 button {
+    //                     cursor: pointer;
+    //                     border-radius: 20px;
+    //                     border: 1px solid gray;
+    //                 }
 
-                    .nbr {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        width: 2em;
-                        color: black;
-                    }
-                }
-            }
-        }
-    }
+    //                 .nbr {
+    //                     display: flex;
+    //                     align-items: center;
+    //                     justify-content: center;
+    //                     width: 2em;
+    //                     color: black;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
 }
 

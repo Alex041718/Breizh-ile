@@ -1,6 +1,4 @@
-<?php
-
-    
+<?php 
     // ------------------- Systeme de session -------------------
     // Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
     require_once '../../../models/Client.php';
@@ -39,6 +37,8 @@
 
 <?php
 
+require_once("../../components/Popup/popup.php");
+
 require_once("../../../models/Housing.php");
 
 require_once("../../../services/AddressService.php");
@@ -71,10 +71,7 @@ $housingLatitude = $housing->getLatitude();
 $housingCity = $housing->getAddress()->getCity();
 $housingPostalCode = $housing->getAddress()->getPostalCode();
 
-
-// $housing_arrangements = $housing->getArrangement(); à modifier du aux changements de la bdd
-
-
+//$housing_arrangements = $housing->getArrangement();
 
 $iconMapping = [
     'Jardin' => 'fa-solid fa-plant-wilt',
@@ -126,38 +123,39 @@ $iconMapping = [
                         </div>
                         <div class="nbrClients">
                             <button type="button" class="para--bold" id="addTravelersBtn">Ajouter des voyageurs<input name="numberPerson" id="liveTravelersCount" value="1"></button>
-                            <div id="popup2" class="popup">
-                                <div class="popup-content">
-                                    <div class="traveler-type">
-                                        <div class="adulteInfo">
-                                            <span class="para--bold">Adultes:</span>
-                                            <p>18 ans et +</p>
-                                        </div>
-                                        <div class="addbtn">
-                                            <button type="button" id="subtractAdultBtn">-</button>
-                                            <div class="nbr">
-                                                <span id="adultCount">1</span>
-                                            </div>
-                                            <button type="button" id="addAdultBtn">+</button>
-                                        </div>
+                            <?php Popup::render("popupVoyageurs","addTravelersBtn",
+                            '
+                                <div class="traveler-type">
+                                    <div class="adulteInfo">
+                                        <span class="para--bold">Adultes:</span>
+                                        <p>18 ans et +</p>
                                     </div>
-
-                                    <div class="traveler-type">
-                                        <div class="enfantInfo">
-                                            <span class="para--bold">Enfants:</span>
-                                            <p>- de 18 ans</p>
+                                    <div class="addbtn">
+                                        <button type="button" id="subtractAdultBtn">-</button>
+                                        <div class="nbr">
+                                            <span id="adultCount">1</span>
                                         </div>
-                                        <div class="addbtn">
-                                            <button type="button" id="subtractChildBtn">-</button>
-                                            <div class="nbr">
-                                                <span id="childCount">0</span>
-                                            </div>
-                                            <button type="button" id="addChildBtn">+</button>
-                                        </div>
+                                        <button type="button" id="addAdultBtn">+</button>
                                     </div>
-                                    <i id="closePopupBtn" class="fa-solid fa-xmark"></i>
                                 </div>
-                            </div>
+
+                                <div class="traveler-type">
+                                    <div class="enfantInfo">
+                                        <span class="para--bold">Enfants:</span>
+                                        <p>- de 18 ans</p>
+                                    </div>
+                                    <div class="addbtn">
+                                        <button type="button" id="subtractChildBtn">-</button>
+                                        <div class="nbr">
+                                            <span id="childCount">0</span>
+                                        </div>
+                                        <button type="button" id="addChildBtn">+</button>
+                                    </div>
+                                </div>
+                                <i id="closePopupBtn" class="fa-solid fa-xmark"></i>
+                            '
+                            )
+                            ?>
                         </div>
                     </div>
 
