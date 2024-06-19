@@ -256,7 +256,6 @@ input[type=number] {
   color: #FFF;
 }
 .popup__access .popup__content .popup__options div div:hover {
-  background-color: #37906c;
   cursor: pointer;
 }
 
