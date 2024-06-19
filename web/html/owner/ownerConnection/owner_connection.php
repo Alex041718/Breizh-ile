@@ -12,8 +12,8 @@
 <body>
 
     <div class="connectionContainer">
-        <img src="../../assets/images/logo_breizh_noir.png">
         <div class="connectionContainer__box">
+            <img src="../../assets/images/logo_breizh_noir.png">
             <h3 class="connectionContainer__box__title">Connectez vous à votre compte propriétaire</h3>
             <form action="/controllers/owner/ownerConnectionController.php" method="post">
 
@@ -39,6 +39,13 @@
                 <?php Button::render("connection__button", "connectButton", "Se connecter",ButtonType::Owner,false,false,true); ?>
 
             </form>
+
+            <div class="inscription">
+                <div class="horizontal-line"></div>
+                <p class="para--20px">OU</p>
+                <div class="horizontal-line"></div>
+            </div>
+            <p class="para--18px">Pas encore de compte ? <a href="">S'inscrire</a> </p>
     </div>
 </body>
 </html>
