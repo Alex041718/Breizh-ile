@@ -79,11 +79,20 @@ hr {
                         flex-direction: column;
                     }
 
-                    &__image > img {
-                        width: 220px;
-                        height: 170px;
-                        object-fit: cover;
-                        border-radius: 5px;
+                    &__image {
+                        display: flex;
+
+                        @media (max-width: 640px) {
+                            justify-content: center;
+                        }
+
+                        img {
+                            width: 220px;
+                            height: 170px;
+                            object-fit: cover;
+                            border-radius: 5px;
+                        }
+
                     }
 
                     &__content {
