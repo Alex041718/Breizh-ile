@@ -5,6 +5,9 @@ body {
 
 main {
   min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }
 
 .title {
@@ -15,9 +18,18 @@ main {
   gap: 1em;
   margin-top: 135px;
 }
+@media (max-width: 1024px) {
+  .title {
+    padding-left: 15px;
+  }
+}
 .title__arrow {
   all: unset;
 }
+@media (max-width: 1024px) {
+  .title__text {
+    text-align: center;
+  }
 .title__arrow i {
   font-size: 30px;
   padding: 15px;
@@ -33,15 +45,28 @@ main {
 .reservation-list {
   display: flex;
   flex-direction: row;
-  padding: 2em;
-  justify-content: center;
   align-items: center;
+  width: 100%;
+}
+@media (max-width: 1024px) {
+  .reservation-list {
+    width: 100%;
+    justify-content: center;
+  }
 }
 .reservation-list__container {
   display: flex;
   flex-direction: column;
-  padding: 2em;
+  width: 100%;
   scroll-behavior: smooth;
+  padding-left: 150px;
+  padding-right: 150px;
+}
+@media (max-width: 1024px) {
+  .reservation-list__container {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
 }
 .reservation-list__container__empty {
   display: flex;
