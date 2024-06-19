@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const popup = document.getElementById('popup2');
+    const popup = document.getElementById('popupVoyageurs');
     const closePopupBtn = document.getElementById('closePopupBtn');
     const subtractAdultBtn = document.getElementById('subtractAdultBtn');
     const addAdultBtn = document.getElementById('addAdultBtn');
