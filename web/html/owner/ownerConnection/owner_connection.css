@@ -4,12 +4,17 @@ body {
 }
 
 .connectionContainer {
+  background-image: url(../../assets/images/OwnerBg.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
   padding-top: 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
-  background-color: #FFFFFF;
   gap: 1em;
 }
 .connectionContainer img {
@@ -21,11 +26,29 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 45px 20px;
+  padding: 45px 40px;
   border: 1px solid #E0E0E0;
-  border-radius: 4px;
-  background-color: #FFFFFF;
+  border-radius: 20px;
+  background-color: white;
   gap: 20px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+.connectionContainer__box .inscription {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+  width: 100%;
+  justify-content: center;
+}
+.connectionContainer__box .inscription .horizontal-line {
+  border: none;
+  height: 1px;
+  width: 100%;
+  background-color: gray;
+}
+.connectionContainer__box a {
+  color: #082C4C;
 }
 .connectionContainer__box .error {
   color: red;
@@ -35,7 +58,6 @@ body {
 }
 .connectionContainer__box__title {
   text-align: center;
-  width: 350px;
 }
 .connectionContainer__box form {
   width: 100%;
@@ -45,5 +67,5 @@ body {
   align-items: center;
 }
 .connectionContainer__box form .connection__input, .connectionContainer__box form button {
-  width: 260px;
+  width: 100%;
 }/*# sourceMappingURL=owner_connection.css.map */
