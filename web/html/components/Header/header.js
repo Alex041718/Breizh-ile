@@ -426,17 +426,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 parent__font.style.backgroundColor = "#37906c";
                 parent__font.style.color = "#ffffff";
             }else{
-                parent__font.style.backgroundColor = "#brown";
+                parent__font.style.backgroundColor = "#ffffff";
             }
             if (document.body.classList.contains('accessibilite__animations')) {
                 parent__animations.style.backgroundColor = "#37906c";
                 parent__animations.style.color = "#ffffff";
             }else{
-                parent__animations.style.backgroundColor = "#brown";
+                parent__animations.style.backgroundColor = "#ffffff";
             }
             if (document.body.classList.contains('accessibilite__taille')) {
                 parent__taille.style.backgroundColor = "#37906c";
-                parent__animations.style.color = "#ffffff";
+                parent__taille.style.color = "#ffffff";
             }else{
                 parent__taille.style.backgroundColor = "#ffffff";
             }
