@@ -129,10 +129,17 @@ nav ul {
 }
 nav ul li {
   display: flex;
+  align-items: center;
   width: 20rem;
   height: 70px;
   font-weight: bold;
   font-size: max(16px, 1.0416666667vw);
+}
+nav ul li .nav-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 16px;
+  filter: brightness(0) saturate(100%) invert(41%) sepia(11%) saturate(2018%) hue-rotate(103deg) brightness(95%) contrast(84%);
 }
 nav ul li span {
   -webkit-user-select: none;
@@ -149,8 +156,8 @@ nav ul li span {
 nav ul li.active {
   background-color: #307B5C;
 }
-nav ul li.active span {
-  color: #FFFFFF;
+nav ul li.active span, nav ul li.active .nav-icon {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(91%) saturate(0%) hue-rotate(92deg) brightness(115%) contrast(101%);
 }
 nav ul li.locked {
   background-color: #FFFFFF;
@@ -239,23 +246,25 @@ nav ul li.active:hover {
   font-size: 12px;
 }
 .content__security {
-  margin-left: 5em;
+  padding-top: 200px;
+  padding-inline: 50px;
+  width: 80%;
+  height: 100%;
   display: none;
   flex-direction: column;
-  width: 85em;
-  height: 30em;
-  position: relative;
 }
 .content__security__title {
-  margin-bottom: 1em;
   width: 10%;
 }
 .content__security__elements {
-  left: 10%;
+  width: 100%;
 }
 .content__security__elements__password {
   width: 20%;
-  margin-bottom: 1em;
+  padding-bottom: 1%;
+}
+.content__security__elements__password--confirmation {
+  width: 20%;
 }
 
 @media (max-width: 1280px) {
@@ -278,9 +287,19 @@ nav ul li.active:hover {
     flex-direction: column;
   }
   nav > ul {
-    height: 90vh;
+    height: 110vh;
+    width: 5vh;
   }
   .content {
-    height: 90vh;
+    height: 110vh;
+  }
+  nav ul li span {
+    display: none;
+  }
+  .nav-icon {
+    margin: auto;
+  }
+  nav ul li {
+    width: 100%;
   }
 }/*# sourceMappingURL=client-profile.css.map */
