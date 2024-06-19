@@ -22,7 +22,7 @@ class Header {
                 <script src="/components/SearchBar/SearchBar.js" defer></script>
                 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
                 <script src="/components/Header/header.js"></script>
-                <script type="module" src="../../components/Popup/popup.js"></script>
+                <script type="module" src="/components/Popup/popup.js"></script>
                 <link rel="stylesheet" href="/components/Header/header.css">
 
                 <header class="">
