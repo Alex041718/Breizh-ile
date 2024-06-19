@@ -18,9 +18,18 @@ main {
   gap: 1em;
   margin-top: 135px;
 }
+@media (max-width: 1024px) {
+  .title {
+    padding-left: 15px;
+  }
+}
 .title__arrow {
   all: unset;
 }
+@media (max-width: 1024px) {
+  .title__text {
+    text-align: center;
+  }
 .title__arrow i {
   font-size: 30px;
   padding: 15px;

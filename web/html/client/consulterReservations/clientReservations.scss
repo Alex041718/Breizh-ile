@@ -1,6 +1,6 @@
 @use '../../style/variables.css';
 
-body {
+body{
     margin: 0;
 }
 
@@ -19,9 +19,6 @@ main {
     gap: 1em;
     margin-top: 135px;
 
-    @media (max-width: 1024px) {
-        //margin: 40px;
-    }
 
     &__arrow{
         all: unset;
@@ -32,6 +29,7 @@ main {
             color : black;
         }
     }
+}
 
     &__text {
         @media (max-width: 1024px) {
