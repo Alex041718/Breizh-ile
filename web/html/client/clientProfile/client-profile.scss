@@ -14,45 +14,44 @@ nav {
     width: min-content;
 
     ul {
+        height: 100%;
         padding-left: 0;
         padding-top: 80px;
         margin: 0;
         display: flex;
         flex-direction: column;
-        height: 80vh;
         list-style: none;
         box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.25);
 
         li {
+            border-bottom: 1px solid variables.$lighterGrey5;
             display: flex;
-            align-items: center;
             width: 20rem;
             height: 70px;
             font-weight: bold;
             font-size: variables.$font-size-lg;
+            align-items: center;
+
+            span {
+                user-select: none;
+                width: 100%;
+                padding-inline: 3.2rem;
+                color: variables.$clientPrimaryColor;
+                text-decoration: none;
+            }
 
             .nav-icon {
                 width: 24px;
                 height: 24px;
-                margin-right: 16px;
+                padding-inline: 15px;
                 filter: brightness(0) saturate(100%) invert(41%) sepia(11%) saturate(2018%) hue-rotate(103deg) brightness(95%) contrast(84%);
-            }
-
-            span {
-                user-select: none;
-                line-height: 70px;
-                width: 100%;
-                padding-inline: 3.2rem;
-                height: 100%;
-                color: variables.$clientPrimaryColor;
-                text-decoration: none;
-                border-bottom: 1px solid variables.$lighterGrey5;
             }
 
             &.active {
                 background-color: variables.$clientPrimaryColor;
 
-                span, .nav-icon {
+                span,
+                .nav-icon {
                     filter: brightness(0) saturate(100%) invert(100%) sepia(91%) saturate(0%) hue-rotate(92deg) brightness(115%) contrast(101%);
                 }
             }
@@ -78,7 +77,8 @@ nav {
 }
 
 .content {
-    height: 80vh;
+    min-height: 100vh;
+    height: 100%;
     display: flex;
 
     &__selector {
@@ -155,7 +155,7 @@ nav {
                     background-color: variables.$whiteColor;
                     border: 1.5px solid variables.$grey5;
                     border-radius: 4px;
-                    font-size: 12px;
+                    font-size: variables.$font-size-lg;
                 }
             }
         }
@@ -169,6 +169,12 @@ nav {
         display: none;
         flex-direction: column;
 
+        &__top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         &__title {
             width: 10%;
         }
@@ -177,11 +183,12 @@ nav {
             width: 100%;
 
             &__password {
-                width: 20%;
+                width: 100%;
                 padding-bottom: 1%;
             }
-            &__password--confirmation{
-                width: 20%;
+
+            &__password--confirmation {
+                width: 100%;
             }
         }
     }
@@ -197,9 +204,16 @@ nav {
     .content__personnal-data__elements {
         grid-template-columns: repeat(2, minmax(11em, 1fr));
     }
+    nav>ul {
+        padding-top: 100px;     
+    }
 
-    nav > ul {
-        padding-top: 100px;
+    nav ul li span {
+        display: none;
+    }
+
+    nav ul li {
+        width: 100%;
     }
 }
 
@@ -209,24 +223,4 @@ nav {
         display: flex;
         flex-direction: column;
     }
-
-    nav > ul {
-        height: 110vh;
-        width: 5vh;
-        //mettre la nav je sais pas trop ou mais pas tout au dessus
-    }
-
-    .content {
-        height: 110vh;
-    }
-        nav ul li span {
-            display: none;
-        }
-        .nav-icon{
-            margin: auto;
-        }
-        nav ul li{
-            width: 100%;
-        }    
-        //mettre les mdt en 15%  
 }
