@@ -31,15 +31,9 @@ $isAuthenticated = SessionService::isClientAuthenticated();
 
     <?php
 
-
-
         require_once("./components/Header/header.php");
 
-        Header::render("search-bar--home", false, $isAuthenticated, $_SERVER['REQUEST_URI']);
-
-        
-
-        
+        Header::render("search-bar--home", false, $isAuthenticated, $_SERVER['REQUEST_URI']);        
 
     ?>
     <main>
@@ -61,12 +55,17 @@ $isAuthenticated = SessionService::isClientAuthenticated();
             </div>
         </section>
         <section id="logements" class="logements">
-            <div id="popup__filter" class="popup__filter">
-                <div method="POST" action="./#logements" class="popup__filter__content">
-                    <?php foreach ($_POST as $key => $value) {
-                        echo '<input type="hidden" name="'. $key . '" value="' . $value . '" />';
-                    }?>
-                    <input type="hidden" />
+            <?php 
+            
+            $inputs = "";
+            foreach ($_POST as $key => $value) {
+                $inputs .= '<input type="hidden" name="'. $key . '" value="' . $value . '" />';
+            }
+
+
+            require_once("./components/SearchBar/SearchBar.php");
+                Popup::render("popup__filter","filter_button",
+                    $inputs . '
                     <div class="popup__filter__top">
                         <h2>Filtres</h2>
                         <i class="fa-solid fa-xmark"></i>
@@ -75,20 +74,20 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                         <h3>Prix</h3>
                         <div class="popup__filter__container__prices">
                             <div class="price-input-container">
-                                <div class="price-input">
+                             <div class="price-input">
                                     <div class="price-field">
                                         <span>Prix Minimum</span>
                                         <input type="number"
                                             id="minInput"
                                             class="min-input"
-                                            value="<?= isset($_POST["minPrice"]) ? $_POST["minPrice"] : "0" ?>">
+                                            value="' . (isset($_POST["minPrice"]) ? $_POST["minPrice"] : "0") . '">
                                     </div>
                                     <div class="price-field">
                                         <span>Prix Maximum</span>
                                         <input type="number"
                                             id="maxInput"
                                             class="max-input"
-                                            value="<?= isset($_POST["maxPrice"]) ? $_POST["maxPrice"] : "500" ?>">
+                                            value="' . (isset($_POST["maxPrice"]) ? $_POST["maxPrice"] : "500") . '">
                                     </div>
                                 </div>
                                 <div class="slider-container">
@@ -103,13 +102,13 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                                     class="min-range"
                                     min="0"
                                     max="500"
-                                    value="<?= isset($_POST["minPrice"]) ? $_POST["minPrice"] : "0" ?>"
+                                    value="' . (isset($_POST["minPrice"]) ? $_POST["minPrice"] : "0") . '"
                                     step="1">
                                 <input type="range"
                                     class="max-range"
                                     min="0"
                                     max="500"
-                                    value="<?= isset($_POST["maxPrice"]) ? $_POST["maxPrice"] : "500" ?>"
+                                    value="' . (isset($_POST["maxPrice"]) ? $_POST["maxPrice"] : "500") . '"
                                     step="1">
                             </div>
                         </div>
@@ -135,7 +134,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                                 </div>
                                 <div class="popup__filter__box">
                                     <input type="checkbox" />
-                                    <p>Villa d'exception</p>
+                                    <p>Villa d\'exception</p>
                                 </div>
                                 <div class="popup__filter__box">
                                     <input type="checkbox" />
@@ -177,8 +176,9 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                     <div class="popup__filter__bottom">
                         <a id="filter_submit" class="btn"a>Valider</a>
                     </div>
-                </div>
-            </div>
+                </div>'
+                );
+            ?>
             <h2>Nos logements</h2>
             <div class="logements__filters">
                 <label>Trier par :</label>
