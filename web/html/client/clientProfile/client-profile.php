@@ -48,12 +48,19 @@ $client = ClientService::GetClientById($clientID);
     Header::render(true,false, $isAuthenticated, '/client/profile');
     ?>
     <main class="content">
-        <nav>
-            <ul>
-                <li id="infos__btn" class="active"><span>Informations Personnelles</span></li>
-                <li id="security__btn"><span>Sécurité</span></li>
-            </ul>
-        </nav>
+    <nav>
+    <ul>
+        <li id="infos__btn" class="active">
+            <span>Informations Personnelles</span>
+            <img src="./../../../assets/icons/personal.svg" alt="Personal Info Icon" class="nav-icon">
+        </li>
+        <li id="security__btn">
+            <span>Sécurité</span>
+            <img src="./../../../assets/icons/settings.svg" alt="Security Icon" class="nav-icon">
+        </li>
+    </ul>
+</nav>
+
         <div id="infos" class="content__personnal-data content__display">
             <h3 class="content__personnal-data__title">Informations Personnelles</h3>
 
@@ -122,20 +129,41 @@ $client = ClientService::GetClientById($clientID);
                 </div>
             </form>
         </div>
-        <div class="content__security">
+        <div id="security" class="content__security">
             <h3 class="content__security__title">Sécurité</h3>
             <p class="content__security__description">Modifier vos paramètres de sécurités</p>
 
             <div class="content__security__elements">
                 <?php
-                Input::render("content__security__elements__password", "password", "password", "Modifier Mot de passe", "password", "Mot de passe", true); ?>
-            </div>
-            <div class="content__security__moderator">
+                Input::render(
+                    "content__security__elements__password", 
+                    "password", 
+                    "password", 
+                    "Modifier Mot de passe", 
+                    "password", 
+                    "Mot de passe", 
+                    true, 
+                    "", 
+                    "10", 
+                    "", 
+                    "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{10,}"
+                );
+                ?>
                 <?php
-                Button::render("button--storybook", "deactivate-account", "Désactiver mon compte", ButtonType::Delete, true); ?>
-
-                <?php
-                Button::render("button--storybook", "delete-account", "Supprimer mon compte", ButtonType::Delete, true); ?>
+                Input::render(
+                    "content__security__elements__password--confirmation", 
+                    "password_confirm", 
+                    "password", 
+                    "Confirmer Mot de passe", 
+                    "password_confirm", 
+                    "Confirmer Mot de passe", 
+                    true, 
+                    "", 
+                    "10", 
+                    "", 
+                    "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{10,}"
+                );
+                ?>
             </div>
         </div>
     </main>
