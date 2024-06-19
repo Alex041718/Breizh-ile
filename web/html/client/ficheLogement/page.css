@@ -165,63 +165,6 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9998;
 }
-.page #popup2 {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border: 1px solid gray;
-  box-shadow: 0 4px 8px rgb(0, 0, 0);
-  border-radius: 20px;
-  padding: 2em;
-  z-index: 9999;
-}
-.page #popup2.show {
-  display: block;
-}
-.page #popup2 .popup-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
-.page #popup2 .popup-content #closePopupBtn {
-  position: absolute;
-  top: 1em;
-  left: 1em;
-  transform-origin: center;
-}
-.page #popup2 .popup-content #closePopupBtn.fa-solid.fa-xmark {
-  transition: transform 0.3s;
-}
-.page #popup2 .popup-content #closePopupBtn.fa-solid.fa-xmark:hover {
-  animation: circle-animation 1s ease-in-out infinite;
-}
-.page #popup2 .popup-content .traveler-type {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.page #popup2 .popup-content .traveler-type .addbtn {
-  display: flex;
-  gap: 0.5em;
-  border: 1px solid gray;
-  background-color: transparent;
-  border-radius: 20px;
-}
-.page #popup2 .popup-content .traveler-type .addbtn button {
-  cursor: pointer;
-  border-radius: 20px;
-  border: 1px solid gray;
-}
-.page #popup2 .popup-content .traveler-type .addbtn .nbr {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2em;
-  color: black;
-}
 
 .popup-active {
   overflow: hidden;
