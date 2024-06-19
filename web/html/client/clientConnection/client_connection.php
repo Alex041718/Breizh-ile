@@ -10,15 +10,14 @@
 <body>
 
     <div class="connectionContainer">
-        <a href="/">
-            <img src="../../assets/images/logo_breizh_noir.png">
-        </a>
         <div class="connectionContainer__box">
+            <a href="/">
+                <img src="../../assets/images/logo_breizh_noir.png">
+            </a>
             <h3 class="connectionContainer__box__title">Connectez vous à votre compte client</h3>
             <form action="/controllers/client/clientConnectionController.php" method="post">
 
                 <?php require_once("../../components/Input/Input.php"); ?>
-
 
                 <?= (isset($_GET["redirect"]) ? "<input type='hidden' name='redirect' value='" . $_GET["redirect"] . "'>" : "<input type='hidden' name='redirect' value='" . "/back" . "'>") ?>
 
@@ -36,6 +35,14 @@
                 <?php Button::render("connection__button", "connectButton", "Se connecter",ButtonType::Client,false,false,true); ?>
 
             </form>
+            <div class="inscription">
+                <div class="horizontal-line"></div>
+                <p>OU</p>
+                <div class="horizontal-line"></div>
+            </div>
+
+            <a href="" class="para--20px">S'inscrire</a>
+            
     </div>
 </body>
 </html>
