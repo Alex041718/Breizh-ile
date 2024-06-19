@@ -71,13 +71,13 @@
 }
 
 .accessibilite__deute .button--vert button, .accessibilite__deute .button--bleu button, .accessibilite__deute .button--rouge button {
-  background-color: pink;
+  background-color: brown;
 }
 .accessibilite__deute .button--bleu {
-  background-color: pink;
+  background-color: brown;
 }
 .accessibilite__deute .order-btn {
-  background-color: pink;
+  background-color: brown;
 }
 
 .accessibilite__font * :not(i) {
