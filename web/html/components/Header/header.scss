@@ -714,7 +714,6 @@ input[type=number] {
         position: relative;
         background-color: white;
         border-radius: 10px;
-        pointer-events: all;
         width: 60%;
 
         @media screen and (max-width: 568px) {
@@ -743,15 +742,27 @@ input[type=number] {
 
             .popup__filter__container__choices {
                 display: flex;
-                justify-content: center;
                 flex-wrap: wrap;
-                justify-content: center;
 
-                .popup__filter__box {
+                .popup__filter__container__choices__row {
                     display: flex;
-                    justify-content: center;
                     width: 50%;
+                    justify-content: center;
+
+                    div {
+                        display: flex;
+                        justify-content: center;
+                        flex-direction: column;
+
+                        .popup__filter__box {
+                            display: flex;
+                            justify-content: left;
+                            width: 100%;
+                            flex-direction: row;
+                        }
+                    }
                 }
+
             }
         }
 

@@ -232,65 +232,87 @@ class Header
                             <div class="popup__filter__container__category">
                                 <h3>Catégorie</h3>
                                 <div class="popup__filter__container__choices">
-                                    <div class="popup__filter__box">
-                                        <input type="checkbox" />
-                                        <p>Appartement</p>
+                                    <div class="popup__filter__container__choices__row">
+                                        <div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox" />
+                                                <p>Appartement</p>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox" />
+                                                <p>Chalet</p>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox" />
+                                                <p>Maison</p>
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <div class="popup__filter__box">
-                                        <input type="checkbox" />
-                                        <p>Chalet</p>
+
+                                    <div class="popup__filter__container__choices__row">
+                                        <div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox" />
+                                                <p>Bateau</p>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox" />
+                                                <p>Villa d\'exception</p>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox" />
+                                                <p>Logement insolite</p>
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <div class="popup__filter__box">
-                                        <input type="checkbox" />
-                                        <p>Maison</p>
-                                    </div>
-                                    <div class="popup__filter__box">
-                                        <input type="checkbox" />
-                                        <p>Bateau</p>
-                                    </div>
-                                    <div class="popup__filter__box">
-                                        <input type="checkbox" />
-                                        <p>Villa d\'exception</p>
-                                    </div>
-                                    <div class="popup__filter__box">
-                                        <input type="checkbox" />
-                                        <p>Logement insolite</p>
-                                    </div>
+
                                 </div>
                             </div>
                             <hr>
                             <div class="popup__filter__container__type">
                                 <h3>Type</h3>
                                 <div class="popup__filter__container__choices">
-                                <div class="popup__filter__box">
-                                        <input type="checkbox" />
-                                        <p>T1</p>
+
+                                    <div class="popup__filter__container__choices__row">
+                                        <div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox" />
+                                                <p>T1</p>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox" />
+                                                <p>T2</p>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox" />
+                                                <p>T3</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="popup__filter__box">
-                                        <input type="checkbox" />
-                                        <p>T2</p>
-                                    </div>
-                                    <div class="popup__filter__box">
-                                        <input type="checkbox" />
-                                        <p>T3</p>
-                                    </div>
-                                    <div class="popup__filter__box">
-                                        <input type="checkbox" />
-                                        <p>T4</p>
-                                    </div>
-                                    <div class="popup__filter__box">
-                                        <input type="checkbox" />
-                                        <p>T5</p>
-                                    </div>
-                                    <div class="popup__filter__box">
-                                        <input type="checkbox" />
-                                        <p>T6</p>
+
+                                    <div class="popup__filter__container__choices__row">
+                                        <div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox" />
+                                                <p>T4</p>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox" />
+                                                <p>T5</p>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox" />
+                                                <p>T6</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="popup__filter__bottom">
-                            <a id="filter_submit" class="btn"a>Valider</a>
+                            <button type="submit" id="filter_submit" class="btn"a>Valider</a>
                         </div>
                     '
         );

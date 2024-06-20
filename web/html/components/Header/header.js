@@ -199,16 +199,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Popup settings
     
-    // const popup_filters = document.getElementById("popup__filter");
-    // const popup_filters_close = document.querySelector(".popup__filter .popup__content i");
+    const popup_filters = document.getElementById("popup__filter");
+    const popup_filters_close = document.querySelector(".popup__filter .popup__content i");
 
-    // const popup_filters_submit = document.getElementById("filter_submit");
+    const popup_filters_submit = document.getElementById("filter_submit");
     // const popup_filters_open = document.getElementById("header__settings");
     // const popup_filters_open_mobile = document.getElementById("open-mobile-settings");
 
     // if(popup_filters_open) popup_filters_open.addEventListener("click", openSettings);
     // popup_filters_open_mobile.addEventListener("click", openSettings);
 
+    // function openSettings() {
+    //     popup_filters.classList.add("popup_enable");
+    // };
+
+    // function close_filter_popup() {
+    //     popup_filters.classList.remove("popup_enable");
+    
+    // }
 
     // popup_filters_submit.addEventListener("click", close_filter_popup);
     // popup_filters_close.addEventListener("click", close_filter_popup);

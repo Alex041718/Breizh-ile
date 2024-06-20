@@ -475,7 +475,6 @@ input[type=number] {
   position: relative;
   background-color: white;
   border-radius: 10px;
-  pointer-events: all;
   width: 60%;
 }
 .popup__filter .popup__content .price-input-container {
@@ -605,14 +604,23 @@ input[type=number] {
 }
 .popup__filter .popup__content .popup__filter__container .popup__filter__container__choices {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+}
+.popup__filter .popup__content .popup__filter__container .popup__filter__container__choices .popup__filter__container__choices__row {
+  display: flex;
+  width: 50%;
   justify-content: center;
 }
-.popup__filter .popup__content .popup__filter__container .popup__filter__container__choices .popup__filter__box {
+.popup__filter .popup__content .popup__filter__container .popup__filter__container__choices .popup__filter__container__choices__row div {
   display: flex;
   justify-content: center;
-  width: 50%;
+  flex-direction: column;
+}
+.popup__filter .popup__content .popup__filter__container .popup__filter__container__choices .popup__filter__container__choices__row div .popup__filter__box {
+  display: flex;
+  justify-content: left;
+  width: 100%;
+  flex-direction: row;
 }
 .popup__filter .popup__content .popup__filter__top {
   padding: 20px;
