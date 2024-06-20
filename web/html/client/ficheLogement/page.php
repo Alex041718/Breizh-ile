@@ -94,7 +94,17 @@ $iconMapping = [
 
     <main>
         <div class="page">
-        <h2 id="title"><?= $housingCity . " - " . $housingPostalCode ?></h2>
+        <span id="title" style="display: flex; align-items: center">
+            <?php
+            require_once("../../components/BackComponent/BackComponent.php");
+            BackComponent::render("", "back-arrow", "", "");
+            ?>
+            <h2 >
+                <?= $housingCity . " - " . $housingPostalCode ?>
+            </h2>
+        </span>
+
+
             <div class="photoAndReservation">
                 <div class="photo">
                     <img src="<?php echo $housing_image ?>" alt="Image Logement">

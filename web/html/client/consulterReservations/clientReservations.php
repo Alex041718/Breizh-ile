@@ -36,7 +36,6 @@ usort($clientReservationList, function ($a, $b) {
     <link rel="stylesheet" href="../../style/ui.css">
     <link rel="stylesheet" href="/client/consulterReservations/clientReservations.css">
     <script src="/components/ReservationCard/ReservationCard.js"></script>
-<!--    <script src="clientReservations.js"></script>-->
     <title>Vos réservation</title>
 
 </head>
@@ -45,13 +44,16 @@ require_once("../../components/Header/header.php");
 Header::render(true,false, $isAuthenticated, '/client/reservations-liste');
 ?>
 <body>
-<main>
-    <div class="title">
-        <a href="/" class="title__arrow">
-            <i class="fa-solid fa-arrow-left"></i>
-        </a>
-        <h2 class="title__text">Vos réservations</h2>
-    </div>
+<main class="global-ui">
+
+
+    <?php
+        require_once("../../components/BackComponent/BackComponent.php");
+        BackComponent::render("", "", "Vos réservations", "");
+    ?>
+
+
+
     <div class="reservation-list">
         <div class="reservation-list__container">
             <?php if (empty($clientReservationList)) : ?>

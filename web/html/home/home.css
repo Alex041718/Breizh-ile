@@ -2,6 +2,10 @@ html {
   scroll-behavior: smooth;
 }
 
+main {
+  padding: 0 !important;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -50,8 +54,7 @@ body {
   transform: translateX(-50%);
   z-index: 4;
   background-color: rgba(255, 255, 255, 0.7) !important;
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 @media screen and (max-width: 1024px) {
   .search-bar--home {
@@ -87,13 +90,11 @@ body {
   width: 100%;
   position: absolute;
   z-index: 1;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .hero-banner__parallax .house {
   position: fixed;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   position: absolute;
   bottom: 0;
   width: 106%;
@@ -519,4 +520,6 @@ body {
   justify-content: end;
   box-sizing: border-box;
   border-top: solid 1px #1D1D1D;
-}/*# sourceMappingURL=home.css.map */
+}
+
+/*# sourceMappingURL=home.css.map */

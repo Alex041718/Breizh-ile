@@ -45,6 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Insérer la nouvelle réservation dans la base de données
         ReservationService::createReservation($reservation);
 
+        // import de la session
+        require_once '../../../services/SessionService.php';
+
         SessionService::remove('currentBid');
 
         // Rediriger ou afficher un message de succès
