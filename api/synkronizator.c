@@ -20,6 +20,22 @@ static struct option long_options[] = {
     {NULL, 0, NULL, 0}
 };
 
+char* generate_api_key() {
+    char* api_key = malloc(33);
+    for (int i = 0; i < 32; i++) {
+        int r = rand() % 100;
+        if (r < 25) {
+            api_key[i] = 'a' + r;
+        } else if (r < 50) {
+            api_key[i] = 'A' + r - 26;
+        } else {
+            api_key[i] = '0' + r - 52;
+        }
+    }
+    api_key[32] = '\0';
+    return api_key;
+}
+
 void print_usage() {
     printf("Usage: ./server [options]\n"
            "Options:\n"
@@ -78,21 +94,22 @@ void handle_request(int client_fd) {
 
         cJSON* json = cJSON_Parse(body);
         if (json != NULL) {
-            char* response_body = cJSON_Print(json);
+            char* response_body = generate_api_key();
             cJSON_Delete(json);
 
             char response[BUFFER_SIZE];
             snprintf(response, BUFFER_SIZE, "HTTP/1.1 200 OK\nContent-Type: application/json\nContent-Length: %ld\r\n\r\n%s", strlen(response_body), response_body);
             printf("Réponse envoyée : %s\n", response);
             send(client_fd, response, strlen(response), 0);
-
-            free(response_body);
         } else {
             char response[] = "HTTP/1.1 400 Bad Request\nContent-Type: text/plain\r\n\r\nRequête invalide";
             printf("Réponse envoyée : %s\n", response);
             send(client_fd, response, strlen(response), 0);
         }
     }
+}
+
+void handle_route() {
 }
 
 int main(int argc, char *argv[]) {
