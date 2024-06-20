@@ -48,6 +48,7 @@ require_once("../../../services/CategoryService.php");
 require_once("../../../services/OwnerService.php");
 require_once("../../../services/ImageService.php");
 require_once("../../../services/ArrangementService.php");
+require_once("../../../services/HasForArrangementService.php");
 // require_once("../../../services/ActivityService.php");
 
 $housing = HousingService::GetHousingById($_GET['id']);
@@ -71,7 +72,7 @@ $housingLatitude = $housing->getLatitude();
 $housingCity = $housing->getAddress()->getCity();
 $housingPostalCode = $housing->getAddress()->getPostalCode();
 
-//$housing_arrangements = $housing->getArrangement();
+// $housing_arrangements = $housing->getArrangement();
 
 $iconMapping = [
     'Jardin' => 'fa-solid fa-plant-wilt',
@@ -100,7 +101,7 @@ $iconMapping = [
                 </div>
                 <form class="reservation" action="/controllers/client/clientCreateDevis.php" method="post">
                     <div class="price">
-                        <h2> <?php echo $housing_priceHt_format . ' €' ?></h2>
+                        <h1> <?php echo $housing_priceHt_format . ' €' ?></h1>
                         <p class="para--18px para--bold">/ nuit</p>
                     </div>
                     
@@ -127,8 +128,8 @@ $iconMapping = [
                             '
                                 <div class="traveler-type">
                                     <div class="adulteInfo">
-                                        <span class="para--bold">Adultes:</span>
-                                        <p>18 ans et +</p>
+                                        <h3>Adultes:</h3>
+                                        <p class="para--20px">18 ans et +</p>
                                     </div>
                                     <div class="addbtn">
                                         <button type="button" id="subtractAdultBtn">-</button>
@@ -141,8 +142,8 @@ $iconMapping = [
 
                                 <div class="traveler-type">
                                     <div class="enfantInfo">
-                                        <span class="para--bold">Enfants:</span>
-                                        <p>- de 18 ans</p>
+                                        <h3>Enfants:</h3>
+                                        <p class="para--20px">- de 18 ans</p>
                                     </div>
                                     <div class="addbtn">
                                         <button type="button" id="subtractChildBtn">-</button>
@@ -152,7 +153,6 @@ $iconMapping = [
                                         <button type="button" id="addChildBtn">+</button>
                                     </div>
                                 </div>
-                                <i id="closePopupBtn" class="fa-solid fa-xmark"></i>
                             '
                             )
                             ?>
@@ -221,73 +221,67 @@ $iconMapping = [
                         </div>
                     </div>
 
-                    <!-- Pop-up -->
-                    <div class="popup-overlay" id="popup-overlay-savoir"></div>
-                    <div class="popup" id="popup-savoir">
+                    <?php Popup::render("popupSavoir","button-savoir",
+                    '
                         <!-- Contenu de la pop-up (description complète) -->
                         <h3 id="titleDescription">Description du logement</h3>
                         <p class="para--18px" id="full-description">
                             <!-- Le texte de la description complète sera injecté ici par JavaScript -->
                         </p>
-                        <i id="close-popup" class="fa-solid fa-xmark"></i>
-                    </div>
+                    '); ?>
+                    
+                    <button type="button" id="criteres"><p class="para--bold">Afficher les critères</p></button>
 
-                    <button type="button" class="criteres"><p class="para--bold">Afficher les critères</p></button>
-
-                    <!-- Overlay and Popup Criteres-->
-                    <div id="overlay-critere" class="overlay-critere"></div>
-                    <div id="popup-critere" class="popup-critere">
-                        <div class="popup-content-critere">
-                            <i id="closePopupCritereBtn" class="fa-solid fa-xmark"></i>
-                            <h3>Critères du Logement</h3>
-                            <div class="section">
-                                <h4>Activités</h4>
-                                <div class="items">
-                                    <div class="item">
-                                        <i class="fa-solid fa-umbrella-beach"></i>
-                                        <span>Plage</span>
-                                    </div>
-                                    <div class="item">
-                                        <i class="fa-solid fa-paw"></i>
-                                        <span>Zoo</span>
-                                    </div>
-                                    <div class="item">
-                                        <i class="fa-solid fa-candy-cane"></i>
-                                        <span>Parc d'attraction</span>
-                                    </div>
-                                    <div class="item">
-                                        <i class="fa-solid fa-landmark"></i>
-                                        <span>Musée</span>
-                                    </div>
+                    <?php 
+                    $popupContent = '
+                        <h3>Critères du Logement</h3>
+                        <div class="section">
+                            <h4>Activités</h4>
+                            <div class="items">
+                                <div class="item">
+                                    <i class="fa-solid fa-umbrella-beach"></i>
+                                    <span>Plage</span>
+                                </div>
+                                <div class="item">
+                                    <i class="fa-solid fa-paw"></i>
+                                    <span>Zoo</span>
+                                </div>
+                                <div class="item">
+                                    <i class="fa-solid fa-candy-cane"></i>
+                                    <span>Parc d\'attraction</span>
+                                </div>
+                                <div class="item">
+                                    <i class="fa-solid fa-landmark"></i>
+                                    <span>Musée</span>
                                 </div>
                             </div>
-
-                            <div class="horizontal-line"></div>
-
-                            <div class="section">
-                                <h4>Aménagements</h4>
-                                <div class="items">
-                                    <?php if (!empty($housing_arrangements)): ?>
-                                        <?php foreach ($housing_arrangements as $arrangement): ?>
-                                            <div class="item">
-                                                <?php
-                                                $label = $arrangement->getLabel();
-                                                if (isset($iconMapping[$label])) {
-                                                    $iconClass = $iconMapping[$label];
-                                                    echo '<i class="' . $iconClass . '"></i>';
-                                                }
-                                                ?>
-                                                <span><?php echo $label ?></span>
-                                            </div>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <p>Aucun aménagement disponible.</p>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-
                         </div>
-                    </div>
+
+                        <div class="horizontal-line"></div>
+
+                        <div class="section">
+                            <h4>Aménagements</h4>
+                            <div class="items">
+                    ';
+
+                    if (!empty($housing_arrangements)) {
+                        foreach ($housing_arrangements as $arrangement) {
+                            $label = $arrangement->getLabel();
+                            $iconClass = isset($iconMapping[$label]) ? $iconMapping[$label] : '';
+                            $popupContent .= '<div class="item"><i class="' . $iconClass . '" id="iconWeb"></i><span>' . $label . '</span></div>';
+                        }
+                    } else {
+                        $popupContent .= '<p>Aucun aménagement disponible.</p>';
+                    }
+
+                    $popupContent .= '
+                            </div>
+                        </div>
+                    ';
+
+                    Popup::render("popupCriteres", "criteres", $popupContent);
+                    ?>
+
                 </div>
 
                 <div class="localisation">
