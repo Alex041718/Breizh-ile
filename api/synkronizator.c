@@ -9,6 +9,7 @@
 #include <time.h>
 #include <math.h>
 #include "cJSON.h" // https://github.com/DaveGamble/cJSON
+#include "sqlService.h"
 
 #define MAX_CLIENTS 1
 #define BUFFER_SIZE 2048
@@ -19,22 +20,6 @@ static struct option long_options[] = {
     {"port", required_argument, NULL, 'p'},
     {NULL, 0, NULL, 0}
 };
-
-char* generate_api_key() {
-    char* api_key = malloc(33);
-    for (int i = 0; i < 32; i++) {
-        int r = rand() % 100;
-        if (r < 25) {
-            api_key[i] = 'a' + r;
-        } else if (r < 50) {
-            api_key[i] = 'A' + r - 26;
-        } else {
-            api_key[i] = '0' + r - 52;
-        }
-    }
-    api_key[32] = '\0';
-    return api_key;
-}
 
 void print_usage() {
     printf("Usage: ./server [options]\n"
@@ -75,6 +60,38 @@ void parse_request(char* request, char* method, char* path, char* headers, char*
     }
 }
 
+void create_apiKey(const cJSON* body, char* response, size_t response_size) {
+    if (!cJSON_HasObjectItem(body, "userID") || !cJSON_HasObjectItem(body, "superAdmin")) {
+        snprintf(response, response_size, "Paramètres manquants");
+        return;
+    }
+    
+    const cJSON* userID_item = cJSON_GetObjectItemCaseSensitive(body, "userID");
+    const cJSON* superAdmin_item = cJSON_GetObjectItemCaseSensitive(body, "superAdmin");
+
+    if (!cJSON_IsNumber(userID_item) || !cJSON_IsBool(superAdmin_item)) {
+        snprintf(response, response_size, "Paramètres invalides");
+        return;
+    }
+
+    int userID = cJSON_GetNumberValue(userID_item);
+    bool createSuperAdmin = cJSON_IsTrue(superAdmin_item);
+
+    if (create_api_key(userID, createSuperAdmin)) {
+        snprintf(response, response_size, "Clé API créée");
+    } else {
+        snprintf(response, response_size, "Erreur lors de la création de la clé API");
+    }
+}
+
+void handle_route(const char* path, const cJSON* body, char* response, size_t response_size) {
+    if (strcmp(path, "/api/create-key") == 0) {
+        create_apiKey(body, response, response_size);
+    } else {
+        snprintf(response, response_size, "Route inconnue");
+    }
+}
+
 void handle_request(int client_fd) {
     char buffer[BUFFER_SIZE];
     int read_bytes = recv(client_fd, buffer, BUFFER_SIZE - 1, 0);
@@ -93,23 +110,24 @@ void handle_request(int client_fd) {
         printf("Corps : %s\n", body);
 
         cJSON* json = cJSON_Parse(body);
-        if (json != NULL) {
-            char* response_body = generate_api_key();
-            cJSON_Delete(json);
+        char response_body[BUFFER_SIZE/2];
+        char response[BUFFER_SIZE];
 
-            char response[BUFFER_SIZE];
-            snprintf(response, BUFFER_SIZE, "HTTP/1.1 200 OK\nContent-Type: application/json\nContent-Length: %ld\r\n\r\n%s", strlen(response_body), response_body);
+        if (json != NULL) {
+            handle_route(path, json, response_body, sizeof(response_body));
+
+            snprintf(response, BUFFER_SIZE, "HTTP/1.1 200 OK\nContent-Type: application/json\nContent-Length: %ld\r\n\r\n%s", 
+                     strlen(response_body), response_body);
             printf("Réponse envoyée : %s\n", response);
             send(client_fd, response, strlen(response), 0);
+
+            cJSON_Delete(json);
         } else {
-            char response[] = "HTTP/1.1 400 Bad Request\nContent-Type: text/plain\r\n\r\nRequête invalide";
-            printf("Réponse envoyée : %s\n", response);
-            send(client_fd, response, strlen(response), 0);
+            const char* error_response = "HTTP/1.1 400 Bad Request\nContent-Type: text/plain\r\n\r\nRequête invalide";
+            printf("Réponse envoyée : %s\n", error_response);
+            send(client_fd, error_response, strlen(error_response), 0);
         }
     }
-}
-
-void handle_route() {
 }
 
 int main(int argc, char *argv[]) {

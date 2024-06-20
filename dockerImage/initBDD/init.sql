@@ -298,3 +298,12 @@ CREATE TABLE _Lang_User (
     FOREIGN KEY (langID) REFERENCES _Lang(langID),
     FOREIGN KEY (userID) REFERENCES _User(userID)
 );
+
+
+CREATE TABLE _User_APIKey (
+    userID BIGINT UNSIGNED, -- Correspond au type `serial` dans User pour mysql
+    apiKey varchar(64),
+    active Boolean,
+    superAdmin Boolean,
+    FOREIGN KEY (userID) REFERENCES _User(userID)
+);
