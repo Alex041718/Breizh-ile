@@ -64,120 +64,120 @@ $isAuthenticated = SessionService::isClientAuthenticated();
 
 
             require_once("./components/SearchBar/SearchBar.php");
-                Popup::render("popup__filter","filter_button",
-                    $inputs . '
-                    <div class="popup__filter__top">
-                        <h2>Filtres</h2>
-                        <i class="fa-solid fa-xmark"></i>
-                    </div>
-                    <div class="popup__filter__container">
-                        <h3>Prix</h3>
-                        <div class="popup__filter__container__prices">
-                            <div class="price-input-container">
-                             <div class="price-input">
-                                    <div class="price-field">
-                                        <span>Prix Minimum</span>
-                                        <input type="number"
-                                            id="minInput"
-                                            class="min-input"
-                                            value="' . (isset($_POST["minPrice"]) ? $_POST["minPrice"] : "0") . '">
-                                    </div>
-                                    <div class="price-field">
-                                        <span>Prix Maximum</span>
-                                        <input type="number"
-                                            id="maxInput"
-                                            class="max-input"
-                                            value="' . (isset($_POST["maxPrice"]) ? $_POST["maxPrice"] : "500") . '">
-                                    </div>
-                                </div>
-                                <div class="slider-container">
-                                    <div class="price-slider">
-                                    </div>
-                                </div>
-                            </div>
+                // Popup::render("popup__filter","filter_button",
+                //     $inputs . '
+                //     <div class="popup__filter__top">
+                //         <h2>Filtres</h2>
+                //         <i class="fa-solid fa-xmark"></i>
+                //     </div>
+                //     <div class="popup__filter__container">
+                //         <h3>Prix</h3>
+                //         <div class="popup__filter__container__prices">
+                //             <div class="price-input-container">
+                //              <div class="price-input">
+                //                     <div class="price-field">
+                //                         <span>Prix Minimum</span>
+                //                         <input type="number"
+                //                             id="minInput"
+                //                             class="min-input"
+                //                             value="' . (isset($_POST["minPrice"]) ? $_POST["minPrice"] : "0") . '">
+                //                     </div>
+                //                     <div class="price-field">
+                //                         <span>Prix Maximum</span>
+                //                         <input type="number"
+                //                             id="maxInput"
+                //                             class="max-input"
+                //                             value="' . (isset($_POST["maxPrice"]) ? $_POST["maxPrice"] : "500") . '">
+                //                     </div>
+                //                 </div>
+                //                 <div class="slider-container">
+                //                     <div class="price-slider">
+                //                     </div>
+                //                 </div>
+                //             </div>
 
-                            <!-- Slider -->
-                            <div class="range-input">
-                                <input type="range"
-                                    class="min-range"
-                                    min="0"
-                                    max="500"
-                                    value="' . (isset($_POST["minPrice"]) ? $_POST["minPrice"] : "0") . '"
-                                    step="1">
-                                <input type="range"
-                                    class="max-range"
-                                    min="0"
-                                    max="500"
-                                    value="' . (isset($_POST["maxPrice"]) ? $_POST["maxPrice"] : "500") . '"
-                                    step="1">
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="popup__filter__container__category">
-                            <h3>Catégorie</h3>
-                            <div class="popup__filter__container__choices">
-                                <div class="popup__filter__box">
-                                    <input type="checkbox" />
-                                    <p>Appartement</p>
-                                </div>
-                                <div class="popup__filter__box">
-                                    <input type="checkbox" />
-                                    <p>Chalet</p>
-                                </div>
-                                <div class="popup__filter__box">
-                                    <input type="checkbox" />
-                                    <p>Maison</p>
-                                </div>
-                                <div class="popup__filter__box">
-                                    <input type="checkbox" />
-                                    <p>Bateau</p>
-                                </div>
-                                <div class="popup__filter__box">
-                                    <input type="checkbox" />
-                                    <p>Villa d\'exception</p>
-                                </div>
-                                <div class="popup__filter__box">
-                                    <input type="checkbox" />
-                                    <p>Logement insolite</p>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="popup__filter__container__type">
-                            <h3>Type</h3>
-                            <div class="popup__filter__container__choices">
-                            <div class="popup__filter__box">
-                                    <input type="checkbox" />
-                                    <p>T1</p>
-                                </div>
-                                <div class="popup__filter__box">
-                                    <input type="checkbox" />
-                                    <p>T2</p>
-                                </div>
-                                <div class="popup__filter__box">
-                                    <input type="checkbox" />
-                                    <p>T3</p>
-                                </div>
-                                <div class="popup__filter__box">
-                                    <input type="checkbox" />
-                                    <p>T4</p>
-                                </div>
-                                <div class="popup__filter__box">
-                                    <input type="checkbox" />
-                                    <p>T5</p>
-                                </div>
-                                <div class="popup__filter__box">
-                                    <input type="checkbox" />
-                                    <p>T6</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="popup__filter__bottom">
-                        <a id="filter_submit" class="btn"a>Valider</a>
-                    </div>
-                </div>'
-                );
+                //             <!-- Slider -->
+                //             <div class="range-input">
+                //                 <input type="range"
+                //                     class="min-range"
+                //                     min="0"
+                //                     max="500"
+                //                     value="' . (isset($_POST["minPrice"]) ? $_POST["minPrice"] : "0") . '"
+                //                     step="1">
+                //                 <input type="range"
+                //                     class="max-range"
+                //                     min="0"
+                //                     max="500"
+                //                     value="' . (isset($_POST["maxPrice"]) ? $_POST["maxPrice"] : "500") . '"
+                //                     step="1">
+                //             </div>
+                //         </div>
+                //         <hr>
+                //         <div class="popup__filter__container__category">
+                //             <h3>Catégorie</h3>
+                //             <div class="popup__filter__container__choices">
+                //                 <div class="popup__filter__box">
+                //                     <input type="checkbox" />
+                //                     <p>Appartement</p>
+                //                 </div>
+                //                 <div class="popup__filter__box">
+                //                     <input type="checkbox" />
+                //                     <p>Chalet</p>
+                //                 </div>
+                //                 <div class="popup__filter__box">
+                //                     <input type="checkbox" />
+                //                     <p>Maison</p>
+                //                 </div>
+                //                 <div class="popup__filter__box">
+                //                     <input type="checkbox" />
+                //                     <p>Bateau</p>
+                //                 </div>
+                //                 <div class="popup__filter__box">
+                //                     <input type="checkbox" />
+                //                     <p>Villa d\'exception</p>
+                //                 </div>
+                //                 <div class="popup__filter__box">
+                //                     <input type="checkbox" />
+                //                     <p>Logement insolite</p>
+                //                 </div>
+                //             </div>
+                //         </div>
+                //         <hr>
+                //         <div class="popup__filter__container__type">
+                //             <h3>Type</h3>
+                //             <div class="popup__filter__container__choices">
+                //             <div class="popup__filter__box">
+                //                     <input type="checkbox" />
+                //                     <p>T1</p>
+                //                 </div>
+                //                 <div class="popup__filter__box">
+                //                     <input type="checkbox" />
+                //                     <p>T2</p>
+                //                 </div>
+                //                 <div class="popup__filter__box">
+                //                     <input type="checkbox" />
+                //                     <p>T3</p>
+                //                 </div>
+                //                 <div class="popup__filter__box">
+                //                     <input type="checkbox" />
+                //                     <p>T4</p>
+                //                 </div>
+                //                 <div class="popup__filter__box">
+                //                     <input type="checkbox" />
+                //                     <p>T5</p>
+                //                 </div>
+                //                 <div class="popup__filter__box">
+                //                     <input type="checkbox" />
+                //                     <p>T6</p>
+                //                 </div>
+                //             </div>
+                //         </div>
+                //     </div>
+                //     <div class="popup__filter__bottom">
+                //         <a id="filter_submit" class="btn"a>Valider</a>
+                //     </div>
+                // </div>'
+                // );
             ?>
             <h2>Nos logements</h2>
             <div class="logements__filters">

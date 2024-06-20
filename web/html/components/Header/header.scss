@@ -1,9 +1,9 @@
 @import '../../style/variables';
 
 @font-face {
-	font-family: Luciole-Reguglar;
-	src:
-		url(/assets/luciole/Luciole-Reguglar.ttf) format(ttf);
+    font-family: Luciole-Reguglar;
+    src:
+        url(/assets/luciole/Luciole-Reguglar.ttf) format(ttf);
 }
 
 
@@ -51,6 +51,7 @@
         align-items: center;
         color: $clientPrimaryColor;
         position: relative;
+
         p {
             font-weight: bold;
         }
@@ -65,7 +66,7 @@
             border-radius: 70px;
             border: $clientPrimaryColor 3px solid;
         }
-      }
+    }
 
     @media screen and (max-width: 1024px) {
         display: flex;
@@ -87,11 +88,15 @@
 }
 
 .accessibilite__deute {
-    .button--vert, .button--bleu, .button--rouge {
+
+    .button--vert,
+    .button--bleu,
+    .button--rouge {
         button {
             background-color: brown;
         }
     }
+
     .button--bleu {
         background-color: brown;
     }
@@ -143,6 +148,7 @@
     from {
         transform: translateY(100%);
     }
+
     to {
         transform: translateY(0);
     }
@@ -152,6 +158,7 @@
     from {
         transform: translateY(0);
     }
+
     to {
         transform: translateY(100%);
     }
@@ -166,16 +173,16 @@ input:focus {
 }
 
 input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
-    input[type=number] {
-        -moz-appearance: textfield;
-    }
+input[type=number] {
+    -moz-appearance: textfield;
+}
 
-.header.scroll ~ .popup__search {
+.header.scroll~.popup__search {
 
     height: 90vh;
 
@@ -287,18 +294,21 @@ input::-webkit-outer-spin-button,
                 padding: 25px;
 
             }
+
             div {
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
                 width: 100%;
+
                 div {
                     background-color: white;
                     margin: 35px;
                     padding: 20px;
                     border-radius: 10px;
                     text-align: center;
-                    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2); /* Exemple d'ombre */
+                    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2);
+                    /* Exemple d'ombre */
                     width: 100%;
                     align-items: center;
 
@@ -325,10 +335,12 @@ input::-webkit-outer-spin-button,
     }
 
 }
+
 .leaflet-pane {
     position: relative;
     z-index: 50;
 }
+
 .leaflet-top {
     position: relative;
     z-index: 55;
@@ -347,8 +359,8 @@ input::-webkit-outer-spin-button,
     width: 100%;
     height: 100px;
     transition: all 0.3;
-    background: rgb(115,115,115);
-    background: linear-gradient(rgba(0,45,87,0.55) 0%, rgba(115,115,115,0) 100%);
+    background: rgb(115, 115, 115);
+    background: linear-gradient(rgba(0, 45, 87, 0.55) 0%, rgba(115, 115, 115, 0) 100%);
 
     z-index: 1000;
 
@@ -409,6 +421,7 @@ input::-webkit-outer-spin-button,
                 display: flex;
                 justify-content: center;
             }
+
             .logo img {
                 width: 250px !important;
             }
@@ -438,6 +451,7 @@ input::-webkit-outer-spin-button,
             from {
                 transform: translateY(-100%);
             }
+
             to {
                 transform: translateY(0);
             }
@@ -475,7 +489,9 @@ input::-webkit-outer-spin-button,
         padding-bottom: 0;
 
         .header__right {
-            i { color: $ownerPrimaryColor; }
+            i {
+                color: $ownerPrimaryColor;
+            }
         }
 
         .logo-big {
@@ -518,7 +534,7 @@ input::-webkit-outer-spin-button,
 }
 
 #mobile-options,
-#options  {
+#options {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
@@ -534,6 +550,7 @@ input::-webkit-outer-spin-button,
         list-style-type: none;
         padding: 0;
         margin: 0;
+
         a {
             transition: all 0.1s;
             color: black;
@@ -541,6 +558,7 @@ input::-webkit-outer-spin-button,
             padding: 10px;
             text-decoration: none;
         }
+
         a:hover {
             color: white;
             background-color: $clientPrimaryColor;
@@ -565,139 +583,131 @@ input::-webkit-outer-spin-button,
 }
 
 .popup_enable {
-    display: flex !important;
-  }
+    display: flex ;
+}
 
 
 .popup__filter {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    pointer-events: all;
-    z-index: 1000;
+    .popup__content{
+        overflow-y: auto;
+        padding: 0px !important;
 
-    .price-input-container {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
+        .price-input-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
 
-      .price-input {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        width: 80%;
-      }
-    }
-
-    .price-input .price-field {
-      display: flex;
-
-      span {
-        width: 50%;
-      }
-
-      input {
-        flex: 1;
-        height: 35px;
-        font-size: 15px;
-        font-family: "DM Sans", sans-serif;
-        border-radius: 9px;
-        text-align: center;
-        border: 0px;
-        background: #e4e4e4;
-    }
-
-      @media screen and (max-width: 1300px) {
-        grid-column: span 2 / span 2;
-      }
-
-      @media screen and (max-width: 568px) {
-        flex-direction: column;
-        gap: 20px;
-        span {
-          width: 100%;
-          text-align: center;
+            .price-input {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                width: 80%;
+            }
         }
 
-      }
-  }
+        .price-input .price-field {
+            display: flex;
 
-  .price-input {
-      width: 100%;
-      font-size: 19px;
-      color: $grey3;
-  }
+            span {
+                width: 50%;
+            }
 
-  /* Remove Arrows/Spinners */
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-  }
+            input {
+                flex: 1;
+                height: 35px;
+                font-size: 15px;
+                font-family: "DM Sans", sans-serif;
+                border-radius: 9px;
+                text-align: center;
+                border: 0px;
+                background: #e4e4e4;
+            }
 
-  .slider-container {
-      width: 100%;
+            @media screen and (max-width: 1300px) {
+                grid-column: span 2 / span 2;
+            }
+
+            @media screen and (max-width: 568px) {
+                flex-direction: column;
+                gap: 20px;
+
+                span {
+                    width: 100%;
+                    text-align: center;
+                }
+
+            }
+        }
+
+        .price-input {
+            width: 100%;
+            font-size: 19px;
+            color: $grey3;
+        }
+
+        /* Remove Arrows/Spinners */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .slider-container {
+            width: 100%;
 
 
-      @media screen and (max-width: 568px) {
-        display: none;
-      }
-  }
+            @media screen and (max-width: 568px) {
+                display: none;
+            }
+        }
 
-  .slider-container {
-      height: 6px;
-      position: relative;
-      background: #e4e4e4;
-      border-radius: 5px;
-  }
+        .slider-container {
+            height: 6px;
+            position: relative;
+            background: #e4e4e4;
+            border-radius: 5px;
+        }
 
-  .slider-container .price-slider {
-      height: 100%;
-      left: 0%;
-      right: 0%;
-      position: absolute;
-      border-radius: 5px;
-      background: $clientPrimaryColor;
-  }
+        .slider-container .price-slider {
+            height: 100%;
+            left: 0%;
+            right: 0%;
+            position: absolute;
+            border-radius: 5px;
+            background: $clientPrimaryColor;
+        }
 
-  .range-input {
-      position: relative;
+        .range-input {
+            position: relative;
 
-      @media screen and (max-width: 568px) {
-        display: none;
-      }
-  }
+            @media screen and (max-width: 568px) {
+                display: none;
+            }
+        }
 
-  .range-input input {
-      position: absolute;
-      width: 100%;
-      height: 5px;
-      background: none;
-      top: -5px;
-      pointer-events: none;
-      cursor: pointer;
-      -webkit-appearance: none;
-  }
+        .range-input input {
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background: none;
+            top: -5px;
+            pointer-events: none;
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
 
-  /* Styles for the range thumb in WebKit browsers */
-  input[type="range"]::-webkit-slider-thumb {
-      height: 18px;
-      width: 18px;
-      border-radius: 70%;
-      background: $grey2;
-      pointer-events: auto;
-      -webkit-appearance: none;
-  }
+        /* Styles for the range thumb in WebKit browsers */
+        input[type="range"]::-webkit-slider-thumb {
+            height: 18px;
+            width: 18px;
+            border-radius: 70%;
+            background: $grey2;
+            pointer-events: auto;
+            -webkit-appearance: none;
+        }
 
-    &__content {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -708,7 +718,7 @@ input::-webkit-outer-spin-button,
         width: 60%;
 
         @media screen and (max-width: 568px) {
-          width: 80%;
+            width: 80%;
         }
 
         .popup__filter__container {
@@ -725,7 +735,7 @@ input::-webkit-outer-spin-button,
                 width: 100%;
             }
 
-            &__category {
+            .popup__filter__container__category {
                 display: flex;
                 flex-direction: column;
                 gap: 25px;
@@ -753,6 +763,7 @@ input::-webkit-outer-spin-button,
             border-bottom: solid 1px $black2;
             box-sizing: border-box;
             width: 100%;
+
             i {
                 position: absolute;
                 right: 20px;
@@ -771,5 +782,9 @@ input::-webkit-outer-spin-button,
             border-top: solid 1px $black2;
 
         }
+        
+        
     }
-  }
+    
+
+}
