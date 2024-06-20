@@ -45,6 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Insérer la nouvelle réservation dans la base de données
         ReservationService::createReservation($reservation);
 
+        SessionService::remove('currentBid');
+
         // Rediriger ou afficher un message de succès
         header('Location: /client/reservations-liste?success=1');
         exit();

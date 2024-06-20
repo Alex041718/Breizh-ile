@@ -128,6 +128,15 @@ class SessionService {
     }
 
     /**
+     * Supprime une valeur de session.
+     * @param string $key
+     */
+    public static function remove($key) {
+        self::startSession();
+        unset($_SESSION[$key]);
+    }
+
+    /**
      * Vérifie si une clé de session spécifique existe.
      * @param string $key
      * @return bool

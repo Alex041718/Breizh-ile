@@ -54,7 +54,7 @@ hr {
 .bid__container__info__info-detail {
   max-width: 44em;
   border: 1px solid #E0E0E0;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #FFFFFF;
   padding: 2em;
   display: flex;
@@ -103,7 +103,7 @@ hr {
 .bid__container__info__pay-recap {
   width: 300px;
   border: 1px solid #E0E0E0;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #FFFFFF;
   padding: 1em;
   gap: 1em;

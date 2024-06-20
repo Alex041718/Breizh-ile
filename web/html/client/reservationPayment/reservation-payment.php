@@ -96,7 +96,7 @@ $paymentMethods = PayementMethodService::GetPayementMethodById(1);
                 <?php require_once ("../../components/Button/Button.php"); ?>
             <div class="reservation-payment__container__button-box">
 
-                <?php Button::render("reservation-payment__container__button", "submit", "Annuler", ButtonType::Delete, "", true, false); ?>
+                <?php Button::render("reservation-payment__container__button", "submit", "Annuler", ButtonType::Delete, "history.back()", true, false); ?>
 
                 <?php Button::render("reservation-payment__container__button", "submit", "Valider le paiement", ButtonType::Client, "", false, true); ?>
 
