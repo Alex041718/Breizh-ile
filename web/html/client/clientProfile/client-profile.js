@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const firstPassword = formData.get('firstPasswordEntry');
             const secondPassword = formData.get('secondPasswordEntry');
 
-            if (firstPassword !== secondPassword) {
+            if (firstPassword !== secondPassword ) {
                 Toast("Les Mot de passe sont différents.", "warning"); // Log "KO" if passwords do not match
                 return; // Exit function if passwords do not match
             }
