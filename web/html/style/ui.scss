@@ -7,6 +7,40 @@
     font-family: 'Outfit', sans-serif;
 }
 
+main {
+
+    &.global-ui {
+
+        min-height: 60vh;
+        padding-left: 150px;
+        padding-right: 150px;
+        padding-top: 135px;
+        background-color: $backgroundColorPage;
+
+
+        @media screen and (max-width: 1024px) {
+            padding-top: 170px;
+            padding-left: 75px;
+            padding-right: 75px;
+        }
+
+        @media screen and (max-width: 768px) {
+            padding-top: 110px;
+            padding-left: 75px;
+            padding-right: 75px;
+        }
+
+        @media screen and (max-width: 425px) {
+            padding-top: 110px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+    }
+}
+
+
+
 // Title
 
 h1 {

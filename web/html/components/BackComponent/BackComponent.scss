@@ -1,0 +1,27 @@
+@use '../../style/variables.css';
+
+.back-component {
+  margin-left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+
+
+  &__arrow{
+    all: unset;
+
+    i {
+      font-size: 30px;
+      padding: 15px;
+      color : black;
+    }
+  }
+
+
+  &__text {
+    @media (max-width: 1024px) {
+      text-align: center;
+    }
+  }
+}
