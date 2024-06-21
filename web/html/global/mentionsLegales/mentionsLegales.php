@@ -25,7 +25,7 @@
     <p id="auth" style="display:none"><?=$isAuthenticated?></p>
     <?php
     require_once("../../components/Header/header.php");
-    Header::render(true,false, $isAuthenticated, '/mentionsLegales');
+    Header::render(true,false, $isAuthenticated);
     ?>
     <div class="mentions-legales">
         <h2>Mentions Légales</h2>
