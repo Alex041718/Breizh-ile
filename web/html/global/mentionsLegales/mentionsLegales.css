@@ -1,0 +1,14 @@
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+body .mentions-legales {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin: 5em;
+}
+body .mentions-legales h2 {
+  text-align: center;
+}/*# sourceMappingURL=mentionsLegales.css.map */

@@ -1,14 +1,3 @@
-@keyframes circle-animation {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.3);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
 main {
   display: flex;
   flex-direction: column;
@@ -245,6 +234,7 @@ body {
   gap: 0.5em;
   margin-bottom: 0.5em;
   justify-content: center;
+  align-items: center;
 }
 @media screen and (max-width: 728px) {
   .twodiv .localisation .local-texte {
@@ -323,6 +313,7 @@ body {
   gap: 3em;
   width: 35em;
   height: 35em;
+  overflow-y: auto;
 }
 @media screen and (max-width: 768px) {
   .twodiv .details .popupCriteres .popup__content {
