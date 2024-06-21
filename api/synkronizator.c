@@ -12,7 +12,22 @@
 #include "sqlService.h"
 
 #define MAX_CLIENTS 1
-#define BUFFER_SIZE 2048
+#define BUFFER_SIZE 8192
+
+bool request_ok = false;
+bool auth_ok = false;
+bool close_connexion = false;
+
+typedef struct {
+    char attribute[64];
+    char value[8192];
+} BodyAttribute;
+
+typedef struct {
+    char header[32];
+    char path[64];
+    char body[BUFFER_SIZE];
+} Packet;
 
 static struct option long_options[] = {
     {"help", no_argument, NULL, 'h'},
@@ -37,96 +52,164 @@ void print_log(const char *message) {
     printf("[%s] %s\n", timestamp, message);
 }
 
-void parse_request(char* request, char* method, char* path, char* headers, char* body) {
-    char* pos = strstr(request, "\r\n\r\n");
-    if (pos != NULL) {
-        *pos = '\0'; // Terminer la chaîne de l'en-tête
-        strcpy(headers, request); // Copier l'en-tête
-        pos += 4; // Sauter les deux sauts de ligne après l'en-tête
-        strcpy(body, pos); // Copier le corps
-    }
-
-    // Extraire la méthode et le chemin de la première ligne de l'en-tête
-    char* first_line = strtok(headers, "\r\n");
-    if (first_line != NULL) {
-        char* method_token = strtok(first_line, " ");
-        if (method_token != NULL) {
-            strcpy(method, method_token);
-        }
-        char* path_token = strtok(NULL, " ");
-        if (path_token != NULL) {
-            strcpy(path, path_token);
+bool is_number(char* str) {
+    for (int i = 0; i < strlen(str); i++) {
+        if (str[i] < '0' || str[i] > '9') {
+            return false;
         }
     }
+    return true;
 }
 
-void create_apiKey(const cJSON* body, char* response, size_t response_size) {
-    if (!cJSON_HasObjectItem(body, "userID") || !cJSON_HasObjectItem(body, "superAdmin")) {
+void parse_request(char* request, Packet* packet) {
+    char* token = strtok(request, "\n");
+
+    if (token == NULL) return; // Requête vide
+
+    snprintf(packet->header, sizeof(packet->header), "%s", token);
+
+    token = strtok(NULL, "\n");
+
+    if (token == NULL) return; // Commande sans chemin : OK, AUTH, etc.
+
+    snprintf(packet->path, sizeof(packet->path), "%s", token);
+
+    token = token + strlen(token) + 1;
+
+    if (*token == '\0') return; // Pas de corps
+
+    snprintf(packet->body, sizeof(packet->body), "%s", token);
+}
+
+BodyAttribute* parse_token(const char* body) {
+    BodyAttribute* attribute = malloc(sizeof(BodyAttribute));
+    if (attribute == NULL) return NULL;
+
+    const char* equals = strchr(body, '=');
+    if (equals == NULL) {
+        free(attribute);
+        return NULL;
+    }
+
+    size_t attr_len = equals - body;
+    if (attr_len >= sizeof(attribute->attribute)) {
+        free(attribute);
+        return NULL;
+    }
+
+    strncpy(attribute->attribute, body, attr_len);
+    attribute->attribute[attr_len] = '\0';
+
+    const char* value = equals + 1;
+    strncpy(attribute->value, value, sizeof(attribute->value) - 1);
+    attribute->value[sizeof(attribute->value) - 1] = '\0';
+
+    return attribute;
+}
+
+void create_apiKey(char* body, char* response, size_t response_size) {
+    printf("Body : %s\n", body);
+    char* token = strtok(body, ";");
+    if (token == NULL) {
         snprintf(response, response_size, "Paramètres manquants");
         return;
     }
-    
-    const cJSON* userID_item = cJSON_GetObjectItemCaseSensitive(body, "userID");
-    const cJSON* superAdmin_item = cJSON_GetObjectItemCaseSensitive(body, "superAdmin");
 
-    if (!cJSON_IsNumber(userID_item) || !cJSON_IsBool(superAdmin_item)) {
-        snprintf(response, response_size, "Paramètres invalides");
+    printf("Body : %s\n", body);
+    printf("Token : %s\n", token);    
+
+    BodyAttribute* userID = parse_token(token);
+    if (userID == NULL) {
+        snprintf(response, response_size, "UserID manquant");
         return;
     }
 
-    int userID = cJSON_GetNumberValue(userID_item);
-    bool createSuperAdmin = cJSON_IsTrue(superAdmin_item);
+    if (strcmp(userID->attribute, "userID") != 0 || !is_number(userID->value)) {
+        snprintf(response, response_size, "UserID invalide\nExemple de corps de requête : userID=1;superAdmin=0;");
+        return;
+    }
 
-    if (create_api_key(userID, createSuperAdmin)) {
+    token = strtok(NULL, ";");
+    printf("Token : %s\n", token);
+    if (token == NULL) {
+        snprintf(response, response_size, "Paramètres manquants");
+        return;
+    }
+
+    BodyAttribute* superAdmin = parse_token(token);
+    if (superAdmin == NULL) {
+        snprintf(response, response_size, "SuperAdmin manquant");
+        return;
+    }
+
+    if (strcmp(superAdmin->attribute, "superAdmin") != 0 || (strcmp(superAdmin->value, "0") != 0 && strcmp(superAdmin->value, "1") != 0)) {
+        snprintf(response, response_size, "SuperAdmin invalide\nExemple de corps de requête : userID=1;superAdmin=0;");
+        return;
+    }
+
+    if (create_api_key(atoi(userID->value), atoi(superAdmin->value))) {
         snprintf(response, response_size, "Clé API créée");
     } else {
         snprintf(response, response_size, "Erreur lors de la création de la clé API");
     }
 }
 
-void handle_route(const char* path, const cJSON* body, char* response, size_t response_size) {
-    if (strcmp(path, "/api/create-key") == 0) {
-        create_apiKey(body, response, response_size);
+void handle_route(Packet* packet, char* response, size_t response_size) {
+    if (strcmp(packet->path, "/api/create-key") == 0) {
+        create_apiKey(packet->body, response, response_size);
     } else {
         snprintf(response, response_size, "Route inconnue");
+    }
+}
+
+void handle_header(Packet* packet, char* response, size_t response_size) {
+    if (strcmp(packet->header, "OK ?") == 0) {
+        snprintf(response, response_size, "OK\n");
+        request_ok = true;
+    }
+    
+    if (!request_ok) {
+        snprintf(response, response_size, "BAD REQUEST\ncode=400;message=Requête invalide\nLa connexion n'a pas été initialisée correctement\n");
+        return;
+    }
+    
+    if (strcmp(packet->header, "ENTRYPOINT") == 0) {
+        handle_route(packet, response, response_size);
+    } else {
+        snprintf(response, response_size, "BAD REQUEST\ncode=400;message=Requête invalide\nLe header ne correspond pas à une commande connue\n");
+
     }
 }
 
 void handle_request(int client_fd) {
     char buffer[BUFFER_SIZE];
     int read_bytes = recv(client_fd, buffer, BUFFER_SIZE - 1, 0);
+
     if (read_bytes < 0) {
         perror("recv");
+        close_connexion = true;
     } else if (read_bytes == 0) {
         printf("Connexion fermée par le client\n");
+        close_connexion = true;
     } else {
         buffer[read_bytes] = '\0';
-        printf("Reçu : %s\n", buffer);
+        printf("Reçu :\n%s\n", buffer);
 
-        char method[10], path[50], headers[BUFFER_SIZE], body[BUFFER_SIZE];
-        parse_request(buffer, method, path, headers, body);
-        printf("Méthode : %s\n", method);
-        printf("Chemin : %s\n", path);
-        printf("Corps : %s\n", body);
-
-        cJSON* json = cJSON_Parse(body);
+        Packet packet;
+        parse_request(buffer, &packet);
+        
+        if (strlen(packet.header) > 0) printf("Header : %s\n", packet.header);
+        if (strlen(packet.path) > 0) printf("Path : %s\n", packet.path);
+        if (strlen(packet.body) > 0) printf("Body : %s\n", packet.body);
+        
         char response_body[BUFFER_SIZE/2];
         char response[BUFFER_SIZE];
 
-        if (json != NULL) {
-            handle_route(path, json, response_body, sizeof(response_body));
+        handle_header(&packet, response_body, sizeof(response_body));
 
-            snprintf(response, BUFFER_SIZE, "HTTP/1.1 200 OK\nContent-Type: application/json\nContent-Length: %ld\r\n\r\n%s", 
-                     strlen(response_body), response_body);
-            printf("Réponse envoyée : %s\n", response);
-            send(client_fd, response, strlen(response), 0);
-
-            cJSON_Delete(json);
-        } else {
-            const char* error_response = "HTTP/1.1 400 Bad Request\nContent-Type: text/plain\r\n\r\nRequête invalide";
-            printf("Réponse envoyée : %s\n", error_response);
-            send(client_fd, error_response, strlen(error_response), 0);
-        }
+        snprintf(response, BUFFER_SIZE, "%s", response_body);
+        printf("Réponse envoyée :\n%s\n", response);
+        send(client_fd, response, strlen(response), 0);
     }
 }
 
@@ -136,6 +219,7 @@ int main(int argc, char *argv[]) {
     socklen_t addr_len;
     int port = 8080;
     int verbose = 0;
+    bool first_request = true;
 
     int opt;
     while ((opt = getopt_long(argc, argv, "hvp:", long_options, NULL)) != -1) {
@@ -188,10 +272,18 @@ int main(int argc, char *argv[]) {
             perror("accept");
             continue;
         }
-
-        printf("Nouvelle connexion\n");
+        
+        if (first_request) {
+            first_request = false;
+            printf("Nouvelle connexion\n");
+        }
+        
         handle_request(client_fd);
-        close(client_fd);
+
+        if (close_connexion) { 
+            close(client_fd);
+            close_connexion = false;
+        }
     }
 
     close(server_fd);
