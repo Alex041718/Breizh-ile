@@ -1,38 +1,45 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const passwordInput = document.getElementById('firstPasswordEntry');
+    const passwordInput = document.querySelector('#firstPasswordEntry input');
     const lengthCriteria = document.getElementById('length');
     const uppercaseCriteria = document.getElementById('uppercase');
     const lowercaseCriteria = document.getElementById('lowercase');
     const specialCriteria = document.getElementById('special');
+    const containsCriteria = document.getElementById('contains');
 
     passwordInput.addEventListener('input', function () {
         const password = passwordInput.value;
+        console.log(password);
         // Longueur
         if (password.length >= 10) {
             lengthCriteria.style.color = 'green';
         } else {
-            lengthCriteria.style.color = 'blue';
+            lengthCriteria.style.color = 'red';
         }
-
         // Majuscule
         if (/[A-Z]/.test(password)) {
             uppercaseCriteria.style.color = 'green';
         } else {
-            uppercaseCriteria.style.color = 'blue';
+            uppercaseCriteria.style.color = 'red';
         }
-
+        
         // Minuscule
         if (/[a-z]/.test(password)) {
             lowercaseCriteria.style.color = 'green';
         } else {
-            lowercaseCriteria.style.color = 'blue';
+            lowercaseCriteria.style.color = 'red';
         }
-
+        
         // Caractère spécial
         if (/[#@\$%\^&\+=\?]/.test(password)) {
             specialCriteria.style.color = 'green';
         } else {
-            specialCriteria.style.color = 'blue';
+            specialCriteria.style.color = 'red';
+        }
+        // Mot de passe contient Majuscule, Minuscule, Caractère spécial
+        if (/[A-Z]/.test(password) && /[a-z]/.test(password) && /[#@\$%\^&\+=\?]/.test(password)){
+            containsCriteria.style.color = 'green';
+        } else {
+            containsCriteria.style.color = 'red';
         }
     });
 

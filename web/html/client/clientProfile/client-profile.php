@@ -37,6 +37,7 @@ $client = ClientService::GetClientById($clientID);
     <title>Formulaire</title>
     <link rel="stylesheet" href="/client/clientProfile/client-profile.css">
     <link rel="stylesheet" href="/components/Toast/Toast.css">
+    <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
 
 
     <link rel="stylesheet" href="../../style/ui.css">
@@ -52,11 +53,15 @@ $client = ClientService::GetClientById($clientID);
             <ul>
                 <li id="infos__btn" class="active">
                     <span>Informations Personnelles</span>
-                    <img src="./../../../assets/icons/personal.svg" alt="Personal Info Icon" class="nav-icon">
+                    <div class="nav-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
                 </li>
                 <li id="security__btn">
                     <span>Sécurité</span>
-                    <img src="./../../../assets/icons/settings.svg" alt="Security Icon" class="nav-icon">
+                    <div class="nav-icon">
+                        <i class="fa-solid fa-shield"></i>
+                    </div>
                 </li>
             </ul>
         </nav>
