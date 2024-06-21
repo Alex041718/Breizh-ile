@@ -200,10 +200,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Popup settings
     
     const popup_filters = document.getElementById("popup__filter");
-    const popup_filters_close = document.querySelector(".popup__filter .popup__content i");
+    // const popup_filters_close = popup_filters.querySelector(".popup--close");
 
-    const popup_filters_submit = document.getElementById("filter_submit");
-    // const popup_filters_open = document.getElementById("header__settings");
+    // const popup_filters_submit = popup_filters.querySelector("a");
+    // const popup_filters_open = document.getElementById("filter_submit");
+
+
     // const popup_filters_open_mobile = document.getElementById("open-mobile-settings");
 
     // if(popup_filters_open) popup_filters_open.addEventListener("click", openSettings);

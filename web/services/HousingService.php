@@ -138,9 +138,10 @@ class HousingService extends Service
         return self::HousingHandler($row);
     }
   
-    public static function GetHousingsByOffset($city, $dateBegin, $dateEnd, $nbPerson, $minPrice, $maxPrice, $offset, $order, $desc = false) {
+    public static function GetHousingsByOffset($city, $dateBegin, $dateEnd, $nbPerson, $minPrice, $maxPrice, $appartement, $offset, $order, $desc = false) {
 
-        $isAnd = (isset($city) || isset($dateBegin) || isset($dateEnd) || isset($nbPerson) || isset($minPrice) || isset($maxPrice));
+
+        $isAnd = (isset($city) || isset($dateBegin) || isset($dateEnd) || isset($nbPerson) || isset($minPrice) || isset($maxPrice) || $appartement == 1);
 
         if($isAnd) {
             
@@ -154,11 +155,12 @@ class HousingService extends Service
 
             if(isset($nbPerson)) $chaine = $chaine . "_Housing.nbPerson >= " . $nbPerson . ((isset($minPrice) || isset($maxPrice)) ? " AND " : " ");
 
-            if(isset($minPrice)) $chaine = $chaine . "_Housing.priceIncl >= " . $minPrice . " ". (isset($maxPrice) ? " AND " : " ");
+            if(isset($minPrice)) $chaine = $chaine . "_Housing.priceIncl >= " . $minPrice . " ". ((isset($maxPrice) || isset($appartement)) ? " AND " : " ");
 
-            if(isset($maxPrice)) $chaine = $chaine . "_Housing.priceIncl <= " . $maxPrice . " ";
+            if(isset($maxPrice)) $chaine = $chaine . "_Housing.priceIncl <= " .  $maxPrice . " ". ($appartement == 1 ? " AND " : " ");
+            
+            if($appartement == 1) $chaine = $chaine . "_Housing.categoryID = " . 2 . " " ;
 
-    
         }
         else $chaine = "";
 

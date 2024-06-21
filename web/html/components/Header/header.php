@@ -235,8 +235,10 @@ class Header
                                     <div class="popup__filter__container__choices__row">
                                         <div>
                                             <div class="popup__filter__box">
-                                                <input type="checkbox" />
-                                                <p>Appartement</p>
+                                                <input type="checkbox" 
+                                                id="appart"
+                                                value="' . (isset($_POST["appartement"]) ? $_POST["appartement"] : 0) . '"/>
+                                                <p >Appartement</p>
                                             </div>
                                             <div class="popup__filter__box">
                                                 <input type="checkbox" />
@@ -312,7 +314,7 @@ class Header
                             </div>
                         </div>
                         <div class="popup__filter__bottom">
-                            <button type="submit" id="filter_submit" class="btn"a>Valider</a>
+                            <button type="submit" id="filter_submit" class="btn">Valider</button>
                         </div>
                     '
         );

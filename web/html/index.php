@@ -55,16 +55,6 @@ $isAuthenticated = SessionService::isClientAuthenticated();
             </div>
         </section>
         <section id="logements" class="logements">
-            <?php 
-            
-            $inputs = "";
-            foreach ($_POST as $key => $value) {
-                $inputs .= '<input type="hidden" name="'. $key . '" value="' . $value . '" />';
-            }
-
-
-            // require_once("./components/SearchBar/SearchBar.php");
-            ?>
             <h2>Nos logements</h2>
             <div class="logements__filters">
                 <label>Trier par :</label>
@@ -93,7 +83,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                 let rawMinPrice = <?= json_encode($_POST['minPrice'] ?? null) ?>;
                 let rawMaxPrice = <?= json_encode($_POST['maxPrice'] ?? null) ?>;
 
-                
+                let rawAppartement = <?= json_encode($_POST['appartement'] ?? null) ?>;
 
 
                 if(city) city = city.split(' ')[0];
@@ -106,9 +96,12 @@ $isAuthenticated = SessionService::isClientAuthenticated();
 
 
                 filter_submit.addEventListener("click", function() {
+                    const popupFilter = filter_submit.parentNode.parentNode;
+                    popupFilter.parentNode.classList.remove("popup--open");
+                    document.body.style.overflow = '';
                     showUser(cpt, sort, desc, true);
                 })
-
+                
                 sorter.addEventListener("change", function() {
                     if(sorter.value == 1) { sort = "_Housing.priceIncl"; desc = 0; }
                     else if(sorter.value == 2) { sort = "_Housing.priceIncl"; desc = 1; }
@@ -122,6 +115,19 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                     const minPrice = rawMinPrice && isVeryFirst ? rawMinPrice : document.getElementById("minInput").value;
                     const maxPrice = rawMaxPrice && isVeryFirst ? rawMaxPrice : document.getElementById("maxInput").value;
 
+                    console.log(document.getElementById("minInput").value);
+                    console.log(document.getElementById("maxInput").value);
+                    console.log(rawMinPrice);
+                    console.log(rawMaxPrice);
+                    console.log( document.getElementById("appart").value);
+
+
+                    const appartement = rawAppartement && isVeryFirst ? rawAppartement : document.getElementById("appart").value;
+                    console.log( rawAppartement);
+                    console.log( isVeryFirst);
+                    
+                    console.log(appartement);
+
                     if(isFirst) cpt = 0;
                     const itemsToHide = document.querySelectorAll(".show-more");
 
@@ -133,7 +139,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                     container.appendChild(loader);
 
                     var xmlhttp = new XMLHttpRequest();
-                    const params = `q=${cpt}&sort=${sort}&desc=${desc}&nbPerson=${nbPerson}&beginDate=${beginDate}&endDate=${endDate}&city=${city}&minPrice=${minPrice}&maxPrice=${maxPrice}`;
+                    const params = `q=${cpt}&sort=${sort}&desc=${desc}&nbPerson=${nbPerson}&beginDate=${beginDate}&endDate=${endDate}&city=${city}&minPrice=${minPrice}&maxPrice=${maxPrice}&appartement=${appartement}`;
 
                     xmlhttp.open("POST", "./components/HousingCard/getHousing.php", true);
 
