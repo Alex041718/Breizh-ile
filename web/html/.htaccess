@@ -25,6 +25,9 @@ RewriteRule ^client/connection$ /client/clientConnection/client_connection.php [
 # Rediriger /client/register vers /client/clientRegister/client_register.php
 RewriteRule ^client/register$ /client/clientRegister/client_register.php [L]
 
+# Rediriger /client/create-account vers /client/clientRegister/client_create_account.php
+RewriteRule ^client/create-account$ /client/clientRegister/client_create_account.php [L]
+
 # Rediriger /logement vers /client/ficheLogement/page.php
 RewriteRule ^logement$ /client/ficheLogement/page.php [L]
 

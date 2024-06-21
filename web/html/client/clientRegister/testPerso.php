@@ -45,13 +45,12 @@ function sendmail($token, $mailto)
 //        $mail->Body = 'Change you password right <a href="http://localhost:5555/client/clientForgotPassword/reset-password-page.php?token='. $token .'">here</a>';
         $mail->Body = '
             <h1>Création de compte</h1>
-            <p>Accéder à la page de création de compte en cliquant <a href="https://crepetech.ventsdouest.dev/client/clientForgotPassword/reset-password-page.php?token='. $token .'">juste ici.</a><p>'
+            <p>Accéder à la page de création de compte en cliquant <a target="_blank" href="https://crepetech.ventsdouest.dev/client/account-creation?token='. $token .'">juste ici.</a><p>'
         ;
         //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         $mail->send();
-        echo 'Message has been sent';
-        header("Location: /");
+        // header("Location: /");
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }

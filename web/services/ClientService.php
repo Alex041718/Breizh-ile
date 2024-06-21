@@ -80,11 +80,10 @@ class ClientService extends Service
 
         // Obtenez le fuseau horaire par défaut du serveur
         $timezone = date_default_timezone_get();
-        var_dump($timezone);
 
         // Créez un nouvel objet DateTime avec le fuseau horaire spécifique
 //        $date_expiration = new DateTime(null, new DateTimeZone($timezone));
-        $date_expiration = new DateTime(null, new DateTimeZone('Europe/Paris'));
+        $date_expiration = new DateTime("now", new DateTimeZone('Europe/Paris'));
 
         // Ajoutez 20 minutes à l'heure actuelle
         $date_expiration->add(new DateInterval('PT20M'));
