@@ -1,7 +1,41 @@
-import { Toast } from "/components/Toast/Toast.js";
-
-
 document.addEventListener("DOMContentLoaded", function() {
+    const passwordInput = document.getElementById('firstPasswordEntry');
+    const lengthCriteria = document.getElementById('length');
+    const uppercaseCriteria = document.getElementById('uppercase');
+    const lowercaseCriteria = document.getElementById('lowercase');
+    const specialCriteria = document.getElementById('special');
+
+    passwordInput.addEventListener('input', function () {
+        const password = passwordInput.value;
+        // Longueur
+        if (password.length >= 10) {
+            lengthCriteria.style.color = 'green';
+        } else {
+            lengthCriteria.style.color = 'blue';
+        }
+
+        // Majuscule
+        if (/[A-Z]/.test(password)) {
+            uppercaseCriteria.style.color = 'green';
+        } else {
+            uppercaseCriteria.style.color = 'blue';
+        }
+
+        // Minuscule
+        if (/[a-z]/.test(password)) {
+            lowercaseCriteria.style.color = 'green';
+        } else {
+            lowercaseCriteria.style.color = 'blue';
+        }
+
+        // Caractère spécial
+        if (/[#@\$%\^&\+=\?]/.test(password)) {
+            specialCriteria.style.color = 'green';
+        } else {
+            specialCriteria.style.color = 'blue';
+        }
+    });
+
     const infos = document.getElementById('infos');
     const security = document.querySelector('.content__security');
 

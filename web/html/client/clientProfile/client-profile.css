@@ -273,6 +273,9 @@ nav ul li.active:hover {
   width: 100%;
   padding-bottom: 15px;
 }
+.content__security__elements__required__fields {
+  color: red;
+}
 
 @media (max-width: 1280px) {
   .content__personnal-data__elements {

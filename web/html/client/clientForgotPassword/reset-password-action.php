@@ -30,12 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!preg_match($passwordPattern, $newPassword)) {
                 // Gérer l'erreur (format du mot de passe incorrect)
                 echo "Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre, un caractère spécial et faire au moins 10 caractères de long.";
-                //ClientService::updateUserPasswordByClientId("zizi", $clientId);
 
                 return false;
             }
             else{
-                echo"Duncan a un gros zizi";
                 ClientService::updateUserPasswordByClientId($newPassword, $clientId);
                 return true;
             }

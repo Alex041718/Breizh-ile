@@ -26,7 +26,6 @@ if (!$isAuthenticated) {
 // Récupérer le client authentifié
 $clientID = $_SESSION['user_id'];
 $client = ClientService::GetClientById($clientID);
-$res = "bite"
 ?>
 
 <!DOCTYPE html>
@@ -132,46 +131,65 @@ $res = "bite"
             </form>
         </div>
         <div id="security" class="content__security">
-    <h3 class="content__security__title">Sécurité</h3>
-    <p class="content__security__description">Modifier vos paramètres de sécurités</p>
-    <form method="POST" action= "/client/clientForgotPassword/reset-password-action.php">
-        <div class="content__security__elements">
-            <?php
-            Input::render(
-                "content__security__elements__password",
-                "firstPasswordEntry",
-                "password",
-                "Modifier Mot de passe",
-                "firstPasswordEntry",
-                "Mot de passe",
-                true,
-                "",//"10",
-                ""//,"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?]).{10,}"
-            );
-            ?>
-            <?php
-            Input::render(
-                "content__security__elements__password--confirmation",
-                "secondPasswordEntry",
-                "password",
-                "Confirmer Mot de passe",
-                "secondPasswordEntry",
-                "Confirmer Mot de passe",
-                true,
-                "",//"10",
-                ""//,"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?]).{10,}"
-            );
-            ?>
-            <input type="hidden" name="clientId" value="<?php echo ($client->getClientID()) ?>">
-            <div class="content__security__elements__modify_button">
-                <?php
-                require_once ("../../components/Button/Button.php");
+            <h3 class="content__security__title">Sécurité</h3>
+            <p class="content__security__description">Modifier vos paramètres de sécurités</p>
+            <form method="POST" action="/client/clientForgotPassword/reset-password-action.php">
+                <div class="content__security__elements">
+                    <?php
+                    Input::render(
+                        "content__security__elements__password",
+                        "firstPasswordEntry",
+                        "password",
+                        "Modifier Mot de passe",
+                        "firstPasswordEntry",
+                        "Mot de passe",
+                        true,
+                        "",
+                        "10",
+                        "",
+                        "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?]).{10,}"
+                    );
+                    ?>
+                    <?php
+                    Input::render(
+                        "content__security__elements__password--confirmation",
+                        "secondPasswordEntry",
+                        "password",
+                        "Confirmer Mot de passe",
+                        "secondPasswordEntry",
+                        "Confirmer Mot de passe",
+                        true,
+                        "",
+                        "10",
+                        "",
+                        "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?]).{10,}"
+                    );
+                    ?>
+                    <input type="hidden" name="clientId" value="<?php echo ($client->getClientID()) ?>">
+                    <div class="content__security__elements__modify_button">
+                        <?php
+                        require_once ("../../components/Button/Button.php");
 
-                Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Client, "", false, true); ?>
-            </div>
+                        Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Client, "", false, true); ?>
+                    </div>
+                    <div class="content__security__elements__required__fields">
+                        <p id="length" class="content__security__elements__required__fields__length">La taille du mot de
+                            passe doit être supérieure à 10</p>
+                        <p id="contains" class="content__security__elements__required__fields__contains">Le mot de passe
+                            doit contenir:</p>
+                        <p id="uppercase" class="content__security__elements__required__fields__uppercase">1 Majuscule
+                            minimum</p>
+                        <p id="lowercase" class="content__security__elements__required__fields__lowercase">1 Minuscule
+                            minimum</p>
+                        <p id="special" class="content__security__elements__required__fields__special">1 caractère
+                            spécial minimum: ?=.*[@#$%^&+=?]</p>
+                    </div>
+
+
+                </div>
         </div>
-    </form>
-</div>
+        </form>
+        </div>
 
     </main>
 
@@ -180,9 +198,6 @@ $res = "bite"
     Footer::render();
     ?>
     <script type="module" src="/client/clientProfile/client-profile.js"></script>
-    <script>
-        console.log("test :  + <?= $res ?>")
-    </script>
 </body>
 
 </html>
