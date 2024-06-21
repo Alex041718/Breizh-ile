@@ -274,6 +274,7 @@
                 </code>
             </pre>
         </div>
+    </div>
 
         <?php require_once("../components/Popup/popup.php"); ?>
         <div class="button-box__item">
@@ -293,6 +294,22 @@
 
 
 
+
+
+
+        <link rel="stylesheet" href="/components/Toast/Toast.css">
+
+        <script type="module" src="/components/Toast/Toast.js"></script>
+        <script type="module">
+            import { Toast } from "/components/Toast/Toast.js";
+            let btn = document.getElementById('toastButton');
+            btn.addEventListener('click', () => {
+                Toast("Hello zebfiuezafiueziu ezfiuezbifu z ezibfiubeziub  zeibfiubeziufbzu zeufbeziubfiuezb", "success");
+            });
+        </script>
+
+
+        <button id="toastButton" ">Toast</button>
 
     </body>
 </html>

@@ -24,3 +24,8 @@ export function Toast(message, type) {
         toast.remove();
     }, 3000);
 }
+
+
+console.log("Toast loaded");
+
+//Toast("Hello", "success");

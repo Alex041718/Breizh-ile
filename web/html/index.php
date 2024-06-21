@@ -7,6 +7,7 @@ require_once '../services/ClientService.php';
 require_once '../services/SessionService.php'; // pour le menu du header
 $isAuthenticated = SessionService::isClientAuthenticated();
 
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -272,6 +273,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
     <?php
         require_once("./components/Footer/footer.php");
         Footer::render();
+        SessionService::loadToast();
     ?>
 
 

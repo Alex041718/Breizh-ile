@@ -15,7 +15,8 @@ class HousingCard {
         $owner_name = $housing->getOwner()->getNickname();
 
 
-        $render =  /*html*/ '            
+        $render =  /*html*/ '   
+        <link rel="stylesheet" href="/components/HousingCard/HousingCard.css">         
 
         <a href="/logement?id='. $housing_id .'" class="housing-card '. $class . ' " id=" ' . $id . ' ">
             <img class="housing-card__thumbnail" src="' . $housing_thumbnail . '">

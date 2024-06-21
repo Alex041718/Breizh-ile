@@ -25,6 +25,37 @@ class SessionService {
             }
             exit();
         }
+
+        // Utilisateur connecté
+
+        // Affichage d'un toast
+        self::loadToast();
+    }
+
+    public static function createToast(string $message, string $type) {
+        self::set('toast', ['message' => $message, 'type' => $type]);
+    }
+
+    public static function loadToast() {
+        if (self::has('toast')) {
+            $toast = self::get('toast');
+
+            echo '
+
+            <link rel="stylesheet" href="/components/Toast/Toast.css">
+            
+            <script type="module" src="/components/Toast/Toast.js"></script>
+            <script type="module"> 
+                import { Toast } from "/components/Toast/Toast.js";
+                Toast("'.$toast['message'].'", "'.$toast['type'].'");
+            </script>
+            
+            
+';
+
+
+            self::remove('toast');
+        }
     }
 
 

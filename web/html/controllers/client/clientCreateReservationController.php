@@ -39,6 +39,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $housing = HousingService::getHousingByID($housingID);
         $payMethod = PayementMethodService::getPayementMethodByID($payMethodID);
 
+        // check if the housing is available
+
+        $isOnline = $housing->getIsOnline();
+
+        require_once '../../../services/SessionService.php';
+
+        if (!$isOnline) {
+            // redirection vers la page home avec un toast expliquant que le logement n'est plus disponible
+
+            SessionService::createToast('Le logement n\'est plus disponible', 'error');
+
+            header('Location: /');
+            exit();
+
+        }
+
         // Créer une nouvelle instance de Reservation
         $reservation = new Reservation(null, $beginDate, $endDate, $serviceCharge, $touristTax, $status, $nbPerson, $priceIncl, $housing, $payMethod, $client);
 
@@ -46,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ReservationService::createReservation($reservation);
 
         // import de la session
-        require_once '../../../services/SessionService.php';
+
 
         SessionService::remove('currentBid');
 
