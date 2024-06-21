@@ -31,7 +31,7 @@ class Footer {
                         <div>
                             <h4>Légal</h4>
                             <div>
-                                <a href=""><p>Confidentialité</p></a>
+                                <a href="/global/mentionsLegales/mentionsLegales.php"><p>Mentions Légales</p></a>
                                 <a href=""><p>Conditions générales d&#039;utilisation</p></a>
                             </div>
                         </div>
