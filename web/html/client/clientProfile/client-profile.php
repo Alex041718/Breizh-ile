@@ -46,7 +46,7 @@ $client = ClientService::GetClientById($clientID);
 <body>
     <?php
     require_once ("../../components/Header/header.php");
-    Header::render(true, false, $isAuthenticated, '/client/profile');
+    Header::render(isScrolling: true, isBackOffice: false, isAuthenticated: $isAuthenticated, redirectAuthPath: '/client/profile');
     ?>
     <main class="content">
         <nav>
@@ -187,7 +187,7 @@ $client = ClientService::GetClientById($clientID);
                         <p id="lowercase" class="content__security__elements__required__fields__lowercase">1 Minuscule
                             minimum</p>
                         <p id="special" class="content__security__elements__required__fields__special">1 caractère
-                            spécial minimum: ?=.*[@#$%^&+=?]</p>
+                            spécial minimum: @#$%^&+=?</p>
                     </div>
 
 
