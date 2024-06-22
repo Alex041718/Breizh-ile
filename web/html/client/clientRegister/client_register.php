@@ -1,3 +1,16 @@
+<?php
+require_once ('../../../services/ClientService.php');
+require_once("../../components/Input/Input.php");
+require_once("../../components/Button/Button.php");
+
+$client = isset($_COOKIE['account']) ? unserialize( base64_decode( $_COOKIE['account'])) : false;
+
+$isValid = $client ? true : false;
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +22,7 @@
     <script src="/client/clientRegister/client_register.js"></script>
 </head>
 <body>
-
+    
     <div class="connectionContainer connectionContainer--register">
         <div class="connectionContainer__box">
             <a href="/">
@@ -17,61 +30,75 @@
             </a>
             <h3 class="connectionContainer__box__title">Création de votre compte client</h3>
             <?= isset($_GET["error"]) && $_GET["error"] != "" ? '<p class="error">' . $_GET["error"] . '</p>' : "" ?>
-            <form data-success="<?= $_GET["success"] ?>" id="inscription" action="/client/clientRegister/sendAccountCreation.php" method="post">
-                <?php require_once("../../components/Input/Input.php"); ?>
-                <?php require_once("../../components/Button/Button.php"); ?>
+
+            <?php
+
+                if($isValid) {
+                    echo '<form method="post" action="/client/clientRegister/createAccount.php" class="form__success" id="page0">
+                    <p>Un mail contenant un code de vérification vous a été envoyé. Veuillez le saisir dans le champ ci-dessous.</p>';
+                    Input::render("connection__input", "code", "number", null, "inputCode", "Code", true);
+                    Button::render("connection__button", "submitBtn", "Valider",ButtonType::Client,false,false,true);
+                    echo '</form>' ;
+                }
+                else if(isset($_GET["success"]) && $_GET["success"] === "true") {
+                    echo '<p>Votre compte à été créer avec succès.</p>';
+                    Button::render("connection__button","id","Se connecter",ButtonType::Client,"window.location.href = '/client/connection'",false);
+                }
+
+            ?>
+
+            <form data-success="<?= isset($_GET["success"]) && $_GET["success"] !== "" ? $_GET["success"] : "" ?>" id="inscription" action="/client/clientRegister/sendAccountCreation.php" method="post">
                 
-                <div class="form__success" id="page0">
-                    <p>Un mail contenant un code de vérification vous a été envoyé. Veuillez le saisir dans le champ ci-dessous.</p>
-                    <?php Input::render("connection__input", "lastName", "text", null, "lastName", "Code", true); ?>
-                    <?php Button::render("connection__button", "submitBtn", "Valider",ButtonType::Client,false,false,true); ?>
-                </div>
+                
+                <?php 
+                if(!$isValid && !isset($_GET["success"])) { 
+                
+                    echo '<div class="form__section" id="page1">
 
-                <div class="form__section" id="page1">
-                    <?= (isset($_GET["redirect"]) ? "<input type='hidden' name='redirect' value='" . $_GET["redirect"] . "'>" : "<input type='hidden' name='redirect' value='" . "/back" . "'>") ?>
-
-                    <div class="connection__input__genders">
-                        <label class="input__label para--18px" for="gender">Genre <span class="require">*</span></label>
-                        <div class="connection__input__genders-container">
-                            <?php Input::render("connection__input__gender", "male", "radio", "Homme", "gender", "Entrez votre adresse email", false); ?>
-                            <?php Input::render("connection__input__gender", "fename", "radio", "Femme", "gender", "Entrez votre adresse email", false); ?>
-                            <?php Input::render("connection__input__gender", "other", "radio", "Autre", "gender", "Entrez votre adresse email", false); ?>
+                        <input type="hidden" name="addressID" value="0" ?>
+                        <div class="connection__input__genders">
+                            <label class="input__label para--18px" for="gender">Genre <span class="require">*</span></label>
+                            <div class="connection__input__genders-container">';
+                                Input::render("connection__input__gender", "male", "radio", "Homme", "genderID", null, false, "1");
+                                Input::render("connection__input__gender", "female", "radio", "Femme", "genderID", null, false, "0");
+                                Input::render("connection__input__gender", "other", "radio", "Autre", "genderID", null, false, "2");
+                            echo '</div>
                         </div>
-                    </div>
 
-                    <div class="connectionContainer__box__line">
-                        <?php Input::render("connection__input", "lastName", "text", "Nom", "lastName", "Nom", true); ?>
-                        <?php Input::render("connection__input", "firstName", "text", "Prénom", "firstName", "Prénom", true); ?>
-                    </div>
+                        <div class="connectionContainer__box__line">';
+                            Input::render("connection__input", "lastName", "text", "Nom", "lastname", "Nom", true);
+                            Input::render("connection__input", "firstName", "text", "Prénom", "firstname", "Prénom", true);
+                        echo '</div>';
 
-                    <?php Input::render("connection__input", "nickname", "text", "Nom d'utilisateur", "nickname", "Nom d'utilisateur", true); ?>
+                        Input::render("connection__input", "nickname", "text", "Nom d'utilisateur", "nickname", "Nom d'utilisateur", true);
 
-                </div>
+                    echo '</div>
 
-                <div class="form__section" id="page2">
-                    <?php Input::render("connection__input", "email", "email", "Adresse email", "mail", "Entrez votre adresse email", true); ?>
-                    <?php Input::render("connection__input", "birthdate", "date", "Date de naissance", "birthdate", "Nom", true); ?>
+                    <div class="form__section" id="page2">';
+                        Input::render("connection__input", "email", "email", "Adresse email", "mail", "Entrez votre adresse email", true);
+                        Input::render("connection__input", "birthdate", "date", "Date de naissance", "birthDate", "Nom", true);
+                        Input::render("connection__input", "phone", "tel", "Téléphone", "phoneNumber", "Numéro de téléphone", true);
+                        
+                    echo '</div>
 
-                    
-                </div>
+                    <div class="form__section" id="page3">';
+                        Input::render("connection__input", "password", "password", "Mot de passe", "password", "Entrez votre mot de passe", true);
+                        Input::render("connection__input confirm__input", "confirm", "password", null, "confirm", "Confirmer votre mot de passe", true);
+                        Input::render("consent__input", "confirm", "checkbox", "Je consens à ce que mes données soient collectées et stockées pour le bon fonctionnement du site.", "consent", "", true);
+                    echo '</div>' ;
 
-                <div class="form__section" id="page3">
-                    <?php Input::render("connection__input", "password", "password", "Mot de passe", "password", "Entrez votre mot de passe", true); ?>
-                    <?php Input::render("connection__input confirm__input", "confirm", "password", null, "confirm", "Confirmer votre mot de passe", true); ?>
-                    <?php Input::render("consent__input", "confirm", "checkbox", "Je consens à ce que mes données soient collectées et stockées pour le bon fonctionnement du site.", "consent", "", true); ?>
-                </div>
+                    echo '<div class="connectionContainer__box__line">';
+                        Button::render("previous__button", "previousBtn", "Précédent",ButtonType::class,false,false,false);
+                        Button::render("next__button", "nextBtn", "Suivant",ButtonType::class,false,false,false);
+                    echo '</div>';
+
+                    Button::render("connection__button", "submitBtn", "S'inscrire",ButtonType::Client,false,false,true);
+                } ?>
 
                 <input type="hidden" name="role" value="client">
 
-                <div class="connectionContainer__box__line">
-                    <?php Button::render("previous__button", "previousBtn", "Précédent",ButtonType::class,false,false,false); ?>
-                    <?php Button::render("next__button", "nextBtn", "Suivant",ButtonType::class,false,false,false); ?>
-                </div>
-
-                <?php Button::render("connection__button", "submitBtn", "S'inscrire",ButtonType::Client,false,false,true); ?>
-
             </form>
-            <?= isset($_GET["success"]) && $_GET["success"] === true ?
+            <?= !$isValid && !isset($_GET["success"]) ?
             '<div class="inscription">
                 <div class="horizontal-line"></div>
                 <p>OU</p>

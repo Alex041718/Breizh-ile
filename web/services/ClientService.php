@@ -12,6 +12,7 @@ class ClientService extends Service
     {
         $image = ImageService::CreateImage($client->getImage());
         $address = AddressService::CreateAddress($client->getAddress());
+        $lastConnection = $client->getLastConnection() ? $client->getLastConnection()->format('Y-m-d H:i:s') : null;
 
         $client->setImage($image);
         $client->setAddress($address);
@@ -28,7 +29,7 @@ class ClientService extends Service
             'phoneNumber' => $client->getPhoneNumber(),
             'birthDate' => $client->getBirthDate()->format('Y-m-d H:i:s'),
             'consent' => $client->getConsent(),
-            'lastConnection' => $client->getLastConnection()->format('Y-m-d H:i:s'),
+            'lastConnection' => $lastConnection,
             'creationDate' => $client->getCreationDate()->format('Y-m-d H:i:s'),
             'imageID' => $client->getImage()->getImageID(),
             'genderID' => $client->getGender()->getGenderID(),
@@ -37,14 +38,13 @@ class ClientService extends Service
 
         $current_id = $pdo->lastInsertId();
 
-        $stmt = $pdo->prepare('INSERT INTO _Client (clientID, isBlocked) VALUES (:clientID, :isBlocked);');
+        $stmt = $pdo->prepare('INSERT INTO _Client (clientID, isBlocked) VALUES (:clientID, 0);');
 
         $stmt->execute(array(
             'clientID' => $current_id,
-            'isBlocked' => $client->getIsBlocked()
         ));
 
-        return new Client($current_id, $client->getIsBlocked(), $client->getMail(), $client->getFirstname(), $client->getLastname(), $client->getNickname(), $client->getPassword(), $client->getPhoneNumber(), $client->getBirthDate(), $client->getConsent(), $client->getLastConnection(), $client->getCreationDate(), $client->getImage(), $client->getGender(), $client->getAddress());
+        return new Client($current_id, $client->getIsBlocked(), $client->getMail(), $client->getFirstname(), $client->getLastname(), $client->getNickname(), $client->getPassword(), $client->getPhoneNumber(), $client->getBirthDate(), $client->getConsent(), null, $client->getCreationDate(), $client->getImage(), $client->getGender(), $client->getAddress(), null, null);
     }
 
     public static function GetAllClients()
@@ -60,7 +60,44 @@ class ClientService extends Service
         return $clients;
     }
 
-    public static function GetClientById(int $clientID): CLient
+    public static function encryptClient($client) {
+        // Sérialiser l'objet
+        $serializedObject = serialize($client);
+    
+        // // Générer un vecteur d'initialisation (IV) sécurisé
+        // $ivLength = openssl_cipher_iv_length('aes-256-cbc');
+        // $iv = openssl_random_pseudo_bytes($ivLength);
+    
+        // // Chiffrer l'objet sérialisé
+        // $encryptedData = openssl_encrypt($serializedObject, 'aes-256-cbc', "LaCrepeTech", 0, $iv);
+    
+        // // Combiner le IV et les données chiffrées pour le stockage
+        // $encryptedObject = base64_encode($iv . $encryptedData);
+    
+        return $serializedObject;
+    }
+
+    public static function decryptClient($client) {
+        // Décoder les données de l'objet chiffré
+        // $data = base64_decode($client);
+    
+        // // Extraire le vecteur d'initialisation (IV) et les données chiffrées
+        // $ivLength = openssl_cipher_iv_length('aes-256-cbc');
+        // $iv = substr($data, 0, $ivLength);
+        // $encryptedData = substr($data, $ivLength);
+    
+        // // Déchiffrer les données
+        // $serializedObject = openssl_decrypt($encryptedData, 'aes-256-cbc', "LaCrepeTech", 0, $iv);
+
+        // echo $serializedObject;
+    
+        // Désérialiser les données pour récupérer l'objet original
+        $object = unserialize($client);
+    
+        return $object;
+    }
+
+    public static function GetClientById(int $clientID): Client
     {
         $pdo = self::getPDO();
         $stmt = $pdo->query('SELECT * FROM Client WHERE clientID = ' . $clientID);
@@ -70,6 +107,18 @@ class ClientService extends Service
             throw new Exception('Client not found');
         }
         return self::ClientHandler($row);
+    }
+
+    public static function isExistingClient(string $clientMail): bool
+    {
+        $pdo = self::getPDO();
+        $stmt = $pdo->query('SELECT * FROM Client WHERE mail = "' . $clientMail . '"');
+        $row = $stmt->fetch();
+        // retourne une erreur si le client n'existe pas
+        if (!$row) {
+            return false;
+        }
+        return true;
     }
 
     public static function updateUserTokenByEmail(string $clientEmail)
@@ -110,6 +159,25 @@ class ClientService extends Service
         }
     }
 
+    public static function getEncryptToken(string $token)
+    {
+        // Store the cipher method
+        $ciphering = "AES-128-CTR";
+        
+        // Use OpenSSl Encryption method
+        $iv_length = openssl_cipher_iv_length($ciphering);
+        $options = 0;
+ 
+        // Non-NULL Initialization Vector for encryption
+        $encryption_iv = '1234567891011121';
+        
+        // Store the encryption key
+        $encryption_key = "LaCrepeTech";
+
+        // Use openssl_encrypt() function to encrypt the data
+        return openssl_encrypt($token, $ciphering, $encryption_key, $options, $encryption_iv);
+    }
+
     public static function GetClientByToken(string $token): Client
     {
         $pdo = self::getPDO();
@@ -128,6 +196,15 @@ class ClientService extends Service
             throw new Exception('Failed to execute query');
         }
     }
+
+    public static function genRandomCode() {
+        // Génère un nombre aléatoire entre 0 et 999999
+        $code = rand(0, 999999);
+        // Formate le code en une chaîne de caractères de 6 chiffres, avec des zéros en tête si nécessaire
+        $formattedCode = str_pad($code, 6, '0', STR_PAD_LEFT);
+        return $formattedCode;
+    }
+    
 
     public static function updateUserPasswordByClientId($newPassword, $clientId)
     {
@@ -149,6 +226,7 @@ class ClientService extends Service
         $gender = GenderService::GetGenderById($row['genderID']);
         $address = AddressService::GetAddressById($row['addressID']);
         $image = ImageService::GetImageById($row['imageID']);
+        $lastConnection = $row['lastConnection'] ? $row['lastConnection'] : null;
 
 
         return new Client(
@@ -162,7 +240,7 @@ class ClientService extends Service
             $row['phoneNumber'],
             new DateTime($row['birthDate']),
             $row['consent'],
-            new DateTime($row['lastConnection']),
+            $lastConnection,
             new DateTime($row['creationDate']),
             $image,
             $gender,

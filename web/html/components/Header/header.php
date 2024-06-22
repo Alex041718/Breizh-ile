@@ -99,7 +99,7 @@ class Header {
                 $menu = '
                     <div class="option__container">
                         <a href="'. $urlConnexion .'">Se connecter</a>
-                        <a href="">S\'inscrire</a>
+                        <a href="/client/register">S\'inscrire</a>
                     </div>
                 ';
             }

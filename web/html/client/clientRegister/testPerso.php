@@ -11,7 +11,7 @@ require 'PHPMailer/src/SMTP.php';
 //Load Composer's autoloader
 //require 'vendor/autoload.php';
 
-function sendmail($token, $mailto)
+function sendmail($code, $mailto)
 {
 //Create an instance; passing `true` enables exceptions
     $mail = new PHPMailer(true);
@@ -45,7 +45,8 @@ function sendmail($token, $mailto)
 //        $mail->Body = 'Change you password right <a href="http://localhost:5555/client/clientForgotPassword/reset-password-page.php?token='. $token .'">here</a>';
         $mail->Body = '
             <h1>Création de compte</h1>
-            <p>Accéder à la page de création de compte en cliquant <a target="_blank" href="https://crepetech.ventsdouest.dev/client/account-creation?token='. $token .'">juste ici.</a><p>'
+            <p>Nous vous remercions pour votre inscription à Breizh\'Ile, afin de finaliser votre inscription veuillez saisir le code de confirmation suivant :</a><p>
+            <p>' . $code . '</p>'
         ;
         //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 

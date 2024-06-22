@@ -14,7 +14,7 @@ class Client
     private string $phoneNumber;
     private DateTime $birthDate;
     private bool $consent;
-    private DateTime $lastConnection;
+    private ?DateTime $lastConnection;
     private DateTime $creationDate;
     private Image $image;
     private Gender $gender;
@@ -22,7 +22,7 @@ class Client
     private ?string $resetTokenHash;
     private ?DateTime $resetTokenExpiration;
 
-    public function __construct(?int $clientID, bool $isBlocked, string $mail, string $firstname, string $lastname, string $nickname, string $password, string $phoneNumber, DateTime $birthDate, bool $consent, DateTime $lastConnection, DateTime $creationDate, Image $image, Gender $gender, Address $address, ?string $resetTokenHash, ?DateTime $resetTokenExpiration)
+    public function __construct(?int $clientID, bool $isBlocked, string $mail, string $firstname, string $lastname, string $nickname, string $password, string $phoneNumber, DateTime $birthDate, bool $consent, ?DateTime $lastConnection, DateTime $creationDate, Image $image, Gender $gender, Address $address, ?string $resetTokenHash, ?DateTime $resetTokenExpiration)
     {
         $this->clientID = $clientID;
         $this->isBlocked = $isBlocked;
@@ -144,7 +144,7 @@ class Client
         $this->consent = $consent;
     }
 
-    public function getLastConnection(): DateTime
+    public function getLastConnection(): ?DateTime
     {
         return $this->lastConnection;
     }
