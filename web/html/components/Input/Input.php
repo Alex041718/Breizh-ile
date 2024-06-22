@@ -2,9 +2,11 @@
 
 class Input {
 
-    public static function render($class = "", $id = "", $type = "text", $label = "",$name = '', $placeholder = "", $required = false, $value = "", $minLength = "", $maxLength = "", $pattern = "") {
+    public static function render($class = "", $id = "", $type = "text", $label = "", $name = '', $placeholder = "", $required = false, $value = "", $minLength = "", $maxLength = "", $pattern = "") {
 
         $requiredAttribute = $required ? ' required' : '';
+        //https://ui-avatars.com/api/?name=Jeansfsne+Michelle&background=random
+        
 
         // switch case
         switch ($type) {
@@ -26,10 +28,10 @@ class Input {
 
                 <link rel="stylesheet" href="/components/Input/Input.css">
             
-                <div class="input '. $class . ' " id="' . $id . '">
-                    <label class="input__label para--18px" for="' . $name . '">' . $label . ($requiredAttribute ? '<span class="require">*</span>' :''). '</label>
+                <div class="input '. $class . ' " id="' . $id . '">' .
+                    ($label !== null ? '<label class="input__label para--18px" for="' . $name . '">' . $label . ($requiredAttribute ? '<span class="require">*</span>' :''). '</label>' : "")
                     
-                    '. $input .'
+                    . $input .'
                     
                 </div>
 ';
