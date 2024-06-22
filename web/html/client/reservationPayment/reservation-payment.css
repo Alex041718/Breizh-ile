@@ -15,12 +15,15 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 500px;
   padding: 20px;
   background-color: #FFFFFF;
   border-radius: 5px;
   border: 1px solid #E0E0E0;
   gap: 2em;
+  margin: 1em;
+}
+.reservation-payment__container__title {
+  text-align: center;
 }
 .reservation-payment__container__price-to-pay {
   color: #307B5C;
@@ -30,4 +33,6 @@ body {
   display: flex;
   justify-content: center;
   gap: 1em;
-}/*# sourceMappingURL=reservation-payment.css.map */
+}
+
+/*# sourceMappingURL=reservation-payment.css.map */

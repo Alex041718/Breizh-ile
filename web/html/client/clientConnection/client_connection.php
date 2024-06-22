@@ -41,7 +41,6 @@
                 <div class="horizontal-line"></div>
             </div>
             <p class="para--18px">Pas encore de compte ? <a href="/client/register">S'inscrire</a> </p>
-            
     </div>
 </body>
 </html>

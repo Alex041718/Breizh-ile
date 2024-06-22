@@ -18,13 +18,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var font = document.getElementById('font');
     var animations = document.getElementById('animations');
 
-
     var parent__taille = document.getElementById('parent__taille');
     var parent__deute = document.getElementById('parent__deute');
     var parent__animations = document.getElementById('parent__animations');
     var parent__font = document.getElementById('parent__font');
     var closeAccess = document.getElementById("closeAccess");
-
 
     let modeDeuteOn = localStorage.getItem('ModeDeuteVal') ? localStorage.getItem('ModeDeuteVal') : "non";
     let modeAnimationOn = localStorage.getItem('ModeAnimationVal') ? localStorage.getItem('ModeAnimationVal') : "non";
@@ -86,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
             parent__font.style.color = "#ffffff";
         }
     }
-
+  
     if (header.dataset.tag != "" && header.dataset.tag != 1 && header) {
         let tagToScroll = document.querySelector("." + header.dataset.tag);
 
@@ -408,6 +406,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     parent__taille.style.backgroundColor = "brown";
                     parent__taille.style.color = "#ffffff";
                 }
+
                 localStorage.setItem('ModeTailleVal', "accessibilite__taille");
 
             }
@@ -461,6 +460,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 parent__taille.style.backgroundColor = "brown";
                 parent__taille.style.color = "#ffffff";
             }
+
             localStorage.setItem('ModeDeuteVal', "accessibilite__deute");
 
         }
@@ -480,6 +480,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             localStorage.setItem('ModeFontVal', "non");
 
+            if (document.body.classList.contains('accessibilite__deute')) {
+                parent__font.style.backgroundColor = "FFF";
+                parent__font.style.color = "#000000";
+            }
         }
         else{
             parent__font.style.backgroundColor = "#37906c";

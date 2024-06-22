@@ -1,8 +1,13 @@
+import { loadPopUp } from "/components/Popup/popup.js";
+import { changeVisibility } from "./changerVisibilite.js";
+import { Toast } from "/components/Toast/Toast.js";
+
+let housingID = null;
+let index = null;
+
 function main() {
     const housings = document.querySelector(".housings");
     const columns = document.querySelectorAll(".title p");
-
-    const addButton = document.getElementById("addButton");
 
     housings.innerHTML = "Chargement...";
     
@@ -22,6 +27,28 @@ function main() {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 housings.innerHTML = this.responseText;
+
+                loadPopUp();
+                
+                const popUpVisibilityBtns = document.querySelectorAll("[id^='popUpVisibility-btn']");
+                const acceptBtn = document.querySelector("[id^='acceptButton']");
+
+                popUpVisibilityBtns.forEach((popUpVisibilityBtn) => {
+                    popUpVisibilityBtn.addEventListener("click", () => {
+                        housingID = popUpVisibilityBtn.dataset.housingid;
+                        index = popUpVisibilityBtn.dataset.index;
+                    });
+                });
+
+                acceptBtn.addEventListener("click", () => {
+                    if (housingID === null || index === null) {
+                        Toast("Erreur lors de la modification de la visibilité", "error");
+                        return 
+                    };
+                    changeVisibility(housingID, index);
+                    document.querySelector(".popUpVisibility").classList.remove("popup--open");
+                    Toast("Visibilité modifiée avec succès", "success");
+                });
             }
         };
         xhr.send(params);

@@ -13,7 +13,7 @@
     height: 100vh;
     pointer-events: none;
     transition: all 0.2s;
-
+    
     i {
         position: absolute;
         color: #3f3f3fee;
@@ -26,17 +26,19 @@
             color: $blackColor;
         }
     }
-
+    
     &__content {
         position: relative;
         background-color: white;
         padding: 25px;
         width: 50%;
         border-radius: 20px;
+        padding: 3em;
     }
 }
 
 .popup--open {
     opacity: 1;
     pointer-events: all;
+    z-index: 1000;
 }

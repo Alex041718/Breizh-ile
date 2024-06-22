@@ -8,6 +8,9 @@ body {
 
 main {
     background-color: $grey6;
+    min-height: 60vh;
+    padding-top: 6em;
+    padding-bottom: 2em;
 }
 
 hr {
@@ -18,21 +21,26 @@ hr {
 }
 
 .bid {
+
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+
+    @media (max-width: 1024px) {
+        padding-top: 8em;
+        padding-bottom: 5em;
+    }
 
     &__container {
 
-        margin-top: 6em;
-        margin-bottom: 5em;
+
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
+        margin: 1em;
         gap: 2em;
 
         &__title-page {
@@ -42,16 +50,20 @@ hr {
         &__info {
             display: flex;
             flex-direction: row;
-            align-items: stretch;
             justify-content: center;
-            width: 100%;
             gap: 2em;
 
-            // Gauche
+
+            @media (max-width: 1024px) {
+                flex-direction: column;
+            }
+
+
+            //  Gauche
             &__info-detail {
-                width: 700px;
+                max-width: 44em;
                 border: 1px solid $grey5;
-                border-radius: 5px;
+                border-radius: 10px;
                 background-color: $whiteColor;
                 padding: 2em;
 
@@ -64,17 +76,34 @@ hr {
                     flex-direction: row;
                     gap: 2em;
 
-                    &__image > img {
-                        width: 220px;
-                        height: 170px;
-                        object-fit: cover;
-                        border-radius: 5px;
+                    @media (max-width: 1024px) {
+                        flex-direction: column;
+                    }
+
+                    &__image {
+                        display: flex;
+
+                        @media (max-width: 640px) {
+                            justify-content: center;
+                        }
+
+                        img {
+                            width: 220px;
+                            height: 170px;
+                            object-fit: cover;
+                            border-radius: 5px;
+                        }
+
                     }
 
                     &__content {
                         display: flex;
                         flex-direction: column;
                         gap: 1em;
+
+                        &__desc {
+
+                        }
 
 
                     }
@@ -84,7 +113,6 @@ hr {
                     display: flex;
                     flex-direction: row;
                     gap: 1em;
-                    margin-block: 1em;
 
 
                     &__item {
@@ -99,15 +127,19 @@ hr {
             // Droite
             &__pay-recap {
                 width: 300px;
-                height: 400px;
                 border: 1px solid $grey5;
-                border-radius: 5px;
+                border-radius: 10px;
                 background-color: $whiteColor;
                 padding: 1em;
-
+                gap: 1em;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
+
+                @media (max-width: 1024px) {
+                    width: auto;
+
+                }
 
                 &__price-detail {
                     h3 {

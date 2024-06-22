@@ -1,0 +1,17 @@
+@import '../../style/variables';
+
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    .mentions-legales{
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+        margin: 5em;
+
+        h2{
+            text-align: center;
+        }
+    }
+}
