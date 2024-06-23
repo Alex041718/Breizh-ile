@@ -32,7 +32,7 @@
     if(isset($_POST["maxPrice"]) && $_POST["maxPrice"] != "" && $_POST["maxPrice"] != "null") $maxPrice = $_POST["maxPrice"];
     else $maxPrice = null;
     if(isset($_POST["appartement"]) && $_POST["appartement"] != "" && $_POST["appartement"] != "null") $appartement = $_POST["appartement"];
-    else $appartement = 0;
+    else $appartement = null;
 
     $housings = HousingService::GetHousingsByOffset($city, $beginDate, $endDate, $nbPerson, $minPrice, $maxPrice, $appartement, $q*9, $sort, $desc);
 

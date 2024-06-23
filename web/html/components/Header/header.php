@@ -237,8 +237,9 @@ class Header
                                             <div class="popup__filter__box">
                                                 <input type="checkbox" 
                                                 id="appart"
-                                                value="' . (isset($_POST["appartement"]) ? $_POST["appartement"] : 0) . '"/>
-                                                <p >Appartement</p>
+                                                name="appartement"
+                                                value="' . (isset($_POST["appartement"]) ? $_POST["appartement"] : 1) . '"/>
+                                                <p>Appartement</p>
                                             </div>
                                             <div class="popup__filter__box">
                                                 <input type="checkbox" />

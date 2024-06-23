@@ -114,18 +114,10 @@ $isAuthenticated = SessionService::isClientAuthenticated();
 
                     const minPrice = rawMinPrice && isVeryFirst ? rawMinPrice : document.getElementById("minInput").value;
                     const maxPrice = rawMaxPrice && isVeryFirst ? rawMaxPrice : document.getElementById("maxInput").value;
-
-                    console.log(document.getElementById("minInput").value);
-                    console.log(document.getElementById("maxInput").value);
-                    console.log(rawMinPrice);
-                    console.log(rawMaxPrice);
-                    console.log( document.getElementById("appart").value);
-
-
-                    const appartement = rawAppartement && isVeryFirst ? rawAppartement : document.getElementById("appart").value;
-                    console.log( rawAppartement);
-                    console.log( isVeryFirst);
                     
+                    const appartement = rawAppartement && isVeryFirst ? rawAppartement : (document.getElementById("appart").checked === true ? 1 : 0);
+                    
+
                     console.log(appartement);
 
                     if(isFirst) cpt = 0;

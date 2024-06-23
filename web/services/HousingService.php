@@ -160,6 +160,7 @@ class HousingService extends Service
             if(isset($maxPrice)) $chaine = $chaine . "_Housing.priceIncl <= " .  $maxPrice . " ". ($appartement == 1 ? " AND " : " ");
             
             if($appartement == 1) $chaine = $chaine . "_Housing.categoryID = " . 2 . " " ;
+            
 
         }
         else $chaine = "";
