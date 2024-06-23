@@ -10,18 +10,25 @@ export function loadPopUp() {
         const popupCloseBtn = popup.querySelector(".popup--close");
 
         popup.addEventListener("click", function(event) {
-            if(event.target === popup) popup.classList.remove("popup--open");
+            if(event.target === popup){
+                popup.classList.remove("popup--open");
+                document.body.style.overflow = '';
+            } 
         })
 
         popupCloseBtn.addEventListener("click", function closePopup() {
             popup.classList.remove("popup--open");
+            document.body.style.overflow = '';
         })
 
         popupBtns.forEach(popupBtn => {
             popupBtn.addEventListener("click", function() {
                 popup.classList.add("popup--open");
+                document.body.style.overflow = "hidden";
             })
         })
+
+    
     });
 }
 

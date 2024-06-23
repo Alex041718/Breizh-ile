@@ -199,28 +199,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Popup settings
     
-    const popup_filters = document.getElementById("popup__filter__header");
-    const popup_filters_close = popup_filters.querySelector("i");
-    const popup_filters_submit = popup_filters.querySelector("button");
-    const popup_filters_open = document.getElementById("header__settings");
-    const popup_filters_open_mobile = document.getElementById("open-mobile-settings");
+    const popup_filters = document.getElementById("popup__filter");
+    // const popup_filters_close = popup_filters.querySelector(".popup--close");
 
-    if(popup_filters_open) popup_filters_open.addEventListener("click", openSettings);
-    popup_filters_open_mobile.addEventListener("click", openSettings);
-
-    function openSettings() {
-        popup_filters.classList.add("popup_enable");
-        document.body.style.overflow = "hidden";
-    };
+    // const popup_filters_submit = popup_filters.querySelector("a");
+    // const popup_filters_open = document.getElementById("filter_submit");
 
 
-    function close_filter_popup() {
-        popup_filters.classList.remove("popup_enable");
-        document.body.style.overflow = "auto";
-    }
+    // const popup_filters_open_mobile = document.getElementById("open-mobile-settings");
 
-    popup_filters_submit.addEventListener("click", close_filter_popup);
-    popup_filters_close.addEventListener("click", close_filter_popup);
+    // if(popup_filters_open) popup_filters_open.addEventListener("click", openSettings);
+    // popup_filters_open_mobile.addEventListener("click", openSettings);
+
+    // function openSettings() {
+    //     popup_filters.classList.add("popup_enable");
+    // };
+
+    // function close_filter_popup() {
+    //     popup_filters.classList.remove("popup_enable");
+    
+    // }
+
+    // popup_filters_submit.addEventListener("click", close_filter_popup);
+    // popup_filters_close.addEventListener("click", close_filter_popup);
 
     // Price filter
 
