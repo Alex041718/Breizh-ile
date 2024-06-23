@@ -226,7 +226,7 @@ class ClientService extends Service
         $gender = GenderService::GetGenderById($row['genderID']);
         $address = AddressService::GetAddressById($row['addressID']);
         $image = ImageService::GetImageById($row['imageID']);
-        $lastConnection = $row['lastConnection'] ? $row['lastConnection'] : null;
+        $lastConnection = $row['lastConnection'] ? new DateTime($row['lastConnection']) : null;
 
 
         return new Client(

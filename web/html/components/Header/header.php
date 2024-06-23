@@ -12,7 +12,6 @@ class Header
         $tagToScroll = $isScrolling;
 
         $render =  '
-
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
                 <title>Breizh\'Ile</title>
                 <link rel="stylesheet" href="/components/SearchBar/SearchBar.css">

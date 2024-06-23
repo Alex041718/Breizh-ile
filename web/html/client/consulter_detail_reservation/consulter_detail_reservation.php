@@ -6,7 +6,7 @@
     };
 
     // ------------------- Systeme de session -------------------
-    // Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
+    // Il faut tout ceci pour récupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
     require_once '../../../models/Client.php';
     require_once '../../../services/ClientService.php';
     require_once '../../../services/SessionService.php'; // pour le menu du header
@@ -158,7 +158,7 @@
             </section>
             <section class="informations__right">
                 <div class="informations__right__desc">
-                    <img src=<?=$owner_pp?> alt="">
+                    <img src=<?=$owner_pp?> alt="Photo de profil">
                     <div class="informations__right__desc__info">
                         <div class="informations__right__desc__info__perso">
                             <h3><?= $owner_telephone ?></h3>
