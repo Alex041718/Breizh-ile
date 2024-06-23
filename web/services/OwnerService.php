@@ -155,6 +155,7 @@ class OwnerService extends Service
         }
     }
 
+
     public static function OwnerHandler(array $row): Owner
     {
         // Son Job est de traiter les données de la base de données pour les convertir en objet Owner parce que la table _Owner n'est pas identique à la classe Owner (par exemple, au la bdd possède genderID et la classe Owner, elle gère le genre de l'owner en string. Idem avec l'adresse qui est un ID dans la bdd et un objet Address dans la classe Owner)

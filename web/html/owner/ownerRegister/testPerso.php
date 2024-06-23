@@ -29,6 +29,7 @@ function sendmail($code, $mailto)
 
         //Recipients
         $mail->setFrom('crepe-tech@laposte.net', 'Breizh-Ile');
+
         $mail->addAddress('duncancadoret@laposte.net');     //Add a recipient
         $mail->addAddress($mailto);               //Name is optional
 //    $mail->addReplyTo('info@example.com', 'Information');
