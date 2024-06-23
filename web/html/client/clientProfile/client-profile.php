@@ -26,7 +26,6 @@ if (!$isAuthenticated) {
 // Récupérer le client authentifié
 $clientID = $_SESSION['user_id'];
 $client = ClientService::GetClientById($clientID);
-
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +36,8 @@ $client = ClientService::GetClientById($clientID);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire</title>
     <link rel="stylesheet" href="/client/clientProfile/client-profile.css">
+    <link rel="stylesheet" href="/components/Toast/Toast.css">
+    <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
 
 
     <link rel="stylesheet" href="../../style/ui.css">
@@ -44,16 +45,27 @@ $client = ClientService::GetClientById($clientID);
 
 <body>
     <?php
-    require_once("../../components/Header/header.php");
-    Header::render(true,false, $isAuthenticated, '/client/profile');
+    require_once ("../../components/Header/header.php");
+    Header::render(true, false, $isAuthenticated, '/client/profile');
     ?>
     <main class="content">
         <nav>
             <ul>
-                <li id="infos__btn" class="active"><span>Informations Personnelles</span></li>
-                <li id="security__btn"><span>Sécurité</span></li>
+                <li id="infos__btn" class="active">
+                    <span>Informations Personnelles</span>
+                    <div class="nav-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                </li>
+                <li id="security__btn">
+                    <span>Sécurité</span>
+                    <div class="nav-icon">
+                        <i class="fa-solid fa-shield"></i>
+                    </div>
+                </li>
             </ul>
         </nav>
+
         <div id="infos" class="content__personnal-data content__display">
             <h3 class="content__personnal-data__title">Informations Personnelles</h3>
 
@@ -69,27 +81,27 @@ $client = ClientService::GetClientById($clientID);
                     <!-- Nom -->
                     <?php require_once ("../../components/Input/Input.php");
 
-                    Input::render("uneClassEnPlus", "lastname", "text", "Nom", "lastname", "Nom", true, $client->getLastname(),'1','100'); ?>
+                    Input::render("uneClassEnPlus", "lastname", "text", "Nom", "lastname", "Nom", true, $client->getLastname(), '1', '100'); ?>
 
                     <!-- Prenom -->
                     <?php
-                    Input::render("uneClassEnPlus", "firstname", "text", "Prenom", "firstname", "Prenom", true, $client->getFirstname(),'1','100'); ?>
+                    Input::render("uneClassEnPlus", "firstname", "text", "Prenom", "firstname", "Prenom", true, $client->getFirstname(), '1', '100'); ?>
 
                     <!-- Pseudo -->
                     <?php
-                    Input::render("uneClassEnPlus", "nickname", "text", "Pseudo", "nickname", "Pseudo", true, $client->getNickname(),'1','100'); ?>
+                    Input::render("uneClassEnPlus", "nickname", "text", "Pseudo", "nickname", "Pseudo", true, $client->getNickname(), '1', '100'); ?>
 
                     <!-- Mail -->
                     <?php
-                    Input::render("uneClassEnPlus", "mail", "email", "Mail", "mail", "Mail", true, $client->getMail(),'1','100'); ?>
+                    Input::render("uneClassEnPlus", "mail", "email", "Mail", "mail", "Mail", true, $client->getMail(), '1', '100'); ?>
 
                     <!-- Telephone -->
                     <?php
-                    Input::render("uneClassEnPlus", "phoneNumber", "tel", "Telephone", "phoneNumber", "Telephone", true, $client->getPhoneNumber(),'10','12'); ?>
+                    Input::render("uneClassEnPlus", "phoneNumber", "tel", "Telephone", "phoneNumber", "Telephone", true, $client->getPhoneNumber(), '10', '12'); ?>
 
                     <!-- Adresse -->
                     <?php
-                    Input::render("uneClassEnPlus", "address", "text", "Adresse", "address", "Adresse", true, $client->getAddress()->getPostalAddress(),"1","200"); ?>
+                    Input::render("uneClassEnPlus", "address", "text", "Adresse", "address", "Adresse", true, $client->getAddress()->getPostalAddress(), "1", "200"); ?>
 
                     <!-- Genre -->
                     <div class="content__personnal-data__elements__genre">
@@ -109,7 +121,8 @@ $client = ClientService::GetClientById($clientID);
 
                     <!-- Date de création du compte -->
 
-                    <input type="hidden" name="creationDate" value="<?php echo ($client->getCreationDate()->format('Y-m-d')) ?>">
+                    <input type="hidden" name="creationDate"
+                        value="<?php echo ($client->getCreationDate()->format('Y-m-d')) ?>">
                     <input type="hidden" name="clientID" value="<?php echo ($client->getClientID()) ?>">
 
                 </div>
@@ -122,29 +135,74 @@ $client = ClientService::GetClientById($clientID);
                 </div>
             </form>
         </div>
-        <div class="content__security">
+        <div id="security" class="content__security">
             <h3 class="content__security__title">Sécurité</h3>
             <p class="content__security__description">Modifier vos paramètres de sécurités</p>
+            <form method="POST" action="/client/clientForgotPassword/reset-password-action.php">
+                <div class="content__security__elements">
+                    <?php
+                    Input::render(
+                        "content__security__elements__password",
+                        "firstPasswordEntry",
+                        "password",
+                        "Modifier Mot de passe",
+                        "firstPasswordEntry",
+                        "Mot de passe",
+                        true,
+                        "",
+                        "10",
+                        "",
+                        "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?]).{10,}"
+                    );
+                    ?>
+                    <?php
+                    Input::render(
+                        "content__security__elements__password--confirmation",
+                        "secondPasswordEntry",
+                        "password",
+                        "Confirmer Mot de passe",
+                        "secondPasswordEntry",
+                        "Confirmer Mot de passe",
+                        true,
+                        "",
+                        "10",
+                        "",
+                        "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?]).{10,}"
+                    );
+                    ?>
+                    <input type="hidden" name="clientId" value="<?php echo ($client->getClientID()) ?>">
+                    <div class="content__security__elements__modify_button">
+                        <?php
+                        require_once ("../../components/Button/Button.php");
 
-            <div class="content__security__elements">
-                <?php
-                Input::render("content__security__elements__password", "password", "password", "Modifier Mot de passe", "password", "Mot de passe", true); ?>
-            </div>
-            <div class="content__security__moderator">
-                <?php
-                Button::render("button--storybook", "deactivate-account", "Désactiver mon compte", ButtonType::Delete, true); ?>
+                        Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Client, "", false, true); ?>
+                    </div>
+                    <div class="content__security__elements__required__fields">
+                        <p id="length" class="content__security__elements__required__fields__length">La taille du mot de
+                            passe doit être supérieure à 10</p>
+                        <p id="contains" class="content__security__elements__required__fields__contains">Le mot de passe
+                            doit contenir:</p>
+                        <p id="uppercase" class="content__security__elements__required__fields__uppercase">1 Majuscule
+                            minimum</p>
+                        <p id="lowercase" class="content__security__elements__required__fields__lowercase">1 Minuscule
+                            minimum</p>
+                        <p id="special" class="content__security__elements__required__fields__special">1 caractère
+                            spécial minimum: ?=.*[@#$%^&+=?]</p>
+                    </div>
 
-                <?php
-                Button::render("button--storybook", "delete-account", "Supprimer mon compte", ButtonType::Delete, true); ?>
-            </div>
+
+                </div>
         </div>
+        </form>
+        </div>
+
     </main>
 
     <?php
     require_once ("../../components/Footer/footer.php");
     Footer::render();
     ?>
-    <script src="/client/clientProfile/client-profile.js"></script>
+    <script type="module" src="/client/clientProfile/client-profile.js"></script>
 </body>
 
 </html>

@@ -83,7 +83,7 @@
         }
         if(sizeof($housings) == 9): ?>
             <hr class="show-more">
-            <button onclick='showUser(<?= $q+1 ?>,"<?= $sort ?>", <?= $desc ?>, false)' class="show-more btn btn--center">Voir d'avantage</button>
+            <button onclick='showUser(<?= $q+1 ?>,"<?= $sort ?>", <?= $desc ?>, false)' class="show-more btn btn--center">Voir davantage</button>
         <?php endif; ?>
 
   <?php  }

@@ -22,6 +22,12 @@ RewriteRule ^client/reservations-liste$ /client/consulterReservations/clientRese
 # Rediriger /client/connection vers /client/clientConnection/client_connection.php
 RewriteRule ^client/connection$ /client/clientConnection/client_connection.php [L]
 
+# Rediriger /client/register vers /client/clientRegister/client_register.php
+RewriteRule ^client/register$ /client/clientRegister/client_register.php [L]
+
+# Rediriger /client/create-account vers /client/clientRegister/client_create_account.php
+RewriteRule ^client/create-account$ /client/clientRegister/client_create_account.php [L]
+
 # Rediriger /logement vers /client/ficheLogement/page.php
 RewriteRule ^logement$ /client/ficheLogement/page.php [L]
 
@@ -41,6 +47,9 @@ RewriteRule ^back$ /back/connection [L]
 
 # Rediriger /back/connection vers /owner/ownerConnection/owner_connection.php
 RewriteRule ^back/connection$ /owner/ownerConnection/owner_connection.php [L]
+
+# Rediriger /back/register vers /owner/clientRegister/owner_register.php
+RewriteRule ^back/register$ /owner/ownerRegister/owner_register.php [L]
 
 # Rediriger /back/reservations vers /owner/consulter_reservations/consulter_reservations.php
 RewriteRule ^back/reservations$ /owner/consulter_reservations/consulter_reservations.php [L]

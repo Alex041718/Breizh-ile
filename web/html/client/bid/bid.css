@@ -4,6 +4,9 @@ body {
 
 main {
   background-color: #f6f6f6;
+  min-height: 60vh;
+  padding-top: 6em;
+  padding-bottom: 2em;
 }
 
 hr {
@@ -19,15 +22,19 @@ hr {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+}
+@media (max-width: 1024px) {
+  .bid {
+    padding-top: 8em;
+    padding-bottom: 5em;
+  }
 }
 .bid__container {
-  margin-top: 6em;
-  margin-bottom: 5em;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  margin: 1em;
   gap: 2em;
 }
 .bid__container__title-page {
@@ -36,15 +43,18 @@ hr {
 .bid__container__info {
   display: flex;
   flex-direction: row;
-  align-items: stretch;
   justify-content: center;
-  width: 100%;
   gap: 2em;
 }
+@media (max-width: 1024px) {
+  .bid__container__info {
+    flex-direction: column;
+  }
+}
 .bid__container__info__info-detail {
-  width: 700px;
+  max-width: 44em;
   border: 1px solid #E0E0E0;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #FFFFFF;
   padding: 2em;
   display: flex;
@@ -56,7 +66,20 @@ hr {
   flex-direction: row;
   gap: 2em;
 }
-.bid__container__info__info-detail__description__image > img {
+@media (max-width: 1024px) {
+  .bid__container__info__info-detail__description {
+    flex-direction: column;
+  }
+}
+.bid__container__info__info-detail__description__image {
+  display: flex;
+}
+@media (max-width: 640px) {
+  .bid__container__info__info-detail__description__image {
+    justify-content: center;
+  }
+}
+.bid__container__info__info-detail__description__image img {
   width: 220px;
   height: 170px;
   -o-object-fit: cover;
@@ -72,7 +95,6 @@ hr {
   display: flex;
   flex-direction: row;
   gap: 1em;
-  margin-block: 1em;
 }
 .bid__container__info__info-detail__kpi__item {
   padding: 10px 20px;
@@ -81,14 +103,19 @@ hr {
 }
 .bid__container__info__pay-recap {
   width: 300px;
-  height: 400px;
   border: 1px solid #E0E0E0;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #FFFFFF;
   padding: 1em;
+  gap: 1em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+@media (max-width: 1024px) {
+  .bid__container__info__pay-recap {
+    width: auto;
+  }
 }
 .bid__container__info__pay-recap__price-detail h3 {
   padding-block: 10px;

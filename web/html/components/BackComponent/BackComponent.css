@@ -1,0 +1,21 @@
+
+.back-component {
+  margin-left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+}
+.back-component__arrow {
+  all: unset;
+}
+.back-component__arrow i {
+  font-size: 30px;
+  padding: 15px;
+  color: black;
+}
+@media (max-width: 1024px) {
+  .back-component__text {
+    text-align: center;
+  }
+}/*# sourceMappingURL=BackComponent.css.map */

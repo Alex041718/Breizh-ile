@@ -18,6 +18,7 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
     <link rel="stylesheet" href="/owner/consulter_logements/consulter_logements.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/components/Toast/Toast.css">
+    <link rel="stylesheet" href="/components/Button/Button.css">
 </head>
 <body>
     <?php

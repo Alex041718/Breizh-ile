@@ -1,0 +1,14 @@
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+body .cgu {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin: 5em;
+}
+body .cgu h2 {
+  text-align: center;
+}/*# sourceMappingURL=cgu.css.map */

@@ -1,16 +1,16 @@
 @import '../../style/variables';
 
-@keyframes circle-animation {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.3);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
+// @keyframes circle-animation {
+//     0% {
+//         transform: scale(1);
+//     }
+//     50% {
+//         transform: scale(1.3);
+//     }
+//     100% {
+//         transform: scale(1);
+//     }
+// }
 
 main{
     display: flex;
@@ -18,13 +18,13 @@ main{
     align-items: center;
 }
 
+body {
+    margin: 0;
+}
+
 #liveTravelersCount {
     border: none;
     text-align: center;
-}
-
-body {
-    margin: 0;
 }
 
 .photoAndReservation{
@@ -32,7 +32,6 @@ body {
     width: 100%;
     height: 100%;
     gap: 3em;
-
 
     @media screen and (max-width: 768px) {
         flex-direction: column; // Change flex direction to column for mobile devices
@@ -85,12 +84,11 @@ body {
             margin-top: 0.5em;
             gap: 0.5em;
 
-            h2{
+            h1{
                 color: $clientPrimaryColor;
             }
         }
         
-
         .reservationBtn {
             display: flex;
             flex-direction: column;
@@ -176,77 +174,50 @@ body {
         z-index: 9998;
     }
 
-    #popup2 {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: white;
-        border: 1px solid gray;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
-        border-radius: 20px;
-        padding: 2em;
-        z-index: 9999;
-
-        &.show {
-            display: block;
-        }
-
-        .popup-content {
+    .popupVoyageurs {
+        .popup__content {
             display: flex;
             flex-direction: column;
-            gap: 1em;
+            align-items: center;
+            width: auto;
 
-            #closePopupBtn {
-                position: absolute;
-                top: 1em;
-                left: 1em;
-
-                // Définir le centre de rotation au milieu de l'icône
-                transform-origin: center;
-
-                // Appliquer les styles de l'icône
-                &.fa-solid {
-                    // Définir les propriétés pour l'icône spécifique
-                    &.fa-xmark {
-                        // Ajouter une transition pour une animation fluide
-                        transition: transform 0.3s;
-
-                        // Définir les styles pour le survol de l'icône
-                        &:hover {
-                            // Appliquer l'animation de cercle définie
-                            animation: circle-animation 1s ease-in-out infinite;
-                        }
-                    }
-                }
+            @media screen and (max-width: 768px) {
+                padding: 1em;
             }
-
             .traveler-type {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                gap: 10em;
+                padding: 3em;
+
+                @media screen and (max-width: 768px) {
+                    gap: 1.2em;
+                }
 
                 .addbtn {
-                    display: flex;
-                    gap: 0.5em;
-                    border: 1px solid gray;
-
-                    background-color: transparent;
-                    border-radius: 20px;
-
                     button {
                         cursor: pointer;
-                        border-radius: 20px;
-                        border: 1px solid gray;
-                    }
+                        border-radius: 30px;
+                        border: 2px solid gray;
+                        height: 3em;
+                        width: 3em;
 
+                        @media screen and (max-width: 768px) {
+                            height: 2em;
+                            width: 2em;
+                        }
+                    }
                     .nbr {
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        width: 2em;
                         color: black;
+                        font-size: 30px;
+
+                        @media screen and (max-width: 768px) {
+                            font-size: 20px;
+                        }
                     }
                 }
             }
@@ -255,17 +226,13 @@ body {
 
 }
 
-.popup-active {
-    overflow: hidden;
-}
-
-
 .twodiv {
     width: 100%;
     height: 40em;
     display: flex;
     gap: 3em;
     flex-direction: row;
+    margin-top: 2em;
 
     @media screen and (max-width:768px) {
         flex-direction: column;
@@ -283,13 +250,13 @@ body {
             height: 20em;
         }
 
-
         .local-texte {
             display: flex;
             gap: 0.5em;
             margin-bottom: 0.5em;
             justify-content: center;
-            margin-top: 3em;
+            align-items: center;
+
 
             @media screen and (max-width: 728px) {
                 margin-top: 0;
@@ -313,9 +280,9 @@ body {
             display: flex;
         }
 
-        .criteres {
+        #criteres {
             width: 100%;
-            height: 10%;
+            min-height: 4em;
             margin-top: 3em;
             border-radius: 20px;
             align-self: flex-end;
@@ -328,6 +295,7 @@ body {
                     padding: 1em;
                 }
             }
+
         }
 
         .description {
@@ -373,9 +341,57 @@ body {
             }
         }
 
+        .popupCriteres{
+            .popup__content{                  
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                gap: 3em;
+                width: 35em;
+                height: 35em;
+                overflow-y: auto;
+                @media screen and (max-width:768px) {
+                    width: 15em;
+                }
+        
+                h3 {
+                    text-align: center;
+                    margin-bottom: 0.5em;
+                }
+        
+                .section {
+                    .items {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 3em;
+                        margin-left: 5em;
+                        margin-top: 2em;
+        
+                        @media screen and (max-width:768px) {
+                            flex-direction: column;
+                            margin-left: 3em;
+                        }
+                        .item {
+                            display: flex;
+                            align-items: center;
+                            gap: 1.5em;
+                            min-width: 45%;
+        
+                            i{
+                                color: $clientPrimaryColor;
+                            }
+        
+                        }
+                    }
+                }
+                
+            }
+        }
+
 
     }
 }
+
 
 #map{
     position: relative;
@@ -502,29 +518,21 @@ body {
     text-align: center;
 }
 
-.traveler-type {
-    display: flex;
-    gap: 3em;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-left: 3em;
-    margin-right: 3em;
-
-    @media screen and (max-width:768px) {
-        margin-left: 2em;
-        margin-right: 2em; 
-    }
-}
-
 .adulteInfo, .enfantInfo {
     display: flex;
     flex-direction: column;
     align-items: center;
 
+    h3{
+        @media screen and (max-width: 768px) {
+            font-size: 17px;
+        }
+    }
+
     p{
         @media screen and (max-width:768px) {
             width: 5em;
+            font-size: 13px;
         }
     }
 }
@@ -576,186 +584,32 @@ body {
 }
 
 
-
-.popup-savoir-open {
-    overflow: hidden; // Empêche le défilement du corps lorsque la pop-up est ouverte
-
-}
-
 /* Styles pour la pop-up */
-#popup-savoir {
-    flex-direction: column;
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 35em;
-    height: 50vh;
-    background-color: white;
-    padding: 3em;
-    border: 2px solid #ccc;
-    border-radius: 20px;
-    z-index: 9999;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
-    overflow-y: auto;
-
-    @media screen and (max-width: 768px) {
-        width: 15em;
-        height: 20em;
-    }
-
-    @media screen and (max-width: 768px) {
-        width: 15em;
-        height: 20em;
-    }
-
-    #close-popup {
-        position: absolute;
-        top: 1em;
-        left: 1em;
-        cursor: pointer;
-
-        // Définir le centre de rotation au milieu de l'icône
-        transform-origin: center;
-
-        // Appliquer les styles de l'icône
-        &.fa-solid {
-            // Définir les propriétés pour l'icône spécifique
-            &.fa-xmark {
-                // Ajouter une transition pour une animation fluide
-                transition: transform 0.3s;
-
-                // Définir les styles pour le survol de l'icône
-                &:hover {
-                    // Appliquer l'animation de cercle définie
-                    animation: circle-animation 1s ease-in-out infinite;
-                }
-            }
-        }
-    }
-
-    #titleDescription{
-        margin-bottom: 1.5em;
-        text-align: center;
-    }
-
-    p {
-        line-height: 2;
-    }
-
-}
-
-#popup-overlay-savoir {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9998;
-}
-
-
-.overlay-critere {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9998;
-
-}
-
-.popup-critere {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border: 1px solid gray;
-    border-radius: 20px;
-    padding: 2em;
-    z-index: 9999;
-    overflow-y: auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
-
-    &.show {
-        display: block;
-    }
-
-    .popup-content-critere {
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
-        gap: 3em;
-        width: 35em;
-        height: 35em;
-
-        @media screen and (max-width:768px) {
+.popupSavoir {
+    .popup__content{
+        @media screen and (max-width: 768px) {
             width: 15em;
+            height: 20em;
         }
+        max-height: 30em;
+        overflow-y: auto;
 
-        i#closePopupCritereBtn {
-            position: absolute;
-            top: 1em;
-            left: 1em;
-
-            transform-origin: center;
-
-            // Appliquer les styles de l'icône
-            &.fa-solid {
-                // Définir les propriétés pour l'icône spécifique
-                &.fa-xmark {
-                    // Ajouter une transition pour une animation fluide
-                    transition: transform 0.3s;
-
-                    // Définir les styles pour le survol de l'icône
-                    &:hover {
-                        // Appliquer l'animation de cercle définie
-                        animation: circle-animation 1s ease-in-out infinite;
-                    }
-                }
-            }
-        }
-
-        h3 {
+        #titleDescription{
+            margin-bottom: 1em;
             text-align: center;
-            margin-bottom: 0.5em;
+            font-size: 18px;
         }
 
-        .section {
-
-
-            .items {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 3em;
-                margin-left: 5em;
-                margin-top: 2em;
-
-                @media screen and (max-width:768px) {
-                    flex-direction: column;
-                    margin-left: 3em;
-                }
-                .item {
-                    display: flex;
-                    align-items: center;
-                    gap: 1.5em;
-                    min-width: 45%;
-
-                    i{
-                        color: $clientPrimaryColor;
-                    }
-
-                }
+        p {
+            line-height: 2;
+            @media screen and (max-width: 768px) {
+                font-size: 13px;
             }
         }
     }
+    
+
 }
+
 
 

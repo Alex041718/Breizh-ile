@@ -25,7 +25,7 @@
 
                 <?php Input::render("connection__input", "password", "password", "Mot de Passe", "password", "Entrez votre mot de passe", true); ?>
 
-                <a href="/client/clientForgotPassword/clientForgotPassword.php" class="connectionContainer__box__forgot">J'ai oublié mon mot de passe</a>
+                <a href="/client/forgot-password.php" class="connectionContainer__box__forgot">J'ai oublié mon mot de passe</a>
 
                 <input type="hidden" name="role" value="client">
 
@@ -40,7 +40,7 @@
                 <p>OU</p>
                 <div class="horizontal-line"></div>
             </div>
-          <p class="para--18px">Pas encore de compte ? <a href="">S'inscrire</a> </p>       
+            <p class="para--18px">Pas encore de compte ? <a href="/client/register">S'inscrire</a> </p>
     </div>
 </body>
 </html>

@@ -1,8 +1,7 @@
 .toast {
   position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 3rem;
+  top: 5%;
+  right: 3rem;
   padding: 1rem 2rem;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -29,10 +28,10 @@
 @keyframes showToast {
   0% {
     opacity: 0;
-    transform: translate(-50%, 100%);
+    right: 0;
   }
   100% {
     opacity: 1;
-    transform: translate(-50%, 0%);
+    right: 3rem;
   }
 }/*# sourceMappingURL=Toast.css.map */
