@@ -48,6 +48,9 @@ RewriteRule ^back$ /back/connection [L]
 # Rediriger /back/connection vers /owner/ownerConnection/owner_connection.php
 RewriteRule ^back/connection$ /owner/ownerConnection/owner_connection.php [L]
 
+# Rediriger /back/register vers /owner/clientRegister/owner_register.php
+RewriteRule ^back/register$ /owner/ownerRegister/owner_register.php [L]
+
 # Rediriger /back/reservations vers /owner/consulter_reservations/consulter_reservations.php
 RewriteRule ^back/reservations$ /owner/consulter_reservations/consulter_reservations.php [L]
 

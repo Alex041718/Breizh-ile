@@ -10,12 +10,12 @@ require_once 'GenderService.php';
 class OwnerService extends Service
 {
 
-
     public static function CreateOwner(Owner $owner) : Owner
     {
         // Étape 1 : Enregistrer en base l'image, l'adresse de l'owner
         $image = ImageService::CreateImage($owner->getImage());
         $address = AddressService::CreateAddress($owner->getAddress());
+        $lastConnection = $owner->getLastConnection() ? $owner->getLastConnection()->format('Y-m-d H:i:s') : null;
 
         $owner->setImage($image);
         $owner->setAddress($address);
@@ -23,7 +23,7 @@ class OwnerService extends Service
         // Étape 2 : Enregistrer en base l'owner
 
         $pdo = self::getPDO();
-        $stmt = $pdo->prepare('INSERT INTO _User (mail, firstname, lastname, nickname, password, phoneNumber, birthDate, consent, lastConnection, creationDate, imageID, genderID, addressID, isValidated) VALUES (:mail, :firstname, :lastname, :nickname, :password, :phoneNumber, :birthDate, :consent, :lastConnection, :creationDate, :imageID, :genderID, :addressID, :isValidated)');
+        $stmt = $pdo->prepare('INSERT INTO _User (mail, firstname, lastname, nickname, password, phoneNumber, birthDate, consent, lastConnection, creationDate, imageID, genderID, addressID) VALUES (:mail, :firstname, :lastname, :nickname, :password, :phoneNumber, :birthDate, :consent, :lastConnection, :creationDate, :imageID, :genderID, :addressID)');
 
         $stmt->execute(array(
             'mail' => $owner->getMail(),
@@ -34,21 +34,20 @@ class OwnerService extends Service
             'phoneNumber' => $owner->getPhoneNumber(),
             'birthDate' => $owner->getBirthDate()->format('Y-m-d H:i:s'),
             'consent' => $owner->getConsent()*1,
-            'lastConnection' => $owner->getLastConnection()->format('Y-m-d H:i:s'),
+            'lastConnection' => $lastConnection,
             'creationDate' => $owner->getCreationDate()->format('Y-m-d H:i:s'),
             'imageID' => $owner->getImage()->getImageID(),
             'genderID' => $owner->getGender()->getGenderID(),
             'addressID' => $owner->getAddress()->getAddressID(),
-            'isValidated' => $owner->getIsValidated()*1
         ));
 
         $current_id = $pdo->lastInsertId();
 
-        $stmt = $pdo->prepare('INSERT INTO _Owner (ownerID, identityCard) VALUES (:ownerID, :identityCard);');
+        $stmt = $pdo->prepare('INSERT INTO _Owner (ownerID, isValidated, identityCard) VALUES (:ownerID, 0, :identityCard);');
 
         $stmt->execute(array(
             'ownerID' => $current_id,
-            'identityCard' => $owner->getIdentityCard()
+            'identityCard' => $owner->getIdentityCard(),
         ));
 
         return new Owner($current_id, $owner->getIdentityCard(), $owner->getMail(), $owner->getFirstname(), $owner->getLastname(), $owner->getNickname(), $owner->getPassword(), $owner->getPhoneNumber(), $owner->getBirthDate(), $owner->getConsent(), $owner->getLastConnection(), $owner->getCreationDate(),$owner->getIsValidated(), $owner->getImage(), $owner->getGender(), $owner->getAddress());
@@ -71,6 +70,18 @@ class OwnerService extends Service
         $stmt = $pdo->query('SELECT * FROM Owner WHERE ownerID = ' . $ownerID);
         $row = $stmt->fetch();
         return self::OwnerHandler($row);
+    }
+
+    public static function isExistingOwner(string $ownerMail): bool
+    {
+        $pdo = self::getPDO();
+        $stmt = $pdo->query('SELECT * FROM Owner WHERE mail = "' . $ownerMail . '"');
+        $row = $stmt->fetch();
+        // retourne une erreur si le propriétaire n'existe pas
+        if (!$row) {
+            return false;
+        }
+        return true;
     }
 
     public static function OwnerHandler(array $row): Owner
