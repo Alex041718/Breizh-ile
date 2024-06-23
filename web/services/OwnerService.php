@@ -50,7 +50,7 @@ class OwnerService extends Service
             'identityCard' => $owner->getIdentityCard(),
         ));
 
-        return new Owner($current_id, $owner->getIdentityCard(), $owner->getMail(), $owner->getFirstname(), $owner->getLastname(), $owner->getNickname(), $owner->getPassword(), $owner->getPhoneNumber(), $owner->getBirthDate(), $owner->getConsent(), $owner->getLastConnection(), $owner->getCreationDate(),$owner->getIsValidated(), $owner->getImage(), $owner->getGender(), $owner->getAddress());
+        return new Owner($current_id, $owner->getIdentityCard(), $owner->getMail(), $owner->getFirstname(), $owner->getLastname(), $owner->getNickname(), $owner->getPassword(), $owner->getPhoneNumber(), $owner->getBirthDate(), $owner->getConsent(), $owner->getLastConnection(), $owner->getCreationDate(),$owner->getIsValidated(), $owner->getImage(), $owner->getGender(), $owner->getAddress(), null, null);
     }
     public static function GetAllOwners()
     {
@@ -82,6 +82,77 @@ class OwnerService extends Service
             return false;
         }
         return true;
+    }
+
+    public static function updateUserPasswordByOwnerId($newPassword, $ownerId)
+    {
+        $pdo = self::getPDO();
+        $newPassword_hash = password_hash($newPassword, PASSWORD_DEFAULT); // Utilisation de password_hash
+        $stmt = $pdo->prepare("
+        UPDATE Owner
+        SET password = :newPassword_hash
+        WHERE ownerID = :ownerId
+    ");
+        $stmt->bindParam(':newPassword_hash', $newPassword_hash);
+        $stmt->bindParam(':ownerId', $ownerId);
+        $stmt->execute();
+    }
+
+    public static function GetOwnerByToken(string $token): ?Owner
+    {
+        $pdo = self::getPDO();
+        $token_hash = hash("sha256", $token);
+        $stmt = $pdo->prepare('SELECT * FROM Owner WHERE reset_token_hash = :token_hash');
+        $stmt->bindParam(':token_hash', $token);
+
+        if ($stmt->execute()) {
+            $row = $stmt->fetch();
+            // retourne une erreur si le owner n'existe pas
+            if (!$row) {
+                return null;
+            }
+            return self::OwnerHandler($row);
+        } else {
+            throw new Exception('Failed to execute query');
+        }
+    }
+
+    public static function updateUserTokenByEmail(string $ownerEmail)
+    {
+        $token = bin2hex(random_bytes(32));
+        $token_hash = hash("sha256", $token);
+        //        $expiry = date("Y-m-d H:i:s", time() + 60 * 20);
+
+        // Obtenez le fuseau horaire par défaut du serveur
+        $timezone = date_default_timezone_get();
+
+        // Créez un nouvel objet DateTime avec le fuseau horaire spécifique
+//        $date_expiration = new DateTime(null, new DateTimeZone($timezone));
+        $date_expiration = new DateTime("now", new DateTimeZone('Europe/Paris'));
+
+        // Ajoutez 20 minutes à l'heure actuelle
+        $date_expiration->add(new DateInterval('PT20M'));
+
+        // Formattez la date et l'heure au format souhaité
+        $expiry = $date_expiration->format('Y-m-d H:i:s');
+
+
+        $pdo = self::getPDO();
+        $stmt = $pdo->prepare("
+            UPDATE Owner
+            SET reset_token_hash = :token_hash,
+                reset_token_expires_at = :expiry
+            WHERE mail = :email
+        ");
+        $stmt->bindParam(':token_hash', $token_hash);
+        $stmt->bindParam(':expiry', $expiry);
+        $stmt->bindParam(':email', $ownerEmail);
+
+        if ($stmt->execute()) {
+            return $token_hash;
+        } else {
+            return null;
+        }
     }
 
     public static function OwnerHandler(array $row): Owner
@@ -120,7 +191,9 @@ class OwnerService extends Service
             "true",
             $image,
             $gender,
-            $address
+            $address,
+            $row['reset_token_hash'] ?? null,
+            isset($row['reset_token_expires_at']) ? new DateTime($row['reset_token_expires_at']) : null
         );
     }
     public static function ModifyOwner(Owner $owner): bool

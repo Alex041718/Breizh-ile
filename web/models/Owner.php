@@ -17,6 +17,8 @@ class Owner {
     private Image $image;
     private Gender $gender;
     private Address $address;
+    private ?string $resetTokenHash;
+    private ?DateTime $resetTokenExpiration;
 
     public function __construct(?int $ownerID,
                                 string $identityCard,
@@ -33,7 +35,9 @@ class Owner {
                                 bool $isValidated,
                                 Image $image,
                                 Gender $gender,
-                                Address $address) {
+                                Address $address,
+                                ?string $resetTokenHash,
+                                ?DateTime $resetTokenExpiration) {
         $this->ownerID = $ownerID;
         $this->identityCard = $identityCard;
         $this->mail = $mail;
@@ -50,6 +54,8 @@ class Owner {
         $this->image = $image;
         $this->gender = $gender;
         $this->address = $address;
+        $this->resetTokenHash = $resetTokenHash;
+        $this->resetTokenExpiration = $resetTokenExpiration;
     }
 
 
@@ -301,6 +307,26 @@ class Owner {
     public function setAddress(Address $address): void
     {
         $this->address = $address;
+    }
+
+    public function getResetTokenHash(): ?string
+    {
+        return $this->resetTokenHash;
+    }
+
+    public function setResetTokenHash(?string $resetTokenHash): void
+    {
+        $this->resetTokenHash = $resetTokenHash;
+    }
+
+    public function getResetTokenExpiration(): ?DateTime
+    {
+        return $this->resetTokenExpiration;
+    }
+
+    public function setResetTokenExpiration(?DateTime $resetTokenExpiration): void
+    {
+        $this->resetTokenExpiration = $resetTokenExpiration;
     }
 
 

@@ -13,7 +13,9 @@
 
     <div class="connectionContainer">
         <div class="connectionContainer__box">
-            <img src="../../assets/images/logo_breizh_noir.png">
+            <a href="/">
+                <img src="../../assets/images/logo_breizh_noir.png">
+            </a>
             <h3 class="connectionContainer__box__title">Connectez vous à votre compte propriétaire</h3>
             <form action="/controllers/owner/ownerConnectionController.php" method="post">
 
@@ -29,7 +31,7 @@
 
                 <?php Input::render("connection__input", "password", "password", "Mot de Passe", "password", "Entrez votre mot de passe", true); ?>
 
-                <a href="" class="connectionContainer__box__forgot">J'ai oublié mon mot de passe</a>
+                <a href="/back/forgot-password" class="connectionContainer__box__forgot">J'ai oublié mon mot de passe</a>
 
                 <input type="hidden" name="role" value="owner">
 
