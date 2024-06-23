@@ -12,7 +12,7 @@ class Owner {
     private DateTime $birthDate;
     private bool $consent;
     private bool $isValidated;
-    private DateTime $lastConnection;
+    private ?DateTime $lastConnection;
     private DateTime $creationDate;
     private Image $image;
     private Gender $gender;
@@ -28,7 +28,7 @@ class Owner {
                                 string $phoneNumber,
                                 DateTime $birthDate,
                                 bool $consent,
-                                DateTime $lastConnection,
+                                ?DateTime $lastConnection,
                                 DateTime $creationDate,
                                 bool $isValidated,
                                 Image $image,
@@ -226,7 +226,7 @@ class Owner {
     /**
      * @return DateTime
      */
-    public function getLastConnection(): DateTime
+    public function getLastConnection(): ?DateTime
     {
         return $this->lastConnection;
     }

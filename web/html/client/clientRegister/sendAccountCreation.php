@@ -51,7 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_POST['consent'] = 1;
     
     $client = ClientService::ClientHandler($_POST);
-    $encryptClient = ClientService::EncryptClient($client);
 
     $email = $_POST['mail'];
     // Appel de la fonction de mise à jour du token, celle-ci retourne également le token
@@ -59,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     session_start();
 
-    if($encryptClient){
+    if($client){
         sendmail($code, $email);
         setcookie('account', base64_encode( serialize( $client )), time()+3600, "/", "", true, true);
         setcookie('token', base64_encode( serialize( $code )), time()+3600, "/", "", true, true);

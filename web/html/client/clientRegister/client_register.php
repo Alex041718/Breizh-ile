@@ -7,7 +7,6 @@ $client = isset($_COOKIE['account']) ? unserialize( base64_decode( $_COOKIE['acc
 
 $isValid = $client ? true : false;
 
-
 ?>
 
 
@@ -20,6 +19,7 @@ $isValid = $client ? true : false;
     <link rel="stylesheet" href="../../style/ui.css">
     <link rel="stylesheet" href="/client/clientRegister/client_register.css">
     <script src="/client/clientRegister/client_register.js"></script>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfAbv8pAAAAAHEpM2ncSmnkR1Vw91T_9wMU0dRI"></script>
 </head>
 <body>
     
@@ -108,5 +108,13 @@ $isValid = $client ? true : false;
 
             
     </div>
+    <script>
+        function onClick(e) {
+            e.preventDefault();
+            grecaptcha.enterprise.ready(async () => {
+            const token = await grecaptcha.enterprise.execute('6LfAbv8pAAAAAHEpM2ncSmnkR1Vw91T_9wMU0dRI', {action: 'LOGIN'});
+            });
+        }
+    </script>
 </body>
 </html>

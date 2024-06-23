@@ -82,7 +82,8 @@ hr {
 .bid__container__info__info-detail__description__image img {
   width: 220px;
   height: 170px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 5px;
 }
 .bid__container__info__info-detail__description__content {
@@ -130,6 +131,4 @@ hr {
 .bid__container__info__pay-recap__price-total div {
   display: flex;
   justify-content: space-between;
-}
-
-/*# sourceMappingURL=bid.css.map */
+}/*# sourceMappingURL=bid.css.map */

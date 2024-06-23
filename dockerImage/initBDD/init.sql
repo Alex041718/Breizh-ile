@@ -148,7 +148,8 @@ CREATE VIEW Owner AS (
         imageID,
         genderID,
         addressID,
-        identityCard
+        identityCard,
+        isValidated
     FROM _Owner
     JOIN _User ON _Owner.ownerID = _User.userID
 );
