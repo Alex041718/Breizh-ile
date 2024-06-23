@@ -467,6 +467,7 @@ input[type=number] {
 .popup__filter .popup__content {
   overflow-y: auto;
   padding: 0px !important;
+  height: 80vh;
   /* Remove Arrows/Spinners */
   /* Styles for the range thumb in WebKit browsers */
   display: flex;
@@ -590,7 +591,6 @@ input[type=number] {
   flex-direction: column;
   gap: 25px;
   width: 90%;
-  max-height: 300px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -621,6 +621,10 @@ input[type=number] {
   justify-content: left;
   width: 100%;
   flex-direction: row;
+  margin: 5px;
+}
+.popup__filter .popup__content .popup__filter__container .popup__filter__container__choices .popup__filter__container__choices__row div .popup__filter__box p {
+  margin-left: 3px;
 }
 .popup__filter .popup__content .popup__filter__top {
   padding: 20px;

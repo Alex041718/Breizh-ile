@@ -163,7 +163,7 @@ class Header
                         </form>
                     </div>
                     <div class="header-mobile">
-                        <div id="open-mobile-settings" class="header-mobile__icon">
+                        <div id="header__settings" class="header-mobile__icon">
                             <i class="fa-solid fa-sliders"></i>
                             <p>Filtres</p>
                         </div>
@@ -242,11 +242,17 @@ class Header
                                                 <p>Appartement</p>
                                             </div>
                                             <div class="popup__filter__box">
-                                                <input type="checkbox" />
+                                                <input type="checkbox"
+                                                id="chalet"
+                                                name="chalet"
+                                                value="' . (isset($_POST["chalet"]) ? $_POST["chalet"] : 1) . '"/>
                                                 <p>Chalet</p>
                                             </div>
                                             <div class="popup__filter__box">
-                                                <input type="checkbox" />
+                                                <input type="checkbox"
+                                                id="maison"
+                                                name="maison"
+                                                value="' . (isset($_POST["maison"]) ? $_POST["maison"] : 1) . '"/>
                                                 <p>Maison</p>
                                             </div>
                                         </div>
@@ -256,15 +262,24 @@ class Header
                                     <div class="popup__filter__container__choices__row">
                                         <div>
                                             <div class="popup__filter__box">
-                                                <input type="checkbox" />
+                                                <input type="checkbox"
+                                                id="bateau"
+                                                name="bateau"
+                                                value="' . (isset($_POST["bateau"]) ? $_POST["bateau"] : 1) . '"/>
                                                 <p>Bateau</p>
                                             </div>
                                             <div class="popup__filter__box">
-                                                <input type="checkbox" />
+                                                <input type="checkbox"
+                                                id="villa"
+                                                name="villa"
+                                                value="' . (isset($_POST["villa"]) ? $_POST["villa"] : 1) . '"/>
                                                 <p>Villa d\'exception</p>
                                             </div>
                                             <div class="popup__filter__box">
-                                                <input type="checkbox" />
+                                                <input type="checkbox"
+                                                id="insol"
+                                                name="insol"
+                                                value="' . (isset($_POST["insol"]) ? $_POST["insol"] : 1) . '"/>
                                                 <p>Logement insolite</p>
                                             </div>
                                         </div>
@@ -281,16 +296,46 @@ class Header
                                     <div class="popup__filter__container__choices__row">
                                         <div>
                                             <div class="popup__filter__box">
-                                                <input type="checkbox" />
+                                                <input type="checkbox"
+                                                id="t1"
+                                                name="t1"
+                                                value="' . (isset($_POST["t1"]) ? $_POST["t1"] : 1) . '"/>
                                                 <p>T1</p>
                                             </div>
                                             <div class="popup__filter__box">
-                                                <input type="checkbox" />
+                                                <input type="checkbox" 
+                                                id="t2"
+                                                name="t2"
+                                                value="' . (isset($_POST["t2"]) ? $_POST["t2"] : 1) . '"/>
                                                 <p>T2</p>
                                             </div>
                                             <div class="popup__filter__box">
-                                                <input type="checkbox" />
+                                                <input type="checkbox"
+                                                id="t3"
+                                                name="t3"
+                                                value="' . (isset($_POST["t3"]) ? $_POST["t3"] : 1) . '"/>
                                                 <p>T3</p>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox"
+                                                id="f1"
+                                                name="f1"
+                                                value="' . (isset($_POST["f1"]) ? $_POST["f1"] : 1) . '"/>
+                                                <p>F1</p>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox"
+                                                id="f2"
+                                                name="f2"
+                                                value="' . (isset($_POST["f2"]) ? $_POST["f2"] : 1) . '"/>
+                                                <p>F2</p>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox"
+                                                id="f3"
+                                                name="f3"
+                                                value="' . (isset($_POST["f3"]) ? $_POST["f3"] : 1) . '"/>
+                                                <p>F3</p>
                                             </div>
                                         </div>
                                     </div>
@@ -298,16 +343,39 @@ class Header
                                     <div class="popup__filter__container__choices__row">
                                         <div>
                                             <div class="popup__filter__box">
-                                                <input type="checkbox" />
+                                                <input type="checkbox" 
+                                                id="t4"
+                                                name="t4"
+                                                value="' . (isset($_POST["t4"]) ? $_POST["t4"] : 1) . '"/>
                                                 <p>T4</p>
                                             </div>
                                             <div class="popup__filter__box">
-                                                <input type="checkbox" />
-                                                <p>T5</p>
+                                                <input type="checkbox"
+                                                id="t5"
+                                                name="t5"
+                                                value="' . (isset($_POST["t5"]) ? $_POST["t5"] : 1) . '"/>
+                                                <p>T5 et plus</p>
                                             </div>
                                             <div class="popup__filter__box">
-                                                <input type="checkbox" />
-                                                <p>T6</p>
+                                                <input type="checkbox"
+                                                id="t6"
+                                                name="t6"
+                                                value="' . (isset($_POST["t6"]) ? $_POST["t6"] : 1) . '"/>
+                                                <p>Studio</p>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox"
+                                                id="f4"
+                                                name="f4"
+                                                value="' . (isset($_POST["f4"]) ? $_POST["f4"] : 1) . '"/>
+                                                <p>F4</p>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox"
+                                                id="f5"
+                                                name="f5"
+                                                value="' . (isset($_POST["f5"]) ? $_POST["f5"] : 1) . '"/>
+                                                <p>F5 et plus</p>
                                             </div>
                                         </div>
                                     </div>

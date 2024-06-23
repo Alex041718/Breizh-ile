@@ -84,6 +84,24 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                 let rawMaxPrice = <?= json_encode($_POST['maxPrice'] ?? null) ?>;
 
                 let rawAppartement = <?= json_encode($_POST['appartement'] ?? null) ?>;
+                let rawChalet = <?= json_encode($_POST['chalet'] ?? null) ?>;
+                let rawMaison = <?= json_encode($_POST['maison'] ?? null) ?>;
+                let rawBateau = <?= json_encode($_POST['bateau'] ?? null) ?>;
+                let rawVilla = <?= json_encode($_POST['villa'] ?? null) ?>;
+                let rawInsol = <?= json_encode($_POST['insol'] ?? null) ?>;
+
+                let rawt1 = <?= json_encode($_POST['t1'] ?? null) ?>;
+                let rawt2 = <?= json_encode($_POST['t2'] ?? null) ?>;
+                let rawt3 = <?= json_encode($_POST['t3'] ?? null) ?>;
+                let rawt4 = <?= json_encode($_POST['t4'] ?? null) ?>;
+                let rawt5 = <?= json_encode($_POST['t5'] ?? null) ?>;
+                let rawt6 = <?= json_encode($_POST['t6'] ?? null) ?>;
+
+                let rawf1 = <?= json_encode($_POST['f1'] ?? null) ?>;
+                let rawf2 = <?= json_encode($_POST['f2'] ?? null) ?>;
+                let rawf3 = <?= json_encode($_POST['f3'] ?? null) ?>;
+                let rawf4 = <?= json_encode($_POST['f4'] ?? null) ?>;
+                let rawf5 = <?= json_encode($_POST['f5'] ?? null) ?>;
 
 
                 if(city) city = city.split(' ')[0];
@@ -116,9 +134,25 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                     const maxPrice = rawMaxPrice && isVeryFirst ? rawMaxPrice : document.getElementById("maxInput").value;
                     
                     const appartement = rawAppartement && isVeryFirst ? rawAppartement : (document.getElementById("appart").checked === true ? 1 : 0);
-                    
+                    const chalet = rawChalet && isVeryFirst ? rawChalet : (document.getElementById("chalet").checked === true ? 1 : 0);
+                    const maison = rawMaison && isVeryFirst ? rawMaison : (document.getElementById("maison").checked === true ? 1 : 0);
+                    const bateau = rawBateau && isVeryFirst ? rawBateau : (document.getElementById("bateau").checked === true ? 1 : 0);
+                    const villa = rawVilla && isVeryFirst ? rawVilla : (document.getElementById("villa").checked === true ? 1 : 0);
+                    const insol = rawInsol && isVeryFirst ? rawInsol : (document.getElementById("insol").checked === true ? 1 : 0);
 
-                    console.log(appartement);
+                    const t1 = rawt1 && isVeryFirst ? rawt1 : (document.getElementById("t1").checked === true ? 1 : 0);
+                    const t2 = rawt2 && isVeryFirst ? rawt2 : (document.getElementById("t2").checked === true ? 1 : 0);
+                    const t3 = rawt3 && isVeryFirst ? rawt3 : (document.getElementById("t3").checked === true ? 1 : 0);
+                    const t4 = rawt4 && isVeryFirst ? rawt4 : (document.getElementById("t4").checked === true ? 1 : 0);
+                    const t5 = rawt5 && isVeryFirst ? rawt5 : (document.getElementById("t5").checked === true ? 1 : 0);
+                    const t6 = rawt6 && isVeryFirst ? rawt6 : (document.getElementById("t6").checked === true ? 1 : 0);
+
+                    const f1 = rawf1 && isVeryFirst ? rawf1 : (document.getElementById("f1").checked === true ? 1 : 0);
+                    const f2 = rawf2 && isVeryFirst ? rawf2 : (document.getElementById("f2").checked === true ? 1 : 0);
+                    const f3 = rawf3 && isVeryFirst ? rawf3 : (document.getElementById("f3").checked === true ? 1 : 0);
+                    const f4 = rawf4 && isVeryFirst ? rawf4 : (document.getElementById("f4").checked === true ? 1 : 0);
+                    const f5 = rawf5 && isVeryFirst ? rawf5 : (document.getElementById("f5").checked === true ? 1 : 0);
+                    
 
                     if(isFirst) cpt = 0;
                     const itemsToHide = document.querySelectorAll(".show-more");
@@ -131,7 +165,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                     container.appendChild(loader);
 
                     var xmlhttp = new XMLHttpRequest();
-                    const params = `q=${cpt}&sort=${sort}&desc=${desc}&nbPerson=${nbPerson}&beginDate=${beginDate}&endDate=${endDate}&city=${city}&minPrice=${minPrice}&maxPrice=${maxPrice}&appartement=${appartement}`;
+                    const params = `q=${cpt}&sort=${sort}&desc=${desc}&nbPerson=${nbPerson}&beginDate=${beginDate}&endDate=${endDate}&city=${city}&minPrice=${minPrice}&maxPrice=${maxPrice}&appartement=${appartement}&chalet=${chalet}&maison=${maison}&bateau=${bateau}&villa=${villa}&insol=${insol}&t1=${t1}&t2=${t2}&t3=${t3}&t4=${t4}&t5=${t5}&t6=${t6}&f1=${f1}&f2=${f2}&f3=${f3}&f4=${f4}&f5=${f5}`;
 
                     xmlhttp.open("POST", "./components/HousingCard/getHousing.php", true);
 
