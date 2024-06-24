@@ -30,6 +30,10 @@
         Header::render(true,false, $isAuthenticated);
     ?>
     <main class="global-ui">
+        <?php
+        require_once("../../components/BackComponent/BackComponent.php");
+        BackComponent::render("backButton", "", "retour", "");
+        ?>
     <div class="cgu">
         <h2>Conditions Générales d'Utilisation (CGU)</h2>
 

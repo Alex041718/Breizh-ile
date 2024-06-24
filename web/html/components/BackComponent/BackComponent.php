@@ -25,7 +25,7 @@ class BackComponent {
             <a onclick='.$script.' class="back-component__arrow">
                 <i class="fa-solid fa-arrow-left"></i>
             </a>
-            <h2 class="back-component__text">' . $text . '</h2>
+            <h3 class="back-component__text">' . $text . '</h3>
         </div>
     ';
 
