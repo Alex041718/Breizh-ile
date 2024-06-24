@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const textElement = document.getElementById('dynamic-text');
-    const texts = ['Breizh\'Ile', 'Dévoués','Bretons','Bardella'];
+    const texts = ['Breizh\'Ile', 'Bretons', 'Authentiques', 'Traditionnels', 'Passionnés'];
     const typingSpeed = 100;
     const erasingSpeed = 50;
     const delayBetweenTexts = 1000;
