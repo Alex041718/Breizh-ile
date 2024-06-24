@@ -13,6 +13,7 @@
   font-size: 30px;
   padding: 15px;
   color: black;
+  cursor: pointer;
 }
 @media (max-width: 1024px) {
   .back-component__text {
