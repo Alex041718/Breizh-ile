@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
+#include "dotenv.h"
 
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 8081
@@ -23,12 +24,14 @@ typedef struct {
 
 void print_title();
 bool is_server_ok();
+void send_custom_request();
 void send_request(Packet* packet, char* response);
 void create_api_key();
 
 void print_help() {
     printf("Commandes disponibles:\n");
     printf("  ping\n");
+    printf("  custom\n");
     printf("  create-api-key\n");
     printf("  help\n");
     printf("  clear\n");
@@ -45,6 +48,8 @@ void handle_menu() {
     
     if (strcmp(choice, "ping\n") == 0) {
         is_server_ok();
+    } else if (strcmp(choice, "custom\n") == 0) {
+        send_custom_request();
     } else if (strcmp(choice, "create-api-key\n") == 0) {
         printf("Création d'une clé API\n");
         create_api_key();
@@ -77,16 +82,42 @@ void print_title() {
     handle_menu();
 }
 
+void send_custom_request() {
+    char header[32];
+    char path[64];
+    char body[BUFFER_SIZE];
+    char response[BUFFER_SIZE];
+
+    printf("Entrez l'en-tête: ");
+    fgets(header, 32, stdin);
+    header[strlen(header)-1] = '\0';
+
+    printf("Entrez le chemin: ");
+    fgets(path, 64, stdin);
+    path[strlen(path)-1] = '\0';
+
+    printf("Entrez le corps:  ");
+    fgets(body, BUFFER_SIZE, stdin);
+    body[strlen(body)-1] = '\0';
+
+    Packet* packet = malloc(sizeof(Packet));
+    snprintf(packet->header, sizeof(packet->header), "%s", header);
+    snprintf(packet->path, sizeof(packet->path), "%s", path);
+    snprintf(packet->body, sizeof(packet->body), "%s", body);
+
+    send_request(packet, response);
+    printf("Réponse reçue: %s\n", response);
+}
+
 bool is_server_ok() {
     bool server_ok = false;
     char response[BUFFER_SIZE] = {0};
 
-    Packet packet;
-    snprintf(packet.header, sizeof(packet.header), "OK ?");
+    Packet* packet = malloc(sizeof(Packet));
+    strncpy(packet->header, "OK?", sizeof(packet->header));
 
-    send_request(&packet, response);
-
-    printf("Réponse reçue: %s\n", response);
+    printf("Vérification du serveur\n");
+    send_request(packet, response);
 
     if (strcmp(response, "OK\n") == 0) {
         printf(GREEN "Serveur en ligne\n" RESET);
@@ -98,17 +129,40 @@ bool is_server_ok() {
     return server_ok;
 }
 
-void reset_packet(Packet *packet) {
-    memset(packet->header, 0, sizeof(packet->header));
-    memset(packet->path, 0, sizeof(packet->path));
-    memset(packet->body, 0, sizeof(packet->body));
+void ask_auth(char* response) {
+    char email[64];
+    char password[64];
+
+    Packet* packet = malloc(sizeof(Packet));
+    strncpy(packet->header, "AUTH", sizeof(packet->header));
+    strncpy(packet->path, "/api/auth", sizeof(packet->path));
+
+    if (getenv("EMAIL") == NULL || getenv("PASSWORD") == NULL) {
+        printf("Entrez votre email: ");
+        fgets(email, 64, stdin);
+        email[strlen(email)-1] = '\0';
+
+        printf("Entrez votre mot de passe: ");
+        fgets(password, 64, stdin);
+        password[strlen(password)-1] = '\0';
+
+        setenv("EMAIL", email, 1);
+        setenv("PASSWORD", password, 1);
+    } else {
+        snprintf(email, 64, "%s", getenv("EMAIL"));
+        snprintf(password, 64, "%s", getenv("PASSWORD"));
+    }
+
+    snprintf(packet->body, BUFFER_SIZE, "email=%s;password=%s;", email, password);
+
+    send_request(packet, response);
 }
 
 void send_request(Packet* packet, char* response) {
     int sock = 0;
     struct sockaddr_in serv_addr;
-    char buffer[BUFFER_SIZE];
-    char message[BUFFER_SIZE*2];
+    char buffer[BUFFER_SIZE] = {0};
+    char message[BUFFER_SIZE*2] = {0};
     
     // Créer le socket
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -132,21 +186,29 @@ void send_request(Packet* packet, char* response) {
     }
    
     // Envoyer le message
-    if (strlen(packet->path) && strlen(packet->body) > 0) {
+    if (strlen(packet->path) > 0 || strlen(packet->body) > 0) {
         snprintf(message, BUFFER_SIZE*2, "%s\n%s\n%s\n", packet->header, packet->path, packet->body);
     } else if (strlen(packet->header) > 0) {
         snprintf(message, BUFFER_SIZE*2, "%s\n", packet->header);
     }
 
     send(sock, message, strlen(message), 0);
-    printf("Message envoyé\n");
+    printf("Message envoyé: \n%s\n", message);
     
     // Recevoir la réponse
     memset(buffer, 0, BUFFER_SIZE);
     int valread = read(sock, buffer, BUFFER_SIZE);
     snprintf(response, BUFFER_SIZE, "%s", buffer);
 
-    reset_packet(packet);
+    if (strcmp(response, "AUTH?\n") == 0) {
+        printf("Authentification requise\n");
+        ask_auth(response);
+    } else if (strcmp(response, "AUTH FAIL\n") == 0) {
+        printf(RED "Authentification échouée\n" RESET);
+        ask_auth(response);
+    } else if (strcmp(response, "AUTH OK\n") == 0) {
+        printf(GREEN "Authentification réussie\n" RESET);
+    }
 
     close(sock);
 }
@@ -164,6 +226,8 @@ void create_api_key() {
     char user_id[10];
     char is_superadmin[3];
     char body[BUFFER_SIZE];
+
+    if (!is_server_ok()) return;
 
     printf("Entrez l'ID de l'utilisateur: ");
     fgets(user_id, 10, stdin);
@@ -195,16 +259,14 @@ void create_api_key() {
 
     snprintf(body, BUFFER_SIZE, "userID=%d;superAdmin=%d;", atoi(user_id), atoi(is_superadmin));
 
-    Packet packet;
-    snprintf(packet.header, sizeof(packet.header), "ENTRYPOINT");
-    snprintf(packet.path, sizeof(packet.path), "/api/create-key");
-    snprintf(packet.body, sizeof(packet.body), "%s", body);
+    Packet* packet = malloc(sizeof(Packet));
+    snprintf(packet->header, sizeof(packet->header), "ENTRYPOINT");
+    snprintf(packet->path, sizeof(packet->path), "/api/create-key");
+    snprintf(packet->body, sizeof(packet->body), "%s", body);
 
     char response[BUFFER_SIZE];
-    if (is_server_ok()) {
-        send_request(&packet, response);
-    }
-
+    send_request(packet, response);
+    
     printf("Réponse reçue: %s\n", response);
 }
 

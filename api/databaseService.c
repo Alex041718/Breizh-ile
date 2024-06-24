@@ -2,10 +2,12 @@
 #include <stdlib.h>
 #include <mysql/mysql.h>
 #include <stdbool.h>
+#include <string.h>
 #include <time.h>
 #include <sys/time.h>
 #include "dotenv.h"
 #include "bcrypt.h"
+#include "utils.h"
 
 MYSQL* init_database() {
     env_load("..", false);
@@ -179,7 +181,36 @@ bool check_user_credentials(char* email, char* password) {
 }
 
 bool check_user_api_key(char* api_key) {
+    char query[1024];
+    snprintf(query, sizeof(query), "SELECT active FROM _User_APIKey WHERE apiKey='%s'", api_key);
 
+    MYSQL* conn = init_database();
+    MYSQL_RES* res;
+    MYSQL_ROW row;
+
+    if (mysql_query(conn, query)) {
+        fprintf(stderr, "Error querying database: %s\n", mysql_error(conn));
+        mysql_close(conn);
+        return false;
+    }
+
+    res = mysql_store_result(conn);
+    if (res == NULL) {
+        fprintf(stderr, "Error storing result: %s\n", mysql_error(conn));
+        mysql_close(conn);
+        return false;
+    }
+
+    row = mysql_fetch_row(res);
+    if (row == NULL) {
+        fprintf(stderr, "No user found with API key %s\n", api_key);
+        mysql_close(conn);
+        return false;
+    }
+
+    bool active = atoi(row[0]);
+    mysql_close(conn);
+    return active;
 }
 
 bool create_api_key(int user_id, bool is_superadmin) {
@@ -197,4 +228,64 @@ bool create_api_key(int user_id, bool is_superadmin) {
     }
 
     return success;
+}
+
+/*
+La consultation de la liste de tous les biens (si accès privilégié) ;
+● La consultation de la liste des biens du propriétaire (si accès par propriétaire) ;
+*/
+char* get_housings(int user_id, bool is_superadmin) {
+    char query[1024];
+    if (is_superadmin) {
+        snprintf(query, sizeof(query), "SELECT * FROM _Housing");
+    } else {
+        snprintf(query, sizeof(query), "SELECT * FROM _Housing WHERE ownerID=%d", user_id);
+    }
+
+    MYSQL* conn = init_database();
+    MYSQL_RES* res;
+    MYSQL_ROW row;
+
+    if (mysql_query(conn, query)) {
+        fprintf(stderr, "Error querying database: %s\n", mysql_error(conn));
+        mysql_close(conn);
+        return NULL;
+    }
+
+    res = mysql_store_result(conn);
+    if (res == NULL) {
+        fprintf(stderr, "Error storing result: %s\n", mysql_error(conn));
+        mysql_close(conn);
+        return NULL;
+    }
+
+    char* housings = malloc(8192 * 512);
+    housings[0] = '\0';
+    int housing_count = 0;
+    while ((row = mysql_fetch_row(res))) {
+        char housing[8192] = "\0";
+        
+        int num_fields = mysql_num_fields(res);
+        MYSQL_FIELD *fields = mysql_fetch_fields(res);
+
+        for (int i = 0; i < num_fields; i++) {
+            char value[8192] = "\0";
+            replace_newlines_with_spaces(row[i]);
+            snprintf(value, 8192, "%s=%s;", fields[i].name, row[i]);
+            strcat(housing, value);
+        }
+
+        strcat(housing, "\n");
+        strcat(housings, housing);
+    }
+
+    mysql_close(conn);
+    return housings;
+}
+
+int main() {
+    char* housings = get_housings(301, true);
+    printf("%s\n", housings);
+
+    return 0;
 }

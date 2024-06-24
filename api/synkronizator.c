@@ -8,15 +8,19 @@
 #include <getopt.h>
 #include <time.h>
 #include <math.h>
-#include "cJSON.h" // https://github.com/DaveGamble/cJSON
 #include "sqlService.h"
 
 #define MAX_CLIENTS 1
 #define BUFFER_SIZE 8192
+#define MAX_AUTH_ATTEMPTS 3
+
+// TODO: Faire en sorte qu'une demande AUTH obtienne une réponse AUTH Aussi
 
 bool request_ok = false;
 bool auth_ok = false;
 bool close_connexion = false;
+
+int attempts_auth = 0;
 
 typedef struct {
     char attribute[64];
@@ -35,6 +39,9 @@ static struct option long_options[] = {
     {"port", required_argument, NULL, 'p'},
     {NULL, 0, NULL, 0}
 };
+
+char* requested_body;
+void (*requested_fonction)(char*, char*, size_t);
 
 void print_usage() {
     printf("Usage: ./server [options]\n"
@@ -70,7 +77,7 @@ void parse_request(char* request, Packet* packet) {
 
     token = strtok(NULL, "\n");
 
-    if (token == NULL) return; // Commande sans chemin : OK, AUTH, etc.
+    if (token == NULL) return; // Commande sans chemin : OK, etc.
 
     snprintf(packet->path, sizeof(packet->path), "%s", token);
 
@@ -107,16 +114,99 @@ BodyAttribute* parse_token(const char* body) {
     return attribute;
 }
 
+bool check_auth(int client_fd, Packet* packet, char* response, size_t response_size) {
+    char* token = strtok(packet->body, ";");
+    bool check_credentials = false;
+
+    if (token == NULL) {
+        snprintf(response, response_size, "Paramètres manquants");
+        return false;
+    }
+
+    BodyAttribute* connection_method = parse_token(token); // email or api_key
+    if (connection_method == NULL) {
+        snprintf(response, response_size, "Méthode de connexion manquante\nEmail ou clé API requise");
+        return false;
+    }
+
+    if (strcmp(connection_method->attribute, "email") == 0) {
+        token = strtok(NULL, ";");
+        if (token == NULL) {
+            snprintf(response, response_size, "Paramètres manquants");
+            return false;
+        }
+
+        BodyAttribute* password = parse_token(token);
+        if (password == NULL) {
+            snprintf(response, response_size, "Mot de passe manquant");
+            return false;
+        }
+
+        char* copy_requested_body = malloc(strlen(requested_body) + 1);
+        strcpy(copy_requested_body, requested_body);
+        token = strtok(copy_requested_body, ";");
+        if (token == NULL) {
+            snprintf(response, response_size, "Paramètres manquants");
+            return false;
+        }
+
+        int user_id = get_user_id_from_email(connection_method->value);
+        BodyAttribute* userID = parse_token(token);                 
+
+        if (user_id != atoi(userID->value)) {
+            snprintf(response, response_size, "Vous tentez de vous authentifier avec un ID utilisateur qui ne vous appartient pas");
+            return false;
+        }
+
+        check_credentials = check_user_credentials(connection_method->value, password->value);
+    } else if (strcmp(connection_method->attribute, "api_key") == 0) {
+        char* copy_requested_body = malloc(strlen(requested_body) + 1);
+        strcpy(copy_requested_body, requested_body);
+        token = strtok(copy_requested_body, ";");
+        if (token == NULL) {
+            snprintf(response, response_size, "Paramètres manquants");
+            return false;
+        }
+
+        int user_id = get_user_id_from_api_key(connection_method->value);
+        BodyAttribute* userID = parse_token(token);                 
+
+        if (user_id != atoi(userID->value)) {
+            snprintf(response, response_size, "Vous tentez de vous authentifier avec un ID utilisateur qui ne vous appartient pas");
+            return false;
+        }
+
+        check_credentials = check_user_api_key(connection_method->value);
+    } else {
+        snprintf(response, response_size, "Méthode de connexion invalide\nEmail ou clé API requise");
+        return false;
+    }
+
+    if (check_credentials) {
+        attempts_auth = 0;
+
+        auth_ok = true;
+        snprintf(response, response_size, "AUTH OK\n");
+
+        if (requested_fonction != NULL) {
+            requested_fonction(requested_body, response, response_size);
+            free(requested_body);
+            requested_body = NULL;
+            requested_fonction = NULL;
+        }
+    } else {
+        snprintf(response, response_size, "AUTH FAIL\n");
+    }
+
+    return auth_ok;
+}
+
 void create_apiKey(char* body, char* response, size_t response_size) {
-    printf("Body : %s\n", body);
     char* token = strtok(body, ";");
     if (token == NULL) {
         snprintf(response, response_size, "Paramètres manquants");
         return;
-    }
-
-    printf("Body : %s\n", body);
-    printf("Token : %s\n", token);    
+    }   
 
     BodyAttribute* userID = parse_token(token);
     if (userID == NULL) {
@@ -130,7 +220,6 @@ void create_apiKey(char* body, char* response, size_t response_size) {
     }
 
     token = strtok(NULL, ";");
-    printf("Token : %s\n", token);
     if (token == NULL) {
         snprintf(response, response_size, "Paramètres manquants");
         return;
@@ -154,29 +243,42 @@ void create_apiKey(char* body, char* response, size_t response_size) {
     }
 }
 
-void handle_route(Packet* packet, char* response, size_t response_size) {
+void handle_route(int client_fd, Packet* packet, char* response, size_t response_size) {
     if (strcmp(packet->path, "/api/create-key") == 0) {
-        create_apiKey(packet->body, response, response_size);
+        snprintf(response, response_size, "AUTH ?\n");
+
+        requested_body = malloc(strlen(packet->body) + 1);
+        strcpy(requested_body, packet->body);
+        requested_fonction = create_apiKey;
     } else {
         snprintf(response, response_size, "Route inconnue");
     }
 }
 
-void handle_header(Packet* packet, char* response, size_t response_size) {
+void handle_header(int client_fd, Packet* packet, char* response, size_t response_size) {
     if (strcmp(packet->header, "OK ?") == 0) {
         snprintf(response, response_size, "OK\n");
         request_ok = true;
-    }
-    
-    if (!request_ok) {
-        snprintf(response, response_size, "BAD REQUEST\ncode=400;message=Requête invalide\nLa connexion n'a pas été initialisée correctement\n");
+    } else if (!request_ok) {
+        snprintf(response, response_size, "BAD REQUEST\ncode=400;message=Requête invalide\nLa connexion n'a pas été initialisée correctement;\n");
         return;
-    }
-    
-    if (strcmp(packet->header, "ENTRYPOINT") == 0) {
-        handle_route(packet, response, response_size);
+    } else if (strcmp(packet->header, "AUTH") == 0) {
+        if (attempts_auth < MAX_AUTH_ATTEMPTS - 1) {
+            attempts_auth++;
+            check_auth(client_fd, packet, response, response_size);
+        } else {
+            snprintf(response, response_size, "AUTH KO\n");
+            close_connexion = true;
+            attempts_auth = 0;
+
+            requested_fonction = NULL;
+            free(requested_body);
+            requested_body = NULL;
+        }
+    } else if (strcmp(packet->header, "ENTRYPOINT") == 0) {
+        handle_route(client_fd, packet, response, response_size);
     } else {
-        snprintf(response, response_size, "BAD REQUEST\ncode=400;message=Requête invalide\nLe header ne correspond pas à une commande connue\n");
+        snprintf(response, response_size, "BAD REQUEST\ncode=400;message=Requête invalide\nLe header ne correspond pas à une commande connue;\n");
 
     }
 }
@@ -195,17 +297,18 @@ void handle_request(int client_fd) {
         buffer[read_bytes] = '\0';
         printf("Reçu :\n%s\n", buffer);
 
-        Packet packet;
-        parse_request(buffer, &packet);
+        Packet* packet = malloc(sizeof(Packet));
+        packet = memset(packet, 0, sizeof(Packet));
+        parse_request(buffer, packet);
         
-        if (strlen(packet.header) > 0) printf("Header : %s\n", packet.header);
-        if (strlen(packet.path) > 0) printf("Path : %s\n", packet.path);
-        if (strlen(packet.body) > 0) printf("Body : %s\n", packet.body);
+        if (strlen(packet->header) > 0) printf("Header : %s\n", packet->header);
+        if (strlen(packet->path) > 0) printf("Path : %s\n", packet->path);
+        if (strlen(packet->body) > 0) printf("Body : %s\n", packet->body);
         
         char response_body[BUFFER_SIZE/2];
         char response[BUFFER_SIZE];
 
-        handle_header(&packet, response_body, sizeof(response_body));
+        handle_header(client_fd, packet, response_body, sizeof(response_body));
 
         snprintf(response, BUFFER_SIZE, "%s", response_body);
         printf("Réponse envoyée :\n%s\n", response);
@@ -283,6 +386,8 @@ int main(int argc, char *argv[]) {
         if (close_connexion) { 
             close(client_fd);
             close_connexion = false;
+            first_request = true;
+            auth_ok = false;
         }
     }
 

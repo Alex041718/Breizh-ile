@@ -1,5 +1,5 @@
-#ifndef SQL_SERVICE_H
-#define SQL_SERVICE_H
+#ifndef DATABASE_SERVICE_H
+#define DATABASE_SERVICE_H
 
 #include <stdbool.h>
 #include <mysql/mysql.h>
