@@ -7,14 +7,52 @@ body {
 }
 
 main {
-    height: calc(100dvh - 240px);
-    padding-top: 150px;
+    height: auto;
+    padding-top: 50px !important;
     padding-inline: 100px;
     box-sizing: border-box;
     color: $black2;
+    padding-bottom: 100px;
 
-    @media (max-width: 1024px) {
-        height: 100%;
+    @media screen and (max-width: 1300px) {
+        padding-inline: 25px;
+      }
+
+    .nothing {
+        text-align: center;
+        width: 100%;
+        grid-column: span 3 / span 3;
+    }
+
+    hr {
+        height: 1px;
+        width: 90%;
+        margin-block: 50px;
+        background-color: $grey3;
+    }
+
+    .housings-content {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+
+        &__items {
+            display: grid;
+            gap: 50px;
+            grid-template-columns: repeat(3, auto);
+      
+            
+      
+            @media screen and (max-width: 1300px) {
+              grid-template-columns: repeat(2, auto);
+            }
+      
+            @media screen and (max-width: 950px) {
+              display: flex;
+              flex-direction: column;
+            }
+      
+          }
     }
 
     .topcontent {
@@ -48,7 +86,6 @@ main {
         display: flex;
         @media (max-width: 1024px) {
             flex-direction: column;
-            padding-bottom: 150px;
             gap: 15px;
         }
 

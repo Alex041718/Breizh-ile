@@ -42,7 +42,7 @@ $owner_mail = $client->getMail();
 </head>
 <body>
     <?php Header::render(isScrolling: True, isBackOffice: True); ?>
-    <main>
+    <main class="global-ui">
         <div class="topcontent">
             <div class="topcontent__presentation">
                 <img src=<?= $owner_pp ?> alt="Photo de profil">
@@ -51,7 +51,7 @@ $owner_mail = $client->getMail();
                     <p>Dernière connexion: <?= $owner_lastConnection ?></p>
                 </div>
             </div>
-            <h3 class="topcontent__presentation__birthdate">Né le <?= $owner_birthDate ?></h3>
+            <h3 class="topcontent__presentation__birthdate"><?= $owner_birthDate ?></h3>
         </div>
         <div class="bottomcontent">
             <div class="bottomcontent__column">

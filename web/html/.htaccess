@@ -61,6 +61,10 @@ RewriteRule ^back/detail-reservation$ /owner/consulter_detail_reservation/consul
 RewriteRule ^back/creer-logement$ /owner/creer_un_logement/creer_un_logement.php [L]
 # Rediriger /back/logements/id vers /owner/consulter_logement/logement.php
 RewriteRule ^back/logements/([0-9]+)$ /owner/consulter_logement/logement.php?housingID=$1 [L]
+
+# Rediriger /client/profil/id vers /client/consulter_profil/consulter_profil.php
+RewriteRule ^client/profil/([0-9]+)$ /client/consulter_profil/consulter_profil.php?ownerID=$1 [L]
+
 # Rediriger /back/reservations vers /owner/consulter_reservations/consulter_reservations.php
 RewriteRule ^back/logements$ /owner/consulter_logements/consulter_logements.php [L]
 

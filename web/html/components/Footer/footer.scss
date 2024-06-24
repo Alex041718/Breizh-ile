@@ -7,6 +7,9 @@ footer {
     text-align: center;
     padding: 5px;
     bottom: 0px;
+    height: 240px;
+    width: 100%;
+    box-sizing: border-box;
 
     @media screen and (max-width: 1024px) {
         padding-bottom: 120px;
@@ -91,6 +94,7 @@ footer {
 
 @media only screen and (max-width: 780px) {
     footer {
+        height: 100%;
         .informations {
             flex-direction: column;
             gap: 50px;
