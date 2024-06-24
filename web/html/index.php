@@ -104,6 +104,14 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                 let rawf4 = <?= json_encode($_POST['f4'] ?? null) ?>;
                 let rawf5 = <?= json_encode($_POST['f5'] ?? null) ?>;
 
+                let rawBaignade = <?= json_encode($_POST['baignade'] ?? null) ?>;
+                let rawVoile = <?= json_encode($_POST['voile'] ?? null) ?>;
+                let rawCanoe = <?= json_encode($_POST['canoe'] ?? null) ?>;
+                let rawGolf = <?= json_encode($_POST['golf'] ?? null) ?>;
+                let rawEquitation = <?= json_encode($_POST['equitation'] ?? null) ?>;
+                let rawAccrobranche = <?= json_encode($_POST['accrobranche'] ?? null) ?>;
+                let rawRandonnee = <?= json_encode($_POST['randonnee'] ?? null) ?>;
+
 
                 if(city) city = city.split(' ')[0];
 
@@ -154,6 +162,14 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                     const f4 = rawf4 && isVeryFirst ? rawf4 : (document.getElementById("f4").checked === true ? 1 : 0);
                     const f5 = rawf5 && isVeryFirst ? rawf5 : (document.getElementById("f5").checked === true ? 1 : 0);
                     
+                    const baignade = rawBaignade && isVeryFirst ? rawBaignade : (document.getElementById("baignade").checked === true ? 1 : 0);
+                    const voile = rawVoile && isVeryFirst ? rawVoile : (document.getElementById("voile").checked === true ? 1 : 0);
+                    const canoe = rawCanoe && isVeryFirst ? rawCanoe : (document.getElementById("canoe").checked === true ? 1 : 0);
+                    const golf = rawGolf && isVeryFirst ? rawGolf : (document.getElementById("golf").checked === true ? 1 : 0);
+                    const equitation = rawEquitation && isVeryFirst ? rawEquitation : (document.getElementById("equitation").checked === true ? 1 : 0);
+                    const accrobranche = rawAccrobranche && isVeryFirst ? rawAccrobranche : (document.getElementById("accrobranche").checked === true ? 1 : 0);
+                    const randonnee = rawRandonnee && isVeryFirst ? rawRandonnee : (document.getElementById("randonnee").checked === true ? 1 : 0);
+                    
 
                     if(isFirst) cpt = 0;
                     const itemsToHide = document.querySelectorAll(".show-more");
@@ -166,7 +182,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                     container.appendChild(loader);
 
                     var xmlhttp = new XMLHttpRequest();
-                    const params = `q=${cpt}&sort=${sort}&desc=${desc}&nbPerson=${nbPerson}&beginDate=${beginDate}&endDate=${endDate}&city=${city}&minPrice=${minPrice}&maxPrice=${maxPrice}&appartement=${appartement}&chalet=${chalet}&maison=${maison}&bateau=${bateau}&villa=${villa}&insol=${insol}&t1=${t1}&t2=${t2}&t3=${t3}&t4=${t4}&t5=${t5}&t6=${t6}&f1=${f1}&f2=${f2}&f3=${f3}&f4=${f4}&f5=${f5}`;
+                    const params = `q=${cpt}&sort=${sort}&desc=${desc}&nbPerson=${nbPerson}&beginDate=${beginDate}&endDate=${endDate}&city=${city}&minPrice=${minPrice}&maxPrice=${maxPrice}&appartement=${appartement}&chalet=${chalet}&maison=${maison}&bateau=${bateau}&villa=${villa}&insol=${insol}&t1=${t1}&t2=${t2}&t3=${t3}&t4=${t4}&t5=${t5}&t6=${t6}&f1=${f1}&f2=${f2}&f3=${f3}&f4=${f4}&f5=${f5}&baignade=${baignade}&voile=${voile}&canoe=${canoe}&golf=${golf}&equitation=${equitation}&accrobranche=${accrobranche}&randonnee=${randonnee}`;
 
                     xmlhttp.open("POST", "./components/HousingCard/getHousing.php", true);
 
