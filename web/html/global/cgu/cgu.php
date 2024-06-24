@@ -22,11 +22,14 @@
 </head>
 
 <body>
+
+
     <p id="auth" style="display:none"><?=$isAuthenticated?></p>
     <?php
         require_once("../../components/Header/header.php");
         Header::render(true,false, $isAuthenticated);
     ?>
+    <main class="global-ui">
     <div class="cgu">
         <h2>Conditions Générales d'Utilisation (CGU)</h2>
 
@@ -79,6 +82,7 @@
         </div>
     </div>
 
+</main>
     <?php
         require_once("../../components/Footer/footer.php");
         Footer::render();
