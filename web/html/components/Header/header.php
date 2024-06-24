@@ -70,7 +70,7 @@ class Header
                             <p>Bienvenue ' . $owner->getFirstname() . '</p>
                             <a href="/back/profile">Mon Compte</a>
                             <a href="/back/ownerReservations">Mes réservations</a>
-                            <a href="">Qui sommes nous</a>
+                            <a href="/global/aboutUs/aboutUs.php">Qui sommes nous</a>
                             <a href="' . $urlLogout . '">Se déconnecter</a>
                         </div>
                     ';
@@ -83,7 +83,7 @@ class Header
                         <p href="">Bienvenue ' . $client->getFirstname() . '</p>
                         <a href="/client/profile">Mon Compte</a>
                         <a href="/client/reservations-liste">Mes réservations</a>
-                        <a href="">Qui sommes nous</a>
+                        <a href="/global/aboutUs/aboutUs.php">Qui sommes nous</a>
                         <a href="' . $urlLogout . '">Se déconnecter</a>
                     </div>
 
@@ -101,6 +101,7 @@ class Header
                     <div class="option__container">
                         <a href="'. $urlConnexion .'">Se connecter</a>
                         <a href="/client/register">S\'inscrire</a>
+                        <a href="/global/aboutUs/aboutUs.php">Qui sommes nous</a>
                     </div>
                 ';
         }

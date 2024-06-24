@@ -24,7 +24,7 @@ class Footer {
                         <div>
                             <h4>Nous connaître</h4>
                             <div>
-                                <a href=""><p>Qui sommes nous</p></a>
+                                <a href="/global/aboutUs/aboutUs.php"><p>Qui sommes nous</p></a>
                                 <a href=""><p>Notre RSE</p></a>
                             </div>
                         </div>
