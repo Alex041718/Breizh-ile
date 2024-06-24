@@ -1,7 +1,6 @@
 -- Suppression du schema si il existe
 DROP SCHEMA IF EXISTS db;
 
-
 -- Création du schema :
 CREATE SCHEMA db;
 
@@ -15,15 +14,11 @@ CREATE TABLE _Migration (
     executionDate timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
-
-
 -- Création de la table `Gender`
 CREATE TABLE _Gender (
     genderID serial PRIMARY KEY,
     genderName varchar(20)
 );
-
--- add 3 genders
 
 -- Création de la table `Admin`
 CREATE TABLE _Admin (
@@ -38,7 +33,6 @@ CREATE TABLE _Admin (
 -- ajout de l'admin
 INSERT INTO _Admin (mail, firstname, lastname, nickname, password) VALUES ('admin@gmail.com', 'Benoit', 'Tottereau', 'admin', '$2y$10$O.JEDin2vwFgbA3FQnKMheSSJDhaevnV3m5AXetQP6H7TeLrh9HaK');
 
-
 -- Création de la table `Lang`
 CREATE TABLE _Lang (
     langID serial PRIMARY KEY,
@@ -51,13 +45,8 @@ CREATE TABLE _PayCard (
     payCardID serial PRIMARY KEY,
     cardNumber varchar(300),
     ownerName varchar(300),
-    CVC varchar(300)
-);
-
--- Création de la table `Service`
-CREATE TABLE _Service (
-    serviceID serial PRIMARY KEY,
-    label varchar(50)
+    CVC varchar(300),
+    expirationDate varchar(300)
 );
 
 -- Création de la table `Config`
@@ -71,8 +60,11 @@ CREATE TABLE _Config (
 CREATE TABLE _Address (
     addressID serial PRIMARY KEY,
     city varchar(100),
-    postalCode varchar(5),
-    postalAddress varchar(255)
+    postalCode varchar(6),
+    postalAddress varchar(255),
+    complementAddress varchar(255),
+    streetNumber integer,
+    country varchar(100)
 );
 
 -- Création de la table `Category`
@@ -119,8 +111,12 @@ CREATE TABLE _User (
 -- Création de la table `Owner`
 CREATE TABLE _Owner (
     ownerID BIGINT UNSIGNED PRIMARY KEY,
-    isValidated Boolean,
-    identityCard varchar(100),
+    isValidated Boolean DEFAULT TRUE,
+    identityCardFront varchar(100),
+    identityCardBack varchar(100),
+    bankDetails varchar(100), -- RIB
+    swiftCode varchar(100), -- Code BIC
+    IBAN varchar(100), -- Code IBAN
     FOREIGN KEY (ownerID) REFERENCES _User(userID)
 );
 
@@ -196,14 +192,6 @@ CREATE TABLE _Has_for_activity (
     FOREIGN KEY (perimeterID) REFERENCES _Perimeter(perimeterID)
 );
 
-CREATE TABLE _Has_for_service (
-    housingID BIGINT UNSIGNED, -- Correspond au type `serial` dans Housing pour mysql
-    serviceID BIGINT UNSIGNED, -- Correspond au type `serial` dans Service pour mysql
-    FOREIGN KEY (housingID) REFERENCES _Housing(housingID),
-    FOREIGN KEY (serviceID) REFERENCES _Service(serviceID)
-);
-
-
 -- Création de la table `Arrangement`
 CREATE TABLE _Arrangement (
     arrangementID serial PRIMARY KEY,
@@ -215,19 +203,6 @@ CREATE TABLE _Has_for_arrangement (
     arrangementID BIGINT UNSIGNED, -- Correspond au type `serial` dans Arrangement pour mysql
     FOREIGN KEY (housingID) REFERENCES _Housing(housingID),
     FOREIGN KEY (arrangementID) REFERENCES _Arrangement(arrangementID)
-);
-
--- Création de la table `Review`
-CREATE TABLE _Review (
-    reviewID serial PRIMARY KEY,
-    note Float,
-    comm varchar(3000),
-    creationDate Date,
-    isReported Boolean,
-    clientID BIGINT UNSIGNED, -- Correspond au type `serial` dans Client pour mysql
-    housingID BIGINT UNSIGNED, -- Correspond au type `serial` dans Housing pour mysql
-    FOREIGN KEY (clientID) REFERENCES _Client(clientID),
-    FOREIGN KEY (housingID) REFERENCES _Housing(housingID)
 );
 
 CREATE TABLE _Has_for_payCard (
@@ -280,5 +255,13 @@ CREATE TABLE _Lang_User (
     userID BIGINT UNSIGNED, -- Correspond au type `serial` dans Client pour mysql
     PRIMARY KEY (langID, userID),
     FOREIGN KEY (langID) REFERENCES _Lang(langID),
+    FOREIGN KEY (userID) REFERENCES _User(userID)
+);
+
+CREATE TABLE _User_APIKey (
+    userID BIGINT UNSIGNED, -- Correspond au type `serial` dans User pour mysql
+    apiKey varchar(64),
+    active Boolean,
+    superAdmin Boolean,
     FOREIGN KEY (userID) REFERENCES _User(userID)
 );
