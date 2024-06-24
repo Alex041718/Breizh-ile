@@ -27,7 +27,7 @@ function sendmail($token)
         $mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('crepe-tech@laposte.net', 'Administrator Breizh-Ile');
+        $mail->setFrom('crepe-tech@laposte.net', 'Breizh-Ile');
         $mail->addAddress('duncancadoret@laposte.net');     //Add a recipient
         $mail->addAddress('cadoret.du@gmail.com');               //Name is optional
 //    $mail->addReplyTo('info@example.com', 'Information');

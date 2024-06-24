@@ -25,7 +25,7 @@
 
                 <?php Input::render("connection__input", "password", "password", "Mot de Passe", "password", "Entrez votre mot de passe", true); ?>
 
-                <a href="/client/forgot-password.php" class="connectionContainer__box__forgot">J'ai oublié mon mot de passe</a>
+                <a href="/client/forgot-password" class="connectionContainer__box__forgot">J'ai oublié mon mot de passe</a>
 
                 <input type="hidden" name="role" value="client">
 
