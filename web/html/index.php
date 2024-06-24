@@ -7,7 +7,6 @@ require_once '../services/ClientService.php';
 require_once '../services/SessionService.php'; // pour le menu du header
 $isAuthenticated = SessionService::isClientAuthenticated();
 
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -67,7 +66,8 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                 </select>
                 <div class="filter__button">
                     <button id="header__settings">Filtres</button>
-                    <?= sizeof($_POST) > 0 ? '<a href="/"><i class="fa-solid fa-xmark"></i></a>' : "" ?>
+                    <!--sizeof($_POST) > 0 ? '<a href="/"><i class="fa-solid fa-xmark"></i></a>' : "" -->
+                    <a href="/"><i class="fa-solid fa-xmark"></i></a>
                 </div>
             </div>
             <div class="logements__container">
