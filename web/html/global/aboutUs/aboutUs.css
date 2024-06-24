@@ -39,7 +39,7 @@ body .main .container .about-section .sub-section {
   display: flex;
   flex-direction: column;
 }
-body .main .container .about-section .sub-section p, body .main .container .about-section .sub-section h4, body .main .container .about-section .sub-section ul {
+body .main .container .about-section .sub-section p, body .main .container .about-section .sub-section h3, body .main .container .about-section .sub-section ul, body .main .container .about-section .sub-section h4 {
   text-align: start;
 }
 
