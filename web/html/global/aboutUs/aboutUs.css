@@ -1,0 +1,18 @@
+.container {
+  display: inline-block;
+}
+.container h3 {
+  border-right: 5px solid;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: monospace;
+  font-size: 24px;
+  animation: cursor 0.4s step-end infinite alternate;
+}
+
+@keyframes cursor {
+  50% {
+    border-color: transparent;
+  }
+}/*# sourceMappingURL=aboutUs.css.map */
