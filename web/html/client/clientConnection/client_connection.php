@@ -3,6 +3,13 @@
 if(isset($_GET["error"]) && $_GET["error"] == "loginFailed") {
     $_GET["error"] = "Mot de passe incorrect";
 }
+
+// Affichage des toasts
+// Service de session
+require_once '../../../services/SessionService.php';
+// Affichage des toasts
+SessionService::loadToast();
+
 ?>
 
 <!DOCTYPE html>
@@ -50,5 +57,7 @@ if(isset($_GET["error"]) && $_GET["error"] == "loginFailed") {
             </div>
             <p class="para--18px">Pas encore de compte ? <a href="/client/register">S'inscrire</a> </p>
     </div>
+
+
 </body>
 </html>

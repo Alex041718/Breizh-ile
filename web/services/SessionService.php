@@ -43,7 +43,7 @@ class SessionService {
             echo '
 
             <link rel="stylesheet" href="/components/Toast/Toast.css">
-            
+            <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
             <script type="module" src="/components/Toast/Toast.js"></script>
             <script type="module"> 
                 import { Toast } from "/components/Toast/Toast.js";

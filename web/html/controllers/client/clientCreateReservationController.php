@@ -66,6 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         SessionService::remove('currentBid');
 
+        SessionService::createToast('Réservation créée !', 'success');
+
         // Rediriger ou afficher un message de succès
         header('Location: /client/reservations-liste?success=1');
         exit();

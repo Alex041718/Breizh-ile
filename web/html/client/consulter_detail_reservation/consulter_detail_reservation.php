@@ -114,11 +114,17 @@
 
 
     <main>
+
+
         <div class="title">
             <div class="title__arrow">
-                <a href="/client/consulterReservations/clientReservations.php"><i class="fa-solid fa-arrow-left"></i></a>
-                <h2>Ma réservation</h2>
+                <?php
+                require_once("../../components/BackComponent/BackComponent.php");
+                BackComponent::render("", "", "Ma réservation", "");
+                ?>
+
             </div>
+
             <div class="title__date">
                 <h4>Voyage  à Lannion du <?= $reservation_dateDebut->format('d-m-Y').' au '.$reservation_dateFin->format('d-m-Y') ?></h4>
             </div>
