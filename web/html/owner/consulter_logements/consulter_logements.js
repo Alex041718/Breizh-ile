@@ -31,6 +31,7 @@ function main() {
                 loadPopUp();
                 
                 const popUpVisibilityBtns = document.querySelectorAll("[id^='popUpVisibility-btn']");
+                const modificationBtns = document.querySelectorAll("[id^='editHousing-btn']");
                 const acceptBtn = document.querySelector("[id^='acceptButton']");
 
                 popUpVisibilityBtns.forEach((popUpVisibilityBtn) => {
@@ -39,6 +40,14 @@ function main() {
                         index = popUpVisibilityBtn.dataset.index;
                     });
                 });
+
+                modificationBtns.forEach((modificationBtn) => {
+                    modificationBtn.addEventListener("click", () => {
+                        let housingID = modificationBtn.dataset.housingid;
+                        window.location.href = `/owner/modifier_logement/modifier_logement.php?housingID=${housingID}`;
+                    });
+                });
+
 
                 acceptBtn.addEventListener("click", () => {
                     if (housingID === null || index === null) {

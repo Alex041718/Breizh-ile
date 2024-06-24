@@ -103,8 +103,8 @@ $_SESSION["owner"] = $owner;
                 </section>
                 <section class="content__bottom">
                     <?php Input::render("content__input--large", "nbRooms", "text", "Nombre de chambres", "nbRooms", "Nombre de chambres", false, '', 0, 2, '[0-9]{1,2}'); ?>
-                    <?php Input::render("content__input--large", "nbSimpleBed", "text", "Nombre de lits doubles", "nbSimpleBed", "Nombre de lits simples", false, '', 0, 2, '[0-9]{1,2}'); ?>
-                    <?php Input::render("content__input--large", "nbDoubleBed", "text", "Nombre de lits simples", "nbDoubleBed", "Nombre de lits doubles", false, '', 0, 2, '[0-9]{1,2}'); ?>
+                    <?php Input::render("content__input--large", "nbSimpleBed", "text", "Nombre de lits simples", "nbSimpleBed", "Nombre de lits simples", false, '', 0, 2, '[0-9]{1,2}'); ?>
+                    <?php Input::render("content__input--large", "nbDoubleBed", "text", "Nombre de lits doubles", "nbDoubleBed", "Nombre de lits doubles", false, '', 0, 2, '[0-9]{1,2}'); ?>
                 </section>
                 <section class="content__bottom">
                     <?php Input::render("content__input--large", "nbPerson", "text", "Nombre de personnes max", "nbPerson", "Nombre de personnes", false, '', 0, 2, '[0-9]{1,2}'); ?>

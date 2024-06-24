@@ -47,7 +47,7 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
             <p data-sort="status">Status</p>
             <button id="header__settings" class="filter"><i class="fa-solid fa-filter"></i></button>
         </section>
-        
+
 
         <section class="housings">
             <script type="module" src="/owner/consulter_logements/consulter_logements.js"></script>
@@ -111,13 +111,13 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
                     document.body.style.overflow = '';
                     showUser(cpt, sort, desc, true);
                 })
-                
+
 
                 function showUser(cpt, sort, desc, isFirst, isVeryFirst = false) {
 
                     const minPrice = rawMinPrice && isVeryFirst ? rawMinPrice : document.getElementById("minInput").value;
                     const maxPrice = rawMaxPrice && isVeryFirst ? rawMaxPrice : document.getElementById("maxInput").value;
-                    
+
                     const appartement = rawAppartement && isVeryFirst ? rawAppartement : (document.getElementById("appart").checked === true ? 1 : 0);
                     const chalet = rawChalet && isVeryFirst ? rawChalet : (document.getElementById("chalet").checked === true ? 1 : 0);
                     const maison = rawMaison && isVeryFirst ? rawMaison : (document.getElementById("maison").checked === true ? 1 : 0);
@@ -137,7 +137,7 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
                     const f3 = rawf3 && isVeryFirst ? rawf3 : (document.getElementById("f3").checked === true ? 1 : 0);
                     const f4 = rawf4 && isVeryFirst ? rawf4 : (document.getElementById("f4").checked === true ? 1 : 0);
                     const f5 = rawf5 && isVeryFirst ? rawf5 : (document.getElementById("f5").checked === true ? 1 : 0);
-                    
+
                     const baignade = rawBaignade && isVeryFirst ? rawBaignade : (document.getElementById("baignade").checked === true ? 1 : 0);
                     const voile = rawVoile && isVeryFirst ? rawVoile : (document.getElementById("voile").checked === true ? 1 : 0);
                     const canoe = rawCanoe && isVeryFirst ? rawCanoe : (document.getElementById("canoe").checked === true ? 1 : 0);
@@ -145,13 +145,13 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
                     const equitation = rawEquitation && isVeryFirst ? rawEquitation : (document.getElementById("equitation").checked === true ? 1 : 0);
                     const accrobranche = rawAccrobranche && isVeryFirst ? rawAccrobranche : (document.getElementById("accrobranche").checked === true ? 1 : 0);
                     const randonnee = rawRandonnee && isVeryFirst ? rawRandonnee : (document.getElementById("randonnee").checked === true ? 1 : 0);
-                    
+
                     const jardin = rawJardin && isVeryFirst ? rawJardin : (document.getElementById("jardin").checked === true ? 1 : 0);
                     const balcon = rawBalcon && isVeryFirst ? rawBalcon : (document.getElementById("balcon").checked === true ? 1 : 0);
                     const terrasse = rawTerrasse && isVeryFirst ? rawTerrasse : (document.getElementById("terrasse").checked === true ? 1 : 0);
                     const piscine = rawPiscine && isVeryFirst ? rawPiscine : (document.getElementById("piscine").checked === true ? 1 : 0);
                     const jacuzzi = rawJacuzzi && isVeryFirst ? rawJacuzzi : (document.getElementById("jacuzzi").checked === true ? 1 : 0);
-                    
+
 
 
                     if(isFirst) cpt = 0;
@@ -189,7 +189,7 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
                                     if(event.target === popup){
                                         popup.classList.remove("popup--open");
                                         document.body.style.overflow = '';
-                                    } 
+                                    }
                                 })
 
                                 if(!popupCloseBtn) return;
@@ -206,17 +206,17 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
                                     })
                                 })
 
-                            
+
                             });
 
 
                             const popUpVisibilityBtns = document.querySelectorAll("[id^='popUpVisibility-btn']");
                             const acceptBtn = document.querySelector("[id^='acceptButton']");
 
-                            
+
                             popUpVisibilityBtns.forEach((popUpVisibilityBtn) => {
 
-                                
+
                                 popUpVisibilityBtn.addEventListener("click", () => {
 
                                     popUpVisibilityBtn.classList.add("popup--open");
@@ -229,7 +229,7 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
                             acceptBtn.addEventListener("click", () => {
                                 if (housingID === null || index === null) {
                                     Toast("Erreur lors de la modification de la visibilité", "error");
-                                    return 
+                                    return
                                 };
                                 changeVisibility(housingID, index);
                                 document.querySelector(".popUpVisibility").classList.remove("popup--open");
