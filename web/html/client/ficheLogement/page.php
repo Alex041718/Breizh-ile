@@ -61,6 +61,7 @@ $housing_nbDoubleBed = $housing->getNbDoubleBed();
 $housing_nbSimpleBed = $housing->getNbSimpleBed();
 $housing_nbBed = $housing_nbDoubleBed + $housing_nbSimpleBed;
 $housing_image = $housing->getImage()->getImageSrc();
+$housing_ownerID = $housing->getOwner()->getOwnerID();
 $housing_ownerImage = $housing->getOwner()->getImage()->getImageSrc();
 $housing_ownerFirstName = $housing->getOwner()->getFirstname();
 $housing_ownerLastName = $housing->getOwner()->getLastname();
@@ -218,10 +219,10 @@ $iconMapping = [
                         <p id="nbVoyageurs" class="para--18px"> <?php echo $housing_nbPerson ?> personnes • <?=$housing_nbRoom!=0? $housing_nbRoom :"1"?> chambres • <?=$housing_nbBed?> lits</p>
                     </div>
 
-                    <div class="proprio">
+                    <a href="client/profil/<?= $housing_ownerID ?>" class="proprio">
                         <img src=" <?php echo $housing_ownerImage ?>" alt="Proprio Image">
                         <p class="para--18px"> <?php echo $housing_ownerFirstName . ' ' . $housing_ownerLastName; ?></p>
-                    </div>
+                    </a>
 
                     <div class="description">
                         <div class="texte">

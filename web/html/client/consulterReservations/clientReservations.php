@@ -12,8 +12,6 @@ require_once '../../../services/SessionService.php'; // pour le menu du header
 SessionService::system('client', '/client/reservations-liste');
 $isAuthenticated = SessionService::isClientAuthenticated();
 
-
-
 require_once '../../../services/Service.php';
 require_once '../../../services/ReservationService.php';
 require_once("../../components/ReservationCard/ReservationCard.php");

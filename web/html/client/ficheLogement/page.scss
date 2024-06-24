@@ -504,6 +504,8 @@ body {
     display: flex;
     align-items: center;
     gap: 1em;
+    text-decoration: none;
+    color: $black2;
 
     img {
         width: 70px;

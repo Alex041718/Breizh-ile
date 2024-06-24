@@ -38,7 +38,7 @@ class HousingCard {
                             <p>' . $housing_nb_personn . ' personnes</p>
                         </div>
                     </div>
-                    <h3>' . $housing_price . '€<span>/nuit</span></h3>
+                    <h3>' . number_format($housing_price, 2, ",") . '€<span>/nuit</span></h3>
                 </div>
             </div>
         </a>

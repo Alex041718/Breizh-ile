@@ -449,6 +449,8 @@ body {
   display: flex;
   align-items: center;
   gap: 1em;
+  text-decoration: none;
+  color: #1D1D1D;
 }
 .proprio img {
   width: 70px;
