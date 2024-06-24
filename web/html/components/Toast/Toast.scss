@@ -1,8 +1,9 @@
 @import '../../style/variables';
 
 .toast {
+    z-index: 1000;
     position: fixed;
-    top: 5%;
+    top: 10%;
     right: 3rem;
     padding: 1rem 2rem;
     border-radius: 10px;
