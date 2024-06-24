@@ -28,8 +28,6 @@ function sendmail($token)
 
         //Recipients
         $mail->setFrom('crepe-tech@laposte.net', 'Breizh-Ile');
-        $mail->addAddress('duncancadoret@laposte.net');     //Add a recipient
-        $mail->addAddress('cadoret.du@gmail.com');               //Name is optional
 //    $mail->addReplyTo('info@example.com', 'Information');
 //    $mail->addCC('cc@example.com');
 //    $mail->addBCC('bcc@example.com');
