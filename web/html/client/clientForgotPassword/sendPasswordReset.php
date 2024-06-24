@@ -6,11 +6,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérifiez si le champ mail est défini et non vide
     if (isset($_POST['mail']) && !empty($_POST['mail'])) {
         $email = $_POST['mail'];
+        
+        if(!ClientService::isExistingClient($email)) {
+            header("Location: /client/forgot-password?success=true");
+            return;
+        }
         // Appel de la fonction de mise à jour du token, celle-ci retourne également le token
         $token = ClientService::updateUserTokenByEmail($email);
         if($token){
-            sendmail($token);
-            header("Location: /");
+            sendmail($email, $token);
+            header("Location: /client/forgot-password?success=true");
             exit();
         }
         echo "Le token de réinitialisation a été envoyé si l'email est correct.";

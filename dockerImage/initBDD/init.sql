@@ -133,24 +133,7 @@ CREATE TABLE _Client (
 
 -- Création de la view `Owner`
 CREATE VIEW Owner AS (
-    SELECT
-        ownerID,
-        mail,
-        lastname,
-        firstname,
-        nickname,
-        password,
-        phoneNumber,
-        birthDate,
-        consent,
-        lastConnection,
-        creationDate,
-        imageID,
-        genderID,
-        addressID,
-        identityCard,
-        isValidated
-    FROM _Owner
+    SELECT * FROM _Owner
     JOIN _User ON _Owner.ownerID = _User.userID
 );
 
