@@ -25,18 +25,19 @@
   width: 55%;
   float: right;
   background-color: #fdfdfd;
-  padding: 150px;
+  padding: 70px;
   display: flex;
   flex-direction: column;
   gap: 2em;
   margin-top: 2em;
+  box-shadow: 0px 10px 13px -7px #000000, -6px 25px 33px 8px rgba(81, 24, 192, 0.41);
 }
 .inner-container #dynamic-text {
-  color: #307B5C;
+  color: #5118C0;
 }
 
 .inner-container h2 {
-  border-right: 5px solid #307B5C;
+  border-right: 5px solid #5118C0;
   letter-spacing: 2px;
   white-space: nowrap;
   overflow: hidden;
@@ -76,4 +77,4 @@
   #typing-text {
     font-size: 20px;
   }
-}/*# sourceMappingURL=aboutUs2.css.map */
+}/*# sourceMappingURL=aboutUs.css.map */
