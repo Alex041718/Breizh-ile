@@ -24,7 +24,6 @@
 </head>
 <body>
     <p id="auth" style="display:none"><?=$isAuthenticated?></p>
-    <p id="auth" style="display:none"><?=$isAuthenticated?></p>
     <?php
         require_once("../../components/Header/header.php");
         Header::render(true,false, $isAuthenticated);
