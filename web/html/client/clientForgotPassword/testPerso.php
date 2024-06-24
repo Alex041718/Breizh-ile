@@ -11,7 +11,7 @@ require 'PHPMailer/src/SMTP.php';
 //Load Composer's autoloader
 //require 'vendor/autoload.php';
 
-function sendmail($token)
+function sendmail(String $email, $token)
 {
 //Create an instance; passing `true` enables exceptions
     $mail = new PHPMailer(true);
@@ -28,6 +28,8 @@ function sendmail($token)
 
         //Recipients
         $mail->setFrom('crepe-tech@laposte.net', 'Breizh-Ile');
+        $mail->addAddress($email);     //Add a recipient
+
 //    $mail->addReplyTo('info@example.com', 'Information');
 //    $mail->addCC('cc@example.com');
 //    $mail->addBCC('bcc@example.com');
@@ -38,14 +40,13 @@ function sendmail($token)
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Here is the subject';
+        $mail->Subject = 'Modification de votre mot de passe';
 //        $mail->Body = 'Change you password right <a href="http://localhost:5555/client/clientForgotPassword/reset-password-page.php?token='. $token .'">here</a>';
-        $mail->Body = 'Change your password right <a href="https://crepetech.ventsdouest.dev/client/clientForgotPassword/reset-password-page.php?token='. $token .'">here</a>';
+        $mail->Body = 'Changer votre mot de passe en cliquant <a href="https://crepetech.ventsdouest.dev/client/clientForgotPassword/reset-password-page.php?token='. $token .'">juste ici</a>.';
         //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         $mail->send();
-        echo 'Message has been sent';
-        header("Location: /");
+        header("Location: /client/forgot-password?success=true");
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }

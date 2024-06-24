@@ -623,7 +623,7 @@ input[type=number] {
   flex-direction: row;
   margin: 5px;
 }
-.popup__filter .popup__content .popup__filter__container .popup__filter__container__choices .popup__filter__container__choices__row div .popup__filter__box p {
+.popup__filter .popup__content .popup__filter__container .popup__filter__container__choices .popup__filter__container__choices__row div .popup__filter__box label {
   margin-left: 3px;
 }
 .popup__filter .popup__content .popup__filter__top {

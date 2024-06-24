@@ -37,10 +37,21 @@ RewriteRule ^logement/devis$ /client/bid/bid.php [L]
 # Rediriger /detail-reservation vers /client/consulter_detail_reservation/consulter_detail_reservation.php
 RewriteRule ^detail-reservation$ /client/consulter_detail_reservation/consulter_detail_reservation.php [L]
 
-# Rediriger /client-forgot-password /client/clientForgotPassword/clientForgotPassword.php
+# Rediriger /client/forgot-password /client/clientForgotPassword/clientForgotPassword.php
 RewriteRule ^client/forgot-password$ /client/clientForgotPassword/clientForgotPassword.php [L]
 
+# Rediriger /client/forgot-password /client/clientForgotPassword/reset-password-page.php
+RewriteRule ^client/reset-password$ /client/clientForgotPassword/reset-password-page.php [L]
+
+
+
 # REDIRECTIONS PROPRIETAIRE #
+
+# Rediriger /back/forgot-password /owner/ownerForgotPassword/ownerForgotPassword.php
+RewriteRule ^back/forgot-password$ /owner/ownerForgotPassword/ownerForgotPassword.php [L]
+
+# Rediriger /back/forgot-password /owner/clientForgotPassword/reset-password-page.php
+RewriteRule ^back/reset-password$ /owner/ownerForgotPassword/reset-password-page.php [L]
 
 # Rediriger /back vers /back/connection
 RewriteRule ^back$ /back/connection [L]

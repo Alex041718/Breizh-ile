@@ -1,3 +1,17 @@
+<?php
+
+if(isset($_GET["error"]) && $_GET["error"] == "loginFailed") {
+    $_GET["error"] = "Mot de passe incorrect";
+}
+
+// Affichage des toasts
+// Service de session
+require_once '../../../services/SessionService.php';
+// Affichage des toasts
+SessionService::loadToast();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +34,7 @@
                 <?php require_once("../../components/Input/Input.php"); ?>
 
                 <?= (isset($_GET["redirect"]) ? "<input type='hidden' name='redirect' value='" . $_GET["redirect"] . "'>" : "<input type='hidden' name='redirect' value='" . "/back" . "'>") ?>
+                <?= isset($_GET["error"]) && $_GET["error"] != "" ? '<p class="error">' . $_GET["error"] . '</p>' : "" ?>
 
                 <?php Input::render("connection__input", "mail", "text", "E-mail", "mail", "Entrez votre e-mail", true); ?>
 
@@ -42,5 +57,7 @@
             </div>
             <p class="para--18px">Pas encore de compte ? <a href="/client/register">S'inscrire</a> </p>
     </div>
+
+
 </body>
 </html>

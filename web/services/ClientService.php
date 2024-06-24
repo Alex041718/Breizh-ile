@@ -178,7 +178,7 @@ class ClientService extends Service
         return openssl_encrypt($token, $ciphering, $encryption_key, $options, $encryption_iv);
     }
 
-    public static function GetClientByToken(string $token): Client
+    public static function GetClientByToken(string $token): ?Client
     {
         $pdo = self::getPDO();
         $token_hash = hash("sha256", $token);
@@ -189,7 +189,7 @@ class ClientService extends Service
             $row = $stmt->fetch();
             // retourne une erreur si le client n'existe pas
             if (!$row) {
-                throw new Exception('Client not found');
+                return null;
             }
             return self::ClientHandler($row);
         } else {
@@ -226,7 +226,7 @@ class ClientService extends Service
         $gender = GenderService::GetGenderById($row['genderID']);
         $address = AddressService::GetAddressById($row['addressID']);
         $image = ImageService::GetImageById($row['imageID']);
-        $lastConnection = $row['lastConnection'] ? new DateTime($row['lastConnection']) : null;
+        $lastConnection = isset($row['lastConnection']) ? new DateTime($row['lastConnection']) : null;
 
 
         return new Client(

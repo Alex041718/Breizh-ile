@@ -17,6 +17,8 @@ function redirect($url)
 
 // Vérifier la méthode de la requête et l'existence des données
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['mail']) || !isset($_POST['password']) || !isset($_POST['role']) || $_POST['role'] !== 'client') {
+    // Toast d'erreur
+    SessionService::createToast('Erreur lors de la connexion', 'error');
     redirect('/client/connection');
 }
 
@@ -35,9 +37,13 @@ if (ConnectionService::checkClient($mail, $password)) {
     $id = ConnectionService::getClientID($mail);
     SessionService::authenticate($id, $mail, 'client');
 
+    // Toast de connexion réussie
+    SessionService::createToast('Connexion réussie', 'success');
     redirect($redirectPage);
 
 } else {
+    // Toast de connexion échouée
+    SessionService::createToast('Connexion échouée', 'error');
     // Connexion échouée, redirection vers la page de connexion
     redirect('/client/clientConnection/client_connection.php?error=loginFailed');
 }

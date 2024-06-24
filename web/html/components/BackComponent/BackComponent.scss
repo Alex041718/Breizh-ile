@@ -9,12 +9,14 @@
 
 
   &__arrow{
+
     all: unset;
 
     i {
       font-size: 30px;
       padding: 15px;
       color : black;
+      cursor: pointer;
     }
   }
 
