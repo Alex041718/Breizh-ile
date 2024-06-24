@@ -1,32 +1,31 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const textElement = document.getElementById('typing-text');
-    const baseText = 'Nous sommes';
-    const words = ['Breizh\'Ile', 'Dévoué'];
+    const textElement = document.getElementById('dynamic-text');
+    const texts = ['Breizh\'Ile', 'Dévoués','Bretons','Bardella'];
     const typingSpeed = 100;
     const erasingSpeed = 50;
-    const delayBetweenWords = 1000;
+    const delayBetweenTexts = 1000;
 
-    let wordIndex = 0;
+    let textIndex = 0;
     let charIndex = 0;
     let isErasing = false;
 
     function type() {
-        if (!isErasing && charIndex < words[wordIndex].length) {
-            textElement.textContent = baseText + ' ' + words[wordIndex].substring(0, charIndex + 1);
+        if (!isErasing && charIndex < texts[textIndex].length) {
+            textElement.textContent += texts[textIndex].charAt(charIndex);
             charIndex++;
             setTimeout(type, typingSpeed);
         } else if (isErasing && charIndex > 0) {
-            textElement.textContent = baseText + ' ' + words[wordIndex].substring(0, charIndex - 1);
+            textElement.textContent = texts[textIndex].substring(0, charIndex - 1);
             charIndex--;
             setTimeout(type, erasingSpeed);
-        } else if (!isErasing && charIndex === words[wordIndex].length) {
+        } else if (!isErasing && charIndex === texts[textIndex].length) {
             setTimeout(() => {
                 isErasing = true;
                 setTimeout(type, erasingSpeed);
-            }, delayBetweenWords);
+            }, delayBetweenTexts);
         } else if (isErasing && charIndex === 0) {
             isErasing = false;
-            wordIndex = (wordIndex + 1) % words.length;
+            textIndex = (textIndex + 1) % texts.length;
             setTimeout(type, typingSpeed);
         }
     }

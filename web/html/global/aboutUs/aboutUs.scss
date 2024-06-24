@@ -1,17 +1,50 @@
-.container {
-    display: inline-block;
-    
-    h3 {
-        border-right: 5px solid;
-        letter-spacing: 2px;
-        white-space: nowrap;
-        overflow: hidden;
-        font-family: monospace;
-        font-size: 24px;
-        animation: cursor .4s step-end infinite alternate;
-    }
-}
+@import '../../style/variables';
 
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    .main{
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+        margin: 5em;
+        .container {
+            display: flex;  
+            align-items: center;
+            .about-section {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 3em;
+                gap: 3em;
+                #dynamic-text{
+                    color: $clientPrimaryColor;
+                }
+                #typing-text {
+                    border-right: 5px solid;
+                    letter-spacing: 2px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    font-size: 100px;
+                    animation: cursor .4s step-end infinite alternate;
+                    width: fit-content;
+                }
+                .sub-section{
+                    text-align: center;
+                    gap: 1em;
+                    display: flex;
+                    flex-direction: column;
+
+                    p,h4,ul{
+                        text-align: start;
+                    }
+                }
+            }
+            
+        }
+    }  
+}
 
 
 @keyframes cursor {
