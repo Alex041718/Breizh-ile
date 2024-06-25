@@ -4,19 +4,25 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1em;
+  gap: 0;
+  cursor: pointer;
+  width: fit-content;
 }
 .back-component__arrow {
   all: unset;
 }
 .back-component__arrow i {
-  font-size: 30px;
+  font-size: 20px;
   padding: 15px;
+  padding-left: 0;
   color: black;
   cursor: pointer;
 }
-@media (max-width: 1024px) {
-  .back-component__text {
-    text-align: center;
-  }
-}/*# sourceMappingURL=BackComponent.css.map */
+.back-component__text {
+  padding-bottom: 2px;
+}
+.back-component__text :hover {
+  text-decoration: underline;
+}
+
+/*# sourceMappingURL=BackComponent.css.map */

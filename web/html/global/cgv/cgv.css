@@ -7,8 +7,11 @@ body .cgv {
   display: flex;
   flex-direction: column;
   gap: 2em;
-  margin: 5em;
+  background-color: #FFFFFF;
+  padding: 1em;
 }
 body .cgv h2 {
   text-align: center;
-}/*# sourceMappingURL=cgv.css.map */
+}
+
+/*# sourceMappingURL=cgv.css.map */

@@ -7,8 +7,11 @@ body .mentions-legales {
   display: flex;
   flex-direction: column;
   gap: 2em;
-  margin: 5em;
+  background-color: #FFFFFF;
+  padding: 1em;
 }
 body .mentions-legales h2 {
   text-align: center;
-}/*# sourceMappingURL=mentionsLegales.css.map */
+}
+
+/*# sourceMappingURL=mentionsLegales.css.map */

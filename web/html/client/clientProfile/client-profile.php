@@ -72,11 +72,11 @@ $client = ClientService::GetClientById($clientID);
 
             <?php
             require_once("../../components/BackComponent/BackComponent.php");
-            BackComponent::render("backButton", "", "", "");
+            BackComponent::render("backButton", "", "Retour", "");
             ?>
             <style>.backButton {margin-bottom: 1em;}</style>
 
-            <h3 class="content__personnal-data__title">Informations Personnelles</h3>
+            <h2 class="content__personnal-data__title">Informations Personnelles</h2>
 
             <div class="content__personnal-data__top">
                 <p class="content__personnal-data__top__description">Modifier vos informations Personnelles</p>
@@ -147,9 +147,9 @@ $client = ClientService::GetClientById($clientID);
         <div id="security" class="content__security">
             <?php
             require_once("../../components/BackComponent/BackComponent.php");
-            BackComponent::render("backButton", "", "", "");
+            BackComponent::render("backButton", "", "Retour", "");
             ?>
-            <h3 class="content__security__title">Sécurité</h3>
+            <h2 class="content__security__title">Sécurité</h2>
             <p class="content__security__description">Modifier vos paramètres de sécurités</p>
             <form method="POST" action="/client/clientForgotPassword/reset-password-action.php">
                 <div class="content__security__elements">

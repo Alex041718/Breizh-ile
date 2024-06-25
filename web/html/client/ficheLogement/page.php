@@ -93,13 +93,13 @@ $iconMapping = [
         Header::render(true,false, $isAuthenticated, '/logement?id=' . $_GET['id']);
         ?>
 
-    <main>
+    <main class="global-ui">
+        <?php
+        require_once("../../components/BackComponent/BackComponent.php");
+        BackComponent::render("", "back-arrow", "Retour", "");
+        ?>
         <div class="page">
         <span id="title" style="display: flex; align-items: center">
-            <?php
-            require_once("../../components/BackComponent/BackComponent.php");
-            BackComponent::render("", "back-arrow", "", "");
-            ?>
             <h2 >
                 <?= $housingCity . " - " . $housingPostalCode ?>
             </h2>

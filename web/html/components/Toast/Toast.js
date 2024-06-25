@@ -22,7 +22,7 @@ export function Toast(message, type) {
 
     setTimeout(() => {
         toast.remove();
-    }, 3000);
+    }, 8000);
 }
 
 

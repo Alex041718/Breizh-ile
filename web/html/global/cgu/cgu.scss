@@ -8,7 +8,8 @@ body{
         display: flex;
         flex-direction: column;
         gap: 2em;
-        margin: 5em;
+        background-color: $whiteColor;
+        padding: 1em;
 
         h2{
             text-align: center;

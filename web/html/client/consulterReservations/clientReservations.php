@@ -47,12 +47,13 @@ Header::render(true,false, $isAuthenticated, '/client/reservations-liste');
 
     <?php
         require_once("../../components/BackComponent/BackComponent.php");
-        BackComponent::render("", "", "Vos réservations", "");
+        BackComponent::render("", "", "Retour", "");
     ?>
 
-
+    <h2 class="title">Vos réservations</h2>
 
     <div class="reservation-list">
+
         <div class="reservation-list__container">
             <?php if (empty($clientReservationList)) : ?>
             <div class="reservation-list__container__empty">
