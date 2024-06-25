@@ -1,50 +1,80 @@
-body {
-  display: flex;
-  flex-direction: column;
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-body .main {
+
+.main {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f1f1;
+}
+
+.about-section {
+  background: url("/assets/images/pic.jpg") no-repeat left;
+  background-size: 55%;
+  background-color: #f1f1f1;
+  overflow: hidden;
+  padding: 100px 0;
+  width: 100%;
+}
+
+.inner-container {
+  width: 55%;
+  float: right;
+  background-color: #fdfdfd;
+  padding: 70px;
   display: flex;
   flex-direction: column;
   gap: 2em;
-  margin: 5em;
+  margin-top: 2em;
+  box-shadow: 0px 10px 13px -7px #000000, -6px 25px 33px 8px rgba(81, 24, 192, 0.41);
 }
-body .main .container {
-  display: flex;
-  align-items: center;
+.inner-container #dynamic-text {
+  color: #5118C0;
 }
-body .main .container .about-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 3em;
-  gap: 3em;
-}
-body .main .container .about-section #dynamic-text {
-  color: #307B5C;
-}
-body .main .container .about-section #typing-text {
-  border-right: 5px solid;
+
+.inner-container h2 {
+  border-right: 5px solid #5118C0;
   letter-spacing: 2px;
   white-space: nowrap;
   overflow: hidden;
-  font-size: 100px;
   animation: cursor 0.4s step-end infinite alternate;
   width: -moz-fit-content;
   width: fit-content;
 }
-body .main .container .about-section .sub-section {
-  text-align: center;
-  gap: 1em;
-  display: flex;
-  flex-direction: column;
-}
-body .main .container .about-section .sub-section p, body .main .container .about-section .sub-section h3, body .main .container .about-section .sub-section ul, body .main .container .about-section .sub-section h4 {
-  text-align: start;
+
+.para--18px {
+  font-size: 13px;
+  color: #545454;
+  line-height: 30px;
+  text-align: justify;
 }
 
-@keyframes cursor {
-  50% {
-    border-color: transparent;
+@media screen and (max-width: 1200px) {
+  .inner-container {
+    padding: 80px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .about-section {
+    background-size: 100%;
+    padding: 100px 40px;
+  }
+  .inner-container {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .about-section {
+    padding: 0;
+  }
+  .inner-container {
+    padding: 60px;
+  }
+  #typing-text {
+    font-size: 20px;
   }
 }/*# sourceMappingURL=aboutUs.css.map */
