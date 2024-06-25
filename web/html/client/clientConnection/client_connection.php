@@ -1,14 +1,21 @@
 <?php
 
+require_once '../../../services/SessionService.php'; // pour le menu du header
+$isAuthenticated = SessionService::isClientAuthenticated();
+
+if($isAuthenticated) {
+    header("Location: /");
+}
+
 if(isset($_GET["error"]) && $_GET["error"] == "loginFailed") {
     $_GET["error"] = "Mot de passe incorrect";
 }
 
 // Affichage des toasts
 // Service de session
-require_once '../../../services/SessionService.php';
 // Affichage des toasts
 SessionService::loadToast();
+
 
 ?>
 
