@@ -59,14 +59,16 @@ Header::render(true,false,$isAuthenticated,$_SERVER['REQUEST_URI']);
 
 <main class="global-ui">
 
-    <?php
-    require_once("../../components/BackComponent/BackComponent.php");
-    BackComponent::render("", "", "Vos réservations", "");
-    ?>
+
 
     <div class="bid">
 
         <div class="bid__container">
+
+            <?php
+            require_once("../../components/BackComponent/BackComponent.php");
+            BackComponent::render("", "", "Vos réservations", "");
+            ?>
 
             <h2 class="bid__container__title-page">Votre devis pour séjourné à <?= $housing->getAddress()->getCity() ?> :</h2>
 

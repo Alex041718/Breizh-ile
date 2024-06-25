@@ -25,14 +25,13 @@ hr {
 }
 @media (max-width: 1024px) {
   .bid {
-    padding-top: 8em;
     padding-bottom: 5em;
   }
 }
 .bid__container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin: 1em;
   gap: 2em;
@@ -82,8 +81,7 @@ hr {
 .bid__container__info__info-detail__description__image img {
   width: 220px;
   height: 170px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 5px;
 }
 .bid__container__info__info-detail__description__content {
@@ -131,4 +129,6 @@ hr {
 .bid__container__info__pay-recap__price-total div {
   display: flex;
   justify-content: space-between;
-}/*# sourceMappingURL=bid.css.map */
+}
+
+/*# sourceMappingURL=bid.css.map */

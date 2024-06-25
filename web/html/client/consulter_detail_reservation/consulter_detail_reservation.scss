@@ -6,19 +6,19 @@ body{
 }
 
 main {
-    margin-top: 135px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 
 
-    @media screen and (max-width: 1024px) {
-        margin-top: 75px;
-
-    }
     .title {
         display: flex;
         align-items: center;
         flex-direction: row;
         justify-content: center;
-        margin: 40px;
+        padding-bottom: 2em;
+
 
 
         .title__arrow {
@@ -44,14 +44,13 @@ main {
     }
 
     .informations {
+        background-color: $whiteColor;
+        border-radius: 10px;
+        padding: 2em;
         display: flex;
-        padding-inline: 50px;
-        padding-bottom: 100px;
 
         @media screen and (max-width: 1024px) {
             flex-direction: column;
-            padding-left: 25px;
-            padding-right: 25px;
         }
 
         .informations__left {

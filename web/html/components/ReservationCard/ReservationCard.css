@@ -8,6 +8,7 @@ main.global-ui {
   padding-left: 150px;
   padding-right: 150px;
   padding-top: 135px;
+  padding-bottom: 2em;
   background-color: #f6f6f6;
 }
 @media screen and (max-width: 1024px) {
@@ -83,7 +84,6 @@ p {
   padding-inline: 25px;
   background-color: #1D1D1D;
   color: white;
-  width: -moz-fit-content;
   width: fit-content;
   border-radius: 10px;
 }
@@ -152,12 +152,8 @@ p {
     margin: auto;
   }
 }
-.reservation-card:hover {
-  background-color: #f6f6f6;
-}
-.reservation-card:hover .reservation-card__img-container img,
-.reservation-card:hover .reservation-card__content {
-  background-color: #f6f6f6;
+.reservation-card :hover {
+  background-color: #e9e9e9;
 }
 .reservation-card__img-container img {
   width: 250px;
@@ -169,8 +165,7 @@ p {
     width: 100%;
     height: auto;
     max-height: 300px;
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
     border-radius: 10px 10px 0 0;
   }
 }
@@ -276,4 +271,6 @@ p {
   .reservation-card__content__right__date {
     justify-content: flex-start;
   }
-}/*# sourceMappingURL=ReservationCard.css.map */
+}
+
+/*# sourceMappingURL=ReservationCard.css.map */

@@ -113,15 +113,15 @@
 ?>
 
 
-    <main>
+    <main class="global-ui">
 
-
+        <?php
+        require_once("../../components/BackComponent/BackComponent.php");
+        BackComponent::render("", "", "Retour", "");
+        ?>
         <div class="title">
             <div class="title__arrow">
-                <?php
-                require_once("../../components/BackComponent/BackComponent.php");
-                BackComponent::render("", "", "Ma réservation", "");
-                ?>
+
 
             </div>
 

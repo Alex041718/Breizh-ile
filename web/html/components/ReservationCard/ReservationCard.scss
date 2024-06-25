@@ -15,18 +15,15 @@
   @media (max-width: 1024px) {
     flex-direction: column;
     height: 100%;
-    width: 100%; // Changez cette valeur selon vos besoins
+    width: 100%;
     margin: auto;
   }
 
-  &:hover {
-    background-color: variables.$grey6;
+  :hover {
+    background-color: variables.$lighterGrey5;
 
-    .reservation-card__img-container img,
-    .reservation-card__content {
-      background-color: variables.$grey6;
-    }
   }
+
 
   &__img-container {
     img {

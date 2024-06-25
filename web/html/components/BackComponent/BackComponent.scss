@@ -6,6 +6,10 @@
   flex-direction: row;
   align-items: center;
   gap: 0;
+  cursor: pointer;
+  width: fit-content;
+
+
 
 
 
@@ -16,6 +20,7 @@
     i {
       font-size: 20px;
       padding: 15px;
+      padding-left: 0;
       color : black;
       cursor: pointer;
     }
@@ -23,9 +28,10 @@
 
 
   &__text {
-    padding-bottom: 4px;
-    @media (max-width: 1024px) {
-      text-align: center;
+    padding-bottom: 2px;
+
+    :hover {
+      text-decoration: underline;
     }
   }
 }

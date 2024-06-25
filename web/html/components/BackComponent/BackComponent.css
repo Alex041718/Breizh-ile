@@ -5,6 +5,8 @@
   flex-direction: row;
   align-items: center;
   gap: 0;
+  cursor: pointer;
+  width: fit-content;
 }
 .back-component__arrow {
   all: unset;
@@ -12,16 +14,15 @@
 .back-component__arrow i {
   font-size: 20px;
   padding: 15px;
+  padding-left: 0;
   color: black;
   cursor: pointer;
 }
 .back-component__text {
-  padding-bottom: 4px;
+  padding-bottom: 2px;
 }
-@media (max-width: 1024px) {
-  .back-component__text {
-    text-align: center;
-  }
+.back-component__text :hover {
+  text-decoration: underline;
 }
 
 /*# sourceMappingURL=BackComponent.css.map */

@@ -29,7 +29,6 @@ hr {
     justify-content: center;
 
     @media (max-width: 1024px) {
-        padding-top: 8em;
         padding-bottom: 5em;
     }
 
@@ -38,7 +37,7 @@ hr {
 
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
         margin: 1em;
         gap: 2em;
