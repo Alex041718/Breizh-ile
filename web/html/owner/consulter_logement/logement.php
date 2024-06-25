@@ -52,7 +52,7 @@
     <link rel="stylesheet" href="/owner/consulter_logement/logement.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../style/ui.css">
-    <script src="/client/ficheLogement/logement.js"></script>
+    <script src="/client/ficheLogement/page.js"></script>
     <link rel="stylesheet" href="/client/ficheLogement/logement.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">

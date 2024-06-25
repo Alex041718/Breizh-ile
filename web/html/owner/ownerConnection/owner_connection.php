@@ -1,4 +1,13 @@
-<?php session_start(); ?>
+<?php session_start(); 
+
+require_once '../../../services/SessionService.php'; // pour le menu du header
+$isAuthenticated = SessionService::isOwnerAuthenticated();
+
+if($isAuthenticated) {
+    header("Location: /back/logements");
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
