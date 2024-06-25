@@ -84,6 +84,7 @@ p {
   padding-inline: 25px;
   background-color: #1D1D1D;
   color: white;
+  width: -moz-fit-content;
   width: fit-content;
   border-radius: 10px;
 }
@@ -131,6 +132,4 @@ p {
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important;
   color: #ffffff;
-}
-
-/*# sourceMappingURL=ui.css.map */
+}/*# sourceMappingURL=ui.css.map */

@@ -6,6 +6,7 @@
   align-items: center;
   gap: 0;
   cursor: pointer;
+  width: -moz-fit-content;
   width: fit-content;
 }
 .back-component__arrow {
@@ -23,6 +24,4 @@
 }
 .back-component__text :hover {
   text-decoration: underline;
-}
-
-/*# sourceMappingURL=BackComponent.css.map */
+}/*# sourceMappingURL=BackComponent.css.map */

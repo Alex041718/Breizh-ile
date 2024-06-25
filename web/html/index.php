@@ -112,6 +112,12 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                 let rawAccrobranche = <?= json_encode($_POST['accrobranche'] ?? null) ?>;
                 let rawRandonnee = <?= json_encode($_POST['randonnee'] ?? null) ?>;
 
+                let rawJardin = <?= json_encode($_POST['jardin'] ?? null) ?>;
+                let rawBalcon = <?= json_encode($_POST['balcon'] ?? null) ?>;
+                let rawTerrasse = <?= json_encode($_POST['terrasse'] ?? null) ?>;
+                let rawPiscine = <?= json_encode($_POST['piscine'] ?? null) ?>;
+                let rawJacuzzi = <?= json_encode($_POST['jacuzzi'] ?? null) ?>;
+
 
                 if(city) city = city.split(' ')[0];
 
@@ -170,7 +176,12 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                     const accrobranche = rawAccrobranche && isVeryFirst ? rawAccrobranche : (document.getElementById("accrobranche").checked === true ? 1 : 0);
                     const randonnee = rawRandonnee && isVeryFirst ? rawRandonnee : (document.getElementById("randonnee").checked === true ? 1 : 0);
                     
-
+                    const jardin = rawJardin && isVeryFirst ? rawJardin : (document.getElementById("jardin").checked === true ? 1 : 0);
+                    const balcon = rawBalcon && isVeryFirst ? rawBalcon : (document.getElementById("balcon").checked === true ? 1 : 0);
+                    const terrasse = rawTerrasse && isVeryFirst ? rawTerrasse : (document.getElementById("terrasse").checked === true ? 1 : 0);
+                    const piscine = rawPiscine && isVeryFirst ? rawPiscine : (document.getElementById("piscine").checked === true ? 1 : 0);
+                    const jacuzzi = rawJacuzzi && isVeryFirst ? rawJacuzzi : (document.getElementById("jacuzzi").checked === true ? 1 : 0);
+                    
                     if(isFirst) cpt = 0;
                     const itemsToHide = document.querySelectorAll(".show-more");
 
@@ -182,7 +193,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                     container.appendChild(loader);
 
                     var xmlhttp = new XMLHttpRequest();
-                    const params = `q=${cpt}&sort=${sort}&desc=${desc}&nbPerson=${nbPerson}&beginDate=${beginDate}&endDate=${endDate}&city=${city}&minPrice=${minPrice}&maxPrice=${maxPrice}&appartement=${appartement}&chalet=${chalet}&maison=${maison}&bateau=${bateau}&villa=${villa}&insol=${insol}&t1=${t1}&t2=${t2}&t3=${t3}&t4=${t4}&t5=${t5}&t6=${t6}&f1=${f1}&f2=${f2}&f3=${f3}&f4=${f4}&f5=${f5}&baignade=${baignade}&voile=${voile}&canoe=${canoe}&golf=${golf}&equitation=${equitation}&accrobranche=${accrobranche}&randonnee=${randonnee}`;
+                    const params = `q=${cpt}&sort=${sort}&desc=${desc}&nbPerson=${nbPerson}&beginDate=${beginDate}&endDate=${endDate}&city=${city}&minPrice=${minPrice}&maxPrice=${maxPrice}&appartement=${appartement}&chalet=${chalet}&maison=${maison}&bateau=${bateau}&villa=${villa}&insol=${insol}&t1=${t1}&t2=${t2}&t3=${t3}&t4=${t4}&t5=${t5}&t6=${t6}&f1=${f1}&f2=${f2}&f3=${f3}&f4=${f4}&f5=${f5}&baignade=${baignade}&voile=${voile}&canoe=${canoe}&golf=${golf}&equitation=${equitation}&accrobranche=${accrobranche}&randonnee=${randonnee}&jardin=${jardin}&balcon=${balcon}&terrasse=${terrasse}&piscine=${piscine}&jacuzzi=${jacuzzi}`;
 
                     xmlhttp.open("POST", "./components/HousingCard/getHousing.php", true);
 

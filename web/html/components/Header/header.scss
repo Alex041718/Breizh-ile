@@ -736,7 +736,7 @@ input[type=number] {
                 width: 100%;
             }
 
-            .popup__filter__container__category {
+            .popup__filter__container__category, .popup__filter__container__type, .popup__filter__container__amenagement, .popup__filter__container__activity {
                 display: flex;
                 flex-direction: column;
                 gap: 25px;

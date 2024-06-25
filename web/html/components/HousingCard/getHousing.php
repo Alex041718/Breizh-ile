@@ -81,7 +81,18 @@
     if(isset($_POST["randonnee"]) && $_POST["randonnee"] != "" && $_POST["randonnee"] != "null") $randonnee = $_POST["randonnee"];
     else $randonnee = null;
 
-    $housings = HousingService::GetHousingsByOffset($city, $beginDate, $endDate, $nbPerson, $minPrice, $maxPrice, $appartement, $chalet, $maison, $bateau, $villa, $insol, $t1, $t2, $t3, $t4, $t5, $t6, $f1, $f2, $f3, $f4, $f5, $baignade, $voile, $canoe, $golf, $equitation, $accrobranche, $randonnee, $q*9, $sort, $desc);
+    if(isset($_POST["jardin"]) && $_POST["jardin"] != "" && $_POST["jardin"] != "null") $jardin = $_POST["jardin"];
+    else $jardin = null;
+    if(isset($_POST["balcon"]) && $_POST["balcon"] != "" && $_POST["balcon"] != "null") $balcon = $_POST["balcon"];
+    else $balcon = null;
+    if(isset($_POST["terrasse"]) && $_POST["terrasse"] != "" && $_POST["terrasse"] != "null") $terrasse = $_POST["terrasse"];
+    else $terrasse = null;
+    if(isset($_POST["piscine"]) && $_POST["piscine"] != "" && $_POST["piscine"] != "null") $piscine = $_POST["piscine"];
+    else $piscine = null;
+    if(isset($_POST["jacuzzi"]) && $_POST["jacuzzi"] != "" && $_POST["jacuzzi"] != "null") $jacuzzi = $_POST["jacuzzi"];
+    else $jacuzzi = null;
+
+    $housings = HousingService::GetHousingsByOffset($city, $beginDate, $endDate, $nbPerson, $minPrice, $maxPrice, $appartement, $chalet, $maison, $bateau, $villa, $insol, $t1, $t2, $t3, $t4, $t5, $t6, $f1, $f2, $f3, $f4, $f5, $baignade, $voile, $canoe, $golf, $equitation, $accrobranche, $randonnee, $jardin, $balcon, $terrasse, $piscine, $jacuzzi, $q*9, $sort, $desc);
 
     if($housings != false && sizeof($housings) > 0) {
         for ($i=0; $i < count($housings); $i++) {

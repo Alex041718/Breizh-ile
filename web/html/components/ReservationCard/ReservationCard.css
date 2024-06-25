@@ -84,6 +84,7 @@ p {
   padding-inline: 25px;
   background-color: #1D1D1D;
   color: white;
+  width: -moz-fit-content;
   width: fit-content;
   border-radius: 10px;
 }
@@ -165,7 +166,8 @@ p {
     width: 100%;
     height: auto;
     max-height: 300px;
-    object-fit: cover;
+    -o-object-fit: cover;
+       object-fit: cover;
     border-radius: 10px 10px 0 0;
   }
 }
@@ -271,6 +273,4 @@ p {
   .reservation-card__content__right__date {
     justify-content: flex-start;
   }
-}
-
-/*# sourceMappingURL=ReservationCard.css.map */
+}/*# sourceMappingURL=ReservationCard.css.map */
