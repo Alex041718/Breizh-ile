@@ -43,14 +43,18 @@ class OwnerService extends Service
 
         $current_id = $pdo->lastInsertId();
 
-        $stmt = $pdo->prepare('INSERT INTO _Owner (ownerID, isValidated, identityCard) VALUES (:ownerID, 0, :identityCard);');
+        $stmt = $pdo->prepare('INSERT INTO _Owner (ownerID, isValidated, identityCardFront, identityCardBack, bankDetails, swiftCode, IBAN) VALUES (:ownerID, 0, :identityCardFront, :identityCardBack, :bankDetails, :swiftCode, :IBAN);');
 
         $stmt->execute(array(
             'ownerID' => $current_id,
-            'identityCard' => $owner->getIdentityCard(),
+            'identityCardFront' => $owner->getIdentityCardFront(),
+            'identityCardBack' => $owner->getIdentityCardBack(),
+            'bankDetails' => $owner->getBankDetails(),
+            'swiftCode' => $owner->getSwiftCode(),
+            'IBAN' => $owner->getIBAN(),
         ));
 
-        return new Owner($current_id, $owner->getIdentityCard(), $owner->getMail(), $owner->getFirstname(), $owner->getLastname(), $owner->getNickname(), $owner->getPassword(), $owner->getPhoneNumber(), $owner->getBirthDate(), $owner->getConsent(), $owner->getLastConnection(), $owner->getCreationDate(),$owner->getIsValidated(), $owner->getImage(), $owner->getGender(), $owner->getAddress(), null, null);
+        return new Owner($current_id, $owner->getMail(), $owner->getFirstname(), $owner->getLastname(), $owner->getNickname(), $owner->getPassword(), $owner->getPhoneNumber(), $owner->getBirthDate(), $owner->getConsent(), $owner->getLastConnection(), $owner->getCreationDate(),$owner->getIsValidated(), $owner->getIdentityCardFront(), $owner->getIdentityCardBack(), $owner->getBankDetails(), $owner->getSwiftCode(), $owner->getIBAN(), $owner->getImage(), $owner->getGender(), $owner->getAddress(), null, null);
     }
     public static function GetAllOwners()
     {
@@ -178,7 +182,6 @@ class OwnerService extends Service
 
         return new Owner(
             $row['ownerID'],
-            $row['identityCard'],
             $row['mail'],
             $row['firstname'],
             $row['lastname'],
@@ -190,6 +193,11 @@ class OwnerService extends Service
             $lastConnection,
             $creationDate,
             "true",
+            $row['identityCardFront'],
+            $row['identityCardBack'],
+            $row['bankDetails'],
+            $row['swiftCode'],
+            $row['IBAN'],
             $image,
             $gender,
             $address,

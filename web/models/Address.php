@@ -5,13 +5,19 @@ class Address
     private string $city;
     private string $postalCode;
     private string $postalAddress;
+    private string $complementAddress;
+    private string $streetNumber;
+    private string $country;
 
-    public function __construct(?int $addressID, string $city, string $postalCode, string $postalAddress)
+    public function __construct(?int $addressID, string $city, string $postalCode, string $postalAddress, string $complementAddress, string $streetNumber, string $country)
     {
         $this->addressID = $addressID;
         $this->city = $city;
         $this->postalCode = $postalCode;
         $this->postalAddress = $postalAddress;
+        $this->complementAddress = $complementAddress;
+        $this->streetNumber = $streetNumber;
+        $this->country = $country;
     }
 
     /**
@@ -78,6 +84,53 @@ class Address
         $this->postalAddress = $postalAddress;
     }
 
+    /**
+     * @return string
+     */
+    public function getComplementAddress(): string
+    {
+        return $this->complementAddress;
+    }
+
+    /**
+     * @param string $complementAddress
+     */
+    public function setComplementAddress(string $complementAddress): void
+    {
+        $this->complementAddress = $complementAddress;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStreetNumber(): string
+    {
+        return $this->streetNumber;
+    }
+
+    /**
+     * @param string $streetNumber
+     */
+    public function setStreetNumber(string $streetNumber): void
+    {
+        $this->streetNumber = $streetNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountry(): string
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param string $country
+     */
+    public function setCountry(string $country): void
+    {
+        $this->country = $country;
+    }
 
 }
 ?>
