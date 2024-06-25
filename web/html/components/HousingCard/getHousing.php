@@ -66,7 +66,22 @@
     if(isset($_POST["f5"]) && $_POST["f5"] != "" && $_POST["f5"] != "null") $f5 = $_POST["f5"];
     else $f5 = null;
 
-    $housings = HousingService::GetHousingsByOffset($city, $beginDate, $endDate, $nbPerson, $minPrice, $maxPrice, $appartement, $chalet, $maison, $bateau, $villa, $insol, $t1, $t2, $t3, $t4, $t5, $t6, $f1, $f2, $f3, $f4, $f5, $q*9, $sort, $desc);
+    if(isset($_POST["baignade"]) && $_POST["baignade"] != "" && $_POST["baignade"] != "null") $baignade = $_POST["baignade"];
+    else $baignade = null;
+    if(isset($_POST["voile"]) && $_POST["voile"] != "" && $_POST["voile"] != "null") $voile = $_POST["voile"];
+    else $voile = null;
+    if(isset($_POST["canoe"]) && $_POST["canoe"] != "" && $_POST["canoe"] != "null") $canoe = $_POST["canoe"];
+    else $canoe = null;
+    if(isset($_POST["golf"]) && $_POST["golf"] != "" && $_POST["golf"] != "null") $golf = $_POST["golf"];
+    else $golf = null;
+    if(isset($_POST["equitation"]) && $_POST["equitation"] != "" && $_POST["equitation"] != "null") $equitation = $_POST["equitation"];
+    else $equitation = null;
+    if(isset($_POST["accrobranche"]) && $_POST["accrobranche"] != "" && $_POST["accrobranche"] != "null") $accrobranche = $_POST["accrobranche"];
+    else $accrobranche = null;
+    if(isset($_POST["randonnee"]) && $_POST["randonnee"] != "" && $_POST["randonnee"] != "null") $randonnee = $_POST["randonnee"];
+    else $randonnee = null;
+
+    $housings = HousingService::GetHousingsByOffset($city, $beginDate, $endDate, $nbPerson, $minPrice, $maxPrice, $appartement, $chalet, $maison, $bateau, $villa, $insol, $t1, $t2, $t3, $t4, $t5, $t6, $f1, $f2, $f3, $f4, $f5, $baignade, $voile, $canoe, $golf, $equitation, $accrobranche, $randonnee, $q*9, $sort, $desc);
 
     if($housings != false && sizeof($housings) > 0) {
         for ($i=0; $i < count($housings); $i++) {

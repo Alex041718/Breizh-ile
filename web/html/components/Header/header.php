@@ -381,6 +381,71 @@ class Header
                                     </div>
                                 </div>
                             </div>
+                            <hr>
+                            <div class="popup__filter__container__activity">
+                                <h3>Activité</h3>
+                                <div class="popup__filter__container__choices">
+                                    <div class="popup__filter__container__choices__row">
+                                        <div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox"
+                                                id="baignade"
+                                                name="baignade"
+                                                value="' . (isset($_POST["baignade"]) ? $_POST["baignade"] : 1) . '"/>
+                                                <label class="para--14px" for="baignade">Baignade</label>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox" 
+                                                id="voile"
+                                                name="voile"
+                                                value="' . (isset($_POST["voile"]) ? $_POST["voile"] : 1) . '"/>
+                                                <label class="para--14px" for="voile">Voile</label>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox"
+                                                id="canoe"
+                                                name="canoe"
+                                                value="' . (isset($_POST["canoe"]) ? $_POST["canoe"] : 1) . '"/>
+                                                <label class="para--14px" for="canoe">Canoë</label>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox"
+                                                id="golf"
+                                                name="golf"
+                                                value="' . (isset($_POST["golf"]) ? $_POST["golf"] : 1) . '"/>
+                                                <label class="para--14px" for="golf">Golf</label>
+                                            </div>  
+                                        </div>
+                                    </div>
+
+                                    <div class="popup__filter__container__choices__row">
+                                        <div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox" 
+                                                id="equitation"
+                                                name="equitation"
+                                                value="' . (isset($_POST["equitation"]) ? $_POST["equitation"] : 1) . '"/>
+                                                <label class="para--14px" for="equitation">Equitation</label>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox"
+                                                id="accrobranche"
+                                                name="accrobranche"
+                                                value="' . (isset($_POST["accrobranche"]) ? $_POST["accrobranche"] : 1) . '"/>
+                                                <label class="para--14px" for="accrobranche">Accrobranche</label>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox"
+                                                id="randonnee"
+                                                name="randonnee"
+                                                value="' . (isset($_POST["randonnee"]) ? $_POST["randonnee"] : 1) . '"/>
+                                                <label class="para--14px" for="randonnee">Randonnée</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="popup__filter__bottom">
                             <button type="submit" id="filter_submit" class="btn">Valider</button>
