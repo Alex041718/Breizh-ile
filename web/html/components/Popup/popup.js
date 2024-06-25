@@ -16,6 +16,8 @@ export function loadPopUp() {
             } 
         })
 
+        if(!popupCloseBtn) return;
+
         popupCloseBtn.addEventListener("click", function closePopup() {
             popup.classList.remove("popup--open");
             document.body.style.overflow = '';
