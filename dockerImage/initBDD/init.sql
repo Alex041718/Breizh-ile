@@ -88,7 +88,7 @@ CREATE TABLE _Image (
 -- Création de la table `User`
 CREATE TABLE _User (
     userID serial PRIMARY KEY,
-    mail varchar(255) UNIQUE,
+    mail varchar(255),
     lastname varchar(100),
     firstname varchar(100),
     nickname varchar(50),

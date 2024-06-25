@@ -80,15 +80,24 @@ $isValid = $owner ? true : false;
                         echo '<div class="connectionContainer__box__line">';
                             Input::render("connection__input", "birthdate", "date", "Date de naissance", "birthDate", "Nom", true);
                             Input::render("connection__input", "phone", "tel", "Téléphone", "phoneNumber", "Numéro de téléphone", true);
+                        echo '</div>
+                            <div class="connectionContainer__box__line">';
+                            Input::render("connection__input", "IDCardFront", "file", "Carte d'identité Recto", "identityCardFront", null, true);
+                            Input::render("connection__input", "IDCardBack", "file", "Carte d'identité Verso", "identityCardBack", null, true);
                         echo '</div>';
-                        Input::render("connection__input", "IDCard", "file", "Carte d'identité", "identityCard", null, true);
                         
                     echo '</div>
 
-                    <div class="form__section" id="page3">';
+                    <div class="form__section" id="page4">';
                         Input::render("connection__input", "password", "password", "Mot de passe", "password", "Entrez votre mot de passe", true);
                         Input::render("connection__input confirm__input", "confirm", "password", null, "confirm", "Confirmer votre mot de passe", true);
                         Input::render("consent__input", "confirm", "checkbox", "Je consens à ce que mes données soient collectées et stockées pour le bon fonctionnement du site.", "consent", "", true);
+                    echo '</div>' ;
+
+                    echo '<div class="form__section" id="page3">';
+                        Input::render("connection__input", "password", "text", "RIB", "bankDetails", "Entrez votre RIB", true);
+                        Input::render("connection__input confirm__input", "confirm", "text", "IBAN", "IBAN", "Entrez votre IBAN", true);
+                        Input::render("connection__input confirm__input", "confirm", "text", "BIC", "swiftCode", "Entrez votre BIC", true);
                     echo '</div>' ;
 
                     echo '<div class="connectionContainer__box__line">';

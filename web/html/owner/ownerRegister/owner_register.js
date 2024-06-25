@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const page1 = document.getElementById("page1");
     const page2 = document.getElementById("page2");
     const page3 = document.getElementById("page3");
+    const page4 = document.getElementById("page4");
 
     const submitBtn = document.getElementById("submitBtn");
     const previousBtn = document.getElementById("previousBtn");
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
     page1.style.display = "block";
     page2.style.display = "none";
     page3.style.display = "none";
+    page4.style.display = "none";
     submitBtn.style.display = "none";
     previousBtn.style.opacity = "0";
     previousBtn.style.pointerEvents = "none"
@@ -21,7 +23,11 @@ document.addEventListener("DOMContentLoaded", function() {
     previousBtn.addEventListener("click", function() {
         nextBtn.style.display = "block";
         submitBtn.style.display = "none";
-        if(page3.style.display === "block") {
+        if(page4.style.display === "block") {
+            page4.style.display = "none";
+            page3.style.display = "block";
+        }
+        else if(page3.style.display === "block") {
             page2.style.display = "block";
             page3.style.display = "none";
         }
@@ -34,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 
     nextBtn.addEventListener("click", function() {
-        console.log(page2.style.display)
         previousBtn.style.opacity = "1";
         previousBtn.style.pointerEvents = "all"
         
@@ -42,9 +47,13 @@ document.addEventListener("DOMContentLoaded", function() {
             page1.style.display = "none";
             page2.style.display = "block";
         }
-        else {
+        else if(page2.style.display === "block") {
             page2.style.display = "none";
             page3.style.display = "block";
+        }
+        else {
+            page3.style.display = "none";
+            page4.style.display = "block";
             submitBtn.style.display = "block";
             nextBtn.style.display = "none";
         }
