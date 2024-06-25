@@ -30,6 +30,7 @@ $owner_mail = $owner->getMail();
 $owner_isVerified = $owner->getIsValidated();
 
 $isAuthenticated = SessionService::isClientAuthenticated();
+echo "test";
 
 $owner_housings = HousingService::getAllHousingsByOwnerID($_GET['ownerID']);
 
@@ -45,10 +46,16 @@ $annonceText = ($nb_housing > 1 ? $nb_housing . " annonces" : ($nb_housing === 0
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/client/consulter_profil/consulter_profil.css" class="css">
+    <link rel="stylesheet" href="/style/ui.css" class="css">
 </head>
 <body>
     <?php Header::render(true,false, $isAuthenticated, '/client/reservations-liste'); ?>
-    <main>
+    <main class="global-ui">
+        <?php
+        require_once("../../components/BackComponent/BackComponent.php");
+        BackComponent::render("backButton", "", "Retour", "");
+        ?>
+        <div class="page-content">
         <div class="topcontent">
             <div class="topcontent__presentation">
                 <img src=<?= $owner_pp ?> alt="Photo de profil">
@@ -90,6 +97,7 @@ $annonceText = ($nb_housing > 1 ? $nb_housing . " annonces" : ($nb_housing === 0
                     echo "<p class='nothing'>Le propriétaire n'a aucun logement</p>";
                  } ?>
             </div>
+        </div>
         </div>
     </main>
     <?php

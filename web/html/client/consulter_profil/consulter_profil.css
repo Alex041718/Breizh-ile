@@ -84,7 +84,6 @@ p {
   padding-inline: 25px;
   background-color: #1D1D1D;
   color: white;
-  width: -moz-fit-content;
   width: fit-content;
   border-radius: 10px;
 }
@@ -141,95 +140,99 @@ body {
 
 main {
   height: auto;
-  padding-top: 50px !important;
-  padding-inline: 100px;
   box-sizing: border-box;
   color: #1D1D1D;
-  padding-bottom: 100px;
+}
+main .page-content {
+  background-color: #FFFFFF;
+  padding: 1em;
+  border-radius: 10px;
 }
 @media screen and (max-width: 1300px) {
-  main {
+  main .page-content {
     padding-inline: 25px;
   }
 }
-main .nothing {
+main .page-content .nothing {
   text-align: center;
   width: 100%;
   grid-column: span 3/span 3;
 }
-main hr {
+main .page-content hr {
   height: 1px;
   width: 90%;
   margin-block: 50px;
   background-color: #828282;
 }
-main .housings-content {
+main .page-content .housings-content {
   display: flex;
   flex-direction: column;
   gap: 50px;
 }
-main .housings-content__items {
+main .page-content .housings-content__items {
   display: grid;
   gap: 50px;
   grid-template-columns: repeat(3, auto);
 }
 @media screen and (max-width: 1300px) {
-  main .housings-content__items {
+  main .page-content .housings-content__items {
     grid-template-columns: repeat(2, auto);
   }
 }
 @media screen and (max-width: 950px) {
-  main .housings-content__items {
+  main .page-content .housings-content__items {
     display: flex;
     flex-direction: column;
   }
 }
-main .topcontent {
+main .page-content .topcontent {
   padding-block: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 @media (max-width: 1024px) {
-  main .topcontent {
+  main .page-content .topcontent {
     flex-direction: column;
     align-items: baseline;
     gap: 25px;
   }
 }
-main .topcontent__presentation {
+main .page-content .topcontent__presentation {
   display: flex;
   gap: 25px;
   align-items: center;
 }
-main .topcontent__presentation p {
+main .page-content .topcontent__presentation p {
   opacity: 0.7;
 }
-main .topcontent__presentation img {
+main .page-content .topcontent__presentation img {
   border-radius: 10px;
 }
-main .bottomcontent {
+main .page-content .bottomcontent {
   display: flex;
 }
 @media (max-width: 1024px) {
-  main .bottomcontent {
+  main .page-content .bottomcontent {
     flex-direction: column;
     gap: 15px;
   }
 }
-main .bottomcontent__column {
+main .page-content .bottomcontent__column {
   display: flex;
   flex-direction: column;
   gap: 15px;
   width: 50%;
 }
 @media (max-width: 1024px) {
-  main .bottomcontent__column {
+  main .page-content .bottomcontent__column {
     width: 100%;
   }
 }
-main .bottomcontent__column__info {
+main .page-content .bottomcontent__column__info {
   display: flex;
   gap: 5px;
   align-items: center;
-}/*# sourceMappingURL=consulter_profil.css.map */
+}
+
+/*# sourceMappingURL=consulter_profil.css.map */
