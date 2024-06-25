@@ -196,6 +196,7 @@ bool check_authentification(Packet* packet, char* response) {
         free(requested_operation->requested_packet);
         free(requested_operation);
         requested_operation = NULL;
+        connection_closed = true;
     }
 
     return true;
@@ -237,7 +238,6 @@ void handle_header(Packet* packet, char* response) {
         } else {
             snprintf(response, RESPONSE_BUFFER_SIZE, "AUTH_KO\n");
             connection_closed = true;
-            number_authentification_attempts = 0;
 
             // Free the memory and reset the requested operation
             free(requested_operation->requested_packet);
@@ -248,7 +248,6 @@ void handle_header(Packet* packet, char* response) {
         handle_route(packet, response);
     } else {
         snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLe header ne correspond pas à une commande connue;\n");
-
     }
 }
 
@@ -482,6 +481,7 @@ int main(int argc, char* argv[]) {
             first_request = true;
             authentification_ok = false;
             connection_initialized_with_ok = false;
+            number_authentification_attempts = 0;
         }
     }
 

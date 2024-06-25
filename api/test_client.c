@@ -27,6 +27,7 @@ bool is_server_ok();
 void send_custom_request();
 void send_request(Packet* packet, char* response);
 void create_api_key();
+bool is_number(char* str);
 
 void print_help() {
     printf("Commandes disponibles:\n");

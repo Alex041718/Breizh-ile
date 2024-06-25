@@ -110,6 +110,8 @@ bool is_server_ok() {
     printf("Vérification du serveur\n");
     send_request(packet, response);
 
+    printf("Réponse reçue: %s\n", response);
+
     if (strcmp(response, "OK\n") == 0) {
         printf(GREEN "Serveur en ligne\n" RESET);
         return true;
@@ -142,6 +144,7 @@ void send_custom_request() {
 void send_request(Packet* packet, char* response) {
     int sock = 0;
     struct sockaddr_in serv_addr;
+    char buffer[BUFFER_SIZE] = {0};
     char message[BUFFER_SIZE*2] = {0};
     
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -164,28 +167,36 @@ void send_request(Packet* packet, char* response) {
         return;
     }
    
-    snprintf(message, sizeof(message), "%s\n%s\n%s\n", packet->header, packet->path, packet->body);
+    // Envoyer le message
+    if (strlen(packet->path) > 0 || strlen(packet->body) > 0) {
+        snprintf(message, BUFFER_SIZE*2, "%s\n%s\n%s\n", packet->header, packet->path, packet->body);
+    } else if (strlen(packet->header) > 0) {
+        snprintf(message, BUFFER_SIZE*2, "%s\n", packet->header);
+    }
+
     send(sock, message, strlen(message), 0);
     printf("Message envoyé: \n%s\n", message);
     
-    memset(response, 0, BUFFER_SIZE);
-    int valread = read(sock, response, BUFFER_SIZE);
+    // Recevoir la réponse
+    memset(buffer, 0, BUFFER_SIZE);
+    int valread = read(sock, buffer, BUFFER_SIZE);
+    snprintf(response, BUFFER_SIZE, "%s", buffer);
 
     if (strcmp(response, "AUTH?\n") == 0) {
         printf("Authentification requise\n");
-        authenticate();
+        authenticate(response);
     }
 
     close(sock);
 }
 
-void authenticate() {
+void authenticate(char* response) {
     char auth_type[10];
     char credentials[256];
+    
     Packet* packet = malloc(sizeof(Packet));
     strcpy(packet->header, "AUTH");
     strcpy(packet->path, "/api/auth");
-    char response[BUFFER_SIZE];
 
     printf("Choisissez le type d'authentification (email/api): ");
     fgets(auth_type, sizeof(auth_type), stdin);
@@ -203,12 +214,12 @@ void authenticate() {
 
         snprintf(credentials, sizeof(credentials), "email=%s;password=%s;", email, password);
     } else if (strcmp(auth_type, "api") == 0) {
-        char api_key[65];
+        char api_key[66];
         printf("Entrez votre clé API: ");
         fgets(api_key, sizeof(api_key), stdin);
         api_key[strcspn(api_key, "\n")] = 0;
 
-        snprintf(credentials, sizeof(credentials), "api_key=%s;", api_key);
+        snprintf(credentials, sizeof(credentials), "api-key=%s;", api_key);
     } else {
         printf(RED "Type d'authentification invalide\n" RESET);
         return;
