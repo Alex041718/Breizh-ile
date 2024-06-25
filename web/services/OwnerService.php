@@ -6,7 +6,6 @@ require_once __ROOT__.'/models/Owner.php';
 require_once 'ImageService.php';
 require_once 'AddressService.php';
 require_once 'GenderService.php';
-
 class OwnerService extends Service
 {
 
