@@ -622,6 +622,11 @@ input[type=number] {
   width: 100%;
   flex-direction: row;
   margin: 5px;
+  align-items: center;
+}
+.popup__filter .popup__content .popup__filter__container .popup__filter__container__choices .popup__filter__container__choices__row div .popup__filter__box input {
+  width: 20px;
+  height: 20px;
 }
 .popup__filter .popup__content .popup__filter__container .popup__filter__container__choices .popup__filter__container__choices__row div .popup__filter__box label {
   margin-left: 3px;
