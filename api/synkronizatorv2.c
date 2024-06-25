@@ -371,24 +371,24 @@ void get_list_housings(Packet* packet, char* response) {
     }
 
     // Get the superAdmin attribute
-    BodyAttribute* super_admin_attribute = get_body_attribute(body_attributes, "superAdmin");
-    if (super_admin_attribute == NULL) {
-        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nL'attribut 'superAdmin' est manquant;\n");
-        return;
-    }
+    // BodyAttribute* super_admin_attribute = get_body_attribute(body_attributes, "superAdmin");
+    // if (super_admin_attribute == NULL) {
+    //     snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nL'attribut 'superAdmin' est manquant;\n");
+    //     return;
+    // }
 
-    if (strcmp(super_admin_attribute->value, "0") != 0 && strcmp(super_admin_attribute->value, "1") != 0) {
-        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLa valeur de l'attribut 'superAdmin' n'est pas valide, elle doit être '0' ou '1';\n");
-        return;
-    }
+    // if (strcmp(super_admin_attribute->value, "0") != 0 && strcmp(super_admin_attribute->value, "1") != 0) {
+    //     snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLa valeur de l'attribut 'superAdmin' n'est pas valide, elle doit être '0' ou '1';\n");
+    //     return;
+    // }
 
-    if (atoi(super_admin_attribute->value) && !is_user_admin(user_id_authentificated)) {
-        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=403;message=Accès interdit\nVous n'avez pas les droits pour effectuer cette action;\n");
-        return;
-    }
+    // if (atoi(super_admin_attribute->value) && !is_user_admin(user_id_authentificated)) {
+    //     snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=403;message=Accès interdit\nVous n'avez pas les droits pour effectuer cette action;\n");
+    //     return;
+    // }
 
     // We try to get the housings
-    char* housings = get_housings(atoi(user_id_attribute->value), atoi(super_admin_attribute->value));
+    char* housings = get_housings(atoi(user_id_attribute->value), is_user_admin(user_id_authentificated));
     if (housings == NULL) {
         snprintf(response, RESPONSE_BUFFER_SIZE, "INTERNAL_SERVER_ERROR\ncode=500;message=Erreur interne du serveur\nLes logements n'ont pas pu être récupérés;\n");
         return;

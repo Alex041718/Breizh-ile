@@ -9,7 +9,7 @@
 #include "utils.h"
 
 #define SERVER_IP "127.0.0.1"
-#define SERVER_PORT 8081
+#define SERVER_PORT 8084
 #define BUFFER_SIZE 4096
 
 #define RESET "\033[0m"
@@ -266,6 +266,7 @@ void create_api_key() {
 }
 
 void get_housings() {
+    char user_id[10], is_superadmin[3];
     Packet* packet = malloc(sizeof(Packet));
     strcpy(packet->header, "ENTRYPOINT");
     strcpy(packet->path, "/api/get-housings");
@@ -273,6 +274,13 @@ void get_housings() {
 
     if (!is_server_ok()) return;
 
+    do {
+        printf("Entrez l'ID de l'utilisateur: ");
+        fgets(user_id, sizeof(user_id), stdin);
+        user_id[strcspn(user_id, "\n")] = 0;
+    } while (strcmp(user_id, "0") == 0 || !is_number(user_id));
+
+    snprintf(packet->body, sizeof(packet->body), "userID=%s;", user_id);
     send_request(packet, response);
     printf("Liste des logements:\n%s\n", response);
 }

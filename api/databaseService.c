@@ -147,11 +147,14 @@ int get_user_id_from_api_key(char* api_key) {
 
 bool check_user_credentials(char* email, char* password) {
     char query[1024];
-    snprintf(query, sizeof(query), "SELECT password FROM _User WHERE mail='%s'", email);
+    snprintf(query, sizeof(query), "SELECT * FROM _Admin");
 
     MYSQL* conn = init_database();
     MYSQL_RES* res;
     MYSQL_ROW row;
+
+    printf("LE CACA\n");
+    printf("%s\n", row[1]);
 
     if (mysql_query(conn, query)) {
         fprintf(stderr, "Error querying database: %s\n", mysql_error(conn));
