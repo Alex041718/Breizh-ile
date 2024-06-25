@@ -57,59 +57,36 @@ require_once("../../../services/OwnerService.php");
 
         }
 
-        $housingTitle       = "";
-        $housingShortDesc   = "";
-        $housingDesc        = "";
-        $housingImg         = "";
-        $housingAddress     = "";
-        $housingPostalCode  = "";
-        $housingCity        = "";
-        $housingAddressLabel= "";
-        $housingLongitude   = "";
-        $housingLatitude    = "";
-        $housingPriceHT     = "";
-        $housingBeginDate   = "";
-        $housingEndDate     = "";
-        $housingCategory    = "";
-        $housingType        = "";
-        $housingSurface     = "";
-        $housingNbRooms     = "";
-        $housingNbSimpleBed = "";
-        $housingNbDoubleBed = "";
-        $housingNbPerson    = "";
+        $housingTitle = $housing->getTitle() ?? "";
+        $housingShortDesc = $housing->getShortDesc() ?? "";
+        $housingDesc = $housing->getLongDesc() ?? "";
+        $housingImg = $housing->getImage()->getImageSrc() ?? "";
+
+        $housingAddress = $housing->getAddress();
+        $housingPostalCode = $housingAddress->getPostalCode() ?? "";
+        $housingCity = $housingAddress->getCity() ?? "";
+        $housingCountry = $housingAddress->getCountry() ?? "";
+        $housingComplementAddress = $housingAddress->getComplementAddress() ?? "";
+        $housingStreetNumber = $housingAddress->getStreetNumber() ?? "";
+        $housingAddressLabel = $housingAddress->getPostalAddress() ?? "";
+        $housingLongitude = $housing->getLongitude() ?? "";
+        $housingLatitude = $housing->getLatitude() ?? "";
 
 
-        if(isset($housing)){
+        $housingPriceHT = $housing->getPriceExcl() ?? "";
+        $housingBeginDate = $housing->getBeginDate() ? $housing->getBeginDate()->format('Y-m-d') : '';
+        $housingEndDate = $housing->getEndDate()->format('Y-m-d') ?? "";
+        $housingCategory = $housing->getCategory()->getLabel() ?? "";
+        $housingType = $housing->getType()->getLabel() ?? "";
+        $housingSurface = $housing->getSurfaceInM2() ?? "";
+        $housingNbRooms = $housing->getNbRoom() ?? "";
+        $housingNbSimpleBed = $housing->getNbSimpleBed() ?? "";
+        $housingNbDoubleBed = $housing->getNbDoubleBed() ?? "";
+        $housingNbPerson = $housing->getNbPerson() ?? "";
 
-            //Onglet description
-            $housingTitle = $housing->getTitle();
-            $housingShortDesc = $housing->getShortDesc();
-            $housingDesc = $housing->getLongDesc();
-            $housingImg  = $housing->getImage()->getImageSrc();
 
-//            Onglet localisation
-            $housingAddress = $housing->getAddress();
-            $housingPostalCode = $housingAddress->getPostalCode();
-            $housingCity = $housingAddress->getCity();
-            $housingAddressLabel = $housingAddress->getPostalAddress();
-            $housingLongitude = $housing->getLongitude();
-            $housingLatitude = $housing->getLatitude();
-
-//            Onglet caractéristiques
-            $housingPriceHT = $housing->getPriceExcl();
-            $housingBeginDate = $housing->getBeginDate() ? $housing->getBeginDate()->format('Y-m-d') : '';
-            $housingEndDate = $housing->getEndDate()->format('Y-m-d');
-            $housingCategory = $housing->getCategory()->getLabel();
-            $housingType = $housing->getType()->getLabel();
-            $housingSurface = $housing->getSurfaceInM2();
-            $housingNbRooms = $housing->getNbRoom();
-            $housingNbSimpleBed = $housing->getNbSimpleBed();
-            $housingNbDoubleBed = $housing->getNbDoubleBed();
-            $housingNbPerson = $housing->getNbPerson();
-        }
 
     ?>
-
     <main>
         <nav>
             <ul>
@@ -140,9 +117,14 @@ require_once("../../../services/OwnerService.php");
                         <section>
                             <section class="inline">
                                 <?php Input::render("half content__input--large", "postalCode", "text", "Code Postal", "postalCode", "Ex: 29200", true, $housingPostalCode, 0, 5, "[0-9]{5}"); ?>
+                                <?php Input::render("wide content__input--large", "country", "text", "Pays", "country", "Pays où se situe le logement", false, $housingCountry, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
                                 <?php Input::render("wide content__input--large", "city", "text", "Ville", "city", "Entrez la ville de votre logement", true, $housingCity, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
                             </section>
-                            <?php Input::render("content__input--large", "postalAddress", "text", "Addresse", "postalAddress", "Entrez l'adresse de votre logement", true, $housingAddressLabel, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+                            <section class="inline">
+                                <?php Input::render("half content__input--large", "complementAddress", "text", "Complément d'adresse", "complementAddress", "", false, $housingComplementAddress, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+                                <?php Input::render("half content__input--large", "streetNumber", "text", "Numéro de rue", "streetNumber", "", false, $housingStreetNumber, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+                                <?php Input::render("content__input--large", "postalAddress", "text", "Adresse", "postalAddress", "Entrez l'adresse de votre logement", true, $housingAddressLabel, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+                            </section>
                             <section class="inline">
                                 <?php Input::render("content__input--large", "longitude", "text", "Longitude", "longitude", "Ex: 48.202047", false, $housingLongitude, 0, 100, '^-?([0-8]?[0-9]|90)(\.[0-9]{1,10})$'); ?>
                                 <?php Input::render("content__input--large", "latitude", "text", "Latitude", "latitude", "Ex: -2.932644", false, $housingLatitude, 0, 100, '^-?([0-9]{1,2}|1[0-7][0-9]|180)(\.[0-9]{1,10})$'); ?>
@@ -159,8 +141,8 @@ require_once("../../../services/OwnerService.php");
                     <span class="separator"></span>
                     <section class="content__up">
                         <?php Input::render("content__input--large", "priceHT", "text", "Prix par nuit", "priceHT", "Prix HT", true, $housingPriceHT, 0, 8, '[0-9]+\.[0-9]{1,2}'); ?>
-                        <?php Input::render("content__input--large", "beginDate", "date", "Date minimale", "beginDate", "Entrez la date minimale", false, $housingBeginDate, 0, 40, '(^0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4}$)'); ?>
-                        <?php Input::render("content__input--large", "endDate", "date", "Date maximale", "endDate", "Entrez la date maximale", false, $housingEndDate, 0, 40, '(^0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4}$)'); ?>
+                        <?php Input::render("content__input--large", "beginDate", "text", "Date minimale", "beginDate", "Entrez la date minimale", false, $housingBeginDate, 0, 40, '(^0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4}$)'); ?>
+                        <?php Input::render("content__input--large", "endDate", "text", "Date maximale", "endDate", "Entrez la date maximale", false, $housingEndDate, 0, 40, '(^0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4}$)'); ?>
                     </section>
                     <p>Spécifications</p>
                     <span class="separator"></span>

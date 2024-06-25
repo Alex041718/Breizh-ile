@@ -58,24 +58,86 @@ class HousingService extends Service
         $pdo = self::getPDO();
 
         // Mettre à jour le logement
-        $stmt = $pdo->prepare(
-        'UPDATE _Housing SET 
-                title = :title
-            WHERE housingID = :housingID');
+//        $stmt = $pdo->prepare(
+//        'UPDATE _Housing SET
+//                title = :title
+//            WHERE housingID = :housingID');
 
-        $housingId = $housing->getHousingID();
+        $stmt = $pdo->prepare('UPDATE _Housing SET
+                    title = :title,
+                    shortDesc = :shortDesc,
+                    longDesc = :longDesc,
+                    priceExcl = :priceExcl,
+                    priceIncl = :priceIncl,
+                    nbPerson = :nbPerson,
+                    nbRoom = :nbRoom,
+                    nbDoubleBed = :nbDoubleBed,
+                    nbSimpleBed = :nbSimpleBed,
+                    longitude = :longitude,
+                    latitude = :latitude,
+                    isOnline = :isOnline,
+                    noticeCount = :noticeCount,
+                    beginDate = :beginDate,
+                    endDate = :endDate,
+                    creationDate = :creationDate,
+                    imageID = :imageID,
+                    surfaceInM2 = :surfaceInM2,
+                    typeID = :typeID,
+                    categoryID = :categoryID,
+                    addressID = :addressID,
+                    ownerID = :ownerID
+                WHERE housingID = :housingID');
+//
         $title = $housing->getTitle();
-
+        $shortDesc = $housing->getShortDesc();
+        $longDesc = $housing->getLongDesc();
+        $priceExcl = $housing->getPriceExcl();
+        $priceIncl = $housing->getPriceIncl();
+        $nbPerson = $housing->getNbPerson();
+        $nbRoom = $housing->getNbRoom();
+        $nbDoubleBed = $housing->getNbDoubleBed();
+        $nbSimpleBed = $housing->getNbSimpleBed();
+        $longitude = $housing->getLongitude();
+        $latitude = $housing->getLatitude();
+        $isOnline = $housing->getIsOnline();
+        $noticeCount = $housing->getNoticeCount();
+        $beginDate = $housing->getBeginDate()->format('Y-m-d H:i:s');
+        $endDate = $housing->getEndDate()->format('Y-m-d H:i:s');
+        $creationDate = $housing->getCreationDate()->format('Y-m-d H:i:s');
+        $imageID = $housing->getImage()->getImageID();
+        $surfaceInM2 = $housing->getSurfaceInM2();
+        $typeID = $housing->getType()->getTypeID();
+        $categoryID = $housing->getCategory()->getCategoryID();
+        $addressID = $housing->getAddress()->getAddressID();
+        $ownerID = $housing->getOwner()->getOwnerID();
+        $housingId = $housing->getHousingID();
+//
         $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':shortDesc', $shortDesc);
+        $stmt->bindParam(':longDesc', $longDesc);
+        $stmt->bindParam(':priceExcl', $priceExcl);
+        $stmt->bindParam(':priceIncl', $priceIncl);
+        $stmt->bindParam(':nbPerson', $nbPerson);
+        $stmt->bindParam(':nbRoom', $nbRoom);
+        $stmt->bindParam(':nbDoubleBed', $nbDoubleBed);
+        $stmt->bindParam(':nbSimpleBed', $nbSimpleBed);
+        $stmt->bindParam(':longitude', $longitude);
+        $stmt->bindParam(':latitude', $latitude);
+        $stmt->bindParam(':isOnline', $isOnline);
+        $stmt->bindParam(':noticeCount', $noticeCount);
+        $stmt->bindParam(':beginDate', $beginDate);
+        $stmt->bindParam(':endDate', $endDate);
+        $stmt->bindParam(':creationDate', $creationDate);
+        $stmt->bindParam(':imageID', $imageID);
+        $stmt->bindParam(':surfaceInM2', $surfaceInM2);
+        $stmt->bindParam(':typeID', $typeID);
+        $stmt->bindParam(':categoryID', $categoryID);
+        $stmt->bindParam(':addressID', $addressID);
+        $stmt->bindParam(':ownerID', $ownerID);
         $stmt->bindParam(':housingID', $housingId);
 
         $stmt->execute();
-//
-//            if ($stmt->rowCount() > 0) {
-//                echo "Mise à jour réussie.";
-//            } else {
-//                echo "Aucune mise à jour effectuée.";
-//            }
+
 
         return new Housing(
             $housing->getHousingID(),
@@ -104,6 +166,17 @@ class HousingService extends Service
         );
 
     }
+
+//
+//            if ($stmt->rowCount() > 0) {
+//                echo "Mise à jour réussie.";
+//            } else {
+//                echo "Aucune mise à jour effectuée.";
+//            }
+
+
+//
+//    }
 
 
     public static function HousingHandler(array $row): Housing

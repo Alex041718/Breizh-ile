@@ -166,13 +166,36 @@ addButtonActivities.addEventListener("click", () => {
 });
 
 buttonValidate.addEventListener("click", () => {
+    console.log("validate");
     let xhr = new XMLHttpRequest();
     const inputFile = document.getElementsByName("file-name")[0];
-    let params = `title=${document.getElementById("title").querySelector("input").value}&shortDesc=${document.getElementById("shortdesc").querySelector("textarea").value}&longDesc=${document.getElementById("longdesc").querySelector("textarea").value}&price=${document.getElementById("priceHT").querySelector("input").value}&nbPerson=${document.getElementById("nbPerson").querySelector("input").value}&nbRooms=${document.getElementById("nbRooms").querySelector("input").value}&nbSimpleBed=${document.getElementById("nbSimpleBed").querySelector("input").value}&nbDoubleBed=${document.getElementById("nbDoubleBed").querySelector("input").value}&beginDate=${document.getElementById("beginDate").querySelector("input").value.split("/").reverse().join("-")}&endDate=${document.getElementById("endDate").querySelector("input").value.split("/").reverse().join("-")}&surfaceInM2=${document.getElementById("surface").querySelector("input").value}&latitude=${document.getElementById("latitude").querySelector("input").value}&longitude=${document.getElementById("longitude").querySelector("input").value}&postalAddress=${document.getElementById("postalAddress").querySelector("input").value}&city=${document.getElementById("city").querySelector("input").value}&postalCode=${document.getElementById("postalCode").querySelector("input").value}&arrangements=${arrangements.join(",")}&activities=${activities.map(activity => activity.join("|")).join(",")}&image=${inputFile.textContent}&type=${document.getElementById("type").querySelector("select").selectedIndex}&category=${document.getElementById("category").querySelector("select").selectedIndex}`;
+    let params = `title=${document.getElementById("title").querySelector("input").value}
+    &shortDesc=${document.getElementById("shortdesc").querySelector("textarea").value}
+    &longDesc=${document.getElementById("longdesc").querySelector("textarea").value}
+    &price=${document.getElementById("priceHT").querySelector("input").value}
+    &nbPerson=${document.getElementById("nbPerson").querySelector("input").value}
+    &nbRooms=${document.getElementById("nbRooms").querySelector("input").value}
+    &nbSimpleBed=${document.getElementById("nbSimpleBed").querySelector("input").value}
+    &nbDoubleBed=${document.getElementById("nbDoubleBed").querySelector("input").value}
+    &beginDate=${document.getElementById("beginDate").querySelector("input").value.split("/").reverse().join("-")}
+    &endDate=${document.getElementById("endDate").querySelector("input").value.split("/").reverse().join("-")}
+    &surfaceInM2=${document.getElementById("surface").querySelector("input").value}
+    &latitude=${document.getElementById("latitude").querySelector("input").value}
+    &longitude=${document.getElementById("longitude").querySelector("input").value}
+    &postalAddress=${document.getElementById("postalAddress").querySelector("input").value}
+    &city=${document.getElementById("city").querySelector("input").value}
+    &country=${document.getElementById("country").querySelector("input").value}
+    &complementAddress=${document.getElementById("complementAddress").querySelector("input").value}
+    &streetNumber=${document.getElementById("streetNumber").querySelector("input").value}
+    &postalCode=${document.getElementById("postalCode").querySelector("input").value}
+    &arrangements=${arrangements.join(",")}&activities=${activities.map(activity => activity.join("|")).join(",")}
+    &image=${inputFile.textContent}
+    &type=${document.getElementById("type").querySelector("select").selectedIndex}
+    &category=${document.getElementById("category").querySelector("select").selectedIndex}`;
 
+    console.log(params);
     xhr.open("POST", "/owner/creer_un_logement/createHousing.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
     xhr.send(params);
 });
 

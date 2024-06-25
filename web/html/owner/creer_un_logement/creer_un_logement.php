@@ -72,9 +72,15 @@ $_SESSION["owner"] = $owner;
                     <section>
                         <section class="inline">
                             <?php Input::render("half content__input--large", "postalCode", "text", "Code Postal", "postalCode", "Ex: 29200", true, '', 0, 5, "[0-9]{5}"); ?>
+                            <?php Input::render("wide content__input--large", "country", "text", "Pays", "country", "Pays où se situe le logement", false, 'France', 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
                             <?php Input::render("wide content__input--large", "city", "text", "Ville", "city", "Entrez la ville de votre logement", true, '', 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
                         </section>
-                        <?php Input::render("content__input--large", "postalAddress", "text", "Addresse", "postalAddress", "Entrez l'adresse de votre logement", true, '', 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+                        <section class="inline">
+                            <?php Input::render("half content__input--large", "complementAddress", "text", "Complément d'adresse", "complementAddress", "", false, '', 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+                            <?php Input::render("half content__input--large", "streetNumber", "text", "Numéro de rue", "streetNumber", "", false, '', 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+                            <?php Input::render("content__input--large", "postalAddress", "text", "Adresse", "postalAddress", "Entrez l'adresse de votre logement", true, '', 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+
+                        </section>
                         <section class="inline">
                             <?php Input::render("content__input--large", "longitude", "text", "Longitude", "longitude", "Ex: 48.202047", false, '', 0, 100, '^-?([0-8]?[0-9]|90)(\.[0-9]{1,10})$'); ?>
                             <?php Input::render("content__input--large", "latitude", "text", "Latitude", "latitude", "Ex: -2.932644", false, '', 0, 100, '^-?([0-9]{1,2}|1[0-7][0-9]|180)(\.[0-9]{1,10})$'); ?>

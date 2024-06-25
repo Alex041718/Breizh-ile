@@ -28,6 +28,9 @@ $latitude = (float) $_POST['latitude'];
 $longitude = (float) $_POST['longitude'];
 $postalAddress = $_POST['postalAddress'];
 $city = $_POST['city'];
+$country = (isset($_POST['country'])) ? $_POST['country'] : "France";
+$streetNumber = (isset($_POST['streetNumber'])) ? $_POST['streetNumber'] : "";
+$complementAddress = (isset($_POST['complementAddress'])) ? $_POST['complementAddress'] : "";
 $postalCode = $_POST['postalCode'];
 $arrangements = explode(",", $_POST['arrangements']);
 $activites = explode(",", $_POST['activities']);
@@ -35,7 +38,7 @@ $image = $_POST['image'];
 $type = TypeService::GetTypeById($_POST['type']);
 $category = CategoryService::GetCategoryById($_POST['category']);
 
-$addressObject = AddressService::CreateAddress(new Address(0, $city, $postalCode, $postalAddress));
+$addressObject = AddressService::CreateAddress(new Address(0, $city, $postalCode, $postalAddress, $complementAddress, $streetNumber, $country));
 $imageObject = ImageService::CreateImage(new Image(0, $image));
 
 /*
