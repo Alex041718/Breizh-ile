@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     passwordInput.addEventListener('input', function () {
         const password = passwordInput.value;
-        console.log(password);
         // Longueur
         if (password.length >= 10) {
             lengthCriteria.style.color = 'green';
@@ -91,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 Toast("Modification terminée.", "success");
             })
             .catch(() => {
-                console.log('KO'); // Log "KO" if submission failed
+                console.log('KO');
             });
         });
     }

@@ -36,7 +36,7 @@ $client = ClientService::GetClientById($clientID);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire</title>
     <link rel="stylesheet" href="/client/clientProfile/client-profile.css">
-    <link rel="stylesheet" href="/components/Toast/Toast.css">
+    <link rel="stylesheet" href="../components/Toast/Toast.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
 
 
