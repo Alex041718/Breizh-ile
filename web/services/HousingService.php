@@ -138,26 +138,26 @@ class HousingService extends Service
         return self::HousingHandler($row);
     }
   
-    public static function GetHousingsByOffset($city, $dateBegin, $dateEnd, $nbPerson, $minPrice, $maxPrice, $appartement, $chalet, $maison, $bateau, $villa, $insol, $t1, $t2, $t3, $t4, $t5, $t6, $f1, $f2, $f3, $f4, $f5, $baignade, $voile, $canoe, $golf, $equitation, $accrobranche, $randonnee, $offset, $order, $desc = false) {
+    public static function GetHousingsByOffset($city, $dateBegin, $dateEnd, $nbPerson, $minPrice, $maxPrice, $appartement, $chalet, $maison, $bateau, $villa, $insol, $t1, $t2, $t3, $t4, $t5, $t6, $f1, $f2, $f3, $f4, $f5, $baignade, $voile, $canoe, $golf, $equitation, $accrobranche, $randonnee, $jardin, $balcon, $terrasse, $piscine, $jacuzzi, $offset, $order, $desc = false) {
 
 
-        $isAnd = (isset($city) || isset($dateBegin) || isset($dateEnd) || isset($nbPerson) || isset($minPrice) || isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1);
+        $isAnd = (isset($city) || isset($dateBegin) || isset($dateEnd) || isset($nbPerson) || isset($minPrice) || isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1 || $jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1);
 
         if($isAnd) {
             
             $chaine = "AND ";
     
-            if(isset($city)) $chaine = $chaine . '_Address.city = "' . $city . '"' . ((isset($dateBegin) || isset($dateEnd) || isset($nbPerson) || isset($minPrice) || isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1) ? " AND " : " ");
+            if(isset($city)) $chaine = $chaine . '_Address.city = "' . $city . '"' . ((isset($dateBegin) || isset($dateEnd) || isset($nbPerson) || isset($minPrice) || isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1 || $jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " AND " : " ");
             
-            if(isset($dateBegin)) $chaine = $chaine . "_Housing.beginDate < '" . $dateBegin . "'". ((isset($dateEnd) | isset($nbPerson) || isset($minPrice) || isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1) ? " AND " : " ");
+            if(isset($dateBegin)) $chaine = $chaine . "_Housing.beginDate < '" . $dateBegin . "'". ((isset($dateEnd) | isset($nbPerson) || isset($minPrice) || isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1 || $jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " AND " : " ");
     
-            if(isset($dateEnd)) $chaine = $chaine . "_Housing.endDate > '" . $dateEnd . "'". ((isset($nbPerson) || isset($minPrice) || isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1) ? " AND " : " ");
+            if(isset($dateEnd)) $chaine = $chaine . "_Housing.endDate > '" . $dateEnd . "'". ((isset($nbPerson) || isset($minPrice) || isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1 || $jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " AND " : " ");
 
-            if(isset($nbPerson)) $chaine = $chaine . "_Housing.nbPerson >= " . $nbPerson . ((isset($minPrice) || isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1) ? " AND " : " ");
+            if(isset($nbPerson)) $chaine = $chaine . "_Housing.nbPerson >= " . $nbPerson . ((isset($minPrice) || isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1 || $jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " AND " : " ");
 
-            if(isset($minPrice)) $chaine = $chaine . "_Housing.priceIncl >= " . $minPrice . " ". ((isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1) ? " AND " : " ");
+            if(isset($minPrice)) $chaine = $chaine . "_Housing.priceIncl >= " . $minPrice . " ". ((isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1 || $jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " AND " : " ");
 
-            if(isset($maxPrice)) $chaine = $chaine . "_Housing.priceIncl <= " .  $maxPrice . " ". (($appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1) ? " AND " : " ");
+            if(isset($maxPrice)) $chaine = $chaine . "_Housing.priceIncl <= " .  $maxPrice . " ". (($appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1 || $jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " AND " : " ");
             
             if(($appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1)){
                 $chaine = $chaine . "(";
@@ -214,10 +214,31 @@ class HousingService extends Service
                 $innerHasForActivity = "";
             }
 
+
+            if ((($appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1) || ($t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1) || ($baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1)) && ($jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1)){
+                $chaine = $chaine . "AND ";
+            }
+
+            if(($jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1)){
+                $innerHasForAmenagement = 'INNER JOIN _Has_for_arrangement ON _Housing.housingID = _Has_for_arrangement.housingID ';
+                $chaine = $chaine . "(";
+                if($jardin == 1) $chaine = $chaine . "_Has_for_arrangement.arrangementID = " . 1 . " " . (($balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " OR " : " ");
+                if($balcon == 1) $chaine = $chaine . "_Has_for_arrangement.arrangementID = " . 2 . " " . (($terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " OR " : " ");
+                if($terrasse == 1) $chaine = $chaine . "_Has_for_arrangement.arrangementID = " . 3 . " " . (($piscine == 1 || $jacuzzi == 1) ? " OR " : " ");
+                if($piscine == 1) $chaine = $chaine . "_Has_for_arrangement.arrangementID = " . 4 . " " . (($jacuzzi == 1) ? " OR " : " ");
+                if($jacuzzi == 1) $chaine = $chaine . "_Has_for_arrangement.arrangementID = " . 5 . " " ;
+                $chaine = $chaine . ") ";
+            }
+            else{
+                $innerHasForAmenagement = "";
+            }
+
+
         }
         else $chaine = "";
         
-        $query = 'SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID INNER JOIN _Address ON _Housing.addressID = _Address.addressID ' . $innerHasForActivity . 'WHERE _Housing.isOnline = true ' . $chaine . 'ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';';
+        $query = 'SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID ' . $innerHasForAmenagement . 'INNER JOIN _Address ON _Housing.addressID = _Address.addressID ' . $innerHasForActivity . 'WHERE _Housing.isOnline = true ' . $chaine . 'ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';';
+
 
         $pdo = self::getPDO();
         $stmt = $pdo->query($query);

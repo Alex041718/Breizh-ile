@@ -597,7 +597,7 @@ input[type=number] {
 .popup__filter .popup__content .popup__filter__container hr {
   width: 100%;
 }
-.popup__filter .popup__content .popup__filter__container .popup__filter__container__category {
+.popup__filter .popup__content .popup__filter__container .popup__filter__container__category, .popup__filter .popup__content .popup__filter__container .popup__filter__container__type, .popup__filter .popup__content .popup__filter__container .popup__filter__container__amenagement, .popup__filter .popup__content .popup__filter__container .popup__filter__container__activity {
   display: flex;
   flex-direction: column;
   gap: 25px;

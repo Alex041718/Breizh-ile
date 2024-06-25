@@ -445,6 +445,56 @@ class Header
                                     </div>
                                 </div>
                             </div>
+                            <hr>
+                            <div class="popup__filter__container__amenagement">
+                                <h3>Aménagement</h3>
+                                <div class="popup__filter__container__choices">
+                                    <div class="popup__filter__container__choices__row">
+                                        <div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox"
+                                                id="jardin"
+                                                name="jardin"
+                                                value="' . (isset($_POST["jardin"]) ? $_POST["jardin"] : 1) . '"/>
+                                                <label class="para--14px" for="jardin">Jardin</label>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox" 
+                                                id="balcon"
+                                                name="balcon"
+                                                value="' . (isset($_POST["balcon"]) ? $_POST["balcon"] : 1) . '"/>
+                                                <label class="para--14px" for="balcon">Balcon</label>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox"
+                                                id="terrasse"
+                                                name="terrasse"
+                                                value="' . (isset($_POST["terrasse"]) ? $_POST["terrasse"] : 1) . '"/>
+                                                <label class="para--14px" for="terrasse">Terrasse</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="popup__filter__container__choices__row">
+                                        <div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox" 
+                                                id="piscine"
+                                                name="piscine"
+                                                value="' . (isset($_POST["piscine"]) ? $_POST["piscine"] : 1) . '"/>
+                                                <label class="para--14px" for="piscine">Piscine</label>
+                                            </div>
+                                            <div class="popup__filter__box">
+                                                <input type="checkbox"
+                                                id="jacuzzi"
+                                                name="jacuzzi"
+                                                value="' . (isset($_POST["jacuzzi"]) ? $_POST["jacuzzi"] : 1) . '"/>
+                                                <label class="para--14px" for="jacuzzi">Jacuzzi</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                         <div class="popup__filter__bottom">

@@ -41,7 +41,8 @@ body {
   width: 100%;
   height: 100%;
   border-radius: 20px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 @media screen and (max-width: 768px) {
   .photoAndReservation .photo img {
@@ -536,6 +537,4 @@ body {
   .popupSavoir .popup__content p {
     font-size: 13px;
   }
-}
-
-/*# sourceMappingURL=page.css.map */
+}/*# sourceMappingURL=page.css.map */

@@ -8,6 +8,7 @@ main.global-ui {
   padding-left: 150px;
   padding-right: 150px;
   padding-top: 135px;
+  padding-bottom: 2em;
   background-color: #f6f6f6;
 }
 @media screen and (max-width: 1024px) {
