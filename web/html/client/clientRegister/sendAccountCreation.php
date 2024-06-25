@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     // Image
-    $image = ImageService::CreateImage(new Image(null, "https://ui-avatars.com/api/?background=random&name=" . $_POST['lastname'] . "+" . $_POST['firstname']));
+    $image = ImageService::CreateImage(new Image(null, "https://ui-avatars.com/api/?background=random&name=" . mb_substr($_POST['lastname'], 0, 1) . "+" . mb_substr($_POST['firstname'], 0, 1)));
     $_POST['imageID'] = $image->getImageID();
 
     //Phone
