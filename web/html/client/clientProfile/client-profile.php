@@ -152,7 +152,7 @@ $client = ClientService::GetClientById($clientID);
                         "",
                         "10",
                         "",
-                        "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?]).{10,}"
+                        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
                     );
                     ?>
                     <?php
@@ -167,7 +167,7 @@ $client = ClientService::GetClientById($clientID);
                         "",
                         "10",
                         "",
-                        "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?]).{10,}"
+                        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
                     );
                     ?>
                     <input type="hidden" name="clientId" value="<?php echo ($client->getClientID()) ?>">
@@ -179,15 +179,15 @@ $client = ClientService::GetClientById($clientID);
                     </div>
                     <div class="content__security__elements__required__fields">
                         <p id="length" class="content__security__elements__required__fields__length">La taille du mot de
-                            passe doit être supérieure à 10</p>
+                            passe doit être égale ou supérieure à 8</p>
                         <p id="contains" class="content__security__elements__required__fields__contains">Le mot de passe
                             doit contenir:</p>
                         <p id="uppercase" class="content__security__elements__required__fields__uppercase">1 Majuscule
                             minimum</p>
                         <p id="lowercase" class="content__security__elements__required__fields__lowercase">1 Minuscule
                             minimum</p>
-                        <p id="special" class="content__security__elements__required__fields__special">1 caractère
-                            spécial minimum: ?=.*[@#$%^&+=?]</p>
+                        <p id="digit" class="content__security__elements__required__fields__digit">1 chiffre minimum
+                        </p>
                     </div>
 
 
