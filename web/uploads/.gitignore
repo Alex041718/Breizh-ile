@@ -1,0 +1,8 @@
+# Ignorer tous les fichiers
+*
+
+# Ne pas ignorer le fichier .gitignore
+!.gitignore
+
+# Ne pas ignorer les fichiers dont le nom commence par "image"
+!image*
