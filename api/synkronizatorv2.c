@@ -18,7 +18,7 @@
 #define HEADER_SIZE 64 // 64 bytes header size
 #define PATH_BUFFER_SIZE 64 // 64 bytes buffer size
 #define BODY_BUFFER_SIZE 4096 // 4KB buffer size
-#define RESPONSE_BUFFER_SIZE BODY_BUFFER_SIZE * 2 // 8KB buffer size
+#define RESPONSE_BUFFER_SIZE 1024 * 2048 // 2MB response buffer size, it is a very large buffer size but it is necessary for the housings list for example
 
 // Types definition
 typedef struct {
@@ -63,6 +63,7 @@ RequestedOperation* requested_operation = NULL;
 void handle_header(Packet* packet, char* response);
 void handle_request(int socket_client);
 void create_user_api_key(Packet* packet, char* response);
+void get_list_housings(Packet* packet, char* response);
 
 void print_usage() {
     printf("Usage: ./server [options]\n"
@@ -209,6 +210,14 @@ void handle_route(Packet* packet, char* response) {
         requested_operation = malloc(sizeof(RequestedOperation));
         requested_operation->requested_packet = packet;
         requested_operation->requested_fonction = create_user_api_key;
+    } else if (strcmp(packet->path, "/api/get-housings") == 0) {
+        // This route requires authentication
+        snprintf(response, RESPONSE_BUFFER_SIZE, "AUTH?\n");
+
+        // Save the requested operation and packet for later
+        requested_operation = malloc(sizeof(RequestedOperation));
+        requested_operation->requested_packet = packet;
+        requested_operation->requested_fonction = get_list_housings;
     } else {
         snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLa route demandée n'existe pas;\n");
     }
@@ -324,6 +333,11 @@ void create_user_api_key(Packet* packet, char* response) {
         return;
     }
 
+    if (atoi(super_admin_attribute->value) && !is_user_admin(user_id_authentificated)) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=403;message=Accès interdit\nVous n'avez pas les droits pour effectuer cette action;\n");
+        return;
+    }
+
     // We try to create the API key
     if (!create_api_key(atoi(user_id_attribute->value), atoi(super_admin_attribute->value))) {
         snprintf(response, RESPONSE_BUFFER_SIZE, "INTERNAL_SERVER_ERROR\ncode=500;message=Erreur interne du serveur\nLa clé API n'a pas pu être créée;\n");
@@ -331,6 +345,57 @@ void create_user_api_key(Packet* packet, char* response) {
     }
 
     snprintf(response, RESPONSE_BUFFER_SIZE, "OK\ncode=200;message=Clé API créée avec succès\nLa clé API a été créée avec succès;\n");
+}
+
+void get_list_housings(Packet* packet, char* response) {
+    BodyAttributeList* body_attributes = parse_body(packet->body);
+    if (body_attributes == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLes attributs du corps de la requête sont invalides;\n");
+        return;
+    }
+
+    // Get the user ID attribute
+    BodyAttribute* user_id_attribute = get_body_attribute(body_attributes, "userID");
+    if (user_id_attribute == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nL'attribut 'userID' est manquant;\n");
+        return;
+    }
+
+    if (!is_number(user_id_attribute->value)) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLa valeur de l'attribut 'userID' n'est pas un nombre;\n");
+        return;
+    }
+
+    if (user_id_authentificated != atoi(user_id_attribute->value)) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=403;message=Accès interdit\nVous n'avez pas les droits pour effectuer cette action;\n");
+        return;
+    }
+
+    // Get the superAdmin attribute
+    BodyAttribute* super_admin_attribute = get_body_attribute(body_attributes, "superAdmin");
+    if (super_admin_attribute == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nL'attribut 'superAdmin' est manquant;\n");
+        return;
+    }
+
+    if (strcmp(super_admin_attribute->value, "0") != 0 && strcmp(super_admin_attribute->value, "1") != 0) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLa valeur de l'attribut 'superAdmin' n'est pas valide, elle doit être '0' ou '1';\n");
+        return;
+    }
+
+    if (atoi(super_admin_attribute->value) && !is_user_admin(user_id_authentificated)) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=403;message=Accès interdit\nVous n'avez pas les droits pour effectuer cette action;\n");
+        return;
+    }
+
+    // We try to get the housings
+    char* housings = get_housings(atoi(user_id_attribute->value), atoi(super_admin_attribute->value));
+    if (housings == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "INTERNAL_SERVER_ERROR\ncode=500;message=Erreur interne du serveur\nLes logements n'ont pas pu être récupérés;\n");
+        return;
+    }
+
+    snprintf(response, RESPONSE_BUFFER_SIZE, "OK\ncode=200;message=Logements récupérés avec succès\n%s\n", housings);
 }
 
 int main(int argc, char* argv[]) {
@@ -411,6 +476,7 @@ int main(int argc, char* argv[]) {
 
         // Close the connection
         if (connection_closed) {
+            print_log("Fermeture de la connexion", INFO);
             close(socket_client);
             connection_closed = false;
             first_request = true;

@@ -19,4 +19,13 @@ int get_user_id_from_api_key(char* api_key);
 // Vérifie si une clé API est valide
 bool check_user_api_key(char* api_key);
 
+// Vérifie si une clé API est celle d'un superadmin
+bool is_superadmin_api_key(char* api_key);
+
+// Vérifie si un utilisateur est un admin
+bool is_user_admin(int user_id);
+
+// Récupère les informations des logements d'un utilisateur
+char* get_housings(int user_id, bool is_superadmin);
+
 #endif

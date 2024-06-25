@@ -230,10 +230,71 @@ bool create_api_key(int user_id, bool is_superadmin) {
     return success;
 }
 
-/*
-La consultation de la liste de tous les biens (si accès privilégié) ;
-● La consultation de la liste des biens du propriétaire (si accès par propriétaire) ;
-*/
+bool is_superadmin_api_key(char* api_key) {
+    char query[1024];
+    snprintf(query, sizeof(query), "SELECT superAdmin FROM _User_APIKey WHERE apiKey='%s'", api_key);
+
+    MYSQL* conn = init_database();
+    MYSQL_RES* res;
+    MYSQL_ROW row;
+
+    if (mysql_query(conn, query)) {
+        fprintf(stderr, "Error querying database: %s\n", mysql_error(conn));
+        mysql_close(conn);
+        return false;
+    }
+
+    res = mysql_store_result(conn);
+    if (res == NULL) {
+        fprintf(stderr, "Error storing result: %s\n", mysql_error(conn));
+        mysql_close(conn);
+        return false;
+    }
+
+    row = mysql_fetch_row(res);
+    if (row == NULL) {
+        fprintf(stderr, "No user found with API key %s\n", api_key);
+        mysql_close(conn);
+        return false;
+    }
+
+    bool superadmin = atoi(row[0]);
+    mysql_close(conn);
+    return superadmin;
+}
+
+bool is_user_admin(int user_id) {
+    char query[1024];
+    snprintf(query, sizeof(query), "SELECT * FROM _Admin WHERE adminID=%d", user_id);
+
+    MYSQL* conn = init_database();
+    MYSQL_RES* res;
+    MYSQL_ROW row;
+
+    if (mysql_query(conn, query)) {
+        fprintf(stderr, "Error querying database: %s\n", mysql_error(conn));
+        mysql_close(conn);
+        return false;
+    }
+
+    res = mysql_store_result(conn);
+    if (res == NULL) {
+        fprintf(stderr, "Error storing result: %s\n", mysql_error(conn));
+        mysql_close(conn);
+        return false;
+    }
+
+    row = mysql_fetch_row(res);
+    if (row == NULL) {
+        fprintf(stderr, "No admin found with ID %d\n", user_id);
+        mysql_close(conn);
+        return false;
+    }
+
+    mysql_close(conn);
+    return true;
+}
+
 char* get_housings(int user_id, bool is_superadmin) {
     char query[1024];
     if (is_superadmin) {
@@ -261,7 +322,6 @@ char* get_housings(int user_id, bool is_superadmin) {
 
     char* housings = malloc(8192 * 512);
     housings[0] = '\0';
-    int housing_count = 0;
     while ((row = mysql_fetch_row(res))) {
         char housing[8192] = "\0";
         
@@ -283,9 +343,46 @@ char* get_housings(int user_id, bool is_superadmin) {
     return housings;
 }
 
-int main() {
-    char* housings = get_housings(301, true);
-    printf("%s\n", housings);
+char* get_disponibility_housing(int housing_id, char* starting_date, char* end_date) {
+    char query[8192];
+    snprintf(query, sizeof(query), "WITH RECURSIVE DateRange AS (SELECT '%s' AS start_date, '%s' AS end_date), Reservations AS (SELECT beginDate, endDate FROM _Reservation WHERE housingID = %d AND endDate >= (SELECT start_date FROM DateRange) AND beginDate <= (SELECT end_date FROM DateRange) ORDER BY beginDate), AvailableDates AS (SELECT GREATEST(CASE WHEN @prev_end IS NULL THEN (SELECT start_date FROM DateRange) ELSE DATE_ADD(@prev_end, INTERVAL 1 DAY) END, (SELECT start_date FROM DateRange)) AS available_from, LEAST(DATE_SUB(beginDate, INTERVAL 1 DAY), (SELECT end_date FROM DateRange)) AS available_to, @prev_end := endDate FROM Reservations, (SELECT @prev_end := NULL) AS vars UNION ALL SELECT GREATEST(CASE WHEN (SELECT MAX(endDate) FROM Reservations) IS NULL THEN (SELECT start_date FROM DateRange) ELSE DATE_ADD((SELECT MAX(endDate) FROM Reservations), INTERVAL 1 DAY) END, (SELECT start_date FROM DateRange)), (SELECT end_date FROM DateRange), NULL) SELECT available_from, available_to FROM AvailableDates WHERE available_from <= available_to AND available_from <= (SELECT end_date FROM DateRange) AND available_to >= (SELECT start_date FROM DateRange) ORDER BY available_from;", starting_date, end_date, housing_id);
 
-    return 0;
+    MYSQL* conn = init_database();
+    MYSQL_RES* res;
+    MYSQL_ROW row;
+
+    if (mysql_query(conn, query)) {
+        fprintf(stderr, "Error querying database: %s\n", mysql_error(conn));
+        mysql_close(conn);
+        return NULL;
+    }
+
+    res = mysql_store_result(conn);
+    if (res == NULL) {
+        fprintf(stderr, "Error storing result: %s\n", mysql_error(conn));
+        mysql_close(conn);
+        return NULL;
+    }
+
+    char* disponibility = malloc(8192 * 512);
+    disponibility[0] = '\0';
+    while ((row = mysql_fetch_row(res))) {
+        char date[8192] = "\0";
+        
+        int num_fields = mysql_num_fields(res);
+        MYSQL_FIELD *fields = mysql_fetch_fields(res);
+
+        for (int i = 0; i < num_fields; i++) {
+            char value[8192] = "\0";
+            replace_newlines_with_spaces(row[i]);
+            snprintf(value, 8192, "%s=%s;", fields[i].name, row[i]);
+            strcat(date, value);
+        }
+
+        strcat(date, "\n");
+        strcat(disponibility, date);
+    }
+
+    mysql_close(conn);
+    return disponibility;
 }
