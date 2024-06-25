@@ -257,7 +257,7 @@ class OwnerService extends Service
             'phoneNumber' => $owner->getPhoneNumber(),
             'birthDate' => $owner->getBirthDate()->format('Y-m-d H:i:s'),
             'consent' => $owner->getConsent(),
-            'lastConnection' => $owner->getLastConnection()->format('Y-m-d H:i:s'),
+            'lastConnection' => $owner->getLastConnection() ? $owner->getLastConnection()->format('Y-m-d H:i:s') : null,
             'creationDate' => $owner->getCreationDate()->format('Y-m-d H:i:s'),
             'imageID' => $owner->getImage()->getImageID(),
             'genderID' => $owner->getGender()->getGenderID(),

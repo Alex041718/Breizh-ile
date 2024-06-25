@@ -303,13 +303,14 @@ class ClientService extends Service
             'phoneNumber' => $client->getPhoneNumber(),
             'birthDate' => $client->getBirthDate()->format('Y-m-d H:i:s'),
             'consent' => $client->getConsent(),
-            'lastConnection' => $client->getLastConnection()->format('Y-m-d H:i:s'),
+            'lastConnection' => $client->getLastConnection() ? $client->getLastConnection()->format('Y-m-d H:i:s') : null,
             'creationDate' => $client->getCreationDate()->format('Y-m-d H:i:s'),
             'imageID' => $client->getImage()->getImageID(),
             'genderID' => $client->getGender()->getGenderID(),
             'addressID' => $client->getAddress()->getAddressID(),
             'userID' => $client->getClientID()
         ));
+
 
         if (!$success) {
             throw new Exception('Failed to modify client');
