@@ -38,11 +38,21 @@ h1 {
   font-weight: bold;
   margin: 0;
 }
+@media (min-width: 1920px) {
+  h1 {
+    font-size: 56px;
+  }
+}
 
 h2 {
   font-size: max(30px, 2.5vw);
   font-weight: bold;
   margin: 0;
+}
+@media (min-width: 1920px) {
+  h2 {
+    font-size: 48px;
+  }
 }
 
 h3 {
@@ -50,16 +60,31 @@ h3 {
   font-weight: bold;
   margin: 0;
 }
+@media (min-width: 1920px) {
+  h3 {
+    font-size: 30px;
+  }
+}
 
 h4 {
   font-size: max(16px, 1.0416666667vw);
   font-weight: bold;
   margin: 0;
 }
+@media (min-width: 1920px) {
+  h4 {
+    font-size: 20px;
+  }
+}
 
 p {
   margin: 0;
   font-size: max(14px, 0.8333333333vw);
+}
+@media (min-width: 1920px) {
+  p {
+    font-size: 16px;
+  }
 }
 
 .para--bold {

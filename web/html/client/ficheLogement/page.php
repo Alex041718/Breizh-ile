@@ -276,19 +276,19 @@ $iconMapping = [
                             <h4>Activités</h4>
                             <div class="items">
                                 <div class="item">
-                                    <i class="fa-solid fa-umbrella-beach"></i>
+                                    <i class="fa-solid fa-umbrella-beach" id="icon"></i>
                                     <span>Plage</span>
                                 </div>
                                 <div class="item">
-                                    <i class="fa-solid fa-paw"></i>
+                                    <i class="fa-solid fa-paw" id="icon"></i>
                                     <span>Zoo</span>
                                 </div>
                                 <div class="item">
-                                    <i class="fa-solid fa-candy-cane"></i>
+                                    <i class="fa-solid fa-candy-cane" id="icon"></i>
                                     <span>Parc d\'attraction</span>
                                 </div>
                                 <div class="item">
-                                    <i class="fa-solid fa-landmark"></i>
+                                    <i class="fa-solid fa-landmark" id="icon"></i>
                                     <span>Musée</span>
                                 </div>
                             </div>

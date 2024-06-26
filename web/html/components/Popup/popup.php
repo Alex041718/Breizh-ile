@@ -8,7 +8,7 @@
 
                 <div data-btn="' . $btn_name . '" class="popup ' . $name .'">
                     <div class="popup__content" >
-                        <i class="popup--close fa-solid fa-xmark"></i>
+                        <i class="popup--close fa-solid fa-xmark" id="xClose"></i>
                         ' . $content . '
                     </div>
                 </div>
