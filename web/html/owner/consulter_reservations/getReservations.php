@@ -29,7 +29,7 @@ function showReservations($reservations) {
         <div class="reservation">
             <?php require_once("../../components/CheckBox/CheckBox.php"); CheckBox::render(name: "checkbox"); ?>
             <p><?= $reservation->getCreationDate()->format("d / m / Y") ?></p>
-            <a href="#" class="profile-picture"><img src="<?= $reservation->getClientId()->getImage()->getImageSrc() ?>" alt="profile picture"><?= $reservation->getClientId()->getNickname() ?></a>
+            <a href="/back/profil/<?= $reservation->getClientId()->getClientID() ?>" class="profile-picture"><img src="<?= $reservation->getClientId()->getImage()->getImageSrc() ?>" alt="profile picture"><?= $reservation->getClientId()->getNickname() ?></a>
             <a href="#"><?= $reservation->getHousingId()->getTitle() ?></a>
             <p><?= $reservation->getBeginDate()->format("d / m / Y") ?></p>
             <p><?= $reservation->getEndDate()->format("d / m / Y") ?></p>
@@ -52,6 +52,13 @@ if (isset($_POST["sort"])) {
     $sort = $_POST["sort"];
     $isReverse = filter_var($_POST["isReverse"], FILTER_VALIDATE_BOOLEAN);
     uasort($reservations, getSort($sort, $isReverse));
+}
+
+if (isset($_POST["filter"])) {
+    $filter = $_POST["filter"];
+    $filter_values = ["Terminée", "En cours", "Prochainement"];
+
+    $reservations = array_filter($reservations, fn($reservation) => $reservation->getStatus() === $filter_values[$filter]);
 }
 
 showReservations($reservations);

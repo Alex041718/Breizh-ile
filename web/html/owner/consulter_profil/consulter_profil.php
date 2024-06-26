@@ -38,7 +38,7 @@ $owner_mail = $client->getMail();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./consulter_profil.css" class="css">
+    <link rel="stylesheet" href="/owner/consulter_profil/consulter_profil.css" class="css">
 </head>
 <body>
     <?php Header::render(isScrolling: True, isBackOffice: True); ?>
