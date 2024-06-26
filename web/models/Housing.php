@@ -439,5 +439,10 @@ class Housing {
     {
         $this->image = $image;
     }
+
+    public function __toString(): string
+    {
+        return "title" . $this->getAddress()->getPostalAddress();
+    }
 }
 ?>

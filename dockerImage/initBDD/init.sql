@@ -63,7 +63,7 @@ CREATE TABLE _Address (
     postalCode varchar(6),
     postalAddress varchar(255),
     complementAddress varchar(255),
-    streetNumber integer,
+    streetNumber varchar(10),
     country varchar(100)
 );
 

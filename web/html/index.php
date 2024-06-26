@@ -67,7 +67,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                 <div class="filter__button">
                     <button id="header__settings">Filtres</button>
                     <!--sizeof($_POST) > 0 ? '<a href="/"><i class="fa-solid fa-xmark"></i></a>' : "" -->
-                    <a href="/"><i class="fa-solid fa-xmark"></i></a>
+                    <a id="reset" href="/"><i class="fa-solid fa-xmark"></i></a>
                 </div>
             </div>
             <div class="logements__container">
@@ -75,7 +75,8 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                 const container = document.querySelector(".logements__container")
                 const sorter = document.getElementById("sorter")
                 const filter_submit = document.getElementById("filter_submit")
-
+                const reset = document.getElementById("reset")
+                reset.style.display = "none";
                 let nbPerson = <?= json_encode($_POST['peopleNumber'] ?? null) ?>;
                 let beginDate = <?= json_encode($_POST['startDate'] ?? null) ?>;
                 let endDate = <?= json_encode($_POST['endDate'] ?? null) ?>;
@@ -145,6 +146,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
 
                 function showUser(cpt, sort, desc, isFirst, isVeryFirst = false) {
 
+
                     const minPrice = rawMinPrice && isVeryFirst ? rawMinPrice : document.getElementById("minInput").value;
                     const maxPrice = rawMaxPrice && isVeryFirst ? rawMaxPrice : document.getElementById("maxInput").value;
                     
@@ -183,6 +185,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                     const jacuzzi = rawJacuzzi && isVeryFirst ? rawJacuzzi : (document.getElementById("jacuzzi").checked === true ? 1 : 0);
                     
                     if(isFirst) cpt = 0;
+                    if(!isVeryFirst) reset.style.display = "block";
                     const itemsToHide = document.querySelectorAll(".show-more");
 
                     itemsToHide.forEach(itemToHide => {
@@ -206,6 +209,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                             else container.innerHTML += this.responseText;
                         }
                     }
+                    
 
                     xmlhttp.send(params);
                     cpt++;
@@ -213,6 +217,7 @@ $isAuthenticated = SessionService::isClientAuthenticated();
                 }
             </script>
             </div>
+            
         </section>
     </main>
     <?php

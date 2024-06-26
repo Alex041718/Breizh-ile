@@ -38,6 +38,11 @@ body {
     grid-column: span 2/span 2;
   }
 }
+@media screen and (max-width: 950px) {
+  .loader {
+    align-self: center;
+  }
+}
 
 @keyframes rotation {
   0% {
@@ -69,7 +74,12 @@ body {
 .hero-banner {
   position: relative;
   overflow: hidden;
-  height: 120vh;
+  height: 120dvh;
+}
+@media screen and (min-width: 1920px) {
+  .hero-banner {
+    height: 1296px;
+  }
 }
 @media screen and (max-width: 560px) {
   .hero-banner {

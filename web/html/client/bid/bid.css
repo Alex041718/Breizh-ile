@@ -4,9 +4,10 @@ body {
 
 main {
   background-color: #f6f6f6;
-  min-height: 60vh;
-  padding-top: 6em;
-  padding-bottom: 2em;
+  min-height: calc(100dvh - 240px);
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 hr {
@@ -17,15 +18,16 @@ hr {
 }
 
 .bid {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-inline: 100px;
+  width: 100%;
 }
 @media (max-width: 1024px) {
   .bid {
-    padding-bottom: 5em;
+    padding-inline: 25px;
   }
 }
 .bid__container {
@@ -35,6 +37,12 @@ hr {
   justify-content: space-between;
   margin: 1em;
   gap: 2em;
+  width: 100%;
+}
+@media (max-width: 1024px) {
+  .bid__container {
+    padding-block: 100px;
+  }
 }
 .bid__container__title-page {
   align-self: flex-start;
@@ -51,14 +59,20 @@ hr {
   }
 }
 .bid__container__info__info-detail {
-  max-width: 44em;
   border: 1px solid #E0E0E0;
   border-radius: 10px;
   background-color: #FFFFFF;
   padding: 2em;
+  width: 70%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 20px;
+}
+@media (max-width: 1024px) {
+  .bid__container__info__info-detail {
+    width: 100%;
+  }
 }
 .bid__container__info__info-detail__description {
   display: flex;
@@ -101,7 +115,7 @@ hr {
   border-radius: 10px;
 }
 .bid__container__info__pay-recap {
-  width: 300px;
+  width: 30%;
   border: 1px solid #E0E0E0;
   border-radius: 10px;
   background-color: #FFFFFF;

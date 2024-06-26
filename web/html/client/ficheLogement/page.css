@@ -72,7 +72,7 @@ body {
   margin-top: 0.5em;
   gap: 0.5em;
 }
-.photoAndReservation .reservation .price h1 {
+.photoAndReservation .reservation .price h2 {
   color: #307B5C;
 }
 .photoAndReservation .reservation .reservationBtn {
@@ -129,8 +129,14 @@ body {
   height: 100%;
   max-width: 1920px;
   background-color: #FFFFFF;
-  padding: 2em;
+  padding-block: 100px;
+  padding-inline: 100px;
   border-radius: 10px;
+}
+@media screen and (max-width: 1024px) {
+  .page {
+    padding-inline: 25px;
+  }
 }
 .page #title {
   margin-top: 1em;
@@ -198,7 +204,7 @@ body {
 
 .twodiv {
   width: 100%;
-  height: 40em;
+  height: 100%;
   display: flex;
   gap: 3em;
   flex-direction: row;
@@ -214,7 +220,7 @@ body {
   width: 50%;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: auto;
 }
 @media screen and (max-width: 768px) {
   .twodiv .localisation {
@@ -336,7 +342,7 @@ body {
   gap: 1.5em;
   min-width: 45%;
 }
-.twodiv .details .popupCriteres .popup__content .section .items .item i {
+.twodiv .details .popupCriteres .popup__content .section .items .item #icon {
   color: #307B5C;
 }
 

@@ -9,8 +9,15 @@ class ImageService extends Service{
     {
         // la méthode crée une image
         $pdo = self::getPDO();
+        $source =$image->getImageSrc();
+        //FIXME solution temporaire
+        if(str_contains($source, "=")){
+            $source = explode("=", $source)[1];
+        }
         $stmt = $pdo->prepare('INSERT INTO _Image (src) VALUES (:imageSrc)');
-        $stmt->execute(['imageSrc' => $image->getImageSrc()]);
+        $stmt->bindParam(':imageSrc', $source);
+        $stmt->execute();
+        //$stmt->execute(['imageSrc' => $image->getImageSrc()]);
         return new Image($pdo->lastInsertId(), $image->getImageSrc());
     }
 

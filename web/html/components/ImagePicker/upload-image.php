@@ -12,7 +12,7 @@ if (isset($_FILES['image'])) {
         $allowed = ['jpg', 'jpeg', 'png'];
         if (in_array($ext, $allowed)) {
             if ($error === 0) {
-                if ($size <= 1000000) {
+                if ($size <= 1500000) {
                     $new_name = uniqid('', true) . '.' . $ext;
                     $destination = '/var/www/uploads/' . $new_name;
                     move_uploaded_file($tmp_name, $destination);

@@ -13,7 +13,7 @@
   transition: all 0.2s;
   z-index: 2000;
 }
-.popup i {
+.popup #xClose {
   position: absolute;
   color: rgba(63, 63, 63, 0.9333333333);
   right: 25px;
@@ -21,7 +21,7 @@
   cursor: pointer;
   font-size: 25px;
 }
-.popup i:hover {
+.popup #xClose:hover {
   color: #000000;
 }
 .popup__content {
