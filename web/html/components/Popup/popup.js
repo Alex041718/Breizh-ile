@@ -1,8 +1,6 @@
 export function loadPopUp() {
     const popups = document.querySelectorAll(".popup");
 
-    console.log(popups);
-
     popups.forEach(popup => {
 
         const popupBtnId = popup.dataset.btn;

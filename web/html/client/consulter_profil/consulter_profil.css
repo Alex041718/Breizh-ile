@@ -84,6 +84,7 @@ p {
   padding-inline: 25px;
   background-color: #1D1D1D;
   color: white;
+  width: -moz-fit-content;
   width: fit-content;
   border-radius: 10px;
 }
@@ -233,6 +234,4 @@ main .page-content .bottomcontent__column__info {
   display: flex;
   gap: 5px;
   align-items: center;
-}
-
-/*# sourceMappingURL=consulter_profil.css.map */
+}/*# sourceMappingURL=consulter_profil.css.map */

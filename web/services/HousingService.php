@@ -138,7 +138,7 @@ class HousingService extends Service
         return self::HousingHandler($row);
     }
   
-    public static function GetHousingsByOffset($city, $dateBegin, $dateEnd, $nbPerson, $minPrice, $maxPrice, $appartement, $chalet, $maison, $bateau, $villa, $insol, $t1, $t2, $t3, $t4, $t5, $t6, $f1, $f2, $f3, $f4, $f5, $baignade, $voile, $canoe, $golf, $equitation, $accrobranche, $randonnee, $jardin, $balcon, $terrasse, $piscine, $jacuzzi, $offset, $order, $desc = false) {
+    public static function GetHousingsByOffset($city, $dateBegin, $dateEnd, $nbPerson, $minPrice, $maxPrice, $appartement, $chalet, $maison, $bateau, $villa, $insol, $t1, $t2, $t3, $t4, $t5, $t6, $f1, $f2, $f3, $f4, $f5, $baignade, $voile, $canoe, $golf, $equitation, $accrobranche, $randonnee, $jardin, $balcon, $terrasse, $piscine, $jacuzzi, $offset, $order, $desc = false, $ownerID = null) {
 
 
         $isAnd = (isset($city) || isset($dateBegin) || isset($dateEnd) || isset($nbPerson) || isset($minPrice) || isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1 || $jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1);
@@ -235,9 +235,21 @@ class HousingService extends Service
 
 
         }
-        else $chaine = "";
+        else  {
+            $chaine = "";
+            $innerHasForAmenagement = "";
+            $innerHasForActivity = "";
+        }
+
+        $beforeHas = 'WITH doublon AS (';
+        $afterHas = ') SELECT DISTINCT * FROM doublon D INNER JOIN _Housing H ON H.housingID = D.housingID';
         
-        $query = 'SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID ' . $innerHasForAmenagement . 'INNER JOIN _Address ON _Housing.addressID = _Address.addressID ' . $innerHasForActivity . 'WHERE _Housing.isOnline = true ' . $chaine . 'ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';';
+        if ($ownerID != null && $beforeHas != "" && $afterHas != ""){
+            $query = $beforeHas . 'SELECT _Housing.housingID, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID ' . $innerHasForAmenagement . 'INNER JOIN _Address ON _Housing.addressID = _Address.addressID ' . $innerHasForActivity . 'WHERE _Housing.ownerID = ' . $ownerID . ' ' . $chaine . ($desc ? 'DESC' : '') . $afterHas .';';
+        }
+        else{
+            $query = $beforeHas . 'SELECT _Housing.housingID, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID ' . $innerHasForAmenagement . 'INNER JOIN _Address ON _Housing.addressID = _Address.addressID ' . $innerHasForActivity . 'WHERE _Housing.isOnline = true ' . $chaine . $afterHas . ' ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';';
+        }       
 
 
         $pdo = self::getPDO();

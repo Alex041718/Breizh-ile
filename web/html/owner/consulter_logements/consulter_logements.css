@@ -9,6 +9,10 @@ main {
   padding-inline: 50px;
 }
 
+.show-more {
+  text-align: center;
+}
+
 .title {
   display: flex;
   width: 100%;
