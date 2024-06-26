@@ -9,7 +9,13 @@ body{
         flex-direction: column;
         gap: 2em;
         background-color: $whiteColor;
-        padding: 1em;
+
+        padding-block: 100px;
+        padding-inline: 100px;
+
+        @media (max-width: 1024px) {
+            padding-inline: 25px;
+        }
 
         h2{
             text-align: center;

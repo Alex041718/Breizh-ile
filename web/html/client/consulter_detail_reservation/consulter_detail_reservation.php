@@ -113,7 +113,7 @@
 ?>
 
 
-    <main class="global-ui">
+    <main>
 
         <?php
         require_once("../../components/BackComponent/BackComponent.php");
@@ -169,9 +169,6 @@
                         <div class="informations__right__desc__info__perso">
                             <h3><?= $owner_telephone ?></h3>
                             <p><?= $owner_mail ?></p>
-                        </div>
-                        <div class="informations__right__desc__info__vide">
-
                         </div>
                         <div class="informations__right__desc__info__icons">
                             <a href="tel:<?= $owner_telephone ?>"><i id="telephone" class="fa-solid fa-phone"></i></a>

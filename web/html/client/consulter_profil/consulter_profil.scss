@@ -15,11 +15,12 @@ main {
 
     .page-content {
         background-color: $whiteColor;
-        padding: 1em;
+        padding-block: 100px;
+        padding-inline: 100px;
         border-radius: 10px;
 
 
-        @media screen and (max-width: 1300px) {
+        @media screen and (max-width: 1024px) {
             padding-inline: 25px;
         }
 

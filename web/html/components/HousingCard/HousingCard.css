@@ -28,10 +28,20 @@
   gap: 15px;
   padding: 20px;
 }
+.housing-card__content a {
+  color: #1D1D1D;
+  text-decoration: none;
+}
 .housing-card__content__owner {
   display: flex;
   align-items: center;
   gap: 5px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.housing-card__content__owner:hover {
+  text-decoration: underline;
+  transition: 0.2s all;
 }
 .housing-card__content__owner img {
   border-radius: 70px;

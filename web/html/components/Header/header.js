@@ -1,6 +1,5 @@
 
 document.addEventListener('DOMContentLoaded', function() {
-
     var header = document.querySelector('.header');
     var profil = document.getElementById('profil');
     var profilMobile = document.getElementById('mobile-profil');
@@ -28,6 +27,22 @@ document.addEventListener('DOMContentLoaded', function() {
     let modeAnimationOn = localStorage.getItem('ModeAnimationVal') ? localStorage.getItem('ModeAnimationVal') : "non";
     let modeTailleOn = localStorage.getItem('ModeTailleVal') ? localStorage.getItem('ModeTailleVal') : "non";
     let modeFontOn = localStorage.getItem('ModeFontVal') ? localStorage.getItem('ModeFontVal') : "non";
+
+    function adjustZoom() {
+        const viewportWidth = window.innerWidth;
+        const desiredWidth = 1920;
+        if (viewportWidth > desiredWidth) {
+          document.body.style.zoom = viewportWidth / desiredWidth;
+        } else {
+          document.body.style.zoom = 1;
+        }
+      }
+  
+      // Ajuster le zoom lors du chargement initial
+      adjustZoom();
+  
+      // Ajuster le zoom lorsque la fenêtre est redimensionnée
+      window.addEventListener('resize', adjustZoom);
 
     if (modeDeuteOn != "non"){
         parent__deute.style.backgroundColor = "brown";

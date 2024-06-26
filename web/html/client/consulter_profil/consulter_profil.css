@@ -46,7 +46,7 @@ h2 {
 }
 
 h3 {
-  font-size: max(23px, 1.5625vw);
+  font-size: max(20px, 1.5625vw);
   font-weight: bold;
   margin: 0;
 }
@@ -146,10 +146,11 @@ main {
 }
 main .page-content {
   background-color: #FFFFFF;
-  padding: 1em;
+  padding-block: 100px;
+  padding-inline: 100px;
   border-radius: 10px;
 }
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1024px) {
   main .page-content {
     padding-inline: 25px;
   }

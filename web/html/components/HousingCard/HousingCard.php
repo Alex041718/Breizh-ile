@@ -13,18 +13,21 @@ class HousingCard {
         $housing_nb_personn = $housing->getNbPerson();
         $owner_pp = $housing->getOwner()->getImage()->getImageSrc();
         $owner_name = $housing->getOwner()->getNickname();
+        $owner_ID = $housing->getOwner()->getOwnerID();
+        
+        $owner_profil = "/client/profil/" . $owner_ID;
 
 
         $render =  /*html*/ '   
         <link rel="stylesheet" href="/components/HousingCard/HousingCard.css">         
 
-        <a href="/logement?id='. $housing_id .'" class="housing-card '. $class . ' " id=" ' . $id . ' ">
+        <div onClick="window.location.href=\'/logement?id='. $housing_id .'\'"  class="housing-card '. $class . ' " id=" ' . $id . ' ">
             <img class="housing-card__thumbnail" src="' . $housing_thumbnail . '">
             <div class="housing-card__content">
-                <div class="housing-card__content__owner">
+                <a href="' . $owner_profil . '" class="housing-card__content__owner">
                     <img src="' . $owner_pp . '">
                     <p>' . $owner_name . '</p>
-                </div>
+                </a>
                 <h4>' . $housing_name . '</h4>
                 <p>' . $housing_content . '</p>
                 <div class="housing-card__content__bottom">
@@ -41,7 +44,7 @@ class HousingCard {
                     <h3>' . number_format($housing_price, 2, ",") . '€<span>/nuit</span></h3>
                 </div>
             </div>
-        </a>
+        </div>
         ';
 
         echo $render;
