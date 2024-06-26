@@ -39,11 +39,11 @@ $client = ClientService::GetClientById($clientID);
     <link rel="stylesheet" href="../components/Toast/Toast.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
 
-
     <link rel="stylesheet" href="../../style/ui.css">
 </head>
 
 <body>
+
     <?php
     require_once ("../../components/Header/header.php");
     Header::render(true, false, $isAuthenticated, '/client/profile');
@@ -72,11 +72,15 @@ $client = ClientService::GetClientById($clientID);
             <div class="content__personnal-data__top">
                 <p class="content__personnal-data__top__description">Modifier vos informations Personnelles</p>
 
-                <img class="content__personnal-data__image" src="<?= $client->getImage()->getImageSrc() ?>"
-                    alt="photo_de_profile">
+                <img id="profile-image" class="content__personnal-data__image"
+                    src="<?= $client->getImage()->getImageSrc() ?>" alt="photo_de_profile"
+                    onclick="document.getElementById('image-input').click()">
+                <input type="file" id="image-input" name="profileImage" accept="image/*" style="display: none;"
+                    onchange="previewImage(event)">
+
             </div>
 
-            <form method="POST" action="/controllers/client/clientUpdateController.php">
+            <form method="POST" action="/controllers/client/clientUpdateController.php" enctype="multipart/form-data">
                 <div class="content__personnal-data__elements">
                     <!-- Nom -->
                     <?php require_once ("../../components/Input/Input.php");
@@ -114,18 +118,16 @@ $client = ClientService::GetClientById($clientID);
                         </select>
                     </div>
 
-
                     <!-- Date de naissance -->
                     <?php
                     Input::render("uneClassEnPlus", "birthDate", "date", "Date de naissance", "birthDate", "Date de naissance", false, $client->getBirthDate()->format('Y-m-d')); ?>
 
                     <!-- Date de création du compte -->
-
                     <input type="hidden" name="creationDate"
                         value="<?php echo ($client->getCreationDate()->format('Y-m-d')) ?>">
                     <input type="hidden" name="clientID" value="<?php echo ($client->getClientID()) ?>">
-
                 </div>
+
                 <!-- Confirmer modifications button -->
                 <div class="content__personnal-data__elements__modify_button">
                     <?php
@@ -186,23 +188,32 @@ $client = ClientService::GetClientById($clientID);
                             minimum</p>
                         <p id="lowercase" class="content__security__elements__required__fields__lowercase">1 Minuscule
                             minimum</p>
-                        <p id="digit" class="content__security__elements__required__fields__digit">1 chiffre minimum
-                        </p>
+                        <p id="digit" class="content__security__elements__required__fields__digit">1 chiffre minimum</p>
                     </div>
-
-
                 </div>
         </div>
         </form>
         </div>
-
     </main>
 
     <?php
     require_once ("../../components/Footer/footer.php");
     Footer::render();
     ?>
-    <script type="module" src="/client/clientProfile/client-profile.js"></script>
+
+    <script type="module">
+        import { Toast } from '../../components/Toast/Toast.js';
+    </script>
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const output = document.getElementById('profile-image');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 </body>
 
 </html>

@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function handleFormSubmit(form) {
         form.addEventListener('submit', function(event) {
+            console.log("test");
             event.preventDefault(); // Prevent default form submission
 
             const formData = new FormData(form);
