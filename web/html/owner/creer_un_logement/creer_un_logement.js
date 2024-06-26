@@ -1,3 +1,5 @@
+import {Toast} from "../../components/Toast/Toast";
+
 const pages_title = ["description", "localisation", "specifications", "arrangements", "activities"];
 const pages = pages_title.map(page => document.getElementById(page));
 const addButtonArrangements = document.getElementById("addButtonArrangements");
@@ -10,6 +12,7 @@ const imagePicker = document.querySelector("#imagePicker #drop-area");
 const trashButtons = [];
 const buttonNext = document.querySelectorAll("#nextButton");
 const buttonValidate = document.getElementById("validateButton");
+const buttonCancelList = document.querySelectorAll("#cancelButton");
 
 let activities = [];
 let arrangements = [];
@@ -165,10 +168,17 @@ addButtonActivities.addEventListener("click", () => {
     itemsActivities.appendChild(item);
 });
 
+buttonCancelList.forEach(buttonCancel => {
+    buttonCancel.addEventListener("click", () => {
+        window.location.href = "/back/logements";
+    });
+});
+
 buttonValidate.addEventListener("click", () => {
     console.log("validate");
     let xhr = new XMLHttpRequest();
     const inputFile = document.getElementsByName("file-name")[0];
+
     let params = `title=${document.getElementById("title").querySelector("input").value}
     &shortDesc=${document.getElementById("shortdesc").querySelector("textarea").value}
     &longDesc=${document.getElementById("longdesc").querySelector("textarea").value}
@@ -197,6 +207,7 @@ buttonValidate.addEventListener("click", () => {
     xhr.open("POST", "/owner/creer_un_logement/createHousing.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send(params);
+    Toast("Logement créé avec succès", "success");
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -258,8 +269,9 @@ document.addEventListener('DOMContentLoaded', function() {
             else
             {
               tileType = "OpenStreetMap";
-                            
-              selectedTile = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+
+                let selectedTile;
+                selectedTile = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'ArcGIS'
               }).addTo(map);
         }

@@ -1,12 +1,10 @@
 <?php
 require_once '../../../services/SessionService.php';
-require_once("../../../services/OwnerService.php");
 
-//// Gestion de la session
-//SessionService::system('owner', '/back/creer-logement');
-//
-//$owner = OwnerService::getOwnerById($_SESSION['user_id']);
-//$_SESSION["owner"] = $owner;
+// Gestion de la session
+SessionService::system('owner', '/back/modifier-logement');
+
+$isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
 
 ?>
 
@@ -28,7 +26,6 @@ require_once("../../../services/OwnerService.php");
 </head>
 <body>
     <?php
-        require_once("../../components/Header/header.php");
         require_once("../../components/Input/Input.php");
         require_once("../../components/ComboList/ComboList.php");
         require_once("../../components/Button/Button.php");
@@ -43,8 +40,17 @@ require_once("../../../services/OwnerService.php");
         require_once '../../../models/Housing.php';
         require_once '../../../services/HousingService.php';
 
-        Header::render(isScrolling: True, isBackOffice: True);
+        require_once("../../components/Header/header.php");
+        require_once("../../components/OwnerNavBar/ownerNavBar.php");
+        require_once("../../../services/HousingService.php");
+        require_once("../../../services/OwnerService.php");
 
+        $owner = OwnerService::getOwnerById($_SESSION['user_id']);
+
+        $housings = HousingService::getAllHousingsByOwnerID($owner->getOwnerID());
+        $_SESSION["housings"] = $housings;
+
+        Header::render(True, True, $isOwnerAuthenticated, '/back/modifier-logement');
 
         //Récupération des valeurs des champs grace à l'id en paramètre
         $housing = null;
@@ -105,7 +111,10 @@ require_once("../../../services/OwnerService.php");
                             <?php Input::render("content__input--large", "title", "text", "Title", "title", "Entrez un titre pour votre logement", true, $housingTitle, 0, 100); ?>
                             <?php Input::render("content__input--large content__input--long", "shortdesc", "textarea", "Accroche", "shortdesc", "Détaillez votre logement en 3 lignes", true, $housingShortDesc, 0, 255, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
                             <?php Input::render("content__input--large content__input--very-long", "longdesc", "textarea", "Description détaillée", "longdesc", "Détaillez précisement votre logement", false, $housingDesc, 0, 8000, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
-                            <?php Button::render("content__button content__button--next", "nextButton", "Suivant", ButtonType::Owner, "", false, false); ?>
+                            <section class="inline">
+                                <?php Button::render("content__button content__button--next", "validateButton", "Mettre à jour le logement", ButtonType::Owner, "", false, true, '<i class="fa-solid fa-check"></i>'); ?>
+                                <?php Button::render("content__button content__button--back","cancelButton","Annuler",ButtonType::Delete,"", false, false, '<i class="fa-solid fa-xmark"></i>');?>
+                            </section>
                         </section>
                     </section>
                     <section class="content__right">
@@ -117,19 +126,22 @@ require_once("../../../services/OwnerService.php");
                         <section>
                             <section class="inline">
                                 <?php Input::render("half content__input--large", "postalCode", "text", "Code Postal", "postalCode", "Ex: 29200", true, $housingPostalCode, 0, 5, "[0-9]{5}"); ?>
-                                <?php Input::render("wide content__input--large", "country", "text", "Pays", "country", "Pays où se situe le logement", false, $housingCountry, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
                                 <?php Input::render("wide content__input--large", "city", "text", "Ville", "city", "Entrez la ville de votre logement", true, $housingCity, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+                                <?php Input::render("wide content__input--large", "country", "text", "Pays", "country", "Pays où se situe le logement", false, $housingCountry, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
                             </section>
                             <section class="inline">
-                                <?php Input::render("half content__input--large", "complementAddress", "text", "Complément d'adresse", "complementAddress", "", false, $housingComplementAddress, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
                                 <?php Input::render("half content__input--large", "streetNumber", "text", "Numéro de rue", "streetNumber", "", false, $housingStreetNumber, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+                                <?php Input::render("half content__input--large", "complementAddress", "text", "Complément d'adresse", "complementAddress", "", false, $housingComplementAddress, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
                                 <?php Input::render("content__input--large", "postalAddress", "text", "Adresse", "postalAddress", "Entrez l'adresse de votre logement", true, $housingAddressLabel, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
                             </section>
                             <section class="inline">
                                 <?php Input::render("content__input--large", "longitude", "text", "Longitude", "longitude", "Ex: 48.202047", false, $housingLongitude, 0, 100, '^-?([0-8]?[0-9]|90)(\.[0-9]{1,10})$'); ?>
                                 <?php Input::render("content__input--large", "latitude", "text", "Latitude", "latitude", "Ex: -2.932644", false, $housingLatitude, 0, 100, '^-?([0-9]{1,2}|1[0-7][0-9]|180)(\.[0-9]{1,10})$'); ?>
                             </section>
-                            <?php Button::render("content__button content__button--next", "nextButton", "Suivant", ButtonType::Owner, "", false, false); ?>
+                            <section class="inline">
+                                <?php Button::render("content__button content__button--next", "validateButton", "Mettre à jour le logement", ButtonType::Owner, "", false, true, '<i class="fa-solid fa-check"></i>'); ?>
+                                <?php Button::render("content__button content__button--back","cancelButton","Annuler",ButtonType::Delete,"", false, false, '<i class="fa-solid fa-xmark"></i>');?>
+                            </section>
                         </section>
                     </section>
                     <section class="content__right">
@@ -159,8 +171,10 @@ require_once("../../../services/OwnerService.php");
                     <section class="content__bottom">
                         <?php Input::render("content__input--large", "nbPerson", "text", "Nombre de personnes max", "nbPerson", "Nombre de personnes", false, $housingNbPerson, 0, 2, '[0-9]{1,2}'); ?>
                     </section>
-                    <?php Button::render("content__button content__button--next", "nextButton", "Suivant", ButtonType::Owner, "", false, false); ?>
-                </section>
+                    <section class="inline">
+                        <?php Button::render("content__button content__button--next", "validateButton", "Mettre à jour le logement", ButtonType::Owner, "", false, true, '<i class="fa-solid fa-check"></i>'); ?>
+                        <?php Button::render("content__button content__button--back","cancelButton","Annuler",ButtonType::Delete,"", false, false, '<i class="fa-solid fa-xmark"></i>');?>
+                    </section>                </section>
                 <section class="content arrangements">
                     <section class="content__up">
                         <?php ComboList::render("content__combo", "arrangement", "Choisissez l'aménagement", "arrangement", ArrangementService::getAllArrangementsAsArrayOfString(), "Aménagements", false) ?>
@@ -177,8 +191,10 @@ require_once("../../../services/OwnerService.php");
                             <?php endforeach; ?>
                         </div>
                     </section>
-                    <?php Button::render("content__button content__button--next", "nextButton", "Suivant", ButtonType::Owner, "", false, false); ?>
-                </section>
+                    <section class="inline">
+                        <?php Button::render("content__button content__button--next", "validateButton", "Mettre à jour le logement", ButtonType::Owner, "", false, true, '<i class="fa-solid fa-check"></i>'); ?>
+                        <?php Button::render("content__button content__button--back","cancelButton","Annuler",ButtonType::Delete,"", false, false, '<i class="fa-solid fa-xmark"></i>');?>
+                    </section>                </section>
                 <section class="content activities">
                     <section class="content__up">
                         <?php ComboList::render("content__combo", "activity", "Choisissez l'activité", "activity", ActivityService::getAllActivitiesAsArrayOfString(), "Activités", false) ?>
@@ -199,7 +215,11 @@ require_once("../../../services/OwnerService.php");
                             <?php } ?>
                         </div>
                     </section>
-                    <?php Button::render("content__button content__button--next", "validateButton", "Mettre à jour le logement", ButtonType::Owner, "", false, true, '<i class="fa-solid fa-check"></i>'); ?>
+                    <section class="inline">
+                        <?php Button::render("content__button content__button--next", "validateButton", "Mettre à jour le logement", ButtonType::Owner, "", false, true, '<i class="fa-solid fa-check"></i>'); ?>
+                        <?php Button::render("content__button content__button--back","cancelButton","Annuler",ButtonType::Delete,"", false, false, '<i class="fa-solid fa-xmark"></i>');?>
+                    </section>
+
                 </section>
             </section>
         <script type="module" src="modifier_logement.js"></script>

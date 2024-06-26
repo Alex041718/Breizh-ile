@@ -217,7 +217,7 @@ class HousingService extends Service
         if($row['priceIncl'] == null) $row['priceIncl'] = 0;
         if($row['priceExcl'] == null) $row['priceExcl'] = 0;
 
-      
+
         $row['beginDate'] = ($row['beginDate'] == null) ? new DateTime("now") : new DateTime($row['beginDate']);
         $row['endDate'] = ($row['endDate'] == null) ? new DateTime("now") : new DateTime($row['endDate']);
         $row['creationDate'] = new DateTime("now");
@@ -287,7 +287,7 @@ class HousingService extends Service
             if(isset($minPrice)) $chaine = $chaine . "_Housing.priceIncl >= " . $minPrice . " ". ((isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1 || $jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " AND " : " ");
 
             if(isset($maxPrice)) $chaine = $chaine . "_Housing.priceIncl <= " .  $maxPrice . " ". (($appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1 || $jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " AND " : " ");
-            
+
             if(($appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1)){
                 $chaine = $chaine . "(";
                 if($appartement == 1) $chaine = $chaine . "_Housing.categoryID = " . 1 . " " . (($chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1) ? " OR " : " ");
@@ -323,7 +323,7 @@ class HousingService extends Service
             }
         }
         else $chaine = "";
-        
+
         $query = 'SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID INNER JOIN _Address ON _Housing.addressID = _Address.addressID WHERE _Housing.isOnline = true ' . $chaine . 'ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';';
 
         $pdo = self::getPDO();

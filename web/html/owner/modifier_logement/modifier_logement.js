@@ -9,7 +9,8 @@ const inputs = document.querySelectorAll("input, textarea, select");
 const imagePicker = document.querySelector("#imagePicker #drop-area");
 const trashButtons = [];
 const buttonNext = document.querySelectorAll("#nextButton");
-const buttonValidate = document.getElementById("validateButton");
+const buttonValidateList = document.querySelectorAll("#validateButton");
+const buttonCancelList = document.querySelectorAll("#cancelButton");
 
 let activities = [];
 let arrangements = [];
@@ -124,43 +125,53 @@ addButtonActivities.addEventListener("click", () => {
     itemsActivities.appendChild(item);
 });
 
-buttonValidate.addEventListener("click", () => {
-    console.log("validate");
-    let xhr = new XMLHttpRequest();
-    const inputFile = document.getElementsByName("file-name")[0];
-    let params = `housingID=${document.getElementById("housingID").value}
-                        &title=${document.getElementById("title").querySelector("input").value}
-                        &shortDesc=${document.getElementById("shortdesc").querySelector("textarea").value}
-                        &longDesc=${document.getElementById("longdesc").querySelector("textarea").value}
-                        &price=${document.getElementById("priceHT").querySelector("input").value}
-                        &nbPerson=${document.getElementById("nbPerson").querySelector("input").value}
-                        &nbRooms=${document.getElementById("nbRooms").querySelector("input").value}
-                        &nbSimpleBed=${document.getElementById("nbSimpleBed").querySelector("input").value}
-                        &nbDoubleBed=${document.getElementById("nbDoubleBed").querySelector("input").value}
-                        &beginDate=${document.getElementById("beginDate").querySelector("input").value.split("/").reverse().join("-")}
-                        &endDate=${document.getElementById("endDate").querySelector("input").value.split("/").reverse().join("-")}
-                        &surfaceInM2=${document.getElementById("surface").querySelector("input").value}
-                        &latitude=${document.getElementById("latitude").querySelector("input").value}
-                        &longitude=${document.getElementById("longitude").querySelector("input").value}
-                        &postalAddress=${document.getElementById("postalAddress").querySelector("input").value}
-                        &city=${document.getElementById("city").querySelector("input").value}
-                        &country=${document.getElementById("country").querySelector("input").value}
-                        &complementAddress=${document.getElementById("complementAddress").querySelector("input").value}
-                        &streetNumber=${document.getElementById("streetNumber").querySelector("input").value}
-                        &postalCode=${document.getElementById("postalCode").querySelector("input").value}
-                        &arrangements=${arrangements.join(",")}
-                        &activities=${activities.map(activity => activity.join("|")).join(",")}
-                        &image=${document.getElementById("imagePicker").querySelector("input").value}
-                        &type=${document.getElementById("type").querySelector("select").selectedIndex}
-                        &category=${document.getElementById("category").querySelector("select").selectedIndex}`;
+//Actions à la validation
+buttonValidateList.forEach(buttonValidate => {
+    buttonValidate.addEventListener("click", () => {
+        console.log("validate");
+        let xhr = new XMLHttpRequest();
+        const inputFile = document.getElementsByName("file-name")[0];
+        let params = `housingID=${document.getElementById("housingID").value}
+                            &title=${document.getElementById("title").querySelector("input").value}
+                            &shortDesc=${document.getElementById("shortdesc").querySelector("textarea").value}
+                            &longDesc=${document.getElementById("longdesc").querySelector("textarea").value}
+                            &price=${document.getElementById("priceHT").querySelector("input").value}
+                            &nbPerson=${document.getElementById("nbPerson").querySelector("input").value}
+                            &nbRooms=${document.getElementById("nbRooms").querySelector("input").value}
+                            &nbSimpleBed=${document.getElementById("nbSimpleBed").querySelector("input").value}
+                            &nbDoubleBed=${document.getElementById("nbDoubleBed").querySelector("input").value}
+                            &beginDate=${document.getElementById("beginDate").querySelector("input").value.split("/").reverse().join("-")}
+                            &endDate=${document.getElementById("endDate").querySelector("input").value.split("/").reverse().join("-")}
+                            &surfaceInM2=${document.getElementById("surface").querySelector("input").value}
+                            &latitude=${document.getElementById("latitude").querySelector("input").value}
+                            &longitude=${document.getElementById("longitude").querySelector("input").value}
+                            &postalAddress=${document.getElementById("postalAddress").querySelector("input").value}
+                            &city=${document.getElementById("city").querySelector("input").value}
+                            &country=${document.getElementById("country").querySelector("input").value}
+                            &complementAddress=${document.getElementById("complementAddress").querySelector("input").value}
+                            &streetNumber=${document.getElementById("streetNumber").querySelector("input").value}
+                            &postalCode=${document.getElementById("postalCode").querySelector("input").value}
+                            &arrangements=${arrangements.join(",")}
+                            &activities=${activities.map(activity => activity.join("|")).join(",")}
+                            &image=${inputFile.textContent}
+                            &type=${document.getElementById("type").querySelector("select").selectedIndex}
+                            &category=${document.getElementById("category").querySelector("select").selectedIndex}`;
 
-    console.log(params);
+        console.log(params);
 
-    // xhr.open("POST", "/owner/creer_un_logement/createHousing.php", true);
-    xhr.open("POST", "/owner/modifier_logement/process_modification_logement.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        // xhr.open("POST", "/owner/creer_un_logement/createHousing.php", true);
+        xhr.open("POST", "/owner/modifier_logement/process_modification_logement.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        Toast("Logement mis à jour", "success");
+        xhr.send(params);
+    });
+});
 
-    xhr.send(params);
+//Actions à l'annulation
+buttonCancelList.forEach(buttonCancel => {
+    buttonCancel.addEventListener("click", () => {
+        window.location.href = "/back/logements";
+    });
 });
 
 document.addEventListener('DOMContentLoaded', function() {
