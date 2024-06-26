@@ -295,9 +295,9 @@ bool is_user_admin(int user_id) {
     return true;
 }
 
-char* get_housings(int user_id, bool is_superadmin) {
+char* get_housings(int user_id) {
     char query[1024];
-    if (is_superadmin) {
+    if (user_id == 0) {
         snprintf(query, sizeof(query), "SELECT * FROM _Housing");
     } else {
         snprintf(query, sizeof(query), "SELECT * FROM _Housing WHERE ownerID=%d", user_id);

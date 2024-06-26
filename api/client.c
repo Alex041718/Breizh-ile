@@ -5,13 +5,14 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
+#include <errno.h>
 #include "dotenv.h"
 #include "utils.h"
 
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 8081
 #define REQUEST_SIZE 512
-#define BUFFER_SIZE 1024*2048
+#define BUFFER_SIZE 1024 * 2048
 
 #define RESET "\033[0m"
 #define RED "\033[31m"
@@ -111,11 +112,13 @@ bool is_server_ok() {
     char response[BUFFER_SIZE] = {0};
     Packet* packet = malloc(sizeof(Packet));
     strcpy(packet->header, "OK?");
+    strcpy(packet->path, "");
+    strcpy(packet->body, "");
 
     printf("Vérification du serveur\n");
     send_request(packet, response);
 
-    printf("Réponse reçue: %s\n", response);
+    printf("Réponse reçue:\n%s\n", response);
 
     if (strcmp(response, "OK\n") == 0) {
         printf(GREEN "Serveur en ligne\n" RESET);
@@ -143,13 +146,51 @@ void send_custom_request() {
     packet->body[strcspn(packet->body, "\n")] = 0;
 
     send_request(packet, response);
-    printf("Réponse reçue: %s\n", response);
+    printf("Réponse reçue:\n%s\n", response);
+}
+
+ssize_t recv_message(int sockfd, void **buf) {
+    uint32_t size_n;
+    ssize_t n;
+
+    // Recevoir d'abord la taille
+    n = recv(sockfd, &size_n, sizeof(size_n), MSG_WAITALL);
+    if (n != sizeof(size_n)) {
+        return -1;
+    }
+
+    uint32_t size = ntohl(size_n);  // Convertir la taille du format réseau
+
+    // Allouer le buffer pour le message
+    *buf = malloc(size);
+    if (*buf == NULL) {
+        return -1;
+    }
+
+    // Recevoir le message
+    size_t total = 0;
+    char *p = *buf;
+
+    while (total < size) {
+        n = recv(sockfd, p + total, size - total, 0);
+        if (n == 0) {
+            free(*buf);
+            return 0;  // Connexion fermée
+        }
+        if (n == -1) {
+            free(*buf);
+            return -1;  // Erreur
+        }
+        total += n;
+    }
+
+    return size;
 }
 
 void send_request(Packet* packet, char* response) {
     int sock = 0;
     struct sockaddr_in serv_addr;
-    char buffer[REQUEST_SIZE] = {0};
+    void *buffer;
     char message[REQUEST_SIZE] = {0};
 
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -183,9 +224,9 @@ void send_request(Packet* packet, char* response) {
     printf("Message envoyé: \n%s\n", message);
     
     // Recevoir la réponse
-    memset(buffer, 0, REQUEST_SIZE);
-    int valread = read(sock, buffer, REQUEST_SIZE);
-    snprintf(response, REQUEST_SIZE, "%s", buffer);
+    ssize_t received = recv_message(sock, &buffer);
+    snprintf(response, BUFFER_SIZE, "%s", (char*)buffer);
+    free(buffer);
 
     if (strcmp(response, "AUTH?\n") == 0) {
         printf("Authentification requise\n");
@@ -267,10 +308,11 @@ void create_api_key() {
     snprintf(packet->body, sizeof(packet->body), "userID=%s;superAdmin=%s;", user_id, is_superadmin);
     send_request(packet, response);
     
-    printf("Réponse reçue: %s\n", response);
+    printf("Réponse reçue:\n%s\n", response);
 }
 
 void get_housings() {
+    char user_id[10], is_superadmin[3];
     Packet* packet = malloc(sizeof(Packet));
     strcpy(packet->header, "ENTRYPOINT");
     strcpy(packet->path, "/api/get-housings");
@@ -278,6 +320,13 @@ void get_housings() {
 
     if (!is_server_ok()) return;
 
+    do {
+        printf("Entrez l'ID de l'utilisateur (0 pour tous les logements, si admin): ");
+        fgets(user_id, sizeof(user_id), stdin);
+        user_id[strcspn(user_id, "\n")] = 0;
+    } while (!is_number(user_id));
+
+    snprintf(packet->body, sizeof(packet->body), "userID=%s;", user_id);
     send_request(packet, response);
     printf("Liste des logements:\n%s\n", response);
 }
@@ -291,9 +340,11 @@ void get_disponibilities() {
 
     if (!is_server_ok()) return;
 
-    printf("Entrez l'ID du logement: ");
-    fgets(housing_id, sizeof(housing_id), stdin);
-    housing_id[strcspn(housing_id, "\n")] = 0;
+    do {
+        printf("Entrez l'ID du logement: ");
+        fgets(housing_id, sizeof(housing_id), stdin);
+        housing_id[strcspn(housing_id, "\n")] = 0;
+    } while (!is_number(housing_id));
 
     printf("Entrez la date de début (format YYYY-MM-DD): ");
     fgets(starting_date, sizeof(starting_date), stdin);

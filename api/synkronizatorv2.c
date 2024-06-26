@@ -7,6 +7,7 @@
 #include <netinet/in.h>
 #include <stdbool.h>
 #include <getopt.h>
+#include <errno.h>
 #include "databaseService.h"
 #include "utils.h"
 
@@ -53,6 +54,7 @@ static struct option long_options[] = {
 bool connection_initialized_with_ok = false;
 bool authentification_ok = false;
 bool connection_closed = false;
+bool is_admin = false;
 
 bool verbose = false;
 
@@ -177,6 +179,7 @@ bool check_authentification(Packet* packet, char* response) {
         }
 
         user_id_authentificated = get_user_id_from_api_key(api_attribute->value);
+        is_admin = is_superadmin_api_key(api_attribute->value); 
     } else {
         if (email_attribute == NULL || password_attribute == NULL) {
             snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLes attributs du corps de la requête sont invalides;\n");
@@ -189,6 +192,7 @@ bool check_authentification(Packet* packet, char* response) {
         }
 
         user_id_authentificated = get_user_id_from_email(email_attribute->value);
+        is_admin = is_user_admin(user_id_authentificated);
     }
 
     if (user_id_authentificated == -1) {
@@ -268,6 +272,30 @@ void handle_header(Packet* packet, char* response) {
     }
 }
 
+ssize_t send_message(int sockfd, const void *buf, size_t len) {
+    uint32_t size_n = htonl(len);  // Convertir la taille en format réseau
+    
+    // Envoyer d'abord la taille
+    if (send(sockfd, &size_n, sizeof(size_n), 0) != sizeof(size_n)) {
+        return -1;
+    }
+    
+    // Puis envoyer le message
+    size_t total = 0;
+    ssize_t n;
+    const char *p = buf;
+
+    while (total < len) {
+        n = send(sockfd, p + total, len - total, 0);
+        if (n == -1) {
+            return -1;
+        }
+        total += n;
+    }
+
+    return total;
+}
+
 void handle_request(int socket_client) {
     char buffer[BODY_BUFFER_SIZE];
     char response[RESPONSE_BUFFER_SIZE];
@@ -310,7 +338,7 @@ void handle_request(int socket_client) {
     print_log_server(log_message, INFO);
     memset(log_message, 0, sizeof(log_message));
 
-    send(socket_client, response, strlen(response), 0);
+    send_message(socket_client, response, strlen(response) + 1);
 }
 
 void create_user_api_key(Packet* packet, char* response) {
@@ -382,30 +410,13 @@ void get_list_housings(Packet* packet, char* response) {
         return;
     }
 
-    if (user_id_authentificated != atoi(user_id_attribute->value)) {
+    if (user_id_authentificated != atoi(user_id_attribute->value) && !is_admin) {
         snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=403;message=Accès interdit\nVous n'avez pas les droits pour effectuer cette action;\n");
         return;
     }
-
-    // Get the superAdmin attribute
-    BodyAttribute* super_admin_attribute = get_body_attribute(body_attributes, "superAdmin");
-    if (super_admin_attribute == NULL) {
-        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nL'attribut 'superAdmin' est manquant;\n");
-        return;
-    }
-
-    if (strcmp(super_admin_attribute->value, "0") != 0 && strcmp(super_admin_attribute->value, "1") != 0) {
-        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLa valeur de l'attribut 'superAdmin' n'est pas valide, elle doit être '0' ou '1';\n");
-        return;
-    }
-
-    if (atoi(super_admin_attribute->value) && !is_user_admin(user_id_authentificated)) {
-        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=403;message=Accès interdit\nVous n'avez pas les droits pour effectuer cette action;\n");
-        return;
-    }
-
+    
     // We try to get the housings
-    char* housings = get_housings(atoi(user_id_attribute->value), atoi(super_admin_attribute->value));
+    char* housings = get_housings(atoi(user_id_attribute->value));
     if (housings == NULL) {
         snprintf(response, RESPONSE_BUFFER_SIZE, "INTERNAL_SERVER_ERROR\ncode=500;message=Erreur interne du serveur\nLes logements n'ont pas pu être récupérés;\n");
         return;
@@ -433,7 +444,7 @@ void get_list_disponibilities(Packet* packet, char* response) {
         return;
     }
 
-    if (user_id_authentificated != get_user_id_from_housing_id(atoi(housing_id_attribute->value))) {
+    if (user_id_authentificated != get_user_id_from_housing_id(atoi(housing_id_attribute->value)) && !is_admin) {
         snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=403;message=Accès interdit\nVous n'avez pas les droits pour effectuer cette action;\n");
         return;
     }
