@@ -84,7 +84,7 @@ body {
             margin-top: 0.5em;
             gap: 0.5em;
 
-            h1{
+            h2{
                 color: $clientPrimaryColor;
             }
         }
@@ -378,7 +378,7 @@ body {
                             gap: 1.5em;
                             min-width: 45%;
         
-                            i{
+                            #icon{
                                 color: $clientPrimaryColor;
                             }
         

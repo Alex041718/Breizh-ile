@@ -72,7 +72,7 @@ body {
   margin-top: 0.5em;
   gap: 0.5em;
 }
-.photoAndReservation .reservation .price h1 {
+.photoAndReservation .reservation .price h2 {
   color: #307B5C;
 }
 .photoAndReservation .reservation .reservationBtn {
@@ -342,7 +342,7 @@ body {
   gap: 1.5em;
   min-width: 45%;
 }
-.twodiv .details .popupCriteres .popup__content .section .items .item i {
+.twodiv .details .popupCriteres .popup__content .section .items .item #icon {
   color: #307B5C;
 }
 
