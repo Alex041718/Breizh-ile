@@ -57,7 +57,7 @@ $owner_mail = $client->getMail();
             <div class="bottomcontent__column">
                 <div class="bottomcontent__column__info">
                     <i class="fa-solid fa-house"></i>
-                    <h4><?=$owner_postalAddress . " - " . $owner_postalCode . " " . $owner_city ?></h4>
+                    <h4>Habite à <?= $owner_city ?></h4>
                 </div>
                 <div class="bottomcontent__column__info">
                     <i class="fa-solid fa-phone"></i>
