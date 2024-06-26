@@ -1,0 +1,213 @@
+@import '../../style/variables';
+
+$background-image-url: "../../assets/images/OwnerBg.png";
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+main {
+    background: white;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80em;
+}
+
+h3, h4 {
+    text-align: center;
+}
+
+.generate-subscription, .subscriptions {
+    margin-top: 2em;
+}
+
+#page {
+    display: flex;
+    flex-direction: column;
+    .infoUrl{
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        width: 19em;
+        gap: 1em;
+        border: 2px solid #e9e9e9;
+        border-radius: 10px;
+        padding: 0.4rem 0.6rem;
+
+       .date{
+            display: flex;
+            justify-content: space-between;
+            .debut, .fin {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        label, select, input, button {
+            margin: 0.5em 0;
+            width: 100%;
+        }
+    }
+}
+
+button {
+    padding: 0.5em;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.subscription-url {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subscription-url input {
+    width: 80%;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background: #f1f1f1;
+    margin: 0.5em 0;
+    padding: 1em;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    box-sizing: border-box;
+    align-items: center;
+    margin-top: 1.4rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    font-weight: bold;
+    background-color: $lighterGrey5;
+
+    p {
+        width: max(10rem, calc(200vw / 19.2));
+        margin-right: 2rem;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    &--selected::after {
+        content: "";
+        position: relative;
+        display: inline-block;
+        background-image: url("../../assets/icons/arrow.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 10px;
+        height: 10px;
+        top: 31%;
+        transform: translateY(12%) rotate(180deg);
+        left: 0.3rem;
+        z-index: 999;
+    }
+
+    &--reverse::after {
+        transform: translateY(12%) rotate(0deg);
+    }
+
+    .checkbox__input{
+        margin-right: 2rem;
+    }
+    
+}
+
+.reservations {
+    overflow-y: auto;
+    width: 100.33%;
+    padding-right: 0.5rem;
+    margin-top: 1em;
+    margin-bottom: 3em;
+    height: 15em;
+
+    .checkbox__input{
+        margin-right: 2rem;
+    }
+
+    &::-webkit-scrollbar {
+        width: 0.4rem;
+        background: white;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $ownerPrimaryColor;
+        border-radius: 100px;
+        background: $ownerPrimaryColor;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: $lighterGrey5;
+        border-radius: 100px;
+        background: $lighterGrey5;
+    }
+}
+
+.reservation {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    padding: 0.4rem 0.6rem;
+    border: 2px solid $lighterGrey5;
+    border-radius: 10px;
+    height: 2.5rem;
+
+    p, a, .profile-picture {
+        display: block;
+        width: max(10rem, calc(200vw / 19.2));
+        margin-right: 2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        word-wrap: break-word;
+        text-overflow: ellipsis;
+        font-weight: normal;
+        color: $ownerPrimaryColor;
+    }
+
+    .profile-picture, .description-status {
+        display: flex;
+        align-items: center;
+    }
+
+    img {
+        margin-right: 0.5rem;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
