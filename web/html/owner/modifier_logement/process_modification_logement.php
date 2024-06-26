@@ -11,7 +11,7 @@ require_once("../../../services/TypeService.php");
 
 session_start();
 $owner = $_SESSION["owner"];
-
+$housingID = $_POST['housingID'];
 $title = $_POST['title'];
 $shortDesc = $_POST['shortDesc'];
 $longDesc = $_POST['longDesc'];
@@ -68,8 +68,8 @@ public function __construct(int $housingID,
                                 array $arrangement) {
 */
 
-$housing = new Housing(0, $title, $shortDesc, $longDesc, $priceExcl, $priceIncl, $nbPerson, $nbRooms, $nbDoubleBed, $nbSimpleBed, $longitude, $latitude, true, 0, $beginDate, $endDate, new DateTime(), $surfaceInM2, $type, $category, $addressObject, $owner, $imageObject);
-$housing = HousingService::CreateHousing($housing);
+$housing = new Housing($housingID, $title, $shortDesc, $longDesc, $priceExcl, $priceIncl, $nbPerson, $nbRooms, $nbDoubleBed, $nbSimpleBed, $longitude, $latitude, true, 0, $beginDate, $endDate, new DateTime(), $surfaceInM2, $type, $category, $addressObject, $owner, $imageObject);
+$housing = HousingService::UpdateHousingById($housing);
 print_r($housing);
 
 foreach ($activites as $activite) {

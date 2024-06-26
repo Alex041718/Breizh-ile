@@ -1,13 +1,14 @@
 <?php
 class ComboList {
 
-    public static function render($class = "", $id = "", $label = "", $name = '', $options = [], $defaultOption = '', $required = false) {
+    public static function render($class = "", $id = "", $label = "", $name = '', $options = [], $defaultOption = '', $required = false, $selectedValue = '') {
 
         $requiredAttribute = $required ? ' required' : '';
         // default option
-        $optionsHtml = "<option value='' disabled selected hidden>" . $defaultOption . "</option>";
+        $optionsHtml = "<option value='' disabled hidden>" . $defaultOption . "</option>";
         foreach ($options as $option) {
-            $optionsHtml .= '<option value="' . $option . '">' . $option . '</option>';
+            $isSelected = ($option == $selectedValue) ? ' selected' : '';
+            $optionsHtml .= '<option value="' . $option . '"' . $isSelected . '>' . $option . '</option>';
         }
 
         $render =  /*html*/ '
@@ -18,8 +19,9 @@ class ComboList {
                         ' . $optionsHtml . '
                     </select>
                 </div>';
-                
+
         echo $render;
     }
 }
+
 ?>

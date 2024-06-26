@@ -50,6 +50,135 @@ class HousingService extends Service
         return new Housing($pdo->lastInsertId(), $housing->getTitle(), $housing->getShortDesc(), $housing->getLongDesc(), $housing->getPriceExcl(), $housing->getPriceIncl(), $housing->getNbPerson(), $housing->getNbRoom(), $housing->getNbDoubleBed(), $housing->getNbSimpleBed(), $housing->getLongitude(), $housing->getLatitude(), $housing->getIsOnline(), $housing->getNoticeCount(), $housing->getBeginDate(), $housing->getEndDate(), $housing->getCreationDate(), $housing->getSurfaceInM2(), $housing->getType(), $housing->getCategory(), $housing->getAddress(), $housing->getOwner(), $housing->getImage());
     }
 
+    //public static function UpdateHousingById(Housing $housing)
+    public static function UpdateHousingById(Housing $housing)
+    {
+        // Mettre à jour le logement
+
+        $pdo = self::getPDO();
+
+        // Mettre à jour le logement
+//        $stmt = $pdo->prepare(
+//        'UPDATE _Housing SET
+//                title = :title
+//            WHERE housingID = :housingID');
+
+        $stmt = $pdo->prepare('UPDATE _Housing SET
+                    title = :title,
+                    shortDesc = :shortDesc,
+                    longDesc = :longDesc,
+                    priceExcl = :priceExcl,
+                    priceIncl = :priceIncl,
+                    nbPerson = :nbPerson,
+                    nbRoom = :nbRoom,
+                    nbDoubleBed = :nbDoubleBed,
+                    nbSimpleBed = :nbSimpleBed,
+                    longitude = :longitude,
+                    latitude = :latitude,
+                    isOnline = :isOnline,
+                    noticeCount = :noticeCount,
+                    beginDate = :beginDate,
+                    endDate = :endDate,
+                    creationDate = :creationDate,
+                    imageID = :imageID,
+                    surfaceInM2 = :surfaceInM2,
+                    typeID = :typeID,
+                    categoryID = :categoryID,
+                    addressID = :addressID,
+                    ownerID = :ownerID
+                WHERE housingID = :housingID');
+//
+        $title = $housing->getTitle();
+        $shortDesc = $housing->getShortDesc();
+        $longDesc = $housing->getLongDesc();
+        $priceExcl = $housing->getPriceExcl();
+        $priceIncl = $housing->getPriceIncl();
+        $nbPerson = $housing->getNbPerson();
+        $nbRoom = $housing->getNbRoom();
+        $nbDoubleBed = $housing->getNbDoubleBed();
+        $nbSimpleBed = $housing->getNbSimpleBed();
+        $longitude = $housing->getLongitude();
+        $latitude = $housing->getLatitude();
+        $isOnline = $housing->getIsOnline();
+        $noticeCount = $housing->getNoticeCount();
+        $beginDate = $housing->getBeginDate()->format('Y-m-d H:i:s');
+        $endDate = $housing->getEndDate()->format('Y-m-d H:i:s');
+        $creationDate = $housing->getCreationDate()->format('Y-m-d H:i:s');
+        $imageID = $housing->getImage()->getImageID();
+        $surfaceInM2 = $housing->getSurfaceInM2();
+        $typeID = $housing->getType()->getTypeID();
+        $categoryID = $housing->getCategory()->getCategoryID();
+        $addressID = $housing->getAddress()->getAddressID();
+        $ownerID = $housing->getOwner()->getOwnerID();
+        $housingId = $housing->getHousingID();
+//
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':shortDesc', $shortDesc);
+        $stmt->bindParam(':longDesc', $longDesc);
+        $stmt->bindParam(':priceExcl', $priceExcl);
+        $stmt->bindParam(':priceIncl', $priceIncl);
+        $stmt->bindParam(':nbPerson', $nbPerson);
+        $stmt->bindParam(':nbRoom', $nbRoom);
+        $stmt->bindParam(':nbDoubleBed', $nbDoubleBed);
+        $stmt->bindParam(':nbSimpleBed', $nbSimpleBed);
+        $stmt->bindParam(':longitude', $longitude);
+        $stmt->bindParam(':latitude', $latitude);
+        $stmt->bindParam(':isOnline', $isOnline);
+        $stmt->bindParam(':noticeCount', $noticeCount);
+        $stmt->bindParam(':beginDate', $beginDate);
+        $stmt->bindParam(':endDate', $endDate);
+        $stmt->bindParam(':creationDate', $creationDate);
+        $stmt->bindParam(':imageID', $imageID);
+        $stmt->bindParam(':surfaceInM2', $surfaceInM2);
+        $stmt->bindParam(':typeID', $typeID);
+        $stmt->bindParam(':categoryID', $categoryID);
+        $stmt->bindParam(':addressID', $addressID);
+        $stmt->bindParam(':ownerID', $ownerID);
+        $stmt->bindParam(':housingID', $housingId);
+
+        $stmt->execute();
+
+
+        return new Housing(
+            $housing->getHousingID(),
+            $housing->getTitle(),
+            $housing->getShortDesc(),
+            $housing->getLongDesc(),
+            $housing->getPriceExcl(),
+            $housing->getPriceIncl(),
+            $housing->getNbPerson(),
+            $housing->getNbRoom(),
+            $housing->getNbDoubleBed(),
+            $housing->getNbSimpleBed(),
+            $housing->getLongitude(),
+            $housing->getLatitude(),
+            $housing->getIsOnline(),
+            $housing->getNoticeCount(),
+            $housing->getBeginDate(),
+            $housing->getEndDate(),
+            $housing->getCreationDate(),
+            $housing->getSurfaceInM2(),
+            $housing->getType(),
+            $housing->getCategory(),
+            $housing->getAddress(),
+            $housing->getOwner(),
+            $housing->getImage()
+        );
+
+    }
+
+//
+//            if ($stmt->rowCount() > 0) {
+//                echo "Mise à jour réussie.";
+//            } else {
+//                echo "Aucune mise à jour effectuée.";
+//            }
+
+
+//
+//    }
+
+
     public static function HousingHandler(array $row): Housing
     {
         /* Son job est de créer un objet Housing à partir d'un tableau associatif provenant de la bdd. car la table _Housing 
@@ -88,7 +217,7 @@ class HousingService extends Service
         if($row['priceIncl'] == null) $row['priceIncl'] = 0;
         if($row['priceExcl'] == null) $row['priceExcl'] = 0;
 
-      
+
         $row['beginDate'] = ($row['beginDate'] == null) ? new DateTime("now") : new DateTime($row['beginDate']);
         $row['endDate'] = ($row['endDate'] == null) ? new DateTime("now") : new DateTime($row['endDate']);
         $row['creationDate'] = new DateTime("now");
@@ -148,9 +277,9 @@ class HousingService extends Service
             $chaine = "AND ";
     
             if(isset($city)) $chaine = $chaine . '_Address.city = "' . $city . '"' . ((isset($dateBegin) || isset($dateEnd) || isset($nbPerson) || isset($minPrice) || isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1 || $jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " AND " : " ");
-            
+
             if(isset($dateBegin)) $chaine = $chaine . "_Housing.beginDate < '" . $dateBegin . "'". ((isset($dateEnd) | isset($nbPerson) || isset($minPrice) || isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1 || $jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " AND " : " ");
-    
+
             if(isset($dateEnd)) $chaine = $chaine . "_Housing.endDate > '" . $dateEnd . "'". ((isset($nbPerson) || isset($minPrice) || isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1 || $jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " AND " : " ");
 
             if(isset($nbPerson)) $chaine = $chaine . "_Housing.nbPerson >= " . $nbPerson . ((isset($minPrice) || isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1 || $jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " AND " : " ");
@@ -158,7 +287,7 @@ class HousingService extends Service
             if(isset($minPrice)) $chaine = $chaine . "_Housing.priceIncl >= " . $minPrice . " ". ((isset($maxPrice) || $appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1 || $jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " AND " : " ");
 
             if(isset($maxPrice)) $chaine = $chaine . "_Housing.priceIncl <= " .  $maxPrice . " ". (($appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1 || $t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1 || $baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1 || $jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " AND " : " ");
-            
+
             if(($appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1)){
                 $chaine = $chaine . "(";
                 if($appartement == 1) $chaine = $chaine . "_Housing.categoryID = " . 1 . " " . (($chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1) ? " OR " : " ");
@@ -192,65 +321,10 @@ class HousingService extends Service
                 $chaine = $chaine . ") ";
 
             }
-
-            
-            if ((($appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1) || ($t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1)) && ($baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1)){
-                $chaine = $chaine . "AND ";
-            }
-
-            if(($baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1)){
-                $innerHasForActivity = 'INNER JOIN _Has_for_activity ON _Housing.housingID = _Has_for_activity.housingID ';
-                $chaine = $chaine . "(";
-                if($baignade == 1) $chaine = $chaine . "_Has_for_activity.activityID = " . 1 . " " . (($voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1) ? " OR " : " ");
-                if($voile == 1) $chaine = $chaine . "_Has_for_activity.activityID = " . 2 . " " . (($canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1) ? " OR " : " ") ;
-                if($canoe == 1) $chaine = $chaine . "_Has_for_activity.activityID = " . 3 . " " . (($golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1) ? " OR " : " ");
-                if($golf == 1) $chaine = $chaine . "_Has_for_activity.activityID = " . 4 . " " . (($equitation == 1 || $accrobranche == 1 || $randonnee == 1) ? " OR " : " ");
-                if($equitation == 1) $chaine = $chaine . "_Has_for_activity.activityID = " . 5 . " " . (($accrobranche == 1 || $randonnee == 1) ? " OR " : " ");
-                if($accrobranche == 1) $chaine = $chaine . "_Has_for_activity.activityID = " . 6 . " " . (($randonnee == 1) ? " OR " : " ");
-                if($randonnee == 1) $chaine = $chaine . "_Has_for_activity.activityID = " . 7 . " " ;
-                $chaine = $chaine . ") ";
-            }
-            else{
-                $innerHasForActivity = "";
-            }
-
-
-            if ((($appartement == 1 || $chalet == 1 || $maison == 1 || $bateau == 1 || $villa == 1 || $insol == 1) || ($t1 == 1 || $t2 == 1 || $t3 == 1 || $t4 == 1 || $t5 == 1 || $t6 == 1 || $f1 == 1 || $f2 == 1 || $f3 == 1 || $f4 == 1 || $f5 == 1) || ($baignade == 1 || $voile == 1 || $canoe == 1 || $golf == 1 || $equitation == 1 || $accrobranche == 1 || $randonnee == 1)) && ($jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1)){
-                $chaine = $chaine . "AND ";
-            }
-
-            if(($jardin == 1 || $balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1)){
-                $innerHasForAmenagement = 'INNER JOIN _Has_for_arrangement ON _Housing.housingID = _Has_for_arrangement.housingID ';
-                $chaine = $chaine . "(";
-                if($jardin == 1) $chaine = $chaine . "_Has_for_arrangement.arrangementID = " . 1 . " " . (($balcon == 1 || $terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " OR " : " ");
-                if($balcon == 1) $chaine = $chaine . "_Has_for_arrangement.arrangementID = " . 2 . " " . (($terrasse == 1 || $piscine == 1 || $jacuzzi == 1) ? " OR " : " ");
-                if($terrasse == 1) $chaine = $chaine . "_Has_for_arrangement.arrangementID = " . 3 . " " . (($piscine == 1 || $jacuzzi == 1) ? " OR " : " ");
-                if($piscine == 1) $chaine = $chaine . "_Has_for_arrangement.arrangementID = " . 4 . " " . (($jacuzzi == 1) ? " OR " : " ");
-                if($jacuzzi == 1) $chaine = $chaine . "_Has_for_arrangement.arrangementID = " . 5 . " " ;
-                $chaine = $chaine . ") ";
-            }
-            else{
-                $innerHasForAmenagement = "";
-            }
-
-
         }
-        else  {
-            $chaine = "";
-            $innerHasForAmenagement = "";
-            $innerHasForActivity = "";
-        }
+        else $chaine = "";
 
-        $beforeHas = 'WITH doublon AS (';
-        $afterHas = ') SELECT DISTINCT * FROM doublon D INNER JOIN _Housing H ON H.housingID = D.housingID';
-        
-        if ($ownerID != null && $beforeHas != "" && $afterHas != ""){
-            $query = $beforeHas . 'SELECT _Housing.housingID, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID ' . $innerHasForAmenagement . 'INNER JOIN _Address ON _Housing.addressID = _Address.addressID ' . $innerHasForActivity . 'WHERE _Housing.ownerID = ' . $ownerID . ' ' . $chaine . ($desc ? 'DESC' : '') . $afterHas .';';
-        }
-        else{
-            $query = $beforeHas . 'SELECT _Housing.housingID, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID ' . $innerHasForAmenagement . 'INNER JOIN _Address ON _Housing.addressID = _Address.addressID ' . $innerHasForActivity . 'WHERE _Housing.isOnline = true ' . $chaine . $afterHas . ' ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';';
-        }       
-
+        $query = 'SELECT *, _Housing.imageID AS profileImageID FROM _Housing INNER JOIN Owner ON _Housing.ownerID = Owner.ownerID INNER JOIN _Address ON _Housing.addressID = _Address.addressID WHERE _Housing.isOnline = true ' . $chaine . 'ORDER BY '. $order .' ' . ($desc ? 'DESC' : '') .' LIMIT 9 OFFSET ' . $offset .';';
 
         $pdo = self::getPDO();
         $stmt = $pdo->query($query);
