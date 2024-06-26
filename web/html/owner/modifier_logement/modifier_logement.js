@@ -162,7 +162,6 @@ buttonValidateList.forEach(buttonValidate => {
         // xhr.open("POST", "/owner/creer_un_logement/createHousing.php", true);
         xhr.open("POST", "/owner/modifier_logement/process_modification_logement.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        Toast("Logement mis à jour", "success");
         xhr.send(params);
     });
 });

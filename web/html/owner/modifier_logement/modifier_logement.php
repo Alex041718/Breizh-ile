@@ -13,7 +13,7 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Création d'un logement</title>
+    <title>Modification d'un logement</title>
     <link rel="stylesheet" href="../../style/ui.css">
     <link rel="stylesheet" href="/owner/creer_un_logement/creer_un_logement.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>

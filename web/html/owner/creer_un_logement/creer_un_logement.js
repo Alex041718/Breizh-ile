@@ -1,4 +1,3 @@
-import {Toast} from "../../components/Toast/Toast";
 
 const pages_title = ["description", "localisation", "specifications", "arrangements", "activities"];
 const pages = pages_title.map(page => document.getElementById(page));
@@ -207,7 +206,6 @@ buttonValidate.addEventListener("click", () => {
     xhr.open("POST", "/owner/creer_un_logement/createHousing.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send(params);
-    Toast("Logement créé avec succès", "success");
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -270,7 +268,7 @@ document.addEventListener('DOMContentLoaded', function() {
             {
               tileType = "OpenStreetMap";
 
-                let selectedTile;
+                //let selectedTile;
                 selectedTile = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'ArcGIS'
               }).addTo(map);
