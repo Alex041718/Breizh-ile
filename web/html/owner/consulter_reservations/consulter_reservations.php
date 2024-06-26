@@ -38,7 +38,15 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
         OwnerNavBar::render(2);
     ?>
     <main>
-        <h3>Vos réservations</h3>
+        <div class="top-container">
+            <h3>Vos réservations</h3>
+            <div class="top-container__right">
+                <button class="top-container__right__button">Terminée</button>
+                <button class="top-container__right__button">En cours</button>
+                <button class="top-container__right__button">Prochainement</button>
+                <div class="top-container__right__slider"></div>
+            </div>
+        </div>
         <section class="title">
             <?php
                 require_once("../../components/CheckBox/CheckBox.php");
@@ -50,7 +58,7 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
             <p data-sort="date-arrivee">Date d'arrivée</p>
             <p data-sort="date-depart">Date de départ</p>
             <p data-sort="methode-paiement">Méthode de paiement</p>
-            <p data-sort="status">Status</p>
+            <p data-sort="status">Statut</p>
             <button class="filter"><i class="fa-solid fa-filter"></i></button>
         </section>
         <section class="reservations">
