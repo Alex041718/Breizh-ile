@@ -38,6 +38,7 @@ $isValid = $client ? true : false;
                     <p>Un mail contenant un code de vérification vous a été envoyé. Veuillez le saisir dans le champ ci-dessous.</p>';
                     Input::render("connection__input", "code", "number", null, "inputCode", "Code", true);
                     Button::render("connection__button", "submitBtn", "Valider",ButtonType::Client,false,false,true);
+                    echo '<p>' . $client->getMail() . ' n\'est pas votre mail ? <a href="/client/clientRegister/changeMail.php">Modifier</a></p>';
                     echo '</form>' ;
                 }
                 else if(isset($_GET["success"]) && $_GET["success"] === "true") {

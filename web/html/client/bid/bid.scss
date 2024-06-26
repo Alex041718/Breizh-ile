@@ -8,9 +8,10 @@ body {
 
 main {
     background-color: $grey6;
-    min-height: 60vh;
-    padding-top: 6em;
-    padding-bottom: 2em;
+    min-height: calc(100dvh - 240px);
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 hr {
@@ -21,19 +22,18 @@ hr {
 }
 
 .bid {
-
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-inline: 100px;
+    width: 100%;
 
     @media (max-width: 1024px) {
-        padding-bottom: 5em;
+        padding-inline: 25px;
     }
 
     &__container {
-
 
         display: flex;
         flex-direction: column;
@@ -41,6 +41,11 @@ hr {
         justify-content: space-between;
         margin: 1em;
         gap: 2em;
+        width: 100%;
+
+        @media (max-width: 1024px) {
+            padding-block: 100px;
+        }
 
         &__title-page {
             align-self: flex-start;
@@ -60,15 +65,20 @@ hr {
 
             //  Gauche
             &__info-detail {
-                max-width: 44em;
                 border: 1px solid $grey5;
                 border-radius: 10px;
                 background-color: $whiteColor;
                 padding: 2em;
+                width: 70%;
+                box-sizing: border-box;
 
                 display: flex;
                 flex-direction: column;
-                gap: 1em;
+                gap: 20px;
+
+                @media (max-width: 1024px) {
+                    width: 100%;
+                }
 
                 &__description {
                     display: flex;
@@ -125,7 +135,7 @@ hr {
 
             // Droite
             &__pay-recap {
-                width: 300px;
+                width: 30%;
                 border: 1px solid $grey5;
                 border-radius: 10px;
                 background-color: $whiteColor;
@@ -137,7 +147,6 @@ hr {
 
                 @media (max-width: 1024px) {
                     width: auto;
-
                 }
 
                 &__price-detail {
@@ -167,7 +176,6 @@ hr {
                 }
 
                 &__button {
-                    ;
                 }
 
             }

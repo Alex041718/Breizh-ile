@@ -186,7 +186,7 @@ main {
   align-items: center;
   height: 100%;
   width: 100%;
-  font-size: max(23px, 1.5625vw);
+  font-size: max(20px, 1.5625vw);
   color: #828282;
 }
 

@@ -46,7 +46,7 @@ h2 {
 }
 
 h3 {
-  font-size: max(23px, 1.5625vw);
+  font-size: max(20px, 1.5625vw);
   font-weight: bold;
   margin: 0;
 }
@@ -84,6 +84,7 @@ p {
   padding-inline: 25px;
   background-color: #1D1D1D;
   color: white;
+  width: -moz-fit-content;
   width: fit-content;
   border-radius: 10px;
 }
@@ -145,10 +146,11 @@ main {
 }
 main .page-content {
   background-color: #FFFFFF;
-  padding: 1em;
+  padding-block: 100px;
+  padding-inline: 100px;
   border-radius: 10px;
 }
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1024px) {
   main .page-content {
     padding-inline: 25px;
   }
@@ -233,6 +235,4 @@ main .page-content .bottomcontent__column__info {
   display: flex;
   gap: 5px;
   align-items: center;
-}
-
-/*# sourceMappingURL=consulter_profil.css.map */
+}/*# sourceMappingURL=consulter_profil.css.map */

@@ -15,10 +15,10 @@ class Input {
                 $input = '<textarea class="input__textarea" placeholder="' . $placeholder . '"' . $requiredAttribute . ' value="' . $value . '" minlenght="' . $minLength . '" maxlength="' . $maxLength . '"' . ($pattern == "" ? "" : ' pattern="' . $pattern . '"') . '>' . $value . '</textarea>';
                 break;
             case "date":
-                $input = '<input name="' . $name . '" type="' . $type . '" class="input__input" placeholder="' . $placeholder . '"' . $requiredAttribute . ' value="' . $value . '" minlenght="' . $minLength . '" maxlength="' . $maxLength . '"' . ($pattern == "" ? "" : ' pattern="' . $pattern . '"') . '>';
+                $input = '<input content="width=device-width, initial-scale=1, maximum-scale=1" name="' . $name . '" type="' . $type . '" class="input__input" placeholder="' . $placeholder . '"' . $requiredAttribute . ' value="' . $value . '" minlenght="' . $minLength . '" maxlength="' . $maxLength . '"' . ($pattern == "" ? "" : ' pattern="' . $pattern . '"') . '>';
                 break;
             default:
-                $input = '<input name="' . $name . '" type="' . $type . '" class="input__input" placeholder="' . $placeholder . '"' . $requiredAttribute . ' value="' . $value . '" minlenght="' . $minLength . '" maxlength="' . $maxLength . '"' . ($pattern == "" ? "" : ' pattern="' . $pattern . '"') . '>';
+                $input = '<input content="width=device-width, initial-scale=1, maximum-scale=1" name="' . $name . '" type="' . $type . '" class="input__input" placeholder="' . $placeholder . '"' . $requiredAttribute . ' value="' . $value . '" minlenght="' . $minLength . '" maxlength="' . $maxLength . '"' . ($pattern == "" ? "" : ' pattern="' . $pattern . '"') . '>';
 
         }
 

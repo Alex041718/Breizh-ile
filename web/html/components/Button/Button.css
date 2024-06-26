@@ -46,7 +46,7 @@ h2 {
 }
 
 h3 {
-  font-size: max(23px, 1.5625vw);
+  font-size: max(20px, 1.5625vw);
   font-weight: bold;
   margin: 0;
 }

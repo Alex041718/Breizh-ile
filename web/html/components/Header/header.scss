@@ -115,31 +115,31 @@
 }
 
 .accessibilite__taille {
-    $font-size-xs: max(14px, calc(16vw / 19.2));
-    $font-size-base: max(16px, calc(20vw / 19.2));
-    $font-size-lg: max(23px, calc(30vw / 19.2));
-    $font-size-xl: max(30px, calc(48vw / 19.2));
-    $font-size-2xl: max(45px, calc(56vw / 19.2));
-    $font-size-3xl: max(54px, calc(60vw / 19.2));
+    $access-font-size-xs: max(14px, calc(16vw / 19.2));
+    $access-font-size-base: max(16px, calc(20vw / 19.2));
+    $access-font-size-lg: max(18px, calc(30vw / 19.2));
+    $access-font-size-xl: max(30px, calc(48vw / 19.2));
+    $access-font-size-2xl: max(45px, calc(56vw / 19.2));
+    $access-font-size-3xl: max(54px, calc(60vw / 19.2));
 
     h1 {
-        font-size: $font-size-3xl;
+        font-size: $access-font-size-3xl;
     }
 
     h2 {
-        font-size: $font-size-2xl;
+        font-size: $access-font-size-2xl;
     }
 
     h3 {
-        font-size: $font-size-xl;
+        font-size: $access-font-size-xl;
     }
 
     h4 {
-        font-size: $font-size-lg;
+        font-size: $access-font-size-lg;
     }
 
     p {
-        font-size: $font-size-base;
+        font-size: $access-font-size-base;
     }
 
 }

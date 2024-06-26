@@ -37,6 +37,10 @@ body {
   @media screen and (max-width: 1300px) {
     grid-column: span 2 / span 2;
   }
+
+  @media screen and (max-width: 950px) {
+    align-self: center;
+  }
 }
   
 
@@ -70,7 +74,11 @@ body {
 .hero-banner {
     position: relative;
     overflow: hidden;
-    height: 120vh;
+    height: 120dvh;
+
+    @media screen and (min-width: 1920px) {
+      height: 1296px;
+    }
 
     @media screen and (max-width: 560px) {
       height: 100vh;

@@ -57,7 +57,7 @@ require_once("../../components/Header/header.php");
 Header::render(true,false,$isAuthenticated,$_SERVER['REQUEST_URI']);
 ?>
 
-<main class="global-ui">
+<main>
 
 
 

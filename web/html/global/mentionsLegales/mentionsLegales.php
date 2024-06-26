@@ -28,7 +28,7 @@
     Header::render(true,false, $isAuthenticated);
     ?>
 
-    <main class="global-ui">
+    <main>
         <?php
         require_once("../../components/BackComponent/BackComponent.php");
         BackComponent::render("backButton", "", "Retour", "");

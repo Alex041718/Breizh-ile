@@ -8,7 +8,13 @@ body .mentions-legales {
   flex-direction: column;
   gap: 2em;
   background-color: #FFFFFF;
-  padding: 1em;
+  padding-block: 100px;
+  padding-inline: 100px;
+}
+@media (max-width: 1024px) {
+  body .mentions-legales {
+    padding-inline: 25px;
+  }
 }
 body .mentions-legales h2 {
   text-align: center;

@@ -2,11 +2,11 @@
 require_once("../../../services/ClientService.php");
 require_once("../../components/Input/Input.php");
 
-if(!isset($_POST["token"])) {
+if(!isset($_GET["token"])) {
     header("Location: /");
     return;
 }
-$user = ClientService::GetClientByToken($token);
+$user = ClientService::GetClientByToken($_GET["token"]);
 
 date_default_timezone_set('Europe/Paris');
 $time = time();
@@ -55,7 +55,7 @@ require_once("../../components/Button/Button.php");
                 echo isset($_GET["error"]) && $_GET["error"] != "" ? '<p class="error">' . $_GET["error"] . '</p>' : "";
                 echo '<form method="post" action="/client/clientForgotPassword/reset-password-action.php">
                     <input type="hidden" name="clientId" value="' . $user->getClientID() . '">
-                    <input type="hidden" name="token" value="'. $token . '">';
+                    <input type="hidden" name="token" value="'. $_GET["token"] . '">';
                     Input::render("connection__input","password","password","Nouveau mot de passe","firstPasswordEntry","",true);
                     Input::render("connection__input","password","password","Confirmer le mot de passe","secondPasswordEntry","",true);
                     Button::render("connection__button", "connectButton", "Sauvegarder",ButtonType::Client,false,false,true);        

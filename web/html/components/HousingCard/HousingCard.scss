@@ -31,10 +31,21 @@
         gap: 15px;
         padding: 20px;
 
+        a {
+            color: $black2;
+            text-decoration: none;
+        }
+
         &__owner {
             display: flex;
             align-items: center;
             gap: 5px;
+            width: fit-content;
+
+            &:hover {
+                text-decoration: underline;
+                transition: 0.2s all;
+            }
 
             img {
                 border-radius: 70px;
