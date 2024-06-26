@@ -28,4 +28,10 @@ bool is_user_admin(int user_id);
 // Récupère les informations des logements d'un utilisateur
 char* get_housings(int user_id, bool is_superadmin);
 
+// Récupère l'id de l'utilisateur à partir de l'id d'un logement
+int get_user_id_from_housing_id(int housing_id);
+
+// Récupère les informations de disponibilité d'un logement
+char* get_disponibility_housing(int housing_id, char* starting_date, char* end_date);
+
 #endif

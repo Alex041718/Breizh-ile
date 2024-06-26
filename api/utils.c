@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include <stdbool.h>
 #include <string.h>
@@ -34,20 +35,38 @@ void print_log(const char *message, enum log_level level) {
 
     char* message_copy = strdup(message);
     replace_newlines_with_spaces(message_copy);
+
+    char log_message[sizeof(timestamp) + sizeof(message_copy) + 128];
     switch (level) {
         case INFO:
             printf("[%s%s%s] [%sINFO%s] %s\n", CYAN, timestamp, RESET, GREEN, RESET, message_copy);
+            snprintf(log_message, sizeof(log_message), "[%s] [INFO] %s", timestamp, message_copy);
             break;
         case WARNING:
             printf("[%s%s%s] [%sWARNING%s] %s\n", CYAN, timestamp, RESET, YELLOW, RESET, message_copy);
+            snprintf(log_message, sizeof(log_message), "[%s] [WARNING] %s", timestamp, message_copy);
             break;
         case ERROR:
             printf("[%s%s%s] [%sERROR%s] %s\n", CYAN, timestamp, RESET, RED, RESET, message_copy);
+            snprintf(log_message, sizeof(log_message), "[%s] [ERROR] %s", timestamp, message_copy);
             break;
         default:
             printf("[%s%s%s] [%sINFO%s] %s\n", CYAN, timestamp, RESET, GREEN, RESET, message_copy);
+            snprintf(log_message, sizeof(log_message), "[%s] [INFO] %s", timestamp, message_copy);
             break;
     }
+
+    // write to log file
+    FILE* log_file = fopen("log.txt", "a");
+    if (log_file == NULL) {
+        printf("Impossible d'ouvrir le fichier de log\n");
+        return;
+    }
+
+    fprintf(log_file, "%s\n", log_message);
+    fclose(log_file);
+
+    free(message_copy);
 }
 
 bool is_number(char* str) {

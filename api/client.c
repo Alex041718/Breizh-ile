@@ -10,7 +10,8 @@
 
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 8081
-#define BUFFER_SIZE 4096
+#define REQUEST_SIZE 512
+#define BUFFER_SIZE 1024*2048
 
 #define RESET "\033[0m"
 #define RED "\033[31m"
@@ -21,7 +22,7 @@
 typedef struct {
     char header[32];
     char path[64];
-    char body[BUFFER_SIZE];
+    char body[REQUEST_SIZE];
 } Packet;
 
 // Prototypes de fonctions
@@ -33,6 +34,7 @@ void send_request(Packet* packet, char* response);
 void authenticate();
 void create_api_key();
 void get_housings();
+void get_disponibilities();
 void disconnect();
 
 int main() {
@@ -55,15 +57,16 @@ void print_title() {
 
 void print_help() {
     printf("Commandes disponibles:\n");
-    printf("  ping            - Vérifier l'état du serveur\n");
-    printf("  custom          - Envoyer une requête personnalisée\n");
-    printf("  auth            - S'authentifier (email/mot de passe ou clé API)\n");
-    printf("  create-api-key  - Créer une nouvelle clé API\n");
-    printf("  get-housings    - Obtenir la liste des logements\n");
-    printf("  disconnect      - Se déconnecter\n");
-    printf("  help            - Afficher cette aide\n");
-    printf("  clear           - Effacer l'écran\n");
-    printf("  exit            - Quitter le programme\n");
+    printf("  ping                - Vérifier l'état du serveur\n");
+    printf("  custom              - Envoyer une requête personnalisée\n");
+    printf("  auth                - S'authentifier (email/mot de passe ou clé API)\n");
+    printf("  create-api-key      - Créer une nouvelle clé API\n");
+    printf("  get-housings        - Obtenir la liste des logements\n");
+    printf("  get-disponibilities - Obtenir les disponibilités d'un logement\n");
+    printf("  disconnect          - Se déconnecter\n");
+    printf("  help                - Afficher cette aide\n");
+    printf("  clear               - Effacer l'écran\n");
+    printf("  exit                - Quitter le programme\n");
 }
 
 void handle_menu() {
@@ -84,6 +87,8 @@ void handle_menu() {
             create_api_key();
         } else if (strcmp(choice, "get-housings") == 0) {
             get_housings();
+        } else if (strcmp(choice, "get-disponibilities") == 0) {
+            get_disponibilities();
         } else if (strcmp(choice, "disconnect") == 0) {
             disconnect();
         } else if (strcmp(choice, "help") == 0) {
@@ -144,9 +149,9 @@ void send_custom_request() {
 void send_request(Packet* packet, char* response) {
     int sock = 0;
     struct sockaddr_in serv_addr;
-    char buffer[BUFFER_SIZE] = {0};
-    char message[BUFFER_SIZE*2] = {0};
-    
+    char buffer[REQUEST_SIZE] = {0};
+    char message[REQUEST_SIZE] = {0};
+
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         printf(RED "Erreur de création du socket\n" RESET);
         return;
@@ -169,18 +174,18 @@ void send_request(Packet* packet, char* response) {
    
     // Envoyer le message
     if (strlen(packet->path) > 0 || strlen(packet->body) > 0) {
-        snprintf(message, BUFFER_SIZE*2, "%s\n%s\n%s\n", packet->header, packet->path, packet->body);
+        snprintf(message, REQUEST_SIZE*2, "%s\n%s\n%s\n", packet->header, packet->path, packet->body);
     } else if (strlen(packet->header) > 0) {
-        snprintf(message, BUFFER_SIZE*2, "%s\n", packet->header);
+        snprintf(message, REQUEST_SIZE*2, "%s\n", packet->header);
     }
 
     send(sock, message, strlen(message), 0);
     printf("Message envoyé: \n%s\n", message);
     
     // Recevoir la réponse
-    memset(buffer, 0, BUFFER_SIZE);
-    int valread = read(sock, buffer, BUFFER_SIZE);
-    snprintf(response, BUFFER_SIZE, "%s", buffer);
+    memset(buffer, 0, REQUEST_SIZE);
+    int valread = read(sock, buffer, REQUEST_SIZE);
+    snprintf(response, REQUEST_SIZE, "%s", buffer);
 
     if (strcmp(response, "AUTH?\n") == 0) {
         printf("Authentification requise\n");
@@ -275,6 +280,33 @@ void get_housings() {
 
     send_request(packet, response);
     printf("Liste des logements:\n%s\n", response);
+}
+
+void get_disponibilities() {
+    Packet* packet = malloc(sizeof(Packet));
+    strcpy(packet->header, "ENTRYPOINT");
+    strcpy(packet->path, "/api/get-disponibilities");
+    char response[BUFFER_SIZE];
+    char housing_id[10], starting_date[13], ending_date[13];
+
+    if (!is_server_ok()) return;
+
+    printf("Entrez l'ID du logement: ");
+    fgets(housing_id, sizeof(housing_id), stdin);
+    housing_id[strcspn(housing_id, "\n")] = 0;
+
+    printf("Entrez la date de début (format YYYY-MM-DD): ");
+    fgets(starting_date, sizeof(starting_date), stdin);
+    starting_date[strcspn(starting_date, "\n")] = 0;
+
+    printf("Entrez la date de fin (format YYYY-MM-DD): ");
+    fgets(ending_date, sizeof(ending_date), stdin);
+    ending_date[strcspn(ending_date, "\n")] = 0;
+
+    snprintf(packet->body, sizeof(packet->body), "housingID=%s;starting-date=%s;ending-date=%s;", housing_id, starting_date, ending_date);
+    send_request(packet, response);
+    
+    printf("Liste des disponibilités:\n%s\n", response);
 }
 
 void disconnect() {

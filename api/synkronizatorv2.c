@@ -54,6 +54,8 @@ bool connection_initialized_with_ok = false;
 bool authentification_ok = false;
 bool connection_closed = false;
 
+bool verbose = false;
+
 int number_authentification_attempts = 0;
 
 int user_id_authentificated = -1;
@@ -64,6 +66,7 @@ void handle_header(Packet* packet, char* response);
 void handle_request(int socket_client);
 void create_user_api_key(Packet* packet, char* response);
 void get_list_housings(Packet* packet, char* response);
+void get_list_disponibilities(Packet* packet, char* response);
 
 void print_usage() {
     printf("Usage: ./server [options]\n"
@@ -71,6 +74,12 @@ void print_usage() {
            "  -p, --port=PORT      Port d'écoute\n"
            "  -v, --verbose        Mode verbeux\n"
            "  -h, --help           Affiche l'aide\n");
+}
+
+void print_log_server(const char *message, enum log_level level) {
+    if (verbose) {
+        print_log(message, level);
+    }
 }
 
 Packet* parse_packet(char* buffer) {
@@ -219,6 +228,14 @@ void handle_route(Packet* packet, char* response) {
         requested_operation = malloc(sizeof(RequestedOperation));
         requested_operation->requested_packet = packet;
         requested_operation->requested_fonction = get_list_housings;
+    } else if (strcmp(packet->path, "/api/get-disponibilities") == 0) {
+        // This route requires authentication
+        snprintf(response, RESPONSE_BUFFER_SIZE, "AUTH?\n");
+
+        // Save the requested operation and packet for later
+        requested_operation = malloc(sizeof(RequestedOperation));
+        requested_operation->requested_packet = packet;
+        requested_operation->requested_fonction = get_list_disponibilities;
     } else {
         snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLa route demandée n'existe pas;\n");
     }
@@ -265,32 +282,32 @@ void handle_request(int socket_client) {
         connection_closed = true;
         return;
     } else if (bytes_received == 0) {
-        print_log("Connexion fermée par le client", INFO);
+        print_log_server("Connexion fermée par le client", INFO);
         connection_closed = true;
         return;
     }
 
     snprintf(log_message, sizeof(log_message), "Message brute reçu: %s", buffer);
-    print_log(log_message, INFO);
+    print_log_server(log_message, INFO);
     memset(response, 0, sizeof(response));
     
     // Parse the packet
     Packet* packet = parse_packet(buffer);
     if (packet == NULL) {
-        print_log("Erreur lors du parsing du paquet, les données reçues sont invalides.", ERROR);
+        print_log_server("Erreur lors du parsing du paquet, les données reçues sont invalides.", ERROR);
         connection_closed = true;
         return;
     }
 
     snprintf(log_message, sizeof(log_message), "Header: %s, Path: %s, Body: %s", packet->header, packet->path, packet->body);
-    print_log(log_message, INFO);
+    print_log_server(log_message, INFO);
     memset(log_message, 0, sizeof(log_message));
 
     handle_header(packet, response);
 
     // Send the response
     snprintf(log_message, sizeof(log_message), "Réponse envoyée: %s", response);
-    print_log(log_message, INFO);
+    print_log_server(log_message, INFO);
     memset(log_message, 0, sizeof(log_message));
 
     send(socket_client, response, strlen(response), 0);
@@ -397,13 +414,55 @@ void get_list_housings(Packet* packet, char* response) {
     snprintf(response, RESPONSE_BUFFER_SIZE, "OK\ncode=200;message=Logements récupérés avec succès\n%s\n", housings);
 }
 
+void get_list_disponibilities(Packet* packet, char* response) {
+    BodyAttributeList* body_attributes = parse_body(packet->body);
+    if (body_attributes == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLes attributs du corps de la requête sont invalides;\n");
+        return;
+    }
+
+    // Get the housing ID attribute
+    BodyAttribute* housing_id_attribute = get_body_attribute(body_attributes, "housingID");
+    if (housing_id_attribute == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nL'attribut 'housingID' est manquant;\n");
+        return;
+    }
+
+    if (!is_number(housing_id_attribute->value)) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLa valeur de l'attribut 'housingID' n'est pas un nombre;\n");
+        return;
+    }
+
+    if (user_id_authentificated != get_user_id_from_housing_id(atoi(housing_id_attribute->value))) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=403;message=Accès interdit\nVous n'avez pas les droits pour effectuer cette action;\n");
+        return;
+    }
+
+    // Get starting_date and ending_date attributes
+    BodyAttribute* starting_date_attribute = get_body_attribute(body_attributes, "starting-date");
+    BodyAttribute* ending_date_attribute = get_body_attribute(body_attributes, "ending-date");
+
+    if (starting_date_attribute == NULL || ending_date_attribute == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLes attributs 'starting_date' et 'ending_date' sont manquants;\n");
+        return;
+    }
+
+    // We try to get the disponibilities
+    char* disponibilities = get_disponibility_housing(atoi(housing_id_attribute->value), starting_date_attribute->value, ending_date_attribute->value);
+    if (disponibilities == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "INTERNAL_SERVER_ERROR\ncode=500;message=Erreur interne du serveur\nLes disponibilités n'ont pas pu être récupérées;\n");
+        return;
+    }
+
+    snprintf(response, RESPONSE_BUFFER_SIZE, "OK\ncode=200;message=Disponibilités récupérées avec succès\n%s\n", disponibilities);
+}
+
 int main(int argc, char* argv[]) {
     int socket_server, socket_client;
     struct sockaddr_in server_address_configuration, client_address_configuration;
     socklen_t client_address_size;
 
     int server_port = DEFAULT_SERVER_PORT;
-    bool verbose = false;
 
     bool first_request = true;
 
@@ -452,10 +511,10 @@ int main(int argc, char* argv[]) {
 
     char log_message[256];
     snprintf(log_message, sizeof(log_message), "Serveur démarré sur le port %d", server_port);
-    print_log(log_message, INFO);
+    print_log_server(log_message, INFO);
 
     while (true) {
-        print_log("En attente d'une connexion...", INFO);
+        print_log_server("En attente d'une connexion...", INFO);
 
         // Accept the incoming connection
         client_address_size = sizeof(client_address_configuration);
@@ -467,7 +526,7 @@ int main(int argc, char* argv[]) {
 
         if (first_request) {
             first_request = false;
-            print_log("Nouvelle connexion", INFO);
+            print_log_server("Nouvelle connexion", INFO);
         }
 
         // Receive the message
@@ -475,7 +534,7 @@ int main(int argc, char* argv[]) {
 
         // Close the connection
         if (connection_closed) {
-            print_log("Fermeture de la connexion", INFO);
+            print_log_server("Fermeture de la connexion", INFO);
             close(socket_client);
             connection_closed = false;
             first_request = true;

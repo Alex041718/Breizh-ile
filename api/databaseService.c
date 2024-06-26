@@ -386,3 +386,36 @@ char* get_disponibility_housing(int housing_id, char* starting_date, char* end_d
     mysql_close(conn);
     return disponibility;
 }
+
+int get_user_id_from_housing_id(int housing_id) {
+    char query[1024];
+    snprintf(query, sizeof(query), "SELECT ownerID FROM _Housing WHERE housingID=%d", housing_id);
+
+    MYSQL* conn = init_database();
+    MYSQL_RES* res;
+    MYSQL_ROW row;
+
+    if (mysql_query(conn, query)) {
+        fprintf(stderr, "Error querying database: %s\n", mysql_error(conn));
+        mysql_close(conn);
+        return -1;
+    }
+
+    res = mysql_store_result(conn);
+    if (res == NULL) {
+        fprintf(stderr, "Error storing result: %s\n", mysql_error(conn));
+        mysql_close(conn);
+        return -1;
+    }
+
+    row = mysql_fetch_row(res);
+    if (row == NULL) {
+        fprintf(stderr, "No housing found with ID %d\n", housing_id);
+        mysql_close(conn);
+        return -1;
+    }
+
+    int user_id = atoi(row[0]);
+    mysql_close(conn);
+    return user_id;
+}
