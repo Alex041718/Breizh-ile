@@ -4,6 +4,8 @@
     require_once("../../../services/TypeService.php");
     require_once("../../../services/CategoryService.php");
     require_once("../../../services/ArrangementService.php");
+    require_once("../../components/Popup/popup.php");
+    require_once("../../components/Button/Button.php");
 
     if(isset($_POST['q']) && $_POST['q'] != "") {
         $q = intval($_POST['q']);
@@ -14,7 +16,7 @@
     if(isset($_POST['sort']) && $_POST['sort'] != "undefined" && !empty($_POST['sort'])) {
         $sort = $_POST['sort'];
     } else {
-        $sort = "H.priceIncl";
+        $sort = "_Housing.priceIncl";
     }
 
     if(isset($_POST['desc']) && $_POST['desc'] == 1) $desc = 1;
@@ -92,28 +94,50 @@
     if(isset($_POST["jacuzzi"]) && $_POST["jacuzzi"] != "" && $_POST["jacuzzi"] != "null") $jacuzzi = $_POST["jacuzzi"];
     else $jacuzzi = null;
 
-    $housings = HousingService::GetHousingsByOffset($city, $beginDate, $endDate, $nbPerson, $minPrice, $maxPrice, $appartement, $chalet, $maison, $bateau, $villa, $insol, $t1, $t2, $t3, $t4, $t5, $t6, $f1, $f2, $f3, $f4, $f5, $baignade, $voile, $canoe, $golf, $equitation, $accrobranche, $randonnee, $jardin, $balcon, $terrasse, $piscine, $jacuzzi, $q*9, $sort, $desc);
+    
+    if(isset($_POST["ownerID"]) && $_POST["ownerID"] != "" && $_POST["ownerID"] != "null") $ownerID = $_POST["ownerID"];
+    else $ownerID = null;
+
+
+    $housings = HousingService::GetHousingsByOffset($city, $beginDate, $endDate, $nbPerson, $minPrice, $maxPrice, $appartement, $chalet, $maison, $bateau, $villa, $insol, $t1, $t2, $t3, $t4, $t5, $t6, $f1, $f2, $f3, $f4, $f5, $baignade, $voile, $canoe, $golf, $equitation, $accrobranche, $randonnee, $jardin, $balcon, $terrasse, $piscine, $jacuzzi, $q*9, $sort, $desc, $ownerID);
+    
+
+    $codePopUp = '
+        <section class="description-action">
+            <h3>Changer la visibilité</h3>
+            <p>Êtes-vous sûr de vouloir changer la visibilité de ce logement ?</p>
+        </section>
+        <section class="actions">
+            <button type="button" class="button undo__button button--owner--secondary button--bleu " id="undoButton" onclick="document.querySelector(\'.popUpVisibility\').classList.remove(\'popup--open\');">Annuler</button>
+            <button type="button" class="button accept__button button--delete button--rouge " id="acceptButton" onclick="">Changer la visibilité</button>
+        </section>
+    ';
 
     if($housings != false && sizeof($housings) > 0) {
-        for ($i=0; $i < count($housings); $i++) {
-            require_once("../HousingCard/HousingCard.php");
-            require_once("../../../models/Housing.php");
-            require_once("../../../models/Type.php");
-            require_once("../../../models/Image.php");
-            require_once("../../../models/Address.php");
-            require_once("../../../models/Category.php");
-            require_once("../../../models/Owner.php");
-            require_once("../../../models/Gender.php");
-    
-            HousingCard::render($housings[$i]);
+        foreach ($housings as $index=>$housing) { ?>
+            <a href="/back/logements/<?= $housing->getHousingID() ?>" class="housing">
+                <img src="<?= $housing->getImage()->getImageSrc() ?>" alt="Image de logement">
+                <p><?= $housing->getTitle() ?></p>
+                <p><?= $housing->getAddress()->getPostalAddress() ?></p>
+                <p><?= $housing->getPriceIncl() ?></p>
+                <p><?= $housing->getNbPerson() ?></p>
+                <p><?= $housing->getBeginDate()->format("d / m / Y") ?></p>
+                <p><?= $housing->getEndDate()->format("d / m / Y") ?></p>
+                <p class="description-status"><?= $housing->getIsOnline() ? "En ligne" : "Hors ligne" ?><span class="status status--<?= $housing->getIsOnline() ? "online" : "offline" ?>"></span></p>
+                <button data-housingid="<?= $housing->getHousingID() ?>" data-index="<?= $index ?>" id="popUpVisibility-btn" class="eye visibilityButtons" onclick="event.preventDefault()"><i class="fa-solid fa-eye"></i></button>
+            </a>
+            <?php 
+ 
         }
-        if(sizeof($housings) == 9): ?>
-            <hr class="show-more">
-            <button onclick='showUser(<?= $q+1 ?>,"<?= $sort ?>", <?= $desc ?>, false)' class="show-more btn btn--center">Voir davantage</button>
-        <?php endif; ?>
 
-  <?php  }
+        PopUp::render("popUpVisibility", "popUpVisibility-btn", $codePopUp);
+
+        
+    }
+
     else { ?>
         <p class="show-more">Aucun résultat n'a été trouvé...</p>
-    <?php } ?>
+    <?php } 
+    
+?>
 
