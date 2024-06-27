@@ -60,6 +60,11 @@ nav ul li.active:hover {
   background-color: #0b3e6b;
 }
 
+.back-component {
+  padding-left: 4rem;
+  padding-bottom: 2em;
+}
+
 .content {
   display: flex;
   padding-left: 4rem;

@@ -108,6 +108,13 @@ function main() {
     showReservations();
 }
 
+//verifier si dans l'url createHousing = true
+const urlParams = new URLSearchParams(window.location.search);
+const createHousing = urlParams.get("createHousing");
+if (createHousing === "true") {
+    Toast("Logement créé avec succès", "success");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     main();
 });

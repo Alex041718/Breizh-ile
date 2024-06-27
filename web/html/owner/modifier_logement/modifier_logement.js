@@ -1,3 +1,5 @@
+import { Toast } from "/components/Toast/Toast.js";
+
 const pages_title = ["description", "localisation", "specifications", "arrangements", "activities"];
 const pages = pages_title.map(page => document.getElementById(page));
 const addButtonArrangements = document.getElementById("addButtonArrangements");
@@ -163,6 +165,7 @@ buttonValidateList.forEach(buttonValidate => {
         xhr.open("POST", "/owner/modifier_logement/process_modification_logement.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(params);
+        Toast("Logement modifié avec succès", "success");
     });
 });
 
