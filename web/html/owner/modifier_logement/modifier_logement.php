@@ -24,6 +24,7 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
+
 <body>
     <?php
         require_once("../../components/Input/Input.php");
@@ -80,6 +81,7 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
 
 
         $housingPriceHT = $housing->getPriceExcl() ?? "";
+        $noticeCount = $housing->getNoticeCount() ?? "";
         $housingBeginDate = $housing->getBeginDate() ? $housing->getBeginDate()->format('Y-m-d') : '';
         $housingEndDate = $housing->getEndDate()->format('Y-m-d') ?? "";
         $housingCategory = $housing->getCategory()->getLabel() ?? "";
@@ -104,7 +106,11 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
             </ul>
         </nav>
         <input type="hidden" name="housingID" id="housingID" value=<?= htmlspecialchars($_GET['housingID']) ?>>
-            <section class="contents">
+        <section class="contents">
+            <?php
+            require_once("../../components/BackComponent/BackComponent.php");
+            BackComponent::render("", "", "Retour", "");
+            ?>
                 <section class="content description">
                     <section class="content__left">
                         <section>
@@ -125,15 +131,15 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
                     <section class="content__left">
                         <section>
                             <section class="inline">
-                                <?php Input::render("half content__input--large", "postalCode", "text", "Code Postal", "postalCode", "Ex: 29200", true, $housingPostalCode, 0, 5, "[0-9]{5}"); ?>
-                                <?php Input::render("wide content__input--large", "city", "text", "Ville", "city", "Entrez la ville de votre logement", true, $housingCity, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
-                                <?php Input::render("wide content__input--large", "country", "text", "Pays", "country", "Pays où se situe le logement", false, $housingCountry, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+                                <?php Input::render("content__input--large", "postalCode", "text", "Code Postal", "postalCode", "Ex: 29200", true, $housingPostalCode, 0, 5, "[0-9]{5}"); ?>
+                                <?php Input::render("content__input--large", "city", "text", "Ville", "city", "Entrez la ville de votre logement", true, $housingCity, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
                             </section>
                             <section class="inline">
-                                <?php Input::render("half content__input--large", "streetNumber", "text", "Numéro de rue", "streetNumber", "", false, $housingStreetNumber, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
-                                <?php Input::render("half content__input--large", "complementAddress", "text", "Complément d'adresse", "complementAddress", "", false, $housingComplementAddress, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
-                                <?php Input::render("content__input--large", "postalAddress", "text", "Adresse", "postalAddress", "Entrez l'adresse de votre logement", true, $housingAddressLabel, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+                                <?php Input::render("content__input--large", "streetNumber", "text", "Numéro de rue", "streetNumber", "", false, $housingStreetNumber, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+                                <?php Input::render("content__input--large", "complementAddress", "text", "Complément d'adresse", "complementAddress", "", false, $housingComplementAddress, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
                             </section>
+                            <?php Input::render("content__input--large", "postalAddress", "text", "Adresse", "postalAddress", "Entrez l'adresse de votre logement", true, $housingAddressLabel, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+                            <?php Input::render("content__input--large", "country", "text", "Pays", "country", "Pays où se situe le logement", false, $housingCountry, 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
                             <section class="inline">
                                 <?php Input::render("content__input--large", "longitude", "text", "Longitude", "longitude", "Ex: 48.202047", false, $housingLongitude, 0, 100, '^-?([0-8]?[0-9]|90)(\.[0-9]{1,10})$'); ?>
                                 <?php Input::render("content__input--large", "latitude", "text", "Latitude", "latitude", "Ex: -2.932644", false, $housingLatitude, 0, 100, '^-?([0-9]{1,2}|1[0-7][0-9]|180)(\.[0-9]{1,10})$'); ?>
@@ -155,6 +161,7 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
                         <?php Input::render("content__input--large", "priceHT", "text", "Prix par nuit", "priceHT", "Prix HT", true, $housingPriceHT, 0, 8, '[0-9]+\.[0-9]{1,2}'); ?>
                         <?php Input::render("content__input--large", "beginDate", "text", "Date minimale", "beginDate", "Entrez la date minimale", false, $housingBeginDate, 0, 40, '(^0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4}$)'); ?>
                         <?php Input::render("content__input--large", "endDate", "text", "Date maximale", "endDate", "Entrez la date maximale", false, $housingEndDate, 0, 40, '(^0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4}$)'); ?>
+                        <?php Input::render("content__input--large", "noticeCount", "text", "Délai d'annulation", "noticeCount", "Ex: 30", true, $noticeCount, 1, 8, '[0-9]'); ?>
                     </section>
                     <p>Spécifications</p>
                     <span class="separator"></span>
@@ -174,7 +181,8 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
                     <section class="inline">
                         <?php Button::render("content__button content__button--next", "validateButton", "Mettre à jour le logement", ButtonType::Owner, "", false, true, '<i class="fa-solid fa-check"></i>'); ?>
                         <?php Button::render("content__button content__button--back","cancelButton","Annuler",ButtonType::Delete,"", false, false, '<i class="fa-solid fa-xmark"></i>');?>
-                    </section>                </section>
+                    </section>
+                </section>
                 <section class="content arrangements">
                     <section class="content__up">
                         <?php ComboList::render("content__combo", "arrangement", "Choisissez l'aménagement", "arrangement", ArrangementService::getAllArrangementsAsArrayOfString(), "Aménagements", false) ?>

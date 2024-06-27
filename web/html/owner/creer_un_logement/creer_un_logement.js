@@ -182,6 +182,7 @@ buttonValidate.addEventListener("click", () => {
     &shortDesc=${document.getElementById("shortdesc").querySelector("textarea").value}
     &longDesc=${document.getElementById("longdesc").querySelector("textarea").value}
     &price=${document.getElementById("priceHT").querySelector("input").value}
+    &noticeCount=${document.getElementById("noticeCount").querySelector("input").value}
     &nbPerson=${document.getElementById("nbPerson").querySelector("input").value}
     &nbRooms=${document.getElementById("nbRooms").querySelector("input").value}
     &nbSimpleBed=${document.getElementById("nbSimpleBed").querySelector("input").value}
@@ -201,11 +202,15 @@ buttonValidate.addEventListener("click", () => {
     &image=${inputFile.textContent}
     &type=${document.getElementById("type").querySelector("select").selectedIndex}
     &category=${document.getElementById("category").querySelector("select").selectedIndex}`;
-
     console.log(params);
     xhr.open("POST", "/owner/creer_un_logement/createHousing.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send(params);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            window.location.href = "/back/logements?createHousing=true";
+        }
+    };
 });
 
 document.addEventListener('DOMContentLoaded', function() {

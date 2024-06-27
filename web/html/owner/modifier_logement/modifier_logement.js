@@ -1,3 +1,5 @@
+import { Toast } from "/components/Toast/Toast.js";
+
 const pages_title = ["description", "localisation", "specifications", "arrangements", "activities"];
 const pages = pages_title.map(page => document.getElementById(page));
 const addButtonArrangements = document.getElementById("addButtonArrangements");
@@ -128,7 +130,7 @@ addButtonActivities.addEventListener("click", () => {
 //Actions à la validation
 buttonValidateList.forEach(buttonValidate => {
     buttonValidate.addEventListener("click", () => {
-        console.log("validate");
+        let currentImage = document.getElementById("img-view").dataset.defaultImage.split("=")[1]
         let xhr = new XMLHttpRequest();
         const inputFile = document.getElementsByName("file-name")[0];
         let params = `housingID=${document.getElementById("housingID").value}
@@ -136,6 +138,7 @@ buttonValidateList.forEach(buttonValidate => {
                             &shortDesc=${document.getElementById("shortdesc").querySelector("textarea").value}
                             &longDesc=${document.getElementById("longdesc").querySelector("textarea").value}
                             &price=${document.getElementById("priceHT").querySelector("input").value}
+                            &noticeCount=${document.getElementById("noticeCount").querySelector("input").value}
                             &nbPerson=${document.getElementById("nbPerson").querySelector("input").value}
                             &nbRooms=${document.getElementById("nbRooms").querySelector("input").value}
                             &nbSimpleBed=${document.getElementById("nbSimpleBed").querySelector("input").value}
@@ -153,7 +156,7 @@ buttonValidateList.forEach(buttonValidate => {
                             &postalCode=${document.getElementById("postalCode").querySelector("input").value}
                             &arrangements=${arrangements.join(",")}
                             &activities=${activities.map(activity => activity.join("|")).join(",")}
-                            &image=${inputFile.textContent}
+                            &image=${inputFile.textContent !== "" ? inputFile.textContent : currentImage}
                             &type=${document.getElementById("type").querySelector("select").selectedIndex}
                             &category=${document.getElementById("category").querySelector("select").selectedIndex}`;
 
@@ -163,6 +166,7 @@ buttonValidateList.forEach(buttonValidate => {
         xhr.open("POST", "/owner/modifier_logement/process_modification_logement.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(params);
+        Toast("Logement modifié avec succès", "success");
     });
 });
 

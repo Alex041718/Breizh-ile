@@ -282,3 +282,21 @@ CREATE TABLE _User_APIKey (
     superAdmin Boolean,
     FOREIGN KEY (userID) REFERENCES _User(userID)
 );
+
+
+CREATE TABLE _Receipt (
+     ReceiptID INT PRIMARY KEY AUTO_INCREMENT,
+     reservationID BIGINT UNSIGNED,
+     ReceiptDate DATE NOT NULL,
+     touristTax DECIMAL(10, 2) NOT NULL,
+     totalHT DECIMAL(10, 2) NOT NULL,
+     totalTVA DECIMAL(10, 2) NOT NULL,
+     totalTTC DECIMAL(10, 2) NOT NULL,
+     TVA DECIMAL(10, 2) NOT NULL,
+     PaymentDate DATE,
+     payMethodID BIGINT UNSIGNED, -- Correspond au type `serial` dans PaymentMethod pour mysql
+     clientID BIGINT UNSIGNED, -- Correspond au type `serial` dans Client pour mysql
+     CONSTRAINT fk_client FOREIGN KEY (ClientID) REFERENCES _Client(ClientID),
+     CONSTRAINT fk_reservation FOREIGN KEY (reservationID) REFERENCES _Reservation(reservationID),
+     CONSTRAINT fk_payment FOREIGN KEY (payMethodID) REFERENCES _PaymentMethod(payMethodID)
+);

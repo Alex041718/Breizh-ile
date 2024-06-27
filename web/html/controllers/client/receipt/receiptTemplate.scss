@@ -1,0 +1,73 @@
+@import '../../../style/variables';
+
+.receipt {
+
+  &_summary {
+
+    height: fit-content;
+    background-color: $backgroundColorPage;
+    padding: 1em;
+    border: 1px solid #dddddd;
+
+    span {
+      display: inline-block;
+      width: 18em;
+
+      vertical-align: top;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+  }
+
+  &_table {
+
+    .right-nb {
+      text-align: right;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 18px;
+      text-align: left;
+    }
+
+    table th, table td {
+      border: 1px solid #dddddd;
+      padding: 8px;
+    }
+
+    table th {
+      background-color: #f2f2f2;
+    }
+
+    table tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    table tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .table-title {
+      font-size: 24px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    tfoot td {
+      font-weight: bold;
+    }
+
+    tfoot td:nth-child(2) {
+      text-align: right;
+    }
+
+    .invisible-cell {
+        border: none;
+        padding: 0;
+        background: none;
+    }
+  }
+}

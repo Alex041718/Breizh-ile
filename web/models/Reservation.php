@@ -219,7 +219,7 @@ class Reservation
      * @param Housing $housingId
      * @return void
      */
-    public function setHousingId(Housing $housingId): void
+    public function setHousingId(Housing $housingId): housing
     {
         $this->housingId = $housingId;
     }

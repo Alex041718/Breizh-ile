@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $url = "http://" . $_SERVER['HTTP_HOST'] . '/owner/consulter_reservations/gerer_abonnements_ical.php?token=' . $token;
 
+
     SubscriptionService::CreateSubscription(new Subscription(null, $token, $startDate, $endDate, $ownerId), $reservations);
 
 
