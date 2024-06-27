@@ -3,12 +3,11 @@
 
     require_once("../../../services/ReservationService.php");
 
-    if(isset($_POST["beginDate"]) && $_POST["beginDate"] != "" && $_POST["beginDate"] != "null") $beginDate = $_POST["beginDate"];
-    else $beginDate = null;
-    if(isset($_POST["endDate"]) && $_POST["endDate"] != "" && $_POST["endDate"] != "null") $endDate = $_POST["endDate"];
-    else $endDate = null;
+    if(isset($_POST["housingID"]) && $_POST["housingID"] != "" && $_POST["housingID"] != "null") $housingID = $_POST["housingID"];
+    else $housingID = null;
 
-    $dates = ReservationService::getReservationDatesByHousingID($beginDate, $endDate);
+    $dates = ReservationService::getReservationDatesByHousingID($housingID);
+    echo json_encode($dates);
 
 
 ?>
