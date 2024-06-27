@@ -108,7 +108,7 @@
     $reservation_postalAdress = $housing->getAddress()->getPostalAddress();
 
 
-    $reservation_prixTTC = number_format($reservation_prixIncl * $reservation_nbJours + $reservation_serviceCharge + $reservation_touristTax, 2);
+    $reservation_prixTTC = number_format(($reservation_prixIncl * $reservation_nbJours + $reservation_serviceCharge + $reservation_touristTax) * 1.20, 2);
 
 ?>
 
@@ -158,7 +158,7 @@
                 <div class="informations__left__total">
                     <div>
                         <h3>Total TTC</h3>
-                        <p class="para--18px"><?= $reservation_prixTTC ?> €</p>
+                        <p class="para--18px"><?= $reservation_prixTTC?> €</p>
                     </div>
                 </div>
                 <form action="/controllers/client/clientDownloadReceiptController.php" method="post" target="_blank">

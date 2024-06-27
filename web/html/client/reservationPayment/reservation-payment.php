@@ -64,9 +64,19 @@ $endDate = $bid['endDate'];
 // CALCUL !
 //--------------------------------
 $nights = $housing->getPriceIncl() * $intervalDay;
-$serviceFee = $nights * 0.01;
-$sejourTax = 1 * $intervalDay * $numberPerson;
-$total = $nights + $serviceFee + $sejourTax;
+
+
+
+// import PriceHelper
+require_once('../../helper/PriceHelper.php');
+
+$calcul = new PriceHelper($numberPerson, $intervalDay, $housing->getPriceIncl());
+$nights = $calcul->getPriceMultipleNight();
+$serviceFee = $calcul->getServiceFee();
+$sejourTax = $calcul->getTouristTax();
+$totalHT = $calcul->getTotalHT();
+$total = $calcul->getTotalTTC();
+
 //--------------------------------
 
 // payment method
