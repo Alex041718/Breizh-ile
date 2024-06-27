@@ -160,4 +160,28 @@ class ReservationService extends Service
             return 1;
         }
     }
+
+    public static function getReservationDatesByHousingID(int $housingID): Array
+    {
+        $pdo = self::getPDO();
+        $stmt = $pdo->query('SELECT beginDate, endDate FROM _Reservation where housingID = ' . $housingID);
+
+        $dates = [];
+
+        while ($row = $stmt->fetch()) {
+
+            $dates[] = [
+                'beginDate' => $row['beginDate'],
+                'endDate' => $row['endDate']
+            ];
+
+        }
+
+        if(sizeof($dates) == 0) return false;
+
+        return $dates;
+        
+    }
+
+
 }
