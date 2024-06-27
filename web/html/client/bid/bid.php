@@ -36,7 +36,6 @@
     $numberPerson = $bid['numberPerson'];
     $beginDate = $bid['beginDate'];
     $endDate = $bid['endDate'];
-    echo (SessionService::get('oldPage') ?? '/') . '&error=Veuillez%saisir%une%période%valide.' ;
 
     
     if (isset($_POST['endDate']) && isset($_POST['beginDate']) && ($_POST['endDate'] != $endDate || $_POST['beginDate'] != $beginDate)) {
