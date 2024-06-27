@@ -1,6 +1,9 @@
 import { Toast } from "/components/Toast/Toast.js";
+import { changeActiveApi } from "./changeActiveApi.js";
 
 const apiKeys = document.querySelector('.content__api__keys');
+let apiKey = null;
+let index = null;
 
 export function showApiKeys() {
     const xhr = new XMLHttpRequest();
@@ -46,17 +49,21 @@ export function showApiKeys() {
                     popupBtn.addEventListener("click", function() {
                         popup.classList.add("popup--open");
                         document.body.style.overflow = "hidden";
+                        apiKey = popupBtn.dataset.apikey;
+                        index = popupBtn.dataset.index;
                     })
                 })
 
                 acceptBtn.addEventListener("click", () => {
-                    if (housingID === null || index === null) {
-                        Toast("Erreur lors de la modification de la visibilité", "error");
-                        return 
+                    if (apiKey === null) {
+                        Toast("Erreur lors de la modification de la clé API", "error");
+                        return;
                     };
-                    changeVisibility(housingID, index);
-                    document.querySelector(".popUpVisibility").classList.remove("popup--open");
-                    Toast("Visibilité modifiée avec succès", "success");
+
+                    console.log(apiKey, index);
+                    changeActiveApi(apiKey, index);
+                    document.querySelector(".popUpApi").classList.remove("popup--open");
+                    Toast("Api key modifiée avec succès", "success");
                 });
             });
         }

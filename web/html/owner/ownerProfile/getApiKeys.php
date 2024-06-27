@@ -21,17 +21,17 @@ function showApiKeys($apiKeys) {
         <p class="no-api-keys">Vous n'avez aucune clé API.</p>
     <?php
     } else {
-        foreach ($apiKeys as $apiKey) { ?>
+        foreach ($apiKeys as $index=>$apiKey) { ?>
             <div class="content__api__keys__key">
                 <p class="copy content__api__keys__key__description">
                     <?= $apiKey->getApiKey() ?>
                     <i class="fa-solid fa-copy"></i>
                 </p>
-                <p class="content__api__keys__key__description">
+                <p class="description-status content__api__keys__key__description">
                     <?= $apiKey->isActive() ? "Active" : "Inactive" ?>
                     <span class="status status--<?= $apiKey->isActive() ? "online" : "offline" ?>"></span>
                 </p>
-                <button id="popUpApi-btn" class="eye"><i class="fa-solid fa-eye"></i></button>
+                <button data-apikey="<?= $apiKey->getApiKey() ?>" data-index="<?= $index ?>" id="popUpApi-btn" class="eye"><i class="fa-solid fa-eye"></i></button>
             </div>
         <?php
         }

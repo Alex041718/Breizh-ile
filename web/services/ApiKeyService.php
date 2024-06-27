@@ -23,7 +23,6 @@ class ApiKeyService extends Service
     {
         $pdo = self::getPDO();
         $stmt = $pdo->query('SELECT * FROM _User_APIKey WHERE userID = ' . $userID);
-        $row = $stmt->fetch();
         
         $apiKeys = [];
         while ($row = $stmt->fetch()) {
@@ -31,6 +30,34 @@ class ApiKeyService extends Service
         }
 
         return $apiKeys;
+    }
+
+    public static function GetUserIDByApiKey(string $apiKey): int
+    {
+        $pdo = self::getPDO();
+        $stmt = $pdo->query("SELECT userID FROM _User_APIKey WHERE apiKey = '" . $apiKey . "'");
+        $row = $stmt->fetch();
+        return $row['userID'];
+    }
+
+    public static function GetApiKeyByApiKey(string $apiKey): ApiKey
+    {
+        $pdo = self::getPDO();
+        $stmt = $pdo->query("SELECT * FROM _User_APIKey WHERE apiKey = '" . $apiKey . "'");
+        $row = $stmt->fetch();
+        return new ApiKey($row['userID'], $row['apiKey'], $row['active'], $row['superAdmin']);
+    }
+
+    public static function changeActive(ApiKey $apiKey): ApiKey
+    {
+        $newVisibility = (int) !$apiKey->isActive();
+        $apiKey->setActive($newVisibility);
+
+        $pdo = self::getPDO();
+        $stmt = $pdo->prepare('UPDATE _User_APIKey SET active = ? WHERE apiKey = ?');
+        $stmt->execute([$newVisibility, $apiKey->getApiKey()]);
+
+        return $apiKey;
     }
 }
 ?>
