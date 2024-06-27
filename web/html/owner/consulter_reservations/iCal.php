@@ -24,13 +24,14 @@ function generateICal(Array $reservations) {
         $ical .= "DTEND:" . $reservation->getEndDate()->format('Ymd') . "\r\n";
         $ical .= "SUMMARY:" . htmlentities("Reservation - " . $reservation->getclientID()->getFirstName() . " " . $reservation->getclientID()->getLastName()) . "\r\n";
         $ical .= "DESCRIPTION:" . "Reservation ID: " . $reservation->getId() . "\r\n";
-        $ical .= "LOCATION:" . $address . "\r\n";
+        $ical .= "LOCATION:" . iconv('UTF-8', 'ASCII//TRANSLIT', $address) . "\r\n";
         $ical .= "END:VEVENT\r\n";
     }
 
     $ical .= "END:VCALENDAR\r\n";
 
-    return html_entity_decode($ical, ENT_QUOTES);
+    return $ical;
+
 }
 // // Vérification des paramètres GET pour récupérer une réservation par ID
 // if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['reservation_id'])) {
