@@ -2,6 +2,7 @@
 require_once '../../../services/SessionService.php';
 require_once '../../../services/OwnerService.php';
 require_once '../../../services/ReservationService.php';
+require_once '../../../services/SubscriptionService.php';
 
 header('Content-Type: application/json');
 
@@ -17,12 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $owner = OwnerService::GetOwnerById($_SESSION['user_id']);
     $ownerId = $owner->getOwnerID();
-    $reservations = $_POST['reservations'];
-    $startDate = $_POST['startDate'];
-    $endDate = $_POST['endDate'];
+    $startDate = $_POST['start-date'];
+    $endDate = $_POST['end-date'];
 
-    if (empty($reservations) || empty($startDate) || empty($endDate)) {
-        echo json_encode(['success' => false, 'message' => 'Invalid input']);
+    if (empty($startDate) || empty($endDate)) {
+        header("Location: /owner/consulter_reservations/gerer_abonnements_ical.php");
         exit();
     }
 
@@ -30,21 +30,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $token = generateUniqueToken();
 
     // Save the subscription details to the database (implement this function)
-    saveSubscription($ownerId, $token, $startDate, $endDate, $reservations);
+    // saveSubscription($ownerId, $token, $startDate, $endDate, );
 
     // $reservationId = $reservations[0]->getId(); // Assuming $reservations is an array of Reservation objects
 
-    $url = "http://localhost:5555/owner/consulter_reservations/iCal.php?token=$token&startDate=$startDate&endDate=$endDate";
-    echo json_encode(['success' => true, 'url' => $url]);
+    $url = "http://localhost:5555/owner/consulter_reservations/gerer_abonnements_ical.php?token=$token";
+
+    SubscriptionService::CreateSubscription(new Subscription(null, $token, $startDate, $endDate, $ownerId), $reservations);
+
+
+
+    header("Location: " . $url);
+
+
+
 }
 
 function generateUniqueToken() {
-    return bin2hex(random_bytes(16));
+    return bin2hex(random_bytes(32));
 }
 
-function saveSubscription($ownerId, $token, $startDate, $endDate, $reservations) {
-    // Implement the logic to save the subscription details to the database
-    // Example:
-    // INSERT INTO subscriptions (owner_id, token, start_date, end_date, reservations) VALUES (?, ?, ?, ?, ?)
-
-}

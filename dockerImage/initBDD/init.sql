@@ -243,7 +243,7 @@ CREATE TABLE _Subscription (
     subscriptionID serial PRIMARY KEY,
     token varchar(255),
     beginDate Date,
-    beginEnd Date,
+    endDate Date,
     userID BIGINT UNSIGNED,
     FOREIGN KEY (userID) REFERENCES _User(userID)
 );

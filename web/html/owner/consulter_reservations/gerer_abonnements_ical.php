@@ -64,7 +64,10 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
         // //     // Example:
         // //     // INSERT INTO subscriptions (owner_id, token, start_date, end_date, reservations) VALUES (?, ?, ?, ?, ?)
         // // }
+
+        if(isset($_GET['token'])) $url = "http://" . $_SERVER['HTTP_HOST'] . "/calendar/" . $_GET['token'];
     ?>
+
     <main>
         <h3>Gérer vos abonnements iCal</h3>
         <!-- Section pour générer l'URL d'abonnement -->
@@ -103,11 +106,13 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
                         <button type="submit" id="generate-url-button">Générer URL</button>
                     </form>
 
-                    <div class="subscription-url" style="display: none;">
-                        <label for="subscription-url">URL d'abonnement :</label>
-                        <input type="text" id="subscription-url" readonly>
+                    <?= isset($_GET['token']) && $_GET['token'] !== "" ?
+
+                    '<div class="subscription-url">
+                        <label for="subscription-url">URL d\'abonnement :</label>
+                        <input type="text" id="subscription-url" value="' . $url . '" readonly>
                         <button id="copy-button">Copier</button>
-                    </div>
+                    </div>' : "" ?>
                 </div>
             </div>
         </section>
