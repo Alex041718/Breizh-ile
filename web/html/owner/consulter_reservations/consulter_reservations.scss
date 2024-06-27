@@ -74,6 +74,17 @@ main {
     }
 }
 
+.buttons {
+    display: flex;
+    gap: 50px;
+    padding-top: 50px;
+    margin-bottom: 100px;
+
+    .exportation__button {
+        
+    }
+}
+
 .reservation {
     display: flex;
     align-items: center;
@@ -112,12 +123,6 @@ main {
     }
 }
 
-.exportation__button {
-    position: relative;
-    margin-top: 1rem;
-    margin-bottom: 6rem;
-    z-index: 2;
-}
 
 .goTo, .filter{
     background: none;

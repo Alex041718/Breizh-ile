@@ -1,20 +1,22 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+main {
+  padding-block: 100px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-main {
-  background: white;
-  padding: 2em;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 80em;
+.container {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  padding-inline: 50px;
+}
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+  }
+  .container > * {
+    width: 100% !important;
+  }
 }
 
 h3, h4 {
@@ -23,32 +25,32 @@ h3, h4 {
 
 .generate-subscription, .subscriptions {
   margin-top: 2em;
+  width: 70%;
 }
 
-#page {
+.infoUrl {
   display: flex;
-  flex-direction: column;
-}
-#page .infoUrl {
+  align-items: center;
+  width: 30%;
   display: flex;
   flex-direction: column;
   align-self: center;
-  width: 19em;
   gap: 1em;
   border: 2px solid #e9e9e9;
   border-radius: 10px;
   padding: 0.4rem 0.6rem;
 }
-#page .infoUrl .date {
+.infoUrl .date {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
 }
-#page .infoUrl .date .debut, #page .infoUrl .date .fin {
+.infoUrl .date .debut, .infoUrl .date .fin {
   display: flex;
   flex-direction: column;
   text-align: center;
 }
-#page .infoUrl label, #page .infoUrl select, #page .infoUrl input, #page .infoUrl button {
+.infoUrl label, .infoUrl select, .infoUrl input, .infoUrl button {
   margin: 0.5em 0;
   width: 100%;
 }
@@ -82,16 +84,6 @@ button:hover {
 ul {
   list-style-type: none;
   padding: 0;
-}
-
-li {
-  background: #f1f1f1;
-  margin: 0.5em 0;
-  padding: 1em;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .title {
@@ -170,6 +162,10 @@ li {
   border: 2px solid #e9e9e9;
   border-radius: 10px;
   height: 2.5rem;
+}
+.reservation .goTo {
+  width: 45px;
+  margin-right: 10px;
 }
 .reservation p, .reservation a, .reservation .profile-picture {
   display: block;

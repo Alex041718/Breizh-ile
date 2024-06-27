@@ -66,10 +66,29 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
         <section class="reservations">
             <script type="module" src="/owner/consulter_reservations/consulter_reservations.js"></script>
         </section>
-        <?php
-        require_once ("../../components/Button/Button.php");
-        Button::render("exportation__button", "exportationButton", "Exporter la sélection", ButtonType::Owner, false, false, false, '<i class="fa-solid fa-file-export"></i>');
-        ?>
+        <section class="buttons">
+            <?php
+                require_once ("../../components/Button/Button.php");
+                require_once ("../../components/Button/Button.php");
+
+            ?>
+            <form action="/owner/consulter_reservations/gerer_abonnements_ical.php" method="get" class="ical-form"
+                id="ical-form">
+                <?php Button::render(
+                        class: "iCalButton",
+                        id: "iCalButton",
+                        text: "Gérer les abonnements iCal",
+                        type: ButtonType::Owner,
+                        onClick: "",
+                        isSecondary: false,
+                        submit: true,
+                        icon: '<i class="fa-regular fa-calendar"></i>'
+                    );
+                ?>
+            </form>
+            <?php Button::render("exportation__button", "exportationButton", "Exporter la sélection", ButtonType::Owner, false, false, false, '<i class="fa-solid fa-file-export"></i>'); ?>
+        </section>
+        
         <section class="export-selection">
             <section class="export-selection__CSV">
                 <?php
@@ -90,23 +109,6 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
             </section>
             <button class="closeExport"><i class="fa-solid fa-xmark"></i></button>
         </section>
-
-        <form action="/owner/consulter_reservations/gerer_abonnements_ical.php" method="get" class="ical-form"
-            id="ical-form">
-            <?php
-            require_once ("../../components/Button/Button.php");
-            Button::render(
-                class: "iCalButton",
-                id: "iCalButton",
-                text: "Gérer les abonnements iCal",
-                type: ButtonType::Owner,
-                onClick: "",
-                isSecondary: false,
-                submit: true, // Assurez-vous que le bouton est de type submit
-                icon: '<i class="fa-regular fa-calendar"></i>'
-            );
-            ?>
-        </form>
 
     </main>
 
