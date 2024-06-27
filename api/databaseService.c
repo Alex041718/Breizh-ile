@@ -42,8 +42,6 @@ MYSQL* init_database() {
         exit(1);
     }
 
-    printf("Connected to the database\n");
-
     return conn;
 }
 
@@ -220,10 +218,8 @@ bool create_api_key(int user_id, bool is_superadmin) {
     char query[1024];
 
     snprintf(query, sizeof(query), "INSERT INTO _User_APIKey (userID, apiKey, active, superAdmin) VALUES (%d, '%s', 1, %d)", user_id, api_key, is_superadmin);
-    printf("Query: %s\n", query);
 
     if (!query_database(query)) {
-        printf("Error creating API key\n");
         success = false;
     }
 

@@ -567,3 +567,268 @@
 [2024-06-26 15:52:33] [INFO] Réponse envoyée: OK code=200;message=Disponibilités récupérées avec succès available_from=2024-06-26;available_to=2024-
 [2024-06-26 15:52:33] [INFO] Fermeture de la connexion
 [2024-06-26 15:52:33] [INFO] En attente d'une connexion...
+[2024-06-27 14:32:17] [INFO] Serveur démarré sur le port 8081
+[2024-06-27 14:32:17] [INFO] En attente d'une connexion...
+[2024-06-27 14:32:42] [INFO] Nouvelle connexion
+[2024-06-27 14:32:42] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:32:42] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:32:42] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:32:42] [INFO] En attente d'une connexion...
+[2024-06-27 14:32:42] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:32:42] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:32:42] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:32:42] [INFO] En attente d'une connexion...
+[2024-06-27 14:32:43] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:32:43] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:32:43] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:32:43] [INFO] En attente d'une connexion...
+[2024-06-27 14:32:44] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:32:44] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:32:44] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:32:44] [INFO] En attente d'une connexion...
+[2024-06-27 14:32:44] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:32:44] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:32:44] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:32:44] [INFO] En attente d'une connexion...
+[2024-06-27 14:32:45] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:32:45] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:32:45] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:32:45] [INFO] En attente d'une connexion...
+[2024-06-27 14:32:52] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:32:52] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:32:52] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:32:52] [INFO] En attente d'une connexion...
+[2024-06-27 14:33:01] [INFO] Message brute reçu: ENTRYPOINT /api/get-housings userID=301; 
+[2024-06-27 14:33:01] [INFO] Header: ENTRYPOINT, Path: /api/get-housings, Body: userID=301;
+[2024-06-27 14:33:01] [INFO] Réponse envoyée: AUTH? 
+[2024-06-27 14:33:01] [INFO] En attente d'une connexion...
+[2024-06-27 14:33:21] [INFO] Message brute reçu: AUTH /api/auth api-key=NJz96wcxCvwNkhw2hnFTWoDLOsBIR3HCLpS2PAMUzfKTn02DqXYMfXq3UFD7Ofb0; 
+[2024-06-27 14:33:21] [INFO] Header: AUTH, Path: /api/auth, Body: api-key=NJz96wcxCvwNkhw2hnFTWoDLOsBIR3HCLpS2PAMUzfKTn02DqXYMfXq3UFD7Ofb0;
+[2024-06-27 14:33:21] [INFO] Réponse envoyée: AUTH_FAIL 
+[2024-06-27 14:33:21] [INFO] En attente d'une connexion...
+[2024-06-27 14:33:33] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:33:33] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:33:33] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:33:33] [INFO] En attente d'une connexion...
+[2024-06-27 14:33:35] [INFO] Message brute reçu: ENTRYPOINT /api/get-housings userID=301; 
+[2024-06-27 14:33:35] [INFO] Header: ENTRYPOINT, Path: /api/get-housings, Body: userID=301;
+[2024-06-27 14:33:35] [INFO] Réponse envoyée: AUTH? 
+[2024-06-27 14:33:35] [INFO] En attente d'une connexion...
+[2024-06-27 14:33:47] [INFO] Message brute reçu: AUTH /api/auth api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW; 
+[2024-06-27 14:33:47] [INFO] Header: AUTH, Path: /api/auth, Body: api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW;
+[2024-06-27 14:33:47] [INFO] Réponse envoyée: OK code=200;message=Logements récupérés avec succès housingID=113;title=Carnac - appartement 3 pièces 
+[2024-06-27 14:33:47] [INFO] Fermeture de la connexion
+[2024-06-27 14:33:47] [INFO] En attente d'une connexion...
+[2024-06-27 14:34:22] [INFO] Nouvelle connexion
+[2024-06-27 14:34:22] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:34:22] [INFO] Header: OK?, Path: ec succès housingID=113;title=Carnac - appartement 3 pièces duplex - 35m²;shortDesc=Carnac, proche plage
+[2024-06-27 14:34:22] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:34:22] [INFO] En attente d'une connexion...
+[2024-06-27 14:34:24] [INFO] Message brute reçu: ENTRYPOINT /api/get-housings userID=0; 
+[2024-06-27 14:34:24] [INFO] Header: ENTRYPOINT, Path: /api/get-housings, Body: userID=0;
+[2024-06-27 14:34:24] [INFO] Réponse envoyée: AUTH? 
+[2024-06-27 14:34:24] [INFO] En attente d'une connexion...
+[2024-06-27 14:34:28] [INFO] Message brute reçu: AUTH /api/auth api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW; 
+[2024-06-27 14:34:28] [INFO] Header: AUTH, Path: /api/auth, Body: api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW;
+[2024-06-27 14:34:28] [INFO] Réponse envoyée: BAD_REQUEST code=403;message=Accès interdit Vous n'avez pas les droits pour effectuer cette action; 
+[2024-06-27 14:34:28] [INFO] Fermeture de la connexion
+[2024-06-27 14:34:28] [INFO] En attente d'une connexion...
+[2024-06-27 14:35:55] [INFO] Nouvelle connexion
+[2024-06-27 14:35:55] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:35:55] [INFO] Header: OK?, Path: =403;message=Accès interdit Vous n'avez pas les droits pour effectuer cette action;  duplex;longDesc=A 800
+[2024-06-27 14:35:55] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:35:55] [INFO] En attente d'une connexion...
+[2024-06-27 14:35:57] [INFO] Message brute reçu: ENTRYPOINT /api/get-housings userID=0; 
+[2024-06-27 14:35:57] [INFO] Header: ENTRYPOINT, Path: /api/get-housings, Body: userID=0;
+[2024-06-27 14:35:57] [INFO] Réponse envoyée: AUTH? 
+[2024-06-27 14:35:57] [INFO] En attente d'une connexion...
+[2024-06-27 14:35:59] [INFO] Message brute reçu: AUTH /api/auth api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW; 
+[2024-06-27 14:35:59] [INFO] Header: AUTH, Path: /api/auth, Body: api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW;
+[2024-06-27 14:35:59] [INFO] Réponse envoyée: OK code=200;message=Logements récupérés avec succès housingID=1;title=Quiberon - appartement 2 pièces 
+[2024-06-27 14:35:59] [INFO] Fermeture de la connexion
+[2024-06-27 14:35:59] [INFO] En attente d'une connexion...
+[2024-06-27 14:36:10] [INFO] Nouvelle connexion
+[2024-06-27 14:36:10] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:36:10] [INFO] Header: OK?, Path: age=Logements récupérés avec succès housingID=1;title=Quiberon - appartement 2 pièces  upermarché, da
+[2024-06-27 14:36:10] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:36:10] [INFO] En attente d'une connexion...
+[2024-06-27 14:36:13] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:36:13] [INFO] Header: OK?, Path: ngID=1;title=Quiberon - appartement 2 pièces  upermarché, dans un environnement calme, bel appartement 3 
+[2024-06-27 14:36:13] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:36:13] [INFO] En attente d'une connexion...
+[2024-06-27 14:36:13] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:36:13] [INFO] Header: OK?, Path:   upermarché, dans un environnement calme, bel appartement 3 pièces duplex (env. 35m²) pour 4 personnes,
+[2024-06-27 14:36:13] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:36:13] [INFO] En attente d'une connexion...
+[2024-06-27 14:36:14] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:36:14] [INFO] Header: OK?, Path: ans un environnement calme, bel appartement 3 pièces duplex (env. 35m²) pour 4 personnes, sidence (salon 
+[2024-06-27 14:36:14] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:36:14] [INFO] En attente d'une connexion...
+[2024-06-27 14:39:27] [INFO] Serveur démarré sur le port 8081
+[2024-06-27 14:39:27] [INFO] En attente d'une connexion...
+[2024-06-27 14:39:30] [INFO] Serveur démarré sur le port 8081
+[2024-06-27 14:39:30] [INFO] En attente d'une connexion...
+[2024-06-27 14:39:34] [INFO] Nouvelle connexion
+[2024-06-27 14:39:34] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:39:34] [INFO] Header: , Path: , Body: 
+[2024-06-27 14:39:34] [INFO] Réponse envoyée: BAD_REQUEST code=400;message=Requête invalide La connexion n'a pas été initialisée correctement; 
+[2024-06-27 14:39:34] [INFO] En attente d'une connexion...
+[2024-06-27 14:39:34] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:39:34] [INFO] Header: , Path: , Body: 
+[2024-06-27 14:39:34] [INFO] Réponse envoyée: BAD_REQUEST code=400;message=Requête invalide La connexion n'a pas été initialisée correctement; 
+[2024-06-27 14:39:34] [INFO] En attente d'une connexion...
+[2024-06-27 14:40:34] [INFO] Serveur démarré sur le port 8081
+[2024-06-27 14:40:34] [INFO] En attente d'une connexion...
+[2024-06-27 14:40:42] [INFO] Nouvelle connexion
+[2024-06-27 14:40:42] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:40:42] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:40:42] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:40:42] [INFO] En attente d'une connexion...
+[2024-06-27 14:40:43] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:40:43] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:40:43] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:40:43] [INFO] En attente d'une connexion...
+[2024-06-27 14:40:44] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:40:44] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:40:44] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:40:44] [INFO] En attente d'une connexion...
+[2024-06-27 14:40:47] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:40:47] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:40:47] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:40:47] [INFO] En attente d'une connexion...
+[2024-06-27 14:40:48] [INFO] Message brute reçu: ENTRYPOINT /api/get-housings userID=0; 
+[2024-06-27 14:40:48] [INFO] Header: ENTRYPOINT, Path: /api/get-housings, Body: userID=0;
+[2024-06-27 14:40:48] [INFO] Réponse envoyée: AUTH? 
+[2024-06-27 14:40:48] [INFO] En attente d'une connexion...
+[2024-06-27 14:40:56] [INFO] Message brute reçu: AUTH /api/auth api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW; 
+[2024-06-27 14:40:56] [INFO] Header: AUTH, Path: /api/auth, Body: api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW;
+[2024-06-27 14:40:56] [INFO] Réponse envoyée: OK code=200;message=Logements récupérés avec succès housingID=1;title=Quiberon - appartement 2 pièces 
+[2024-06-27 14:40:56] [INFO] Fermeture de la connexion
+[2024-06-27 14:40:56] [INFO] En attente d'une connexion...
+[2024-06-27 14:40:58] [INFO] Nouvelle connexion
+[2024-06-27 14:40:58] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:40:58] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:40:58] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:40:58] [INFO] En attente d'une connexion...
+[2024-06-27 14:40:59] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:40:59] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:40:59] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:40:59] [INFO] En attente d'une connexion...
+[2024-06-27 14:40:59] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:40:59] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:40:59] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:40:59] [INFO] En attente d'une connexion...
+[2024-06-27 14:41:00] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:41:00] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:41:00] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:41:00] [INFO] En attente d'une connexion...
+[2024-06-27 14:41:12] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:41:12] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:41:12] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:41:12] [INFO] En attente d'une connexion...
+[2024-06-27 14:41:14] [INFO] Message brute reçu: ENTRYPOINT /api/get-housings userID=301; 
+[2024-06-27 14:41:14] [INFO] Header: ENTRYPOINT, Path: /api/get-housings, Body: userID=301;
+[2024-06-27 14:41:14] [INFO] Réponse envoyée: AUTH? 
+[2024-06-27 14:41:14] [INFO] En attente d'une connexion...
+[2024-06-27 14:41:16] [INFO] Message brute reçu: AUTH /api/auth api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW; 
+[2024-06-27 14:41:16] [INFO] Header: AUTH, Path: /api/auth, Body: api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW;
+[2024-06-27 14:41:17] [INFO] Réponse envoyée: OK code=200;message=Logements récupérés avec succès housingID=113;title=Carnac - appartement 3 pièces 
+[2024-06-27 14:41:17] [INFO] Fermeture de la connexion
+[2024-06-27 14:41:17] [INFO] En attente d'une connexion...
+[2024-06-27 14:42:45] [INFO] Nouvelle connexion
+[2024-06-27 14:42:45] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:42:45] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:42:45] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:42:45] [INFO] En attente d'une connexion...
+[2024-06-27 14:42:45] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:42:45] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:42:45] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:42:45] [INFO] En attente d'une connexion...
+[2024-06-27 14:42:46] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:42:46] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:42:46] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:42:46] [INFO] En attente d'une connexion...
+[2024-06-27 14:43:03] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:43:03] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:43:03] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:43:03] [INFO] En attente d'une connexion...
+[2024-06-27 14:44:20] [INFO] Message brute reçu: ENTRYPOINT /api/get-disponibilities housingID=113;starting-date=2000-01-01;ending-date=2025-12-31; 
+[2024-06-27 14:44:20] [INFO] Header: ENTRYPOINT, Path: /api/get-disponibilities, Body: housingID=113;starting-date=2000-01-01;ending-date=2025-12-31;
+[2024-06-27 14:44:20] [INFO] Réponse envoyée: AUTH? 
+[2024-06-27 14:44:20] [INFO] En attente d'une connexion...
+[2024-06-27 14:44:23] [INFO] Message brute reçu: AUTH /api/auth api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW; 
+[2024-06-27 14:44:23] [INFO] Header: AUTH, Path: /api/auth, Body: api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW;
+[2024-06-27 14:44:23] [INFO] Réponse envoyée: OK code=200;message=Disponibilités récupérées avec succès available_from=2000-01-01;available_to=2025-
+[2024-06-27 14:44:23] [INFO] Fermeture de la connexion
+[2024-06-27 14:44:23] [INFO] En attente d'une connexion...
+[2024-06-27 14:44:31] [INFO] Nouvelle connexion
+[2024-06-27 14:44:31] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:44:31] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:44:31] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:44:31] [INFO] En attente d'une connexion...
+[2024-06-27 14:44:49] [INFO] Message brute reçu: ENTRYPOINT /api/get-disponibilities housingID=301;starting-date=2025-01-01;ending-date=2024-01-01; 
+[2024-06-27 14:44:49] [INFO] Header: ENTRYPOINT, Path: /api/get-disponibilities, Body: housingID=301;starting-date=2025-01-01;ending-date=2024-01-01;
+[2024-06-27 14:44:49] [INFO] Réponse envoyée: AUTH? 
+[2024-06-27 14:44:49] [INFO] En attente d'une connexion...
+[2024-06-27 14:44:52] [INFO] Message brute reçu: AUTH /api/auth api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW; 
+[2024-06-27 14:44:52] [INFO] Header: AUTH, Path: /api/auth, Body: api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW;
+[2024-06-27 14:44:52] [INFO] Réponse envoyée: OK code=200;message=Disponibilités récupérées avec succès  
+[2024-06-27 14:44:52] [INFO] Fermeture de la connexion
+[2024-06-27 14:44:52] [INFO] En attente d'une connexion...
+[2024-06-27 14:45:02] [INFO] Nouvelle connexion
+[2024-06-27 14:45:02] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:45:02] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:45:02] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:45:02] [INFO] En attente d'une connexion...
+[2024-06-27 14:45:07] [INFO] Message brute reçu: ENTRYPOINT /api/get-disponibilities housingID=301;starting-date=121;ending-date=1233; 
+[2024-06-27 14:45:07] [INFO] Header: ENTRYPOINT, Path: /api/get-disponibilities, Body: housingID=301;starting-date=121;ending-date=1233;
+[2024-06-27 14:45:07] [INFO] Réponse envoyée: AUTH? 
+[2024-06-27 14:45:07] [INFO] En attente d'une connexion...
+[2024-06-27 14:45:09] [INFO] Message brute reçu: AUTH /api/auth api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW; 
+[2024-06-27 14:45:09] [INFO] Header: AUTH, Path: /api/auth, Body: api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW;
+[2024-06-27 14:45:09] [INFO] Réponse envoyée: OK code=200;message=Disponibilités récupérées avec succès available_from=121;available_to=1233;  
+[2024-06-27 14:45:09] [INFO] Fermeture de la connexion
+[2024-06-27 14:45:09] [INFO] En attente d'une connexion...
+[2024-06-27 14:45:27] [INFO] Nouvelle connexion
+[2024-06-27 14:45:27] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:45:27] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:45:27] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:45:27] [INFO] En attente d'une connexion...
+[2024-06-27 14:45:43] [INFO] Message brute reçu: ENTRYPOINT /api/get-disponibilities housingID=301;starting-date=aoidjaoizjd;ending-date=iuahzdiuhazd; 
+[2024-06-27 14:45:43] [INFO] Header: ENTRYPOINT, Path: /api/get-disponibilities, Body: housingID=301;starting-date=aoidjaoizjd;ending-date=iuahzdiuhazd;
+[2024-06-27 14:45:43] [INFO] Réponse envoyée: AUTH? 
+[2024-06-27 14:45:43] [INFO] En attente d'une connexion...
+[2024-06-27 14:45:57] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:45:57] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:45:57] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:45:57] [INFO] En attente d'une connexion...
+[2024-06-27 14:45:59] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:45:59] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:45:59] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:45:59] [INFO] En attente d'une connexion...
+[2024-06-27 14:46:00] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:46:00] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:46:00] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:46:00] [INFO] En attente d'une connexion...
+[2024-06-27 14:46:46] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:46:46] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:46:46] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:46:46] [INFO] En attente d'une connexion...
+[2024-06-27 14:46:51] [INFO] Message brute reçu: ENTRYPOINT /api/get-disponibilities housingID=301;starting-date=caca;ending-date=caca; 
+[2024-06-27 14:46:51] [INFO] Header: ENTRYPOINT, Path: /api/get-disponibilities, Body: housingID=301;starting-date=caca;ending-date=caca;
+[2024-06-27 14:46:51] [INFO] Réponse envoyée: AUTH? 
+[2024-06-27 14:46:51] [INFO] En attente d'une connexion...
+[2024-06-27 14:46:53] [INFO] Message brute reçu: AUTH /api/auth api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW; 
+[2024-06-27 14:46:53] [INFO] Header: AUTH, Path: /api/auth, Body: api-key=2U0sQKuMMc7csH5Y9jb2wgp8aVTD4Erp6XcR8GNSr1zlom5z4sblOIjyXH7i9HxW;
+[2024-06-27 14:46:53] [INFO] Réponse envoyée: OK code=200;message=Disponibilités récupérées avec succès available_from=caca;available_to=caca;  
+[2024-06-27 14:46:53] [INFO] Fermeture de la connexion
+[2024-06-27 14:46:53] [INFO] En attente d'une connexion...
+[2024-06-27 14:47:05] [INFO] Nouvelle connexion
+[2024-06-27 14:47:05] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:47:05] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:47:05] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:47:05] [INFO] En attente d'une connexion...
+[2024-06-27 14:47:06] [INFO] Message brute reçu: OK? 
+[2024-06-27 14:47:06] [INFO] Header: OK?, Path: , Body: 
+[2024-06-27 14:47:06] [INFO] Réponse envoyée: OK 
+[2024-06-27 14:47:06] [INFO] En attente d'une connexion...

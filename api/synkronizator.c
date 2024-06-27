@@ -5,33 +5,43 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <stdbool.h>
 #include <getopt.h>
-#include <time.h>
-#include <math.h>
-#include "sqlService.h"
+#include <errno.h>
+#include "databaseService.h"
+#include "utils.h"
 
-#define MAX_CLIENTS 1
-#define BUFFER_SIZE 8192
-#define MAX_AUTH_ATTEMPTS 3
+#define MAX_CLIENTS 1 // Maximum number of clients that can connect to the server
+#define MAX_AUTH_ATTEMPTS 3 // Maximum number of authentication attempts before closing the connection
 
-// TODO: Faire en sorte qu'une demande AUTH obtienne une réponse AUTH Aussi
+#define DEFAULT_SERVER_PORT 8080
 
-bool request_ok = false;
-bool auth_ok = false;
-bool close_connexion = false;
+#define HEADER_SIZE 64 // 64 bytes header size
+#define PATH_BUFFER_SIZE 64 // 64 bytes buffer size
+#define BODY_BUFFER_SIZE 4096 // 4KB buffer size
+#define RESPONSE_BUFFER_SIZE 1024 * 2048 // 2MB response buffer size, it is a very large buffer size but it is necessary for the housings list for example
 
-int attempts_auth = 0;
-
+// Types definition
 typedef struct {
-    char attribute[64];
-    char value[8192];
+    char attribute[HEADER_SIZE];
+    char value[BODY_BUFFER_SIZE];
 } BodyAttribute;
 
+typedef struct BodyAttributeList {
+    BodyAttribute* attribute;
+    struct BodyAttributeList* next;
+} BodyAttributeList;
+
 typedef struct {
-    char header[32];
-    char path[64];
-    char body[BUFFER_SIZE];
+    char header[HEADER_SIZE];
+    char path[PATH_BUFFER_SIZE];
+    char body[BODY_BUFFER_SIZE];
 } Packet;
+
+typedef struct {
+    Packet* requested_packet;
+    void (*requested_fonction)(Packet*, char*);
+} RequestedOperation;
 
 static struct option long_options[] = {
     {"help", no_argument, NULL, 'h'},
@@ -40,8 +50,25 @@ static struct option long_options[] = {
     {NULL, 0, NULL, 0}
 };
 
-char* requested_body;
-void (*requested_fonction)(char*, char*, size_t);
+// Global variables
+bool connection_initialized_with_ok = false;
+bool authentification_ok = false;
+bool connection_closed = false;
+bool is_admin = false;
+
+bool verbose = false;
+
+int number_authentification_attempts = 0;
+
+int user_id_authentificated = -1;
+RequestedOperation* requested_operation = NULL;
+
+// Function prototypes
+void handle_header(Packet* packet, char* response);
+void handle_request(int socket_client);
+void create_user_api_key(Packet* packet, char* response);
+void get_list_housings(Packet* packet, char* response);
+void get_list_disponibilities(Packet* packet, char* response);
 
 void print_usage() {
     printf("Usage: ./server [options]\n"
@@ -51,347 +78,488 @@ void print_usage() {
            "  -h, --help           Affiche l'aide\n");
 }
 
-void print_log(const char *message) {
-    time_t now = time(NULL);
-    struct tm *tm = localtime(&now);
-    char timestamp[20];
-    strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", tm);
-    printf("[%s] %s\n", timestamp, message);
+void print_log_server(const char *message, enum log_level level) {
+    if (verbose) {
+        print_log(message, level);
+    }
 }
 
-bool is_number(char* str) {
-    for (int i = 0; i < strlen(str); i++) {
-        if (str[i] < '0' || str[i] > '9') {
+Packet* parse_packet(char* buffer) {
+    Packet* packet = malloc(sizeof(Packet));
+    // reset the packet
+    memset(packet->header, 0, sizeof(packet->header));
+    memset(packet->path, 0, sizeof(packet->path));
+    memset(packet->body, 0, sizeof(packet->body));
+    sscanf(buffer, "%s %s %s", packet->header, packet->path, packet->body);
+
+    return packet;
+}
+
+BodyAttributeList* parse_body(char* attribute_string) {
+    BodyAttributeList* head = NULL;
+    BodyAttributeList* current = NULL;
+
+    // Duplicate the string to avoid modifying the original
+    char* copy_attribute_string = strdup(attribute_string);
+    if (copy_attribute_string == NULL) return NULL;
+
+    char* token = strtok(copy_attribute_string, ";");
+    while (token != NULL) {
+        char* equal_sign_index = strchr(token, '=');
+        if (equal_sign_index == NULL) {
+            free(copy_attribute_string);
+            break;
+        }
+
+        BodyAttributeList* newNode = malloc(sizeof(BodyAttributeList));
+        if (newNode == NULL) {
+            free(copy_attribute_string);
+            break;
+        }
+
+        newNode->attribute = malloc(sizeof(BodyAttribute));
+        if (newNode->attribute == NULL) {
+            free(newNode);
+            free(copy_attribute_string);
+            break;
+        }
+
+        *equal_sign_index = '\0'; // Replace the equal sign with a null character
+        strncpy(newNode->attribute->attribute, token, HEADER_SIZE - 1);
+        newNode->attribute->attribute[HEADER_SIZE - 1] = '\0';
+        strncpy(newNode->attribute->value, equal_sign_index + 1, BODY_BUFFER_SIZE - 1);
+        newNode->attribute->value[BODY_BUFFER_SIZE - 1] = '\0';
+
+        newNode->next = NULL;
+
+        if (head == NULL) {
+            head = current = newNode;
+        } else {
+            current->next = newNode;
+            current = newNode;
+        }
+
+        token = strtok(NULL, ";");
+    }
+
+    free(copy_attribute_string);
+    return head;
+}
+
+BodyAttribute* get_body_attribute(BodyAttributeList* head, const char* attribute) {
+    BodyAttributeList* current = head;
+    BodyAttribute* body_attribute = NULL;
+    while (current != NULL) {
+        if (strcmp(current->attribute->attribute, attribute) == 0) {
+            body_attribute = current->attribute;
+            break;
+        }
+        current = current->next;
+    }
+
+    return body_attribute;
+}
+
+bool check_authentification(Packet* packet, char* response) {
+    BodyAttributeList* body_attributes = parse_body(packet->body);
+    if (body_attributes == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLes attributs du corps de la requête sont invalides;\n");
+        return false;
+    }
+    
+    if (requested_operation == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nUne requete d'authentification ne peut pas être effectuée sans opération;\n");
+        return false;
+    }
+
+    BodyAttribute* api_attribute = get_body_attribute(body_attributes, "api-key");
+    BodyAttribute* email_attribute = get_body_attribute(body_attributes, "email");
+    BodyAttribute* password_attribute = get_body_attribute(body_attributes, "password");
+
+    if (api_attribute != NULL) {
+        if (!check_user_api_key(api_attribute->value)) {
+            snprintf(response, RESPONSE_BUFFER_SIZE, "AUTH_FAIL\n");
             return false;
         }
+
+        user_id_authentificated = get_user_id_from_api_key(api_attribute->value);
+        is_admin = is_superadmin_api_key(api_attribute->value); 
+    } else {
+        if (email_attribute == NULL || password_attribute == NULL) {
+            snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLes attributs du corps de la requête sont invalides;\n");
+            return false;
+        }
+
+        if (!check_user_credentials(email_attribute->value, password_attribute->value)) {
+            snprintf(response, RESPONSE_BUFFER_SIZE, "AUTH_FAIL\n");
+            return false;
+        }
+
+        user_id_authentificated = get_user_id_from_email(email_attribute->value);
+        is_admin = is_user_admin(user_id_authentificated);
     }
+
+    if (user_id_authentificated == -1) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "AUTH_FAIL\n");
+        return false;
+    }
+
+    snprintf(response, RESPONSE_BUFFER_SIZE, "AUTH_OK\n");
+
+    if (requested_operation->requested_fonction != NULL) {
+        requested_operation->requested_fonction(requested_operation->requested_packet, response);
+
+        // Free the memory and reset the requested operation
+        free(requested_operation->requested_packet);
+        free(requested_operation);
+        requested_operation = NULL;
+        connection_closed = true;
+    }
+
     return true;
 }
 
-void parse_request(char* request, Packet* packet) {
-    char* token = strtok(request, "\n");
-
-    if (token == NULL) return; // Requête vide
-
-    snprintf(packet->header, sizeof(packet->header), "%s", token);
-
-    token = strtok(NULL, "\n");
-
-    if (token == NULL) return; // Commande sans chemin : OK, etc.
-
-    snprintf(packet->path, sizeof(packet->path), "%s", token);
-
-    token = token + strlen(token) + 1;
-
-    if (*token == '\0') return; // Pas de corps
-
-    snprintf(packet->body, sizeof(packet->body), "%s", token);
-}
-
-BodyAttribute* parse_token(const char* body) {
-    BodyAttribute* attribute = malloc(sizeof(BodyAttribute));
-    if (attribute == NULL) return NULL;
-
-    const char* equals = strchr(body, '=');
-    if (equals == NULL) {
-        free(attribute);
-        return NULL;
-    }
-
-    size_t attr_len = equals - body;
-    if (attr_len >= sizeof(attribute->attribute)) {
-        free(attribute);
-        return NULL;
-    }
-
-    strncpy(attribute->attribute, body, attr_len);
-    attribute->attribute[attr_len] = '\0';
-
-    const char* value = equals + 1;
-    strncpy(attribute->value, value, sizeof(attribute->value) - 1);
-    attribute->value[sizeof(attribute->value) - 1] = '\0';
-
-    return attribute;
-}
-
-bool check_auth(int client_fd, Packet* packet, char* response, size_t response_size) {
-    char* token = strtok(packet->body, ";");
-    bool check_credentials = false;
-
-    if (token == NULL) {
-        snprintf(response, response_size, "Paramètres manquants");
-        return false;
-    }
-
-    BodyAttribute* connection_method = parse_token(token); // email or api_key
-    if (connection_method == NULL) {
-        snprintf(response, response_size, "Méthode de connexion manquante\nEmail ou clé API requise");
-        return false;
-    }
-
-    if (strcmp(connection_method->attribute, "email") == 0) {
-        token = strtok(NULL, ";");
-        if (token == NULL) {
-            snprintf(response, response_size, "Paramètres manquants");
-            return false;
-        }
-
-        BodyAttribute* password = parse_token(token);
-        if (password == NULL) {
-            snprintf(response, response_size, "Mot de passe manquant");
-            return false;
-        }
-
-        char* copy_requested_body = malloc(strlen(requested_body) + 1);
-        strcpy(copy_requested_body, requested_body);
-        token = strtok(copy_requested_body, ";");
-        if (token == NULL) {
-            snprintf(response, response_size, "Paramètres manquants");
-            return false;
-        }
-
-        int user_id = get_user_id_from_email(connection_method->value);
-        BodyAttribute* userID = parse_token(token);                 
-
-        if (user_id != atoi(userID->value)) {
-            snprintf(response, response_size, "Vous tentez de vous authentifier avec un ID utilisateur qui ne vous appartient pas");
-            return false;
-        }
-
-        check_credentials = check_user_credentials(connection_method->value, password->value);
-    } else if (strcmp(connection_method->attribute, "api_key") == 0) {
-        char* copy_requested_body = malloc(strlen(requested_body) + 1);
-        strcpy(copy_requested_body, requested_body);
-        token = strtok(copy_requested_body, ";");
-        if (token == NULL) {
-            snprintf(response, response_size, "Paramètres manquants");
-            return false;
-        }
-
-        int user_id = get_user_id_from_api_key(connection_method->value);
-        BodyAttribute* userID = parse_token(token);                 
-
-        if (user_id != atoi(userID->value)) {
-            snprintf(response, response_size, "Vous tentez de vous authentifier avec un ID utilisateur qui ne vous appartient pas");
-            return false;
-        }
-
-        check_credentials = check_user_api_key(connection_method->value);
-    } else {
-        snprintf(response, response_size, "Méthode de connexion invalide\nEmail ou clé API requise");
-        return false;
-    }
-
-    if (check_credentials) {
-        attempts_auth = 0;
-
-        auth_ok = true;
-        snprintf(response, response_size, "AUTH OK\n");
-
-        if (requested_fonction != NULL) {
-            requested_fonction(requested_body, response, response_size);
-            free(requested_body);
-            requested_body = NULL;
-            requested_fonction = NULL;
-        }
-    } else {
-        snprintf(response, response_size, "AUTH FAIL\n");
-    }
-
-    return auth_ok;
-}
-
-void create_apiKey(char* body, char* response, size_t response_size) {
-    char* token = strtok(body, ";");
-    if (token == NULL) {
-        snprintf(response, response_size, "Paramètres manquants");
-        return;
-    }   
-
-    BodyAttribute* userID = parse_token(token);
-    if (userID == NULL) {
-        snprintf(response, response_size, "UserID manquant");
-        return;
-    }
-
-    if (strcmp(userID->attribute, "userID") != 0 || !is_number(userID->value)) {
-        snprintf(response, response_size, "UserID invalide\nExemple de corps de requête : userID=1;superAdmin=0;");
-        return;
-    }
-
-    token = strtok(NULL, ";");
-    if (token == NULL) {
-        snprintf(response, response_size, "Paramètres manquants");
-        return;
-    }
-
-    BodyAttribute* superAdmin = parse_token(token);
-    if (superAdmin == NULL) {
-        snprintf(response, response_size, "SuperAdmin manquant");
-        return;
-    }
-
-    if (strcmp(superAdmin->attribute, "superAdmin") != 0 || (strcmp(superAdmin->value, "0") != 0 && strcmp(superAdmin->value, "1") != 0)) {
-        snprintf(response, response_size, "SuperAdmin invalide\nExemple de corps de requête : userID=1;superAdmin=0;");
-        return;
-    }
-
-    if (create_api_key(atoi(userID->value), atoi(superAdmin->value))) {
-        snprintf(response, response_size, "Clé API créée");
-    } else {
-        snprintf(response, response_size, "Erreur lors de la création de la clé API");
-    }
-}
-
-void handle_route(int client_fd, Packet* packet, char* response, size_t response_size) {
+void handle_route(Packet* packet, char* response) {
     if (strcmp(packet->path, "/api/create-key") == 0) {
-        snprintf(response, response_size, "AUTH ?\n");
+        // This route requires authentication
+        snprintf(response, RESPONSE_BUFFER_SIZE, "AUTH?\n");
 
-        requested_body = malloc(strlen(packet->body) + 1);
-        strcpy(requested_body, packet->body);
-        requested_fonction = create_apiKey;
+        // Save the requested operation and packet for later
+        requested_operation = malloc(sizeof(RequestedOperation));
+        requested_operation->requested_packet = packet;
+        requested_operation->requested_fonction = create_user_api_key;
+    } else if (strcmp(packet->path, "/api/get-housings") == 0) {
+        // This route requires authentication
+        snprintf(response, RESPONSE_BUFFER_SIZE, "AUTH?\n");
+
+        // Save the requested operation and packet for later
+        requested_operation = malloc(sizeof(RequestedOperation));
+        requested_operation->requested_packet = packet;
+        requested_operation->requested_fonction = get_list_housings;
+    } else if (strcmp(packet->path, "/api/get-disponibilities") == 0) {
+        // This route requires authentication
+        snprintf(response, RESPONSE_BUFFER_SIZE, "AUTH?\n");
+
+        // Save the requested operation and packet for later
+        requested_operation = malloc(sizeof(RequestedOperation));
+        requested_operation->requested_packet = packet;
+        requested_operation->requested_fonction = get_list_disponibilities;
     } else {
-        snprintf(response, response_size, "Route inconnue");
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLa route demandée n'existe pas;\n");
     }
 }
 
-void handle_header(int client_fd, Packet* packet, char* response, size_t response_size) {
-    if (strcmp(packet->header, "OK ?") == 0) {
-        snprintf(response, response_size, "OK\n");
-        request_ok = true;
-    } else if (!request_ok) {
-        snprintf(response, response_size, "BAD REQUEST\ncode=400;message=Requête invalide\nLa connexion n'a pas été initialisée correctement;\n");
+void handle_header(Packet* packet, char* response) {
+    if (strcmp(packet->header, "OK?") == 0) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "OK\n");
+        connection_initialized_with_ok = true;
+    } else if (!connection_initialized_with_ok) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLa connexion n'a pas été initialisée correctement;\n");
         return;
     } else if (strcmp(packet->header, "AUTH") == 0) {
-        if (attempts_auth < MAX_AUTH_ATTEMPTS - 1) {
-            attempts_auth++;
-            check_auth(client_fd, packet, response, response_size);
+        if (number_authentification_attempts < MAX_AUTH_ATTEMPTS - 1) {
+            number_authentification_attempts++;
+            authentification_ok = check_authentification(packet, response);
         } else {
-            snprintf(response, response_size, "AUTH KO\n");
-            close_connexion = true;
-            attempts_auth = 0;
+            snprintf(response, RESPONSE_BUFFER_SIZE, "AUTH_KO\n");
+            connection_closed = true;
 
-            requested_fonction = NULL;
-            free(requested_body);
-            requested_body = NULL;
+            // Free the memory and reset the requested operation
+            free(requested_operation->requested_packet);
+            free(requested_operation);
+            requested_operation = NULL;
         }
     } else if (strcmp(packet->header, "ENTRYPOINT") == 0) {
-        handle_route(client_fd, packet, response, response_size);
+        handle_route(packet, response);
     } else {
-        snprintf(response, response_size, "BAD REQUEST\ncode=400;message=Requête invalide\nLe header ne correspond pas à une commande connue;\n");
-
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLe header ne correspond pas à une commande connue;\n");
     }
 }
 
-void handle_request(int client_fd) {
-    char buffer[BUFFER_SIZE];
-    int read_bytes = recv(client_fd, buffer, BUFFER_SIZE - 1, 0);
-
-    if (read_bytes < 0) {
-        perror("recv");
-        close_connexion = true;
-    } else if (read_bytes == 0) {
-        printf("Connexion fermée par le client\n");
-        close_connexion = true;
-    } else {
-        buffer[read_bytes] = '\0';
-        printf("Reçu :\n%s\n", buffer);
-
-        Packet* packet = malloc(sizeof(Packet));
-        packet = memset(packet, 0, sizeof(Packet));
-        parse_request(buffer, packet);
-        
-        if (strlen(packet->header) > 0) printf("Header : %s\n", packet->header);
-        if (strlen(packet->path) > 0) printf("Path : %s\n", packet->path);
-        if (strlen(packet->body) > 0) printf("Body : %s\n", packet->body);
-        
-        char response_body[BUFFER_SIZE/2];
-        char response[BUFFER_SIZE];
-
-        handle_header(client_fd, packet, response_body, sizeof(response_body));
-
-        snprintf(response, BUFFER_SIZE, "%s", response_body);
-        printf("Réponse envoyée :\n%s\n", response);
-        send(client_fd, response, strlen(response), 0);
+ssize_t send_message(int sockfd, const void *buf, size_t len) {
+    uint32_t size_n = htonl(len);  // Convertir la taille en format réseau
+    
+    // Envoyer d'abord la taille
+    if (send(sockfd, &size_n, sizeof(size_n), 0) != sizeof(size_n)) {
+        return -1;
     }
+    
+    // Puis envoyer le message
+    size_t total = 0;
+    ssize_t n;
+    const char *p = buf;
+
+    while (total < len) {
+        n = send(sockfd, p + total, len - total, 0);
+        if (n == -1) {
+            return -1;
+        }
+        total += n;
+    }
+
+    return total;
 }
 
-int main(int argc, char *argv[]) {
-    int server_fd, client_fd;
-    struct sockaddr_in server_addr, client_addr;
-    socklen_t addr_len;
-    int port = 8080;
-    int verbose = 0;
+void handle_request(int socket_client) {
+    char buffer[BODY_BUFFER_SIZE];
+    char response[RESPONSE_BUFFER_SIZE];
+    char log_message[RESPONSE_BUFFER_SIZE*2];
+
+    // Receive the message
+    memset(buffer, 0, sizeof(buffer));
+    int bytes_received = recv(socket_client, buffer, sizeof(buffer), 0);
+
+    if (bytes_received < 0) {
+        perror("Erreur lors de la réception du message");
+        connection_closed = true;
+        return;
+    } else if (bytes_received == 0) {
+        print_log_server("Connexion fermée par le client", INFO);
+        connection_closed = true;
+        return;
+    }
+
+    snprintf(log_message, sizeof(log_message), "Message brute reçu: %s", buffer);
+    print_log_server(log_message, INFO);
+    memset(response, 0, sizeof(response));
+    
+    // Parse the packet
+    Packet* packet = parse_packet(buffer);
+    if (packet == NULL) {
+        print_log_server("Erreur lors du parsing du paquet, les données reçues sont invalides.", ERROR);
+        connection_closed = true;
+        return;
+    }
+
+    snprintf(log_message, sizeof(log_message), "Header: %s, Path: %s, Body: %s", packet->header, packet->path, packet->body);
+    print_log_server(log_message, INFO);
+    memset(log_message, 0, sizeof(log_message));
+
+    handle_header(packet, response);
+
+    // Send the response
+    snprintf(log_message, sizeof(log_message), "Réponse envoyée: %s", response);
+    print_log_server(log_message, INFO);
+    memset(log_message, 0, sizeof(log_message));
+
+    send_message(socket_client, response, strlen(response) + 1);
+}
+
+void create_user_api_key(Packet* packet, char* response) {
+    BodyAttributeList* body_attributes = parse_body(packet->body);
+    if (body_attributes == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLes attributs du corps de la requête sont invalides;\n");
+        return;
+    }
+
+    // Get the user ID attribute
+    BodyAttribute* user_id_attribute = get_body_attribute(body_attributes, "userID");
+    if (user_id_attribute == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nL'attribut 'userID' est manquant;\n");
+        return;
+    }
+
+    if (!is_number(user_id_attribute->value)) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLa valeur de l'attribut 'userID' n'est pas un nombre;\n");
+        return;
+    }
+
+    if (user_id_authentificated != atoi(user_id_attribute->value)) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=403;message=Accès interdit\nVous n'avez pas les droits pour effectuer cette action;\n");
+        return;
+    }
+
+    // Get the superAdmin attribute
+    BodyAttribute* super_admin_attribute = get_body_attribute(body_attributes, "superAdmin");
+    if (super_admin_attribute == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nL'attribut 'superAdmin' est manquant;\n");
+        return;
+    }
+
+    if (strcmp(super_admin_attribute->value, "0") != 0 && strcmp(super_admin_attribute->value, "1") != 0) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLa valeur de l'attribut 'superAdmin' n'est pas valide, elle doit être '0' ou '1';\n");
+        return;
+    }
+
+    if (atoi(super_admin_attribute->value) && !is_user_admin(user_id_authentificated)) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=403;message=Accès interdit\nVous n'avez pas les droits pour effectuer cette action;\n");
+        return;
+    }
+
+    // We try to create the API key
+    if (!create_api_key(atoi(user_id_attribute->value), atoi(super_admin_attribute->value))) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "INTERNAL_SERVER_ERROR\ncode=500;message=Erreur interne du serveur\nLa clé API n'a pas pu être créée;\n");
+        return;
+    }
+
+    snprintf(response, RESPONSE_BUFFER_SIZE, "OK\ncode=200;message=Clé API créée avec succès\nLa clé API a été créée avec succès;\n");
+}
+
+void get_list_housings(Packet* packet, char* response) {
+    BodyAttributeList* body_attributes = parse_body(packet->body);
+    if (body_attributes == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLes attributs du corps de la requête sont invalides;\n");
+        return;
+    }
+
+    // Get the user ID attribute
+    BodyAttribute* user_id_attribute = get_body_attribute(body_attributes, "userID");
+    if (user_id_attribute == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nL'attribut 'userID' est manquant;\n");
+        return;
+    }
+
+    if (!is_number(user_id_attribute->value)) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLa valeur de l'attribut 'userID' n'est pas un nombre;\n");
+        return;
+    }
+
+    if (user_id_authentificated != atoi(user_id_attribute->value) && !is_admin) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=403;message=Accès interdit\nVous n'avez pas les droits pour effectuer cette action;\n");
+        return;
+    }
+    
+    // We try to get the housings
+    char* housings = get_housings(atoi(user_id_attribute->value));
+    if (housings == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "INTERNAL_SERVER_ERROR\ncode=500;message=Erreur interne du serveur\nLes logements n'ont pas pu être récupérés;\n");
+        return;
+    }
+
+    snprintf(response, RESPONSE_BUFFER_SIZE, "OK\ncode=200;message=Logements récupérés avec succès\n%s\n", housings);
+}
+
+void get_list_disponibilities(Packet* packet, char* response) {
+    BodyAttributeList* body_attributes = parse_body(packet->body);
+    if (body_attributes == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLes attributs du corps de la requête sont invalides;\n");
+        return;
+    }
+
+    // Get the housing ID attribute
+    BodyAttribute* housing_id_attribute = get_body_attribute(body_attributes, "housingID");
+    if (housing_id_attribute == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nL'attribut 'housingID' est manquant;\n");
+        return;
+    }
+
+    if (!is_number(housing_id_attribute->value)) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLa valeur de l'attribut 'housingID' n'est pas un nombre;\n");
+        return;
+    }
+
+    if (user_id_authentificated != get_user_id_from_housing_id(atoi(housing_id_attribute->value)) && !is_admin) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=403;message=Accès interdit\nVous n'avez pas les droits pour effectuer cette action;\n");
+        return;
+    }
+
+    // Get starting_date and ending_date attributes
+    BodyAttribute* starting_date_attribute = get_body_attribute(body_attributes, "starting-date");
+    BodyAttribute* ending_date_attribute = get_body_attribute(body_attributes, "ending-date");
+
+    if (starting_date_attribute == NULL || ending_date_attribute == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "BAD_REQUEST\ncode=400;message=Requête invalide\nLes attributs 'starting_date' et 'ending_date' sont manquants;\n");
+        return;
+    }
+
+    // We try to get the disponibilities
+    char* disponibilities = get_disponibility_housing(atoi(housing_id_attribute->value), starting_date_attribute->value, ending_date_attribute->value);
+    if (disponibilities == NULL) {
+        snprintf(response, RESPONSE_BUFFER_SIZE, "INTERNAL_SERVER_ERROR\ncode=500;message=Erreur interne du serveur\nLes disponibilités n'ont pas pu être récupérées;\n");
+        return;
+    }
+
+    snprintf(response, RESPONSE_BUFFER_SIZE, "OK\ncode=200;message=Disponibilités récupérées avec succès\n%s\n", disponibilities);
+}
+
+int main(int argc, char* argv[]) {
+    int socket_server, socket_client;
+    struct sockaddr_in server_address_configuration, client_address_configuration;
+    socklen_t client_address_size;
+
+    int server_port = DEFAULT_SERVER_PORT;
+
     bool first_request = true;
 
-    int opt;
-    while ((opt = getopt_long(argc, argv, "hvp:", long_options, NULL)) != -1) {
-        switch (opt) {
+    int option_index = 0;
+    while ((option_index = getopt_long(argc, argv, "p:vh", long_options, NULL)) != -1) {
+        switch (option_index) {
+            case 'p':
+                server_port = atoi(optarg);
+                break;
+            case 'v':
+                verbose = true;
+                break;
             case 'h':
                 print_usage();
                 return 0;
-            case 'v':
-                verbose = 1;
-                break;
-            case 'p':
-                port = atoi(optarg);
-                break;
             default:
                 print_usage();
                 return 1;
         }
     }
 
-    server_fd = socket(AF_INET, SOCK_STREAM, 0);
-    if (server_fd < 0) {
-        perror("socket");
+    // Create the socket
+    socket_server = socket(AF_INET, SOCK_STREAM, 0);
+    if (socket_server < 0) {
+        perror("Erreur lors de la création du socket serveur");
         return 1;
     }
 
-    memset(&server_addr, 0, sizeof(server_addr));
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_addr.s_addr = INADDR_ANY;
-    server_addr.sin_port = htons(port);
+    // Configure the server address
+    memset(&server_address_configuration, 0, sizeof(server_address_configuration)); // Initialize the server address configuration
+    server_address_configuration.sin_family = AF_INET; // Set the address family to AF_INET (IPv4)
+    server_address_configuration.sin_addr.s_addr = INADDR_ANY; // Set the IP address to INADDR_ANY (any available IP address)
+    server_address_configuration.sin_port = htons(server_port); // Set the port number
 
-    if (bind(server_fd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
-        perror("bind");
+    // Bind the socket to the server address
+    if (bind(socket_server, (struct sockaddr*)&server_address_configuration, sizeof(server_address_configuration)) < 0) {
+        perror("Erreur lors de la liaison du socket au serveur");
         return 1;
     }
 
-    if (listen(server_fd, MAX_CLIENTS) < 0) {
-        perror("listen");
+    // Listen for incoming connections
+    if (listen(socket_server, MAX_CLIENTS) < 0) {
+        perror("Erreur lors de l'écoute des connexions entrantes");
         return 1;
     }
 
-    printf("Serveur en écoute sur le port %d\n", port);
-    print_log("Serveur démarré");
+    char log_message[256];
+    snprintf(log_message, sizeof(log_message), "Serveur démarré sur le port %d", server_port);
+    print_log_server(log_message, INFO);
 
-    while (1) {
-        printf("En attente d'une connexion...\n");
+    while (true) {
+        print_log_server("En attente d'une connexion...", INFO);
 
-        addr_len = sizeof(client_addr);
-        client_fd = accept(server_fd, (struct sockaddr *)&client_addr, &addr_len);
-        if (client_fd < 0) {
-            perror("accept");
+        // Accept the incoming connection
+        client_address_size = sizeof(client_address_configuration);
+        socket_client = accept(socket_server, (struct sockaddr*)&client_address_configuration, &client_address_size);
+        if (socket_client < 0) {
+            perror("Erreur lors de l'acceptation de la connexion entrante");
             continue;
         }
-        
+
         if (first_request) {
             first_request = false;
-            printf("Nouvelle connexion\n");
+            print_log_server("Nouvelle connexion", INFO);
         }
-        
-        handle_request(client_fd);
 
-        if (close_connexion) { 
-            close(client_fd);
-            close_connexion = false;
+        // Receive the message
+        handle_request(socket_client);
+
+        // Close the connection
+        if (connection_closed) {
+            print_log_server("Fermeture de la connexion", INFO);
+            close(socket_client);
+            connection_closed = false;
             first_request = true;
-            auth_ok = false;
+            authentification_ok = false;
+            connection_initialized_with_ok = false;
+            number_authentification_attempts = 0;
         }
     }
 
-    close(server_fd);
+    close(socket_server);
 
     return 0;
 }
