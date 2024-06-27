@@ -1,5 +1,6 @@
 <?php
 require_once '../../../services/ReservationService.php';
+require_once '../../../services/SubscriptionService.php';
 
 // Fonction pour échapper les caractères spéciaux dans les valeurs iCal
 function escapeString($string) {
@@ -19,8 +20,8 @@ function generateICal(Array $reservations) {
         $ical .= "BEGIN:VEVENT\r\n";
         $ical .= "UID:" . $reservation->getClientID()->getMail() ."\r\n";
         $ical .= "DTSTAMP;TZID=France/Paris:" . (new DateTime("now"))->format("Ymd\THis") . "\r\n";
-        $ical .= "DTSTART:" . $reservation->getBeginDate()->format('Ymd\THis\Z') . "\r\n";
-        $ical .= "DTEND:" . $reservation->getEndDate()->format('Ymd\THis\Z') . "\r\n";
+        $ical .= "DTSTART:" . $reservation->getBeginDate()->format('Ymd') . "\r\n";
+        $ical .= "DTEND:" . $reservation->getEndDate()->format('Ymd') . "\r\n";
         $ical .= "SUMMARY:" . htmlentities("Reservation - " . $reservation->getclientID()->getFirstName() . " " . $reservation->getclientID()->getLastName()) . "\r\n";
         $ical .= "DESCRIPTION:" . "Reservation ID: " . $reservation->getId() . "\r\n";
         $ical .= "LOCATION:" . $address . "\r\n";
@@ -42,11 +43,16 @@ function generateICal(Array $reservations) {
             // Envoi des en-têtes HTTP pour télécharger le fichier iCal
             // header('Content-Type: text/calendar; charset=utf-8');
             // header('Content-Disposition: attachment; filename="calendar.ics"');
+
+            $subscription = SubscriptionService::getSubscriptionByToken($_GET['token'])->getId();
+
+            $reservations = SubscriptionService::getReservationBySubscription($subscription);
+
             header("Content-type:text/calendar; charset=utf-8");
             header('Content-Disposition: attachment; filename="calendar.ics"');
-            header('Content-Length: '. strlen(generateICal([ReservationService::getReservationByID(4), ReservationService::getReservationByID(4)])));
+            header('Content-Length: '. strlen(generateICal($reservations)));
             header('Connection: close');
-            echo htmlentities(generateICal([ReservationService::getReservationByID(4), ReservationService::getReservationByID(5)]));
+            echo htmlentities(generateICal($reservations));
             // Génération et affichage du fichier iCal
             exit;
 //         } else {

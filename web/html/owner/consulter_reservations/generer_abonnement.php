@@ -12,22 +12,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
 
     if (!$isOwnerAuthenticated) {
-        echo json_encode(['success' => false, 'message' => 'Unauthorized']);
+        header("Location: /");
+        exit();
+    }
+
+    if (!isset($_POST['start-date']) || !isset($_POST['end-date']) || !isset($_POST['reservationIDs'])) {
+        header("Location: /owner/consulter_reservations/gerer_abonnements_ical.php");
         exit();
     }
 
     $owner = OwnerService::GetOwnerById($_SESSION['user_id']);
     $ownerId = $owner->getOwnerID();
-    $startDate = $_POST['start-date'];
-    $endDate = $_POST['end-date'];
-
-    if (empty($startDate) || empty($endDate)) {
-        header("Location: /owner/consulter_reservations/gerer_abonnements_ical.php");
-        exit();
-    }
+    $startDate = new DateTime($_POST['start-date']);
+    $endDate = new DateTime($_POST['end-date']);
+    $reservationIDs = explode(",", $_POST['reservationIDs']);
 
     // Assuming you have a function to generate a unique token
     $token = generateUniqueToken();
+
+    $reservations = [];
+
+    foreach ($reservationIDs as $reservationID) {
+        $reservations[] = ReservationService::getReservationByID($reservationID);
+    }
 
     // Save the subscription details to the database (implement this function)
     // saveSubscription($ownerId, $token, $startDate, $endDate, );

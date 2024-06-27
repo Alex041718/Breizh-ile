@@ -18,23 +18,21 @@ class SubscriptionService extends Service
         $stmt->execute(array(
             'subscriptionID' => $subscription->getId(),
             'token' => $subscription->getToken(),
-            'beginDate' => $subscription->getBeginDate(),
-            'endDate' => $subscription->getEndDate(),
+            'beginDate' => $subscription->getBeginDate()->format("Y-m-d"),
+            'endDate' => $subscription->getEndDate()->format("Y-m-d"),
             'userID' => $subscription->getUserID(),
         ));
 
         $current_id = $pdo->lastInsertId();
         
         foreach ($reservations as $reservation) {
-            $stmt = $pdo->prepare('INSERT INTO _Has_for_subscription (subscriptionID , reservationID ) VALUES (:clientID, :reservationID);');
+            $stmt = $pdo->prepare('INSERT INTO _Has_for_subscription (subscriptionID , reservationID ) VALUES (:subscriptionID, :reservationID);');
 
             $stmt->execute(array(
                 'subscriptionID' => $current_id,
                 'reservationID' => $reservation->getID(),
             ));
-        }
-
-        
+        }       
 
         return new Subscription($current_id, $subscription->getToken(), $subscription->getBeginDate(), $subscription->getEndDate(), $subscription->getUserID());
     }
@@ -44,7 +42,7 @@ class SubscriptionService extends Service
         $pdo = self::getPDO();
         $stmt = $pdo->query("SELECT * FROM _Subscription WHERE token = '" . $token . "';");
         $row = $stmt->fetch();
-        return new Subscription($row['subscriptionID'], $row['token'], $row['beginDate'], $row['endDate'], $row['userID']);
+        return new Subscription($row['subscriptionID'], $row['token'], new DateTime($row['beginDate']), new DateTime($row['endDate']), $row['userID']);
     }
 
     public static function getReservationBySubscription(string $subscriptionID)
@@ -52,7 +50,7 @@ class SubscriptionService extends Service
 
         
         $pdo = self::getPDO();
-        $stmt = $pdo->query("SELECT *, r.reservationID as realID, r.beginDate as realBegin, r.endDate as realEnd FROM `_Subscription` s JOIN `_Has_for_subscription` h ON s.subscriptionID = h.subscriptionID JOIN _Reservation as r ON h.reservationID = r.reservationID  WHERE s.subscriptionID = " . $subscriptionID .";");
+        $stmt = $pdo->query("SELECT *, r.reservationID as realID, r.beginDate as realBegin, r.endDate as realEnd FROM `_Subscription` s JOIN `_Has_for_subscription` h ON s.subscriptionID = h.subscriptionID JOIN _Reservation as r ON h.reservationID = r.reservationID  WHERE s.subscriptionID = " . $subscriptionID ." AND r.beginDate >= s.beginDate AND r.endDate <= s.endDate;");
         $reservations = [];
 
         while ($row = $stmt->fetch()) {
@@ -60,7 +58,7 @@ class SubscriptionService extends Service
             $payMethod = PayementMethodService::GetPayementMethodById($row['payMethodID']);
             $client = ClientService::getClientById($row['clientID']);
             
-            return new Reservation($row['realID'], $row['realBegin'], $row['realEnd'], $row['serviceCharge'], $row['touristTax'], $row['status'], $row['nbPerson'], $row['r_price_incl'], $housing, $payMethod, $client);
+            $reservations[] = new Reservation($row['realID'], new DateTime($row['realBegin']), new DateTime($row['realEnd']), $row['serviceCharge'], $row['touristTax'], $row['status'], $row['nbPerson'], $row['priceIncl'], $housing, $payMethod, $client);
     }
 
         return $reservations;

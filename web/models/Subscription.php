@@ -16,11 +16,11 @@ class Subscription
      /**
      * @var DateTime
      */
-    private string $beginDate;
+    private DateTime $beginDate;
     /**
      * @var DateTime
      */
-    private string $endDate;
+    private DateTime $endDate;
     /**
      * @var int
      */
@@ -30,7 +30,6 @@ class Subscription
      * @param int|null $id
      * @param string $token
      * @param DateTime $beginDate
-     * @param DateTime $endDate
      * @param DateTime $endDate
      * @param int $userID
      */
@@ -63,7 +62,7 @@ class Subscription
     /**
      * @return string
      */
-    public function getToken(): ?int
+    public function getToken(): string
     {
         return $this->token;
     }

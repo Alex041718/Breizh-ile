@@ -9,7 +9,10 @@ function main() {
     const urlInput = document.getElementById('subscription-url');
     const subscriptionUrlSection = document.querySelector('.subscription-url');
     const copyButton = document.getElementById('copy-button');
+    let exportCheckboxes = document.querySelectorAll('.checkbox__input');
 
+    let reservationIDs = [];
+    
     startDateInput.addEventListener('change', () => {
         endDateInput.min = startDateInput.value;
     });
@@ -38,8 +41,17 @@ function main() {
 
             if (checkboxAll[0].checked) {
                 selected_reservations = Array.from({ length: checkboxes.length }, (_, index) => index);
+                exportCheckboxes = document.querySelectorAll('.checkbox__input');
+                reservationIDs = [];
+                exportCheckboxes.forEach(checkbox => {
+                    if(checkbox === checkboxAll[0]) return;
+                    reservationIDs.push(checkbox.parentElement.parentElement.dataset.reservationid);
+                })
+                updateReservationInput();
+
             } else {
                 selected_reservations = [];
+                reservationIDs = [];
             }
 
         });
@@ -66,6 +78,8 @@ function main() {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 reservations.innerHTML = this.responseText;
+                exportCheckboxes = document.querySelectorAll('.checkbox__input');
+                onRowSpawning();
                 applyCheckboxes();
             }
         };
@@ -114,6 +128,34 @@ function main() {
         });
     });
 
+    console.log(exportCheckboxes);
+
+    function updateReservationInput(checkbox) {
+        let inputHidden = document.getElementById("reservationInput");
+        
+        if(!inputHidden) inputHidden = document.createElement("input");
+
+        inputHidden.type = "hidden";
+        inputHidden.id = "reservationInput";
+        inputHidden.name = "reservationIDs";
+        inputHidden.value = reservationIDs.join(',');
+
+        
+        form.appendChild(inputHidden);
+    }
+
+    function onRowSpawning() {
+        exportCheckboxes.forEach((checkbox, index) => {
+            if(index === 0) return;
+            checkbox.addEventListener("change", () => {
+                if(reservationIDs.includes(checkbox.parentElement.parentElement.dataset.reservationid)) reservationIDs.pop(checkbox.parentElement.parentElement.dataset.reservationid);
+                else reservationIDs.push(checkbox.parentElement.parentElement.dataset.reservationid);
+                updateReservationInput(checkbox);
+                console.log(reservationIDs);
+            });
+        });
+    }
+
     function generateSubscriptionUrl(event) {
         event.preventDefault();
 
@@ -138,8 +180,7 @@ function main() {
                     try {
                         const response = JSON.parse(xhr.responseText);
                         if (response.success) {
-                            document.getElementById('').value = response.url;
-                            document.querySelector('.subscription-url').style.display = 'block';
+                            console.log(selectedReservations);
                         } else {
                             alert(response.message);
                         }
