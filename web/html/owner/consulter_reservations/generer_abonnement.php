@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // $reservationId = $reservations[0]->getId(); // Assuming $reservations is an array of Reservation objects
 
-    $url = "http://localhost:5555/owner/consulter_reservations/gerer_abonnements_ical.php?token=$token";
+    $url = "http://" . $_SERVER['HTTP_HOST'] . '/owner/consulter_reservations/gerer_abonnements_ical.php?token=' . $token;
 
     SubscriptionService::CreateSubscription(new Subscription(null, $token, $startDate, $endDate, $ownerId), $reservations);
 

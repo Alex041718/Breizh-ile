@@ -22,7 +22,7 @@ function generateICal(Array $reservations) {
         $ical .= "DTSTAMP;TZID=France/Paris:" . (new DateTime("now"))->format("Ymd\THis") . "\r\n";
         $ical .= "DTSTART:" . $reservation->getBeginDate()->format('Ymd') . "\r\n";
         $ical .= "DTEND:" . $reservation->getEndDate()->format('Ymd') . "\r\n";
-        $ical .= "SUMMARY:" . htmlentities("Reservation - " . $reservation->getclientID()->getFirstName() . " " . $reservation->getclientID()->getLastName()) . "\r\n";
+        $ical .= "SUMMARY:" . iconv('UTF-8', 'ASCII//TRANSLIT', htmlentities("Reservation - " . $reservation->getclientID()->getFirstName() . " " . $reservation->getclientID()->getLastName())) . "\r\n";
         $ical .= "DESCRIPTION:" . "Reservation ID: " . $reservation->getId() . "\r\n";
         $ical .= "LOCATION:" . iconv('UTF-8', 'ASCII//TRANSLIT', $address) . "\r\n";
         $ical .= "END:VEVENT\r\n";
