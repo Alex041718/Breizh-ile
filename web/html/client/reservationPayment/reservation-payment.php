@@ -91,7 +91,7 @@ $paymentMethods = PayementMethodService::GetPayementMethodById(1);
 
             <p>Votre séjour à <?= $housing->getAddress()->getCity() ?></p>
             <p>Du <b><?= $beginDate->format('d/m/Y'); ?></b> au <b><?= $endDate->format('d/m/Y'); ?></b></p>
-            <h3 class="reservation-payment__container__price-to-pay"><?= $total ?>€</h3>
+            <h3 class="reservation-payment__container__price-to-pay"><?= round($total, 2) ?>€</h3>
 
                 <?php require_once ("../../components/Button/Button.php"); ?>
             <div class="reservation-payment__container__button-box">

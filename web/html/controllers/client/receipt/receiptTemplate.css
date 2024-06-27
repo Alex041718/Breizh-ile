@@ -1,0 +1,54 @@
+.receipt_summary {
+  height: fit-content;
+  background-color: #f6f6f6;
+  padding: 1em;
+  border: 1px solid #dddddd;
+}
+.receipt_summary span {
+  display: inline-block;
+  width: 18em;
+  vertical-align: top;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.receipt_table .right-nb {
+  text-align: right;
+}
+.receipt_table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 18px;
+  text-align: left;
+}
+.receipt_table table th, .receipt_table table td {
+  border: 1px solid #dddddd;
+  padding: 8px;
+}
+.receipt_table table th {
+  background-color: #f2f2f2;
+}
+.receipt_table table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.receipt_table table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+.receipt_table .table-title {
+  font-size: 24px;
+  margin: 20px 0;
+  text-align: center;
+}
+.receipt_table tfoot td {
+  font-weight: bold;
+}
+.receipt_table tfoot td:nth-child(2) {
+  text-align: right;
+}
+.receipt_table .invisible-cell {
+  border: none;
+  padding: 0;
+  background: none;
+}
+
+/*# sourceMappingURL=receiptTemplate.css.map */
