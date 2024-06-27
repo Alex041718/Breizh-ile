@@ -261,7 +261,11 @@ nav {
                 &__description {
                     display: flex;
                     gap: 0.3rem;
+                }
+
+                .copy {
                     width: 30rem;
+                    font-size: variables.$font-size-base !important;
                 }
 
                 .eye, .copy {

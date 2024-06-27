@@ -384,7 +384,10 @@ nav ul li.active:hover {
 .content__api__keys__key__description {
   display: flex;
   gap: 0.3rem;
+}
+.content__api__keys__key .copy {
   width: 30rem;
+  font-size: max(14px, 0.8333333333vw) !important;
 }
 .content__api__keys__key .eye, .content__api__keys__key .copy {
   background: none;

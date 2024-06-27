@@ -8,12 +8,12 @@ session_start();
 function showApiKeys($apiKeys) {
     $codePopUp = /*html*/ '
         <section class="description-action">
-            <h3>Changer la visibilité</h3>
-            <p>Êtes-vous sûr de vouloir changer la visibilité de ce logement ?</p>
+            <h3>Changer l\'état de la clé API</h3>
+            <p>Êtes-vous sûr de vouloir changer l\'état de cette clé API ?</p>
         </section>
         <section class="actions">
             <button type="button" class="button undo__button button--owner--secondary button--bleu " id="undoButton" onclick="document.querySelector(\'.popUpVisibility\').classList.remove(\'popup--open\');">Annuler</button>
-            <button type="button" class="button accept__button button--delete button--rouge " id="acceptButton" onclick="">Changer la visibilité</button>
+            <button type="button" class="button accept__button button--delete button--rouge " id="acceptButton" onclick="">Changer l\'état</button>
         </section>
     ';
 
