@@ -90,6 +90,76 @@ $iconMapping = [
 
 ?>
 
+<script>
+
+    let rawbeginDate = <?= json_encode($_POST['beginDate'] ?? null) ?>;
+    let rawendDate = <?= json_encode($_POST['endDate'] ?? null) ?>;
+
+    const beginDate = rawbeginDate && isVeryFirst ? rawbeginDate : (document.getElementById("start-date"));
+    const endDate = rawendDate && isVeryFirst ? rawendDate : (document.getElementById("end-date"));
+
+
+    var xmlhttp = new XMLHttpRequest();
+    const params = `beginDate=${beginDate}&endDate=${endDate}`;
+
+    xmlhttp.open("POST", "/client/ficheLogement/getReservationDates.php", true);
+
+    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    xmlhttp.onreadystatechange = function() {
+        if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            const inputs = document.querySelectorAll(".datepicker input[type=date]");
+
+            let arriveePicker, departPicker;
+
+            inputs.forEach((input) => {
+                const options = {
+                    dateFormat: "d-m-Y",
+                    minDate: "today",
+                    maxDate: new Date().fp_incr(365)
+                };
+
+                // Fonction pour désactiver des dates spécifiques
+                function disableSpecificDates(date) {
+                    const startDate = new Date("2020-12-08");
+                    const endDate = new Date("2020-12-10");
+
+                    // Désactive les dates entre le 08/12/2020 et le 10/12/2020 inclus
+                    return date >= startDate && date <= endDate;
+                }
+
+                // Initialisez Flatpickr avec la fonction de désactivation
+                flatpickr(input, {
+                    disable: [disableSpecificDates],
+                    dateFormat: "Y-m-d"
+                });
+
+
+                if (input.id === 'start-date') {
+                    options.onChange = function(selectedDates) {
+                        // Update the minimum date for the departure date
+                        const minDepartDate = selectedDates[0];
+                        departPicker.set('minDate', minDepartDate.fp_incr(1));
+                        calculateAndDisplayNights();
+                    };
+                    arriveePicker = flatpickr(input, options);
+                } else if (input.id === 'end-date') {
+                    options.onChange = function() {
+                        calculateAndDisplayNights();
+                    };
+                    departPicker = flatpickr(input, options);
+                } else {
+                    flatpickr(input, options);
+                }
+            });
+        }
+    }
+
+    xmlhttp.send(params);
+
+</script>
+
+
 <body>
     <p id="auth" style="display:none"><?= $isAuthenticated ?></p>
     <?php
