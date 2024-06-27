@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const popup = document.getElementById('popup2');
-    const closePopupBtn = document.getElementById('closePopupBtn');
+    
     const subtractAdultBtn = document.getElementById('subtractAdultBtn');
     const addAdultBtn = document.getElementById('addAdultBtn');
     const adultCount = document.getElementById('adultCount');
@@ -13,23 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let adultCountValue = parseInt(adultCount.textContent); // Nombre initial d'adultes
     let childCountValue = parseInt(childCount.textContent); // Nombre initial d'enfants
-
-    // Fonction pour ouvrir la pop-up
-    function openPopup() {
-        popup.style.display = 'block';
-        overlay.style.display = 'block';
-        body.classList.add('popup-active'); // Ajoute la classe 'popup-active' pour assombrir le fond
-    }
-
-    // Fonction pour fermer la pop-up
-    function closePopup() {
-        popup.style.display = 'none';
-        overlay.style.display = 'none';
-        body.classList.remove('popup-active'); // Retire la classe 'popup-active' pour annuler l'assombrissement du fond
-    }
-
-    // Gestionnaire d'événement pour le bouton de fermeture de la pop-up
-    closePopupBtn.addEventListener('click', closePopup);
 
     // Gestionnaire d'événement pour le bouton de soustraction d'adulte
     subtractAdultBtn.addEventListener('click', function () {
@@ -89,11 +71,6 @@ document.addEventListener('DOMContentLoaded', function () {
         calculateAndDisplayNights();
     }
 
-    // Gestionnaire d'événement pour le bouton "Ajouter des voyageurs"
-    addTravelersBtn.addEventListener('click', openPopup);
-
-    // Fermer la pop-up en cliquant sur l'overlay
-    if(overlay) overlay.addEventListener('click', closePopup);
 
     // MAP GESTION
 
@@ -186,10 +163,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function showPopup() {
         var truncatedText = document.getElementById('truncate-text').textContent;
         document.getElementById('full-description').textContent = truncatedText;
-        popupOverlaSsavoir.style.display = 'block';
-        document.getElementById('popup-savoir').style.display = 'block';
-        // Ajouter la classe pour verrouiller le défilement du corps
-        body.classList.add('popup-savoir-open');
     }
 
     // Fonction pour cacher la pop-up
@@ -204,33 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Ajout de l'événement de clic sur le bouton "En savoir +"
     document.getElementById('button-savoir').addEventListener('click', showPopup);
 
-    // Ajout de l'événement de clic sur le bouton "Fermer" de la pop-up
-    document.getElementById('close-popup').addEventListener('click', closePopupSavoir);
-
-    popupOverlaSsavoir.addEventListener('click', closePopupSavoir);
-
-    // Fonction pour afficher la pop-up
-    function showPopupCriteres() {
-        document.getElementById('popup-critere').classList.add('show');
-        document.getElementById('overlay-critere').style.display = 'block';
-        body.classList.add('popup-active'); // Empêche le défilement de la page
-    }
-
-    // Fonction pour cacher la pop-up
-    function closePopupCriteres() {
-        document.getElementById('popup-critere').classList.remove('show');
-        document.getElementById('overlay-critere').style.display = 'none';
-        body.classList.remove('popup-active'); // Réactive le défilement de la page
-    }
-
-    // Ajout de l'événement de clic sur le bouton "Afficher les critères"
-    document.querySelector('.criteres').addEventListener('click', showPopupCriteres);
-
-    // Ajout de l'événement de clic sur le bouton "Fermer" de la pop-up
-    document.getElementById('closePopupCritereBtn').addEventListener('click', closePopupCriteres);
-
-    document.getElementById('overlay-critere').addEventListener('click', closePopupCriteres);
-
+  
     const inputs = document.querySelectorAll(".datepicker input[type=date]");
 
     let arriveePicker, departPicker;

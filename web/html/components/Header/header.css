@@ -70,14 +70,16 @@
   transition: none !important;
 }
 
-.accessibilite__deute .button--vert button, .accessibilite__deute .button--bleu button, .accessibilite__deute .button--rouge button {
-  background-color: pink;
+.accessibilite__deute .button--vert button,
+.accessibilite__deute .button--bleu button,
+.accessibilite__deute .button--rouge button {
+  background-color: brown;
 }
 .accessibilite__deute .button--bleu {
-  background-color: pink;
+  background-color: brown;
 }
 .accessibilite__deute .order-btn {
-  background-color: pink;
+  background-color: brown;
 }
 
 .accessibilite__font * :not(i) {
@@ -94,7 +96,7 @@
   font-size: max(30px, 2.5vw);
 }
 .accessibilite__taille h4 {
-  font-size: max(23px, 1.5625vw);
+  font-size: max(18px, 1.5625vw);
 }
 .accessibilite__taille p {
   font-size: max(16px, 1.0416666667vw);
@@ -242,7 +244,8 @@ input[type=number] {
   padding: 20px;
   border-radius: 10px;
   text-align: center;
-  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2); /* Exemple d'ombre */
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2);
+  /* Exemple d'ombre */
   width: 100%;
   align-items: center;
 }
@@ -256,7 +259,6 @@ input[type=number] {
   color: #FFF;
 }
 .popup__access .popup__content .popup__options div div:hover {
-  background-color: #37906c;
   cursor: pointer;
 }
 
@@ -459,44 +461,43 @@ input[type=number] {
 }
 
 .popup_enable {
-  display: flex !important;
+  display: flex;
 }
 
-.popup__filter {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  pointer-events: all;
-  z-index: 1000;
+.popup__filter .popup__content {
+  overflow-y: auto;
+  padding: 0px !important;
+  height: 80vh;
   /* Remove Arrows/Spinners */
   /* Styles for the range thumb in WebKit browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background-color: white;
+  border-radius: 10px;
+  width: 60%;
 }
-.popup__filter .price-input-container {
+.popup__filter .popup__content .price-input-container {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
 }
-.popup__filter .price-input-container .price-input {
+.popup__filter .popup__content .price-input-container .price-input {
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 80%;
 }
-.popup__filter .price-input .price-field {
+.popup__filter .popup__content .price-input .price-field {
   display: flex;
 }
-.popup__filter .price-input .price-field span {
+.popup__filter .popup__content .price-input .price-field span {
   width: 50%;
 }
-.popup__filter .price-input .price-field input {
+.popup__filter .popup__content .price-input .price-field input {
   flex: 1;
   height: 35px;
   font-size: 15px;
@@ -507,45 +508,45 @@ input[type=number] {
   background: #e4e4e4;
 }
 @media screen and (max-width: 1300px) {
-  .popup__filter .price-input .price-field {
+  .popup__filter .popup__content .price-input .price-field {
     grid-column: span 2/span 2;
   }
 }
 @media screen and (max-width: 568px) {
-  .popup__filter .price-input .price-field {
+  .popup__filter .popup__content .price-input .price-field {
     flex-direction: column;
     gap: 20px;
   }
-  .popup__filter .price-input .price-field span {
+  .popup__filter .popup__content .price-input .price-field span {
     width: 100%;
     text-align: center;
   }
 }
-.popup__filter .price-input {
+.popup__filter .popup__content .price-input {
   width: 100%;
   font-size: 19px;
   color: #828282;
 }
-.popup__filter input::-webkit-outer-spin-button,
-.popup__filter input::-webkit-inner-spin-button {
+.popup__filter .popup__content input::-webkit-outer-spin-button,
+.popup__filter .popup__content input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.popup__filter .slider-container {
+.popup__filter .popup__content .slider-container {
   width: 100%;
 }
 @media screen and (max-width: 568px) {
-  .popup__filter .slider-container {
+  .popup__filter .popup__content .slider-container {
     display: none;
   }
 }
-.popup__filter .slider-container {
+.popup__filter .popup__content .slider-container {
   height: 6px;
   position: relative;
   background: #e4e4e4;
   border-radius: 5px;
 }
-.popup__filter .slider-container .price-slider {
+.popup__filter .popup__content .slider-container .price-slider {
   height: 100%;
   left: 0%;
   right: 0%;
@@ -553,15 +554,15 @@ input[type=number] {
   border-radius: 5px;
   background: #307B5C;
 }
-.popup__filter .range-input {
+.popup__filter .popup__content .range-input {
   position: relative;
 }
 @media screen and (max-width: 568px) {
-  .popup__filter .range-input {
+  .popup__filter .popup__content .range-input {
     display: none;
   }
 }
-.popup__filter .range-input input {
+.popup__filter .popup__content .range-input input {
   position: absolute;
   width: 100%;
   height: 5px;
@@ -571,7 +572,7 @@ input[type=number] {
   cursor: pointer;
   -webkit-appearance: none;
 }
-.popup__filter input[type=range]::-webkit-slider-thumb {
+.popup__filter .popup__content input[type=range]::-webkit-slider-thumb {
   height: 18px;
   width: 18px;
   border-radius: 70%;
@@ -579,51 +580,58 @@ input[type=number] {
   pointer-events: auto;
   -webkit-appearance: none;
 }
-.popup__filter__content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  background-color: white;
-  border-radius: 10px;
-  pointer-events: all;
-  width: 60%;
-}
 @media screen and (max-width: 568px) {
-  .popup__filter__content {
+  .popup__filter .popup__content {
     width: 80%;
   }
 }
-.popup__filter__content .popup__filter__container {
+.popup__filter .popup__content .popup__filter__container {
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 25px;
   width: 90%;
-  max-height: 300px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
-.popup__filter__content .popup__filter__container hr {
+.popup__filter .popup__content .popup__filter__container hr {
   width: 100%;
 }
-.popup__filter__content .popup__filter__container__category {
+.popup__filter .popup__content .popup__filter__container .popup__filter__container__category, .popup__filter .popup__content .popup__filter__container .popup__filter__container__type, .popup__filter .popup__content .popup__filter__container .popup__filter__container__amenagement, .popup__filter .popup__content .popup__filter__container .popup__filter__container__activity {
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
-.popup__filter__content .popup__filter__container .popup__filter__container__choices {
+.popup__filter .popup__content .popup__filter__container .popup__filter__container__choices {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+}
+.popup__filter .popup__content .popup__filter__container .popup__filter__container__choices .popup__filter__container__choices__row {
+  display: flex;
+  width: 50%;
   justify-content: center;
 }
-.popup__filter__content .popup__filter__container .popup__filter__container__choices .popup__filter__box {
+.popup__filter .popup__content .popup__filter__container .popup__filter__container__choices .popup__filter__container__choices__row div {
   display: flex;
   justify-content: center;
-  width: 50%;
+  flex-direction: column;
 }
-.popup__filter__content .popup__filter__top {
+.popup__filter .popup__content .popup__filter__container .popup__filter__container__choices .popup__filter__container__choices__row div .popup__filter__box {
+  display: flex;
+  justify-content: left;
+  width: 100%;
+  flex-direction: row;
+  margin: 5px;
+  align-items: center;
+}
+.popup__filter .popup__content .popup__filter__container .popup__filter__container__choices .popup__filter__container__choices__row div .popup__filter__box input {
+  width: 20px;
+  height: 20px;
+}
+.popup__filter .popup__content .popup__filter__container .popup__filter__container__choices .popup__filter__container__choices__row div .popup__filter__box label {
+  margin-left: 3px;
+}
+.popup__filter .popup__content .popup__filter__top {
   padding: 20px;
   display: flex;
   justify-content: center;
@@ -631,13 +639,13 @@ input[type=number] {
   box-sizing: border-box;
   width: 100%;
 }
-.popup__filter__content .popup__filter__top i {
+.popup__filter .popup__content .popup__filter__top i {
   position: absolute;
   right: 20px;
   font-size: 60px;
   cursor: pointer;
 }
-.popup__filter__content .popup__filter__bottom {
+.popup__filter .popup__content .popup__filter__bottom {
   padding: 20px;
   width: 100%;
   display: flex;

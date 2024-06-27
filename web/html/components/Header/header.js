@@ -1,7 +1,5 @@
 
 document.addEventListener('DOMContentLoaded', function() {
-
-
     var header = document.querySelector('.header');
     var profil = document.getElementById('profil');
     var profilMobile = document.getElementById('mobile-profil');
@@ -19,14 +17,89 @@ document.addEventListener('DOMContentLoaded', function() {
     var font = document.getElementById('font');
     var animations = document.getElementById('animations');
 
-
     var parent__taille = document.getElementById('parent__taille');
     var parent__deute = document.getElementById('parent__deute');
     var parent__animations = document.getElementById('parent__animations');
     var parent__font = document.getElementById('parent__font');
     var closeAccess = document.getElementById("closeAccess");
 
+    let modeDeuteOn = localStorage.getItem('ModeDeuteVal') ? localStorage.getItem('ModeDeuteVal') : "non";
+    let modeAnimationOn = localStorage.getItem('ModeAnimationVal') ? localStorage.getItem('ModeAnimationVal') : "non";
+    let modeTailleOn = localStorage.getItem('ModeTailleVal') ? localStorage.getItem('ModeTailleVal') : "non";
+    let modeFontOn = localStorage.getItem('ModeFontVal') ? localStorage.getItem('ModeFontVal') : "non";
 
+    function adjustZoom() {
+        const viewportWidth = window.innerWidth;
+        const desiredWidth = 1920;
+        if (viewportWidth > desiredWidth) {
+          document.body.style.zoom = viewportWidth / desiredWidth;
+        } else {
+          document.body.style.zoom = 1;
+        }
+      }
+  
+      // Ajuster le zoom lors du chargement initial
+      adjustZoom();
+  
+      // Ajuster le zoom lorsque la fenêtre est redimensionnée
+      window.addEventListener('resize', adjustZoom);
+
+    if (modeDeuteOn != "non"){
+        parent__deute.style.backgroundColor = "brown";
+        document.body.classList.add('accessibilite__deute');
+        document.querySelector('header').classList.add('accessibilite__deute');
+        document.querySelector('footer').classList.add('accessibilite__deute');
+        parent__deute.style.color = "#ffffff";
+
+        if (document.body.classList.contains('accessibilite__font')) {
+            parent__font.style.backgroundColor = "brown";
+            parent__font.style.color = "#ffffff";
+        }
+        if (document.body.classList.contains('accessibilite__animations')) {
+            parent__animations.style.backgroundColor = "brown";
+            parent__animations.style.color = "#ffffff";
+        }
+        if (document.body.classList.contains('accessibilite__taille')) {
+            parent__taille.style.backgroundColor = "brown";
+            parent__taille.style.color = "#ffffff";
+        }
+    }
+    if (modeAnimationOn != "non"){
+        parent__animations.style.backgroundColor = "#37906c";
+        document.body.classList.add('accessibilite__animations');
+        if (typeof checkParallaxAccessibilite === 'function') {
+            checkParallaxAccessibilite();
+        }
+        parent__animations.style.color = "#ffffff";
+
+        if (document.body.classList.contains('accessibilite__deute')) {
+            parent__animations.style.backgroundColor = "brown";
+            parent__animations.style.color = "#ffffff";
+        }
+    }
+    if (modeTailleOn != "non"){
+
+        parent__taille.style.backgroundColor = "#37906c";
+        parent__taille.style.color = "#ffffff";
+        document.body.classList.add('accessibilite__taille');
+
+        if (document.body.classList.contains('accessibilite__deute')) {
+            parent__taille.style.backgroundColor = "brown";
+            parent__taille.style.color = "#ffffff";
+        }
+
+    }
+    if (modeFontOn != "non"){
+        parent__font.style.backgroundColor = "#37906c";
+        document.body.classList.add('accessibilite__font');
+        parent__font.style.color = "#ffffff";
+
+        if (document.body.classList.contains('accessibilite__deute')) {
+            parent__font.style.backgroundColor = "brown";
+            parent__font.style.color = "#ffffff";
+        }
+    }
+  
     if (header.dataset.tag != "" && header.dataset.tag != 1 && header) {
         let tagToScroll = document.querySelector("." + header.dataset.tag);
 
@@ -141,28 +214,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Popup settings
     
-    const popup_filters = document.getElementById("popup__filter__header");
-    const popup_filters_close = popup_filters.querySelector("i");
-    const popup_filters_submit = popup_filters.querySelector("button");
-    const popup_filters_open = document.getElementById("header__settings");
-    const popup_filters_open_mobile = document.getElementById("open-mobile-settings");
+    const popup_filters = document.getElementById("popup__filter");
+    // const popup_filters_close = popup_filters.querySelector(".popup--close");
 
-    if(popup_filters_open) popup_filters_open.addEventListener("click", openSettings);
-    popup_filters_open_mobile.addEventListener("click", openSettings);
-
-    function openSettings() {
-        popup_filters.classList.add("popup_enable");
-        document.body.style.overflow = "hidden";
-    };
+    // const popup_filters_submit = popup_filters.querySelector("a");
+    // const popup_filters_open = document.getElementById("filter_submit");
 
 
-    function close_filter_popup() {
-        popup_filters.classList.remove("popup_enable");
-        document.body.style.overflow = "auto";
-    }
+    // const popup_filters_open_mobile = document.getElementById("open-mobile-settings");
 
-    popup_filters_submit.addEventListener("click", close_filter_popup);
-    popup_filters_close.addEventListener("click", close_filter_popup);
+    // if(popup_filters_open) popup_filters_open.addEventListener("click", openSettings);
+    // popup_filters_open_mobile.addEventListener("click", openSettings);
+
+    // function openSettings() {
+    //     popup_filters.classList.add("popup_enable");
+    // };
+
+    // function close_filter_popup() {
+    //     popup_filters.classList.remove("popup_enable");
+    
+    // }
+
+    // popup_filters_submit.addEventListener("click", close_filter_popup);
+    // popup_filters_close.addEventListener("click", close_filter_popup);
 
     // Price filter
 
@@ -330,15 +404,28 @@ document.addEventListener('DOMContentLoaded', function() {
             if (document.body.classList.contains('accessibilite__taille')){
                 parent__taille.style.backgroundColor = "#FFF";
                 document.body.classList.remove('accessibilite__taille');
+                parent__taille.style.color = "#000000";
+
+                if (document.body.classList.contains('accessibilite__deute')) {
+                    parent__taille.style.backgroundColor = "FFF";
+                    parent__taille.style.color = "#000000";
+                }
+                localStorage.setItem('ModeTailleVal', "non");
 
             }
             else{
                 parent__taille.style.backgroundColor = "#37906c";
+                parent__taille.style.color = "#ffffff";
                 document.body.classList.add('accessibilite__taille');
 
+                if (document.body.classList.contains('accessibilite__deute')) {
+                    parent__taille.style.backgroundColor = "brown";
+                    parent__taille.style.color = "#ffffff";
+                }
+
+                localStorage.setItem('ModeTailleVal', "accessibilite__taille");
+
             }
-            
-        
     });
 
     parent__deute.addEventListener('click', function() {
@@ -347,13 +434,51 @@ document.addEventListener('DOMContentLoaded', function() {
             parent__deute.style.backgroundColor = "#FFF";
             document.body.classList.remove('accessibilite__deute');
             document.querySelector('header').classList.remove('accessibilite__deute');
-            document.querySelector('footer').classList.remove('accessibilite__deute');            
+            document.querySelector('footer').classList.remove('accessibilite__deute');        
+            parent__deute.style.color = "#000000";
+            
+            if (document.body.classList.contains('accessibilite__font')) {
+                parent__font.style.backgroundColor = "#37906c";
+                parent__font.style.color = "#ffffff";
+            }else{
+                parent__font.style.backgroundColor = "#ffffff";
+            }
+            if (document.body.classList.contains('accessibilite__animations')) {
+                parent__animations.style.backgroundColor = "#37906c";
+                parent__animations.style.color = "#ffffff";
+            }else{
+                parent__animations.style.backgroundColor = "#ffffff";
+            }
+            if (document.body.classList.contains('accessibilite__taille')) {
+                parent__taille.style.backgroundColor = "#37906c";
+                parent__taille.style.color = "#ffffff";
+            }else{
+                parent__taille.style.backgroundColor = "#ffffff";
+            }
+            localStorage.setItem('ModeDeuteVal', "non");
         }
         else{
-            parent__deute.style.backgroundColor = "#37906c";
+            parent__deute.style.backgroundColor = "brown";
             document.body.classList.add('accessibilite__deute');
             document.querySelector('header').classList.add('accessibilite__deute');
             document.querySelector('footer').classList.add('accessibilite__deute');
+            parent__deute.style.color = "#ffffff";
+
+            if (document.body.classList.contains('accessibilite__font')) {
+                parent__font.style.backgroundColor = "brown";
+                parent__font.style.color = "#ffffff";
+            }
+            if (document.body.classList.contains('accessibilite__animations')) {
+                parent__animations.style.backgroundColor = "brown";
+                parent__animations.style.color = "#ffffff";
+            }
+            if (document.body.classList.contains('accessibilite__taille')) {
+                parent__taille.style.backgroundColor = "brown";
+                parent__taille.style.color = "#ffffff";
+            }
+
+            localStorage.setItem('ModeDeuteVal', "accessibilite__deute");
+
         }
     });
 
@@ -363,14 +488,31 @@ document.addEventListener('DOMContentLoaded', function() {
         if (document.body.classList.contains('accessibilite__font')){
             parent__font.style.backgroundColor = "#FFF";
             document.body.classList.remove('accessibilite__font');
+            parent__font.style.color = "#000000";
 
+            if (document.body.classList.contains('accessibilite__deute')) {
+                parent__font.style.backgroundColor = "FFF";
+                parent__font.style.color = "#000000";
+            }
+            localStorage.setItem('ModeFontVal', "non");
+
+            if (document.body.classList.contains('accessibilite__deute')) {
+                parent__font.style.backgroundColor = "FFF";
+                parent__font.style.color = "#000000";
+            }
         }
         else{
             parent__font.style.backgroundColor = "#37906c";
             document.body.classList.add('accessibilite__font');
+            parent__font.style.color = "#ffffff";
+
+            if (document.body.classList.contains('accessibilite__deute')) {
+                parent__font.style.backgroundColor = "brown";
+                parent__font.style.color = "#ffffff";
+            }
+            localStorage.setItem('ModeFontVal', "accessibilite__font");
 
         }
-        
     });
 
     parent__animations.addEventListener('click', function() {
@@ -381,6 +523,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (typeof checkParallaxAccessibilite === 'function') {
                 checkParallaxAccessibilite();
             }        
+            parent__animations.style.color = "#000000";
+
+            if (document.body.classList.contains('accessibilite__deute')) {
+                parent__animations.style.backgroundColor = "FFF";
+                parent__animations.style.color = "#000000";
+            }
+            localStorage.setItem('ModeAnimationVal', "non");
+
         }
         else{
             parent__animations.style.backgroundColor = "#37906c";
@@ -388,6 +538,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (typeof checkParallaxAccessibilite === 'function') {
                 checkParallaxAccessibilite();
             }
+            parent__animations.style.color = "#ffffff";
+
+            if (document.body.classList.contains('accessibilite__deute')) {
+                parent__animations.style.backgroundColor = "brown";
+                parent__animations.style.color = "#ffffff";
+            }
+            localStorage.setItem('ModeAnimationVal', "accessibilite__animations");
+
         }
         
     });

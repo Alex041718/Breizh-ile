@@ -62,6 +62,11 @@ nav {
     }
 }
 
+.back-component{
+    padding-left: 4rem;
+    padding-bottom: 2em;
+}
+
 .content {
     display: flex;
     padding-left: 4rem;
@@ -95,6 +100,11 @@ nav {
         width: 100%;
 
         &--next {
+            margin-top: auto;
+            margin-bottom: 8.5rem;
+        }
+
+        &--back {
             margin-top: auto;
             margin-bottom: 8.5rem;
         }
@@ -212,7 +222,12 @@ nav {
         &--next {
             margin-top: auto;
             margin-bottom: 8.5rem;
-            width: max(15rem, calc(800vw / 19.2)) !important;
+            width: 30rem !important;
+        }
+        &--back {
+            margin-top: auto;
+            margin-bottom: 8.5rem;
+            width: 20rem !important;        
         }
     }
 
@@ -237,6 +252,11 @@ nav {
             margin-bottom: 8.5rem;
             margin-left: 0;
         }
+        &--back {
+            margin-top: auto;
+            margin-bottom: 8.5rem;
+            margin-left: 0;
+        }
     }
 }
 
@@ -245,6 +265,7 @@ nav {
     flex-direction: row !important;
     height: max-content !important;
     width: max(15rem, calc(700vw / 19.2)) !important;
+    gap: 5%;
 
     .input {
         width: max(5rem, calc(300vw / 19.2));

@@ -6,7 +6,7 @@
     };
 
     // ------------------- Systeme de session -------------------
-    // Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
+    // Il faut tout ceci pour récupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
     require_once '../../../models/Client.php';
     require_once '../../../services/ClientService.php';
     require_once '../../../services/SessionService.php'; // pour le menu du header
@@ -114,11 +114,17 @@
 
 
     <main>
+
+        <?php
+        require_once("../../components/BackComponent/BackComponent.php");
+        BackComponent::render("", "", "Retour", "");
+        ?>
         <div class="title">
             <div class="title__arrow">
-                <a href="/client/consulterReservations/clientReservations.php"><i class="fa-solid fa-arrow-left"></i></a>
-                <h2>Ma réservation</h2>
+
+
             </div>
+
             <div class="title__date">
                 <h4>Voyage  à Lannion du <?= $reservation_dateDebut->format('d-m-Y').' au '.$reservation_dateFin->format('d-m-Y') ?></h4>
             </div>
@@ -158,14 +164,11 @@
             </section>
             <section class="informations__right">
                 <div class="informations__right__desc">
-                    <img src=<?=$owner_pp?> alt="">
+                    <img src=<?=$owner_pp?> alt="Photo de profil">
                     <div class="informations__right__desc__info">
                         <div class="informations__right__desc__info__perso">
                             <h3><?= $owner_telephone ?></h3>
                             <p><?= $owner_mail ?></p>
-                        </div>
-                        <div class="informations__right__desc__info__vide">
-
                         </div>
                         <div class="informations__right__desc__info__icons">
                             <a href="tel:<?= $owner_telephone ?>"><i id="telephone" class="fa-solid fa-phone"></i></a>

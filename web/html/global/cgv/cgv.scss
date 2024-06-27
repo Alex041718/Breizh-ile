@@ -1,0 +1,24 @@
+@import '../../style/variables';
+
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    .cgv{
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+        background-color: $whiteColor;
+
+        padding-block: 100px;
+        padding-inline: 100px;
+
+        @media (max-width: 1024px) {
+            padding-inline: 25px;
+        }
+
+        h2{
+            text-align: center;
+        }
+    }
+}

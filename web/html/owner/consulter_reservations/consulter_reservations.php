@@ -11,6 +11,7 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,29 +21,38 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/components/Toast/Toast.css">
 </head>
+
 <body>
     <?php
-        require_once("../../components/Header/header.php");
-        require_once("../../components/OwnerNavBar/ownerNavBar.php");
-        require_once("../../../services/ReservationService.php");
-        require_once("../../../services/OwnerService.php");
+    require_once ("../../components/Header/header.php");
+    require_once ("../../components/OwnerNavBar/ownerNavBar.php");
+    require_once ("../../../services/ReservationService.php");
+    require_once ("../../../services/OwnerService.php");
 
-        $owner = OwnerService::getOwnerById($_SESSION['user_id']);
+    $owner = OwnerService::getOwnerById($_SESSION['user_id']);
 
-        $reservations = ReservationService::getAllReservationsByOwnerID($owner->getOwnerID());
-        $_SESSION["reservations"] = $reservations;
+    $reservations = ReservationService::getAllReservationsByOwnerID($owner->getOwnerID());
+    $_SESSION["reservations"] = $reservations;
 
-        $selected_reservations = array();
+    $selected_reservations = array();
 
-        Header::render(True, True, $isOwnerAuthenticated, '/back/reservations');
-        OwnerNavBar::render(2);
+    Header::render(True, True, $isOwnerAuthenticated, '/back/reservations');
+    OwnerNavBar::render(2);
     ?>
     <main>
-        <h3>Vos réservations</h3>
+        <div class="top-container">
+            <h3>Vos réservations</h3>
+            <div class="top-container__right">
+                <button class="top-container__right__button">Terminée</button>
+                <button class="top-container__right__button">En cours</button>
+                <button class="top-container__right__button">Prochainement</button>
+                <div class="top-container__right__slider"></div>
+            </div>
+        </div>
         <section class="title">
             <?php
-                require_once("../../components/CheckBox/CheckBox.php");
-                CheckBox::render(name: "checkboxAll");
+            require_once ("../../components/CheckBox/CheckBox.php");
+            CheckBox::render(name: "checkboxAll");
             ?>
             <p data-sort="date-resa">Date de réservation</p>
             <p data-sort="client">Client</p>
@@ -57,33 +67,53 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
             <script type="module" src="/owner/consulter_reservations/consulter_reservations.js"></script>
         </section>
         <?php
-            require_once("../../components/Button/Button.php");
-            Button::render("exportation__button", "exportationButton", "Exporter la sélection", ButtonType::Owner, false, false, false, '<i class="fa-solid fa-file-export"></i>');
+        require_once ("../../components/Button/Button.php");
+        Button::render("exportation__button", "exportationButton", "Exporter la sélection", ButtonType::Owner, false, false, false, '<i class="fa-solid fa-file-export"></i>');
         ?>
         <section class="export-selection">
             <section class="export-selection__CSV">
                 <?php
-                    require_once("../../components/CheckBox/CheckBox.php");
-                    CheckBox::render(name: "checkboxCSV", class: "checkboxCSV", checked: true);
+                require_once ("../../components/CheckBox/CheckBox.php");
+                CheckBox::render(name: "checkboxCSV", class: "checkboxCSV", checked: true);
                 ?>
                 <img src="https://static-00.iconduck.com/assets.00/csv-icon-1791x2048-ot22nr8i.png" alt="icone CSV">
                 <p>CSV</p>
             </section>
             <section class="export-selection__ICAL">
                 <?php
-                    require_once("../../components/CheckBox/CheckBox.php");
-                    CheckBox::render(name: "checkboxICAL", class: "checkboxICAL", checked: true);
+                require_once ("../../components/CheckBox/CheckBox.php");
+                CheckBox::render(name: "checkboxICAL", class: "checkboxICAL", checked: true);
                 ?>
-                <img src="https://s3.amazonaws.com/s3.roaringapps.com/assets/icons/1610972759099-Calendar.png" alt="icone iCal">
+                <img src="https://s3.amazonaws.com/s3.roaringapps.com/assets/icons/1610972759099-Calendar.png"
+                    alt="icone iCal">
                 <p>iCal</p>
             </section>
             <button class="closeExport"><i class="fa-solid fa-xmark"></i></button>
         </section>
+
+        <form action="/owner/consulter_reservations/gerer_abonnements_ical.php" method="get" class="ical-form"
+            id="ical-form">
+            <?php
+            require_once ("../../components/Button/Button.php");
+            Button::render(
+                class: "iCalButton",
+                id: "iCalButton",
+                text: "Gérer les abonnements iCal",
+                type: ButtonType::Owner,
+                onClick: "",
+                isSecondary: false,
+                submit: true, // Assurez-vous que le bouton est de type submit
+                icon: '<i class="fa-regular fa-calendar"></i>'
+            );
+            ?>
+        </form>
+
     </main>
 
     <?php
-        require_once("../../components/Footer/footer.php");
-        Footer::render(True);
+    require_once ("../../components/Footer/footer.php");
+    Footer::render(True);
     ?>
 </body>
+
 </html>

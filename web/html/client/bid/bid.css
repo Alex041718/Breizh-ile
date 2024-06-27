@@ -4,6 +4,10 @@ body {
 
 main {
   background-color: #f6f6f6;
+  min-height: calc(100dvh - 240px);
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 hr {
@@ -14,21 +18,31 @@ hr {
 }
 
 .bid {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-inline: 100px;
   width: 100%;
 }
+@media (max-width: 1024px) {
+  .bid {
+    padding-inline: 25px;
+  }
+}
 .bid__container {
-  margin-top: 6em;
-  margin-bottom: 5em;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 1em;
   gap: 2em;
+  width: 100%;
+}
+@media (max-width: 1024px) {
+  .bid__container {
+    padding-block: 100px;
+  }
 }
 .bid__container__title-page {
   align-self: flex-start;
@@ -36,27 +50,49 @@ hr {
 .bid__container__info {
   display: flex;
   flex-direction: row;
-  align-items: stretch;
   justify-content: center;
-  width: 100%;
   gap: 2em;
 }
+@media (max-width: 1024px) {
+  .bid__container__info {
+    flex-direction: column;
+  }
+}
 .bid__container__info__info-detail {
-  width: 700px;
   border: 1px solid #E0E0E0;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #FFFFFF;
   padding: 2em;
+  width: 70%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 20px;
+}
+@media (max-width: 1024px) {
+  .bid__container__info__info-detail {
+    width: 100%;
+  }
 }
 .bid__container__info__info-detail__description {
   display: flex;
   flex-direction: row;
   gap: 2em;
 }
-.bid__container__info__info-detail__description__image > img {
+@media (max-width: 1024px) {
+  .bid__container__info__info-detail__description {
+    flex-direction: column;
+  }
+}
+.bid__container__info__info-detail__description__image {
+  display: flex;
+}
+@media (max-width: 640px) {
+  .bid__container__info__info-detail__description__image {
+    justify-content: center;
+  }
+}
+.bid__container__info__info-detail__description__image img {
   width: 220px;
   height: 170px;
   -o-object-fit: cover;
@@ -72,7 +108,6 @@ hr {
   display: flex;
   flex-direction: row;
   gap: 1em;
-  margin-block: 1em;
 }
 .bid__container__info__info-detail__kpi__item {
   padding: 10px 20px;
@@ -80,15 +115,20 @@ hr {
   border-radius: 10px;
 }
 .bid__container__info__pay-recap {
-  width: 300px;
-  height: 400px;
+  width: 30%;
   border: 1px solid #E0E0E0;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #FFFFFF;
   padding: 1em;
+  gap: 1em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+@media (max-width: 1024px) {
+  .bid__container__info__pay-recap {
+    width: auto;
+  }
 }
 .bid__container__info__pay-recap__price-detail h3 {
   padding-block: 10px;

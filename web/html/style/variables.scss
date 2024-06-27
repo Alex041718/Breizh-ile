@@ -8,7 +8,7 @@ $font-size-base: max(14px, calc(16vw / 19.2));
 
 $font-size-lg: max(16px, calc(20vw / 19.2));
 
-$font-size-xl: max(23px, calc(30vw / 19.2));
+$font-size-xl: max(20px, calc(30vw / 19.2));
 
 $font-size-2xl: max(30px, calc(48vw / 19.2));
 
@@ -33,6 +33,8 @@ $grey5: #E0E0E0;
 $lighterGrey5: #e9e9e9;
 $grey6: #f6f6f6;
 
+$backgroundColorPage: #f6f6f6;
+
 $deleteColor: #EB5757;
 $deleteColorHover: #e43838;
 
@@ -42,4 +44,3 @@ $errorColor: #EB5757;
 $warningColor: #E2B93B;
 $inProgressColor: #FFAF45;
 $infoColor: #2F80ED;
-

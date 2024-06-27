@@ -1,8 +1,13 @@
+import { loadPopUp } from "/components/Popup/popup.js";
+import { changeVisibility } from "./changerVisibilite.js";
+import { Toast } from "/components/Toast/Toast.js";
+
+let housingID = null;
+let index = null;
+
 function main() {
     const housings = document.querySelector(".housings");
     const columns = document.querySelectorAll(".title p");
-
-    const addButton = document.getElementById("addButton");
 
     housings.innerHTML = "Chargement...";
     
@@ -22,6 +27,37 @@ function main() {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 housings.innerHTML = this.responseText;
+
+                loadPopUp();
+                
+                const popUpVisibilityBtns = document.querySelectorAll("[id^='popUpVisibility-btn']");
+                const modificationBtns = document.querySelectorAll("[id^='editHousing-btn']");
+                const acceptBtn = document.querySelector("[id^='acceptButton']");
+
+                popUpVisibilityBtns.forEach((popUpVisibilityBtn) => {
+                    popUpVisibilityBtn.addEventListener("click", () => {
+                        housingID = popUpVisibilityBtn.dataset.housingid;
+                        index = popUpVisibilityBtn.dataset.index;
+                    });
+                });
+
+                modificationBtns.forEach((modificationBtn) => {
+                    modificationBtn.addEventListener("click", () => {
+                        let housingID = modificationBtn.dataset.housingid;
+                        window.location.href = `/owner/modifier_logement/modifier_logement.php?housingID=${housingID}`;
+                    });
+                });
+
+
+                acceptBtn.addEventListener("click", () => {
+                    if (housingID === null || index === null) {
+                        Toast("Erreur lors de la modification de la visibilité", "error");
+                        return 
+                    };
+                    changeVisibility(housingID, index);
+                    document.querySelector(".popUpVisibility").classList.remove("popup--open");
+                    Toast("Visibilité modifiée avec succès", "success");
+                });
             }
         };
         xhr.send(params);
@@ -70,6 +106,13 @@ function main() {
     });
 
     showReservations();
+}
+
+//verifier si dans l'url createHousing = true
+const urlParams = new URLSearchParams(window.location.search);
+const createHousing = urlParams.get("createHousing");
+if (createHousing === "true") {
+    Toast("Logement créé avec succès", "success");
 }
 
 document.addEventListener("DOMContentLoaded", () => {

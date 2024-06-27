@@ -60,6 +60,11 @@ nav ul li.active:hover {
   background-color: #0b3e6b;
 }
 
+.back-component {
+  padding-left: 4rem;
+  padding-bottom: 2em;
+}
+
 .content {
   display: flex;
   padding-left: 4rem;
@@ -82,6 +87,10 @@ nav ul li.active:hover {
   width: 100%;
 }
 .content__button--next {
+  margin-top: auto;
+  margin-bottom: 8.5rem;
+}
+.content__button--back {
   margin-top: auto;
   margin-bottom: 8.5rem;
 }
@@ -174,7 +183,12 @@ nav ul li.active:hover {
 .specifications .content__button--next, .arrangements .content__button--next, .activities .content__button--next {
   margin-top: auto;
   margin-bottom: 8.5rem;
-  width: max(15rem, 41.6666666667vw) !important;
+  width: 30rem !important;
+}
+.specifications .content__button--back, .arrangements .content__button--back, .activities .content__button--back {
+  margin-top: auto;
+  margin-bottom: 8.5rem;
+  width: 20rem !important;
 }
 .specifications input, .specifications select, .arrangements input, .arrangements select, .activities input, .activities select {
   margin-right: 2rem;
@@ -195,6 +209,11 @@ nav ul li.active:hover {
   margin-bottom: 8.5rem;
   margin-left: 0;
 }
+.arrangements .content__button--back, .activities .content__button--back {
+  margin-top: auto;
+  margin-bottom: 8.5rem;
+  margin-left: 0;
+}
 
 .inline {
   display: flex;
@@ -202,6 +221,7 @@ nav ul li.active:hover {
   height: -moz-max-content !important;
   height: max-content !important;
   width: max(15rem, 36.4583333333vw) !important;
+  gap: 5%;
 }
 .inline .input {
   width: max(5rem, 15.625vw);

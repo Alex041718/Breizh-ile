@@ -11,6 +11,10 @@ main {
     padding-inline: 50px;
 }
 
+.show-more {
+    text-align: center;
+}
+
 .title {
     display: flex;
     width: 100%;
@@ -130,7 +134,7 @@ main {
     margin-right: 1.2rem;
 }
 
-.trash, .filter{
+.eye, .edition, .filter{
     background: none;
 	color: inherit;
 	border: none;
@@ -141,7 +145,7 @@ main {
     margin-left: auto;
 }
 
-.trash {
+.eye {
     margin-right: 17px;
 }
 
@@ -164,4 +168,28 @@ main {
     &--online {
         background-color: $successColor;
     }
+}
+
+.popUpVisibility {
+    .popup__content {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 1.6rem;
+        width: 30rem;
+    }
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.description-action {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    gap: 0.2rem;
 }

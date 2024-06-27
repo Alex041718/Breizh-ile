@@ -10,14 +10,17 @@ class AddressService extends Service
     public static function CreateAddress(Address $address): Address
     {
         $pdo = self::getPDO();
-        $stmt = $pdo->prepare('INSERT INTO _Address (city, postalCode, postalAddress) VALUES (:city, :postalCode, :postalAddress)');
+        $stmt = $pdo->prepare('INSERT INTO _Address (city, postalCode, postalAddress, complementAddress, streetNumber, country) VALUES (:city, :postalCode, :postalAddress, :complementAddress, :streetNumber, :country)');
         $stmt->execute([
             'city' => $address->getCity(),
             'postalCode' => $address->getPostalCode(),
-            'postalAddress' => $address->getPostalAddress()
+            'postalAddress' => $address->getPostalAddress(),
+            'complementAddress' => $address->getComplementAddress(),
+            'streetNumber' => $address->getStreetNumber(),
+            'country' => $address->getCountry()
         ]);
 
-        return new Address($pdo->lastInsertId(), $address->getCity(), $address->getPostalCode(), $address->getPostalAddress());
+        return new Address($pdo->lastInsertId(), $address->getCity(), $address->getPostalCode(), $address->getPostalAddress(), $address->getComplementAddress(), $address->getStreetNumber(), $address->getCountry());
     }
     public static function GetAllAddresses(): array
     {
@@ -26,7 +29,7 @@ class AddressService extends Service
         $addresses = [];
 
         while ($row = $stmt->fetch()) {
-            $addresses[] = new Address($row['addressID'], $row['city'], $row['postalCode'], $row['postalAddress']);
+            $addresses[] = new Address($row['addressID'], $row['city'], $row['postalCode'], $row['postalAddress'], $row['complementAddress'], $row['streetNumber'], $row['country']);
         }
 
         return $addresses;
@@ -37,7 +40,7 @@ class AddressService extends Service
         $pdo = self::getPDO();
         $stmt = $pdo->query('SELECT * FROM _Address WHERE addressID = ' . $addressID);
         $row = $stmt->fetch();
-        return new Address($row['addressID'], $row['city'], $row['postalCode'], $row['postalAddress']);
+        return new Address($row['addressID'], $row['city'], $row['postalCode'], $row['postalAddress'], $row['complementAddress'], $row['streetNumber'], $row['country']);
     }
 }
 ?>

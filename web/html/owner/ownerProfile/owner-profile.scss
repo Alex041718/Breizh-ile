@@ -4,6 +4,7 @@
 body {
     margin: 0;
     background-color: variables.$whiteColor;
+    color: variables.$ownerPrimaryColor;
 }
 
 .content__display {
@@ -14,40 +15,54 @@ nav {
     width: min-content;
 
     ul {
-        padding: 0;
+        height: 100%;
+        padding-left: 0;
+        padding-top: 120px;
         margin: 0;
         display: flex;
         flex-direction: column;
-        height: 95vh;
         list-style: none;
         box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.25);
 
         li {
+            border-bottom: 1px solid variables.$lighterGrey5;
             display: flex;
             width: 20rem;
             height: 70px;
             font-weight: bold;
             font-size: variables.$font-size-lg;
-            
+            align-items: center;
+
             span {
                 user-select: none;
-                line-height: 70px;
                 width: 100%;
                 padding-inline: 3.2rem;
-                height: 100%;
                 color: variables.$ownerPrimaryColor;
                 text-decoration: none;
-                border-bottom: 1px solid variables.$lighterGrey5;
+            }
+
+            .nav-icon {
+                width: 24px;
+                height: 24px;
+                padding-inline: 15px;
+                filter: brightness(0) saturate(100%) invert(36%) sepia(8%) saturate(3507%) hue-rotate(177deg) brightness(93%) contrast(85%);
             }
 
             &.active {
                 background-color: variables.$ownerPrimaryColor;
-                span { color: variables.$whiteColor; }
+
+                span,
+                .nav-icon {
+                    filter: brightness(0) saturate(100%) invert(100%) sepia(91%) saturate(0%) hue-rotate(92deg) brightness(115%) contrast(101%);
+                }
             }
 
             &.locked {
                 background-color: variables.$whiteColor;
-                span { color: variables.$grey5; }
+
+                span {
+                    color: variables.$grey5;
+                }
             }
 
             &:hover {
@@ -56,17 +71,16 @@ nav {
             }
 
             &.active:hover {
-                background-color: variables.$ownerPrimaryColorHover;
+                background-color: variables.$ownerPrimaryColor;
             }
         }
     }
 }
 
 .content {
+    min-height: 100vh;
     height: 100%;
     display: flex;
-    align-items: center;
-    margin-top: 120px;
 
     &__selector {
         min-width: 8em;
@@ -91,41 +105,37 @@ nav {
     }
 
     &__personnal-data {
-        margin-left: 5em;
+        padding-top: 200px;
+        padding-inline: 50px;
+        width: 80%;
+        height: 100%;
         display: none;
         flex-direction: column;
-        width: 85em;
-        height: 30em;
-        position: relative;
-
 
         &__top {
-            width: 70%;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         &__image {
-            width: 5em;
-            height: 5em;
+            width: 75px;
+            height: 75px;
             border-radius: 50%;
             justify-self: end;
         }
 
         &__title {
-            margin-bottom: 1em;
             width: 10%;
         }
 
         &__elements {
-            left: 10%;
             display: grid;
             grid-template-columns: repeat(4, minmax(13em, 1fr));
             gap: 1em;
-            width: 20%;
+            width: 100%;
 
-            &__modify_button{
+            &__modify_button {
                 margin: 10px 0;
             }
 
@@ -150,50 +160,204 @@ nav {
                 }
             }
         }
-
-
-
     }
 
     &__security {
-        margin-left: 5em;
+        padding-top: 200px;
+        padding-inline: 50px;
+        width: 80%;
+        height: 100%;
         display: none;
         flex-direction: column;
-        width: 85em;
-        height: 30em;
-        position: relative;
+        gap: 20px;
+
+        &__top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
         &__title {
-            margin-bottom: 1em;
             width: 10%;
         }
 
         &__elements {
-            left: 10%;
+            width: 100%;
+
             &__password {
-                width: 20%;
-                margin-bottom: 1em;
+                width: 100%;
+                padding-bottom: 1%;
+            }
+
+            &__password--confirmation {
+                width: 100%;
+                padding-bottom: 15px;
+            }
+            &__required__fields{
+                color: red;
+            }
+        }
+    }
+
+    &__api {
+        padding-top: 200px;
+        padding-inline: 50px;
+        width: 80%;
+        height: 100%;
+        display: none;
+        flex-direction: column;
+        gap: 20px;
+
+        &__contents {
+            display: flex;
+
+            .button {
+                &--api {
+                    margin-left: auto;
+                }
+            }
+
+            &__titles {
+                &__title {
+                    width: 10%;
+                }
+            }
+        }
+
+        &__keys {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            height: calc((68px * 7) + (0.6rem * 7));
+            overflow-y: scroll;
+            padding-right: 0.5rem;
+
+            &::-webkit-scrollbar {
+                width: 0.4rem;
+                background: white;
+            }
+        
+            &::-webkit-scrollbar-thumb {
+                background-color: variables.$ownerPrimaryColor;
+                border-radius: 100px;
+                background: variables.$ownerPrimaryColor;
+            }
+        
+            &::-webkit-scrollbar-track {
+                background-color: variables.$lighterGrey5;
+                border-radius: 100px;
+                background: variables.$lighterGrey5;
+            }
+
+            &__key {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1.5rem;
+                background-color: variables.$grey5;
+                border-radius: 10px;
+                border-bottom: 1px solid variables.$lighterGrey5;
+
+                &__description {
+                    display: flex;
+                    gap: 0.3rem;
+                    width: 30rem;
+                }
+
+                .eye, .copy {
+                    background: none;
+                    color: inherit;
+                    border: none;
+                    padding: 0;
+                    font: inherit;
+                    cursor: pointer;
+                    outline: inherit;
+                }
+
+                .status{
+                    display: inline-block;
+                    align-self: center;
+                    margin-left: 0.3rem;
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+
+                    &--offline {
+                        background-color: variables.$errorColor;
+                    }
+                    
+                    &--online {
+                        background-color: variables.$successColor;
+                    }
+                }
+
+                &__key--name {
+                    width: 20%;
+                }
+
+                &__key--value {
+                    width: 20%;
+                }
+
+                &__key--delete {
+                    width: 20%;
+                }
             }
         }
     }
 }
 
+.popUpApi {
+    .popup__content {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 1.6rem;
+        width: 30rem;
+    }
+}
 
-// VOIR POUR METTRE DES VARIABLES A LA PLACE DES MEDIA QUERIES
-@media (max-width: 1200px) {
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.description-action {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    gap: 0.2rem;
+}
+
+@media (max-width: 1280px) {
     .content__personnal-data__elements {
         grid-template-columns: repeat(3, minmax(12em, 1fr));
     }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1024px) {
     .content__personnal-data__elements {
         grid-template-columns: repeat(2, minmax(11em, 1fr));
     }
+    nav>ul {
+        padding-top: 100px;     
+    }
+
+    nav ul li span {
+        display: none;
+    }
+
+    nav ul li {
+        width: 100%;
+    }
 }
 
-@media (max-width: 610px) {
+@media (max-width: 640px) {
     .content__personnal-data__elements {
         grid-template-columns: repeat(1, minmax(10em, 1em));
+        display: flex;
+        flex-direction: column;
     }
 }

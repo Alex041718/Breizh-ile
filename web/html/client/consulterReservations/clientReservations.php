@@ -12,8 +12,6 @@ require_once '../../../services/SessionService.php'; // pour le menu du header
 SessionService::system('client', '/client/reservations-liste');
 $isAuthenticated = SessionService::isClientAuthenticated();
 
-
-
 require_once '../../../services/Service.php';
 require_once '../../../services/ReservationService.php';
 require_once("../../components/ReservationCard/ReservationCard.php");
@@ -36,7 +34,6 @@ usort($clientReservationList, function ($a, $b) {
     <link rel="stylesheet" href="../../style/ui.css">
     <link rel="stylesheet" href="/client/consulterReservations/clientReservations.css">
     <script src="/components/ReservationCard/ReservationCard.js"></script>
-<!--    <script src="clientReservations.js"></script>-->
     <title>Vos réservation</title>
 
 </head>
@@ -45,14 +42,18 @@ require_once("../../components/Header/header.php");
 Header::render(true,false, $isAuthenticated, '/client/reservations-liste');
 ?>
 <body>
-<main>
-    <div class="title">
-        <a href="/" class="title__arrow">
-            <i class="fa-solid fa-arrow-left"></i>
-        </a>
-        <h2 class="title__text">Vos réservations</h2>
-    </div>
+<main class="global-ui">
+
+
+    <?php
+        require_once("../../components/BackComponent/BackComponent.php");
+        BackComponent::render("", "", "Retour", "");
+    ?>
+
+    <h2 class="title">Vos réservations</h2>
+
     <div class="reservation-list">
+
         <div class="reservation-list__container">
             <?php if (empty($clientReservationList)) : ?>
             <div class="reservation-list__container__empty">

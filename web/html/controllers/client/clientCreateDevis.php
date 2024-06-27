@@ -3,10 +3,10 @@
 // Controller création d'un devis et redirection sur la page de devis
 
 
-/*
- * array(7) { ["startDate"]=> string(10) "2024-05-22" ["endDate"]=> string(10) "2024-05-27" ["numberPerson"]=> string(1) "1" ["isAuthenticated"]=> string(1) "1" ["clientID"]=> string(1) "1" ["housingID"]=> string(3) "221" ["ownerID"]=> string(3) "406" }
- */
+// Supression de potentiel devis existant
+require_once('../../../services/SessionService.php');
 
+SessionService::remove('currentBid');
 function redirect($url)
 {
     header('Location: ' . $url);
@@ -90,7 +90,7 @@ $resToSend = [
 
 
 
-require_once('../../../services/SessionService.php');
+
 
 SessionService::set('oldPage', $oldPage);
 

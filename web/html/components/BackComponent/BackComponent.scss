@@ -1,0 +1,37 @@
+@use '../../style/variables.css';
+
+.back-component {
+  margin-left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+  cursor: pointer;
+  width: fit-content;
+
+
+
+
+
+  &__arrow{
+
+    all: unset;
+
+    i {
+      font-size: 20px;
+      padding: 15px;
+      padding-left: 0;
+      color : black;
+      cursor: pointer;
+    }
+  }
+
+
+  &__text {
+    padding-bottom: 2px;
+
+    :hover {
+      text-decoration: underline;
+    }
+  }
+}

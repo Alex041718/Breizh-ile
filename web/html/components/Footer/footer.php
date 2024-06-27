@@ -24,21 +24,22 @@ class Footer {
                         <div>
                             <h4>Nous connaître</h4>
                             <div>
-                                <a href=""><p>Qui sommes nous</p></a>
+                                <a href="/global/aboutUs/aboutUs.php"><p>Qui sommes nous ?</p></a>
                                 <a href=""><p>Notre RSE</p></a>
                             </div>
                         </div>
                         <div>
                             <h4>Légal</h4>
                             <div>
-                                <a href=""><p>Confidentialité</p></a>
-                                <a href=""><p>Conditions générales d&#039;utilisation</p></a>
+                                <a href="/global/mentionsLegales/mentionsLegales.php"><p>Mentions Légales</p></a>
+                                <a href="/global/cgv/cgv.php"><p>Conditions générales de vente</p></a>
+                                <a href="/global/cgu/cgu.php"><p>Conditions générales d&#039;utilisation</p></a>
                             </div>
                         </div>
                         <div>
                             <h4>Votre compte</h4>
                             <div>
-                                <a href="/back"><p>Devenir propriétaire</p></a>
+                                <a href="/back/register"><p>Devenir propriétaire</p></a>
                             </div>
                         </div>
                     </div>

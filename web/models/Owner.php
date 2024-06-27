@@ -12,14 +12,20 @@ class Owner {
     private DateTime $birthDate;
     private bool $consent;
     private bool $isValidated;
-    private DateTime $lastConnection;
+    private string $identityCardFront;
+    private string $identityCardBack;
+    private string $bankDetails;
+    private string $swiftCode;
+    private string $IBAN;
+    private ?DateTime $lastConnection;
     private DateTime $creationDate;
     private Image $image;
     private Gender $gender;
     private Address $address;
+    private ?string $resetTokenHash;
+    private ?DateTime $resetTokenExpiration;
 
     public function __construct(?int $ownerID,
-                                string $identityCard,
                                 string $mail,
                                 string $firstname,
                                 string $lastname,
@@ -28,14 +34,20 @@ class Owner {
                                 string $phoneNumber,
                                 DateTime $birthDate,
                                 bool $consent,
-                                DateTime $lastConnection,
+                                ?DateTime $lastConnection,
                                 DateTime $creationDate,
                                 bool $isValidated,
+                                string $identityCardFront,
+                                string $identityCardBack,
+                                string $bankDetails,
+                                string $swiftCode,
+                                string $IBAN,
                                 Image $image,
                                 Gender $gender,
-                                Address $address) {
+                                Address $address,
+                                ?string $resetTokenHash,
+                                ?DateTime $resetTokenExpiration) {
         $this->ownerID = $ownerID;
-        $this->identityCard = $identityCard;
         $this->mail = $mail;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
@@ -47,9 +59,16 @@ class Owner {
         $this->lastConnection = $lastConnection;
         $this->creationDate = $creationDate;
         $this->isValidated = $isValidated;
+        $this->identityCardFront = $identityCardFront;
+        $this->identityCardBack = $identityCardBack;
+        $this->bankDetails = $bankDetails;
+        $this->swiftCode = $swiftCode;
+        $this->IBAN = $IBAN;
         $this->image = $image;
         $this->gender = $gender;
         $this->address = $address;
+        $this->resetTokenHash = $resetTokenHash;
+        $this->resetTokenExpiration = $resetTokenExpiration;
     }
 
 
@@ -82,17 +101,81 @@ class Owner {
     /**
      * @return string
      */
-    public function getIdentityCard(): string
-    {
-        return $this->identityCard;
+    public function getIdentityCardFront(): string
+    {   
+        return $this->identityCardFront;
     }
 
     /**
-     * @param string $identityCard
+     * @param string $identityCardFront
      */
-    public function setIdentityCard(string $identityCard): void
+    public function setIdentityCardFront(string $identityCardFront): void
     {
-        $this->identityCard = $identityCard;
+        $this->identityCardFront = $identityCardFront;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdentityCardBack(): string
+    {   
+        return $this->identityCardBack;
+    }
+
+    /**
+     * @param string $identityCardBack
+     */
+    public function setIdentityCardBack(string $identityCardBack): void
+    {
+        $this->identityCardBack = $identityCardBack;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBankDetails(): string
+    {
+        return $this->bankDetails;
+    }
+
+    /**
+     * @param string $bankDetails
+     */
+    public function setBankDetails(string $bankDetails): void
+    {
+        $this->bankDetails = $bankDetails;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getSwiftCode(): string
+    {
+        return $this->swiftCode;
+    }
+
+    /**
+     * @param string $swiftCode
+     */
+    public function setSwiftCode(string $swiftCode): void
+    {
+        $this->swiftCode = $swiftCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIBAN(): string
+    {
+        return $this->IBAN;
+    }
+
+    /**
+     * @param string $IBAN
+     */
+    public function setIBAN(string $IBAN): void
+    {
+        $this->swiftCode = $IBAN;
     }
 
     /**
@@ -226,7 +309,7 @@ class Owner {
     /**
      * @return DateTime
      */
-    public function getLastConnection(): DateTime
+    public function getLastConnection(): ?DateTime
     {
         return $this->lastConnection;
     }
@@ -301,6 +384,26 @@ class Owner {
     public function setAddress(Address $address): void
     {
         $this->address = $address;
+    }
+
+    public function getResetTokenHash(): ?string
+    {
+        return $this->resetTokenHash;
+    }
+
+    public function setResetTokenHash(?string $resetTokenHash): void
+    {
+        $this->resetTokenHash = $resetTokenHash;
+    }
+
+    public function getResetTokenExpiration(): ?DateTime
+    {
+        return $this->resetTokenExpiration;
+    }
+
+    public function setResetTokenExpiration(?DateTime $resetTokenExpiration): void
+    {
+        $this->resetTokenExpiration = $resetTokenExpiration;
     }
 
 

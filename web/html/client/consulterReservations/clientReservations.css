@@ -3,25 +3,9 @@ body {
   margin: 0;
 }
 
-main {
-  min-height: 70vh;
-}
-
 .title {
-  margin-left: 2em;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1em;
-  margin-top: 135px;
-}
-.title__arrow {
-  all: unset;
-}
-.title__arrow i {
-  font-size: 30px;
-  padding: 15px;
-  color: black;
+  margin-bottom: 1em;
+  margin-top: 0.5em;
 }
 
 .fa-less-than::before {
@@ -33,14 +17,19 @@ main {
 .reservation-list {
   display: flex;
   flex-direction: row;
-  padding: 2em;
-  justify-content: center;
   align-items: center;
+  width: 100%;
+}
+@media (max-width: 1024px) {
+  .reservation-list {
+    width: 100%;
+    justify-content: center;
+  }
 }
 .reservation-list__container {
   display: flex;
   flex-direction: column;
-  padding: 2em;
+  width: 100%;
   scroll-behavior: smooth;
 }
 .reservation-list__container__empty {

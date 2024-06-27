@@ -1,4 +1,13 @@
-<?php session_start(); ?>
+<?php session_start(); 
+
+require_once '../../../services/SessionService.php'; // pour le menu du header
+$isAuthenticated = SessionService::isOwnerAuthenticated();
+
+if($isAuthenticated) {
+    header("Location: /back/logements");
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,8 +21,10 @@
 <body>
 
     <div class="connectionContainer">
-        <img src="../../assets/images/logo_breizh_noir.png">
         <div class="connectionContainer__box">
+            <a href="/">
+                <img src="../../assets/images/logo_breizh_noir.png">
+            </a>
             <h3 class="connectionContainer__box__title">Connectez vous à votre compte propriétaire</h3>
             <form action="/controllers/owner/ownerConnectionController.php" method="post">
 
@@ -29,7 +40,7 @@
 
                 <?php Input::render("connection__input", "password", "password", "Mot de Passe", "password", "Entrez votre mot de passe", true); ?>
 
-                <a href="" class="connectionContainer__box__forgot">J'ai oublié mon mot de passe</a>
+                <a href="/back/forgot-password" class="connectionContainer__box__forgot">J'ai oublié mon mot de passe</a>
 
                 <input type="hidden" name="role" value="owner">
 
@@ -39,6 +50,13 @@
                 <?php Button::render("connection__button", "connectButton", "Se connecter",ButtonType::Owner,false,false,true); ?>
 
             </form>
+
+            <div class="inscription">
+                <div class="horizontal-line"></div>
+                <p class="para--20px">OU</p>
+                <div class="horizontal-line"></div>
+            </div>
+            <p class="para--18px">Pas encore de compte ? <a href="/back/register">S'inscrire</a> </p>
     </div>
 </body>
 </html>
