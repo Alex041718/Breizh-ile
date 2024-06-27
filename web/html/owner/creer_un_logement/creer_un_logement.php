@@ -112,6 +112,7 @@ Header::render(True, True, $isOwnerAuthenticated, '/back/creer-logement'); ?>
                 <?php Input::render("content__input--large", "priceHT", "text", "Prix par nuit", "priceHT", "Prix HT", true, '', 0, 8, '[0-9]+\.[0-9]{1,2}'); ?>
                 <?php Input::render("content__input--large", "beginDate", "text", "Date minimale", "beginDate", "Entrez la date minimale", false, '', 0, 40, '(^0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4}$)'); ?>
                 <?php Input::render("content__input--large", "endDate", "text", "Date maximale", "endDate", "Entrez la date maximale", false, '', 0, 40, '(^0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4}$)'); ?>
+                <?php Input::render("content__input", "noticeCount", "text", "Délai d'annulation", "noticeCount", "Ex: 30", true, '7', 1, 8, '[0-9]'); ?>
             </section>
             <p>Spécifications</p>
             <span class="separator"></span>

@@ -182,6 +182,7 @@ buttonValidate.addEventListener("click", () => {
     &shortDesc=${document.getElementById("shortdesc").querySelector("textarea").value}
     &longDesc=${document.getElementById("longdesc").querySelector("textarea").value}
     &price=${document.getElementById("priceHT").querySelector("input").value}
+    &noticeCount=${document.getElementById("noticeCount").querySelector("input").value}
     &nbPerson=${document.getElementById("nbPerson").querySelector("input").value}
     &nbRooms=${document.getElementById("nbRooms").querySelector("input").value}
     &nbSimpleBed=${document.getElementById("nbSimpleBed").querySelector("input").value}
