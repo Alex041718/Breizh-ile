@@ -61,8 +61,8 @@
         <tr>
             <td class="designation">Nuitée</td>
             <td class="right-nb"><?php echo htmlspecialchars($intervalDay = $reservation->getBeginDate()->diff($reservation->getEndDate())->days); ?></td>
-            <td class="right-nb"><?php echo htmlspecialchars($receipt->getReservation()->getPriceIncl()); ?> €</td>
-            <td class="right-nb"><?php echo htmlspecialchars($intervalDay*$receipt->getReservation()->getPriceIncl()); ?> €</td>
+            <td class="right-nb"><?php echo htmlspecialchars($receipt->getReservation()->getHousingId()->getPriceIncl()); ?> €</td>
+            <td class="right-nb"><?php echo htmlspecialchars($intervalDay*$receipt->getReservation()->getHousingId()->getPriceIncl()); ?> €</td>
         </tr>
         <tr>
             <td class="designation">Frais de service (1%)</td>
@@ -79,7 +79,7 @@
         <tr>
             <td class="invisible-cell" colspan="1"></td>
             <td colspan="2">Sous Total HT</td>
-            <td class="right-nb"><?php echo htmlspecialchars($receipt->getTouristTax() + $receipt->getReservation()->getServiceCharge() + $intervalDay*$receipt->getReservation()->getPriceIncl()); ?> €</td>
+            <td class="right-nb"><?php echo htmlspecialchars($receipt->getTouristTax() + $receipt->getReservation()->getServiceCharge() + $intervalDay*$receipt->getReservation()->getHousingId()->getPriceIncl()); ?> €</td>
         </tr>
         <tr>
             <td class="invisible-cell" colspan="1"></td>
@@ -94,7 +94,7 @@
         <tr>
             <td class="invisible-cell" colspan="1"></td>
             <td colspan="2">Total TTC</td>
-            <td class="right-nb"><?php echo htmlspecialchars(number_format(($receipt->getTouristTax() + $receipt->getReservation()->getServiceCharge() + $intervalDay*$receipt->getReservation()->getPriceIncl()) * 1.2, 2)); ?> €</td>
+            <td class="right-nb"><?php echo htmlspecialchars(number_format(($receipt->getTouristTax() + $receipt->getReservation()->getServiceCharge() + $intervalDay*$receipt->getReservation()->getHousingId()->getPriceIncl()) * 1.2, 2)); ?> €</td>
         </tr>
 
         </tbody>

@@ -113,6 +113,18 @@ Header::render(true,false,$isAuthenticated,$_SERVER['REQUEST_URI']);
                         $serviceFee = $nights*0.01;
                         $sejourTax = 1*$intervalDay*$numberPerson;
                         $total = $nights + $serviceFee + $sejourTax;
+
+
+                        // import PriceHelper
+                        require_once('../../helper/PriceHelper.php');
+
+                        $calcul = new PriceHelper($numberPerson, $intervalDay, $housing->getPriceIncl());
+                        $nights = $calcul->getPriceMultipleNight();
+                        $serviceFee = $calcul->getServiceFee();
+                        $sejourTax = $calcul->getTouristTax();
+                        $totalHT = $calcul->getTotalHT();
+                        $total = $calcul->getTotalTTC();
+
                         ?>
 
                         <div>
@@ -127,6 +139,11 @@ Header::render(true,false,$isAuthenticated,$_SERVER['REQUEST_URI']);
                             <p class="para--18px">Taxee de séjour</p>
                             <p class="para--18px"><?= $sejourTax ?> €</p>
                         </div>
+                        <div>
+                            <p class="para--18px">Total Hors Taxe</p>
+                            <p class="para--18px"><?= $totalHT ?> €</p>
+                        </div>
+
                         <hr>
                     </div>
 
