@@ -17,6 +17,7 @@ $shortDesc = $_POST['shortDesc'];
 $longDesc = $_POST['longDesc'];
 $priceExcl = $_POST['price'];
 $priceIncl = (float) $priceExcl * 1.10;
+$noticeCount = (int) $_POST['noticeCount'];
 $nbPerson = (int) $_POST['nbPerson'];
 $nbRooms = (int) $_POST['nbRooms'];
 $nbSimpleBed = (int) $_POST['nbSimpleBed'];
@@ -68,7 +69,7 @@ public function __construct(int $housingID,
                                 array $arrangement) {
 */
 
-$housing = new Housing(0, $title, $shortDesc, $longDesc, $priceExcl, $priceIncl, $nbPerson, $nbRooms, $nbDoubleBed, $nbSimpleBed, $longitude, $latitude, true, 0, $beginDate, $endDate, new DateTime(), $surfaceInM2, $type, $category, $addressObject, $owner, $imageObject);
+$housing = new Housing(0, $title, $shortDesc, $longDesc, $priceExcl, $priceIncl, $nbPerson, $nbRooms, $nbDoubleBed, $nbSimpleBed, $longitude, $latitude, true, $noticeCount, $beginDate, $endDate, new DateTime(), $surfaceInM2, $type, $category, $addressObject, $owner, $imageObject);
 $housing = HousingService::CreateHousing($housing);
 print_r($housing);
 

@@ -81,6 +81,7 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
 
 
         $housingPriceHT = $housing->getPriceExcl() ?? "";
+        $noticeCount = $housing->getNoticeCount() ?? "";
         $housingBeginDate = $housing->getBeginDate() ? $housing->getBeginDate()->format('Y-m-d') : '';
         $housingEndDate = $housing->getEndDate()->format('Y-m-d') ?? "";
         $housingCategory = $housing->getCategory()->getLabel() ?? "";
@@ -160,6 +161,7 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
                         <?php Input::render("content__input--large", "priceHT", "text", "Prix par nuit", "priceHT", "Prix HT", true, $housingPriceHT, 0, 8, '[0-9]+\.[0-9]{1,2}'); ?>
                         <?php Input::render("content__input--large", "beginDate", "text", "Date minimale", "beginDate", "Entrez la date minimale", false, $housingBeginDate, 0, 40, '(^0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4}$)'); ?>
                         <?php Input::render("content__input--large", "endDate", "text", "Date maximale", "endDate", "Entrez la date maximale", false, $housingEndDate, 0, 40, '(^0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4}$)'); ?>
+                        <?php Input::render("content__input--large", "noticeCount", "text", "Délai d'annulation", "noticeCount", "Ex: 30", true, $noticeCount, 1, 8, '[0-9]'); ?>
                     </section>
                     <p>Spécifications</p>
                     <span class="separator"></span>
@@ -179,7 +181,8 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
                     <section class="inline">
                         <?php Button::render("content__button content__button--next", "validateButton", "Mettre à jour le logement", ButtonType::Owner, "", false, true, '<i class="fa-solid fa-check"></i>'); ?>
                         <?php Button::render("content__button content__button--back","cancelButton","Annuler",ButtonType::Delete,"", false, false, '<i class="fa-solid fa-xmark"></i>');?>
-                    </section>                </section>
+                    </section>
+                </section>
                 <section class="content arrangements">
                     <section class="content__up">
                         <?php ComboList::render("content__combo", "arrangement", "Choisissez l'aménagement", "arrangement", ArrangementService::getAllArrangementsAsArrayOfString(), "Aménagements", false) ?>
