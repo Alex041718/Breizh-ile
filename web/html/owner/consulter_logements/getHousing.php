@@ -42,8 +42,8 @@ function showHousings($housings) {
         <a href="/back/logements/<?= $housing->getHousingID() ?>" class="housing">
             <img src="<?= $housing->getImage()->getImageSrc() ?>" alt="Image de logement">
             <p><?= $housing->getTitle() ?></p>
-            <p><?= $housing->getAddress()->getPostalAddress() ?></p>
-            <p><?= $housing->getPriceIncl() ?></p>
+            <p><?= $housing->getAddress()->getStreetNumber() . " " . $housing->getAddress()->getPostalAddress() ?></p>
+            <p><?= number_format($housing->getPriceIncl(), 2) . " €" ?></p>
             <p><?= $housing->getNbPerson() ?></p>
             <p><?= $housing->getBeginDate()->format("d / m / Y") ?></p>
             <p><?= $housing->getEndDate()->format("d / m / Y") ?></p>
