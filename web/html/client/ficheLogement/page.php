@@ -101,6 +101,10 @@ $iconMapping = [
 
     <main>
 
+        <div id="animated-image-container">
+            <img id="animated-image" src="../../assets/images/imageAnim.jpeg" alt="Animated Image">
+        </div>
+
         <div class="page">
             <?php
             require_once ("../../components/BackComponent/BackComponent.php");
