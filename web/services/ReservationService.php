@@ -42,7 +42,7 @@ class ReservationService extends Service
         return $reservationList;
     }
 
-    public static function createReservation(Reservation $reservation): bool
+    public static function createReservation(Reservation $reservation): Reservation
     {
         $pdo = self::getPDO();
         $stmt = $pdo->prepare('INSERT INTO _Reservation (`reservationID`,beginDate, endDate, serviceCharge, touristTax, status, nbPerson, priceIncl,`creationDate`, housingID, payMethodID, clientID) VALUES (NULL, :beginDate, :endDate, :serviceCharge, :touristTax, :status, :nbPerson, :priceIncl,CURRENT_TIMESTAMP, :housingID, :payMethodID, :clientID)');
@@ -64,7 +64,7 @@ class ReservationService extends Service
             throw new Exception('Failed to create reservation');
         }
 
-        return true;
+        return self::getReservationByID($pdo->lastInsertId());
     }
 
     public static function getAllReservationsByClientID(int $clientID)
