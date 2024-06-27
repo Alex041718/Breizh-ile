@@ -161,7 +161,17 @@
                         <p class="para--18px"><?= $reservation_prixTTC ?> €</p>
                     </div>
                 </div>
+                <form action="/controllers/client/clientDownloadReceiptController.php" method="post" target="_blank">
+                    <input type="hidden" name="reservationID" value="<?= $reservation->getId() ?>">
+                    <?php
+                    //import button
+                    require_once '../../components/Button/Button.php';
+
+                    Button::render("submit", "submit", "Télécharger la facture", ButtonType::Client,"",true,true,"");
+                    ?>
+                </form>
             </section>
+
             <section class="informations__right">
                 <div class="informations__right__desc">
                     <img src=<?=$owner_pp?> alt="Photo de profil">
