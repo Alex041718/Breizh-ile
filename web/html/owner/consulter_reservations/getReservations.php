@@ -26,7 +26,7 @@ function showReservations($reservations) {
     <?php 
     } else {
     foreach ($reservations as $reservation) { ?>
-        <div class="reservation">
+        <div class="reservation" data-reservationID="<?= $reservation->getId() ?>">
             <?php require_once("../../components/CheckBox/CheckBox.php"); CheckBox::render(name: "checkbox"); ?>
             <p><?= $reservation->getCreationDate()->format("d / m / Y") ?></p>
             <a href="/back/profil/<?= $reservation->getClientId()->getClientID() ?>" class="profile-picture"><img src="<?= $reservation->getClientId()->getImage()->getImageSrc() ?>" alt="profile picture"><?= $reservation->getClientId()->getNickname() ?></a>

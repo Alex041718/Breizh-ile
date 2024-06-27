@@ -62,6 +62,9 @@ RewriteRule ^back/connection$ /owner/ownerConnection/owner_connection.php [L]
 # Rediriger /back/register vers /owner/clientRegister/owner_register.php
 RewriteRule ^back/register$ /owner/ownerRegister/owner_register.php [L]
 
+# Rediriger /calendar/id vers /owner/consulter_logement/logement.php
+RewriteRule ^calendar/([a-zA-Z0-9_.-]*)$ /owner/consulter_reservations/iCal.php?token=$1 [L]
+
 # Rediriger /back/reservations vers /owner/consulter_reservations/consulter_reservations.php
 RewriteRule ^back/reservations$ /owner/consulter_reservations/consulter_reservations.php [L]
 
