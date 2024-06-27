@@ -238,6 +238,23 @@ CREATE TABLE _Reservation (
     FOREIGN KEY (clientID) REFERENCES _Client(clientID)
 );
 
+-- Création de la table `Subscription`
+CREATE TABLE _Subscription (
+    subscriptionID serial PRIMARY KEY,
+    token varchar(255),
+    beginDate Date,
+    beginEnd Date,
+    userID BIGINT UNSIGNED,
+    FOREIGN KEY (userID) REFERENCES _User(userID)
+);
+
+CREATE TABLE _Has_for_subscription (
+    subscriptionID BIGINT UNSIGNED, -- Correspond au type `serial` dans Arrangement pour mysql
+    reservationID BIGINT UNSIGNED, -- Correspond au type `serial` dans Housing pour mysql
+    FOREIGN KEY (reservationID) REFERENCES _Reservation(reservationID),
+    FOREIGN KEY (subscriptionID) REFERENCES _Subscription(subscriptionID)
+);
+
 -- Associations many-to-many et autres contraintes
 
 -- Association Image-Housing

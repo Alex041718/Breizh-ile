@@ -46,4 +46,5 @@ function saveSubscription($ownerId, $token, $startDate, $endDate, $reservations)
     // Implement the logic to save the subscription details to the database
     // Example:
     // INSERT INTO subscriptions (owner_id, token, start_date, end_date, reservations) VALUES (?, ?, ?, ?, ?)
+
 }
