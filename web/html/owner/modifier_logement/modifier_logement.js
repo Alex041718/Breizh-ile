@@ -128,7 +128,7 @@ addButtonActivities.addEventListener("click", () => {
 //Actions à la validation
 buttonValidateList.forEach(buttonValidate => {
     buttonValidate.addEventListener("click", () => {
-        console.log("validate");
+        let currentImage = document.getElementById("img-view").dataset.defaultImage.split("=")[1]
         let xhr = new XMLHttpRequest();
         const inputFile = document.getElementsByName("file-name")[0];
         let params = `housingID=${document.getElementById("housingID").value}
@@ -153,7 +153,7 @@ buttonValidateList.forEach(buttonValidate => {
                             &postalCode=${document.getElementById("postalCode").querySelector("input").value}
                             &arrangements=${arrangements.join(",")}
                             &activities=${activities.map(activity => activity.join("|")).join(",")}
-                            &image=${inputFile.textContent}
+                            &image=${inputFile.textContent !== "" ? inputFile.textContent : currentImage}
                             &type=${document.getElementById("type").querySelector("select").selectedIndex}
                             &category=${document.getElementById("category").querySelector("select").selectedIndex}`;
 
