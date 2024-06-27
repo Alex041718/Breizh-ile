@@ -27,11 +27,14 @@ SessionService::loadToast();
     <title>Connexion Compte Client</title>
     <link rel="stylesheet" href="../../style/ui.css">
     <link rel="stylesheet" href="/client/clientConnection/client_connection.css">
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfAbv8pAAAAAHEpM2ncSmnkR1Vw91T_9wMU0dRI"></script>
 </head>
 <body>
 
     <div class="connectionContainer">
         <div class="connectionContainer__box">
+            <link rel="stylesheet" href="/components/Button/Button.css">
+
             <a href="/">
                 <img src="../../assets/images/logo_breizh_noir.png">
             </a>
@@ -53,8 +56,11 @@ SessionService::loadToast();
 
                 <?php require_once("../../components/Button/Button.php"); ?>
 
-
-                <?php Button::render("connection__button", "connectButton", "Se connecter",ButtonType::Client,false,false,true); ?>
+                <button type="submit" id="connectButton" class="button button--client button--vert connection__button g-recaptcha" 
+                        data-sitekey="reCAPTCHA_site_key" 
+                        data-callback="onSubmit"
+                        data-action="submit">Se connecter
+                </button>
 
             </form>
             <div class="inscription">
@@ -64,7 +70,13 @@ SessionService::loadToast();
             </div>
             <p class="para--18px">Pas encore de compte ? <a href="/client/register">S'inscrire</a> </p>
     </div>
-
-
+    <script>
+        function onClick(e) {
+            e.preventDefault();
+            grecaptcha.enterprise.ready(async () => {
+            const token = await grecaptcha.enterprise.execute('6LfAbv8pAAAAAHEpM2ncSmnkR1Vw91T_9wMU0dRI', {action: 'LOGIN'});
+            });
+        }
+    </script>
 </body>
 </html>

@@ -17,6 +17,8 @@ if($isAuthenticated) {
     <title>Connexion Compte Propriétaire</title>
     <link rel="stylesheet" href="../../style/ui.css">
     <link rel="stylesheet" href="/owner/ownerConnection/owner_connection.css">
+    <link rel="stylesheet" href="/components/Button/Button.css">
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfAbv8pAAAAAHEpM2ncSmnkR1Vw91T_9wMU0dRI"></script>
 </head>
 <body>
 
@@ -47,7 +49,11 @@ if($isAuthenticated) {
                 <?php require_once("../../components/Button/Button.php"); ?>
 
 
-                <?php Button::render("connection__button", "connectButton", "Se connecter",ButtonType::Owner,false,false,true); ?>
+                <button type="submit" id="connectButton" class="button button--owner button--bleu connection__button g-recaptcha" 
+                        data-sitekey="reCAPTCHA_site_key" 
+                        data-callback="onSubmit"
+                        data-action="submit">Se connecter
+                </button>
 
             </form>
 
@@ -58,5 +64,13 @@ if($isAuthenticated) {
             </div>
             <p class="para--18px">Pas encore de compte ? <a href="/back/register">S'inscrire</a> </p>
     </div>
+    <script>
+        function onClick(e) {
+            e.preventDefault();
+            grecaptcha.enterprise.ready(async () => {
+            const token = await grecaptcha.enterprise.execute('6LfAbv8pAAAAAHEpM2ncSmnkR1Vw91T_9wMU0dRI', {action: 'LOGIN'});
+            });
+        }
+    </script>
 </body>
 </html>

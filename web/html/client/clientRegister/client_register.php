@@ -37,7 +37,7 @@ $isValid = $client ? true : false;
                     echo '<form method="post" action="/client/clientRegister/createAccount.php" class="form__success" id="page0">
                     <p>Un mail contenant un code de vérification vous a été envoyé. Veuillez le saisir dans le champ ci-dessous.</p>';
                     Input::render("connection__input", "code", "number", null, "inputCode", "Code", true);
-                    Button::render("connection__button", "submitBtn", "Valider",ButtonType::Client,false,false,true);
+                    Button::render("", "", "",ButtonType::Client,false,false,true);
                     echo '<p>' . $client->getMail() . ' n\'est pas votre mail ? <a href="/client/clientRegister/changeMail.php">Modifier</a></p>';
                     echo '</form>' ;
                 }
@@ -93,7 +93,11 @@ $isValid = $client ? true : false;
                         Button::render("next__button", "nextBtn", "Suivant",ButtonType::class,false,false,false);
                     echo '</div>';
 
-                    Button::render("connection__button", "submitBtn", "S'inscrire",ButtonType::Client,false,false,true);
+                    echo '<button type="submit" id="submitBtn" class="button button--client button--vert connection__button g-recaptcha" 
+                            data-sitekey="reCAPTCHA_site_key" 
+                            data-callback="onSubmit"
+                            data-action="submit">S\'inscrire
+                        </button>';
                 } ?>
 
                 <input type="hidden" name="role" value="client">

@@ -115,48 +115,50 @@ function main() {
     });
 
     function generateSubscriptionUrl(event) {
-    event.preventDefault();
+        event.preventDefault();
 
-    const startDate = document.getElementById('start-date').value;
-    const endDate = document.getElementById('end-date').value;
-    const selectedReservations = Array.from(document.querySelectorAll('input[name="checkbox"]:checked')).map(checkbox => checkbox.value);
+        const startDate = document.getElementById('start-date').value;
+        const endDate = document.getElementById('end-date').value;
+        const selectedReservations = Array.from(document.querySelectorAll('input[name="checkbox"]:checked')).map(checkbox => checkbox.value);
 
-    if (!startDate || !endDate || selectedReservations.length === 0) {
-        alert("Veuillez remplir tous les champs et sélectionner au moins une réservation.");
-        return;
+        console.log(startDate, endDate, selectedReservations);
+
+        if (!startDate || !endDate || selectedReservations.length === 0) {
+            alert("Veuillez remplir tous les champs et sélectionner au moins une réservation.");
+            return;
+        }
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/owner/consulter_reservations/generer_abonnement.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        if (response.success) {
+                            document.getElementById('subscription-url').value = response.url;
+                            document.querySelector('.subscription-url').style.display = 'block';
+                        } else {
+                            alert(response.message);
+                        }
+                    } catch (e) {
+                        console.error('Invalid JSON response', e);
+                        alert('Une erreur s\'est produite lors de la génération de l\'URL.');
+                    }
+                } else {
+                    alert('Erreur de serveur. Veuillez réessayer plus tard.');
+                }
+            }
+        };
+
+        const requestData = `reservations=${selectedReservations.join(",")}&startDate=${startDate}&endDate=${endDate}`;
+        xhr.send(requestData);
     }
 
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/owner/consulter_reservations/generer_abonnement.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                try {
-                    const response = JSON.parse(xhr.responseText);
-                    if (response.success) {
-                        document.getElementById('subscription-url').value = response.url;
-                        document.querySelector('.subscription-url').style.display = 'block';
-                    } else {
-                        alert(response.message);
-                    }
-                } catch (e) {
-                    console.error('Invalid JSON response', e);
-                    alert('Une erreur s\'est produite lors de la génération de l\'URL.');
-                }
-            } else {
-                alert('Erreur de serveur. Veuillez réessayer plus tard.');
-            }
-        }
-    };
 
-    const requestData = `reservations=${selectedReservations.join(",")}&startDate=${startDate}&endDate=${endDate}`;
-    xhr.send(requestData);
-}
-
-    
-    
 
     function copyToClipboard() {
         const input = urlInput;
@@ -165,7 +167,7 @@ function main() {
         alert("URL copiée dans le presse-papiers !");
     }
 
-    form.addEventListener('submit', generateSubscriptionUrl);
+    // form.addEventListener('submit', generateSubscriptionUrl);
 
     if (copyButton) {
         copyButton.addEventListener('click', copyToClipboard);
