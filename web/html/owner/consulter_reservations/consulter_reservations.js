@@ -7,6 +7,7 @@ const checkboxAll = document.getElementsByName("checkboxAll");
 let current_tab = 1;
 
 reservations.innerHTML = "Chargement...";
+let selected_reservations = [];
 
 function applyCheckboxes() {
     checkboxAll[0].addEventListener("change", () => {
@@ -14,8 +15,12 @@ function applyCheckboxes() {
             checkbox.checked = checkboxAll[0].checked;
         });
 
+        selected_reservations = [];
+
         if (checkboxAll[0].checked) {
-            selected_reservations = Array.from({length: checkboxes.length}, (_, index) => index);
+            checkboxes.forEach((checkbox) => {
+                selected_reservations.push(checkbox.parentElement.parentElement.dataset.reservationid);
+            });
         } else {
             selected_reservations = [];
         }
@@ -31,7 +36,7 @@ function applyCheckboxes() {
                 checkboxAll[0].checked = false;
                 selected_reservations = selected_reservations.filter(reservation => reservation !== index);
             } else {
-                selected_reservations.push(index);
+                selected_reservations.push(checkbox.parentElement.parentElement.dataset.reservationid);
             }
 
             let isAtLeastOneChecked = selected_reservations.length > 0;
@@ -72,8 +77,6 @@ function main() {
     const exportSelectionType = document.querySelectorAll(".export-selection")[0];
     const closeButton = document.querySelectorAll(".closeExport")[0];
     const exportCheckboxes = document.querySelectorAll('[name="checkboxCSV"], [name="checkboxICAL"]');
-
-    let selected_reservations = [];
 
     exportationButton.classList.toggle("button--disabled");
     exportationButton.disabled = true;
