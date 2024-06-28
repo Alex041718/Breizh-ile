@@ -64,7 +64,6 @@ class SubscriptionService extends Service
 
         $pdo = self::getPDO();
         $stmt = $pdo->query("SELECT * FROM _Subscription WHERE userID = '" . $userID . "';");
-        $row = $stmt->fetch();
 
         while ($row = $stmt->fetch()) {
             $reservations[] = new Subscription($row['subscriptionID'], $row['token'], new DateTime($row['beginDate']), new DateTime($row['endDate']), $row['userID']);
