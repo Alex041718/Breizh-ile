@@ -11,9 +11,6 @@ class ImageService extends Service{
         $pdo = self::getPDO();
         $source =$image->getImageSrc();
         //FIXME solution temporaire
-        if(str_contains($source, "=")){
-            $source = explode("=", $source)[1];
-        }
         $stmt = $pdo->prepare('INSERT INTO _Image (src) VALUES (:imageSrc)');
         $stmt->bindParam(':imageSrc', $source);
         $stmt->execute();
