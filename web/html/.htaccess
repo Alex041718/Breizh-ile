@@ -22,6 +22,12 @@ RewriteRule ^client/reservations-liste$ /client/consulterReservations/clientRese
 # Rediriger /client/connection vers /client/clientConnection/client_connection.php
 RewriteRule ^client/connection$ /client/clientConnection/client_connection.php [L]
 
+# Rediriger /client/register vers /client/clientRegister/client_register.php
+RewriteRule ^client/register$ /client/clientRegister/client_register.php [L]
+
+# Rediriger /client/create-account vers /client/clientRegister/client_create_account.php
+RewriteRule ^client/create-account$ /client/clientRegister/client_create_account.php [L]
+
 # Rediriger /logement vers /client/ficheLogement/page.php
 RewriteRule ^logement$ /client/ficheLogement/page.php [L]
 
@@ -31,16 +37,39 @@ RewriteRule ^logement/devis$ /client/bid/bid.php [L]
 # Rediriger /detail-reservation vers /client/consulter_detail_reservation/consulter_detail_reservation.php
 RewriteRule ^detail-reservation$ /client/consulter_detail_reservation/consulter_detail_reservation.php [L]
 
-# Rediriger /client-forgot-password /client/clientForgotPassword/clientForgotPassword.php
+# Rediriger /client/forgot-password /client/clientForgotPassword/clientForgotPassword.php
 RewriteRule ^client/forgot-password$ /client/clientForgotPassword/clientForgotPassword.php [L]
 
+# Rediriger /client/forgot-password /client/clientForgotPassword/reset-password-page.php
+RewriteRule ^client/reset-password$ /client/clientForgotPassword/reset-password-page.php [L]
+
+# Rediriger /client/forgot-password /client/clientForgotPassword/reset-password-page.php
+RewriteRule ^client/exporter$ /client/consulter_reservations/gerer_abonnements_ical.php [L]
+
+# Rediriger /calendar/id vers /owner/consulter_logement/logement.php
+RewriteRule ^/client/calendar/([a-zA-Z0-9_.-]*)$ /client/consulter_reservations/iCal.php?token=$1 [L]
+
+
+
 # REDIRECTIONS PROPRIETAIRE #
+
+# Rediriger /back/forgot-password /owner/ownerForgotPassword/ownerForgotPassword.php
+RewriteRule ^back/forgot-password$ /owner/ownerForgotPassword/ownerForgotPassword.php [L]
+
+# Rediriger /back/forgot-password /owner/clientForgotPassword/reset-password-page.php
+RewriteRule ^back/reset-password$ /owner/ownerForgotPassword/reset-password-page.php [L]
 
 # Rediriger /back vers /back/connection
 RewriteRule ^back$ /back/connection [L]
 
 # Rediriger /back/connection vers /owner/ownerConnection/owner_connection.php
 RewriteRule ^back/connection$ /owner/ownerConnection/owner_connection.php [L]
+
+# Rediriger /back/register vers /owner/clientRegister/owner_register.php
+RewriteRule ^back/register$ /owner/ownerRegister/owner_register.php [L]
+
+# Rediriger /calendar/id vers /owner/consulter_logement/logement.php
+RewriteRule ^calendar/([a-zA-Z0-9_.-]*)$ /owner/consulter_reservations/iCal.php?token=$1 [L]
 
 # Rediriger /back/reservations vers /owner/consulter_reservations/consulter_reservations.php
 RewriteRule ^back/reservations$ /owner/consulter_reservations/consulter_reservations.php [L]
@@ -52,6 +81,13 @@ RewriteRule ^back/detail-reservation$ /owner/consulter_detail_reservation/consul
 RewriteRule ^back/creer-logement$ /owner/creer_un_logement/creer_un_logement.php [L]
 # Rediriger /back/logements/id vers /owner/consulter_logement/logement.php
 RewriteRule ^back/logements/([0-9]+)$ /owner/consulter_logement/logement.php?housingID=$1 [L]
+
+# Rediriger /client/profil/id vers /client/consulter_profil/consulter_profil.php
+RewriteRule ^client/profil/([0-9]+)$ /client/consulter_profil/consulter_profil.php?ownerID=$1 [L]
+
+# Rediriger /client/profil/id vers /back/consulter_profil/consulter_profil.php
+RewriteRule ^back/profil/([0-9]+)$ /owner/consulter_profil/consulter_profil.php?clientID=$1 [L]
+
 # Rediriger /back/reservations vers /owner/consulter_reservations/consulter_reservations.php
 RewriteRule ^back/logements$ /owner/consulter_logements/consulter_logements.php [L]
 

@@ -7,30 +7,81 @@
     font-family: 'Outfit', sans-serif;
 }
 
+main {
+
+    &.global-ui {
+
+        min-height: 60vh;
+        padding-left: 150px;
+        padding-right: 150px;
+        padding-top: 135px;
+        padding-bottom: 2em;
+        background-color: $backgroundColorPage;
+
+
+        @media screen and (max-width: 1024px) {
+            padding-top: 170px;
+            padding-left: 75px;
+            padding-right: 75px;
+        }
+
+        @media screen and (max-width: 768px) {
+            padding-top: 110px;
+            padding-left: 75px;
+            padding-right: 75px;
+        }
+
+        @media screen and (max-width: 425px) {
+            padding-top: 110px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+    }
+}
+
+
+
 // Title
 
 h1 {
     font-size: $font-size-3xl;
     font-weight: bold;
     margin: 0;
+
+    @media (min-width: 1920px) {
+        font-size: 56px;
+    }
 }
 
 h2 {
     font-size: $font-size-2xl;
     font-weight: bold;
     margin: 0;
+
+    @media (min-width: 1920px) {
+        font-size: 48px;
+    }
 }
 
 h3 {
     font-size: $font-size-xl;
     font-weight: bold;
     margin: 0;
+
+    @media (min-width: 1920px) {
+        font-size: 30px;
+    }
 }
 
 h4 {
     font-size: $font-size-lg;
     font-weight: bold;
     margin: 0;
+
+    @media (min-width: 1920px) {
+        font-size: 20px;
+    }
 }
 
 
@@ -39,6 +90,10 @@ h4 {
 p {
     margin: 0;
     font-size: $font-size-base;
+
+    @media (min-width: 1920px) {
+        font-size: 16px;
+    }
 }
 
 .para {

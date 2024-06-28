@@ -10,6 +10,9 @@ $redirect = $_GET['redirect'] ?? '/';
 // décode l'url
 $redirect = urldecode($redirect);
 
+
+
+
 header('Location: '. $redirect);
 exit();
 

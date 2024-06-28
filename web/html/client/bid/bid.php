@@ -36,8 +36,13 @@
     $numberPerson = $bid['numberPerson'];
     $beginDate = $bid['beginDate'];
     $endDate = $bid['endDate'];
+    echo (SessionService::get('oldPage') ?? '/') . '&error=Veuillez%saisir%une%période%valide.' ;
 
-
+    
+    if (isset($_POST['endDate']) && isset($_POST['beginDate']) && ($_POST['endDate'] != $endDate || $_POST['beginDate'] != $beginDate)) {
+        header('Location: '. (SessionService::get('oldPage') ?? '/') . '&error=Veuillez%saisir%une%période%valide.');
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -57,81 +62,109 @@ require_once("../../components/Header/header.php");
 Header::render(true,false,$isAuthenticated,$_SERVER['REQUEST_URI']);
 ?>
 
-<main class="bid">
-    <span>la barre de progression</span>
-    <div class="bid__container">
+<main>
 
-        <h2 class="bid__container__title-page">Votre devis pour séjourné à <?= $housing->getAddress()->getCity() ?> :</h2>
 
-        <div class="bid__container__info">
-            <div class="bid__container__info__info-detail">
-                <div class="bid__container__info__info-detail__description">
-                    <div class="bid__container__info__info-detail__description__image">
-                        <img src="<?= $housing->getImage()->getImageSrc() ?>" alt="Image du logement">
+
+    <div class="bid">
+
+        <div class="bid__container">
+
+            <?php
+            require_once("../../components/BackComponent/BackComponent.php");
+            BackComponent::render("", "", "Vos réservations", "");
+            ?>
+
+            <h2 class="bid__container__title-page">Votre devis pour séjourné à <?= $housing->getAddress()->getCity() ?> :</h2>
+
+            <div class="bid__container__info">
+                <div class="bid__container__info__info-detail">
+                    <div class="bid__container__info__info-detail__description">
+                        <div class="bid__container__info__info-detail__description__image">
+                            <img src="<?= $housing->getImage()->getImageSrc() ?>" alt="Image du logement">
+                        </div>
+                        <div class="bid__container__info__info-detail__description__content">
+                            <h3><?= $housing->getTitle() ?></h3>
+                            <p class="para--18px bid__container__info__info-detail__description__content__desc"><?= $housing->getShortDesc() ?></p>
+                            <div class="bid__container__info__info-detail__kpi">
+                                <div class="bid__container__info__info-detail__kpi__item"><?= $intervalDay ?> nuits</div>
+                                <div class="bid__container__info__info-detail__kpi__item"><?= $numberPerson ?> personnes</div>
+                                <!--<div class="bid__container__info__info-detail__kpi__item"><?= $housing->getNbSimpleBed() ?> lit(s) simple(s)</div>
+                        <div class="bid__container__info__info-detail__kpi__item"><?= $housing->getNbDoubleBed() ?> lit(s) double(s)</div> -->
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="bid__container__info__info-detail__description__content">
-                        <h3><?= $housing->getTitle() ?></h3>
-                        <p class="para--18px>"><?= $housing->getLongDesc() ?></p>
-                    </div>
-                </div>
 
-                <div class="bid__container__info__info-detail__kpi">
-                    <div class="bid__container__info__info-detail__kpi__item"><?= $intervalDay ?> nuits</div>
-                    <div class="bid__container__info__info-detail__kpi__item"><?= $numberPerson ?> personnes</div>
-                    <!--<div class="bid__container__info__info-detail__kpi__item"><?= $housing->getNbSimpleBed() ?> lit(s) simple(s)</div>
-                    <div class="bid__container__info__info-detail__kpi__item"><?= $housing->getNbDoubleBed() ?> lit(s) double(s)</div> -->
 
-                </div>
 
-                <div class="bid__container__info__info-detail__dates">
-                    <h3>Du <?= $beginDate->format('d/m/Y') ?> au <?= $endDate->format('d/m/Y') ?></h3>
-                </div>
-            </div>
-            <div class="bid__container__info__pay-recap">
-
-                <div class="bid__container__info__pay-recap__price-detail">
-                    <h3>Détails du prix</h3>
-                    <?php
-                    // CALCUL !
-
-                    $nights = $housing->getPriceIncl()*$intervalDay;
-                    $serviceFee = $nights*0.01;
-                    $sejourTax = 1*$intervalDay*$numberPerson;
-                    $total = $nights + $serviceFee + $sejourTax;
-                    ?>
-
-                    <div>
-                        <p class="para--18px"><?= $housing->getPriceIncl() ?> € x <?= $intervalDay ?> nuits</p>
-                        <p class="para--18px"><?= $nights ?> €</p>
-                    </div>
-                    <div>
-                        <p class="para--18px" >Frais de service</p>
-                        <p class="para--18px"><?= $serviceFee  ?> €</p>
-                    </div>
-                    <div>
-                        <p class="para--18px">Taxee de séjour</p>
-                        <p class="para--18px"><?= $sejourTax ?> €</p>
-                    </div>
-                    <hr>
-                </div>
-
-                <div class="bid__container__info__pay-recap__price-total">
-                    <div>
-                        <h3>Total TTC</h3>
-                        <p class="para--18px"><?= $total ?> €</p>
+                    <div class="bid__container__info__info-detail__dates">
+                        <h3>Du <?= $beginDate->format('d/m/Y') ?> au <?= $endDate->format('d/m/Y') ?></h3>
                     </div>
                 </div>
+                <div class="bid__container__info__pay-recap">
+
+                    <div class="bid__container__info__pay-recap__price-detail">
+                        <h3>Détails du prix</h3>
+                        <?php
+                        // CALCUL !
+
+                        $nights = $housing->getPriceIncl()*$intervalDay;
+                        $serviceFee = $nights*0.01;
+                        $sejourTax = 1*$intervalDay*$numberPerson;
+                        $total = $nights + $serviceFee + $sejourTax;
+
+
+                        // import PriceHelper
+                        require_once('../../helper/PriceHelper.php');
+
+                        $calcul = new PriceHelper($numberPerson, $intervalDay, $housing->getPriceIncl());
+                        $nights = $calcul->getPriceMultipleNight();
+                        $serviceFee = $calcul->getServiceFee();
+                        $sejourTax = $calcul->getTouristTax();
+                        $totalHT = $calcul->getTotalHT();
+                        $total = $calcul->getTotalTTC();
+
+                        ?>
+
+                        <div>
+                            <p class="para--18px"><?= $housing->getPriceIncl() ?> € x <?= $intervalDay ?> nuits</p>
+                            <p class="para--18px"><?= $nights ?> €</p>
+                        </div>
+                        <div>
+                            <p class="para--18px" >Frais de service</p>
+                            <p class="para--18px"><?= $serviceFee  ?> €</p>
+                        </div>
+                        <div>
+                            <p class="para--18px">Taxee de séjour</p>
+                            <p class="para--18px"><?= $sejourTax ?> €</p>
+                        </div>
+                        <div>
+                            <p class="para--18px">Total Hors Taxe</p>
+                            <p class="para--18px"><?= $totalHT ?> €</p>
+                        </div>
+
+                        <hr>
+                    </div>
+
+                    <div class="bid__container__info__pay-recap__price-total">
+                        <div>
+                            <h3>Total TTC</h3>
+                            <p class="para--18px"><?= $total ?> €</p>
+                        </div>
+                    </div>
 
 
 
 
 
 
-                    <?php require_once('../../components/Button/Button.php');
-                    Button::render("bid__container__info__pay-recap__button","id","Procéder au paiement",ButtonType::Client,"window.location.href = '/logement/payment'",false);
-                    ?>
+                        <?php require_once('../../components/Button/Button.php');
+                        Button::render("bid__container__info__pay-recap__button","id","Procéder au paiement",ButtonType::Client,"window.location.href = '/logement/payment'",false);
+                        ?>
 
 
+                </div>
             </div>
         </div>
     </div>

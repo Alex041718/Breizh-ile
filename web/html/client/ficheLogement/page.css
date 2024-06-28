@@ -1,7 +1,7 @@
 main {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 body {
@@ -13,6 +13,34 @@ body {
   text-align: center;
 }
 
+#animated-image-container {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(0%, 0%) rotate(0deg);
+}
+
+#animated-image {
+  width: 700px;
+  height: auto;
+  animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(0); /* Starting position */
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(360deg) scale(1.2); /* Rotation and scale up */
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1); /* Final position */
+    opacity: 1;
+  }
+}
 .photoAndReservation {
   display: flex;
   width: 100%;
@@ -72,7 +100,7 @@ body {
   margin-top: 0.5em;
   gap: 0.5em;
 }
-.photoAndReservation .reservation .price h1 {
+.photoAndReservation .reservation .price h2 {
   color: #307B5C;
 }
 .photoAndReservation .reservation .reservationBtn {
@@ -128,20 +156,19 @@ body {
 .page {
   height: 100%;
   max-width: 1920px;
-  margin: 8em;
+  background-color: #FFFFFF;
+  padding-block: 100px;
+  padding-inline: 100px;
+  border-radius: 10px;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .page {
-    margin: 3em;
+    padding-inline: 25px;
   }
 }
 .page #title {
-  margin-bottom: 0.5em;
-}
-@media screen and (max-width: 768px) {
-  .page #title {
-    margin-top: 3em;
-  }
+  margin-top: 1em;
+  margin-bottom: 2em;
 }
 .page #overlay {
   display: none;
@@ -205,7 +232,7 @@ body {
 
 .twodiv {
   width: 100%;
-  height: 40em;
+  height: 100%;
   display: flex;
   gap: 3em;
   flex-direction: row;
@@ -221,7 +248,7 @@ body {
   width: 50%;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: auto;
 }
 @media screen and (max-width: 768px) {
   .twodiv .localisation {
@@ -343,7 +370,7 @@ body {
   gap: 1.5em;
   min-width: 45%;
 }
-.twodiv .details .popupCriteres .popup__content .section .items .item i {
+.twodiv .details .popupCriteres .popup__content .section .items .item #icon {
   color: #307B5C;
 }
 
@@ -449,6 +476,8 @@ body {
   display: flex;
   align-items: center;
   gap: 1em;
+  text-decoration: none;
+  color: #1D1D1D;
 }
 .proprio img {
   width: 70px;

@@ -22,5 +22,10 @@ export function Toast(message, type) {
 
     setTimeout(() => {
         toast.remove();
-    }, 3000);
+    }, 8000);
 }
+
+
+console.log("Toast loaded");
+
+//Toast("Hello", "success");

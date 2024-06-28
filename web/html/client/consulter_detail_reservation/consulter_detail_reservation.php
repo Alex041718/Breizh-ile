@@ -6,7 +6,7 @@
     };
 
     // ------------------- Systeme de session -------------------
-    // Il faut tout ceci pour réccupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
+    // Il faut tout ceci pour récupérer la session de l'utilisateur sur une page où l'on peut ne pas être connecté
     require_once '../../../models/Client.php';
     require_once '../../../services/ClientService.php';
     require_once '../../../services/SessionService.php'; // pour le menu du header
@@ -108,17 +108,23 @@
     $reservation_postalAdress = $housing->getAddress()->getPostalAddress();
 
 
-    $reservation_prixTTC = number_format($reservation_prixIncl * $reservation_nbJours + $reservation_serviceCharge + $reservation_touristTax, 2);
+    $reservation_prixTTC = number_format(($reservation_prixIncl * $reservation_nbJours + $reservation_serviceCharge + $reservation_touristTax) * 1.20, 2);
 
 ?>
 
 
     <main>
+
+        <?php
+        require_once("../../components/BackComponent/BackComponent.php");
+        BackComponent::render("", "", "Retour", "");
+        ?>
         <div class="title">
             <div class="title__arrow">
-                <a href="/client/consulterReservations/clientReservations.php"><i class="fa-solid fa-arrow-left"></i></a>
-                <h2>Ma réservation</h2>
+
+
             </div>
+
             <div class="title__date">
                 <h4>Voyage  à Lannion du <?= $reservation_dateDebut->format('d-m-Y').' au '.$reservation_dateFin->format('d-m-Y') ?></h4>
             </div>
@@ -152,20 +158,27 @@
                 <div class="informations__left__total">
                     <div>
                         <h3>Total TTC</h3>
-                        <p class="para--18px"><?= $reservation_prixTTC ?> €</p>
+                        <p class="para--18px"><?= $reservation_prixTTC?> €</p>
                     </div>
                 </div>
+                <form action="/controllers/client/clientDownloadReceiptController.php" method="post" target="_blank">
+                    <input type="hidden" name="reservationID" value="<?= $reservation->getId() ?>">
+                    <?php
+                    //import button
+                    require_once '../../components/Button/Button.php';
+
+                    Button::render("submit", "submit", "Télécharger la facture", ButtonType::Client,"",true,true,"");
+                    ?>
+                </form>
             </section>
+
             <section class="informations__right">
                 <div class="informations__right__desc">
-                    <img src=<?=$owner_pp?> alt="">
+                    <img src=<?=$owner_pp?> alt="Photo de profil">
                     <div class="informations__right__desc__info">
                         <div class="informations__right__desc__info__perso">
                             <h3><?= $owner_telephone ?></h3>
                             <p><?= $owner_mail ?></p>
-                        </div>
-                        <div class="informations__right__desc__info__vide">
-
                         </div>
                         <div class="informations__right__desc__info__icons">
                             <a href="tel:<?= $owner_telephone ?>"><i id="telephone" class="fa-solid fa-phone"></i></a>

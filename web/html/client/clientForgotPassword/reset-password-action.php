@@ -4,7 +4,6 @@ require_once('../../../services/ClientService.php');
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     if(isset($_POST['firstPasswordEntry'], $_POST['secondPasswordEntry'], $_POST['clientId'])) {
         if($_POST['firstPasswordEntry'] == $_POST['secondPasswordEntry']){
             $newPassword = $_POST['firstPasswordEntry'];

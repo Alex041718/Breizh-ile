@@ -3,11 +3,15 @@ body {
 }
 
 main {
-  margin-top: 135px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding-block: 100px;
+  padding-inline: 100px;
 }
 @media screen and (max-width: 1024px) {
   main {
-    margin-top: 75px;
+    padding-inline: 25px;
   }
 }
 main .title {
@@ -15,7 +19,6 @@ main .title {
   align-items: center;
   flex-direction: row;
   justify-content: center;
-  margin: 40px;
 }
 main .title .title__arrow {
   display: flex;
@@ -31,21 +34,14 @@ main .title .title__arrow i {
 main .title .title__date {
   display: flex;
 }
-@media screen and (max-width: 1024px) {
-  main .title .title__date {
-    padding-top: 100px;
-  }
-}
 main .informations {
+  background-color: #FFFFFF;
+  border-radius: 10px;
   display: flex;
-  padding-inline: 50px;
-  padding-bottom: 100px;
 }
 @media screen and (max-width: 1024px) {
   main .informations {
     flex-direction: column;
-    padding-left: 25px;
-    padding-right: 25px;
   }
 }
 main .informations .informations__left {
@@ -68,9 +64,14 @@ main .informations .informations__left .informations__left__logement {
   display: flex;
   align-items: center;
 }
+@media screen and (max-width: 560px) {
+  main .informations .informations__left .informations__left__logement {
+    flex-direction: column;
+  }
+}
 main .informations .informations__left .informations__left__logement img {
-  width: 250px;
-  height: 150px;
+  width: 50%;
+  height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 10px;
@@ -79,6 +80,12 @@ main .informations .informations__left .informations__left__logement img {
   main .informations .informations__left .informations__left__logement img {
     width: 175px;
     height: 100px;
+  }
+}
+@media screen and (max-width: 560px) {
+  main .informations .informations__left .informations__left__logement img {
+    width: 100%;
+    height: 100%;
   }
 }
 main .informations .informations__left .informations__left__logement .informations__left__logement__info {
@@ -138,6 +145,7 @@ main .informations .informations__right .informations__right__desc .informations
   padding: 25px;
   align-items: center;
   width: 100%;
+  justify-content: space-between;
 }
 @media screen and (max-width: 1024px) {
   main .informations .informations__right .informations__right__desc .informations__right__desc__info {
@@ -145,7 +153,8 @@ main .informations .informations__right .informations__right__desc .informations
   }
 }
 main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__perso {
-  width: 50%;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 @media screen and (max-width: 1024px) {
   main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__perso {
@@ -163,7 +172,8 @@ main .informations .informations__right .informations__right__desc .informations
 main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__icons {
   display: flex;
   gap: 25px;
-  width: 20%;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 main .informations .informations__right .informations__right__desc .informations__right__desc__info .informations__right__desc__info__icons i {
   text-decoration: none;

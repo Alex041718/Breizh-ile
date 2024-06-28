@@ -13,8 +13,10 @@
     height: 100vh;
     pointer-events: none;
     transition: all 0.2s;
-    
-    i {
+    z-index: 2000;
+
+      
+    #xClose {
         position: absolute;
         color: #3f3f3fee;
         right: 25px;

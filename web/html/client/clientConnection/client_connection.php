@@ -1,3 +1,24 @@
+<?php
+
+require_once '../../../services/SessionService.php'; // pour le menu du header
+$isAuthenticated = SessionService::isClientAuthenticated();
+
+if($isAuthenticated) {
+    header("Location: /");
+}
+
+if(isset($_GET["error"]) && $_GET["error"] == "loginFailed") {
+    $_GET["error"] = "Mot de passe incorrect";
+}
+
+// Affichage des toasts
+// Service de session
+// Affichage des toasts
+SessionService::loadToast();
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,13 +40,14 @@
 
                 <?php require_once("../../components/Input/Input.php"); ?>
 
-                <?= (isset($_GET["redirect"]) ? "<input type='hidden' name='redirect' value='" . $_GET["redirect"] . "'>" : "<input type='hidden' name='redirect' value='" . "/back" . "'>") ?>
+                <?= (isset($_GET["redirect"]) ? "<input type='hidden' name='redirect' value='" . $_GET["redirect"] . "'>" : "<input type='hidden' name='redirect' value='" . "/" . "'>") ?>
+                <?= isset($_GET["error"]) && $_GET["error"] != "" ? '<p class="error">' . $_GET["error"] . '</p>' : "" ?>
 
                 <?php Input::render("connection__input", "mail", "text", "E-mail", "mail", "Entrez votre e-mail", true); ?>
 
                 <?php Input::render("connection__input", "password", "password", "Mot de Passe", "password", "Entrez votre mot de passe", true); ?>
 
-                <a href="/client/clientForgotPassword/clientForgotPassword.php" class="connectionContainer__box__forgot">J'ai oublié mon mot de passe</a>
+                <a href="/client/forgot-password" class="connectionContainer__box__forgot">J'ai oublié mon mot de passe</a>
 
                 <input type="hidden" name="role" value="client">
 
@@ -40,7 +62,9 @@
                 <p>OU</p>
                 <div class="horizontal-line"></div>
             </div>
-          <p class="para--18px">Pas encore de compte ? <a href="">S'inscrire</a> </p>       
+            <p class="para--18px">Pas encore de compte ? <a href="/client/register">S'inscrire</a> </p>
     </div>
+
+
 </body>
 </html>

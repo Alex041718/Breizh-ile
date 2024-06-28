@@ -1,4 +1,6 @@
-import {Toast} from '../../components/Toast/Toast.js';
+import { showApiKeys } from "./getApiKeys.js";
+import { loadPopUp } from "/components/Popup/popup.js";
+import { Toast } from "/components/Toast/Toast.js";
 
 document.addEventListener("DOMContentLoaded", function() {
     const passwordInput = document.querySelector('#firstPasswordEntry input');
@@ -29,18 +31,53 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const infosBtn = document.getElementById('infos__btn');
     const securityBtn = document.getElementById('security__btn');
+    const apiBtn = document.getElementById('api__btn');
+    const apiCreateBtn = document.querySelector('.button--api');
 
     const securityForm = document.querySelector('.content__security form');
     const personalDataForm = document.querySelector('.content__personnal-data form');
 
-    securityBtn.addEventListener("click", toggle);
-    infosBtn.addEventListener("click", toggle);
+    const apiForm = document.querySelector('.content__api');
+
+    securityBtn.addEventListener("click", function() {
+        toggle();
+
+        securityBtn.classList.add("active");
+        security.classList.add('content__display');
+    });
+
+    infosBtn.addEventListener("click", function() {
+        toggle();
+
+        infosBtn.classList.add("active");
+        infos.classList.add('content__display');
+    });
+
+    apiBtn.addEventListener("click", function() {
+        toggle();
+
+        apiBtn.classList.add("active");
+        apiForm.classList.add('content__display');
+    });
+
+    apiCreateBtn.addEventListener("click", function() {
+        fetch('/owner/ownerProfile/createApiKey.php', {
+            method: 'POST'
+        })
+        .then(_ => {
+            showApiKeys();
+
+            loadPopUp();
+        })
+    });
 
     function toggle() {
-        securityBtn.classList.toggle("active");
-        infosBtn.classList.toggle("active");
-        infos.classList.toggle('content__display');
-        security.classList.toggle('content__display');
+        securityBtn.classList.remove("active");
+        infosBtn.classList.remove("active");
+        apiBtn.classList.remove("active");
+        infos.classList.remove('content__display');
+        security.classList.remove('content__display');
+        apiForm.classList.remove('content__display');
     }
 
     function handleFormSubmit(form) {
@@ -53,8 +90,8 @@ document.addEventListener("DOMContentLoaded", function() {
             const firstPassword = formData.get('firstPasswordEntry');
             const secondPassword = formData.get('secondPasswordEntry');
 
-            if (firstPassword !== secondPassword) {
-                Toast("Les mots de passe sont différents.", "warning"); // Log "KO" if passwords do not match
+            if (firstPassword !== secondPassword ) {
+                Toast("Les Mot de passe sont différents.", "warning"); // Log "KO" if passwords do not match
                 return; // Exit function if passwords do not match
             }
 

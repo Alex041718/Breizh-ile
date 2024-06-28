@@ -5,6 +5,8 @@ require_once '../../../services/ReservationService.php';
 require_once '../../../services/ClientService.php';
 require_once '../../../services/HousingService.php';
 require_once '../../../services/PayementMethodService.php';
+require_once '../../../models/Receipt.php';
+require_once '../../../services/ReceiptService.php';
 
 
 
@@ -39,11 +41,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $housing = HousingService::getHousingByID($housingID);
         $payMethod = PayementMethodService::getPayementMethodByID($payMethodID);
 
+        // check if the housing is available
+
+        $isOnline = $housing->getIsOnline();
+
+        require_once '../../../services/SessionService.php';
+
+        if (!$isOnline) {
+            // redirection vers la page home avec un toast expliquant que le logement n'est plus disponible
+
+            SessionService::createToast('Le logement n\'est plus disponible', 'error');
+
+            header('Location: /');
+            exit();
+
+        }
+
         // Créer une nouvelle instance de Reservation
         $reservation = new Reservation(null, $beginDate, $endDate, $serviceCharge, $touristTax, $status, $nbPerson, $priceIncl, $housing, $payMethod, $client);
+        // Créer une nouvelle instance de Receipt
+
+        // calcul
+        $intervalDay = $beginDate->diff($endDate)->days;
+        $nights = $housing->getPriceIncl()*$intervalDay;
+        $serviceFee = $nights*0.01;
+        //$sejourTax = 1*$intervalDay*$nbPerson;
+        $totalTTC = $nights + $serviceFee + $touristTax;
+        $TVA = 0.2;
+        $totalTVA = $totalTTC*$TVA;
+        $totalHT = $totalTTC - $totalTVA;
+        $paymentDate = new DateTime();
+
+        $receipt = new Receipt(null, $reservation, new DateTime(), $touristTax, $totalHT, $totalTVA, $totalTTC, $TVA, $paymentDate, $payMethod, $client);
 
         // Insérer la nouvelle réservation dans la base de données
-        ReservationService::createReservation($reservation);
+        $reservation = ReservationService::createReservation($reservation);
+        // Insérer le nouveau reçu dans la base de données
+
+        $receipt->setReservation($reservation);
+
+        ReceiptService::createReceipt($receipt);
+
+        // import de la session
+
+
+        SessionService::remove('currentBid');
+
+        SessionService::createToast('Réservation créée !', 'success');
 
         // Rediriger ou afficher un message de succès
         header('Location: /client/reservations-liste?success=1');

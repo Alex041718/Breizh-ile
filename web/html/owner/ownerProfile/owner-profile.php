@@ -48,7 +48,7 @@ $owner = OwnerService::GetOwnerById($ownerID);
 
     <?php
     require_once ("../../components/Header/header.php");
-    Header::render(true, true, $isAuthenticated, '/owner/profile');
+    Header::render(isScrolling: True, isBackOffice: True, isAuthenticated: $isAuthenticated, redirectAuthPath: '/back/profile');
     ?>
     <main class="content">
         <nav>
@@ -63,6 +63,13 @@ $owner = OwnerService::GetOwnerById($ownerID);
                     <span>Sécurité</span>
                     <div class="nav-icon">
                         <i class="fa-solid fa-shield"></i>
+                    </div>
+                </li>
+
+                <li id="api__btn">
+                    <span>API</span>
+                    <div class="nav-icon">
+                        <i class="fa-solid fa-file-code"></i>
                     </div>
                 </li>
             </ul>
@@ -191,7 +198,18 @@ $owner = OwnerService::GetOwnerById($ownerID);
                     </div>
                 </div>
         </div>
-        </form>
+        <div id="api" class="content__api">
+            <div class="content__api__contents">
+                <div class="content__api__contents__titles">
+                    <h3 class="content__api__contents__titles__title">API</h3>
+                    <p class="content__api__contents__titles__description">Gérer vos clés d'API</p>
+                </div>
+                <?php Button::render("button--api", "api", "Créer une nouvelle clé API", ButtonType::Owner, "", false, true); ?>
+            </div>
+
+            <div class="content__api__keys">
+                <script type="module" src="/owner/ownerProfile/getApiKeys.js"></script>
+            </div>
         </div>
     </main>
 
@@ -210,6 +228,7 @@ $owner = OwnerService::GetOwnerById($ownerID);
     }
 </script>
 
+    <script type="module" src="/owner/ownerProfile/owner-profile.js"></script>
 </body>
 
 </html>

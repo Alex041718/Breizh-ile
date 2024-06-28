@@ -64,9 +64,19 @@ $endDate = $bid['endDate'];
 // CALCUL !
 //--------------------------------
 $nights = $housing->getPriceIncl() * $intervalDay;
-$serviceFee = $nights * 0.01;
-$sejourTax = 1 * $intervalDay * $numberPerson;
-$total = $nights + $serviceFee + $sejourTax;
+
+
+
+// import PriceHelper
+require_once('../../helper/PriceHelper.php');
+
+$calcul = new PriceHelper($numberPerson, $intervalDay, $housing->getPriceIncl());
+$nights = $calcul->getPriceMultipleNight();
+$serviceFee = $calcul->getServiceFee();
+$sejourTax = $calcul->getTouristTax();
+$totalHT = $calcul->getTotalHT();
+$total = $calcul->getTotalTTC();
+
 //--------------------------------
 
 // payment method
@@ -80,6 +90,7 @@ $paymentMethods = PayementMethodService::GetPayementMethodById(1);
     <title>Validation du paiement</title>
     <link rel="stylesheet" type="text/css" href="/client/reservationPayment/reservation-payment.css">
     <link rel="stylesheet" href="../../style/ui.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -90,12 +101,12 @@ $paymentMethods = PayementMethodService::GetPayementMethodById(1);
 
             <p>Votre séjour à <?= $housing->getAddress()->getCity() ?></p>
             <p>Du <b><?= $beginDate->format('d/m/Y'); ?></b> au <b><?= $endDate->format('d/m/Y'); ?></b></p>
-            <h3 class="reservation-payment__container__price-to-pay"><?= $total ?>€</h3>
+            <h3 class="reservation-payment__container__price-to-pay"><?= round($total, 2) ?>€</h3>
 
                 <?php require_once ("../../components/Button/Button.php"); ?>
             <div class="reservation-payment__container__button-box">
 
-                <?php Button::render("reservation-payment__container__button", "submit", "Annuler", ButtonType::Delete, "", true, false); ?>
+                <?php Button::render("reservation-payment__container__button", "submit", "Annuler", ButtonType::Delete, "window.location.href = '/logement/devis';", true, false); ?>
 
                 <?php Button::render("reservation-payment__container__button", "submit", "Valider le paiement", ButtonType::Client, "", false, true); ?>
 

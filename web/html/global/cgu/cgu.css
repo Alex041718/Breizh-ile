@@ -7,8 +7,15 @@ body .cgu {
   display: flex;
   flex-direction: column;
   gap: 2em;
-  margin: 5em;
+  background-color: #FFFFFF;
+  padding-block: 100px;
+  padding-inline: 100px;
 }
 body .cgu h2 {
   text-align: center;
+}
+@media (max-width: 1024px) {
+  body .cgu {
+    padding-inline: 25px;
+  }
 }/*# sourceMappingURL=cgu.css.map */

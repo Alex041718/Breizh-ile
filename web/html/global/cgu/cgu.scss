@@ -8,10 +8,17 @@ body{
         display: flex;
         flex-direction: column;
         gap: 2em;
-        margin: 5em;
+        background-color: $whiteColor;
 
         h2{
             text-align: center;
+        }
+
+        padding-block: 100px;
+        padding-inline: 100px;
+
+        @media (max-width: 1024px) {
+            padding-inline: 25px;
         }
     }
 }

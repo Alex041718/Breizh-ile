@@ -1,7 +1,7 @@
 <?php
-require_once("../../../services/HousingService.php");
-require_once("../../components/Popup/popup.php");
-require_once("../../components/Button/Button.php");
+require_once "../../../services/HousingService.php";
+require_once "../../components/Popup/popup.php";
+require_once "../../components/Button/Button.php";
 
 session_start();
 
@@ -42,12 +42,13 @@ function showHousings($housings) {
         <a href="/back/logements/<?= $housing->getHousingID() ?>" class="housing">
             <img src="<?= $housing->getImage()->getImageSrc() ?>" alt="Image de logement">
             <p><?= $housing->getTitle() ?></p>
-            <p><?= $housing->getAddress()->getPostalAddress() ?></p>
-            <p><?= $housing->getPriceIncl() ?></p>
+            <p><?= $housing->getAddress()->getStreetNumber() . " " . $housing->getAddress()->getPostalAddress() ?></p>
+            <p><?= number_format($housing->getPriceIncl(), 2) . " €" ?></p>
             <p><?= $housing->getNbPerson() ?></p>
             <p><?= $housing->getBeginDate()->format("d / m / Y") ?></p>
             <p><?= $housing->getEndDate()->format("d / m / Y") ?></p>
             <p class="description-status"><?= $housing->getIsOnline() ? "En ligne" : "Hors ligne" ?><span class="status status--<?= $housing->getIsOnline() ? "online" : "offline" ?>"></span></p>
+            <button data-housingid="<?= $housing->getHousingID() ?>" data-index="<?= $index ?>" id="editHousing-btn" class="edition" onclick="event.preventDefault();"><i class="fa-solid fa-pen-to-square"></i></button>
             <button data-housingid="<?= $housing->getHousingID() ?>" data-index="<?= $index ?>" id="popUpVisibility-btn" class="eye visibilityButtons" onclick="event.preventDefault()"><i class="fa-solid fa-eye"></i></button>
         </a>
     <?php 

@@ -9,6 +9,10 @@ main {
   padding-inline: 50px;
 }
 
+.show-more {
+  text-align: center;
+}
+
 .title {
   display: flex;
   width: 100%;
@@ -107,7 +111,7 @@ main {
   align-items: center;
   height: 100%;
   width: 100%;
-  font-size: max(23px, 1.5625vw);
+  font-size: max(20px, 1.5625vw);
   color: #828282;
 }
 
@@ -122,7 +126,7 @@ main {
   margin-right: 1.2rem;
 }
 
-.eye, .filter {
+.eye, .edition, .filter {
   background: none;
   color: inherit;
   border: none;

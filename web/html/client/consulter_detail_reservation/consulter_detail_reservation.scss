@@ -6,19 +6,25 @@ body{
 }
 
 main {
-    margin-top: 135px;
 
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding-block: 100px;
+    padding-inline: 100px;
 
     @media screen and (max-width: 1024px) {
-        margin-top: 75px;
+        padding-inline: 25px;
 
     }
+
+
     .title {
         display: flex;
         align-items: center;
         flex-direction: row;
         justify-content: center;
-        margin: 40px;
+
 
 
         .title__arrow {
@@ -35,29 +41,24 @@ main {
         .title__date {
             display: flex;
 
-            @media screen and (max-width: 1024px) {
-                padding-top: 100px;
-
-            }
         }
 
     }
 
     .informations {
+        background-color: $whiteColor;
+        border-radius: 10px;
         display: flex;
-        padding-inline: 50px;
-        padding-bottom: 100px;
 
         @media screen and (max-width: 1024px) {
             flex-direction: column;
-            padding-left: 25px;
-            padding-right: 25px;
         }
 
         .informations__left {
             width: 50%;
             border-right: 1px solid #ccc;
             padding-right: 50px;
+
 
 
             @media screen and (max-width: 1024px) {
@@ -75,15 +76,24 @@ main {
                 display: flex;
                 align-items: center;
 
+                @media screen and (max-width: 560px) {
+                    flex-direction: column;
+                }
+
                 img {
-                    width: 250px;
-                    height: 150px;
+                    width: 50%;
+                    height: 100%;
                     object-fit: cover;
                     border-radius:10px;
 
                     @media screen and (max-width: 1024px) {
                         width: 175px;
                         height: 100px;
+                    }
+
+                    @media screen and (max-width: 560px) {
+                        width: 100%;
+                        height: 100%;
                     }
                 }
 
@@ -108,6 +118,10 @@ main {
                 div:nth-child(odd) {
                     background-color: $grey5;
                 }
+            }
+
+            &__receipt-dl-button {
+               margin-top: 2em;
             }
 
             .informations__left__total {
@@ -160,6 +174,7 @@ main {
                     padding: 25px;
                     align-items: center;
                     width: 100%;
+                    justify-content: space-between;
 
                     @media screen and (max-width: 1024px) {
                         padding: 0;
@@ -169,7 +184,7 @@ main {
 
 
                     .informations__right__desc__info__perso {
-                        width: 50%;
+                        width: fit-content;
 
                         @media screen and (max-width: 1024px) {
                             width: 75%;
@@ -189,7 +204,7 @@ main {
                     .informations__right__desc__info__icons {
                         display: flex;
                         gap: 25px;
-                        width: 20%;
+                        width: fit-content;
 
                         i {
                             text-decoration: none;

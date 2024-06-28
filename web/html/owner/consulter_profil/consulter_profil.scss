@@ -1,0 +1,73 @@
+@import '../../style/variables';
+@import '../../style/ui';
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    height: calc(100dvh - 240px);
+    padding-top: 150px;
+    padding-inline: 100px;
+    box-sizing: border-box;
+    color: $black2;
+
+    @media (max-width: 1024px) {
+        height: 100%;
+    }
+
+    .topcontent {
+        padding-block: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @media (max-width: 1024px) {
+            flex-direction: column;
+            align-items: baseline;
+            gap: 25px;
+        }
+    
+        &__presentation {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+
+            p {
+                opacity: 0.7;
+            }
+    
+            img {
+                border-radius: 10px;
+            }
+        }
+    }
+
+    .bottomcontent {
+        display: flex;
+        @media (max-width: 1024px) {
+            flex-direction: column;
+            padding-bottom: 150px;
+            gap: 15px;
+        }
+
+        &__column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 50%;
+
+            @media (max-width: 1024px) {
+                width: 100%;
+            }
+
+            &__info {
+                display: flex;
+                gap: 5px;
+                align-items: center;                
+            }
+        }
+    }
+}
+

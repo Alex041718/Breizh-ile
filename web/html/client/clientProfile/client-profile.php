@@ -36,7 +36,7 @@ $client = ClientService::GetClientById($clientID);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire</title>
     <link rel="stylesheet" href="/client/clientProfile/client-profile.css">
-    <link rel="stylesheet" href="../components/Toast/Toast.css">
+    <link rel="stylesheet" href="/components/Toast/Toast.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
 
     <script type="module" src="/client/clientProfile/client-profile.js"></script>
@@ -48,7 +48,8 @@ $client = ClientService::GetClientById($clientID);
 
     <?php
     require_once ("../../components/Header/header.php");
-    Header::render(true, false, $isAuthenticated, '/client/profile');
+
+    Header::render(isScrolling: true, isBackOffice: false, isAuthenticated: $isAuthenticated, redirectAuthPath: '/client/profile');
     ?>
     <main class="content">
         <nav>
@@ -69,7 +70,14 @@ $client = ClientService::GetClientById($clientID);
         </nav>
 
         <div id="infos" class="content__personnal-data content__display">
-            <h3 class="content__personnal-data__title">Informations Personnelles</h3>
+
+            <?php
+            require_once("../../components/BackComponent/BackComponent.php");
+            BackComponent::render("backButton", "", "Retour", "");
+            ?>
+            <style>.backButton {margin-bottom: 1em;}</style>
+
+            <h2 class="content__personnal-data__title">Informations Personnelles</h2>
 
             <div class="content__personnal-data__top">
                 <p class="content__personnal-data__top__description">Modifier vos informations Personnelles</p>
@@ -122,6 +130,7 @@ $client = ClientService::GetClientById($clientID);
                     Input::render("uneClassEnPlus", "birthDate", "date", "Date de naissance", "birthDate", "Date de naissance", false, $client->getBirthDate()->format('Y-m-d')); ?>
 
                     <!-- Date de création du compte -->
+
                     <input type="hidden" name="creationDate"
                         value="<?php echo ($client->getCreationDate()->format('Y-m-d')) ?>">
                     <input type="hidden" name="clientID" value="<?php echo ($client->getClientID()) ?>">
@@ -137,7 +146,11 @@ $client = ClientService::GetClientById($clientID);
             </form>
         </div>
         <div id="security" class="content__security">
-            <h3 class="content__security__title">Sécurité</h3>
+            <?php
+            require_once("../../components/BackComponent/BackComponent.php");
+            BackComponent::render("backButton", "", "Retour", "");
+            ?>
+            <h2 class="content__security__title">Sécurité</h2>
             <p class="content__security__description">Modifier vos paramètres de sécurités</p>
             <form method="POST" action="/client/clientForgotPassword/reset-password-action.php">
                 <div class="content__security__elements">
@@ -193,6 +206,9 @@ $client = ClientService::GetClientById($clientID);
         </div>
         </form>
         </div>
+        </form>
+        </div>
+
     </main>
 
     <?php
@@ -210,6 +226,7 @@ $client = ClientService::GetClientById($clientID);
     }
 </script>
 
+    <script type="module" src="/client/clientProfile/client-profile.js"></script>
 </body>
 
 </html>
