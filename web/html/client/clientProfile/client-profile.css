@@ -269,6 +269,7 @@ nav ul li.active:hover {
   height: 75px;
   border-radius: 50%;
   justify-self: end;
+  cursor: pointer;
 }
 .content__personnal-data__title {
   width: 10%;
@@ -330,6 +331,22 @@ nav ul li.active:hover {
 }
 .content__security__elements__required__fields {
   color: red;
+  padding-bottom: 10px;
+}
+.content__security__elements__required__fields__lenght {
+  padding-top: 5px;
+}
+.content__security__elements__required__fields__contains {
+  padding-top: 5px;
+}
+.content__security__elements__required__fields__uppercase {
+  padding-top: 5px;
+}
+.content__security__elements__required__fields__lowercase {
+  padding-top: 5px;
+}
+.content__security__elements__required__fields__digit {
+  padding-top: 5px;
 }
 
 @media (max-width: 1280px) {

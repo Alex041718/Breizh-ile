@@ -1,46 +1,27 @@
+import {Toast} from '../../components/Toast/Toast.js';
+
 document.addEventListener("DOMContentLoaded", function() {
     const passwordInput = document.querySelector('#firstPasswordEntry input');
     const lengthCriteria = document.getElementById('length');
     const uppercaseCriteria = document.getElementById('uppercase');
     const lowercaseCriteria = document.getElementById('lowercase');
-    const specialCriteria = document.getElementById('special');
+    const digitCriteria = document.getElementById('digit');
     const containsCriteria = document.getElementById('contains');
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
     passwordInput.addEventListener('input', function () {
         const password = passwordInput.value;
-        console.log(password);
         // Longueur
-        if (password.length >= 10) {
-            lengthCriteria.style.color = 'green';
-        } else {
-            lengthCriteria.style.color = 'red';
-        }
+        lengthCriteria.style.color = password.length >= 8 ? 'green' : 'red';
         // Majuscule
-        if (/[A-Z]/.test(password)) {
-            uppercaseCriteria.style.color = 'green';
-        } else {
-            uppercaseCriteria.style.color = 'red';
-        }
-        
+        uppercaseCriteria.style.color = /[A-Z]/.test(password) ? 'green' : 'red';
         // Minuscule
-        if (/[a-z]/.test(password)) {
-            lowercaseCriteria.style.color = 'green';
-        } else {
-            lowercaseCriteria.style.color = 'red';
-        }
-        
-        // Caractère spécial
-        if (/[#@\$%\^&\+=\?]/.test(password)) {
-            specialCriteria.style.color = 'green';
-        } else {
-            specialCriteria.style.color = 'red';
-        }
-        // Mot de passe contient Majuscule, Minuscule, Caractère spécial
-        if (/[A-Z]/.test(password) && /[a-z]/.test(password) && /[#@\$%\^&\+=\?]/.test(password)){
-            containsCriteria.style.color = 'green';
-        } else {
-            containsCriteria.style.color = 'red';
-        }
+        lowercaseCriteria.style.color = /[a-z]/.test(password) ? 'green' : 'red';
+        // Chiffre
+        digitCriteria.style.color = /\d/.test(password) ? 'green' : 'red';
+        // Mot de passe contient Majuscule, Minuscule, Chiffre
+        containsCriteria.style.color = passwordRegex.test(password) ? 'green' : 'red';
     });
 
     const infos = document.getElementById('infos');
@@ -52,13 +33,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const securityForm = document.querySelector('.content__security form');
     const personalDataForm = document.querySelector('.content__personnal-data form');
 
-    securityBtn.addEventListener("click", function() {
-        toggle();
-    });
-
-    infosBtn.addEventListener("click", function() {
-        toggle();
-    });
+    securityBtn.addEventListener("click", toggle);
+    infosBtn.addEventListener("click", toggle);
 
     function toggle() {
         securityBtn.classList.toggle("active");
@@ -87,11 +63,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 method: 'POST',
                 body: formData
             })
-            .then(() => {
-                Toast("Modification terminée.", "success");
+            .then(response => {
+                if (response.ok) {
+                    Toast("Modification terminée.", "success");
+                    form.reset(); // Optionally reset the form
+                } else {
+                    return response.text().then(text => { throw new Error(text) });
+                }
             })
-            .catch(() => {
-                console.log('KO'); // Log "KO" if submission failed
+            .catch(error => {
+                console.error('Error:', error);
+                Toast("Une erreur est survenue. Veuillez réessayer.", "error");
             });
         });
     }

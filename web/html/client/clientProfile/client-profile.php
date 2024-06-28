@@ -39,13 +39,16 @@ $client = ClientService::GetClientById($clientID);
     <link rel="stylesheet" href="/components/Toast/Toast.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
 
+    <script type="module" src="/client/clientProfile/client-profile.js"></script>
 
     <link rel="stylesheet" href="../../style/ui.css">
 </head>
 
 <body>
+
     <?php
     require_once ("../../components/Header/header.php");
+
     Header::render(isScrolling: true, isBackOffice: false, isAuthenticated: $isAuthenticated, redirectAuthPath: '/client/profile');
     ?>
     <main class="content">
@@ -66,8 +69,6 @@ $client = ClientService::GetClientById($clientID);
             </ul>
         </nav>
 
-
-
         <div id="infos" class="content__personnal-data content__display">
 
             <?php
@@ -81,11 +82,12 @@ $client = ClientService::GetClientById($clientID);
             <div class="content__personnal-data__top">
                 <p class="content__personnal-data__top__description">Modifier vos informations Personnelles</p>
 
-                <img class="content__personnal-data__image" src="<?= $client->getImage()->getImageSrc() ?>"
-                    alt="photo_de_profile">
+                <img id="profile-image" class="content__personnal-data__image" src="<?= $client->getImage()->getImageSrc() ?>" alt="photo_de_profile" onclick="document.getElementById('image-input').click()">
+                
             </div>
-
-            <form method="POST" action="/controllers/client/clientUpdateController.php">
+            
+            <form method="POST" action="/controllers/client/clientUpdateController.php" enctype="multipart/form-data">
+                <input type="file" id="image-input" name="profileImage" accept="image/*" style="display: none;" onchange="previewImage(event)">
                 <div class="content__personnal-data__elements">
                     <!-- Nom -->
                     <?php require_once ("../../components/Input/Input.php");
@@ -123,7 +125,6 @@ $client = ClientService::GetClientById($clientID);
                         </select>
                     </div>
 
-
                     <!-- Date de naissance -->
                     <?php
                     Input::render("uneClassEnPlus", "birthDate", "date", "Date de naissance", "birthDate", "Date de naissance", false, $client->getBirthDate()->format('Y-m-d')); ?>
@@ -133,8 +134,8 @@ $client = ClientService::GetClientById($clientID);
                     <input type="hidden" name="creationDate"
                         value="<?php echo ($client->getCreationDate()->format('Y-m-d')) ?>">
                     <input type="hidden" name="clientID" value="<?php echo ($client->getClientID()) ?>">
-
                 </div>
+
                 <!-- Confirmer modifications button -->
                 <div class="content__personnal-data__elements__modify_button">
                     <?php
@@ -165,7 +166,7 @@ $client = ClientService::GetClientById($clientID);
                         "",
                         "10",
                         "",
-                        "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?]).{10,}"
+                        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
                     );
                     ?>
                     <?php
@@ -180,31 +181,30 @@ $client = ClientService::GetClientById($clientID);
                         "",
                         "10",
                         "",
-                        "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?]).{10,}"
+                        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
                     );
                     ?>
                     <input type="hidden" name="clientId" value="<?php echo ($client->getClientID()) ?>">
-                    <div class="content__security__elements__modify_button">
-                        <?php
-                        require_once ("../../components/Button/Button.php");
-
-                        Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Client, "", false, true); ?>
-                    </div>
                     <div class="content__security__elements__required__fields">
                         <p id="length" class="content__security__elements__required__fields__length">La taille du mot de
-                            passe doit être supérieure à 10</p>
+                            passe doit être égale ou supérieure à 8</p>
                         <p id="contains" class="content__security__elements__required__fields__contains">Le mot de passe
                             doit contenir:</p>
                         <p id="uppercase" class="content__security__elements__required__fields__uppercase">1 Majuscule
                             minimum</p>
                         <p id="lowercase" class="content__security__elements__required__fields__lowercase">1 Minuscule
                             minimum</p>
-                        <p id="special" class="content__security__elements__required__fields__special">1 caractère
-                            spécial minimum: @#$%^&+=?</p>
+                        <p id="digit" class="content__security__elements__required__fields__digit">1 chiffre minimum</p>
                     </div>
+                    <div class="content__security__elements__modify_button">
+                        <?php
+                        require_once ("../../components/Button/Button.php");
 
-
+                        Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Client, "", false, true); ?>
+                    </div>
                 </div>
+        </div>
+        </form>
         </div>
         </form>
         </div>
@@ -215,6 +215,17 @@ $client = ClientService::GetClientById($clientID);
     require_once ("../../components/Footer/footer.php");
     Footer::render();
     ?>
+<script>
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            const output = document.getElementById('profile-image');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+
     <script type="module" src="/client/clientProfile/client-profile.js"></script>
 </body>
 

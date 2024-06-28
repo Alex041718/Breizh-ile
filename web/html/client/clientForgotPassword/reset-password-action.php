@@ -4,26 +4,53 @@ require_once('../../../services/ClientService.php');
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if(isset($_POST['firstPasswordEntry'], $_POST['secondPasswordEntry'], $_POST['clientId'])) {
+        if($_POST['firstPasswordEntry'] == $_POST['secondPasswordEntry']){
+            $newPassword = $_POST['firstPasswordEntry'];
+            $clientId = $_POST['clientId'];
 
-    if(isset($_POST['firstPasswordEntry'], $_POST['token'], $_POST['secondPasswordEntry'], $_POST['clientId'])) {
-        $newPassword = $_POST['firstPasswordEntry'];
-        $clientId = $_POST['clientId'];
+            // Vérifier que le nouveau mot de passe n'est pas égal à l'ancien mot de passe
+            $client = ClientService::GetClientById($clientId);
+            if (!$client) {
+                // Gérer l'erreur (client non trouvé)
+                echo "Client non trouvé.";
+                return false;
+            }
 
-        if(!preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/", $_POST['firstPasswordEntry'])) { header("Location: /client/reset-password?token=" . $_POST["token"] . "&error=Votre%20mot%20de%20passe%20doit%20contenir%20au%20moins%208%20caractères,%20une%20majuscule,%20une%20minuscule%20et%20un%20chiffre."); return; }
-        else if($_POST['firstPasswordEntry'] !== $_POST['secondPasswordEntry']) { header("Location: /client/reset-password?token=" . $_POST["token"] . "&error=Les%20mots%20de%20passes%20ne%20correspondent%20pas."); return; }
+            $currentPassword = $client->getPassword(); // Récupérer le mot de passe actuel (à adapter selon ton modèle)
+            if($newPassword === $currentPassword) {
+                // Gérer l'erreur (mot de passe identique à l'ancien)
+                echo "Le nouveau mot de passe ne peut pas être identique à l'ancien.";
+                return false; // ou gérer autrement l'erreur
+            }
 
-        // Mettre à jour le mot de passe
-        // FIXME : Ajouter un message de succès
+            // Vérification du format du mot de passe avec regex
+            $passwordPattern = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?]).{10,}$/';
+            if (!preg_match($passwordPattern, $newPassword)) {
+                // Gérer l'erreur (format du mot de passe incorrect)
+                echo "Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre, un caractère spécial et faire au moins 10 caractères de long.";
 
-        // Redirection vers une page par exemple
-        ClientService::updateUserPasswordByClientId($newPassword, $clientId);
-        header("Location: /client/reset-password?token=" . $_POST["token"] . "&success=true");
-        // exit();
-        // Gérer l'erreur (les mots de passe ne correspondent pas)
+                return false;
+            }
+            else{
+                ClientService::updateUserPasswordByClientId($newPassword, $clientId);
+                return true;
+            }
 
+            // Mettre à jour le mot de passe
+            // FIXME : Ajouter un message de succès
+
+            // Redirection vers une page par exemple
+            // header("Location: /");
+            // exit();
+        } else {
+            // Gérer l'erreur (les mots de passe ne correspondent pas)
+            echo "Les mots de passe ne correspondent pas.";
+            return false;
+        }
     } else {
         // Gérer l'erreur (les champs requis ne sont pas présents dans la requête)
-        header("Location: /client/reset-password?token=" . $_POST["token"] . "&error=Veuillez%20sasir%20de%20tous%20les%20champs.");
+        echo "Tous les champs requis ne sont pas fournis.";
         return false;
     }
 }

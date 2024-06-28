@@ -45,7 +45,7 @@ nav {
                 width: 24px;
                 height: 24px;
                 padding-inline: 15px;
-                filter: brightness(0) saturate(100%) invert(36%) sepia(8%) saturate(3507%) hue-rotate(177deg) brightness(93%) contrast(85%);
+                filter: brightness(0) saturate(100%) invert(39%) sepia(8%) saturate(3246%) hue-rotate(177deg) brightness(50%) contrast(91%);
             }
 
             &.active {
@@ -123,6 +123,7 @@ nav {
             height: 75px;
             border-radius: 50%;
             justify-self: end;
+            cursor: pointer;
         }
 
         &__title {
@@ -195,6 +196,22 @@ nav {
             }
             &__required__fields{
                 color: red;
+                padding-bottom: 10px;
+                &__lenght{
+                    padding-top: 5px;
+                }
+                &__contains{
+                    padding-top: 5px;
+                }
+                &__uppercase{
+                    padding-top: 5px;
+                }
+                &__lowercase{
+                    padding-top: 5px;
+                }
+                &__digit{
+                    padding-top: 5px;
+                }
             }
         }
     }

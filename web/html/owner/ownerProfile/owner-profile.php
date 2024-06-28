@@ -16,7 +16,7 @@ function redirect($url)
 }
 
 // Vérifier l'authentification du owner
-SessionService::system('owner', '/back/profile');
+SessionService::system('owner', '/owner/profile');
 $isAuthenticated = SessionService::isOwnerAuthenticated();
 
 if (!$isAuthenticated) {
@@ -26,8 +26,8 @@ if (!$isAuthenticated) {
 // Récupérer le owner authentifié
 $ownerID = $_SESSION['user_id'];
 $owner = OwnerService::GetOwnerById($ownerID);
-
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -36,14 +36,16 @@ $owner = OwnerService::GetOwnerById($ownerID);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire</title>
     <link rel="stylesheet" href="/owner/ownerProfile/owner-profile.css">
-    <link rel="stylesheet" href="/components/Toast/Toast.css">
+    <link rel="stylesheet" href="../components/Toast/Toast.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
 
+    <script type="module" src="/owner/ownerProfile/owner-profile.js"></script>
 
     <link rel="stylesheet" href="../../style/ui.css">
 </head>
 
 <body>
+
     <?php
     require_once ("../../components/Header/header.php");
     Header::render(isScrolling: True, isBackOffice: True, isAuthenticated: $isAuthenticated, redirectAuthPath: '/back/profile');
@@ -63,6 +65,7 @@ $owner = OwnerService::GetOwnerById($ownerID);
                         <i class="fa-solid fa-shield"></i>
                     </div>
                 </li>
+
                 <li id="api__btn">
                     <span>API</span>
                     <div class="nav-icon">
@@ -71,20 +74,23 @@ $owner = OwnerService::GetOwnerById($ownerID);
                 </li>
             </ul>
         </nav>
+
         <div id="infos" class="content__personnal-data content__display">
             <h3 class="content__personnal-data__title">Informations Personnelles</h3>
 
             <div class="content__personnal-data__top">
                 <p class="content__personnal-data__top__description">Modifier vos informations Personnelles</p>
 
-                <img class="content__personnal-data__image" src="<?= $owner->getImage()->getImageSrc() ?>"
-                    alt="photo_de_profile">
+                <img id="profile-image" class="content__personnal-data__image" src="<?= $owner->getImage()->getImageSrc() ?>" alt="photo_de_profile" onclick="document.getElementById('image-input').click()">
+                
             </div>
-
-            <form method="POST" action="/controllers/owner/ownerUpdateController.php">
+            
+            <form method="POST" action="/controllers/owner/ownerUpdateController.php" enctype="multipart/form-data">
+                <input type="file" id="image-input" name="profileImage" accept="image/*" style="display: none;" onchange="previewImage(event)">
                 <div class="content__personnal-data__elements">
                     <!-- Nom -->
                     <?php require_once ("../../components/Input/Input.php");
+
                     Input::render("uneClassEnPlus", "lastname", "text", "Nom", "lastname", "Nom", true, $owner->getLastname(), '1', '100'); ?>
 
                     <!-- Prenom -->
@@ -118,23 +124,21 @@ $owner = OwnerService::GetOwnerById($ownerID);
                         </select>
                     </div>
 
-
                     <!-- Date de naissance -->
                     <?php
                     Input::render("uneClassEnPlus", "birthDate", "date", "Date de naissance", "birthDate", "Date de naissance", false, $owner->getBirthDate()->format('Y-m-d')); ?>
 
                     <!-- Date de création du compte -->
-
                     <input type="hidden" name="creationDate"
                         value="<?php echo ($owner->getCreationDate()->format('Y-m-d')) ?>">
-
                     <input type="hidden" name="ownerID" value="<?php echo ($owner->getOwnerID()) ?>">
-
                 </div>
+
                 <!-- Confirmer modifications button -->
                 <div class="content__personnal-data__elements__modify_button">
                     <?php
                     require_once ("../../components/Button/Button.php");
+
                     Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Owner, "", false, true); ?>
                 </div>
             </form>
@@ -156,7 +160,7 @@ $owner = OwnerService::GetOwnerById($ownerID);
                         "",
                         "10",
                         "",
-                        "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?]).{10,}"
+                        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
                     );
                     ?>
                     <?php
@@ -171,33 +175,28 @@ $owner = OwnerService::GetOwnerById($ownerID);
                         "",
                         "10",
                         "",
-                        "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?]).{10,}"
+                        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
                     );
                     ?>
-                    <input type="hidden" name="ownerId" value="<?php echo ($owner->getOwnerID()) ?>">
-                    <div class="content__security__elements__modify_button">
-                        <?php
-                        require_once ("../../components/Button/Button.php");
-
-                        Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Owner, "", false, true); ?>
-                    </div>
+                    <input type="hidden" name="ownerID" value="<?php echo ($owner->getOwnerID()) ?>">
                     <div class="content__security__elements__required__fields">
                         <p id="length" class="content__security__elements__required__fields__length">La taille du mot de
-                            passe doit être supérieure à 10</p>
+                            passe doit être égale ou supérieure à 8</p>
                         <p id="contains" class="content__security__elements__required__fields__contains">Le mot de passe
                             doit contenir:</p>
                         <p id="uppercase" class="content__security__elements__required__fields__uppercase">1 Majuscule
                             minimum</p>
                         <p id="lowercase" class="content__security__elements__required__fields__lowercase">1 Minuscule
                             minimum</p>
-                        <p id="special" class="content__security__elements__required__fields__special">1 caractère
-                            spécial minimum: @#$%^&+=?</p>
+                        <p id="digit" class="content__security__elements__required__fields__digit">1 chiffre minimum</p>
                     </div>
+                    <div class="content__security__elements__modify_button">
+                        <?php
+                        require_once ("../../components/Button/Button.php");
 
-
+                        Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Owner, "", false, true); ?>
+                    </div>
                 </div>
-        </div>
-        </form>
         </div>
         <div id="api" class="content__api">
             <div class="content__api__contents">
@@ -218,6 +217,17 @@ $owner = OwnerService::GetOwnerById($ownerID);
     require_once ("../../components/Footer/footer.php");
     Footer::render();
     ?>
+<script>
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            const output = document.getElementById('profile-image');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+
     <script type="module" src="/owner/ownerProfile/owner-profile.js"></script>
 </body>
 
