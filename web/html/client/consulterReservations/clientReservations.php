@@ -17,8 +17,16 @@ require_once '../../../services/ReservationService.php';
 require_once("../../components/ReservationCard/ReservationCard.php");
 require_once("../../components/Header/header.php");
 
+
+
 $client = ClientService::GetClientById($_SESSION['user_id']);
 $clientReservationList = ReservationService::getReservationByClientId($client->getClientID());
+
+// batch pour créer les factures des reservations qui n'en possèdent pas
+require_once '../../../services/ReceiptService.php';
+ReceiptService::createReceiptsForReservationsWithoutReceipt($client->getClientID());
+
+
 //sort by begin date
 usort($clientReservationList, function ($a, $b) {
     return $a->getBeginDate() <=> $b->getBeginDate();

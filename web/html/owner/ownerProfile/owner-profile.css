@@ -162,6 +162,7 @@ p {
 body {
   margin: 0;
   background-color: #FFFFFF;
+  color: #082C4C;
 }
 
 .content__display {
@@ -175,7 +176,7 @@ nav {
 nav ul {
   height: 100%;
   padding-left: 0;
-  padding-top: 80px;
+  padding-top: 120px;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -330,6 +331,117 @@ nav ul li.active:hover {
 }
 .content__security__elements__required__fields {
   color: red;
+}
+.content__api {
+  padding-top: 200px;
+  padding-inline: 50px;
+  width: 80%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  gap: 20px;
+}
+.content__api__contents {
+  display: flex;
+}
+.content__api__contents .button--api {
+  margin-left: auto;
+}
+.content__api__contents__titles__title {
+  width: 10%;
+}
+.content__api__keys {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  height: calc(476px + 4.2rem);
+  overflow-y: scroll;
+  padding-right: 0.5rem;
+}
+.content__api__keys::-webkit-scrollbar {
+  width: 0.4rem;
+  background: white;
+}
+.content__api__keys::-webkit-scrollbar-thumb {
+  background-color: #082C4C;
+  border-radius: 100px;
+  background: #082C4C;
+}
+.content__api__keys::-webkit-scrollbar-track {
+  background-color: #e9e9e9;
+  border-radius: 100px;
+  background: #e9e9e9;
+}
+.content__api__keys__key {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: #E0E0E0;
+  border-radius: 10px;
+  border-bottom: 1px solid #e9e9e9;
+}
+.content__api__keys__key__description {
+  display: flex;
+  gap: 0.3rem;
+}
+.content__api__keys__key .copy {
+  width: 30rem;
+  font-size: max(14px, 0.8333333333vw) !important;
+}
+.content__api__keys__key .eye, .content__api__keys__key .copy {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+.content__api__keys__key .status {
+  display: inline-block;
+  align-self: center;
+  margin-left: 0.3rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.content__api__keys__key .status--offline {
+  background-color: #EB5757;
+}
+.content__api__keys__key .status--online {
+  background-color: #27AE60;
+}
+.content__api__keys__key__key--name {
+  width: 20%;
+}
+.content__api__keys__key__key--value {
+  width: 20%;
+}
+.content__api__keys__key__key--delete {
+  width: 20%;
+}
+
+.popUpApi .popup__content {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 1.6rem;
+  width: 30rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.description-action {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  gap: 0.2rem;
 }
 
 @media (max-width: 1280px) {

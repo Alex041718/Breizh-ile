@@ -90,6 +90,8 @@ $iconMapping = [
 
 ?>
 
+
+
 <body>
     <p id="auth" style="display:none"><?= $isAuthenticated ?></p>
     <?php
@@ -98,6 +100,10 @@ $iconMapping = [
     ?>
 
     <main>
+
+        <div id="animated-image-container">
+            <img id="animated-image" src="../../assets/images/imageAnim.jpeg" alt="Animated Image">
+        </div>
 
         <div class="page">
             <?php
@@ -184,6 +190,8 @@ $iconMapping = [
                         <button type="submit" class="para--18px para--bold" id="reserverBtn">Réserver</button>
                         <div id="message" style="display: none;">Veuillez sélectionner vos dates d'arrivée et de départ
                             !</div>
+                        <?= isset($_GET["error"]) && $_GET["error"] != "" ? '<p class="error">' . $_GET["error"] . '</p>' : "" ?>
+
                     </div>
 
                     <div class="prix">
@@ -347,5 +355,130 @@ $iconMapping = [
     Footer::render();
     ?>
 </body>
+
+
+<script>
+
+    const housingID = <?php echo $_GET['id'] ?>;
+
+    var xmlhttp = new XMLHttpRequest();
+    const params = `housingID=${housingID}`;
+
+    xmlhttp.open("POST", "/client/ficheLogement/getReservationDates.php", true);
+
+    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    xmlhttp.onreadystatechange = function() {
+        if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+            const response = JSON.parse(xmlhttp.responseText);
+
+            const reservedDates = response.map(dateObj => {
+                return {
+                    from: new Date(dateObj.beginDate),
+                    to: new Date(dateObj.endDate)
+                };
+            });
+
+
+            const inputs = document.querySelectorAll(".datepicker input[type=text]");
+
+            let arriveePicker, departPicker;
+            const nightCountElement = document.getElementById('night-count');
+            const finalTotalElement = document.getElementById('final-total');
+            const totalCostElement = document.getElementById('total-cost');
+            const nightPriceElement = document.getElementById('nightPrice');
+            const costPerNight = parseFloat(nightPriceElement.textContent);
+
+            inputs.forEach((input) => {
+
+                const options = {
+                    dateFormat: "d-m-Y",
+                    minDate: "today",
+                    maxDate: new Date().fp_incr(365),
+                    disable: reservedDates
+                };
+
+                if (input.id === 'start-date') {
+                    options.onChange = function(selectedDates) {
+                        // Update the minimum date for the departure date
+                        const minDepartDate = selectedDates[0];
+                        departPicker.set('minDate', minDepartDate.fp_incr(1));
+                        calculateAndDisplayNights();
+                    };
+                    arriveePicker = flatpickr(input, options);
+                } else if (input.id === 'end-date') {
+                    options.onChange = function() {
+                        calculateAndDisplayNights();
+                    };
+                    departPicker = flatpickr(input, options);
+                } else {
+                    flatpickr(input, options);
+                }
+            });
+
+            const priceDisplay = document.querySelector('.prix');
+            const buttonDisplay = document.querySelector("#reserverBtn");
+
+
+            function calculateAndDisplayNights() {
+                const startDate = arriveePicker.selectedDates[0];
+                const endDate = departPicker.selectedDates[0];
+
+                if (startDate && endDate) {
+                    const timeDifference = endDate - startDate;
+                    let nightCount = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+                    if (nightCount == 0) {
+                        nightCount = 1;
+                    }
+                    const totalCost = (nightCount * costPerNight).toFixed(2) ;
+
+                    nightCountElement.textContent = nightCount;
+                    totalCostElement.textContent = totalCost + " €";
+                    finalTotalElement.textContent = totalCost + " €";
+                } else {
+                    nightCountElement.textContent = 0;
+                    totalCostElement.textContent = "0 €";
+                    finalTotalElement.textContent = "0 €";
+                }
+
+                displayPriceDetails();
+            }
+            const messageErreurDates = document.getElementById("message");
+                // Ajouter un gestionnaire d'événement pour le survol du bouton
+            buttonDisplay.addEventListener("mouseover", function() {
+                // Vérifier si le bouton est désactivé
+                if (buttonDisplay.disabled) {
+                    // Afficher le message
+                    messageErreurDates.style.display = "block";
+                }
+            });
+            
+            // Ajouter un gestionnaire d'événement pour la sortie du survol du bouton
+            buttonDisplay.addEventListener("mouseout", function() {
+                // Cacher le message lorsque le curseur quitte le bouton
+                messageErreurDates.style.display = "none";
+            });
+
+            function displayPriceDetails() {
+                const nightCount = parseInt(nightCountElement.textContent, 10);
+                if (nightCount > 0 ) {
+                    priceDisplay.style.display = 'flex';
+                    buttonDisplay.disabled = false;
+                } else {
+                    priceDisplay.style.display = 'none';
+                    buttonDisplay.disabled = true;
+                }
+            }
+
+        }
+    }
+
+    xmlhttp.send(params);
+
+</script>
+
+
 
 </html>

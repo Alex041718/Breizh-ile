@@ -84,13 +84,13 @@ Header::render(True, True, $isOwnerAuthenticated, '/back/creer-logement'); ?>
                     <section class="inline">
                         <?php Input::render("half content__input--large", "postalCode", "text", "Code Postal", "postalCode", "Ex: 29200", true, '', 0, 5, "[0-9]{5}"); ?>
                         <?php Input::render("wide content__input--large", "city", "text", "Ville", "city", "Entrez la ville de votre logement", true, '', 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
-                        <?php Input::render("wide content__input--large", "country", "text", "Pays", "country", "Pays où se situe le logement", false, 'France', 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
                     </section>
                     <section class="inline">
-                        <?php Input::render("half content__input--large", "streetNumber", "text", "Numéro de rue", "streetNumber", "", false, '', 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
-                        <?php Input::render("half content__input--large", "complementAddress", "text", "Complément d'adresse", "complementAddress", "Ex: lieu-dit", false, '', 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
-                        <?php Input::render("content__input--large", "postalAddress", "text", "Adresse", "postalAddress", "Entrez l'adresse de votre logement", true, '', 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+                        <?php Input::render("content__input--large", "streetNumber", "text", "Numéro de rue", "streetNumber", "", false, '', 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+                        <?php Input::render("content__input--large", "complementAddress", "text", "Complément d'adresse", "complementAddress", "Ex: lieu-dit", false, '', 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
                     </section>
+                    <?php Input::render("content__input--large", "postalAddress", "text", "Adresse", "postalAddress", "Entrez l'adresse de votre logement", true, '', 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
+                    <?php Input::render("wide content__input--large", "country", "text", "Pays", "country", "Pays où se situe le logement", false, 'France', 0, 100, '[A-Za-zÀ-ÖØ-öø-ÿ0-9 \(\)\',.!?\/\\-&~€]+'); ?>
                     <section class="inline">
                         <?php Input::render("content__input--large", "longitude", "text", "Longitude", "longitude", "Ex: 48.202047", false, '', 0, 100, '^-?([0-8]?[0-9]|90)(\.[0-9]{1,10})$'); ?>
                         <?php Input::render("content__input--large", "latitude", "text", "Latitude", "latitude", "Ex: -2.932644", false, '', 0, 100, '^-?([0-9]{1,2}|1[0-7][0-9]|180)(\.[0-9]{1,10})$'); ?>
@@ -112,6 +112,7 @@ Header::render(True, True, $isOwnerAuthenticated, '/back/creer-logement'); ?>
                 <?php Input::render("content__input--large", "priceHT", "text", "Prix par nuit", "priceHT", "Prix HT", true, '', 0, 8, '[0-9]+\.[0-9]{1,2}'); ?>
                 <?php Input::render("content__input--large", "beginDate", "text", "Date minimale", "beginDate", "Entrez la date minimale", false, '', 0, 40, '(^0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4}$)'); ?>
                 <?php Input::render("content__input--large", "endDate", "text", "Date maximale", "endDate", "Entrez la date maximale", false, '', 0, 40, '(^0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4}$)'); ?>
+                <?php Input::render("content__input", "noticeCount", "text", "Délai d'annulation", "noticeCount", "Ex: 30", true, '7', 1, 8, '[0-9]'); ?>
             </section>
             <p>Spécifications</p>
             <span class="separator"></span>

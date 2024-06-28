@@ -41,6 +41,34 @@ document.addEventListener('DOMContentLoaded', function () {
         updateChildCount();
     });
 
+    let keysPressed = new Set();
+
+    // Ajouter un écouteur d'événement pour keydown
+    document.addEventListener('keydown', function(event) {
+        // Ajouter la touche à l'ensemble des touches enfoncées
+        keysPressed.add(event.key.toLowerCase());
+
+        // Vérifier si les deux touches 'a' et 'b' sont enfoncées
+        if (keysPressed.has('r') && keysPressed.has('a') && keysPressed.has('p') && keysPressed.has('h') && keysPressed.has('e') && keysPressed.has('l')) {
+            // Sélectionner l'image par son ID
+            var image = document.getElementById('animated-image-container');
+            // Afficher l'image en changeant le style
+            image.style.display = 'block';
+        }
+    });
+
+    // Ajouter un écouteur d'événement pour keyup
+    document.addEventListener('keyup', function(event) {
+        // Retirer la touche de l'ensemble des touches enfoncées
+        keysPressed.delete(event.key.toLowerCase());
+
+        // Si une des touches 'a' ou 'b' est relâchée, cacher l'image à nouveau
+        if (!keysPressed.has('r') || !keysPressed.has('a') || !keysPressed.has('p') || !keysPressed.has('h') || !keysPressed.has('e') || !keysPressed.has('l')) {
+            var image = document.getElementById('animated-image-container');
+            image.style.display = 'none';
+        }
+    });
+
     function updateAdultCount() {
         const maxVoyageurs = parseInt(nbVoyageurs.textContent, 10);
         const totalTravelers = adultCountValue + childCountValue;

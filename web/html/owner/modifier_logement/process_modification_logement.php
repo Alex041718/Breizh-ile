@@ -28,6 +28,7 @@ $latitude = (float) $_POST['latitude'];
 $longitude = (float) $_POST['longitude'];
 $postalAddress = $_POST['postalAddress'];
 $city = $_POST['city'];
+$noticeCount = (isset($_POST['noticeCount'])) ? $_POST['noticeCount'] : 7;
 $country = (isset($_POST['country'])) ? $_POST['country'] : "France";
 $streetNumber = (isset($_POST['streetNumber'])) ? $_POST['streetNumber'] : "";
 $complementAddress = (isset($_POST['complementAddress'])) ? $_POST['complementAddress'] : "";
@@ -68,7 +69,7 @@ public function __construct(int $housingID,
                                 array $arrangement) {
 */
 
-$housing = new Housing($housingID, $title, $shortDesc, $longDesc, $priceExcl, $priceIncl, $nbPerson, $nbRooms, $nbDoubleBed, $nbSimpleBed, $longitude, $latitude, true, 0, $beginDate, $endDate, new DateTime(), $surfaceInM2, $type, $category, $addressObject, $owner, $imageObject);
+$housing = new Housing($housingID, $title, $shortDesc, $longDesc, $priceExcl, $priceIncl, $nbPerson, $nbRooms, $nbDoubleBed, $nbSimpleBed, $longitude, $latitude, true, $noticeCount, $beginDate, $endDate, new DateTime(), $surfaceInM2, $type, $category, $addressObject, $owner, $imageObject);
 $housing = HousingService::UpdateHousingById($housing);
 print_r($housing);
 
