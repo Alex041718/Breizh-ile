@@ -18,11 +18,11 @@ function generateICal(Array $reservations) {
         $address = $reservation->getHousingId()->getAddress()->getStreetNumber() . " " . $reservation->getHousingId()->getAddress()->getPostalAddress() . " - " . $reservation->getHousingId()->getAddress()->getPostalCode() . " " .  $reservation->getHousingId()->getAddress()->getCity();
 
         $ical .= "BEGIN:VEVENT\r\n";
-        $ical .= "UID:" . $reservation->getClientID()->getMail() ."\r\n";
+        $ical .= "UID:" . $reservation->getHousingId()->getOwner()->getMail() ."\r\n";
         $ical .= "DTSTAMP;TZID=France/Paris:" . (new DateTime("now"))->format("Ymd\THis") . "\r\n";
         $ical .= "DTSTART:" . $reservation->getBeginDate()->format('Ymd') . "\r\n";
         $ical .= "DTEND:" . $reservation->getEndDate()->format('Ymd') . "\r\n";
-        $ical .= "SUMMARY:" . "Reservation - " . $reservation->getclientID()->getFirstName() . " " . $reservation->getclientID()->getLastName() . "\r\n";
+        $ical .= "SUMMARY:" . "Reservation - " . $reservation->getHousingId()->getOwner()->getFirstName() . " " . $reservation->getHousingId()->getOwner()->getLastName() . "\r\n";
         $ical .= "DESCRIPTION:" . "Reservation ID: " . $reservation->getId() . "\r\n";
         $ical .= "LOCATION:" . $address . "\r\n";
         $ical .= "END:VEVENT\r\n";

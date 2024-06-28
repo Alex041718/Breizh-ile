@@ -93,7 +93,7 @@ function main() {
         let xhr = new XMLHttpRequest();
         let params = (sort === "") ? "" : `sort=${sort}&isReverse=${isReverse}`;
 
-        xhr.open("POST", "/owner/consulter_reservations/getReservations.php", true);
+        xhr.open("POST", "/client/consulter_reservations/getReservations.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
         xhr.onreadystatechange = function () {
@@ -192,7 +192,7 @@ function main() {
         }
 
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", "/owner/consulter_reservations/generer_abonnement.php", true);
+        xhr.open("POST", "/client/consulter_reservations/generer_abonnement.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
         xhr.onreadystatechange = function () {
@@ -245,7 +245,7 @@ function deleteSubscribe(token, index) {
     let xhr = new XMLHttpRequest();
     let params = `token=${token}`;
 
-    xhr.open("POST", "/owner/consulter_reservations/delete_abonnement.php", true);
+    xhr.open("POST", "/client/consulter_reservations/delete_abonnement.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     row.outerHTML = "";
@@ -261,7 +261,7 @@ function modifySubscribe(token, isEditMode) {
     if(currentToken.includes("=")) currentToken = currentToken.split("=")[1]
     if(currentToken.includes("&")) currentToken = currentToken.split("&")[0];
 
-    if(currentToken !== token) url += `?token=${token}`;
+    url += `?token=${token}`;
 
 
     if(!isEditMode || currentToken !== token) {

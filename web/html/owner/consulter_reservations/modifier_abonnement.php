@@ -16,19 +16,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    if (!isset($_POST['start-date']) || !isset($_POST['end-date']) || !isset($_POST['reservationIDs'])) {
+    if (!isset($_POST['token']) || !isset($_POST['start-date']) || !isset($_POST['end-date']) || !isset($_POST['reservationIDs'])) {
         header("Location: /owner/consulter_reservations/gerer_abonnements_ical.php?error=Veuillez%20saisir%20tous%20les%20champs.");
         exit();
     }
 
     $owner = OwnerService::GetOwnerById($_SESSION['user_id']);
+    $token = $_POST['token'];
     $ownerId = $owner->getOwnerID();
     $startDate = new DateTime($_POST['start-date']);
     $endDate = new DateTime($_POST['end-date']);
     $reservationIDs = explode(",", $_POST['reservationIDs']);
 
     // Assuming you have a function to generate a unique token
-    $token = generateUniqueToken();
 
     $reservations = [];
     $ownerReservations = ReservationService::getAllReservationsByOwnerID($ownerId);
@@ -48,7 +48,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $url = "http://" . $_SERVER['HTTP_HOST'] . '/owner/consulter_reservations/gerer_abonnements_ical.php?token=' . $token;
 
-    SubscriptionService::CreateSubscription(new Subscription(null, $token, $startDate, $endDate, $ownerId), $reservations);
+    $id = SubscriptionService::getSubscriptionByToken($token)->getId();
+
+
+    SubscriptionService::deleteSubscriptionByToken(SubscriptionService::getSubscriptionByToken($token));
+    SubscriptionService::CreateSubscription(new Subscription($id, $token, $startDate, $endDate, $ownerId), $reservations);
 
 
 

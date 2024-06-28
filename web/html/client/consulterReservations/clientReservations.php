@@ -50,7 +50,11 @@ Header::render(true,false, $isAuthenticated, '/client/reservations-liste');
         BackComponent::render("", "", "Retour", "");
     ?>
 
-    <h2 class="title">Vos réservations</h2>
+    <div class="topcontent">
+        <h2 class="title">Vos réservations</h2>
+        <?php require_once("../../components/Button/button.php");
+        Button::render("connection__button","id","Exporter avec ICalendar",ButtonType::Client,"window.location.href = '/client/exporter'",false); ?>
+    </div>
 
     <div class="reservation-list">
 

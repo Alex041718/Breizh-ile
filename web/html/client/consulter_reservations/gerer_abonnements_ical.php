@@ -1,8 +1,10 @@
 <?php
 require_once '../../../services/SessionService.php';
-SessionService::system('owner', '/back/reservations');
+SessionService::system('client', '/');
 
-$isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
+$isClientAuthenticated = SessionService::isClientAuthenticated();
+
+if(!$isClientAuthenticated) header("Location: /");
 
 ?>
 
@@ -15,62 +17,27 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
     <link rel="stylesheet" href="../../style/ui.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/components/Toast/Toast.css">
-    <script src="gerer_abonnements.js"></script>
-    <link rel="stylesheet" href="gerer_abonnements.css"> <!-- CSS spécifique à cette page -->
+    <script src="/client/consulter_reservations/gerer_abonnements.js"></script>
+    <link rel="stylesheet" href="/client/consulter_reservations/gerer_abonnements.css"> <!-- CSS spécifique à cette page -->
 </head>
 <body>
     <?php
         // Assurez-vous que le chemin vers OwnerService.php est correct
         require_once '../../../services/SessionService.php';
-        require_once '../../../services/OwnerService.php'; // Ajout de cette ligne pour inclure OwnerService
+        require_once '../../../services/ClientService.php'; // Ajout de cette ligne pour inclure OwnerService
         require_once("../../components/Header/header.php");
-        require_once("../../components/OwnerNavBar/ownerNavBar.php");
         require_once("../../../services/ReservationService.php");
         require_once("../../../services/SubscriptionService.php");
 
-        // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        //     $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
-        
-        //     if (!$isOwnerAuthenticated) {
-        //         echo json_encode(['success' => false, 'message' => 'Unauthorized']);
-        //         exit();
-        //     }
-        
-        //     $owner = OwnerService::GetOwnerById($_SESSION['user_id']);
-        //     $ownerId = $owner->getOwnerID();
-        //     $reservations = $_POST['reservations'];
-        //     $startDate = $_POST['startDate'];
-        //     $endDate = $_POST['endDate'];
-        
-        //     if (empty($reservations) || empty($startDate) || empty($endDate)) {
-        //         echo json_encode(['success' => false, 'message' => 'Invalid input']);
-        //         exit();
-        //     }
-        
-        //     // Assuming you have a function to generate a unique token
-        //     $token = generateUniqueToken();
-        
-        //     // Save the subscription details to the database (implement this function)
-        //     saveSubscription($ownerId, $token, $startDate, $endDate, $reservations);
-        
-        //     $url = "https://owner/consulter_reservations/generate_ical.php?token=$token";
-        //     echo json_encode(['success' => true, 'url' => $url]);
-        // }
-        
-        // function generateUniqueToken() {
-        //     return bin2hex(random_bytes(16));
-        // }
-        
-        // // function saveSubscription($ownerId, $token, $startDate, $endDate, $reservations) {
-        // //     // Implement the logic to save the subscription details to the database
-        // //     // Example:
-        // //     // INSERT INTO subscriptions (owner_id, token, start_date, end_date, reservations) VALUES (?, ?, ?, ?, ?)
-        // // }
-
-        if(isset($_GET['token'])) $url = "http://" . $_SERVER['HTTP_HOST'] . "/calendar/" . $_GET['token'];
+        if(isset($_GET['token'])) $url = "http://" . $_SERVER['HTTP_HOST'] . "/client/consulter_reservations/iCal.php?token=" . $_GET['token'];
         else $url = "";
 
-        Header::render(True, True, $isOwnerAuthenticated, '/back/reservations');
+        Header::render(True, false, $isClientAuthenticated, '/back/reservations');
+        
+        $client = ClientService::GetClientById($_SESSION['user_id']);
+
+        $reservations = ReservationService::getAllReservationsByClientID($client->getClientID());
+        $_SESSION["reservations"] = $reservations;
 
     ?>
 
@@ -97,7 +64,7 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
                 <div class="infoUrl">
                     <h4><?= isset($_GET['editMode']) && $_GET['editMode'] === "enable" ? "Modifier l'abonnement" : "Générer une nouvelle URL d'abonnements" ?></h4>
                     <?= isset($_GET["error"]) && $_GET["error"] != "" ? '<p class="error">' . $_GET["error"] . '</p>' : "" ?>
-                    <form id="generate-subscription-form" action="<?= isset($_GET['editMode']) && $_GET['editMode'] === "enable" ? "modifier_abonnement.php" : "generer_abonnement.php" ?>" method="POST">
+                    <form id="generate-subscription-form" action="<?= isset($_GET['editMode']) && $_GET['editMode'] === "enable" ? "/client/consulter_reservations/modifier_abonnement.php" : "/client/consulter_reservations/generer_abonnement.php" ?>" method="POST">
                         <div class="date">
                             <?= isset($_GET['editMode']) && $_GET['editMode'] === "enable" && isset($_GET['token']) && $_GET['token'] !== "" ? '<input type="hidden" name="token" value="' . $_GET['token'] . '">' : "" ?>
                             <div class="debut">
@@ -142,7 +109,7 @@ $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
                         <p class="token"><?= $subscription->getToken() ?></p>
                         <p class="period">Période : <?= $subscription->getBeginDate()->format("d/m/Y") . ' - ' . $subscription->getEndDate()->format("d/m/Y") ?></p>
                         <div class="buttons">
-                            <button onclick="navigator.clipboard.writeText(' <?= "http://" . $_SERVER['HTTP_HOST'] . "/owner/consulter_reservations/ical.php?token=" . $subscription->getToken() ?> ');alert('URL copiée dans le presse-papiers !');">Copier URL</button>
+                            <button onclick="navigator.clipboard.writeText(' <?= "http://" . $_SERVER['HTTP_HOST'] . "/client/consulter_reservations/ical.php?token=" . $subscription->getToken() ?> ');alert('URL copiée dans le presse-papiers !');">Copier URL</button>
                             <button id="modify" onclick="modifySubscribe('<?= $subscription->getToken() ?>', <?= (int)$isEditMode ?>)"><?= $isEditMode && isset($_GET['token']) && $_GET['token'] == $subscription->getToken() ? "Annuler" : "Modifier" ?></button>
                             <button id="delete" <?= $isEditMode && isset($_GET['token']) && $_GET['token'] == $subscription->getToken() ? "disabled" : "" ?> onclick="deleteSubscribe('<?= $subscription->getToken() ?>', <?= $index ?>)">Supprimer</button>
                         </div>

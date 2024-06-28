@@ -6,23 +6,23 @@ require_once '../../../services/SubscriptionService.php';
 
 header('Content-Type: application/json');
 
-SessionService::system('owner', '/back/reservations');
+SessionService::system('client', '/');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $isOwnerAuthenticated = SessionService::isOwnerAuthenticated();
+    $isClientAuthenticated = SessionService::isClientAuthenticated();
 
-    if (!$isOwnerAuthenticated) {
+    if (!$isClientAuthenticated) {
         header("Location: /");
         exit();
     }
 
     if (!isset($_POST['start-date']) || !isset($_POST['end-date']) || !isset($_POST['reservationIDs'])) {
-        header("Location: /owner/consulter_reservations/gerer_abonnements_ical.php?error=Veuillez%20saisir%20tous%20les%20champs.");
+        header("Location: /client/consulter_reservations/gerer_abonnements_ical.php?error=Veuillez%20saisir%20tous%20les%20champs.");
         exit();
     }
 
-    $owner = OwnerService::GetOwnerById($_SESSION['user_id']);
-    $ownerId = $owner->getOwnerID();
+    $client = ClientService::GetClientById($_SESSION['user_id']);
+    $clientId = $client->getClientID();
     $startDate = new DateTime($_POST['start-date']);
     $endDate = new DateTime($_POST['end-date']);
     $reservationIDs = explode(",", $_POST['reservationIDs']);
@@ -31,24 +31,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $token = generateUniqueToken();
 
     $reservations = [];
-    $ownerReservations = ReservationService::getAllReservationsByOwnerID($ownerId);
+    $clientReservations = ReservationService::getAllReservationsByClientID($clientId);
 
     // Initialiser une liste vide pour stocker les IDs
-    $ownerReservationIDs = [];
+    $clientReservationIDs = [];
 
     // Parcourir chaque objet de réservation et récupérer son ID
-    foreach ($ownerReservations as $reservation) {
-        $ownerReservationIDs[] = $reservation->getId();
+    foreach ($clientReservations as $reservation) {
+        $clientReservationIDs[] = $reservation->getId();
     }
 
     foreach ($reservationIDs as $reservationID) {
-        if(!in_array($reservationID, $ownerReservationIDs)) continue;
+        if(!in_array($reservationID, $clientReservationIDs)) continue;
         $reservations[] = ReservationService::getReservationByID($reservationID);
     }
 
-    $url = "http://" . $_SERVER['HTTP_HOST'] . '/owner/consulter_reservations/gerer_abonnements_ical.php?token=' . $token;
+    $url = "http://" . $_SERVER['HTTP_HOST'] . '/client/consulter_reservations/gerer_abonnements_ical.php?token=' . $token;
 
-    SubscriptionService::CreateSubscription(new Subscription(null, $token, $startDate, $endDate, $ownerId), $reservations);
+    SubscriptionService::CreateSubscription(new Subscription(null, $token, $startDate, $endDate, $clientId), $reservations);
 
 
 

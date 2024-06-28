@@ -9,12 +9,12 @@ body {
 }
 
 .row--selected {
-    background-color: $ownerPrimaryColor;
+    background-color: $clientPrimaryColor;
     color: white;
 
     button {
         background-color: white;
-        color: $ownerPrimaryColor;
+        color: $clientPrimaryColor;
 
         &:hover {
             background-color: $lighterGrey5;
@@ -37,12 +37,7 @@ main {
     box-sizing: border-box;
 
     h3 {
-        position: fixed;
-        pointer-events: none;
-        top: 50px;
-        left: 0;
-        color: $ownerPrimaryColor;
-        z-index: 10000;
+        color: $black2;
         width: 100%;
 
         @media (max-width: 1024px) {
@@ -123,7 +118,7 @@ i {
 
 button {
     padding: 0.5em;
-    background-color: $ownerPrimaryColor;
+    background-color: $clientPrimaryColor;
     color: white;
     border: none;
     border-radius: 5px;
@@ -131,7 +126,7 @@ button {
 }
 
 button:hover {
-    background-color: $ownerPrimaryColorHover;
+    background-color: $clientPrimaryColorHover;
 }
 
 .subscription-url {
@@ -226,9 +221,9 @@ li {
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: $ownerPrimaryColor;
+        background-color: $clientPrimaryColor;
         border-radius: 100px;
-        background: $ownerPrimaryColor;
+        background: $clientPrimaryColor;
     }
 
     &::-webkit-scrollbar-track {
@@ -256,7 +251,7 @@ li {
         word-wrap: break-word;
         text-overflow: ellipsis;
         font-weight: normal;
-        color: $ownerPrimaryColor;
+        color: $black2;
     }
 
     .profile-picture, .description-status {
