@@ -3,6 +3,23 @@ body {
   margin: 0;
 }
 
+.topcontent {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.topcontent button {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+@media (max-width: 768px) {
+  .topcontent {
+    flex-direction: column;
+    padding-bottom: 50px;
+  }
+}
+
 .title {
   margin-bottom: 1em;
   margin-top: 0.5em;

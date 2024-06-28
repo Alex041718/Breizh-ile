@@ -43,6 +43,12 @@ RewriteRule ^client/forgot-password$ /client/clientForgotPassword/clientForgotPa
 # Rediriger /client/forgot-password /client/clientForgotPassword/reset-password-page.php
 RewriteRule ^client/reset-password$ /client/clientForgotPassword/reset-password-page.php [L]
 
+# Rediriger /client/forgot-password /client/clientForgotPassword/reset-password-page.php
+RewriteRule ^client/exporter$ /client/consulter_reservations/gerer_abonnements_ical.php [L]
+
+# Rediriger /calendar/id vers /owner/consulter_logement/logement.php
+RewriteRule ^/client/calendar/([a-zA-Z0-9_.-]*)$ /client/consulter_reservations/iCal.php?token=$1 [L]
+
 
 
 # REDIRECTIONS PROPRIETAIRE #

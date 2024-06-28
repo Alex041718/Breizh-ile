@@ -42,7 +42,35 @@ class SubscriptionService extends Service
         $pdo = self::getPDO();
         $stmt = $pdo->query("SELECT * FROM _Subscription WHERE token = '" . $token . "';");
         $row = $stmt->fetch();
-        return new Subscription($row['subscriptionID'], $row['token'], new DateTime($row['beginDate']), new DateTime($row['endDate']), $row['userID']);
+        if($row) return new Subscription($row['subscriptionID'], $row['token'], new DateTime($row['beginDate']), new DateTime($row['endDate']), $row['userID']);
+        else return false;
+    }
+
+    public static function deleteSubscriptionByToken(Subscription $subscription)
+    {
+
+        $pdo = self::getPDO();
+        $stmt = $pdo->query("DELETE FROM _Has_for_subscription WHERE subscriptionID = '" . $subscription->getId() . "';");
+        $stmt->execute();
+
+        $pdo = self::getPDO();
+        $stmt = $pdo->query("DELETE FROM _Subscription WHERE token = '" . $subscription->getToken() . "';");
+        $stmt->execute();
+    }
+
+    public static function getSubscriptionsByUserID(string $userID)
+    {
+        $reservations = [];
+
+        $pdo = self::getPDO();
+        $stmt = $pdo->query("SELECT * FROM _Subscription WHERE userID = '" . $userID . "';");
+        $row = $stmt->fetch();
+
+        while ($row = $stmt->fetch()) {
+            $reservations[] = new Subscription($row['subscriptionID'], $row['token'], new DateTime($row['beginDate']), new DateTime($row['endDate']), $row['userID']);
+        }
+
+        return $reservations;
     }
 
     public static function getReservationBySubscription(string $subscriptionID)
@@ -59,7 +87,7 @@ class SubscriptionService extends Service
             $client = ClientService::getClientById($row['clientID']);
             
             $reservations[] = new Reservation($row['realID'], new DateTime($row['realBegin']), new DateTime($row['realEnd']), $row['serviceCharge'], $row['touristTax'], $row['status'], $row['nbPerson'], $row['priceIncl'], $housing, $payMethod, $client);
-    }
+        }
 
         return $reservations;
     }

@@ -5,12 +5,12 @@ body {
 }
 
 .row--selected {
-  background-color: #082C4C;
+  background-color: #307B5C;
   color: white;
 }
 .row--selected button {
   background-color: white;
-  color: #082C4C;
+  color: #307B5C;
 }
 .row--selected button:hover {
   background-color: #e9e9e9;
@@ -31,12 +31,7 @@ main {
   box-sizing: border-box;
 }
 main h3 {
-  position: fixed;
-  pointer-events: none;
-  top: 50px;
-  left: 0;
-  color: #082C4C;
-  z-index: 10000;
+  color: #1D1D1D;
   width: 100%;
 }
 @media (max-width: 1024px) {
@@ -113,7 +108,7 @@ i {
 
 button {
   padding: 0.5em;
-  background-color: #082C4C;
+  background-color: #307B5C;
   color: white;
   border: none;
   border-radius: 5px;
@@ -121,7 +116,7 @@ button {
 }
 
 button:hover {
-  background-color: #0b3e6b;
+  background-color: #37906c;
 }
 
 .subscription-url {
@@ -211,9 +206,9 @@ li {
   background: white;
 }
 .reservations::-webkit-scrollbar-thumb {
-  background-color: #082C4C;
+  background-color: #307B5C;
   border-radius: 100px;
-  background: #082C4C;
+  background: #307B5C;
 }
 .reservations::-webkit-scrollbar-track {
   background-color: #e9e9e9;
@@ -239,7 +234,7 @@ li {
   word-wrap: break-word;
   text-overflow: ellipsis;
   font-weight: normal;
-  color: #082C4C;
+  color: #1D1D1D;
 }
 .reservation .profile-picture, .reservation .description-status {
   display: flex;
