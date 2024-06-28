@@ -7,11 +7,13 @@ $ICAL = 1;
 session_start();
 $reservations = $_SESSION["reservations"];
 
-$reservations_index_selected = explode(",", $_POST["reservations"]);
+$reservations_ids_selected = explode(",", $_POST["reservations"]);
 $reservations_selected = array();
 
-foreach ($reservations_index_selected as $index) {
-    array_push($reservations_selected, $reservations[$index]);
+foreach ($reservations_ids_selected as $reservation_id) {
+    $reservation = ReservationService::getReservationById($reservation_id);
+    if ($reservation->getHousingId()->getOwner()->getOwnerID() != $_SESSION["user_id"]) continue;
+    array_push($reservations_selected, ReservationService::getReservationById($reservation_id));
 }
 
 function exportReservationToCSV($reservations) {
