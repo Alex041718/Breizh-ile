@@ -2,6 +2,7 @@
 
 require_once '../../../models/Client.php';
 require_once '../../../services/ClientService.php';
+require_once '../../../services/ImageService.php'; // Inclure ImageService
 
 // Traitement du formulaire de mise à jour
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -16,10 +17,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $creationDate = $_POST['creationDate'];
     $clientID = $_POST['clientID'];
 
-    $client = ClientService::GetClientById($clientID);
-
     try {
-        // Mettre à jour les informations du client
+        // Récupérer le client existant
+        $client = ClientService::GetClientById($clientID);
+
+        // Gestion de l'image
+        if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOAD_ERR_OK) {
+            $uploadedFile = $_FILES['profileImage'];
+
+            // Dossier de destination des images
+            $uploadDir = __DIR__ . '/../../../uploads/';
+            $imagePath = $uploadDir . basename($uploadedFile['name']);
+
+            // Déplacer le fichier téléchargé vers le dossier d'upload
+            move_uploaded_file($uploadedFile['tmp_name'], $imagePath);
+
+            // Créer une nouvelle entrée d'image si nécessaire
+            $image = new Image(null, '/uploads/' . basename($uploadedFile['name']));
+            $savedImage = ImageService::CreateImage($image);
+
+            // Mettre à jour l'image du client
+            $client->getImage()->setImageSrc($savedImage->getImageSrc());
+        }
+
+        // Mettre à jour les autres informations du client
         $client->setLastname($lastname);
         $client->setFirstname($firstname);
         $client->setNickname($nickname);
@@ -33,10 +54,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Modifier le client dans la base de données
         ClientService::ModifyClient($client);
 
-        // Rediriger ou afficher un message de succès
+        // Rediriger avec un message de succès
         header('Location: /client/profile?success=1');
+        exit();
     } catch (Exception $e) {
         // Gérer les erreurs (par exemple, afficher un message d'erreur à l'utilisateur)
         $error = $e->getMessage();
     }
 }
+?>

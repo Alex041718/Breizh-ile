@@ -1,3 +1,5 @@
+import {Toast} from '../../components/Toast/Toast.js';
+
 document.addEventListener("DOMContentLoaded", function() {
     const passwordInput = document.querySelector('#firstPasswordEntry input');
     const lengthCriteria = document.getElementById('length');
@@ -43,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function handleFormSubmit(form) {
         form.addEventListener('submit', function(event) {
-            console.log("test");
             event.preventDefault(); // Prevent default form submission
 
             const formData = new FormData(form);

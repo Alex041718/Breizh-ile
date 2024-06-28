@@ -39,6 +39,8 @@ $client = ClientService::GetClientById($clientID);
     <link rel="stylesheet" href="../components/Toast/Toast.css">
     <script src="https://kit.fontawesome.com/a12680d986.js" crossorigin="anonymous"></script>
 
+    <script type="module" src="/client/clientProfile/client-profile.js"></script>
+
     <link rel="stylesheet" href="../../style/ui.css">
 </head>
 
@@ -72,15 +74,12 @@ $client = ClientService::GetClientById($clientID);
             <div class="content__personnal-data__top">
                 <p class="content__personnal-data__top__description">Modifier vos informations Personnelles</p>
 
-                <img id="profile-image" class="content__personnal-data__image"
-                    src="<?= $client->getImage()->getImageSrc() ?>" alt="photo_de_profile"
-                    onclick="document.getElementById('image-input').click()">
-                <input type="file" id="image-input" name="profileImage" accept="image/*" style="display: none;"
-                    onchange="previewImage(event)">
-
+                <img id="profile-image" class="content__personnal-data__image" src="<?= $client->getImage()->getImageSrc() ?>" alt="photo_de_profile" onclick="document.getElementById('image-input').click()">
+                
             </div>
-
+            
             <form method="POST" action="/controllers/client/clientUpdateController.php" enctype="multipart/form-data">
+                <input type="file" id="image-input" name="profileImage" accept="image/*" style="display: none;" onchange="previewImage(event)">
                 <div class="content__personnal-data__elements">
                     <!-- Nom -->
                     <?php require_once ("../../components/Input/Input.php");
@@ -173,12 +172,6 @@ $client = ClientService::GetClientById($clientID);
                     );
                     ?>
                     <input type="hidden" name="clientId" value="<?php echo ($client->getClientID()) ?>">
-                    <div class="content__security__elements__modify_button">
-                        <?php
-                        require_once ("../../components/Button/Button.php");
-
-                        Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Client, "", false, true); ?>
-                    </div>
                     <div class="content__security__elements__required__fields">
                         <p id="length" class="content__security__elements__required__fields__length">La taille du mot de
                             passe doit être égale ou supérieure à 8</p>
@@ -190,6 +183,12 @@ $client = ClientService::GetClientById($clientID);
                             minimum</p>
                         <p id="digit" class="content__security__elements__required__fields__digit">1 chiffre minimum</p>
                     </div>
+                    <div class="content__security__elements__modify_button">
+                        <?php
+                        require_once ("../../components/Button/Button.php");
+
+                        Button::render("button--storybook", "modifier", "Valider les modifications", ButtonType::Client, "", false, true); ?>
+                    </div>
                 </div>
         </div>
         </form>
@@ -200,20 +199,17 @@ $client = ClientService::GetClientById($clientID);
     require_once ("../../components/Footer/footer.php");
     Footer::render();
     ?>
+<script>
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            const output = document.getElementById('profile-image');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
 
-    <script type="module">
-        import { Toast } from '../../components/Toast/Toast.js';
-    </script>
-    <script>
-        function previewImage(event) {
-            const reader = new FileReader();
-            reader.onload = function () {
-                const output = document.getElementById('profile-image');
-                output.src = reader.result;
-            };
-            reader.readAsDataURL(event.target.files[0]);
-        }
-    </script>
 </body>
 
 </html>
