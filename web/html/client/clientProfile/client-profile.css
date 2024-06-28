@@ -214,6 +214,7 @@ nav ul li.active:hover {
   height: 75px;
   border-radius: 50%;
   justify-self: end;
+  cursor: pointer;
 }
 .content__personnal-data__title {
   width: 10%;
@@ -243,7 +244,7 @@ nav ul li.active:hover {
   background-color: #FFFFFF;
   border: 1.5px solid #E0E0E0;
   border-radius: 4px;
-  font-size: max(16px, 1.0416666667vw);
+  font-size: 12px;
 }
 .content__security {
   padding-top: 200px;
@@ -275,6 +276,22 @@ nav ul li.active:hover {
 }
 .content__security__elements__required__fields {
   color: red;
+  padding-bottom: 10px;
+}
+.content__security__elements__required__fields__lenght {
+  padding-top: 5px;
+}
+.content__security__elements__required__fields__contains {
+  padding-top: 5px;
+}
+.content__security__elements__required__fields__uppercase {
+  padding-top: 5px;
+}
+.content__security__elements__required__fields__lowercase {
+  padding-top: 5px;
+}
+.content__security__elements__required__fields__digit {
+  padding-top: 5px;
 }
 
 @media (max-width: 1280px) {
